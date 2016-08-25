@@ -13,12 +13,14 @@
 String host = System.getenv("OPENSHIFT_POSTGRESQL_DB_HOST");
 String port = System.getenv("OPENSHIFT_POSTGRESQL_DB_PORT");
 String userName = System.getenv("OPENSHIFT_POSTGRESQL_DB_USERNAME");
+String password = System.getenv("OPENSHIFT_POSTGRESQL_DB_PASSWORD");
 String databaseName = "testdb";
 String url = "jdbc:postgresql://" + host + ":" + port + "/" + databaseName;
 %>
 Host: <%= host %><br />
 Port: <%= port %><br />
 UserName: <%= userName %><br />
+Password: <%= password %><br />
 URL: <%= url %><br />
 </body>
 </html>
