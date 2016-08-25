@@ -33,11 +33,11 @@ try
   Connection connection = DriverManager.getConnection(url, userName, password);
   if (connection == null)
   {
-    out.print("Null Connection");
+    out.print("Null Connection<br />");
   }
   else
   {
-    out.print("Connected!");
+    out.print("Connected!<br />");
     preparedStatement = connection.prepareStatement(query);
     resultSet = preparedStatement.executeQuery();
     while (resultSet.next())
@@ -49,7 +49,7 @@ try
 }
 catch (SQLException e)  
 {
-  message = e.getMessage();
+  out.print(e.getMessage());
 }
 %>
 </body>
