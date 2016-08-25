@@ -10,8 +10,8 @@
 <body>
 <h1>Test DB!!!!</h1>
 <%
-String host = System.getenv("$OPENSHIFT_MYSQL_DB_HOST");
-String port = System.getenv("$OPENSHIFT_MYSQL_DB_PORT");
+String host = System.getenv("$OPENSHIFT_POSTGRESQL_DB_HOST");
+String port = System.getenv("$OPENSHIFT_POSTGRESQL_DB_PORT");
 %>
 Host: <%= host %><br />
 Port: <%= port %><br />
