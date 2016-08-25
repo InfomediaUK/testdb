@@ -17,6 +17,9 @@ String password = System.getenv("OPENSHIFT_POSTGRESQL_DB_PASSWORD");
 String databaseName = "testdb";
 String url = "jdbc:postgresql://" + host + ":" + port + "/" + databaseName;
 String message = "Nothing Yet...";
+String query = "SELECT * FROM test";
+PreparedStatement preparedStatement = null;
+ResultSet resultSet = null;
 %>
 Host: <%= host %><br />
 Port: <%= port %><br />
@@ -26,10 +29,21 @@ URL: <%= url %><br />
 <%
 try
 {
+  Class.forName("org.postgresql.Driver");
   Connection connection = DriverManager.getConnection(url, userName, password);
   if (connection == null)
   {
-    message = "Null Connection";
+    out.print("Null Connection");
+  }
+  else
+  {
+    out.print("Connected!");
+    preparedStatement = connection.prepareStatement(query);
+    resultSet = preparedStatement.executeQuery();
+    while (resultSet.next())
+    {
+      out.print(resultSet.getString("testname") + "<br />");      
+    }
   }
   connection.close();
 }
@@ -38,6 +52,5 @@ catch (SQLException e)
   message = e.getMessage();
 }
 %>
-Message: <%= message %><br />
 </body>
 </html>
