@@ -16,11 +16,28 @@ String userName = System.getenv("OPENSHIFT_POSTGRESQL_DB_USERNAME");
 String password = System.getenv("OPENSHIFT_POSTGRESQL_DB_PASSWORD");
 String databaseName = "testdb";
 String url = "jdbc:postgresql://" + host + ":" + port + "/" + databaseName;
+String message = "Nothing Yet...";
 %>
 Host: <%= host %><br />
 Port: <%= port %><br />
 UserName: <%= userName %><br />
 Password: <%= password %><br />
 URL: <%= url %><br />
+<%
+try
+{
+  Connection connection = DriverManager.getConnection(url, userName, password);
+  if (connection == null)
+  {
+    message = "Null Connection";
+  }
+  connection.close();
+}
+catch (SQLException e)  
+{
+  message = e.getMessage();
+}
+%>
+Message: <%= message %><br />
 </body>
 </html>
