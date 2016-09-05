@@ -8,6 +8,10 @@
 	<form-beans>
 	   <form-bean name="helloWorldForm"
 		type="net.infomediauk.HelloWorldForm"/>
+
+	   <form-bean name="sendMailForm"
+		type="net.infomediauk.SendMailForm"/>
+
 	</form-beans>
 
 	<action-mappings>
@@ -15,8 +19,14 @@
 		type="net.infomediauk.action.HelloWorldAction"
 		name="helloWorldForm">
 		<forward name="success" path="/HelloWorld.jsp"/>
-
 	   </action>
+	   
+	   <action path="/sendMail"
+		type="net.infomediauk.action.SendMailAction"
+		name="sendMailForm">
+		<forward name="success" path="/SendMail.jsp"/>
+	   </action>
+	   
 	</action-mappings>
 
 </struts-config>
