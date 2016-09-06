@@ -45,18 +45,21 @@ public class SendMailAction extends Action
       {
         transport = session.getTransport();
         // Create a default MimeMessage object.
-        MimeMessage message = new MimeMessage(session);
+        MimeMessage mimeMessage = new MimeMessage(session);
+        mimeMessage.addHeader("Content-type", "text/HTML; charset=UTF-8");
+        mimeMessage.addHeader("format", "flowed");
+        mimeMessage.addHeader("Content-Transfer-Encoding", "8bit");
         // Set From: header field of the header.
-        message.setFrom(new InternetAddress(from));
+        mimeMessage.setFrom(new InternetAddress(from));
         // Set To: header field of the header.
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
         // Set Subject: header field
-        message.setSubject("Sent from Java Web App using transport.sendMessage");
+        mimeMessage.setSubject("Sent from Java Web App using transport.sendMessage");
         // Now set the actual message
-        message.setText("Authenticated message using transport.sendMessage");
+        mimeMessage.setText("Authenticated mimeMessage using transport.sendMessage");
         transport.connect();
         // Send message
-        transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+        transport.sendMessage(mimeMessage, mimeMessage.getRecipients(Message.RecipientType.TO));
         sendMailForm.setMessage("Sent message successfully using transport.sendMessage...");
       }
       finally
