@@ -28,15 +28,15 @@ public class SendMailAction extends Action
     SendMailForm sendMailForm = (SendMailForm)form;
     
     String to = "admin@adultebookshop.com";//"patrice@pjlocums.co.uk";//"lyndon@infomediauk.net";
-    String from = "kevin@matchmyjob.co.uk";//"admin@adultebookshop.com";
+    String from = "admin@matchmyjob.co.uk";//"admin@adultebookshop.com";
     String host = "customermail2.easily.co.uk";//"mail.infomediauk.net";
     Properties properties = new Properties();
     properties.setProperty("mail.smtp.host", host);
     properties.setProperty("mail.smtp.port", "25");
     properties.setProperty("mail.transport.protocol", "smtp");
     properties.setProperty("mail.smtp.auth", "true");
-    Authenticator auth = new SMTPAuthenticator();
-    Session session = Session.getInstance(properties, auth);
+    SMTPAuthenticator authenticator = new SMTPAuthenticator();
+    Session session = Session.getInstance(properties, authenticator);
     session.setDebug(true);
     try
     {
@@ -54,13 +54,13 @@ public class SendMailAction extends Action
         // Set To: header field of the header.
         mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
         // Set Subject: header field
-        mimeMessage.setSubject("Sent from Java Web App using transport.sendMessage");
+        mimeMessage.setSubject("Sent from " + host);
         // Now set the actual message
-        mimeMessage.setText("LET ME KNOW IF YOU GET THIS... Authenticated mimeMessage using transport.sendMessage");
+        mimeMessage.setText("To: " + to + " From: " + from + " Host: " + host + " User: " + authenticator.getUsername());
         transport.connect();
         // Send message
         transport.sendMessage(mimeMessage, mimeMessage.getRecipients(Message.RecipientType.TO));
-        sendMailForm.setMessage("Sent message successfully using transport.sendMessage...");
+        sendMailForm.setMessage("Sent message successfully. To: " + to + " From: " + from + " Host: " + host + " User: " + authenticator.getUsername());
       }
       finally
       {
