@@ -36,7 +36,7 @@ public class SendMailAction extends Action
     properties.setProperty("mail.transport.protocol", "smtp");
     properties.setProperty("mail.smtp.auth", "true");
     Authenticator auth = new SMTPAuthenticator();
-    Session session = Session.getDefaultInstance(properties, auth);
+    Session session = Session.getInstance(properties, auth);
     session.setDebug(true);
     try
     {
@@ -51,7 +51,7 @@ public class SendMailAction extends Action
         // Set To: header field of the header.
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
         // Set Subject: header field
-        message.setSubject("Sent from OpenShift Java Web App using transport.sendMessage");
+        message.setSubject("Sent from Java Web App using transport.sendMessage");
         // Now set the actual message
         message.setText("Authenticated message using transport.sendMessage");
         transport.connect();
