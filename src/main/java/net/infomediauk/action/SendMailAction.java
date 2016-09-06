@@ -27,9 +27,9 @@ public class SendMailAction extends Action
 
     SendMailForm sendMailForm = (SendMailForm)form;
     
-    String to = "lyndon@infomediauk.net";
-    String from = "admin@adultebookshop.com";
-    String host = "mail.infomediauk.net";
+    String to = "admin@adultebookshop.com";//"patrice@pjlocums.co.uk";//"lyndon@infomediauk.net";
+    String from = "kevin@matchmyjob.co.uk";//"admin@adultebookshop.com";
+    String host = "customermail2.easily.co.uk";//"mail.infomediauk.net";
     Properties properties = new Properties();
     properties.setProperty("mail.smtp.host", host);
     properties.setProperty("mail.smtp.port", "25");
@@ -56,7 +56,7 @@ public class SendMailAction extends Action
         // Set Subject: header field
         mimeMessage.setSubject("Sent from Java Web App using transport.sendMessage");
         // Now set the actual message
-        mimeMessage.setText("Authenticated mimeMessage using transport.sendMessage");
+        mimeMessage.setText("LET ME KNOW IF YOU GET THIS... Authenticated mimeMessage using transport.sendMessage");
         transport.connect();
         // Send message
         transport.sendMessage(mimeMessage, mimeMessage.getRecipients(Message.RecipientType.TO));
