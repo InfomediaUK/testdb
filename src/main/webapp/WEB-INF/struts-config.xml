@@ -27,6 +27,15 @@
 		<forward name="success" path="/SendMail.jsp"/>
 	   </action>
 	   
+	   <action path="/User"
+	   type="org.apache.struts.actions.ForwardAction"
+	   parameter="/user-form.jsp"/>
+	   
 	</action-mappings>
+
+	<plug-in className="org.apache.struts.tiles.TilesPlugin" >
+		<set-property property="definitions-config"
+		value="/WEB-INF/tiles-defs.xml"/>
+	</plug-in>
 
 </struts-config>
