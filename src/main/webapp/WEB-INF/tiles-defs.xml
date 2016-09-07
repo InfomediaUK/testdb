@@ -5,8 +5,8 @@
 <tiles-definitions>
 
    <definition name="company-template" path="/pages/tiles/common-layout.jsp">
-	<put name="header" value="/pages/tiles/template-green/header.jsp" />
-	<put name="footer" value="/pages/tiles/template-green/footer.jsp" />
+	<put name="header" value="/pages/tiles/template-red/header.jsp" />
+	<put name="footer" value="/pages/tiles/template-red/footer.jsp" />
    </definition>
 
 </tiles-definitions>
