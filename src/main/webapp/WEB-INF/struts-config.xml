@@ -6,36 +6,50 @@
 <struts-config>
 
 	<form-beans>
-	   <form-bean name="helloWorldForm"
-		type="net.infomediauk.HelloWorldForm"/>
+		<form-bean name="AgyLoginForm"
+			type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="consultant" type="com.helmet.bean.Consultant" />
+			<form-property name="agencyCode" type="java.lang.String" />
+		</form-bean>
 
-	   <form-bean name="sendMailForm"
-		type="net.infomediauk.SendMailForm"/>
+		<form-bean name="helloWorldForm" type="net.infomediauk.HelloWorldForm" />
+
+		<form-bean name="sendMailForm" type="net.infomediauk.SendMailForm" />
 
 	</form-beans>
 
 	<action-mappings>
-	   <action path="/helloWorld"
-		type="net.infomediauk.action.HelloWorldAction"
-		name="helloWorldForm">
-		<forward name="success" path="/HelloWorld.jsp"/>
-	   </action>
-	   
-	   <action path="/sendMail"
-		type="net.infomediauk.action.SendMailAction"
-		name="sendMailForm">
-		<forward name="success" path="/SendMail.jsp"/>
-	   </action>
-	   
-	   <action path="/User"
-	   type="org.apache.struts.actions.ForwardAction"
-	   parameter="/user-form.jsp"/>
-	   
+
+		<action path="/agyLogin" type="com.helmet.application.agy.Login"
+			name="AgyLoginForm" scope="request" input="/home.do" validate="false">
+			<forward name="success" path="agyLogin.page" />
+		</action>
+
+		<action path="/agyLoginProcess" type="com.helmet.application.agy.LoginProcess"
+			name="AgyLoginForm" scope="request" input="agyLogin.page" validate="true">
+			<forward name="success" path="/agy/home.do" redirect="true" />
+			<forward name="cancel" path="/home.do" redirect="true" />
+		</action>
+
+		<action path="/helloWorld" type="net.infomediauk.action.HelloWorldAction"
+			name="helloWorldForm">
+			<forward name="success" path="/HelloWorld.jsp" />
+		</action>
+
+		<action path="/sendMail" type="net.infomediauk.action.SendMailAction"
+			name="sendMailForm">
+			<forward name="success" path="/SendMail.jsp" />
+		</action>
+
+		<action path="/User" type="org.apache.struts.actions.ForwardAction"
+			parameter="/user-form.jsp" />
+
 	</action-mappings>
 
-	<plug-in className="org.apache.struts.tiles.TilesPlugin" >
-		<set-property property="definitions-config"
-		value="/WEB-INF/tiles-defs.xml"/>
+    <message-resources null="false" parameter="MessageResources" />
+    
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
 	</plug-in>
 
 </struts-config>

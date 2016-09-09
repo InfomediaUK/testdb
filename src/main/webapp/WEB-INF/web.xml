@@ -19,6 +19,11 @@
          /WEB-INF/struts-config.xml
         </param-value>
     </init-param>
+    <!-- You will get 'java.lang.IllegalArgumentException: Path does not start with a "/" character' if this is missing. -->
+    <init-param> 
+      <param-name>chainConfig</param-name> 
+      <param-value>org/apache/struts/tiles/chain-config.xml</param-value> 
+    </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
 

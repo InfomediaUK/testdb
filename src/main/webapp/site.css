@@ -1,0 +1,76 @@
+body {
+	color:#000; 
+	background:#fff; 
+	font:70% verdana,tahoma,helvetica,sans-serif; 
+	margin:10px; 
+	padding:0px;
+}
+
+img {
+	border:0;
+}
+
+input {
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	padding:0px;
+}
+
+select {
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	padding:0px;
+}
+
+h1 {
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	font-weight: bold;
+}
+
+h2 {
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	font-weight: bold;
+}
+
+a { 
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	color:#cc0000; 
+	background:#fff; 
+	text-decoration:none; 
+}
+
+a:link { 
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	color:#cc0000; 
+	background:#fff; 
+	text-decoration:none; 
+}
+
+a:visited { 
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	color:#cc0000; 
+	background:#fff; 
+	text-decoration:none; 
+}
+
+a:active { 
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	color:#cc0000; 
+	background:#fff; 
+	text-decoration:none; 
+}
+
+a:hover { 
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	color:#ff0000; 
+	background:#fff; 
+	text-decoration:underline; 
+}
+
+.label { 
+	font:100% verdana,tahoma,helvetica,sans-serif; 
+	font-weight: bold;
+}       
+
+.button {
+  width: 75px;
+  height: 23px;
+}

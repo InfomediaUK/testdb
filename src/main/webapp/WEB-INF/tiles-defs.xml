@@ -9,4 +9,20 @@
 	<put name="footer" value="/pages/tiles/template-red/footer.jsp" />
    </definition>
 
+  <!-- Main Layout -->
+  <definition name="layout.main" path="/layoutMain.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="blah description"/>
+        <put name="keywords"  value="blah, keywords"/>
+        <put name="header" value="/header.jsp"/>
+        <put name="body"   value=""/>
+        <put name="footer" value="/footer.jsp" />
+  </definition>
+
+  <!-- agyLogin Page -->
+  <definition name="agyLogin.page" extends="layout.main">
+        <put name="titleKey" value="title.agyLogin" type="string"/>
+        <put name="body"   value="/agyLogin.jsp"/>
+  </definition>
+
 </tiles-definitions>
