@@ -8,4 +8,5 @@
 <br/>
 <br/>
 <br/>
-Boo!
+<br/>
+<h1><bean:message key="text.strapLine" /></h1>
