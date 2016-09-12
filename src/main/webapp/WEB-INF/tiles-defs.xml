@@ -19,6 +19,11 @@
         <put name="footer" value="/footer.jsp" />
   </definition>
 
+  <!-- Home Page -->
+  <definition name="home.page" extends="layout.main">
+        <put name="titleKey" value="title.mmj" type="string"/>
+        <put name="body"   value="/home.jsp"/>
+  </definition>
   <!-- agyLogin Page -->
   <definition name="agyLogin.page" extends="layout.main">
         <put name="titleKey" value="title.agyLogin" type="string"/>

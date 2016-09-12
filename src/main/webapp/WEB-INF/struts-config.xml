@@ -19,10 +19,17 @@
 	</form-beans>
 
     <global-forwards >
+        <forward name="home" path="/home.do" />
+
+        <forward name="agy" path="/agy" />
         <forward name="agyLogin" path="/agyLogin.do" />
     </global-forwards>
 
 	<action-mappings>
+
+	    <action path="/home"
+	        type="org.apache.struts.actions.ForwardAction"
+	        parameter="home.page"/>
 
 		<action path="/agyLogin" 
 		    type="com.helmet.application.agy.Login"
