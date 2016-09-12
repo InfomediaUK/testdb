@@ -18,10 +18,18 @@
 
 	</form-beans>
 
+    <global-forwards >
+        <forward name="agyLogin" path="/agyLogin.do" />
+    </global-forwards>
+
 	<action-mappings>
 
-		<action path="/agyLogin" type="com.helmet.application.agy.Login"
-			name="AgyLoginForm" scope="request" input="/home.do" validate="false">
+		<action path="/agyLogin" 
+		    type="com.helmet.application.agy.Login"
+			name="AgyLoginForm" 
+			scope="request" 
+			input="/home.do" 
+			validate="false">
 			<forward name="success" path="agyLogin.page" />
 		</action>
 
