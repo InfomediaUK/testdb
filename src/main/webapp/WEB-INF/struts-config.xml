@@ -33,8 +33,12 @@
 			<forward name="success" path="agyLogin.page" />
 		</action>
 
-		<action path="/agyLoginProcess" type="com.helmet.application.agy.LoginProcess"
-			name="AgyLoginForm" scope="request" input="agyLogin.page" validate="true">
+		<action path="/agyLoginProcess" 
+		    type="com.helmet.application.agy.LoginProcess"
+			name="AgyLoginForm" 
+			scope="request" 
+			input="agyLogin.page" 
+			validate="true">
 			<forward name="success" path="/agy/home.do" redirect="true" />
 			<forward name="cancel" path="/home.do" redirect="true" />
 		</action>
