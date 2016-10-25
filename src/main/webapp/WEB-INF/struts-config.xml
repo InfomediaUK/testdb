@@ -12,6 +12,11 @@
 			<form-property name="agencyCode" type="java.lang.String" />
 		</form-bean>
 
+	    <form-bean name="AgyForgottenPwdForm" type="org.apache.struts.validator.DynaValidatorForm">
+	        <form-property name="consultant" type="com.helmet.bean.Consultant" />
+	        <form-property name="agencyCode" type="java.lang.String" />
+	    </form-bean>
+    
 		<form-bean name="helloWorldForm" type="net.infomediauk.HelloWorldForm" />
 
 		<form-bean name="sendMailForm" type="net.infomediauk.SendMailForm" />
@@ -23,6 +28,7 @@
 
         <forward name="agy" path="/agy" />
         <forward name="agyLogin" path="/agyLogin.do" />
+        <forward name="agyForgottenPwd" path="/agyForgottenPwd.do" />
     </global-forwards>
 
 	<action-mappings>
@@ -45,10 +51,31 @@
 			name="AgyLoginForm" 
 			scope="request" 
 			input="agyLogin.page" 
+            cancellable="true"
 			validate="true">
 			<forward name="success" path="/agy/home.do" redirect="true" />
 			<forward name="cancel" path="/home.do" redirect="true" />
 		</action>
+
+		<action path="/agyForgottenPwd"
+            type="com.helmet.application.agy.ForgottenPwd"
+            name="AgyForgottenPwdForm"
+            scope="request"
+            input="agyLogin.page"
+            validate="false">
+            <forward name="success" path="agyForgottenPwd.page" />
+        </action>
+
+    <action path="/agyForgottenPwdProcess"
+            type="com.helmet.application.agy.ForgottenPwdProcess"
+            name="AgyForgottenPwdForm"
+            scope="request"
+            input="agyForgottenPwd.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="agyPwdHint.page" redirect="true"/>
+        <forward name="cancel" path="/agyLogin.do" redirect="true"/>
+    </action>
 
 		<action path="/helloWorld" type="net.infomediauk.action.HelloWorldAction"
 			name="helloWorldForm">

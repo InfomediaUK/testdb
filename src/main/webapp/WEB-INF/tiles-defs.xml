@@ -29,5 +29,14 @@
         <put name="titleKey" value="title.agyLogin" type="string"/>
         <put name="body"   value="/agyLogin.jsp"/>
   </definition>
-
+  <!-- agyForgottenPwd Page -->
+  <definition name="agyForgottenPwd.page" extends="layout.main">
+        <put name="titleKey" value="title.agyForgottenPwd" type="string"/>
+        <put name="body"   value="/agyForgottenPwd.jsp"/>
+  </definition>
+  <!-- agyPwdHint Page -->
+  <definition name="agyPwdHint.page" extends="layout.main">
+        <put name="titleKey" value="title.agyPwdHint" type="string"/>
+        <put name="body"   value="/agyPwdHint.jsp"/>
+  </definition>
 </tiles-definitions>

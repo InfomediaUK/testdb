@@ -19,6 +19,6 @@ public class Login extends Action
                                HttpServletRequest request,
                                HttpServletResponse response) 
   {
-      return mapping.findForward("success");
+    return mapping.findForward("success");
   }
 }

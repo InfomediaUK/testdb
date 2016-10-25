@@ -38,4 +38,4 @@
 </html:form>
 </table>
 <br/>
-<html:link forward="agyLogin"><bean:message key="link.forgottenPwd"/></html:link>
+<html:link forward="agyForgottenPwd"><bean:message key="link.forgottenPwd"/></html:link>
