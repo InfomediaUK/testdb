@@ -3,16 +3,16 @@ package com.helmet.application.agy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.validator.DynaValidatorForm;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //import com.helmet.api.AgyService;
 //import com.helmet.api.ServiceFactory;
@@ -23,11 +23,11 @@ import com.helmet.bean.Consultant;
 
 public class ForgottenPwdProcess extends Action
 {
-  protected transient Log logger = LogFactory.getLog(getClass());
+  private static final Logger logger = LoggerFactory.getLogger(Login.class);
 
   public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-
+    logger.debug("Entering");
     if (isCancelled(request))
     {
       return mapping.findForward("cancel");
@@ -42,6 +42,7 @@ public class ForgottenPwdProcess extends Action
 
     MessageResources messageResources = getResources(request);
 
+    logger.debug("Leaving");
     return mapping.findForward("success");
   }
 
