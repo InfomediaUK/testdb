@@ -1,5 +1,8 @@
 package com.helmet.application.agy;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +23,13 @@ public class Login extends Action
                                HttpServletResponse response) 
   {
     logger.debug("Entering");
+    String pattern = "dd/MM/yyyy";
+    SimpleDateFormat format = new SimpleDateFormat(pattern);
+    Date date = new Date();
+    for (int i = 0; i < 100; i++)
+    {
+      logger.debug("Date: {} {}", format.format(date), i);
+    }
     logger.debug("Leaving");
     return mapping.findForward("success");
   }
