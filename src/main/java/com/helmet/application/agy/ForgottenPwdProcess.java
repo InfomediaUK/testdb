@@ -11,8 +11,8 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.validator.DynaValidatorForm;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
 
 //import com.helmet.api.AgyService;
 //import com.helmet.api.ServiceFactory;
@@ -23,11 +23,12 @@ import com.helmet.bean.Consultant;
 
 public class ForgottenPwdProcess extends Action
 {
-  private static final Logger logger = LoggerFactory.getLogger(Login.class);
+//  private static final Logger logger = LoggerFactory.getLogger(Login.class);
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
   public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-    logger.debug("Entering");
+    logger.entry("In coming !!!");
     if (isCancelled(request))
     {
       return mapping.findForward("cancel");
@@ -42,7 +43,7 @@ public class ForgottenPwdProcess extends Action
 
     MessageResources messageResources = getResources(request);
 
-    logger.debug("Leaving");
+    logger.exit("Out going !!!");
     return mapping.findForward("success");
   }
 

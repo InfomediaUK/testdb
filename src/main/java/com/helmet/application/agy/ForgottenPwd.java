@@ -8,22 +8,22 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.DynaValidatorForm;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
 
 import com.helmet.bean.Consultant;
 import com.helmet.bean.User;
 
 public class ForgottenPwd extends Action
 {
-  private static final Logger logger = LoggerFactory.getLogger(ForgottenPwd.class);
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
   public ActionForward execute(ActionMapping mapping,
                                ActionForm form,
                                HttpServletRequest request,
                                HttpServletResponse response) 
   {
-    logger.debug("Entering");
+    logger.entry("In coming !!!");
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
     Consultant consultant = new Consultant();
@@ -33,7 +33,7 @@ public class ForgottenPwd extends Action
     dynaForm.set("consultant", consultant);
     dynaForm.set("agencyCode", "PJRGN");
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    logger.debug("Leaving");
+    logger.exit("Out going !!!");
     return mapping.findForward("success");
   }
 }

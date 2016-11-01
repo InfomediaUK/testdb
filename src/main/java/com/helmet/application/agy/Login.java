@@ -1,5 +1,6 @@
 package com.helmet.application.agy;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,19 +11,19 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
 
 public class Login extends Action
 {
-  private static final Logger logger = LoggerFactory.getLogger(Login.class);
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
   public ActionForward execute(ActionMapping mapping,
                                ActionForm form,
                                HttpServletRequest request,
                                HttpServletResponse response) 
   {
-    logger.debug("Entering");
+    logger.entry("In coming !!!");
     String pattern = "dd/MM/yyyy";
     SimpleDateFormat format = new SimpleDateFormat(pattern);
     Date date = new Date();
@@ -30,7 +31,15 @@ public class Login extends Action
     {
       logger.debug("Date: {} {}", format.format(date), i);
     }
-    logger.debug("Leaving");
+    try
+    {
+      throw new IOException("Bloody thing's gone pants...");
+    }
+    catch (Exception e)
+    {
+      logger.catching(e);
+    }
+    logger.exit("Out going !!!");
     return mapping.findForward("success");
   }
 }

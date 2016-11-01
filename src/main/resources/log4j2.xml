@@ -18,11 +18,40 @@
 			</Policies>
 			<DefaultRolloverStrategy max="3"/>
 		</RollingFile>
+		<RollingFile name="RollingFileStruts" fileName="${log-path}/struts.log" filePattern="${log-path}/struts-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
+			<PatternLayout>
+			    <pattern>%d{dd MMM yyyy HH:mm:ss,SSS} - %-5level %logger{36}: %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+			    <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			    <SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="3"/>
+		</RollingFile>
+		<RollingFile name="RollingFileSpring" fileName="${log-path}/spring.log" filePattern="${log-path}/spring-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
+			<PatternLayout>
+			    <pattern>%d{dd MMM yyyy HH:mm:ss,SSS} - %-5level %logger{36}: %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+			    <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			    <SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="3"/>
+		</RollingFile>
     </Appenders>
     <Loggers>
         <Root level="all">
             <AppenderRef ref="Console" />
             <AppenderRef ref="RollingFile"/>
         </Root>
+        <Logger name="org.apache.commons" level="OFF" additivity="false">
+            <AppenderRef ref="Console" level="DEBUG" />
+        </Logger>
+        <Logger name="org.apache.struts" level="DEBUG" additivity="false">
+            <AppenderRef ref="RollingFileStruts" level="DEBUG" />
+        </Logger>
+        <Logger name="org.springframework" level="DEBUG" additivity="false">
+            <AppenderRef ref="RollingFileSpring" level="DEBUG" />
+        </Logger>
     </Loggers>
 </Configuration>

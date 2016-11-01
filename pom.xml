@@ -110,13 +110,19 @@
 		    <version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-core</artifactId>
-		    <version>${log4j.version}</version>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-ext</artifactId>
+		    <version>${slf4j.version}</version>
+		</dependency>
+		<!-- Bridge logging from JCL to SLF4j-->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-api</artifactId>
+		    <artifactId>log4j-core</artifactId>
 		    <version>${log4j.version}</version>
 		</dependency>
 		<dependency>
