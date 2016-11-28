@@ -2,8 +2,8 @@ package com.helmet.application;
 
 import java.io.FileOutputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
@@ -15,216 +15,216 @@ import com.itextpdf.text.pdf.codec.TiffImage;
 
 public class FileHandler {
 
-  private static FileHandler fileHandler;
+	private static FileHandler fileHandler;
 
-  protected transient Log logger = LogFactory.getLog(getClass());
+	protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-  private String appServerLocation;
+	private String appServerLocation;
 
-  private String tempFileLocation = System.getenv("OPENSHIFT_DATA_DIR");
+	private String tempFileLocation;
 
-  private String tempFileFolder = "/temp";
+	private String tempFileFolder;
 
-  private String fileLocation = System.getenv("OPENSHIFT_DATA_DIR");
+	private String fileLocation;
 
-  private String fileFolder = "documents";
+	private String fileFolder;
 
-  private String photoFileLocation = System.getenv("OPENSHIFT_DATA_DIR");
+	private String photoFileLocation;
 
-  private String photoFileFolder = "/documents/photos";
+	private String photoFileFolder;
 
-  private String logoFileLocation = System.getenv("OPENSHIFT_DATA_DIR");
+	private String logoFileLocation;
 
-  private String logoFileFolder = "/documents/logos";
+	private String logoFileFolder;
 
-  private String cvFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+	private String cvFileLocation;
 
-  private String cvFileFolder = "/documents/cvs";
+	private String cvFileFolder;
 
-  private String receiptFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+	private String receiptFileLocation;
 
-  private String receiptFileFolder = "/documents/receipts";
+	private String receiptFileFolder;
 
-  private String invoiceFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+	private String invoiceFileLocation;
 
-  private String invoiceFileFolder = "/documents/invoices";
+	private String invoiceFileFolder;
 
-  private String applicantFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+  private String applicantFileLocation;
 
-  private String applicantFileFolder = "/documents/applicants";
+  private String applicantFileFolder;
 
-  private String consultantFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+  private String consultantFileLocation;
 
-  private String consultantFileFolder = "/documents/consultants";
+  private String consultantFileFolder;
 
-  private String nhsBookingFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+  private String nhsBookingFileLocation;
 
-  private String nhsBookingFileFolder = "/documents/nhsBookings";
+  private String nhsBookingFileFolder;
   
-  private String nhsInvoiceFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+  private String nhsInvoiceFileLocation;
 
-  private String nhsInvoiceFileFolder = "/documents/nhsInvoices";
+  private String nhsInvoiceFileFolder;
   
-  private String nhsBackingReportFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+  private String nhsBackingReportFileLocation;
 
-  private String nhsBackingReportFileFolder = "/documents/nhsBackingReports";
+  private String nhsBackingReportFileFolder;
   
-  private String nhsPaymentsFileLocation = System.getenv("OPENSHIFT_DATA_DIR");;
+  private String nhsPaymentsFileLocation;
 
-  private String nhsPaymentsFileFolder = "/documents/nhsPayments";
+  private String nhsPaymentsFileFolder;
   
-  private String nhsPaymentsAcceptStatus = "Paid in full";
+  private String nhsPaymentsAcceptStatus;
   
-  public static FileHandler getInstance() {
-    if (fileHandler == null) {
-      // NOT instantiated yet so create it.
-      synchronized (FileHandler.class) {
-        // Only ONE thread at a time here!
-        if (fileHandler == null) {
-          fileHandler = new FileHandler();
-        }
-      }
-    }
-    return fileHandler;
-  }
+	public static FileHandler getInstance() {
+		if (fileHandler == null) {
+			// NOT instantiated yet so create it.
+			synchronized (FileHandler.class) {
+				// Only ONE thread at a time here!
+				if (fileHandler == null) {
+					fileHandler = new FileHandler();
+				}
+			}
+		}
+		return fileHandler;
+	}
 
-  public String getAppServerLocation() {
-    return appServerLocation;
-  }
+	public String getAppServerLocation() {
+		return appServerLocation;
+	}
 
-  public void setAppServerLocation(String appServerLocation) {
-    this.appServerLocation = appServerLocation;
-  }
+	public void setAppServerLocation(String appServerLocation) {
+		this.appServerLocation = appServerLocation;
+	}
 
-  public String getFileLocation() {
-    return fileLocation;
-  }
+	public String getFileLocation() {
+		return fileLocation;
+	}
 
-  public void setFileLocation(String fileLocation) {
-    this.fileLocation = fileLocation;
-  }
+	public void setFileLocation(String fileLocation) {
+		this.fileLocation = fileLocation;
+	}
 
-  public String getTempFileLocation() {
-    return tempFileLocation;
-  }
+	public String getTempFileLocation() {
+		return tempFileLocation;
+	}
 
-  public void setTempFileLocation(String tempFileLocation) {
-    this.tempFileLocation = tempFileLocation;
-  }
+	public void setTempFileLocation(String tempFileLocation) {
+		this.tempFileLocation = tempFileLocation;
+	}
 
-  public String getFileFolder() {
-    return fileFolder;
-  }
+	public String getFileFolder() {
+		return fileFolder;
+	}
 
-  public void setFileFolder(String fileFolder) {
-    this.fileFolder = fileFolder;
-  }
+	public void setFileFolder(String fileFolder) {
+		this.fileFolder = fileFolder;
+	}
 
-  public String getTempFileFolder() {
-    return tempFileFolder;
-  }
+	public String getTempFileFolder() {
+		return tempFileFolder;
+	}
 
-  public void setTempFileFolder(String tempFileFolder) {
-    this.tempFileFolder = tempFileFolder;
-  }
+	public void setTempFileFolder(String tempFileFolder) {
+		this.tempFileFolder = tempFileFolder;
+	}
 
-  public String getPhotoFileFolder() {
-    return photoFileFolder;
-  }
+	public String getPhotoFileFolder() {
+		return photoFileFolder;
+	}
 
-  public void setPhotoFileFolder(String photoFileFolder) {
-    this.photoFileFolder = photoFileFolder;
-  }
+	public void setPhotoFileFolder(String photoFileFolder) {
+		this.photoFileFolder = photoFileFolder;
+	}
 
-  public String getPhotoFileLocation() {
-    return photoFileLocation;
-  }
+	public String getPhotoFileLocation() {
+		return photoFileLocation;
+	}
 
-  public void setPhotoFileLocation(String photoFileLocation) {
-    this.photoFileLocation = photoFileLocation;
-  }
+	public void setPhotoFileLocation(String photoFileLocation) {
+		this.photoFileLocation = photoFileLocation;
+	}
 
-  public String getLogoFileFolder() {
-    return logoFileFolder;
-  }
+	public String getLogoFileFolder() {
+		return logoFileFolder;
+	}
 
-  public void setLogoFileFolder(String logoFileFolder) {
-    this.logoFileFolder = logoFileFolder;
-  }
+	public void setLogoFileFolder(String logoFileFolder) {
+		this.logoFileFolder = logoFileFolder;
+	}
 
-  public String getLogoFileLocation() {
-    return logoFileLocation;
-  }
+	public String getLogoFileLocation() {
+		return logoFileLocation;
+	}
 
-  public void setLogoFileLocation(String logoFileLocation) {
-    this.logoFileLocation = logoFileLocation;
-  }
+	public void setLogoFileLocation(String logoFileLocation) {
+		this.logoFileLocation = logoFileLocation;
+	}
 
-  public String getCvFileFolder() {
-    return cvFileFolder;
-  }
+	public String getCvFileFolder() {
+		return cvFileFolder;
+	}
 
-  public void setCvFileFolder(String cvFileFolder) {
-    this.cvFileFolder = cvFileFolder;
-  }
+	public void setCvFileFolder(String cvFileFolder) {
+		this.cvFileFolder = cvFileFolder;
+	}
 
-  public String getCvFileLocation() {
-    return cvFileLocation;
-  }
+	public String getCvFileLocation() {
+		return cvFileLocation;
+	}
 
-  public void setCvFileLocation(String cvFileLocation) {
-    this.cvFileLocation = cvFileLocation;
-  }
+	public void setCvFileLocation(String cvFileLocation) {
+		this.cvFileLocation = cvFileLocation;
+	}
 
-  public String getReceiptFileFolder() {
-    return receiptFileFolder;
-  }
+	public String getReceiptFileFolder() {
+		return receiptFileFolder;
+	}
 
-  public void setReceiptFileFolder(String receiptFileFolder) {
-    this.receiptFileFolder = receiptFileFolder;
-  }
+	public void setReceiptFileFolder(String receiptFileFolder) {
+		this.receiptFileFolder = receiptFileFolder;
+	}
 
-  public String getReceiptFileLocation() {
-    return receiptFileLocation;
-  }
+	public String getReceiptFileLocation() {
+		return receiptFileLocation;
+	}
 
-  public void setReceiptFileLocation(String receiptFileLocation) {
-    this.receiptFileLocation = receiptFileLocation;
-  }
+	public void setReceiptFileLocation(String receiptFileLocation) {
+		this.receiptFileLocation = receiptFileLocation;
+	}
 
-  public String getInvoiceFileFolder() {
-    return invoiceFileFolder;
-  }
+	public String getInvoiceFileFolder() {
+		return invoiceFileFolder;
+	}
 
-  public void setInvoiceFileFolder(String invoiceFileFolder) {
-    this.invoiceFileFolder = invoiceFileFolder;
-  }
+	public void setInvoiceFileFolder(String invoiceFileFolder) {
+		this.invoiceFileFolder = invoiceFileFolder;
+	}
 
-  public String getInvoiceFileLocation() {
-    return invoiceFileLocation;
-  }
+	public String getInvoiceFileLocation() {
+		return invoiceFileLocation;
+	}
 
-  public void setInvoiceFileLocation(String invoiceFileLocation) {
-    this.invoiceFileLocation = invoiceFileLocation;
-  }
+	public void setInvoiceFileLocation(String invoiceFileLocation) {
+		this.invoiceFileLocation = invoiceFileLocation;
+	}
 
-  public String getApplicantFileFolder() {
-    return applicantFileFolder;
-  }
+	public String getApplicantFileFolder() {
+		return applicantFileFolder;
+	}
 
-  public void setApplicantFileFolder(String applicantFileFolder) {
-    this.applicantFileFolder = applicantFileFolder;
-  }
+	public void setApplicantFileFolder(String applicantFileFolder) {
+		this.applicantFileFolder = applicantFileFolder;
+	}
 
-  public String getApplicantFileLocation() {
-    return applicantFileLocation;
-  }
+	public String getApplicantFileLocation() {
+		return applicantFileLocation;
+	}
 
-  public void setApplicantFileLocation(String applicantFileLocation) {
-    this.applicantFileLocation = applicantFileLocation;
-  }
+	public void setApplicantFileLocation(String applicantFileLocation) {
+		this.applicantFileLocation = applicantFileLocation;
+	}
 
-  public String getConsultantFileFolder()
+	public String getConsultantFileFolder()
   {
     return consultantFileFolder;
   }
@@ -337,9 +337,9 @@ public class FileHandler {
 
   public void convertTiffToPdf(String tiffFilePath, String pdfFilePath) {
 
-    Document document = null;
-    try {
-      int pages = 0;
+		Document document = null;
+		try {
+			int pages = 0;
             RandomAccessFileOrArray ra = null;
             int comps = 0;
             try {
@@ -354,16 +354,16 @@ public class FileHandler {
         
             for (int c = 0; c < comps; ++c) {
 
-              // for each page
-              
-              try {
+            	// for each page
+            	
+            	try {
                     Image img = TiffImage.getTiffImage(ra, c + 1);
                     
                     if (img != null) {
                         
-                      logger.debug("page " + (c + 1));
-                      logger.debug("width " + img.getWidth() + " height " + img.getHeight());
-                      logger.debug("plainWidth " + img.getPlainWidth() + " plainHeight " + img.getPlainHeight());
+                    	logger.debug("page " + (c + 1));
+                    	logger.debug("width " + img.getWidth() + " height " + img.getHeight());
+                    	logger.debug("plainWidth " + img.getPlainWidth() + " plainHeight " + img.getPlainHeight());
 
                         // web a4 page is 595 x 842 @ 72 dpi
                         // we need to convert from current dpi to web dpi
@@ -382,18 +382,18 @@ public class FileHandler {
 
                         if (document == null) {
                         
-                          // set the orientation of the initial page
-                      document = new Document(pageSize);
-                      PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
-                    
-                    document.setMargins(0, 0, 0, 0);
-                    
-                    document.open();
+                        	// set the orientation of the initial page
+                			document = new Document(pageSize);
+                			PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
+            				
+            				document.setMargins(0, 0, 0, 0);
+            				
+            				document.open();
                         }
                         else {
-                          // set the orientation of the new page
-                          document.setPageSize(pageSize);
-                          document.newPage();
+                        	// set the orientation of the new page
+                        	document.setPageSize(pageSize);
+                        	document.newPage();
                         }
                         
                         logger.debug("pageWidth " + document.getPageSize().getWidth() + " pageHeight " + document.getPageSize().getHeight());
@@ -405,7 +405,7 @@ public class FileHandler {
                         logger.debug("maxPageWidth " + maxPageWidth + " maxPageHeight " + maxPageHeight);
                         
                         if (img.getScaledWidth() > maxPageWidth) {
-                          float widthFactor = maxPageWidth / imgWidth;
+                        	float widthFactor = maxPageWidth / imgWidth;
                             img.scaleAbsoluteWidth(maxPageWidth);
                             img.scaleAbsoluteHeight(imgHeight * (widthFactor));
                         }
@@ -413,30 +413,30 @@ public class FileHandler {
                         logger.debug("img.getScaledWidth " + img.getScaledWidth() + " img.getScaledHeight " + img.getScaledHeight());
 
                         if (img.getScaledHeight() > maxPageHeight) {
-                          float heightFactor = maxPageHeight / imgHeight;
+                        	float heightFactor = maxPageHeight / imgHeight;
                             img.scaleAbsoluteHeight(maxPageHeight);
                             img.scaleAbsoluteWidth(imgWidth * (heightFactor));
                         }
                         
                         logger.debug("img.getScaledWidth " + img.getScaledWidth() + " img.getScaledHeight " + img.getScaledHeight());
 
-                      document.add(img);
+                    	document.add(img);
             
                         ++pages;
                     }
                 }
                 catch (Throwable e) {
-                  logger.error("Exception " + tiffFilePath + " page " + (c + 1) + " " + e.getMessage());
+                	logger.error("Exception " + tiffFilePath + " page " + (c + 1) + " " + e.getMessage());
                 }
-      }
-      ra.close();
-      document.close();
-    } catch (Throwable e) {
-      e.printStackTrace();
-    }
-    
-  }
+			}
+			ra.close();
+			document.close();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+	}
 
-  
-  
+	
+	
 }
