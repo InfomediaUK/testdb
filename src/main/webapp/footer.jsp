@@ -8,4 +8,4 @@
 <br/>
 <br/>
 <bean:message key="text.copyright" />&nbsp;<fmt:formatDate value="${date}" pattern="yyyy" />
-<%-- <jsp:include flush="true" page="/sessionStuff.jsp"/>   --%>
+<jsp:include flush="true" page="/sessionStuff.jsp"/>

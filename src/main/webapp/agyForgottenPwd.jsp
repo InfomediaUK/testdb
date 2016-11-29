@@ -2,10 +2,11 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
-<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
-<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
-<br/>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" 
+%><%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" 
+%><%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" 
+%><%@ taglib uri="/mmj" prefix="mmj" 
+%><br/>
 <h2><bean:message key="title.agyForgottenPwd" /></h2>
 <bean:define id="focusField" value="agencyCode"/>
 <bean:parameter id="agencyCodeParam" name="agencyCode" value=""/>
@@ -30,7 +31,7 @@
   <tr>
     <td colspan="2" align="center">
       <br/>
-      <html:submit styleClass="button"><bean:message key="button.getHint"/></html:submit>&nbsp;
+      <html:submit styleClass="button"><bean:message key="button.getHint"/></html:submit>
       <html:cancel styleClass="button"><bean:message key="button.cancel"/></html:cancel>
     </td>
   </tr>

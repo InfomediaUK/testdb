@@ -1,0 +1,15 @@
+%applicant.user.fullName%
+
+Please be advised that your CRB Expires on:-
+%applicant.crbExpiryDate%
+
+Please contact your agency (%agency.telephoneNumber%) and provide them with the following information:-
+A valid passport. 
+A bank statement or utility bill no older than 3 months.  
+Your address history by month and year for the last 5 years. 
+
+Alternatively if you are registered with the DBS update service they will need your certificate number, date of birth and your surname as it appears on the certificate.
+
+Kind regards
+
+MMJ Support Team

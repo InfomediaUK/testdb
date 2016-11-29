@@ -1,0 +1,10 @@
+%applicant.user.fullName%
+
+Please be advised that your Training Expires on:-
+%applicant.trainingExpiryDate%
+
+Please contact your agency (%agency.telephoneNumber%) to book the practical training day and for your online login details.
+
+Kind regards
+
+MMJ Support Team

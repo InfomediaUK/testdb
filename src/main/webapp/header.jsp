@@ -9,14 +9,18 @@
 <br/>
 <br/>
 <%
+String serverNamePrefix = null;
 String mmjLogo = null;
-if (request.getServerName().startsWith("local") || request.getServerName().startsWith("127.0.0.1"))
+if (request.getServerName().startsWith("local"))
 {
-  mmjLogo = request.getContextPath() + "/images/" + "localmaster-logo.jpg";
+  serverNamePrefix = request.getServerName();
+  mmjLogo = request.getContextPath() + "/localmaster-logo.jpg";
 }
 else
 {
-  mmjLogo = request.getContextPath() + "/images/" + "master-logo.jpg";
+  serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
+  serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
+  mmjLogo = request.getContextPath() + "/images/" + serverNamePrefix + "master-logo.jpg";
 }
 %>
 <html:link forward="home"><img src="<%= mmjLogo %>" width="150" height="58" /></html:link>

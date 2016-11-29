@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+<title>Match My Job - 503 Service Unavailable - Providing management solutions for workforce procurement</title>
+
+<style>
+body {
+	color:#000;
+	background:#fff;
+	font:70% verdana,tahoma,helvetica,sans-serif;
+	margin:10px;
+	padding:0px;
+}
+#siteUnavailable {
+	text-align:center;
+	width:100%;
+	background-color:#e0e0e0;
+
+	BORDER-TOP: #cc0000 1px solid;
+	BORDER-LEFT: #cc0000 1px solid;
+	BORDER-RIGHT: #cc0000 1px solid;
+	BORDER-BOTTOM: #cc0000 1px solid;
+
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+}
+#siteUnavailableContainer {
+	width:100%;
+	padding-top:0em;
+	padding-bottom:0.5em;
+}
+</style>
+
+</head>
+<body>
+<div align="center">
+<img src="/master-logo.jpg" title="Match My Job - Providing management solutions for workforce procurement" alt="Match My Job" border="0"/>
+</div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<?php
+
+// Load the XML source
+$xml = new DOMDocument;
+$xml->load('../admin/siteUnavailable.xml');
+
+// Load the XSL source
+$xsl = new DOMDocument;
+$xsl->load('../admin/siteUnavailable.xsl');
+
+
+$proc = new XSLTProcessor();
+$proc->importStylesheet($xsl);
+$newXml = $proc->transformToXML($xml);
+echo $newXml;
+
+
+?>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div align="center">
+<p>&copy; Copyright Ingenious Solutions London Ltd <?php echo date('Y'); ?></p>
+</div>
+
+</body>
+</html>

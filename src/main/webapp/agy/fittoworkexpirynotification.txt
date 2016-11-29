@@ -1,0 +1,10 @@
+%applicant.user.fullName%
+
+Please be advised that your Fit to Work Expires on:- %applicant.fitToWorkExpiryDate%
+
+Please contact your agency (%agency.telephoneNumber%) to complete the fit to work renewal process.  You will need to tell them if you have travelled within the last 12 months.
+
+Kind regards
+
+
+MMJ Support Team
