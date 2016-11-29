@@ -11,7 +11,7 @@
 <%
 String serverNamePrefix = null;
 String mmjLogo = null;
-if (request.getServerName().startsWith("local"))
+if (request.getServerName().startsWith("www.befriended.co.uk"))
 {
   serverNamePrefix = request.getServerName();
   mmjLogo = request.getContextPath() + "/localmaster-logo.jpg";
