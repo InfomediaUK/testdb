@@ -1,0 +1,10 @@
+%applicant.user.fullName%
+
+Please be advised that your Passport Expires on:- %applicant.passportExpiryDate%
+
+Please provide your agency with your up to date passport.
+
+Kind regards
+
+
+MMJ Support Team

@@ -1,0 +1,11 @@
+Dear %applicant.user.fullName%
+
+Please be advised that NHS Booking Bank Request %bankReqNum% has been closed.
+
+Reason: %reason%
+
+%siteName% (%locationName%)
+%jobProfileAssignment%
+%date% %startTime% - %endTime%
+
+Kind regards

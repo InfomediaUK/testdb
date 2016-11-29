@@ -1,0 +1,9 @@
+%applicant.user.fullName%
+
+Please be advised that your interview has been set for %applicant.interviewDate%
+
+Please contact your agency and arrange a suitable time for your interview. It will take about one hour.
+
+Kind regards
+
+MMJ Support Team

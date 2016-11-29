@@ -1,0 +1,10 @@
+%applicant.user.fullName%
+
+Please be advised that your Professional Registration Expires on:-%applicant.hpcExpiryDate%
+
+Please contact your agency (%agency.telephoneNumber%) and provide them with your up to date registration details.
+
+Kind regards
+
+
+MMJ Support Team

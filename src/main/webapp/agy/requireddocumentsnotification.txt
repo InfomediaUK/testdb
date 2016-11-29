@@ -1,0 +1,21 @@
+%applicant.user.fullName%
+
+Please be advised that the following documents are required by us:-
+
+We have evidence of a current Passport: %applicant.hasCurrentPassport%
+We have evidence of a current Visa: %applicant.hasCurrentVisa%
+We have evidence of a current CRB: %applicant.hasCurrentCRB%
+We have evidence of current Training: %applicant.hasCurrentTraining%
+We have evidence of your Birth Certificate: %applicant.hasBirthCertificate%
+We have evidence of your Degree (if applicable): %applicant.hasDegree%
+We have Proof of your Address: %applicant.hasProofOfAddress%
+We have your Overseas Police Clearance: %applicant.overseasPoliceClearance%
+We have received your NI Number: %applicant.niNumberReceived%
+
+Please also be aware that if you intend to drive a car you must be in possession of a valid UK Driving License.
+
+We cannot process your job application until we have all of them.
+
+Kind regards
+
+MMJ Support Team
