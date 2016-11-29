@@ -1,0 +1,28 @@
+package com.helmet.persistence;
+
+import java.sql.Date;
+import java.util.List;
+
+import com.helmet.bean.BookingGradeApplicantDate;
+import com.helmet.bean.BookingGradeApplicantDateUser;
+import com.helmet.bean.BookingGradeApplicantDateUserEntity;
+
+public interface BookingGradeApplicantDateDAO {
+
+	public List<BookingGradeApplicantDateUser> getBookingGradeApplicantDateUsersForBookingGradeApplicant(Integer bookingGradeApplicantId, boolean showOnlyActive);
+	public List<BookingGradeApplicantDateUser> getBookingGradeApplicantDateUsersForBookingGradeApplicantForApplicant(Integer bookingGradeApplicantId);
+	public List<BookingGradeApplicantDateUserEntity> getBookingGradeApplicantDateUserEntitiesForBookingGradeApplicant(Integer bookingGradeApplicantId, boolean showOnlyActive);
+	public List<BookingGradeApplicantDateUserEntity> getBookingGradeApplicantDateUserEntitiesForBookingGradeApplicantForApplicant(Integer bookingGradeApplicantId);
+	public List<BookingGradeApplicantDateUserEntity> getOutstandingBookingGradeApplicantDateUserEntitiesForBookingGradeApplicantForApplicant(Integer bookingGradeApplicantId);
+	public List<BookingGradeApplicantDateUserEntity> getBookingGradeApplicantDateUserEntitiesForBookingGradeApplicantForApplicantAndBookingDates(Integer bookingGradeApplicantId, String bookingDateIdStrs);
+	public List<BookingGradeApplicantDateUserEntity> getBookingGradeApplicantDateUserEntitiesForBookingGradeApplicantForDateRange(Integer bookingGradeApplicantId, Date startDate, Date endDate);
+	
+	public BookingGradeApplicantDateUser getBookingGradeApplicantDateUser(Integer bookingGradeApplicantDateId);
+	public int insertBookingGradeApplicantDate(BookingGradeApplicantDate bookingGradeApplicantDate, Integer auditorId);
+	public int updateBookingGradeApplicantDateStatus(Integer bookingGradeApplicantDateId, Integer noOfChanges, Integer auditorId, int status);
+	public int deleteBookingGradeApplicantDate(Integer bookingGradeApplicantDateId, Integer noOfChanges, Integer auditorId);
+	
+    public List<BookingGradeApplicantDate> getBookingGradeApplicantDatesForBookingDateAndStatus(Integer bookingDateId, Integer status);
+	public List<BookingGradeApplicantDateUser> getBookingGradeApplicantDateUsersForBookingFilled(Integer bookingId, boolean showOnlyActive);
+
+}

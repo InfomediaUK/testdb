@@ -4,67 +4,66 @@ import java.sql.Timestamp;
 
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-public class Base
-{
-  private Timestamp creationTimestamp;
+public class Base {
 
-  private Integer auditorId;
+	private Timestamp creationTimestamp;
 
-  private Timestamp auditTimestamp;
+	private Integer auditorId;
 
-  private Boolean active;
+	private Timestamp auditTimestamp;
 
-  private Integer noOfChanges;
+	private Boolean active;
 
-  public Timestamp getCreationTimestamp() {
-    return creationTimestamp;
-  }
+	private Integer noOfChanges;
 
-  public void setCreationTimestamp(Timestamp creationTimestamp) {
-    this.creationTimestamp = creationTimestamp;
-  }
+	public Timestamp getCreationTimestamp() {
+		return creationTimestamp;
+	}
 
-  public Integer getAuditorId() {
-    return auditorId;
-  }
+	public void setCreationTimestamp(Timestamp creationTimestamp) {
+		this.creationTimestamp = creationTimestamp;
+	}
 
-  public void setAuditorId(Integer auditorId) {
-    this.auditorId = auditorId;
-  }
+	public Integer getAuditorId() {
+		return auditorId;
+	}
 
-  public Timestamp getAuditTimestamp() {
-    return auditTimestamp;
-  }
+	public void setAuditorId(Integer auditorId) {
+		this.auditorId = auditorId;
+	}
 
-  public void setAuditTimestamp(Timestamp auditTimestamp) {
-    this.auditTimestamp = auditTimestamp;
-  }
+	public Timestamp getAuditTimestamp() {
+		return auditTimestamp;
+	}
 
-  public Boolean getActive() {
-    return active;
-  }
+	public void setAuditTimestamp(Timestamp auditTimestamp) {
+		this.auditTimestamp = auditTimestamp;
+	}
 
-  public void setActive(Boolean active) {
-    this.active = active;
-  }
+	public Boolean getActive() {
+		return active;
+	}
 
-  public Integer getNoOfChanges() {
-    return noOfChanges;
-  }
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 
-  public void setNoOfChanges(Integer noOfChanges) {
-    this.noOfChanges = noOfChanges;
-  }
+	public Integer getNoOfChanges() {
+		return noOfChanges;
+	}
 
-  public void load(SqlRowSet rs) {
+	public void setNoOfChanges(Integer noOfChanges) {
+		this.noOfChanges = noOfChanges;
+	}
 
-    setCreationTimestamp(rs.getTimestamp("CREATIONTIMESTAMP"));
-    setAuditorId(rs.getInt("AUDITORID"));
-    setAuditTimestamp(rs.getTimestamp("AUDITTIMESTAMP"));
-    setActive(rs.getBoolean("ACTIVE"));
-    setNoOfChanges(rs.getInt("NOOFCHANGES"));
+	public void load(SqlRowSet rs) {
 
-  }
+		setCreationTimestamp(rs.getTimestamp("CREATIONTIMESTAMP"));
+		setAuditorId(rs.getInt("AUDITORID"));
+		setAuditTimestamp(rs.getTimestamp("AUDITTIMESTAMP"));
+		setActive(rs.getBoolean("ACTIVE"));
+		setNoOfChanges(rs.getInt("NOOFCHANGES"));
 
+	}
 
 }
