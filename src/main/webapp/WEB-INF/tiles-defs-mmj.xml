@@ -1,13 +1,10 @@
+<?xml version="1.0"?>
+
 <!DOCTYPE tiles-definitions PUBLIC
 "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
 "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
 
 <tiles-definitions>
-
-   <definition name="company-template" path="/pages/tiles/common-layout.jsp">
-	<put name="header" value="/pages/tiles/template-green/header.jsp" />
-	<put name="footer" value="/pages/tiles/template-red/footer.jsp" />
-   </definition>
 
   <!-- Main Layout -->
   <definition name="layout.main" path="/layoutMain.jsp">
@@ -24,19 +21,199 @@
         <put name="titleKey" value="title.mmj" type="string"/>
         <put name="body"   value="/home.jsp"/>
   </definition>
+  <definition name="error404.page" extends="layout.main">
+        <put name="titleKey" value="title.error404" type="string"/>
+        <put name="body"   value="/error404.jsp"/>
+  </definition>
+  <definition name="error500.page" extends="layout.main">
+        <put name="titleKey" value="title.error500" type="string"/>
+        <put name="body"   value="/error500.jsp"/>
+  </definition>
+
+  <!-- adminLogin Page -->
+  <definition name="adminLogin.page" extends="layout.main">
+        <put name="titleKey" value="title.adminLogin" type="string"/>
+        <put name="body"   value="/adminLogin.jsp"/>
+  </definition>
+
+  <!-- adminSecretWord Page -->
+  <definition name="adminSecretWord.page" extends="layout.main">
+        <put name="titleKey" value="title.adminSecretWord" type="string"/>
+        <put name="body"   value="/adminSecretWord.jsp"/>
+  </definition>
+
+  <!-- adminForgottenPwd Page -->
+  <definition name="adminForgottenPwd.page" extends="layout.main">
+        <put name="titleKey" value="title.adminForgottenPwd" type="string"/>
+        <put name="body"   value="/adminForgottenPwd.jsp"/>
+  </definition>
+
+  <!-- adminPwdHint Page -->
+  <definition name="adminPwdHint.page" extends="layout.main">
+        <put name="titleKey" value="title.adminPwdHint" type="string"/>
+        <put name="body"   value="/adminPwdHint.jsp"/>
+  </definition>
+
+  <!-- adminResetPwd Page -->
+  <definition name="adminResetPwd.page" extends="layout.main">
+        <put name="titleKey" value="title.adminResetPwd" type="string"/>
+        <put name="body"   value="/adminResetPwd.jsp"/>
+  </definition>
+
+  <!-- adminResetPwdSent Page -->
+  <definition name="adminResetPwdSent.page" extends="layout.main">
+        <put name="titleKey" value="title.adminResetPwdSent" type="string"/>
+        <put name="body"   value="/adminResetPwdSent.jsp"/>
+  </definition>
+
+  <!-- adminLoggedOut Page -->
+  <definition name="adminLoggedOut.page" extends="layout.main">
+        <put name="titleKey" value="title.adminLoggedOut" type="string"/>
+        <put name="body"   value="/adminLoggedOut.jsp"/>
+  </definition>
+
+  <!-- mgrLogin Page -->
+  <definition name="mgrLogin.page" extends="layout.main">
+        <put name="titleKey" value="title.mgrLogin" type="string"/>
+        <put name="body"   value="/mgrLogin.jsp"/>
+  </definition>
+
+  <!-- mgrSecretWord Page -->
+  <definition name="mgrSecretWord.page" extends="layout.main">
+        <put name="titleKey" value="title.mgrSecretWord" type="string"/>
+        <put name="body"   value="/mgrSecretWord.jsp"/>
+  </definition>
+
+  <!-- mgrForgottenPwd Page -->
+  <definition name="mgrForgottenPwd.page" extends="layout.main">
+        <put name="titleKey" value="title.mgrForgottenPwd" type="string"/>
+        <put name="body"   value="/mgrForgottenPwd.jsp"/>
+  </definition>
+
+  <!-- mgrPwdHint Page -->
+  <definition name="mgrPwdHint.page" extends="layout.main">
+        <put name="titleKey" value="title.mgrPwdHint" type="string"/>
+        <put name="body"   value="/mgrPwdHint.jsp"/>
+  </definition>
+
+  <!-- mgrResetPwd Page -->
+  <definition name="mgrResetPwd.page" extends="layout.main">
+        <put name="titleKey" value="title.mgrResetPwd" type="string"/>
+        <put name="body"   value="/mgrResetPwd.jsp"/>
+  </definition>
+
+  <!-- mgrResetPwdSent Page -->
+  <definition name="mgrResetPwdSent.page" extends="layout.main">
+        <put name="titleKey" value="title.mgrResetPwdSent" type="string"/>
+        <put name="body"   value="/mgrResetPwdSent.jsp"/>
+  </definition>
+
+  <!-- mgrLoggedOut Page -->
+  <definition name="mgrLoggedOut.page" extends="layout.main">
+        <put name="titleKey" value="title.mgrLoggedOut" type="string"/>
+        <put name="body"   value="/mgrLoggedOut.jsp"/>
+  </definition>
+
   <!-- agyLogin Page -->
   <definition name="agyLogin.page" extends="layout.main">
         <put name="titleKey" value="title.agyLogin" type="string"/>
         <put name="body"   value="/agyLogin.jsp"/>
   </definition>
+
+  <!-- agySecretWord Page -->
+  <definition name="agySecretWord.page" extends="layout.main">
+        <put name="titleKey" value="title.agySecretWord" type="string"/>
+        <put name="body"   value="/agySecretWord.jsp"/>
+  </definition>
+
   <!-- agyForgottenPwd Page -->
   <definition name="agyForgottenPwd.page" extends="layout.main">
         <put name="titleKey" value="title.agyForgottenPwd" type="string"/>
         <put name="body"   value="/agyForgottenPwd.jsp"/>
   </definition>
+
   <!-- agyPwdHint Page -->
   <definition name="agyPwdHint.page" extends="layout.main">
         <put name="titleKey" value="title.agyPwdHint" type="string"/>
         <put name="body"   value="/agyPwdHint.jsp"/>
   </definition>
+
+  <!-- agyResetPwd Page -->
+  <definition name="agyResetPwd.page" extends="layout.main">
+        <put name="titleKey" value="title.agyResetPwd" type="string"/>
+        <put name="body"   value="/agyResetPwd.jsp"/>
+  </definition>
+
+  <!-- agyResetPwdSent Page -->
+  <definition name="agyResetPwdSent.page" extends="layout.main">
+        <put name="titleKey" value="title.agyResetPwdSent" type="string"/>
+        <put name="body"   value="/agyResetPwdSent.jsp"/>
+  </definition>
+
+  <!-- agyLoggedOut Page -->
+  <definition name="agyLoggedOut.page" extends="layout.main">
+        <put name="titleKey" value="title.agyLoggedOut" type="string"/>
+        <put name="body"   value="/agyLoggedOut.jsp"/>
+  </definition>
+
+  <!-- appLogin Page -->
+  <definition name="appLogin.page" extends="layout.main">
+        <put name="titleKey" value="title.appLogin" type="string"/>
+        <put name="body"   value="/appLogin.jsp"/>
+  </definition>
+
+  <!-- appSecretWord Page -->
+  <definition name="appSecretWord.page" extends="layout.main">
+        <put name="titleKey" value="title.appSecretWord" type="string"/>
+        <put name="body"   value="/appSecretWord.jsp"/>
+  </definition>
+
+  <!-- appLoggedOut Page -->
+  <definition name="appLoggedOut.page" extends="layout.main">
+        <put name="titleKey" value="title.appLoggedOut" type="string"/>
+        <put name="body"   value="/appLoggedOut.jsp"/>
+  </definition>
+
+  <!-- zapLogin Page -->
+  <definition name="zapLogin.page" extends="layout.main">
+        <put name="titleKey" value="title.zapLogin" type="string"/>
+        <put name="body"   value="/zapLogin.jsp"/>
+  </definition>
+
+  <!-- zapSecretWord Page -->
+  <definition name="zapSecretWord.page" extends="layout.main">
+        <put name="titleKey" value="title.appSecretWord" type="string"/>
+        <put name="body"   value="/appSecretWord.jsp"/>
+  </definition>
+
+  <!-- zapForgottenPwd Page -->
+  <definition name="zapForgottenPwd.page" extends="layout.main">
+        <put name="titleKey" value="title.zapForgottenPwd" type="string"/>
+        <put name="body"   value="/zapForgottenPwd.jsp"/>
+  </definition>
+
+  <!-- zapPwdHint Page -->
+  <definition name="zapPwdHint.page" extends="layout.main">
+        <put name="titleKey" value="title.zapPwdHint" type="string"/>
+        <put name="body"   value="/zapPwdHint.jsp"/>
+  </definition>
+
+  <!-- zapResetPwd Page -->
+  <definition name="zapResetPwd.page" extends="layout.main">
+        <put name="titleKey" value="title.zapResetPwd" type="string"/>
+        <put name="body"   value="/zapResetPwd.jsp"/>
+  </definition>
+
+  <!-- zapResetPwdSent Page -->
+  <definition name="zapResetPwdSent.page" extends="layout.main">
+        <put name="titleKey" value="title.zapResetPwdSent" type="string"/>
+        <put name="body"   value="/zapResetPwdSent.jsp"/>
+  </definition>
+
+  <!-- zapLoggedOut Page -->
+  <definition name="zapLoggedOut.page" extends="layout.main">
+        <put name="titleKey" value="title.zapLoggedOut" type="string"/>
+        <put name="body"   value="/zapLoggedOut.jsp"/>
+  </definition>
+
 </tiles-definitions>

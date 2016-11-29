@@ -1,61 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts-config PUBLIC
-"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
-"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 
 <struts-config>
+  
+  <form-beans >
 
-	<form-beans>
-		<form-bean name="AgyLoginForm"
-			type="org.apache.struts.validator.DynaValidatorForm">
-			<form-property name="consultant" type="com.helmet.bean.Consultant" />
-			<form-property name="agencyCode" type="java.lang.String" />
-		</form-bean>
+    <form-bean name="AgyLoginForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="consultant" type="com.helmet.bean.Consultant" />
+      <form-property name="agencyCode" type="java.lang.String" />
+    </form-bean>
 
-	    <form-bean name="AgyForgottenPwdForm" type="org.apache.struts.validator.DynaValidatorForm">
-	        <form-property name="consultant" type="com.helmet.bean.Consultant" />
-	        <form-property name="agencyCode" type="java.lang.String" />
-	    </form-bean>
+    <form-bean name="AgySecretWordForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="secretWordKey1" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue1" type="java.lang.String" />
+      <form-property name="secretWordKey2" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue2" type="java.lang.String" />
+      <form-property name="secretWordKey3" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue3" type="java.lang.String" />
+    </form-bean>
     
-		<form-bean name="helloWorldForm" type="net.infomediauk.HelloWorldForm" />
+    <form-bean name="AgyForgottenPwdForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="consultant" type="com.helmet.bean.Consultant" />
+      <form-property name="agencyCode" type="java.lang.String" />
+    </form-bean>
+    
+  </form-beans>
+  
+	<global-exceptions>
+	  <exception
+	    handler="com.helmet.api.exceptions.MMJExceptionHandler"
+	    key="global.error.message"
+	    path="/home.do"
+	    scope="request"
+	    type="com.helmet.api.exceptions.IllegalAccessException"/>
+	</global-exceptions>
+  
+  <global-forwards >
 
-		<form-bean name="sendMailForm" type="net.infomediauk.SendMailForm" />
+    <forward name="home" path="/home.do" />
+    <forward name="error404" path="/error404.do" />
+    <forward name="error500" path="/error500.do" />
 
-	</form-beans>
+    <forward name="agy" path="/agy" />
+    <forward name="agyLogin" path="/agyLogin.do" />
+    <forward name="agyLoggedOut" path="/agyLoggedOut.do" />
+    <forward name="agyForgottenPwd" path="/agyForgottenPwd.do" />
+    <forward name="agyResetPwd" path="/agyResetPwd.do" />
 
-    <global-forwards >
-        <forward name="home" path="/home.do" />
+  </global-forwards>
+  
+  <action-mappings >
 
-        <forward name="agy" path="/agy" />
-        <forward name="agyLogin" path="/agyLogin.do" />
-        <forward name="agyForgottenPwd" path="/agyForgottenPwd.do" />
-    </global-forwards>
-
-	<action-mappings>
-
-	    <action path="/home"
+	<action path="/home"
 	        type="org.apache.struts.actions.ForwardAction"
 	        parameter="home.page"/>
 
-		<action path="/agyLogin" 
-		    type="com.helmet.application.agy.Login"
-			name="AgyLoginForm" 
-			scope="request" 
-			input="/home.do" 
-			validate="false">
-			<forward name="success" path="agyLogin.page" />
-		</action>
+	<action path="/error404"
+	        type="org.apache.struts.actions.ForwardAction"
+	        parameter="error404.page"/>
 
-		<action path="/agyLoginProcess" 
-		    type="com.helmet.application.agy.LoginProcess"
-			name="AgyLoginForm" 
-			scope="request" 
-			input="agyLogin.page" 
+	<action path="/error500"
+	        type="org.apache.struts.actions.ForwardAction"
+	        parameter="error500.page"/>
+
+    <action path="/agyLogin"
+            type="com.helmet.application.agy.Login"
+            name="AgyLoginForm"
+            scope="request"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="agyLogin.page" />
+    </action>
+
+    <action path="/agyLoginProcess"
+            type="com.helmet.application.agy.LoginProcess"
+            name="AgyLoginForm"
+            scope="request"
+            input="agyLogin.page"
             cancellable="true"
-			validate="true">
-			<forward name="success" path="/agy/home.do" redirect="true" />
-			<forward name="cancel" path="/home.do" redirect="true" />
-		</action>
+            validate="true">
+        <forward name="success" path="/agy/home.do" redirect="true"/>
+        <forward name="cancel" path="/home.do" redirect="true"/>
+    </action>
+
+    <action path="/agySecretWord"
+            type="com.helmet.application.agy.SecretWord"
+            name="AgySecretWordForm"
+            scope="session"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="agySecretWord.page" />
+    </action>
+
+    <action path="/agySecretWordProcess"
+            type="com.helmet.application.agy.SecretWordProcess"
+            name="AgySecretWordForm"
+            scope="session"
+            input="agySecretWord.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/agy/home.do" redirect="true"/>
+        <forward name="cancel" path="/agyLoginCancelled.do" redirect="true"/>
+    </action>
+
+	<action path="/agyLoginCancelled"
+            type="com.helmet.application.agy.LoginCancelled">
+        <forward name="success" path="/home.do" />
+    </action>
 
 		<action path="/agyForgottenPwd"
             type="com.helmet.application.agy.ForgottenPwd"
@@ -63,8 +116,8 @@
             scope="request"
             input="agyLogin.page"
             validate="false">
-            <forward name="success" path="agyForgottenPwd.page" />
-        </action>
+        <forward name="success" path="agyForgottenPwd.page" />
+    </action>
 
     <action path="/agyForgottenPwdProcess"
             type="com.helmet.application.agy.ForgottenPwdProcess"
@@ -77,26 +130,55 @@
         <forward name="cancel" path="/agyLogin.do" redirect="true"/>
     </action>
 
-		<action path="/helloWorld" type="net.infomediauk.action.HelloWorldAction"
-			name="helloWorldForm">
-			<forward name="success" path="/HelloWorld.jsp" />
-		</action>
+	<action path="/agyResetPwd"
+            type="com.helmet.application.agy.ForgottenPwd"
+            name="AgyForgottenPwdForm"
+            scope="request"
+            input="agyLogin.page"
+            validate="false">
+        <forward name="success" path="agyResetPwd.page" />
+    </action>
 
-		<action path="/sendMail" type="net.infomediauk.action.SendMailAction"
-			name="sendMailForm">
-			<forward name="success" path="/SendMail.jsp" />
-		</action>
+    <action path="/agyResetPwdProcess"
+            type="com.helmet.application.agy.ForgottenPwdProcess"
+            name="AgyForgottenPwdForm"
+            scope="request"
+            input="agyResetPwd.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/agyResetPwdSendProcess.do"/>
+        <forward name="cancel" path="/agyLogin.do" redirect="true"/>
+    </action>
 
-		<action path="/User" type="org.apache.struts.actions.ForwardAction"
-			parameter="/user-form.jsp" />
+    <action path="/agyResetPwdSendProcess"
+            type="com.helmet.application.agy.ResetPwdSendProcess"
+            name="AgyForgottenPwdForm"
+            scope="request"
+            input="agyResetPwd.page"
+            validate="true">
+        <forward name="success" path="agyResetPwdSent.page" redirect="true"/>
+    </action>
 
-	</action-mappings>
+	<action path="/agyLoggedOut"
+		        type="org.apache.struts.actions.ForwardAction"
+		        parameter="agyLoggedOut.page"/>
 
-    <message-resources null="false" parameter="MessageResources" />
-    
+  </action-mappings>
+  
+  <message-resources null="false" parameter="MessageResources" />
+
+	<!-- Tiles Configuration -->
 	<plug-in className="org.apache.struts.tiles.TilesPlugin">
-		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
-        <set-property property="moduleAware" value="true" />
+	  <set-property property="definitions-config"
+                  value="/WEB-INF/tiles-defs-mmj.xml"/>
+    <set-property property="moduleAware"
+                  value="true" />
 	</plug-in>
+  
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames"
+                  value="/org/apache/struts/validator/validator-rules.xml,/WEB-INF/validation-mmj.xml" />
+    <set-property property="stopOnFirstError" value="false" />
+  </plug-in>
 
 </struts-config>

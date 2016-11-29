@@ -3,14 +3,16 @@
 	<Properties>
 	  <Property name="log-path">${env:OPENSHIFT_LOG_DIR}</Property>
 	  <Property name="log-file-name">${env:OPENSHIFT_APP_NAME}</Property>
+	  <Property name="console-pattern">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+	  <Property name="file-pattern">%d{dd MMM yyyy HH:mm:ss,SSS} - %-5level %logger{36}: %m%n</Property>
 	</Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+            <PatternLayout pattern="${console-pattern}" />
         </Console>
 		<RollingFile name="RollingFile" fileName="${log-path}/${log-file-name}.log" filePattern="${log-path}/${log-file-name}-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
 			<PatternLayout>
-			    <pattern>%d{dd MMM yyyy HH:mm:ss,SSS} - %-5level %logger{36}: %m%n</pattern>
+			    <pattern>${file-pattern}</pattern>
 			</PatternLayout>
 			<Policies>
 			    <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
@@ -20,7 +22,7 @@
 		</RollingFile>
 		<RollingFile name="RollingFileStruts" fileName="${log-path}/struts.log" filePattern="${log-path}/struts-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
 			<PatternLayout>
-			    <pattern>%d{dd MMM yyyy HH:mm:ss,SSS} - %-5level %logger{36}: %m%n</pattern>
+			    <pattern>${file-pattern}</pattern>
 			</PatternLayout>
 			<Policies>
 			    <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
@@ -30,7 +32,17 @@
 		</RollingFile>
 		<RollingFile name="RollingFileSpring" fileName="${log-path}/spring.log" filePattern="${log-path}/spring-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
 			<PatternLayout>
-			    <pattern>%d{dd MMM yyyy HH:mm:ss,SSS} - %-5level %logger{36}: %m%n</pattern>
+			    <pattern>${file-pattern}</pattern>
+			</PatternLayout>
+			<Policies>
+			    <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+			    <SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="3"/>
+		</RollingFile>
+		<RollingFile name="RollingFileHelmet" fileName="${log-path}/helmet.log" filePattern="${log-path}/helmet-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
+			<PatternLayout>
+			    <pattern>${file-pattern}</pattern>
 			</PatternLayout>
 			<Policies>
 			    <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
@@ -52,6 +64,9 @@
         </Logger>
         <Logger name="org.springframework" level="DEBUG" additivity="false">
             <AppenderRef ref="RollingFileSpring" level="DEBUG" />
+        </Logger>
+        <Logger name="com.helmet" level="DEBUG" additivity="false">
+            <AppenderRef ref="RollingFileHelmet" level="DEBUG" />
         </Logger>
     </Loggers>
 </Configuration>
