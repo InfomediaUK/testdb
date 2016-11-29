@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <!-- Added to pick up Development parameters. 
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+     <property name="location" value="classpath:config.properties"/>
+  </bean>
+  -->
+  
+<!-- when moving to test - change db connection and mrgService agyBookingOpen stuff -->
+  <bean id="serviceFactory" 
+        class="com.helmet.api.ServiceFactory"
+		    factory-method="getInstance">
+		<property name="agyService" ref="agyService" />
+	</bean>
+
+  <bean id="systemHandler" 
+        class="com.helmet.application.SystemHandler"
+		    factory-method="getInstance">
+		<property name="helpPopupEvent" value="doPopupHelp" />
+	</bean>
+	
+  <bean id="pdfHandler" 
+        class="com.helmet.application.PdfHandler"
+        factory-method="getInstance">
+    <property name="watermarkText" value="TEST TEST TEST" />
+  </bean>
+
+  <bean id="mailHandler" 
+        class="com.helmet.application.MailHandler"
+		    factory-method="getInstance">
+		<property name="hostName" value="mail.smtp.host" />
+		<property name="hostValue" value="smtp.easily.co.uk" />
+		<property name="portName" value="mail.smtp.port" />
+		<property name="portValue" value="1025" />
+		<property name="userName" value="cgg0dhqh51j0" />
+		<property name="password" value="helmet22" />
+		<property name="connectionTimeoutName" value="mail.smtp.connectiontimeout" />
+		<property name="connectionTimeoutValue" value="30000" />
+		<property name="timeoutName" value="mail.smtp.timeout" />
+		<property name="timeoutValue" value="30000" />
+		<property name="debug" value="true" />
+		<property name="siteUrl" value="/POO" />
+		<property name="sendAutoFillEmail" value="true" />
+		<property name="sendResetPwdEmail" value="false" />
+	</bean>
+<!--  	
+    <bean id="smsHandler" 
+        class="com.helmet.application.SmsHandler"
+		    factory-method="getInstance">
+		<property name="username" value="${smsHandler.username}" />
+		<property name="password" value="${smsHandler.password}" />
+		<property name="account" value="${smsHandler.account}" />
+	</bean>
+-->
+	<bean id="fileHandler" class="com.helmet.application.FileHandler"
+		factory-method="getInstance">
+		<property name="tempFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="tempFileFolder" value="/temp" />
+		<property name="fileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="fileFolder" value="/documents" />
+		<property name="photoFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="photoFileFolder" value="/documents/photos" />
+		<property name="logoFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="logoFileFolder" value="/documents/logos" />
+		<property name="cvFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="cvFileFolder" value="/documents/cvs" />
+		<property name="receiptFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="receiptFileFolder" value="/documents/receipts" />
+		<property name="invoiceFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="invoiceFileFolder" value="/documents/invoices" />
+		<property name="applicantFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="applicantFileFolder" value="/documents/applicants" />
+		<property name="consultantFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="consultantFileFolder" value="/documents/consultants" />
+		<property name="nhsBookingFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="nhsBookingFileFolder" value="/documents/nhsBookings" />
+		<property name="nhsInvoiceFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="nhsInvoiceFileFolder" value="/documents/nhsInvoices" />
+		<property name="nhsBackingReportFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="nhsBackingReportFileFolder" value="/documents/nhsBackingReports" />
+		<property name="nhsPaymentsFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="nhsPaymentsFileFolder" value="/documents/nhsPayments" />
+		<property name="nhsPaymentsAcceptStatus" value="Paid in full" />
+	</bean>
+	
+  <bean id="callOffHandler" 
+        class="com.helmet.application.CallOffHandler"
+		    init-method="init" destroy-method="cancel">
+		<property name="initial" value="2" />
+		<property name="subsequent" value="10" />
+	</bean>
+
+  <bean id="bookingLockHandler" 
+        class="com.helmet.application.BookingLockHandler"
+		    factory-method="getInstance"
+		    init-method="init" destroy-method="cancel">
+	</bean>
+  
+  <bean id="applicantCompliancyTest" 
+        class="com.helmet.application.agy.ApplicantCompliancyTest"
+		    factory-method="getInstance">
+		<property name="startOfReasonMarker" value="***** Start of Compliancy Test Failed *****" />
+		<property name="endOfReasonMarker" value="****** End of Compliancy Test Failed ******" />
+    <property name="metaData">
+      <map>
+        <entry key="applicant.niNumber" value="NOT EMPTY"/>
+        <entry key="applicant.hpcNumber" value="NOT EMPTY"/>
+        <entry key="applicant.hasCurrentCRB" value="TRUE"/>
+        <entry key="applicant.hasCurrentFitToWork" value="TRUE"/>
+        <entry key="applicant.hasCurrentHPC" value="TRUE"/>
+        <entry key="applicant.hasCurrentPassport" value="TRUE"/>
+        <entry key="applicant.hasCurrentTraining" value="TRUE"/>
+        <entry key="applicant.hasCurrentVisa" value="TRUE"/>
+        <entry key="applicant.hasBirthCertificate" value="TRUE"/>
+        <entry key="applicant.hasProofOfAddress" value="TRUE"/>
+        <entry key="applicant.niNumberReceived" value="TRUE"/>
+      </map>
+    </property>
+  </bean>
+  
+  <!--  dataSource - connection to Tomcat database connection pool -->
+  <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close" >
+    <property name="driverClassName" value="org.postgresql.Driver" />
+    <property name="url" value="jdbc:#{systemEnvironment['OPENSHIFT_POSTGRESQL_DB_URL']}" />
+    <property name="username" value="#{systemEnvironment['OPENSHIFT_POSTGRESQL_DB_USERNAME']}" />
+    <property name="password" value="#{systemEnvironment['OPENSHIFT_POSTGRESQL_DB_PASSWORD']}" />
+    <property name="testOnBorrow" value="true" />
+    <property name="initialSize" value="10" />
+    <property name="maxActive" value="50" />
+    <property name="maxIdle" value="10" />
+    <property name="maxAge" value="60000" />
+    <property name="validationQuery" value="SELECT 1" />
+    <!-- The following line causes start-up failure of JDBC connections, so I removed it -->
+    <!-- property name="initSQL" value="${dataSource.initSQL}" /-->
+  </bean>
+
+	<!-- Transaction manager for a single JDBC DataSource -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="agyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="agyServiceTarget"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+ 			</props>
+		</property>
+	</bean>
+
+  <!-- agyService for "real" - this is the target of the agyService "proxy" - the class that is wrapped -->
+	<bean id="agyServiceTarget"	class="com.helmet.api.impl.DefaultAgyService" >
+		<!-- common DAOs -->
+		<property name="agencyInvoiceDAO" ref="agencyInvoiceDAO" />
+		<property name="agencyInvoiceCreditDAO" ref="agencyInvoiceCreditDAO" />
+		<property name="bookingDAO" ref="bookingDAO" />
+		<property name="bookingDateDAO" ref="bookingDateDAO" />
+		<property name="countryDAO" ref="countryDAO" />
+		<property name="bookingExpenseDAO" ref="bookingExpenseDAO" />
+		<property name="bookingGradeDAO" ref="bookingGradeDAO" />
+		<property name="bookingGradeApplicantDAO" ref="bookingGradeApplicantDAO" />
+		<property name="bookingGradeApplicantDateDAO" ref="bookingGradeApplicantDateDAO" />
+		<property name="budgetTransactionDAO" ref="budgetTransactionDAO" />
+		<property name="clientDAO" ref="clientDAO" />
+		<property name="clientAgencyDAO" ref="clientAgencyDAO" />
+		<property name="clientAgencyGradeDAO" ref="clientAgencyGradeDAO" />
+		<property name="clientAgencyJobProfileDAO" ref="clientAgencyJobProfileDAO" />
+		<property name="clientAgencyJobProfileGradeDAO" ref="clientAgencyJobProfileGradeDAO" />
+		<property name="dressCodeDAO" ref="dressCodeDAO" />
+		<property name="expenseDAO" ref="expenseDAO" />
+		<property name="gradeDAO" ref="gradeDAO" />
+		<property name="invoiceDAO" ref="invoiceDAO" />
+		<property name="invoiceAgencyDAO" ref="invoiceAgencyDAO" />
+		<property name="jobProfileDAO" ref="jobProfileDAO" />
+		<property name="locationDAO" ref="locationDAO" />
+		<property name="locationJobProfileDAO" ref="locationJobProfileDAO" />
+		<property name="locationManagerJobProfileDAO" ref="locationManagerJobProfileDAO" />
+		<property name="managerDAO" ref="managerDAO" />
+		<property name="managerAccessDAO" ref="managerAccessDAO" />
+		<property name="managerAccessGroupDAO" ref="managerAccessGroupDAO" />
+		<property name="publicHolidayDAO" ref="publicHolidayDAO" />
+		<property name="reasonForRequestDAO" ref="reasonForRequestDAO" />
+		<property name="shiftDAO" ref="shiftDAO" />
+		<property name="siteDAO" ref="siteDAO" />
+		<property name="upliftDAO" ref="upliftDAO" />
+		<property name="upliftMinuteDAO" ref="upliftMinuteDAO" />
+		<property name="agencyDAO" ref="agencyDAO" />
+		<property name="unavailableDAO" ref="unavailableDAO" />
+        <property name="nhsBookingDAO" ref="nhsBookingDAO" />
+		<property name="nhsBackingReportDAO" ref="nhsBackingReportDAO" />
+        <property name="subcontractInvoiceDAO" ref="subcontractInvoiceDAO" />
+        <property name="subcontractInvoiceItemDAO" ref="subcontractInvoiceItemDAO" />
+		<!-- specific DAOs -->
+		<property name="agyAccessDAO" ref="agyAccessDAO" />
+		<property name="applicantDAO" ref="applicantDAO" />
+		<property name="bookingDateExpenseDAO" ref="bookingDateExpenseDAO" />
+		<property name="bookingDateHourDAO" ref="bookingDateHourDAO" />
+		<property name="consultantDAO" ref="consultantDAO" />
+    <!-- NEW >>>>> -->
+		<property name="emailActionDAO" ref="emailActionDAO" />
+    <!-- <<<<< NEW -->
+ 	</bean>
+
+  <!-- XML Generator -->
+
+	<bean id="xmlGenerator" 
+	      class="com.helmet.reporting.XMLGenerator"
+	      factory-method="getInstance"
+		  init-method="init" >
+		<property name="dataSource" ref="dataSource" />
+		<property name="fileName" value="/Users/infomedia/Documents/Eclipse/Mars/workspace/mmj/WebContent/admin/queries.xml" />
+	</bean>
+
+  <!-- Data Access Objects -->
+
+	<bean id="countryDAO" 
+	      class="com.helmet.persistence.impl.DefaultCountryDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+  <!-- NEW >>>>> -->
+  <bean id="emailActionDAO" 
+        class="com.helmet.persistence.impl.DefaultEmailActionDAO" 
+        init-method="init" >
+      <property name="dataSource" ref="dataSource"/>
+  </bean>
+  <bean id="nhsBackingReportDAO" 
+        class="com.helmet.persistence.impl.DefaultNhsBackingReportDAO" 
+        init-method="init" >
+      <property name="dataSource" ref="dataSource"/>
+		  <property name="pagingLimit" value="50" />
+		  <property name="pagingGroupSize" value="10" />
+  </bean>
+  <!-- <<<<< NEW -->
+	<bean id="geographicalRegionDAO" 
+	      class="com.helmet.persistence.impl.DefaultGeographicalRegionDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="areaOfSpecialityDAO" 
+	      class="com.helmet.persistence.impl.DefaultAreaOfSpecialityDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="disciplineCategoryDAO" 
+	      class="com.helmet.persistence.impl.DefaultDisciplineCategoryDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="passportTypeDAO" 
+	      class="com.helmet.persistence.impl.DefaultPassportTypeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="visaTypeDAO" 
+	      class="com.helmet.persistence.impl.DefaultVisaTypeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="reEnterPwdDAO" 
+	      class="com.helmet.persistence.impl.DefaultReEnterPwdDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="clientReEnterPwdDAO" 
+	      class="com.helmet.persistence.impl.DefaultClientReEnterPwdDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="clientDAO" 
+	      class="com.helmet.persistence.impl.DefaultClientDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="agencyDAO" 
+	      class="com.helmet.persistence.impl.DefaultAgencyDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="clientAgencyDAO" 
+	      class="com.helmet.persistence.impl.DefaultClientAgencyDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="clientAgencyJobProfileDAO" 
+	      class="com.helmet.persistence.impl.DefaultClientAgencyJobProfileDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="clientAgencyGradeDAO" 
+	      class="com.helmet.persistence.impl.DefaultClientAgencyGradeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="siteDAO" 
+	      class="com.helmet.persistence.impl.DefaultSiteDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="managerDAO" 
+	      class="com.helmet.persistence.impl.DefaultManagerDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="locationDAO" 
+	      class="com.helmet.persistence.impl.DefaultLocationDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="adminAccessDAO" 
+	      class="com.helmet.persistence.impl.DefaultAdminAccessDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="administratorAccessDAO" 
+	      class="com.helmet.persistence.impl.DefaultAdministratorAccessDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="adminAccessGroupDAO" 
+	      class="com.helmet.persistence.impl.DefaultAdminAccessGroupDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="administratorAccessGroupDAO" 
+	      class="com.helmet.persistence.impl.DefaultAdministratorAccessGroupDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="adminAccessGroupItemDAO" 
+	      class="com.helmet.persistence.impl.DefaultAdminAccessGroupItemDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="jobFamilyDAO" 
+	      class="com.helmet.persistence.impl.DefaultJobFamilyDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="jobSubFamilyDAO" 
+	      class="com.helmet.persistence.impl.DefaultJobSubFamilyDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="jobProfileDAO" 
+	      class="com.helmet.persistence.impl.DefaultJobProfileDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="locationManagerJobProfileDAO" 
+	      class="com.helmet.persistence.impl.DefaultLocationManagerJobProfileDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="gradeDAO" 
+	      class="com.helmet.persistence.impl.DefaultGradeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="jobProfileGradeDAO" 
+	      class="com.helmet.persistence.impl.DefaultJobProfileGradeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="shiftDAO" 
+	      class="com.helmet.persistence.impl.DefaultShiftDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="reasonForRequestDAO" 
+	      class="com.helmet.persistence.impl.DefaultReasonForRequestDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="expenseDAO" 
+	      class="com.helmet.persistence.impl.DefaultExpenseDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="publicHolidayDAO" 
+	      class="com.helmet.persistence.impl.DefaultPublicHolidayDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="upliftDAO" 
+	      class="com.helmet.persistence.impl.DefaultUpliftDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="upliftMinuteDAO" 
+	      class="com.helmet.persistence.impl.DefaultUpliftMinuteDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="clientAgencyJobProfileGradeDAO" 
+	      class="com.helmet.persistence.impl.DefaultClientAgencyJobProfileGradeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="bookingDAO" 
+	      class="com.helmet.persistence.impl.DefaultBookingDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="bookingDateDAO" 
+	      class="com.helmet.persistence.impl.DefaultBookingDateDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+            <property name="pagingLimit" value="100" />
+		    <property name="pagingGroupSize" value="50" />
+	</bean>
+
+	<bean id="bookingDateHourDAO" 
+	      class="com.helmet.persistence.impl.DefaultBookingDateHourDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="bookingDateExpenseDAO" 
+	      class="com.helmet.persistence.impl.DefaultBookingDateExpenseDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="bookingGradeDAO" 
+	      class="com.helmet.persistence.impl.DefaultBookingGradeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="bookingExpenseDAO" 
+	      class="com.helmet.persistence.impl.DefaultBookingExpenseDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="dressCodeDAO" 
+	      class="com.helmet.persistence.impl.DefaultDressCodeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="managerAccessDAO" 
+	      class="com.helmet.persistence.impl.DefaultManagerAccessDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="managerAccessGroupDAO" 
+	      class="com.helmet.persistence.impl.DefaultManagerAccessGroupDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="consultantDAO" 
+	      class="com.helmet.persistence.impl.DefaultConsultantDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="agyAccessDAO" 
+	      class="com.helmet.persistence.impl.DefaultAgyAccessDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="agyAccessGroupDAO" 
+	      class="com.helmet.persistence.impl.DefaultAgyAccessGroupDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="agyAccessGroupItemDAO" 
+	      class="com.helmet.persistence.impl.DefaultAgyAccessGroupItemDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="consultantAccessDAO" 
+	      class="com.helmet.persistence.impl.DefaultConsultantAccessDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="consultantAccessGroupDAO" 
+	      class="com.helmet.persistence.impl.DefaultConsultantAccessGroupDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="locationJobProfileDAO" 
+	      class="com.helmet.persistence.impl.DefaultLocationJobProfileDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="budgetTransactionDAO" 
+	      class="com.helmet.persistence.impl.DefaultBudgetTransactionDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="applicantDAO" 
+	      class="com.helmet.persistence.impl.DefaultApplicantDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="bookingGradeApplicantDAO" 
+	      class="com.helmet.persistence.impl.DefaultBookingGradeApplicantDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="bookingGradeApplicantDateDAO" 
+	      class="com.helmet.persistence.impl.DefaultBookingGradeApplicantDateDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="invoiceDAO" 
+	      class="com.helmet.persistence.impl.DefaultInvoiceDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="invoiceAgencyDAO" 
+	      class="com.helmet.persistence.impl.DefaultInvoiceAgencyDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="agencyInvoiceDAO" 
+	      class="com.helmet.persistence.impl.DefaultAgencyInvoiceDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="agencyInvoiceCreditDAO" 
+	      class="com.helmet.persistence.impl.DefaultAgencyInvoiceCreditDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+  <bean id="unavailableDAO" 
+        class="com.helmet.persistence.impl.DefaultUnavailableDAO" 
+        init-method="init" >
+      <property name="dataSource" ref="dataSource"/>
+  </bean>
+  <bean id="nhsBookingDAO" 
+        class="com.helmet.persistence.impl.DefaultNhsBookingDAO" 
+        init-method="init" >
+      <property name="dataSource" ref="dataSource"/>
+  </bean>
+  <!-- NEW >>>>> -->
+  <bean id="subcontractInvoiceDAO" 
+        class="com.helmet.persistence.impl.DefaultSubcontractInvoiceDAO" 
+        init-method="init" >
+      <property name="dataSource" ref="dataSource"/>
+  </bean>
+  <bean id="subcontractInvoiceItemDAO" 
+        class="com.helmet.persistence.impl.DefaultSubcontractInvoiceItemDAO" 
+        init-method="init" >
+      <property name="dataSource" ref="dataSource"/>
+  </bean>
+  <!-- <<<<< NEW -->
+  
+ 	<!-- interceptors -->
+ 	<bean id="soInterceptor" class="com.helmet.interceptor.SOInterceptor" />
+
+ 	<bean id="debugInterceptor" class="org.springframework.aop.interceptor.DebugInterceptor" />
+ 	<bean id="performanceMonitorInterceptor" class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor" />
+ 	<bean id="jamonPerformanceMonitorInterceptor" class="org.springframework.aop.interceptor.JamonPerformanceMonitorInterceptor" >
+      <property name="prefix"><value></value></property>
+      <property name="suffix"><value></value></property>
+      <property name="useDynamicLogger"><value>true</value></property>
+  </bean>
+
+
+
+  <!-- wraps detailed beans with interceptors declared  -->
+  <bean id="_springCommandProxyCreator" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    <property name="beanNames">
+        <list>
+<!-- 
+-->
+            <value>agyServiceTarget</value>
+        </list>
+        <!-- can be wildcarded instead of listing individual beans
+        <value>*Service</value>
+        -->
+    </property>
+    <property name="interceptorNames">
+        <list>
+<!-- 
+            <value>soInterceptor</value>
+
+            <value>debugInterceptor</value>
+
+            <value>performanceMonitorInterceptor</value>
+-->
+
+            <value>jamonPerformanceMonitorInterceptor</value>
+        </list>
+    </property>
+  </bean>
+
+</beans>
