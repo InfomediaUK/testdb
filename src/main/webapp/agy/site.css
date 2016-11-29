@@ -1,0 +1,206 @@
+body {color:#000; background:#fff; font:70% verdana,tahoma,helvetica,sans-serif; margin:10px; padding:0px}
+
+img {border:0}
+
+input {font:100% verdana,tahoma,helvetica,sans-serif; padding:0px}
+
+select {font:100% verdana,tahoma,helvetica,sans-serif; padding:0px}
+
+textarea {font:100% verdana,tahoma,helvetica,sans-serif; padding:1px}
+
+h1 {font:100% verdana,tahoma,helvetica,sans-serif; font-weight: bold}
+
+h2 {font:100% verdana,tahoma,helvetica,sans-serif; font-weight: bold}
+
+a         { font:100% verdana,tahoma,helvetica,sans-serif; color:#cc0000; text-decoration:none; }
+a:link    { font:100% verdana,tahoma,helvetica,sans-serif; color:#cc0000; text-decoration:none; }
+a:visited { font:100% verdana,tahoma,helvetica,sans-serif; color:#cc0000; text-decoration:none; }
+a:active  { font:100% verdana,tahoma,helvetica,sans-serif; color:#cc0000; text-decoration:none; }
+a:hover   { font:100% verdana,tahoma,helvetica,sans-serif; color:#ff0000; text-decoration:underline; }
+
+.label { font:100% verdana,tahoma,helvetica,sans-serif; font-weight: bold;}       
+	
+pre {color:#000;
+       font:100% verdana,tahoma,helvetica,sans-serif; 
+       padding:0px}
+
+td.header {background:#ffffff;
+             padding:2px}
+
+td.headerLinks {background:#ffffff;
+             padding:2px;
+             color:#000000}
+
+td.footer {background:#ffffff;
+					padding:2px}
+
+td.pagehelp {background:#ffffff;
+             padding-left:0px;
+						 padding-top:2px}
+
+td.leftColumn {background:#ffffff;
+             padding:2px;
+             line-height:150%;
+             font-weight: bold}
+
+/*
+*/
+td.calPicker {
+	line-height:120%;
+}
+
+td.contentColumn {background:#ffffff;
+             padding:2px;
+             line-height:150%;
+             font-weight: normal}
+
+td.scheduled {
+	color:#000088;
+}
+
+td.invoiced {
+	background:#bbbbbb;
+}
+
+td.unavailable {
+	border: 1px solid #ff0000; 
+	background:#ff0000;
+}
+
+td.nhsMatched {
+	color:#808080;
+}
+
+td.nhsUploadError {
+	color:#808080;
+}
+
+td.nhsBookingDeleted {
+	color:#808080;
+}
+
+.title {font-weight: bold}
+
+table.radio {
+	border-spacing: 0px;
+}
+table.radio tr {
+		line-height:150%;
+}
+
+table.radio td {
+	padding-left:2px;
+	padding-right:2px;
+}
+
+table.simple thead tr th {
+	background-color: #f0f0f0;
+}
+
+table.simple tr th {
+	background-color: #f0f0f0;
+}
+
+table.simple {
+	border: 1px solid #e0e0e0;
+	border-collapse: collapse; 
+}
+
+table.simple td,table.simple th {
+/* background-color:#ffffff; */
+	border: 1px solid #e0e0e0;
+	padding-left:2px;
+	padding-right:2px;
+}
+
+tr.highlightoff { background-color: #ffffff;}
+tr.highlighton  { background-color: #fafafa;}
+
+table.tabs {
+	border-collapse: collapse;
+}
+td.tabSelected {
+	background-color: #e0e0e0;
+
+  BORDER-TOP: #000000 1px solid;
+  BORDER-LEFT: #000000 1px solid;
+  BORDER-RIGHT: #000000 1px solid;
+  BORDER-BOTTOM: #e0e0e0 1px solid;
+	
+	padding-left:2px;
+	padding-right:2px;
+	font-weight: bold;
+}
+td.tabNotSelected {
+	background-color: #ffffff;
+	border: 1px solid #000000;
+	padding-left:2px;
+	padding-right:2px;
+	font-weight: bold;
+}
+td.tabUnavailableClass {
+	background-color: #ffffff;
+	color: #a1a1a1;
+	border: 1px solid #000000;
+	padding-left:2px;
+	padding-right:2px;
+	font-weight: normal;
+}
+
+.titleButton {
+  WIDTH: 75px;
+  HEIGHT: 23px;
+}
+
+.confirmButton {
+  WIDTH: 75px;
+  HEIGHT: 23px;
+	color: #ff0000;
+}
+
+
+.viewed {}
+.notViewed {font-weight:bold;
+            color:#ff0000}
+
+.s2{cursor:pointer;cursor:hand;font:bold 77% verdana;color:#000;background:#ddd;}
+	
+.wizardButton {
+  cursor: hand;
+  color: #000000;
+  width: 75px;
+  height: 23px;
+  text-decoration: none;
+  margin-left: 2px;
+  margin-right: 3px;
+}
+
+.wizardButtonWide {
+  cursor: hand;
+  color: #000000;
+  width: 150px;
+  height: 23px;
+  text-decoration: none;
+  margin-left: 2px;
+  margin-right: 3px;
+}
+.wizardButtonBT {
+  background: #ee86a4;
+  border-top: #f7bdde 1px solid;
+  border-left: #f7bdde 1px solid;
+  border-right: #e78cc6 1px solid;
+  border-bottom: #e78cc6 1px solid;
+  cursor: hand;
+  color: #000000;
+  width: 75px;
+  height: 19px;
+  text-decoration: none;
+  margin-left: 2px;
+  margin-right: 3px;
+}
+
+#wizardbuttons { overflow: hidden; }
+#wizardbuttons input { float: right; }
+
+
+	
