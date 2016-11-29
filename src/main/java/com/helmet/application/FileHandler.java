@@ -19,8 +19,6 @@ public class FileHandler {
 
 	protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-	private String appServerLocation;
-
 	private String tempFileLocation;
 
 	private String tempFileFolder;
@@ -86,14 +84,6 @@ public class FileHandler {
 			}
 		}
 		return fileHandler;
-	}
-
-	public String getAppServerLocation() {
-		return appServerLocation;
-	}
-
-	public void setAppServerLocation(String appServerLocation) {
-		this.appServerLocation = appServerLocation;
 	}
 
 	public String getFileLocation() {
