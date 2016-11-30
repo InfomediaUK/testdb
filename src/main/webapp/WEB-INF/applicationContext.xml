@@ -214,7 +214,7 @@
 	      factory-method="getInstance"
 		  init-method="init" >
 		<property name="dataSource" ref="dataSource" />
-		<property name="fileName" value="/Users/infomedia/Documents/Eclipse/Mars/workspace/mmj/WebContent/admin/queries.xml" />
+		<property name="fileName" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}/queries.xml" />
 	</bean>
 
   <!-- Data Access Objects -->
