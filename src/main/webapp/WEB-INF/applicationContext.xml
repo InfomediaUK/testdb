@@ -196,15 +196,18 @@
 		<property name="nhsBackingReportDAO" ref="nhsBackingReportDAO" />
         <property name="subcontractInvoiceDAO" ref="subcontractInvoiceDAO" />
         <property name="subcontractInvoiceItemDAO" ref="subcontractInvoiceItemDAO" />
+		<property name="areaOfSpecialityDAO" ref="areaOfSpecialityDAO" />
+		<property name="geographicalRegionDAO" ref="geographicalRegionDAO" />
+		<property name="disciplineCategoryDAO" ref="disciplineCategoryDAO" />
+		<property name="emailActionDAO" ref="emailActionDAO" />
+		<property name="passportTypeDAO" ref="passportTypeDAO" />
+		<property name="visaTypeDAO" ref="visaTypeDAO" />
 		<!-- specific DAOs -->
 		<property name="agyAccessDAO" ref="agyAccessDAO" />
 		<property name="applicantDAO" ref="applicantDAO" />
 		<property name="bookingDateExpenseDAO" ref="bookingDateExpenseDAO" />
 		<property name="bookingDateHourDAO" ref="bookingDateHourDAO" />
 		<property name="consultantDAO" ref="consultantDAO" />
-    <!-- NEW >>>>> -->
-		<property name="emailActionDAO" ref="emailActionDAO" />
-    <!-- <<<<< NEW -->
  	</bean>
 
   <!-- XML Generator -->

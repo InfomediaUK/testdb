@@ -6,12 +6,12 @@ import java.util.List;
 
 import com.helmet.bean.Agency;
 import com.helmet.bean.AgencyUser;
+import com.helmet.bean.AreaOfSpeciality;
 import com.helmet.bean.Booking;
 import com.helmet.bean.BookingDate;
 import com.helmet.bean.BookingDateUserApplicant;
 import com.helmet.bean.BookingGradeApplicantUser;
 import com.helmet.bean.BookingUser;
-import com.helmet.bean.BookingUserEntity;
 import com.helmet.bean.Client;
 import com.helmet.bean.ClientAgency;
 import com.helmet.bean.ClientAgencyGrade;
@@ -20,8 +20,11 @@ import com.helmet.bean.ClientAgencyUser;
 import com.helmet.bean.ClientAgencyUserEntity;
 import com.helmet.bean.ClientUser;
 import com.helmet.bean.Country;
+import com.helmet.bean.DisciplineCategory;
 import com.helmet.bean.DressCode;
+import com.helmet.bean.EmailAction;
 import com.helmet.bean.Expense;
+import com.helmet.bean.GeographicalRegion;
 import com.helmet.bean.Grade;
 import com.helmet.bean.JobProfileUser;
 import com.helmet.bean.Location;
@@ -44,6 +47,7 @@ import com.helmet.bean.MgrAccessGroupItem;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.NhsBackingReportUser;
 import com.helmet.bean.NhsBooking;
+import com.helmet.bean.PassportType;
 import com.helmet.bean.PublicHoliday;
 import com.helmet.bean.ReasonForRequest;
 import com.helmet.bean.RecordCount;
@@ -54,6 +58,7 @@ import com.helmet.bean.SiteUserEntity;
 import com.helmet.bean.Uplift;
 import com.helmet.bean.UpliftMinute;
 import com.helmet.bean.UpliftMinuteUser;
+import com.helmet.bean.VisaType;
 
 public interface CommonService {
 
@@ -293,5 +298,15 @@ public interface CommonService {
   public int updateNhsBackingReportTradeshiftDocumentId(NhsBackingReport nhsBackingReport, Integer auditorId);
   public int updateNhsBackingReportSubcontract(NhsBackingReport nhsBackingReport, Integer auditorId);
   public int updateNhsBackingReportSubcontractDocumentationSentDate(NhsBackingReport nhsBackingReport, Integer auditorId);
-  
+
+  public List<AgencyUser> getAgencyUsers(boolean showOnlyActive);
+  public List<AreaOfSpeciality> getAreaOfSpecialities(boolean showOnlyActive);
+  public List<ClientUser> getClientUsers(boolean showOnlyActive);
+  public List<Country> getCountries(boolean showOnlyActive);
+  public List<DisciplineCategory> getDisciplineCategories(boolean showOnlyActive);
+  public List<EmailAction> getEmailActions(boolean showOnlyActive);
+  public List<GeographicalRegion> getGeographicalRegions(boolean showOnlyActive);
+  public List<PassportType> getPassportTypes(boolean showOnlyActive);
+  public List<VisaType> getVisaTypes(boolean showOnlyActive);
+
 }

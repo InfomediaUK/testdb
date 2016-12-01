@@ -14,6 +14,7 @@ import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.bean.Agency;
 import com.helmet.bean.AgencyInvoice;
 import com.helmet.bean.AgencyUser;
+import com.helmet.bean.AreaOfSpeciality;
 import com.helmet.bean.Booking;
 import com.helmet.bean.BookingDate;
 import com.helmet.bean.BookingDateUserApplicant;
@@ -33,8 +34,11 @@ import com.helmet.bean.ClientAgencyUser;
 import com.helmet.bean.ClientAgencyUserEntity;
 import com.helmet.bean.ClientUser;
 import com.helmet.bean.Country;
+import com.helmet.bean.DisciplineCategory;
 import com.helmet.bean.DressCode;
+import com.helmet.bean.EmailAction;
 import com.helmet.bean.Expense;
+import com.helmet.bean.GeographicalRegion;
 import com.helmet.bean.Grade;
 import com.helmet.bean.IntValue;
 import com.helmet.bean.Invoice;
@@ -60,6 +64,7 @@ import com.helmet.bean.MgrAccessGroupItem;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.NhsBackingReportUser;
 import com.helmet.bean.NhsBooking;
+import com.helmet.bean.PassportType;
 import com.helmet.bean.PublicHoliday;
 import com.helmet.bean.ReasonForRequest;
 import com.helmet.bean.RecordCount;
@@ -70,9 +75,11 @@ import com.helmet.bean.SiteUserEntity;
 import com.helmet.bean.Uplift;
 import com.helmet.bean.UpliftMinute;
 import com.helmet.bean.UpliftMinuteUser;
+import com.helmet.bean.VisaType;
 import com.helmet.persistence.AgencyDAO;
 import com.helmet.persistence.AgencyInvoiceCreditDAO;
 import com.helmet.persistence.AgencyInvoiceDAO;
+import com.helmet.persistence.AreaOfSpecialityDAO;
 import com.helmet.persistence.BookingDAO;
 import com.helmet.persistence.BookingDateDAO;
 import com.helmet.persistence.BookingExpenseDAO;
@@ -86,8 +93,11 @@ import com.helmet.persistence.ClientAgencyJobProfileDAO;
 import com.helmet.persistence.ClientAgencyJobProfileGradeDAO;
 import com.helmet.persistence.ClientDAO;
 import com.helmet.persistence.CountryDAO;
+import com.helmet.persistence.DisciplineCategoryDAO;
 import com.helmet.persistence.DressCodeDAO;
+import com.helmet.persistence.EmailActionDAO;
 import com.helmet.persistence.ExpenseDAO;
+import com.helmet.persistence.GeographicalRegionDAO;
 import com.helmet.persistence.GradeDAO;
 import com.helmet.persistence.InvoiceAgencyDAO;
 import com.helmet.persistence.InvoiceDAO;
@@ -103,24 +113,38 @@ import com.helmet.persistence.MgrAccessGroupDAO;
 import com.helmet.persistence.MgrAccessGroupItemDAO;
 import com.helmet.persistence.NhsBackingReportDAO;
 import com.helmet.persistence.NhsBookingDAO;
+import com.helmet.persistence.PassportTypeDAO;
 import com.helmet.persistence.PublicHolidayDAO;
 import com.helmet.persistence.ReasonForRequestDAO;
 import com.helmet.persistence.ShiftDAO;
 import com.helmet.persistence.SiteDAO;
 import com.helmet.persistence.UpliftDAO;
 import com.helmet.persistence.UpliftMinuteDAO;
+import com.helmet.persistence.VisaTypeDAO;
 
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class DefaultCommonService implements CommonService {
 	
+  private AreaOfSpecialityDAO areaOfSpecialityDAO;
+  
+  private GeographicalRegionDAO geographicalRegionDAO;
+  
+  private DisciplineCategoryDAO disciplineCategoryDAO;
+
+  private PassportTypeDAO passportTypeDAO;
+
+  private VisaTypeDAO visaTypeDAO;
+
 	private BookingDAO bookingDAO;
 	
 	private BookingDateDAO bookingDateDAO;
 	
   private CountryDAO countryDAO;
   
-	private LocationJobProfileDAO locationJobProfileDAO;
+  private EmailActionDAO emailActionDAO;
+
+  private LocationJobProfileDAO locationJobProfileDAO;
 	
 	private BudgetTransactionDAO budgetTransactionDAO;
 
@@ -192,7 +216,57 @@ public abstract class DefaultCommonService implements CommonService {
   
   private NhsBackingReportDAO nhsBackingReportDAO;
   
-	public NhsBookingDAO getNhsBookingDAO()
+  public AreaOfSpecialityDAO getAreaOfSpecialityDAO()
+  {
+    return areaOfSpecialityDAO;
+  }
+
+  public void setAreaOfSpecialityDAO(AreaOfSpecialityDAO areaOfSpecialityDAO) 
+  {
+    this.areaOfSpecialityDAO = areaOfSpecialityDAO;
+  }
+
+  public GeographicalRegionDAO getGeographicalRegionDAO()
+  {
+    return geographicalRegionDAO;
+  }
+
+  public void setGeographicalRegionDAO(GeographicalRegionDAO geographicalRegionDAO) 
+  {
+    this.geographicalRegionDAO = geographicalRegionDAO;
+  }
+
+  public DisciplineCategoryDAO getDisciplineCategoryDAO()
+  {
+    return disciplineCategoryDAO;
+  }
+
+  public void setDisciplineCategoryDAO(DisciplineCategoryDAO disciplineCategoryDAO) 
+  {
+    this.disciplineCategoryDAO = disciplineCategoryDAO;
+  }
+
+  public PassportTypeDAO getPassportTypeDAO()
+  {
+    return passportTypeDAO;
+  }
+
+  public void setPassportTypeDAO(PassportTypeDAO passportTypeDAO)
+  {
+    this.passportTypeDAO = passportTypeDAO;
+  }
+
+  public VisaTypeDAO getVisaTypeDAO()
+  {
+    return visaTypeDAO;
+  }
+
+  public void setVisaTypeDAO(VisaTypeDAO visaTypeDAO) 
+  {
+    this.visaTypeDAO = visaTypeDAO;
+  }
+
+  public NhsBookingDAO getNhsBookingDAO()
   {
     return nhsBookingDAO;
   }
@@ -254,7 +328,17 @@ public abstract class DefaultCommonService implements CommonService {
     this.countryDAO = countryDAO;
   }
 
-	public LocationJobProfileDAO getLocationJobProfileDAO() {
+  public EmailActionDAO getEmailActionDAO()
+  {
+    return emailActionDAO;
+  }
+
+  public void setEmailActionDAO(EmailActionDAO emailActionDAO) 
+  {
+    this.emailActionDAO = emailActionDAO;
+  }
+
+  public LocationJobProfileDAO getLocationJobProfileDAO() {
 		return locationJobProfileDAO;
 	}
 
@@ -2942,5 +3026,70 @@ public abstract class DefaultCommonService implements CommonService {
   {
     List<BookingDate> bookingDates = bookingDateDAO.getBookingDatesForNhsBackingReport(nhsBackingReport);
     return bookingDates;
+  }
+  
+  public List<AgencyUser> getAgencyUsers(boolean showOnlyActive)
+  {
+
+    List<AgencyUser> agencyUsers = null;
+    agencyUsers = agencyDAO.getAgencyUsers(showOnlyActive);
+    return agencyUsers;
+
+  }
+
+  public List<AreaOfSpeciality> getAreaOfSpecialities(boolean showOnlyActive) 
+  {
+    List<AreaOfSpeciality> areaOfSpecialities = null;
+    areaOfSpecialities = areaOfSpecialityDAO.getAreaOfSpecialities(showOnlyActive);
+    return areaOfSpecialities;
+  }
+
+  public List<ClientUser> getClientUsers(boolean showOnlyActive) 
+  {
+    List<ClientUser> clientUsers = null;
+    clientUsers = clientDAO.getClientUsers(showOnlyActive);
+    return clientUsers;
+  }
+  
+  public List<Country> getCountries(boolean showOnlyActive)
+  {
+    List<Country> countries = null;
+    countries = countryDAO.getCountries(showOnlyActive);
+    return countries;
+  }
+
+  public List<EmailAction> getEmailActions(boolean showOnlyActive) 
+  {
+    List<EmailAction> emailActions = null;
+    emailActions = emailActionDAO.getEmailActions(showOnlyActive);
+    return emailActions;
+  }
+
+  public List<GeographicalRegion> getGeographicalRegions(boolean showOnlyActive) 
+  {
+    List<GeographicalRegion> geographicalRegions = null;
+    geographicalRegions = geographicalRegionDAO.getGeographicalRegions(showOnlyActive);
+    return geographicalRegions;
+  }
+
+  public List<DisciplineCategory> getDisciplineCategories(boolean showOnlyActive) 
+  {
+    List<DisciplineCategory> disciplineCategories = null;
+    disciplineCategories = disciplineCategoryDAO.getDisciplineCategories(showOnlyActive);
+    return disciplineCategories;
+  }
+
+  public List<PassportType> getPassportTypes(boolean showOnlyActive) 
+  {
+    List<PassportType> passportTypes = null;
+    passportTypes = passportTypeDAO.getPassportTypes(showOnlyActive);
+    return passportTypes;
+  }
+
+  public List<VisaType> getVisaTypes(boolean showOnlyActive) 
+  {
+    List<VisaType> visaTypes = null;
+    visaTypes = visaTypeDAO.getVisaTypes(showOnlyActive);
+    return visaTypes;
   }
 }
