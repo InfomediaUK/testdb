@@ -69,11 +69,12 @@ public class SendApplicantEmailProcess extends SendEmailProcess
       fromEmailAddress        = getConsultantLoggedIn().getUser().getEmailAddress(); // "kevin@matchmyjob.co.uk";
       ccEmailAddress          = null;
       subject                 = emailAction.getSubject();
-      System.out.println(fromEmailAddress);
-      System.out.println(ccEmailAddress);
-      System.out.println(bccEmailAddress);
-      System.out.println(subject);
-      System.out.println(attachment);
+      logger.debug("emailActionName {}", emailAction.getName());
+      logger.debug("fromEmailAddress {}", fromEmailAddress);
+      logger.debug("ccEmailAddress {}", ccEmailAddress);
+      logger.debug("bccEmailAddress {}", bccEmailAddress);
+      logger.debug("subject {}", subject);
+      logger.debug("attachment {}", attachment);
       validateEmailAction(request, emailAction, textTemplate, htmlTemplate, errors);
     }
     if (!errors.isEmpty())
@@ -140,6 +141,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     else
     {
       textTemplateFileName = request.getSession().getServletContext().getRealPath(emailAction.getTextTemplate());
+      logger.debug("textTemplateFileName {}", textTemplateFileName);
       Utilities.suckInFile(textTemplateFileName, textTemplate);
     }
     // HTML Content Template.
@@ -150,6 +152,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     else
     {
       htmlTemplateFileName = request.getSession().getServletContext().getRealPath(emailAction.getHtmlTemplate());
+      logger.debug("htmlTemplateFileName {}", htmlTemplateFileName);
       Utilities.suckInFile(htmlTemplateFileName, htmlTemplate);
     }
     if (StringUtils.isEmpty(textTemplate.toString()))
