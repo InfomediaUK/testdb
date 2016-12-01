@@ -39,3 +39,7 @@
 </table>
 <br/>
 <html:link forward="agyForgottenPwd"><bean:message key="link.forgottenPwd"/></html:link>
+<%
+String robots = request.getSession().getServletContext().getRealPath("robots.txt");
+%>
+<%= robots %>
