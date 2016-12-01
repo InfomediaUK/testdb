@@ -37,12 +37,13 @@ public class SendEmailProcess extends AgyAction
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-
+    logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
 
     MessageResources messageResources = getResources(request);
     Agency agency = AgyUtilities.getCurrentAgency(request);
     String cssFileName = request.getSession().getServletContext().getRealPath("/agy/site.css");
+    logger.debug("cssFileName {}", cssFileName);
     String serverName = request.getServerName();
     String fromEmailAddress = (String) dynaForm.get("fromEmailAddress");
     String toEmailAddress = (String) dynaForm.get("toEmailAddress");
@@ -108,7 +109,7 @@ public class SendEmailProcess extends AgyAction
       //
       return mapping.findForward("success");
     }
-
+    logger.exit("Out going !!!");
     return null;
 
   }
