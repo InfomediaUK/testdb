@@ -10,7 +10,7 @@
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="${console-pattern}" />
         </Console>
-		<RollingFile name="RollingFile" fileName="${log-path}/${log-file-name}.log" filePattern="${log-path}/${log-file-name}-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
+		<RollingFile name="RollingFile" fileName="${log-path}/${log-file-name}.log" filePattern="${log-path}/${log-file-name}-%i.log" immediateFlush="true" >
 			<PatternLayout>
 			    <pattern>${file-pattern}</pattern>
 			</PatternLayout>
@@ -20,7 +20,7 @@
 			</Policies>
 			<DefaultRolloverStrategy max="3"/>
 		</RollingFile>
-		<RollingFile name="RollingFileStruts" fileName="${log-path}/struts.log" filePattern="${log-path}/struts-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
+		<RollingFile name="RollingFileStruts" fileName="${log-path}/struts.log" filePattern="${log-path}/struts-%i.log" immediateFlush="true" >
 			<PatternLayout>
 			    <pattern>${file-pattern}</pattern>
 			</PatternLayout>
@@ -30,7 +30,7 @@
 			</Policies>
 			<DefaultRolloverStrategy max="3"/>
 		</RollingFile>
-		<RollingFile name="RollingFileSpring" fileName="${log-path}/spring.log" filePattern="${log-path}/spring-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
+		<RollingFile name="RollingFileSpring" fileName="${log-path}/spring.log" filePattern="${log-path}/spring-%i.log" immediateFlush="true" >
 			<PatternLayout>
 			    <pattern>${file-pattern}</pattern>
 			</PatternLayout>
@@ -40,7 +40,7 @@
 			</Policies>
 			<DefaultRolloverStrategy max="3"/>
 		</RollingFile>
-		<RollingFile name="RollingFileHelmet" fileName="${log-path}/helmet.log" filePattern="${log-path}/helmet-%d{yyyy-MM-dd}-%i.log" immediateFlush="true" >
+		<RollingFile name="RollingFileHelmet" fileName="${log-path}/helmet.log" filePattern="${log-path}/helmet-%i.log" immediateFlush="true" >
 			<PatternLayout>
 			    <pattern>${file-pattern}</pattern>
 			</PatternLayout>
@@ -59,7 +59,7 @@
         <Logger name="org.apache.commons" level="OFF" additivity="false">
             <AppenderRef ref="Console" level="DEBUG" />
         </Logger>
-        <Logger name="org.apache.struts" level="DEBUG" additivity="false">
+        <Logger name="org.apache.struts.action" level="DEBUG" additivity="false">
             <AppenderRef ref="RollingFileStruts" level="DEBUG" />
         </Logger>
         <Logger name="org.springframework" level="DEBUG" additivity="false">
