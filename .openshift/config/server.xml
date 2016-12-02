@@ -149,8 +149,8 @@
                prefix="localhost_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
         -->
-        <Context docBase="${OPENSHIFT_APP_NAME}" path="/${OPENSHIFT_APP_NAME}" reloadable="true"/>
-        <Context docBase="/var/lib/openshift/579792ef0c1e66011b00017b/app-root/data/documents" path="/${OPENSHIFT_APP_NAME}/documents" reloadable="true"/>
+        <Context docBase="testdb" path="/testdb" reloadable="true"/>
+        <Context docBase="/var/lib/openshift/579792ef0c1e66011b00017b/app-root/data/documents" path="/testdb/documents" reloadable="true"/>
       </Host>
     </Engine>
   </Service>
