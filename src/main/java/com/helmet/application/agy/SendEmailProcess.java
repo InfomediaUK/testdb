@@ -172,11 +172,12 @@ public class SendEmailProcess extends AgyAction
   protected void emailTop(StringBuffer htmlContent, String cssFileName)
   {
     htmlContent.append("<html><head><title>MMJ Email</title>");
-
-    htmlContent.append("<style>");
-    Utilities.suckInFile(cssFileName, htmlContent);
-    htmlContent.append("</style>");
-
+    if (StringUtils.isNotEmpty(cssFileName))
+    {
+      htmlContent.append("<style>");
+      Utilities.suckInFile(cssFileName, htmlContent);
+      htmlContent.append("</style>");
+    }
     htmlContent.append("</head><body>");
   }
 
