@@ -102,11 +102,12 @@ public class MultipartEmailer
   protected void emailTop(StringBuffer htmlContent)
   {
     htmlContent.append("<html><head><title>MMJ Email</title>");
-
-    htmlContent.append("<style>");
-    Utilities.suckInFile(cssFileName, htmlContent);
-    htmlContent.append("</style>");
-
+    if (StringUtils.isNotEmpty(cssFileName))
+    {
+      htmlContent.append("<style>");
+      Utilities.suckInFile(cssFileName, htmlContent);
+      htmlContent.append("</style>");
+    }
     htmlContent.append("</head><body>");
   }
 
