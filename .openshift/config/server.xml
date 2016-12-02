@@ -135,7 +135,7 @@
         <!-- RemoteIp valve, pass protocol header from proxy. -
             http://tomcat.apache.org/tomcat-7.0-doc/api/org/apache/catalina/valves/RemoteIpValve.html
         -->
-        
+
         <Valve
           className="org.apache.catalina.valves.RemoteIpValve"
           protocolHeader="x-forwarded-proto"
@@ -149,6 +149,7 @@
                prefix="localhost_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
         -->
+        <Context docBase="/var/lib/openshift/579792ef0c1e66011b00017b/app-root/data/documents" path="/testdb/documents" reloadable="true"/>
       </Host>
     </Engine>
   </Service>
