@@ -149,7 +149,7 @@
                prefix="localhost_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
         -->
-        <Context docBase="/var/lib/openshift/579792ef0c1e66011b00017b/app-root/data/documents" path="/testdb/documents" reloadable="true"/>
+        <Context docBase="/var/lib/openshift/579792ef0c1e66011b00017b/app-root/data/documents" path="/documents" />
       </Host>
     </Engine>
   </Service>
