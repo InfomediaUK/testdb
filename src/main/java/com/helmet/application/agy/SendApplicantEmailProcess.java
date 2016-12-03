@@ -26,6 +26,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
+import com.helmet.application.FileHandler;
 import com.helmet.application.MailHandler;
 import com.helmet.application.Utilities;
 import com.helmet.bean.Agency;
@@ -140,7 +141,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     }
     else
     {
-      textTemplateFileName = request.getSession().getServletContext().getRealPath(emailAction.getTextTemplate());
+      textTemplateFileName = FileHandler.getInstance().getEmailTemplateRealPath(emailAction.getTextTemplate());
       logger.debug("textTemplateFileName {}", textTemplateFileName);
       Utilities.suckInFile(textTemplateFileName, textTemplate);
     }
@@ -151,7 +152,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     }
     else
     {
-      htmlTemplateFileName = request.getSession().getServletContext().getRealPath(emailAction.getHtmlTemplate());
+      htmlTemplateFileName = FileHandler.getInstance().getEmailTemplateRealPath(emailAction.getHtmlTemplate());
       logger.debug("htmlTemplateFileName {}", htmlTemplateFileName);
       Utilities.suckInFile(htmlTemplateFileName, htmlTemplate);
     }
@@ -173,7 +174,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
   {
     StringBuffer content = new StringBuffer();
     StringBuffer htmlContent = new StringBuffer();
-    emailTop(htmlContent, request.getSession().getServletContext().getRealPath("/agy/site.css"));
+    emailTop(htmlContent, FileHandler.getInstance().getEmailTemplateRealPath("/agy/site.css"));
     Agency agency = AgyUtilities.getCurrentAgency(request);
     emailHeader(htmlContent, agency);
     emailTopDivider(htmlContent);

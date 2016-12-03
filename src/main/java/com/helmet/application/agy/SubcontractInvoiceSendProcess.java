@@ -36,7 +36,7 @@ public class SubcontractInvoiceSendProcess extends AgyAction
   {
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-    String cssFileName = request.getSession().getServletContext().getRealPath("/agy/site.css");
+    String cssFileName = FileHandler.getInstance().getEmailTemplateRealPath("/agy/site.css");
     String serverName = request.getServerName();
     String fromEmailAddress = (String) dynaForm.get("fromEmailAddress");
     String toEmailAddress = (String) dynaForm.get("toEmailAddress");

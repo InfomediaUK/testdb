@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -22,6 +20,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
+import com.helmet.application.FileHandler;
 import com.helmet.application.NhsBookingsBookTask;
 import com.helmet.application.NhsBookingsBookTaskHandle;
 import com.helmet.application.NhsBookingsBookTaskResult;
@@ -52,7 +51,7 @@ public class NhsBookingsBookTaskProcess extends AgyAction
     BigDecimal wageRate = (BigDecimal)dynaForm.get("wageRate");
     BigDecimal value = (BigDecimal)dynaForm.get("value");
     MessageResources messageResources = getResources(request);
-    String cssFileName = request.getSession().getServletContext().getRealPath("/agy/site.css");
+    String cssFileName = FileHandler.getInstance().getEmailTemplateRealPath("/agy/site.css");
     String serverName = request.getServerName();
     // Get the main records from the database.
     AgyService agyService = ServiceFactory.getInstance().getAgyService();

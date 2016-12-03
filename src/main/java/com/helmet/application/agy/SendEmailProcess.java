@@ -42,7 +42,7 @@ public class SendEmailProcess extends AgyAction
 
     MessageResources messageResources = getResources(request);
     Agency agency = AgyUtilities.getCurrentAgency(request);
-    String cssFileName = request.getSession().getServletContext().getRealPath("/agy/site.css");
+    String cssFileName = FileHandler.getInstance().getEmailTemplateRealPath("/agy/site.css");
     logger.debug("cssFileName {}", cssFileName);
     String serverName = request.getServerName();
     String fromEmailAddress = (String) dynaForm.get("fromEmailAddress");

@@ -17,6 +17,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
+import com.helmet.application.FileHandler;
 import com.helmet.application.MultipartEmailer;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Agency;
@@ -38,7 +39,7 @@ public class NhsBookingApplicantNotify extends AgyAction
     logger.entry("In coming !!!");
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
-    String cssFileName = request.getSession().getServletContext().getRealPath("/agy/site.css");
+    String cssFileName = FileHandler.getInstance().getEmailTemplateRealPath("/agy/site.css");
     String serverName = request.getServerName();
     NhsBookingUser nhsBookingUser = (NhsBookingUser)dynaForm.get("nhsBookingUser");
     Integer weekToShow = (Integer)dynaForm.get("weekToShow");
