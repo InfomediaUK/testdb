@@ -83,6 +83,8 @@
 		<property name="nhsBackingReportFileFolder" value="/documents/nhsBackingReports" />
 		<property name="nhsPaymentsFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
 		<property name="nhsPaymentsFileFolder" value="/documents/nhsPayments" />
+		<property name="emailTemplateFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
+		<property name="emailTemplateFileFolder" value="/documents/emailTemplates" />
 		<property name="nhsPaymentsAcceptStatus" value="Paid in full" />
 	</bean>
 	
