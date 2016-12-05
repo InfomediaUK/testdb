@@ -34,7 +34,9 @@
 >
 </head>
 <body>
+<%-- 
 <jsp:include flush="true" page="/siteUnavailable.jsp"/>
+--%>
 <div align="left">
 <tiles:insert attribute="header"/>
 <br/>
