@@ -1,23 +1,40 @@
 package com.helmet.api;
 
-public class ServiceFactory {
-	
-    private static ServiceFactory instance;
+public class ServiceFactory
+{
 
-    AgyService agyService;
+  private static ServiceFactory instance;
 
-    public final static ServiceFactory getInstance() {
-        if (instance == null) {
-            instance = new ServiceFactory();
-        }
-        return instance;
+  AdminService adminService;
+  AgyService agyService;
+
+  public final static ServiceFactory getInstance()
+  {
+    if (instance == null)
+    {
+      instance = new ServiceFactory();
     }
+    return instance;
+  }
 
-	public AgyService getAgyService() {
-		return agyService;
-	}
-	public void setAgyService(AgyService agyService) {
-		this.agyService = agyService;
-	}
+  public AdminService getAdminService()
+  {
+    return adminService;
+  }
+
+  public void setAdminService(AdminService adminService)
+  {
+    this.adminService = adminService;
+  }
+
+  public AgyService getAgyService()
+  {
+    return agyService;
+  }
+
+  public void setAgyService(AgyService agyService)
+  {
+    this.agyService = agyService;
+  }
 
 }
