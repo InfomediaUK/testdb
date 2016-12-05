@@ -1,0 +1,326 @@
+<html>
+<head>
+<title>Maintain Site Unavailable</title>
+<style>
+
+body {
+	color:#000;
+	background:#fff;
+	font:70% verdana,tahoma,helvetica,sans-serif;
+	margin:10px;
+	padding:0px;
+}
+
+img {
+	border:0;
+}
+
+input {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	padding:0px;
+}
+
+select {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	padding:0px;
+}
+
+textarea {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	padding:0px;
+}
+
+h1 {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	font-weight: bold;
+}
+
+h2 {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	font-weight: bold;
+}
+
+a {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	color:#cc0000;
+	background:#fff;
+	text-decoration:none;
+}
+
+a:link {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	color:#cc0000;
+	background:#fff;
+	text-decoration:none;
+}
+
+a:visited {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	color:#cc0000;
+	background:#fff;
+	text-decoration:none;
+}
+
+a:active {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	color:#cc0000;
+	background:#fff;
+	text-decoration:none;
+}
+
+a:hover {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	color:#ff0000;
+	background:#fff;
+	text-decoration:underline;
+}
+
+.label {
+	font:100% verdana,tahoma,helvetica,sans-serif;
+	font-weight: bold;
+}
+
+.button {
+  width: 75px;
+  height: 23px;
+}
+
+table.simple thead tr th {
+	background-color: #f0f0f0;
+}
+
+table.simple tr th {
+	background-color: #f0f0f0;
+}
+
+table.simple {
+	border: 1px solid #e0e0e0;
+	border-collapse: collapse;
+
+	font:100% verdana,tahoma,helvetica,sans-serif;
+
+}
+
+table.simple td,table.simple th {
+/* background-color:#ffffff; */
+	border: 1px solid #e0e0e0;
+	padding-left:2px;
+	padding-right:2px;
+}
+
+#siteUnavailable {
+	text-align:center;
+	width:100%;
+	background-color:#e0e0e0;
+
+	BORDER-TOP: #cc0000 1px solid;
+	BORDER-LEFT: #cc0000 1px solid;
+	BORDER-RIGHT: #cc0000 1px solid;
+	BORDER-BOTTOM: #cc0000 1px solid;
+
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+}
+#siteUnavailableContainer {
+	width:100%;
+	padding-top:0em;
+	padding-bottom:0.5em;
+
+}
+
+</style>
+</head>
+<body>
+
+<?php
+
+$theXmlDocument = 'siteUnavailable.xml';
+$theXslDocument = 'siteUnavailable.xsl';
+
+switch ($_GET['action']) {
+case 'edit':
+    echo 'edit';
+    echo '<br/>';
+    echo '<br/>';
+
+	// Load the XML source
+	$xml = new DOMDocument;
+	$xml->load($theXmlDocument);
+
+	$titleValue = $xml->getElementsByTagName('title')->item(0)->nodeValue;
+
+	echo '<form method="POST" action="?action=save">';
+
+	echo '<table class="simple" width="100%">';
+	echo '  <tr>';
+	echo '    <th align="left">title</th>';
+	echo '	  <td align="left"><input type="text" name="title" value="'.$titleValue.'" size="75"/></td>';
+	echo '  </tr>';
+	echo '  <tr>';
+	echo '    <th align="left">text</th>';
+	echo '    <td align="left">';
+	echo '    <textarea name="text" cols=75 rows=6>';
+
+	$textValues = $xml->getElementsByTagName('text');
+
+	for ($i = 0; $i < $textValues->length; $i++) {
+	   echo $textValues->item($i)->nodeValue;
+	}
+
+	echo '</textarea>';
+	echo '    </td>';
+	echo '  </tr>';
+	echo '  <tr>';
+	echo '    <th align="left">active</th>';
+	echo '    <td align="left">';
+
+	$checked = '';
+	$msgValue = $xml->getElementsByTagName('msg')->item(0);
+
+	$activeValue = $msgValue->getAttribute('active');
+	if ($activeValue == 'true') {
+		$checked = 'checked';
+	}
+
+	echo '<input type="checkbox" name="active" value="true"'.$checked.'/>';
+	echo '    </td>';
+	echo '  </tr>';
+	echo '  <tr>';
+	echo '    <td colspan="2">';
+	echo '<input type="submit" name="submit" value="Save" /></form>';
+	echo '    </td>';
+	echo '  </tr>';
+	echo '</table>';
+
+    echo '<br/>';
+    echo '<br/>';
+	echo '<a href="?action=show">Show</a>';
+
+    break;
+case 'save':
+    echo 'save';
+    echo '<br/>';
+    echo '<br/>';
+
+	$doc = new DOMDocument('1.0', 'UTF-8');
+
+	// we want a nice output
+	$doc->formatOutput = true;
+
+	$root = $doc->createElement('siteUnavailable');
+	$root = $doc->appendChild($root);
+
+	// msg
+	$msg = $doc->createElement('msg');
+	$msg = $root->appendChild($msg);
+
+	$activeParam = $_POST["active"];
+
+	if ($activeParam == 'true') {
+		$msg->setAttribute("active", "true");
+	}
+	else {
+		$msg->setAttribute("active", "false");
+	}
+
+	$titleParam = $_POST["title"];
+
+	// title
+	$title = $doc->createElement('title');
+	$title = $msg->appendChild($title);
+
+	$value = $doc->createTextNode($titleParam);
+	$value = $title->appendChild($value);
+
+	$textParam = $_POST["text"];
+
+	if ($textParam != '') {
+
+		$lines = explode("\r",$textParam);
+		$num = count($lines);
+
+		for($i=0;$i<$num;$i++)
+		{
+
+			// text
+			$text = $doc->createElement('text');
+			$text = $msg->appendChild($text);
+
+			$value = $doc->createTextNode($lines[$i]);
+			$value = $text->appendChild($value);
+
+		}
+
+	}
+
+	echo 'Wrote: ' . $doc->save($theXmlDocument) . ' bytes';
+
+    echo '<br/>';
+    echo '<br/>';
+	echo '<a href="?action=show">Show</a>';
+
+    break;
+default:
+    echo 'show';
+    echo '<br/>';
+    echo '<br/>';
+
+	// Load the XML source
+	$xml = new DOMDocument;
+	$xml->load($theXmlDocument);
+
+	echo '<table class="simple" width="100%">';
+	echo '  <tr>';
+	echo '    <th align="left">title</th>';
+    echo '	  <td align="left">'.$xml->getElementsByTagName('title')->item(0)->nodeValue.'</td>';
+	echo '  </tr>';
+	echo '  <tr>';
+	echo '    <th align="left">text</th>';
+
+	$textValues = $xml->getElementsByTagName('text');
+
+	echo '    <td align="left">';
+	for ($i = 0; $i < $textValues->length; $i++) {
+        if ($i > 0) {
+            echo '<br/>';
+        }
+	    echo $textValues->item($i)->nodeValue;
+	}
+	echo '    </td>';
+
+	echo '  </tr>';
+	echo '  <tr>';
+	echo '    <th align="left">active</th>';
+    echo '	  <td align="left">'.$xml->getElementsByTagName('msg')->item(0)->getAttribute('active').'</td>';
+    echo '  </tr>';
+
+    echo '</table>';
+
+    echo '<br/>';
+    echo 'transformed (only shows when active)';
+    echo '<br/>';
+    echo '<br/>';
+
+	// Load the XSL source
+	$xsl = new DOMDocument;
+	$xsl->load($theXslDocument);
+
+	$proc = new XSLTProcessor();
+	$proc->importStylesheet($xsl);
+	$newXml = $proc->transformToXML($xml);
+	echo $newXml;
+
+    echo '<br/>';
+    echo '<br/>';
+	echo '<a href="?action=edit">Edit</a>';
+
+	break;
+
+}
+
+
+
+?>
+
+</body>
+</html>

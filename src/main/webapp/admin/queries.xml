@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queries>
+  <query id="invoicetotals" name="Invoice Totals" desc="Invoice Totals">
+    <sql>
+		select 
+			ai.agencyinvoiceid,
+			ai.creationtimestamp,
+			ai.chargeratevalue,
+			ai.payratevalue + ai.wtdvalue + ai.nivalue as payeratevalue,
+			ai.wageratevalue,
+			ai.commissionvalue,
+			ai.expensevalue,
+			ai.vatvalue,
+			ai.chargeratevalue + ai.expensevalue + ai.vatvalue as totalvalue,
+			c.name as client,
+			a.name as agency,
+			ap.firstname||' '||ap.lastname as applicant,
+			ap.limitedcompanyname,
+			sum(bd.workedchargeratevalue) as workedchargeratevalue,
+			sum(bd.workedpayratevalue + bd.workedwtdvalue + bd.workednivalue) as workedpayeratevalue,
+			sum(bd.workedwageratevalue) as workedwageratevalue,
+			sum(bd.workedcommissionvalue) as workedcommissionvalue,
+			sum(bd.expensevalue) as workedexpensevalue,
+			sum(bd.workedvatvalue + bd.expensevatvalue) as workedvatvalue,
+			sum(bd.workedchargeratevalue + bd.expensevalue + bd.workedvatvalue + bd.expensevatvalue) as workedtotalvalue,
+			sum(bd.workednoofhours) as workednoofhours,
+			count(bd.bookingdateid) as workednoofshifts,
+			min(bd.bookingdate) as minbookingdate,
+			max(bd.bookingdate) as maxbookingdate
+		from 
+			agencyinvoice ai, 
+			client c, 
+			agency a,
+			bookingdate bd,
+			bookinggradeapplicantdate bgad,
+			bookinggradeapplicant bga,
+			applicant ap
+		where ai.active = true
+		and c.clientid = ai.clientid
+		and c.active = true
+		and a.agencyid = ai.agencyid
+		and a.active = true
+		and bd.agencyinvoiceid = ai.agencyinvoiceid
+		and bd.active = true
+		and bgad.bookingdateid = bd.bookingdateid
+		and bgad.active = true
+		and bgad.status = 3 -- filled
+		and bga.bookinggradeapplicantid = bgad.bookinggradeapplicantid
+		and bga.active = true
+		and ap.applicantid = bga.applicantid
+		and ap.active = true
+		and ai.agencyinvoiceid > INVOICEID
+		group by 1,2,3,4,5,6,7,8,9,10,11,12,13
+		order by 1
+    </sql>
+    <params>
+      <param name="INVOICEID" title="Greater than invoiceid" type="string"/>
+    </params>  
+  </query>
+  <query id="barclaysinvoiceupload" name="Barclays Invoice Upload" desc="Barclays Invoice Upload">
+    <sql>
+  
+select 
+'PJ Locums' as customer,
+'' as blank1,
+ai.agencyinvoiceid -- case when ai.reference is null then 'NO INVOICE AGENCY REFERENCE' else ai.reference end
+, 
+to_char(ai.creationtimestamp, 'DD/MM/YYYY') as created
+,
+'' as blank2,
+trim(to_char(ai.chargeratevalue + ai.expensevalue + ai.vatvalue - ai.discountvalue, '9999999999.99')) as value
+,
+case when c.reference is null then 'NO CLIENT REFERENCE' else c.reference end as reference
+,
+'Product Invoice' as type,
+5 as five,
+'' as blank3,
+1 as one,
+7777.77 as sevens 
+from agencyinvoice ai, client c
+where 
+ai.active = true
+and c.clientid = ai.clientid
+and c.active = true
+and ai.agencyinvoiceid > INVOICEID
+
+order by ai.agencyinvoiceid
+  
+    </sql>
+    <params>
+      <param name="INVOICEID" title="Greater than invoiceid" type="string"/>
+    </params>  
+  </query>
+  <query id="barclayscreditupload" name="Barclays Credit Upload" desc="Barclays Credit Upload">
+    <sql>
+  
+select 
+'PJ Locums' as customer,
+'' as blank1,
+aic.agencyinvoicecreditid
+, 
+to_char(aic.creationtimestamp, 'DD/MM/YYYY') as created
+,
+'' as blank2,
+trim(to_char(-1 * (ai.chargeratevalue + ai.expensevalue + ai.vatvalue - ai.discountvalue), '9999999999.99')) as value
+,
+case when c.reference is null then 'NO CLIENT REFERENCE' else c.reference end as reference
+,
+'Product Credit Note' as type,
+5 as five,
+'' as blank3,
+1 as one,
+7777.77 as sevens 
+from agencyinvoicecredit aic, agencyinvoice ai, client c
+where 
+ai.active = true
+and c.clientid = ai.clientid
+and c.active = true
+and ai.agencyinvoiceid = aic.agencyinvoiceid
+and aic.active = true
+and aic.agencyinvoicecreditid > CREDITID
+
+order by aic.agencyinvoicecreditid
+  
+    </sql>
+    <params>
+      <param name="CREDITID" title="Greater than creditid" type="string"/>
+    </params>  
+  </query>
+  <query id="pasa" name="Pasa" desc="Pasa">
+    <sql>
+  
+select 
+c.name as trust,
+jf.code as category,
+jsf.name as jobfamily,
+jp.name as jobtitle,
+jf.code||'.'||jsf.code||'.'||jp.code as bttcode,
+g.name as grade,
+case when bdh.upliftfactor = 1 then 'Normal' 
+     when bdh.upliftfactor = 1.3 then 'Nights/Saturdays' 
+     when bdh.upliftfactor = 1.6 then 'Sundays/Bank-Holidays'
+     else 'UNKNOWN' 
+end as shift,
+bdh.upliftedpayrate + bdh.wtdrate + bdh.nirate as payerate,
+bdh.upliftedwagerate as wagerate,
+bdh.upliftedchargerate as chargerate,
+sum( case when bdh.chargeratevalue > 0 then bdh.portionofhour else bdh.portionofhour * -1 end ) as hours,
+sum(bdh.chargeratevalue) as charge
+
+,
+bdh.upliftedchargerate * sum( case when bdh.chargeratevalue > 0 then bdh.portionofhour else bdh.portionofhour * -1 end ) as checker
+
+--GRADE
+
+--a.firstname||' '||a.lastname as applicantname,
+--date_part('year', bd.bookingdate) as year, 
+--date_part('week', bd.bookingdate) as week, 
+
+/*
+min(bd.bookingdate) as mindate, 
+max(bd.bookingdate) as maxdate,
+sum(bdh.commissionvalue) as commission,
+sum(bdh.commissionvatvalue) as vat,
+sum(bdh.chargeratevalue + bdh.commissionvatvalue) as total
+*/
+
+from
+bookingdatehour bdh, 
+bookingdate bd,
+booking b,
+location l, 
+site s, 
+client c,
+bookinggradeapplicantdate bgad,
+bookinggradeapplicant bga,
+applicant a,
+
+clientagencyjobprofilegrade cajpg,
+grade g,
+
+jobfamily jf, jobsubfamily jsf, jobprofile jp
+
+where bd.active = true
+and bd.bookingdate between 'DATEFROM' and 'DATETO'
+and bdh.bookingdateid = bd.bookingdateid
+and bdh.active = true
+
+and bd.status = 4 -- completed
+and bd.workedstatus = 4 -- invoiced
+and b.bookingid = bd.bookingid
+and b.active = true
+and l.locationid = b.locationid
+and l.active = true
+and s.siteid = l.siteid
+and s.active = true
+and c.clientid = s.clientid
+and c.active = true
+--and c.clientid = 17
+
+and bgad.bookingdateid = bd.bookingdateid
+and bgad.active = true
+and bgad.status = 3 -- filled
+and bga.bookinggradeapplicantid = bgad.bookinggradeapplicantid
+and bga.active = true
+and a.applicantid = bga.applicantid
+and a.active = true
+and a.agencyid = 1
+
+and jp.jobprofileid = b.jobprofileid
+and jp.active = true
+and jsf.jobsubfamilyid = jp.jobsubfamilyid
+and jsf.active = true
+and jf.jobfamilyid = jsf.jobfamilyid
+and jf.active = true
+
+and cajpg.clientagencyjobprofilegradeid = bga.clientagencyjobprofilegradeid
+and cajpg.active = true
+and g.gradeid = cajpg.gradeid
+and g.active = true
+
+group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10  
+
+    </sql>
+    <params>
+      <param name="DATEFROM" title="Date From (yyyy/mm/dd)" type="string"/>
+      <param name="DATETO" title="Date To (yyyy/mm/dd)" type="string"/>
+    </params>  
+  </query>
+
+  <query id="ibdfdr" name="Invoiced Booking Dates for Date Range" desc="Invoiced Booking Dates for Date Range">
+    <sql>
+
+		select 
+			a.name as agency,
+			c.name as client,
+			ap.firstname||' '||ap.lastname as applicant,
+			ap.limitedcompanyname,
+			bd.bookingdate,
+			ai.agencyinvoiceid,
+			bd.workedchargeratevalue,
+			bd.workedpayratevalue + bd.workedwtdvalue + bd.workednivalue as workedpayeratevalue,
+			bd.workedwageratevalue as workedwageratevalue,
+			bd.workedcommissionvalue,
+			bd.expensevalue,
+			bd.workedvatvalue + bd.expensevatvalue as vatvalue,
+			bd.workedchargeratevalue + bd.expensevalue + bd.workedvatvalue + bd.expensevatvalue as totalvalue,
+			bd.workednoofhours
+		from 
+			agencyinvoice ai, 
+			client c, 
+			agency a,
+			bookingdate bd,
+			bookinggradeapplicantdate bgad,
+			bookinggradeapplicant bga,
+			applicant ap
+		where ai.active = true
+		and c.clientid = ai.clientid
+		and c.active = true
+		and a.agencyid = ai.agencyid
+		and a.active = true
+		and bd.agencyinvoiceid = ai.agencyinvoiceid
+		and bd.active = true
+		and bgad.bookingdateid = bd.bookingdateid
+		and bgad.active = true
+		and bgad.status = 3 -- filled
+		and bga.bookinggradeapplicantid = bgad.bookinggradeapplicantid
+		and bga.active = true
+		and ap.applicantid = bga.applicantid
+		and ap.active = true
+
+		and bd.bookingdate BETWEEN 'DATEFROM' and 'DATETO'
+
+		order by 1,2,3  
+
+    </sql>
+    <params>
+      <param name="DATEFROM" title="Date From (yyyy/mm/dd)" type="string"/>
+      <param name="DATETO" title="Date To (yyyy/mm/dd)" type="string"/>
+    </params>  
+  </query>
+ 
+  <query id="aoninvoice" name="AON Invoice" desc="AON Invoice">
+    <sql>
+
+select 
+
+sum( case when bdh.chargeratevalue > 0 then bdh.portionofhour else bdh.portionofhour * -1 end ) as hours,
+
+a.firstname||' '||a.lastname as applicantname,
+
+to_char(
+case when date_part('dow', bd.bookingdate) = 0 then bd.bookingdate + interval '0 days' -- sun
+     when date_part('dow', bd.bookingdate) = 1 then bd.bookingdate + interval '6 days' -- mon
+     when date_part('dow', bd.bookingdate) = 2 then bd.bookingdate + interval '5 days' -- tue
+     when date_part('dow', bd.bookingdate) = 3 then bd.bookingdate + interval '4 days' -- wed
+     when date_part('dow', bd.bookingdate) = 4 then bd.bookingdate + interval '3 days' -- thu
+     when date_part('dow', bd.bookingdate) = 5 then bd.bookingdate + interval '2 days' -- fri
+     when date_part('dow', bd.bookingdate) = 6 then bd.bookingdate + interval '1 days' -- sat
+     else bd.bookingdate
+end 
+, 'DD-MM-YYYY')
+as weekending,
+
+bdh.upliftedchargerate as chargerate,
+bdh.upliftedpayrate + bdh.wtdrate + bdh.nirate as payerate,
+bdh.upliftedwagerate as wagerate,
+
+sum(bdh.chargeratevalue) as charge,
+round(sum(bdh.commissionvatvalue),2) as vat
+
+from 
+bookingdate bd,
+bookingdatehour bdh,
+booking b,
+location l, 
+site s, 
+client c,
+bookinggradeapplicantdate bgad,
+bookinggradeapplicant bga,
+applicant a
+
+where bd.active = true
+
+--and bd.bookingdate between '2007-04-30' and '2007-06-03' -- may
+--and bd.bookingdate between '2007-06-04' and '2007-07-01' -- june
+and bd.bookingdate BETWEEN 'DATEFROM' and 'DATETO'
+
+and bd.status = 4 -- completed
+and bd.workedstatus = 4 -- invoiced
+
+and bdh.bookingdateid = bd.bookingdateid
+and bdh.active = true
+
+and b.bookingid = bd.bookingid
+and b.active = true
+and l.locationid = b.locationid
+and l.active = true
+and s.siteid = l.siteid
+and s.active = true
+and c.clientid = s.clientid
+and c.active = true
+and c.clientid = 17
+
+and bgad.bookingdateid = bd.bookingdateid
+and bgad.active = true
+and bgad.status = 3 -- filled
+and bga.bookinggradeapplicantid = bgad.bookinggradeapplicantid
+and bga.active = true
+and a.applicantid = bga.applicantid
+and a.active = true
+
+--and a.firstname = 'Faisal'
+
+group by 2, 3, 4, 5, 6
+order by min(bd.bookingdate), 2, 4
+ 
+    </sql>
+    <params>
+      <param name="DATEFROM" title="Date From (yyyy/mm/dd)" type="string"/>
+      <param name="DATETO" title="Date To (yyyy/mm/dd)" type="string"/>
+    </params>  
+  </query>
+ 
+  <query id="agencyinvoiced" name="Agency Invoiced" desc="Agency Invoiced">
+    <sql>
+ 
+select 
+c.name,
+a.firstname||' '||a.lastname as applicantname,
+a.limitedcompanyname,
+to_char(
+case when date_part('dow', bd.bookingdate) = 0 then bd.bookingdate + interval '0 days' -- sun
+     when date_part('dow', bd.bookingdate) = 1 then bd.bookingdate + interval '6 days' -- mon
+     when date_part('dow', bd.bookingdate) = 2 then bd.bookingdate + interval '5 days' -- tue
+     when date_part('dow', bd.bookingdate) = 3 then bd.bookingdate + interval '4 days' -- wed
+     when date_part('dow', bd.bookingdate) = 4 then bd.bookingdate + interval '3 days' -- thu
+     when date_part('dow', bd.bookingdate) = 5 then bd.bookingdate + interval '2 days' -- fri
+     when date_part('dow', bd.bookingdate) = 6 then bd.bookingdate + interval '1 days' -- sat
+     else bd.bookingdate
+end 
+, 'YYYY-MM-DD')
+as weekending,
+sum( case when bdh.chargeratevalue > 0 then bdh.portionofhour else bdh.portionofhour * -1 end ) as hours,
+bdh.upliftedchargerate as chargerate,
+sum(bdh.chargeratevalue) as charge,
+bdh.upliftedpayrate + bdh.wtdrate + bdh.nirate as payerate,
+sum(bdh.payratevalue + bdh.wtdvalue + bdh.nivalue) as paye,
+bdh.upliftedwagerate as wagerate,
+sum(bdh.wageratevalue) as wage,
+sum(bdh.commissionvalue) as commission,
+round(sum(bdh.chargeratevatvalue + bdh.payratevatvalue + bdh.wtdvatvalue + bdh.nivatvalue + bdh.commissionvatvalue),2) as vat
+from 
+bookingdate bd,
+bookingdatehour bdh,
+booking b,
+location l, 
+site s, 
+client c,
+bookinggradeapplicantdate bgad,
+bookinggradeapplicant bga,
+applicant a
+where bd.active = true
+--and bd.bookingdate between '2007-04-30' and '2007-06-03' -- may
+--and bd.bookingdate between '2007-06-04' and '2007-07-01' -- june
+and bd.bookingdate BETWEEN 'DATEFROM' and 'DATETO'
+and bd.status = 4 -- completed
+and bd.workedstatus = 4 -- invoiced
+and bdh.bookingdateid = bd.bookingdateid
+and bdh.active = true
+and b.bookingid = bd.bookingid
+and b.active = true
+and l.locationid = b.locationid
+and l.active = true
+and s.siteid = l.siteid
+and s.active = true
+and c.clientid = s.clientid
+and c.active = true
+--and c.clientid = 17
+and a.agencyid = AGENCYID
+and bgad.bookingdateid = bd.bookingdateid
+and bgad.active = true
+and bgad.status = 3 -- filled
+and bga.bookinggradeapplicantid = bgad.bookinggradeapplicantid
+and bga.active = true
+and a.applicantid = bga.applicantid
+and a.active = true
+--and a.firstname = 'Faisal'
+group by 1, 2, 3, 4, 6, 8, 10
+order by 1, 2, 4, 6 
+
+    </sql>
+    <params>
+      <param name="AGENCYID" title="Agency Id" type="string"/>
+      <param name="DATEFROM" title="Date From (yyyy/mm/dd)" type="string"/>
+      <param name="DATETO" title="Date To (yyyy/mm/dd)" type="string"/>
+    </params>  
+  </query>
+
+  <query id="agencyinvoicedexpenses" name="Agency Invoiced Expenses" desc="Agency Invoiced Expenses">
+    <sql>
+
+select 
+c.name,
+a.firstname||' '||a.lastname as applicantname,
+a.limitedcompanyname,
+
+to_char(
+case when date_part('dow', bd.bookingdate) = 0 then bd.bookingdate + interval '0 days' -- sun
+     when date_part('dow', bd.bookingdate) = 1 then bd.bookingdate + interval '6 days' -- mon
+     when date_part('dow', bd.bookingdate) = 2 then bd.bookingdate + interval '5 days' -- tue
+     when date_part('dow', bd.bookingdate) = 3 then bd.bookingdate + interval '4 days' -- wed
+     when date_part('dow', bd.bookingdate) = 4 then bd.bookingdate + interval '3 days' -- thu
+     when date_part('dow', bd.bookingdate) = 5 then bd.bookingdate + interval '2 days' -- fri
+     when date_part('dow', bd.bookingdate) = 6 then bd.bookingdate + interval '1 days' -- sat
+     else bd.bookingdate
+end 
+, 'YYYY-MM-DD')
+as weekending,
+sum(bd.expensevalue) as expensevalue,
+sum(bd.expensevatvalue) as expensevat
+
+from 
+bookingdate bd,
+booking b,
+location l, 
+site s, 
+client c,
+bookinggradeapplicantdate bgad,
+bookinggradeapplicant bga,
+applicant a
+where bd.active = true
+--and bd.bookingdate between '2007-04-30' and '2007-06-03' -- may
+--and bd.bookingdate between '2007-06-04' and '2007-07-01' -- june
+and bd.bookingdate BETWEEN 'DATEFROM' and 'DATETO'
+and bd.status = 4 -- completed
+and bd.workedstatus in (2, 4) -- 2 = authorised 4 = invoiced
+and b.bookingid = bd.bookingid
+and b.active = true
+and l.locationid = b.locationid
+and l.active = true
+and s.siteid = l.siteid
+and s.active = true
+and c.clientid = s.clientid
+and c.active = true
+--and c.clientid = 17
+and a.agencyid = 1
+and bgad.bookingdateid = bd.bookingdateid
+and bgad.active = true
+and bgad.status = 3 -- filled
+and bga.bookinggradeapplicantid = bgad.bookinggradeapplicantid
+and bga.active = true
+and a.applicantid = bga.applicantid
+and a.active = true
+--and a.firstname = 'Susan'
+group by 1, 2, 3, 4
+
+HAVING sum(bd.expensevalue) > 0
+
+order by 1, 2, 4
+
+    </sql>
+    <params>
+      <param name="AGENCYID" title="Agency Id" type="string"/>
+      <param name="DATEFROM" title="Date From (yyyy/mm/dd)" type="string"/>
+      <param name="DATETO" title="Date To (yyyy/mm/dd)" type="string"/>
+    </params>  
+  </query>
+
+  <query id="agencyauthorised" name="Agency Authorised/Invoiced" desc="Agency Authorised/Invoiced (based on date authorised)">
+    <sql>
+
+select 
+c.name,
+a.firstname||' '||a.lastname as applicantname,
+a.limitedcompanyname,
+
+to_char(
+case when date_part('dow', bd.bookingdate) = 0 then bd.bookingdate + interval '0 days' -- sun
+     when date_part('dow', bd.bookingdate) = 1 then bd.bookingdate + interval '6 days' -- mon
+     when date_part('dow', bd.bookingdate) = 2 then bd.bookingdate + interval '5 days' -- tue
+     when date_part('dow', bd.bookingdate) = 3 then bd.bookingdate + interval '4 days' -- wed
+     when date_part('dow', bd.bookingdate) = 4 then bd.bookingdate + interval '3 days' -- thu
+     when date_part('dow', bd.bookingdate) = 5 then bd.bookingdate + interval '2 days' -- fri
+     when date_part('dow', bd.bookingdate) = 6 then bd.bookingdate + interval '1 days' -- sat
+     else bd.bookingdate
+end 
+, 'YYYY-MM-DD')
+as weekending,
+sum( case when bdh.chargeratevalue > 0 then bdh.portionofhour else bdh.portionofhour * -1 end ) as hours,
+bdh.upliftedchargerate as chargerate,
+sum(bdh.chargeratevalue) as charge,
+bdh.upliftedpayrate + bdh.wtdrate + bdh.nirate as payerate,
+sum(bdh.payratevalue + bdh.wtdvalue + bdh.nivalue) as paye,
+bdh.upliftedwagerate as wagerate,
+sum(bdh.wageratevalue) as wage,
+sum(bdh.commissionvalue) as commission,
+round(sum(bdh.chargeratevatvalue + bdh.payratevatvalue + bdh.wtdvatvalue + bdh.nivatvalue + bdh.commissionvatvalue),2) as vat
+
+from 
+bookingdate bd,
+bookingdatehour bdh,
+booking b,
+location l, 
+site s, 
+client c,
+bookinggradeapplicantdate bgad,
+bookinggradeapplicant bga,
+applicant a
+where bd.active = true
+--and bd.bookingdate between '2007-04-30' and '2007-06-03' -- may
+--and bd.bookingdate between '2007-06-04' and '2007-07-01' -- june
+and date_trunc('day', bd.authorizedtimestamp) BETWEEN 'DATEFROM' and 'DATETO' -- truncates time from date
+and bd.status = 4 -- completed
+and bd.workedstatus in (2, 4) -- 2 = authorised 4 = invoiced
+and bdh.bookingdateid = bd.bookingdateid
+and bdh.active = true
+and b.bookingid = bd.bookingid
+and b.active = true
+and l.locationid = b.locationid
+and l.active = true
+and s.siteid = l.siteid
+and s.active = true
+and c.clientid = s.clientid
+and c.active = true
+--and c.clientid = 17
+and a.agencyid = AGENCYID
+and bgad.bookingdateid = bd.bookingdateid
+and bgad.active = true
+and bgad.status = 3 -- filled
+and bga.bookinggradeapplicantid = bgad.bookinggradeapplicantid
+and bga.active = true
+and a.applicantid = bga.applicantid
+and a.active = true
+--and a.firstname = 'Faisal'
+group by 1, 2, 3, 4, 6, 8, 10
+order by 1, 2, 4, 6 
+
+    </sql>
+    <params>
+      <param name="AGENCYID" title="Agency Id" type="string"/>
+      <param name="DATEFROM" title="Date From (yyyy/mm/dd)" type="string"/>
+      <param name="DATETO" title="Date To (yyyy/mm/dd)" type="string"/>
+    </params>  
+  </query>
+
+  <query id="agencyauthorisedexpenses" name="Agency Authorised/Invoiced Expenses" desc="Agency Authorised/Invoiced Expenses (based on date authorised)">
+    <sql>
+
+select 
+c.name,
+a.firstname||' '||a.lastname as applicantname,
+a.limitedcompanyname,
+
+to_char(
+case when date_part('dow', bd.bookingdate) = 0 then bd.bookingdate + interval '0 days' -- sun
+     when date_part('dow', bd.bookingdate) = 1 then bd.bookingdate + interval '6 days' -- mon
+     when date_part('dow', bd.bookingdate) = 2 then bd.bookingdate + interval '5 days' -- tue
+     when date_part('dow', bd.bookingdate) = 3 then bd.bookingdate + interval '4 days' -- wed
+     when date_part('dow', bd.bookingdate) = 4 then bd.bookingdate + interval '3 days' -- thu
+     when date_part('dow', bd.bookingdate) = 5 then bd.bookingdate + interval '2 days' -- fri
+     when date_part('dow', bd.bookingdate) = 6 then bd.bookingdate + interval '1 days' -- sat
+     else bd.bookingdate
+end 
+, 'YYYY-MM-DD')
+as weekending,
+sum(bd.expensevalue) as expensevalue,
+sum(bd.expensevatvalue) as expensevat
+
+from 
+bookingdate bd,
+booking b,
+location l, 
+site s, 
+client c,
+bookinggradeapplicantdate bgad,
+bookinggradeapplicant bga,
+applicant a
+where bd.active = true
+--and bd.bookingdate between '2007-04-30' and '2007-06-03' -- may
+--and bd.bookingdate between '2007-06-04' and '2007-07-01' -- june
+and date_trunc('day', bd.authorizedtimestamp) BETWEEN 'DATEFROM' and 'DATETO' -- truncates time from date
+and bd.status = 4 -- completed
+and bd.workedstatus in (2, 4) -- 2 = authorised 4 = invoiced
+and b.bookingid = bd.bookingid
+and b.active = true
+and l.locationid = b.locationid
+and l.active = true
+and s.siteid = l.siteid
+and s.active = true
+and c.clientid = s.clientid
+and c.active = true
+--and c.clientid = 17
+and a.agencyid = AGENCYID
+and bgad.bookingdateid = bd.bookingdateid
+and bgad.active = true
+and bgad.status = 3 -- filled
+and bga.bookinggradeapplicantid = bgad.bookinggradeapplicantid
+and bga.active = true
+and a.applicantid = bga.applicantid
+and a.active = true
+--and a.firstname = 'Susan'
+group by 1, 2, 3, 4
+
+HAVING sum(bd.expensevalue) > 0
+
+order by 1, 2, 4
+
+    </sql>
+    <params>
+      <param name="AGENCYID" title="Agency Id" type="string"/>
+      <param name="DATEFROM" title="Date From (yyyy/mm/dd)" type="string"/>
+      <param name="DATETO" title="Date To (yyyy/mm/dd)" type="string"/>
+    </params>  
+  </query>
+
+  <query id="bookingcount" name="Booking Count" desc="Number of Bookings">
+    <sql>
+         select count(*)
+         from booking 
+    </sql>
+  </query>
+  <query id="clients" name="Clients" desc="Clients">
+    <sql>
+		select * from client
+	</sql>
+  </query>
+    <query id="discipline" name="Discipline Category" desc="Specific Discipline Category">
+      <sql>
+        select
+          disciplinecategoryid as id,
+          name,
+          displayorder,
+          active
+        from disciplinecategory
+        where disciplinecategoryid = DISCIPLINECATEGORYID
+      </sql>
+      <params>
+        <param name="DISCIPLINECATEGORYID" title="For disciplinecategoryid" type="string"/>
+      </params>  
+    </query>
+    <query id="disciplines" name="Discipline Categories" desc="All active Discipline Categories">
+      <sql>
+        select
+          disciplinecategoryid as id,
+          name,
+          displayorder
+        from disciplinecategory
+        where active = true
+        order by 3,2
+      </sql>
+    </query>
+</queries>    

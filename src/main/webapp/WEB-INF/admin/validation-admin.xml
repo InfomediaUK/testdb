@@ -1,0 +1,1344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN" "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+
+	<formset>
+
+    <constant>
+	    <constant-name>greaterThanZero</constant-name>
+	    <constant-value>^[1-9]+[0-9]*$</constant-value>
+    </constant>
+
+		<form name="AdministratorFormAdmin">
+			<field property="administrator.user.firstName"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.firstName" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+			</field>
+			<field property="administrator.user.lastName"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.lastName" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>64</var-value>
+				</var>
+			</field>
+			<field property="administrator.user.emailAddress"
+				depends="required,minlength,maxlength,email">
+				<arg0 key="label.emailAddress" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>320</var-value>
+				</var>
+			</field>
+			<field property="administrator.user.login"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.login" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+<!-- 
+			<field property="administrator.user.pwd"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.pwd" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>6</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+      <field
+         property="confirmPwd"
+         depends="required,equal">
+         <arg0 name="required" key="label.confirmPwd"/>
+         <arg0 name="equal" key="label.confirmPwd"/>
+         <arg1 name="equal" key="label.pwd"/>
+         <var>
+           <var-name>field</var-name>
+           <var-value>administrator.user.pwd</var-value>
+         </var>
+         <var>
+           <var-name>ignoreCase</var-name>
+           <var-value>false</var-value>
+         </var>
+      </field>
+			<field property="administrator.user.pwdHint"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.pwdHint" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>100</var-value>
+				</var>
+			</field>
+-->
+		</form>
+
+		<form name="CountryFormAdmin">
+			<field property="country.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>64</var-value>
+				</var>
+			</field>
+			<field property="country.isoCode"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.isoCode" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>2</var-value>
+				</var>
+			</field>
+		</form>
+
+    <form name="EmailActionFormAdmin">
+      <field property="emailAction.name"
+        depends="required,minlength,maxlength">
+        <arg0 key="label.name" />
+        <arg1 name="minlength" key="${var:minlength}"
+          resource="false" />
+        <arg1 name="maxlength" key="${var:maxlength}"
+          resource="false" />
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>1</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>100</var-value>
+        </var>
+      </field>
+      <field property="emailAction.subject"
+        depends="required,minlength,maxlength">
+        <arg0 key="label.subject" />
+        <arg1 name="minlength" key="${var:minlength}"
+          resource="false" />
+        <arg1 name="maxlength" key="${var:maxlength}"
+          resource="false" />
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>1</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>100</var-value>
+        </var>
+      </field>
+      <field property="emailAction.textTemplate"
+        depends="required,minlength,maxlength">
+        <arg0 key="label.textTemplate" />
+        <arg1 name="minlength" key="${var:minlength}"
+          resource="false" />
+        <arg1 name="maxlength" key="${var:maxlength}"
+          resource="false" />
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>1</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>80</var-value>
+        </var>
+      </field>
+      <field property="emailAction.htmlTemplate"
+        depends="required,minlength,maxlength">
+        <arg0 key="label.htmlTemplate" />
+        <arg1 name="minlength" key="${var:minlength}"
+          resource="false" />
+        <arg1 name="maxlength" key="${var:maxlength}"
+          resource="false" />
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>1</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>80</var-value>
+        </var>
+      </field>
+    </form>
+
+		<form name="ReEnterPwdFormAdmin">
+			<field property="reEnterPwd.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="ClientFormAdmin">
+			<field property="client.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>50</var-value>
+				</var>
+			</field>
+			<field property="client.address.address1"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.address" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+			<field property="client.address.postalCode"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.postalCode" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="client.address.countryId"
+				depends="required,mask">
+				<arg0 key="label.country" />
+				<msg name="mask" key="errors.required" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>${greaterThanZero}</var-value>
+				</var>
+			</field>
+			<field property="client.code"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.code" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>30</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="SiteFormAdmin">
+			<field property="site.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>50</var-value>
+				</var>
+			</field>
+			<field property="site.address.address1"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.address" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+			<field property="site.address.postalCode"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.postalCode" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="site.address.countryId"
+				depends="required,mask">
+				<arg0 key="label.country" />
+				<msg name="mask" key="errors.required" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>${greaterThanZero}</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="ManagerFormAdmin">
+			<field property="manager.user.firstName"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.firstName" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+			</field>
+			<field property="manager.user.lastName"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.lastName" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>64</var-value>
+				</var>
+			</field>
+			<field property="manager.user.emailAddress"
+				depends="required,minlength,maxlength,email">
+				<arg0 key="label.emailAddress" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>320</var-value>
+				</var>
+			</field>
+			<field property="manager.user.login"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.login" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+<!-- 
+ 			<field property="manager.user.pwd"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.pwd" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+      <field
+         property="confirmPwd"
+         depends="required,equal">
+         <arg0 name="required" key="label.confirmPwd"/>
+         <arg0 name="equal" key="label.confirmPwd"/>
+         <arg1 name="equal" key="label.pwd"/>
+         <var>
+           <var-name>field</var-name>
+           <var-value>manager.user.pwd</var-value>
+         </var>
+         <var>
+           <var-name>ignoreCase</var-name>
+           <var-value>false</var-value>
+         </var>
+      </field>
+			<field property="manager.user.pwdHint"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.pwdHint" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>100</var-value>
+				</var>
+			</field>
+			<field property="manager.secretWord"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.secretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+-->
+		</form>
+
+		<form name="LocationFormAdmin">
+			<field property="location.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>50</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="AdminAccessFormAdmin">
+			<field property="adminAccess.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="JobFamilyFormAdmin">
+			<field property="jobFamily.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="JobSubFamilyFormAdmin">
+			<field property="jobSubFamily.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="JobProfileFormAdmin">
+			<field property="jobProfile.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+ 			<field property="jobProfile.rate"
+				depends="float">
+				<arg0 key="label.rate" />
+			</field>
+		</form>
+
+		<form name="AdminAccessGroupFormAdmin">
+			<field property="adminAccessGroup.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="ShiftFormAdmin">
+			<field property="shift.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>50</var-value>
+				</var>
+			</field>
+			<field property="shiftStartHour"
+				depends="required">
+				<arg0 key="label.startHour" />
+			</field>
+			<field property="shiftStartMinute"
+				depends="required">
+				<arg0 key="label.startMinute" />
+			</field>
+			<field property="shiftEndHour"
+				depends="required">
+				<arg0 key="label.endHour" />
+			</field>
+			<field property="shiftEndMinute"
+				depends="required">
+				<arg0 key="label.endMinute" />
+			</field>
+			<field property="shift.upliftFactor"
+				depends="required,float">
+				<arg0 key="label.upliftFactor" />
+			</field>
+			<field property="shift.upliftValue"
+				depends="required,float">
+				<arg0 key="label.upliftValue" />
+			</field>
+		</form>
+
+		<form name="AgencyFormAdmin">
+			<field property="agency.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>50</var-value>
+				</var>
+			</field>
+			<field property="agency.address.address1"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.address" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+			<field property="agency.address.postalCode"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.postalCode" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="agency.address.countryId"
+				depends="required,mask">
+				<arg0 key="label.country" />
+				<msg name="mask" key="errors.required" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>${greaterThanZero}</var-value>
+				</var>
+			</field>
+			<field property="agency.code"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.code" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>30</var-value>
+				</var>
+			</field>
+			<field property="agency.freeText"
+				depends="maxlength">
+				<arg0 key="label.freeText" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>1000</var-value>
+				</var>
+			</field>
+			<field property="agency.freeText2"
+				depends="maxlength">
+				<arg0 key="label.freeText2" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>1000</var-value>
+				</var>
+			</field>
+			<field property="agency.clientConfirmationEmailFreeText"
+				depends="maxlength">
+				<arg0 key="label.clientConfirmationEmailFreeText" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>1500</var-value>
+				</var>
+			</field>
+			<field property="agency.applicantConfirmationEmailFreeText"
+				depends="maxlength">
+				<arg0 key="label.applicantConfirmationEmailFreeText" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>1500</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="GradeFormAdmin">
+			<field property="grade.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="ReasonForRequestFormAdmin">
+			<field property="reasonForRequest.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+			<field property="reasonForRequest.code"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.code" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>30</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="ExpenseFormAdmin">
+			<field property="expense.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+			<field property="expense.code"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.code" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>30</var-value>
+				</var>
+			</field>
+			<field property="multiplierStr"
+				depends="required,float">
+				<arg0 key="label.multiplier" />
+			</field>
+			<field property="vatRateStr"
+				depends="required,float">
+				<arg0 key="label.vatRate" />
+			</field>
+		</form>
+
+		<form name="PublicHolidayFormAdmin">
+			<field property="publicHoliday.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+			<field property="phDate"
+				depends="required">
+				<arg0 key="label.date" />
+			</field>
+		</form>
+
+		<form name="UpliftFormAdmin">
+			<field property="uplift.upliftDay"
+				depends="required,integer">
+				<arg0 key="label.upliftDay" />
+			</field>
+			<field property="uplift.upliftHour"
+				depends="required,integer">
+				<arg0 key="label.upliftHour" />
+			</field>
+			<field property="uplift.upliftFactor"
+				depends="required,float">
+				<arg0 key="label.upliftFactor" />
+			</field>
+			<field property="uplift.upliftValue"
+				depends="required,float">
+				<arg0 key="label.upliftValue" />
+			</field>
+		</form>
+
+		<form name="DressCodeFormAdmin">
+			<field property="dressCode.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>100</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="MgrAccessFormAdmin">
+			<field property="mgrAccess.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="MgrAccessGroupFormAdmin">
+			<field property="mgrAccessGroup.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="ConsultantFormAdmin">
+			<field property="consultant.user.firstName"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.firstName" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>32</var-value>
+				</var>
+			</field>
+			<field property="consultant.user.lastName"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.lastName" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>64</var-value>
+				</var>
+			</field>
+			<field property="consultant.user.emailAddress"
+				depends="required,minlength,maxlength,email">
+				<arg0 key="label.emailAddress" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>320</var-value>
+				</var>
+			</field>
+			<field property="consultant.user.login"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.login" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+<!-- 
+			<field property="consultant.user.pwd"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.pwd" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+      <field
+         property="confirmPwd"
+         depends="required,equal">
+         <arg0 name="required" key="label.confirmPwd"/>
+         <arg0 name="equal" key="label.confirmPwd"/>
+         <arg1 name="equal" key="label.pwd"/>
+         <var>
+           <var-name>field</var-name>
+           <var-value>consultant.user.pwd</var-value>
+         </var>
+         <var>
+           <var-name>ignoreCase</var-name>
+           <var-value>false</var-value>
+         </var>
+      </field>
+			<field property="consultant.user.pwdHint"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.pwdHint" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>100</var-value>
+				</var>
+			</field>
+-->
+		</form>
+
+		<form name="AgyAccessFormAdmin">
+			<field property="agyAccess.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="AgyAccessGroupFormAdmin">
+			<field property="agyAccessGroup.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="BudgetTransactionFormAdmin">
+			<field property="budgetTransaction.locationJobProfileId"
+				depends="required,mask">
+				<arg0 key="label.locationJobProfile" />
+				<msg name="mask" key="errors.required" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>${greaterThanZero}</var-value>
+				</var>
+			</field>
+			<field property="budgetTransaction.comment"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.comment" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+		</form>
+
+		<form name="ChangePasswordFormAdmin">
+			<field property="oldPwd"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.oldPwd" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="newPwd"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.newPwd" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>6</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="confirmPwd"
+				depends="required,maxlength,equal">
+				<arg0 key="label.confirmPwd" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+        <arg0 name="equal" key="label.confirmPwd"/>
+        <arg1 name="equal" key="label.newPwd"/>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+        <var>
+          <var-name>field</var-name>
+          <var-value>newPwd</var-value>
+        </var>
+        <var>
+          <var-name>ignoreCase</var-name>
+          <var-value>false</var-value>
+        </var>
+			</field>
+			<field property="pwdHint"
+				depends="required,minlength,maxlength,notequal">
+				<arg0 key="label.pwdHint" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+        <arg0 name="notequal" key="label.pwdHint"/>
+        <arg1 name="notequal" key="label.newPwd"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>100</var-value>
+				</var>
+        <var>
+          <var-name>field</var-name>
+          <var-value>newPwd</var-value>
+        </var>
+        <var>
+          <var-name>ignoreCase</var-name>
+          <var-value>true</var-value>
+        </var>
+			</field>
+		</form>
+
+		<form name="ChangeSecretWordFormAdmin">
+			<field property="oldSecretWord"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.oldSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="newSecretWord"
+				depends="required,mask,minlength,maxlength">
+        <msg name="mask" key="errors.secretWord"/>
+				<arg0 key="label.newSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+		    <var>
+		        <var-name>mask</var-name>
+		        <var-value>^(?=.*[0-9])(?=.*[a-zA-Z]).{8,20}$</var-value>
+<!-- 
+ 		        <var-value>^[a-zA-Z0-9]*$</var-value>
+-->
+		    </var>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="confirmSecretWord"
+				depends="required,minlength,maxlength,equal">
+				<arg0 key="label.confirmSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+        <arg0 name="equal" key="label.confirmSecretWord"/>
+        <arg1 name="equal" key="label.newSecretWord"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+        <var>
+          <var-name>field</var-name>
+          <var-value>newSecretWord</var-value>
+        </var>
+        <var>
+          <var-name>ignoreCase</var-name>
+          <var-value>false</var-value>
+        </var>
+			</field>
+		</form>
+
+		<form name="ReEnterPwdFormAdmin">
+			<field property="pwd"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.pwd" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+    </form>
+
+	</formset>
+</form-validation>

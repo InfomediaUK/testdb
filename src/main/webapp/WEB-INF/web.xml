@@ -40,6 +40,114 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <filter>
+    <filter-name>AdminLoginFilter</filter-name>
+    <filter-class>com.helmet.application.admin.filter.LoginFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/adminLogin.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>AdminSecretWordFilter</filter-name>
+    <filter-class>com.helmet.application.admin.filter.SecretWordFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/adminSecretWord.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>AdminCheckPwdFilter</filter-name>
+    <filter-class>com.helmet.application.admin.filter.CheckPwdFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/admin/changePassword.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern1</param-name>
+      <param-value>/admin/changeSecretWord.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern2</param-name>
+      <param-value>/admin/site.css</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern3</param-name>
+      <param-value>/admin/site.js</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern4</param-name>
+      <param-value>/admin/images/trans.gif</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern5</param-name>
+      <param-value>/admin/changePasswordProcess.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern6</param-name>
+      <param-value>/admin/changeSecretWordProcess.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern7</param-name>
+      <param-value>/admin/changeSecretWordProcess2.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>AdminCheckSecretWordFilter</filter-name>
+    <filter-class>com.helmet.application.admin.filter.CheckSecretWordFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/admin/changeSecretWord.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern1</param-name>
+      <param-value>/admin/changePassword.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern2</param-name>
+      <param-value>/admin/site.css</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern3</param-name>
+      <param-value>/admin/site.js</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern4</param-name>
+      <param-value>/admin/images/trans.gif</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern5</param-name>
+      <param-value>/admin/changeSecretWordProcess.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern6</param-name>
+      <param-value>/admin/changeSecretWordProcess2.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern7</param-name>
+      <param-value>/admin/changePasswordProcess.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>AdminAccessFilter</filter-name>
+    <filter-class>com.helmet.application.admin.filter.AccessFilter</filter-class>
+    <init-param>
+      <param-name>urlPattern</param-name>
+      <param-value>/admin</param-value>
+    </init-param>
+    <init-param>
+      <param-name>accessDeniedPage</param-name>
+      <param-value>/admin/accessDenied.jsp</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>AdminPwdFilter</filter-name>
+    <filter-class>com.helmet.application.admin.filter.PwdFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/admin/reEnterPwd.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
     <filter-name>AgyLoginFilter</filter-name>
     <filter-class>com.helmet.application.agy.filter.LoginFilter</filter-class>
     <init-param>
@@ -156,6 +264,30 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
+    <filter-name>AdminLoginFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AdminLoginFilter</filter-name>
+    <url-pattern>/adminSecretWord.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AdminSecretWordFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AdminAccessFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AdminCheckPwdFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AdminCheckSecretWordFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
     <filter-name>AgyLoginFilter</filter-name>
     <url-pattern>/agy/*</url-pattern>
   </filter-mapping>
@@ -204,6 +336,10 @@
     <init-param>
       <param-name>config</param-name>
       <param-value>/WEB-INF/struts-config-mmj.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>config/admin</param-name>
+      <param-value>/WEB-INF/admin/struts-config-admin.xml</param-value>
     </init-param>
     <init-param>
       <param-name>config/agy</param-name>
@@ -270,6 +406,10 @@
     <taglib>
       <taglib-uri>/mmj</taglib-uri>
       <taglib-location>/WEB-INF/tld/mmj.tld</taglib-location>
+    </taglib>
+    <taglib>
+      <taglib-uri>/mmj-admin</taglib-uri>
+      <taglib-location>/WEB-INF/tld/mmj-admin.tld</taglib-location>
     </taglib>
     <taglib>
       <taglib-uri>/mmj-agy</taglib-uri>

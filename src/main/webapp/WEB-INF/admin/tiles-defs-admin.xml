@@ -1,0 +1,782 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+"http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+
+<tiles-definitions>
+  <definition name="layoutAdmin.main" path="/admin/layoutAdminMain.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="blah admin description"/>
+        <put name="keywords"  value="blah, admin, keywords"/>
+        <put name="header" value="/admin/header.jsp"/>
+        <put name="body"   value=""/>
+        <put name="footer" value="/admin/footer.jsp" />
+        <put name="includeZapatec" value="false" type="string"/>
+  </definition>
+
+  <definition name="layoutAdminZapatec.mainX" path="/admin/layoutAdminMainZapatec.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="blah admin description"/>
+        <put name="keywords"  value="blah, admin, keywords"/>
+        <put name="header" value="/admin/header.jsp"/>
+        <put name="body"   value=""/>
+        <put name="footer" value="/admin/footer.jsp" />
+  </definition>
+
+  <definition name="layoutAdmin.mainX" path="/admin/layoutAdminMain2.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="blah admin description"/>
+        <put name="keywords"  value="blah, admin, keywords"/>
+        <put name="header" value="/admin/header2.jsp"/>
+        <put name="body"   value=""/>
+        <put name="footer" value="/admin/footer.jsp" />
+  </definition>
+
+  <definition name="homeAdmin.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.home" type="string"/>
+        <put name="body"   value="/admin/home.jsp"/>
+  </definition>
+
+  <!-- Administrator -->
+  <definition name="clientUpload.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientUpload" type="string"/>
+        <put name="body"   value="/admin/clientUpload.jsp"/>
+  </definition>
+  <definition name="clientUploadProcessed.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientUploadProcessed" type="string"/>
+        <put name="body"   value="/admin/clientUploadProcessed.jsp"/>
+  </definition>
+  <definition name="administratorList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.administratorList" type="string"/>
+        <put name="body"   value="/admin/administratorList.jsp"/>
+  </definition>
+  <definition name="administratorNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.administratorNew" type="string"/>
+        <put name="body"   value="/admin/administratorNew.jsp"/>
+  </definition>
+  <definition name="administratorView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.administratorView" type="string"/>
+        <put name="body"   value="/admin/administratorView.jsp"/>
+  </definition>
+  <definition name="administratorEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.administratorEdit" type="string"/>
+        <put name="body"   value="/admin/administratorEdit.jsp"/>
+  </definition>
+  <definition name="administratorDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.administratorDelete" type="string"/>
+        <put name="body"   value="/admin/administratorDelete.jsp"/>
+  </definition>
+  <definition name="administratorAudits.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.administratorAudits" type="string"/>
+        <put name="body"   value="/admin/administratorAudits.jsp"/>
+  </definition>
+  <!-- AdminAccess -->
+  <definition name="adminAccessList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessList" type="string"/>
+        <put name="body"   value="/admin/adminAccessList.jsp"/>
+  </definition>
+  <definition name="adminAccessNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessNew" type="string"/>
+        <put name="body"   value="/admin/adminAccessNew.jsp"/>
+  </definition>
+  <definition name="adminAccessView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessView" type="string"/>
+        <put name="body"   value="/admin/adminAccessView.jsp"/>
+  </definition>
+  <definition name="adminAccessEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessEdit" type="string"/>
+        <put name="body"   value="/admin/adminAccessEdit.jsp"/>
+  </definition>
+  <definition name="adminAccessDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessDelete" type="string"/>
+        <put name="body"   value="/admin/adminAccessDelete.jsp"/>
+  </definition>
+  <!-- AdminAccessGroup -->
+  <definition name="adminAccessGroupList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessGroupList" type="string"/>
+        <put name="body"   value="/admin/adminAccessGroupList.jsp"/>
+  </definition>
+  <definition name="adminAccessGroupNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessGroupNew" type="string"/>
+        <put name="body"   value="/admin/adminAccessGroupNew.jsp"/>
+  </definition>
+  <definition name="adminAccessGroupView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessGroupView" type="string"/>
+        <put name="body"   value="/admin/adminAccessGroupView.jsp"/>
+  </definition>
+  <definition name="adminAccessGroupEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessGroupEdit" type="string"/>
+        <put name="body"   value="/admin/adminAccessGroupEdit.jsp"/>
+  </definition>
+  <definition name="adminAccessGroupDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.adminAccessGroupDelete" type="string"/>
+        <put name="body"   value="/admin/adminAccessGroupDelete.jsp"/>
+  </definition>
+  <!-- Country -->
+  <definition name="countryList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.countryList" type="string"/>
+        <put name="body"   value="/admin/countryList.jsp"/>
+  </definition>
+  <definition name="countryNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.countryNew" type="string"/>
+        <put name="body"   value="/admin/countryNew.jsp"/>
+  </definition>
+  <definition name="countryView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.countryView" type="string"/>
+        <put name="body"   value="/admin/countryView.jsp"/>
+  </definition>
+  <definition name="countryEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.countryEdit" type="string"/>
+        <put name="body"   value="/admin/countryEdit.jsp"/>
+  </definition>
+  <definition name="countryDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.countryDelete" type="string"/>
+        <put name="body"   value="/admin/countryDelete.jsp"/>
+  </definition>
+  <!-- EmailAction -->
+  <definition name="emailActionList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.emailActionList" type="string"/>
+        <put name="body"   value="/admin/emailActionList.jsp"/>
+  </definition>
+  <definition name="emailActionNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.emailActionNew" type="string"/>
+        <put name="body"   value="/admin/emailActionNew.jsp"/>
+  </definition>
+  <definition name="emailActionView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.emailActionView" type="string"/>
+        <put name="body"   value="/admin/emailActionView.jsp"/>
+  </definition>
+  <definition name="emailActionEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.emailActionEdit" type="string"/>
+        <put name="body"   value="/admin/emailActionEdit.jsp"/>
+  </definition>
+  <definition name="emailActionDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.emailActionDelete" type="string"/>
+        <put name="body"   value="/admin/emailActionDelete.jsp"/>
+  </definition>
+  <!-- DisciplineCategory -->
+  <definition name="disciplineCategoryList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.disciplineCategoryList" type="string"/>
+        <put name="body"   value="/admin/disciplineCategoryList.jsp"/>
+  </definition>
+  <definition name="disciplineCategoryNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.disciplineCategoryNew" type="string"/>
+        <put name="body"   value="/admin/disciplineCategoryNew.jsp"/>
+  </definition>
+  <definition name="disciplineCategoryView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.disciplineCategoryView" type="string"/>
+        <put name="body"   value="/admin/disciplineCategoryView.jsp"/>
+  </definition>
+  <definition name="disciplineCategoryEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.disciplineCategoryEdit" type="string"/>
+        <put name="body"   value="/admin/disciplineCategoryEdit.jsp"/>
+  </definition>
+  <definition name="disciplineCategoryDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.disciplineCategoryDelete" type="string"/>
+        <put name="body"   value="/admin/disciplineCategoryDelete.jsp"/>
+  </definition>
+  <!-- PassportType -->
+  <definition name="passportTypeList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.passportTypeList" type="string"/>
+        <put name="body"   value="/admin/passportTypeList.jsp"/>
+  </definition>
+  <definition name="passportTypeNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.passportTypeNew" type="string"/>
+        <put name="body"   value="/admin/passportTypeNew.jsp"/>
+  </definition>
+  <definition name="passportTypeView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.passportTypeView" type="string"/>
+        <put name="body"   value="/admin/passportTypeView.jsp"/>
+  </definition>
+  <definition name="passportTypeEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.passportTypeEdit" type="string"/>
+        <put name="body"   value="/admin/passportTypeEdit.jsp"/>
+  </definition>
+  <definition name="passportTypeDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.passportTypeDelete" type="string"/>
+        <put name="body"   value="/admin/passportTypeDelete.jsp"/>
+  </definition>
+  <!-- VisaType -->
+  <definition name="visaTypeList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.visaTypeList" type="string"/>
+        <put name="body"   value="/admin/visaTypeList.jsp"/>
+  </definition>
+  <definition name="visaTypeNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.visaTypeNew" type="string"/>
+        <put name="body"   value="/admin/visaTypeNew.jsp"/>
+  </definition>
+  <definition name="visaTypeView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.visaTypeView" type="string"/>
+        <put name="body"   value="/admin/visaTypeView.jsp"/>
+  </definition>
+  <definition name="visaTypeEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.visaTypeEdit" type="string"/>
+        <put name="body"   value="/admin/visaTypeEdit.jsp"/>
+  </definition>
+  <definition name="visaTypeDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.visaTypeDelete" type="string"/>
+        <put name="body"   value="/admin/visaTypeDelete.jsp"/>
+  </definition>
+  <!-- ReEnterPwd -->
+  <definition name="reEnterPwdList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reEnterPwdList" type="string"/>
+        <put name="body"   value="/admin/reEnterPwdList.jsp"/>
+  </definition>
+  <definition name="reEnterPwdNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reEnterPwdNew" type="string"/>
+        <put name="body"   value="/admin/reEnterPwdNew.jsp"/>
+  </definition>
+  <definition name="reEnterPwdView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reEnterPwdView" type="string"/>
+        <put name="body"   value="/admin/reEnterPwdView.jsp"/>
+  </definition>
+  <definition name="reEnterPwdEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reEnterPwdEdit" type="string"/>
+        <put name="body"   value="/admin/reEnterPwdEdit.jsp"/>
+  </definition>
+  <definition name="reEnterPwdDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reEnterPwdDelete" type="string"/>
+        <put name="body"   value="/admin/reEnterPwdDelete.jsp"/>
+  </definition>
+  <definition name="jobFamilyNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobFamilyNew" type="string"/>
+        <put name="body"   value="/admin/jobFamilyNew.jsp"/>
+  </definition>
+  <definition name="jobFamilyView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobFamilyView" type="string"/>
+        <put name="body"   value="/admin/jobFamilyView.jsp"/>
+  </definition>
+  <definition name="jobFamilyEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobFamilyEdit" type="string"/>
+        <put name="body"   value="/admin/jobFamilyEdit.jsp"/>
+  </definition>
+  <definition name="jobFamilyDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobFamilyDelete" type="string"/>
+        <put name="body"   value="/admin/jobFamilyDelete.jsp"/>
+  </definition>
+  <definition name="jobFamilyOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobFamilyOrder" type="string"/>
+        <put name="body"   value="/admin/jobFamilyOrder.jsp"/>
+  </definition>
+  <!-- JobSubFamily -->
+  <definition name="jobSubFamilyNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobSubFamilyNew" type="string"/>
+        <put name="body"   value="/admin/jobSubFamilyNew.jsp"/>
+  </definition>
+  <definition name="jobSubFamilyView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobSubFamilyView" type="string"/>
+        <put name="body"   value="/admin/jobSubFamilyView.jsp"/>
+  </definition>
+  <definition name="jobSubFamilyEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobSubFamilyEdit" type="string"/>
+        <put name="body"   value="/admin/jobSubFamilyEdit.jsp"/>
+  </definition>
+  <definition name="jobSubFamilyDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobSubFamilyDelete" type="string"/>
+        <put name="body"   value="/admin/jobSubFamilyDelete.jsp"/>
+  </definition>
+  <definition name="jobSubFamilyOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobSubFamilyOrder" type="string"/>
+        <put name="body"   value="/admin/jobSubFamilyOrder.jsp"/>
+  </definition>
+  <!-- JobProfile -->
+  <definition name="jobProfileNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobProfileNew" type="string"/>
+        <put name="body"   value="/admin/jobProfileNew.jsp"/>
+  </definition>
+  <definition name="jobProfileView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobProfileView" type="string"/>
+        <put name="body"   value="/admin/jobProfileView.jsp"/>
+  </definition>
+  <definition name="jobProfileEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobProfileEdit" type="string"/>
+        <put name="body"   value="/admin/jobProfileEdit.jsp"/>
+  </definition>
+  <definition name="jobProfileDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobProfileDelete" type="string"/>
+        <put name="body"   value="/admin/jobProfileDelete.jsp"/>
+  </definition>
+  <definition name="jobProfileOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.jobProfileOrder" type="string"/>
+        <put name="body"   value="/admin/jobProfileOrder.jsp"/>
+  </definition>
+  <!-- Client -->
+  <definition name="clientList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientList" type="string"/>
+        <put name="body"   value="/admin/clientList.jsp"/>
+  </definition>
+  <definition name="clientNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientNew" type="string"/>
+        <put name="body"   value="/admin/clientNew.jsp"/>
+  </definition>
+  <definition name="clientView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientView" type="string"/>
+        <put name="body"   value="/admin/clientView.jsp"/>
+  </definition>
+  <definition name="clientEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientEdit" type="string"/>
+        <put name="body"   value="/admin/clientEdit.jsp"/>
+  </definition>
+  <definition name="clientDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientDelete" type="string"/>
+        <put name="body"   value="/admin/clientDelete.jsp"/>
+  </definition>
+  <definition name="clientOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientOrder" type="string"/>
+        <put name="body"   value="/admin/clientOrder.jsp"/>
+  </definition>
+  <!-- Site -->
+  <definition name="siteNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.siteNew" type="string"/>
+        <put name="body"   value="/admin/siteNew.jsp"/>
+  </definition>
+  <definition name="siteView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.siteView" type="string"/>
+        <put name="body"   value="/admin/siteView.jsp"/>
+  </definition>
+  <definition name="siteEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.siteEdit" type="string"/>
+        <put name="body"   value="/admin/siteEdit.jsp"/>
+  </definition>
+  <definition name="siteDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.siteDelete" type="string"/>
+        <put name="body"   value="/admin/siteDelete.jsp"/>
+  </definition>
+  <definition name="siteOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.siteOrder" type="string"/>
+        <put name="body"   value="/admin/siteOrder.jsp"/>
+  </definition>
+  <!-- Manager -->
+  <definition name="managerNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.managerNew" type="string"/>
+        <put name="body"   value="/admin/managerNew.jsp"/>
+  </definition>
+  <definition name="managerView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.managerView" type="string"/>
+        <put name="body"   value="/admin/managerView.jsp"/>
+  </definition>
+  <definition name="managerEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.managerEdit" type="string"/>
+        <put name="body"   value="/admin/managerEdit.jsp"/>
+  </definition>
+  <definition name="managerDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.managerDelete" type="string"/>
+        <put name="body"   value="/admin/managerDelete.jsp"/>
+  </definition>
+  <definition name="managerResetPwd.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.managerResetPwd" type="string"/>
+        <put name="body"   value="/admin/managerResetPwd.jsp"/>
+  </definition>
+  <definition name="managerResetSecretWord.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.managerResetSecretWord" type="string"/>
+        <put name="body"   value="/admin/managerResetSecretWord.jsp"/>
+  </definition>
+  <!-- Location -->
+  <definition name="locationNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.locationNew" type="string"/>
+        <put name="body"   value="/admin/locationNew.jsp"/>
+  </definition>
+  <definition name="locationView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.locationView" type="string"/>
+        <put name="body"   value="/admin/locationView.jsp"/>
+  </definition>
+  <definition name="locationEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.locationEdit" type="string"/>
+        <put name="body"   value="/admin/locationEdit.jsp"/>
+  </definition>
+  <definition name="locationDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.locationDelete" type="string"/>
+        <put name="body"   value="/admin/locationDelete.jsp"/>
+  </definition>
+  <definition name="locationOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.locationOrder" type="string"/>
+        <put name="body"   value="/admin/locationOrder.jsp"/>
+  </definition>
+  <!-- Grade -->
+  <definition name="gradeNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.gradeNew" type="string"/>
+        <put name="body"   value="/admin/gradeNew.jsp"/>
+  </definition>
+  <definition name="gradeView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.gradeView" type="string"/>
+        <put name="body"   value="/admin/gradeView.jsp"/>
+  </definition>
+  <definition name="gradeEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.gradeEdit" type="string"/>
+        <put name="body"   value="/admin/gradeEdit.jsp"/>
+  </definition>
+  <definition name="gradeDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.gradeDelete" type="string"/>
+        <put name="body"   value="/admin/gradeDelete.jsp"/>
+  </definition>
+  <definition name="gradeOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.gradeOrder" type="string"/>
+        <put name="body"   value="/admin/gradeOrder.jsp"/>
+  </definition>
+  <!-- Shift -->
+  <definition name="shiftNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.shiftNew" type="string"/>
+        <put name="body"   value="/admin/shiftNew.jsp"/>
+  </definition>
+  <definition name="shiftView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.shiftView" type="string"/>
+        <put name="body"   value="/admin/shiftView.jsp"/>
+  </definition>
+  <definition name="shiftEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.shiftEdit" type="string"/>
+        <put name="body"   value="/admin/shiftEdit.jsp"/>
+  </definition>
+  <definition name="shiftDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.shiftDelete" type="string"/>
+        <put name="body"   value="/admin/shiftDelete.jsp"/>
+  </definition>
+  <definition name="shiftOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.shiftOrder" type="string"/>
+        <put name="body"   value="/admin/shiftOrder.jsp"/>
+  </definition>
+  <!-- Agency -->
+  <definition name="agencyList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyList" type="string"/>
+        <put name="body"   value="/admin/agencyList.jsp"/>
+  </definition>
+  <definition name="agencyNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyNew" type="string"/>
+        <put name="body"   value="/admin/agencyNew.jsp"/>
+  </definition>
+  <definition name="agencyView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyView" type="string"/>
+        <put name="body"   value="/admin/agencyView.jsp"/>
+  </definition>
+  <definition name="agencyEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyEdit" type="string"/>
+        <put name="body"   value="/admin/agencyEdit.jsp"/>
+  </definition>
+  <definition name="agencyDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyDelete" type="string"/>
+        <put name="body"   value="/admin/agencyDelete.jsp"/>
+  </definition>
+  <definition name="agencyOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyOrder" type="string"/>
+        <put name="body"   value="/admin/agencyOrder.jsp"/>
+  </definition>
+  <definition name="clientAgencyJobProfileView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientAgencyJobProfileView" type="string"/>
+        <put name="body"   value="/admin/clientAgencyJobProfileView.jsp"/>
+  </definition>
+  <definition name="clientAgencyJobProfileEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientAgencyJobProfileEdit" type="string"/>
+        <put name="body"   value="/admin/clientAgencyJobProfileEdit.jsp"/>
+  </definition>
+  <definition name="clientAgencyView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientAgencyView" type="string"/>
+        <put name="body"   value="/admin/clientAgencyView.jsp"/>
+  </definition>
+  <definition name="clientAgencyEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientAgencyEdit" type="string"/>
+        <put name="body"   value="/admin/clientAgencyEdit.jsp"/>
+  </definition>
+  <definition name="clientAgencyGradeView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientAgencyGradeView" type="string"/>
+        <put name="body"   value="/admin/clientAgencyGradeView.jsp"/>
+  </definition>
+  <definition name="clientAgencyGradeEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientAgencyGradeEdit" type="string"/>
+        <put name="body"   value="/admin/clientAgencyGradeEdit.jsp"/>
+  </definition>
+  <!-- ReasonForRequest -->
+  <definition name="reasonForRequestNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reasonForRequestNew" type="string"/>
+        <put name="body"   value="/admin/reasonForRequestNew.jsp"/>
+  </definition>
+  <definition name="reasonForRequestView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reasonForRequestView" type="string"/>
+        <put name="body"   value="/admin/reasonForRequestView.jsp"/>
+  </definition>
+  <definition name="reasonForRequestEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reasonForRequestEdit" type="string"/>
+        <put name="body"   value="/admin/reasonForRequestEdit.jsp"/>
+  </definition>
+  <definition name="reasonForRequestDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reasonForRequestDelete" type="string"/>
+        <put name="body"   value="/admin/reasonForRequestDelete.jsp"/>
+  </definition>
+  <definition name="reasonForRequestOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reasonForRequestOrder" type="string"/>
+        <put name="body"   value="/admin/reasonForRequestOrder.jsp"/>
+  </definition>
+  <!-- Expense -->
+  <definition name="expenseNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.expenseNew" type="string"/>
+        <put name="body"   value="/admin/expenseNew.jsp"/>
+  </definition>
+  <definition name="expenseView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.expenseView" type="string"/>
+        <put name="body"   value="/admin/expenseView.jsp"/>
+  </definition>
+  <definition name="expenseEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.expenseEdit" type="string"/>
+        <put name="body"   value="/admin/expenseEdit.jsp"/>
+  </definition>
+  <definition name="expenseDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.expenseDelete" type="string"/>
+        <put name="body"   value="/admin/expenseDelete.jsp"/>
+  </definition>
+  <definition name="expenseOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.expenseOrder" type="string"/>
+        <put name="body"   value="/admin/expenseOrder.jsp"/>
+  </definition>
+  <!-- PublicHoliday -->
+  <definition name="publicHolidayNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.publicHolidayNew" type="string"/>
+        <put name="body"   value="/admin/publicHolidayNew.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="publicHolidayView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.publicHolidayView" type="string"/>
+        <put name="body"   value="/admin/publicHolidayView.jsp"/>
+  </definition>
+  <definition name="publicHolidayEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.publicHolidayEdit" type="string"/>
+        <put name="body"   value="/admin/publicHolidayEdit.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="publicHolidayDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.publicHolidayDelete" type="string"/>
+        <put name="body"   value="/admin/publicHolidayDelete.jsp"/>
+  </definition>
+  <!-- Uplift -->
+  <definition name="upliftList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.upliftList" type="string"/>
+        <put name="body"   value="/admin/upliftList.jsp"/>
+  </definition>
+  <definition name="upliftNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.upliftNew" type="string"/>
+        <put name="body"   value="/admin/upliftNew.jsp"/>
+  </definition>
+  <definition name="upliftView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.upliftView" type="string"/>
+        <put name="body"   value="/admin/upliftView.jsp"/>
+  </definition>
+  <definition name="upliftEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.upliftEdit" type="string"/>
+        <put name="body"   value="/admin/upliftEdit.jsp"/>
+  </definition>
+  <definition name="upliftDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.upliftDelete" type="string"/>
+        <put name="body"   value="/admin/upliftDelete.jsp"/>
+  </definition>
+  <definition name="upliftMinutesEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.upliftMinutesEdit" type="string"/>
+        <put name="body"   value="/admin/upliftMinutesEdit.jsp"/>
+  </definition>
+  <definition name="clientAgencyJobProfileGradeView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientAgencyJobProfileGradeView" type="string"/>
+        <put name="body"   value="/admin/clientAgencyJobProfileGradeView.jsp"/>
+  </definition>
+  <definition name="clientAgencyJobProfileGradeEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.clientAgencyJobProfileGradeEdit" type="string"/>
+        <put name="body"   value="/admin/clientAgencyJobProfileGradeEdit.jsp"/>
+  </definition>
+  <!-- DressCode -->
+  <definition name="dressCodeNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.dressCodeNew" type="string"/>
+        <put name="body"   value="/admin/dressCodeNew.jsp"/>
+  </definition>
+  <definition name="dressCodeView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.dressCodeView" type="string"/>
+        <put name="body"   value="/admin/dressCodeView.jsp"/>
+  </definition>
+  <definition name="dressCodeEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.dressCodeEdit" type="string"/>
+        <put name="body"   value="/admin/dressCodeEdit.jsp"/>
+  </definition>
+  <definition name="dressCodeDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.dressCodeDelete" type="string"/>
+        <put name="body"   value="/admin/dressCodeDelete.jsp"/>
+  </definition>
+  <definition name="dressCodeOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.dressCodeOrder" type="string"/>
+        <put name="body"   value="/admin/dressCodeOrder.jsp"/>
+  </definition>
+  <!-- MgrAccess -->
+  <definition name="mgrAccessList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessList" type="string"/>
+        <put name="body"   value="/admin/mgrAccessList.jsp"/>
+  </definition>
+  <definition name="mgrAccessNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessNew" type="string"/>
+        <put name="body"   value="/admin/mgrAccessNew.jsp"/>
+  </definition>
+  <definition name="mgrAccessView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessView" type="string"/>
+        <put name="body"   value="/admin/mgrAccessView.jsp"/>
+  </definition>
+  <definition name="mgrAccessEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessEdit" type="string"/>
+        <put name="body"   value="/admin/mgrAccessEdit.jsp"/>
+  </definition>
+  <definition name="mgrAccessDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessDelete" type="string"/>
+        <put name="body"   value="/admin/mgrAccessDelete.jsp"/>
+  </definition>
+  <!-- MgrAccessGroup -->
+  <definition name="mgrAccessGroupList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessGroupList" type="string"/>
+        <put name="body"   value="/admin/mgrAccessGroupList.jsp"/>
+  </definition>
+  <definition name="mgrAccessGroupNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessGroupNew" type="string"/>
+        <put name="body"   value="/admin/mgrAccessGroupNew.jsp"/>
+  </definition>
+  <definition name="mgrAccessGroupView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessGroupView" type="string"/>
+        <put name="body"   value="/admin/mgrAccessGroupView.jsp"/>
+  </definition>
+  <definition name="mgrAccessGroupEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessGroupEdit" type="string"/>
+        <put name="body"   value="/admin/mgrAccessGroupEdit.jsp"/>
+  </definition>
+  <definition name="mgrAccessGroupDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.mgrAccessGroupDelete" type="string"/>
+        <put name="body"   value="/admin/mgrAccessGroupDelete.jsp"/>
+  </definition>
+  <!-- Consultant -->
+  <definition name="consultantNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.consultantNew" type="string"/>
+        <put name="body"   value="/admin/consultantNew.jsp"/>
+  </definition>
+  <definition name="consultantView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.consultantView" type="string"/>
+        <put name="body"   value="/admin/consultantView.jsp"/>
+  </definition>
+  <definition name="consultantEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.consultantEdit" type="string"/>
+        <put name="body"   value="/admin/consultantEdit.jsp"/>
+  </definition>
+  <definition name="consultantDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.consultantDelete" type="string"/>
+        <put name="body"   value="/admin/consultantDelete.jsp"/>
+  </definition>
+  <!-- AgyAccess -->
+  <definition name="agyAccessList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessList" type="string"/>
+        <put name="body"   value="/admin/agyAccessList.jsp"/>
+  </definition>
+  <definition name="agyAccessNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessNew" type="string"/>
+        <put name="body"   value="/admin/agyAccessNew.jsp"/>
+  </definition>
+  <definition name="agyAccessView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessView" type="string"/>
+        <put name="body"   value="/admin/agyAccessView.jsp"/>
+  </definition>
+  <definition name="agyAccessEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessEdit" type="string"/>
+        <put name="body"   value="/admin/agyAccessEdit.jsp"/>
+  </definition>
+  <definition name="agyAccessDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessDelete" type="string"/>
+        <put name="body"   value="/admin/agyAccessDelete.jsp"/>
+  </definition>
+  <!-- AgyAccessGroup -->
+  <definition name="agyAccessGroupList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessGroupList" type="string"/>
+        <put name="body"   value="/admin/agyAccessGroupList.jsp"/>
+  </definition>
+  <definition name="agyAccessGroupNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessGroupNew" type="string"/>
+        <put name="body"   value="/admin/agyAccessGroupNew.jsp"/>
+  </definition>
+  <definition name="agyAccessGroupView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessGroupView" type="string"/>
+        <put name="body"   value="/admin/agyAccessGroupView.jsp"/>
+  </definition>
+  <definition name="agyAccessGroupEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessGroupEdit" type="string"/>
+        <put name="body"   value="/admin/agyAccessGroupEdit.jsp"/>
+  </definition>
+  <definition name="agyAccessGroupDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agyAccessGroupDelete" type="string"/>
+        <put name="body"   value="/admin/agyAccessGroupDelete.jsp"/>
+  </definition>
+  <!-- Budget Transaction -->
+  <definition name="budgetTransactionList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.budgetTransactionList" type="string"/>
+        <put name="body"   value="/admin/budgetTransactionList.jsp"/>
+  </definition>
+  <definition name="budgetTransactionNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.budgetTransactionNew" type="string"/>
+        <put name="body"   value="/admin/budgetTransactionNew.jsp"/>
+  </definition>
+  <definition name="locationJobProfileView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.locationJobProfileView" type="string"/>
+        <put name="body"   value="/admin/locationJobProfileView.jsp"/>
+  </definition>
+  <definition name="locationJobProfileEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.locationJobProfileEdit" type="string"/>
+        <put name="body"   value="/admin/locationJobProfileEdit.jsp"/>
+  </definition>
+  <definition name="consultantResetPwd.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.consultantResetPwd" type="string"/>
+        <put name="body"   value="/admin/consultantResetPwd.jsp"/>
+  </definition>
+  <definition name="consultantResetSecretWord.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.consultantResetSecretWord" type="string"/>
+        <put name="body"   value="/admin/consultantResetSecretWord.jsp"/>
+  </definition>
+  <definition name="administratorResetPwd.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.administratorResetPwd" type="string"/>
+        <put name="body"   value="/admin/administratorResetPwd.jsp"/>
+  </definition>
+  <definition name="administratorResetSecretWord.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.administratorResetSecretWord" type="string"/>
+        <put name="body"   value="/admin/administratorResetSecretWord.jsp"/>
+  </definition>
+  
+  <!-- Shift Search -->
+  <definition name="shiftSearch.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.shiftSearch" type="string"/>
+        <put name="body"   value="/admin/shiftSearch.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="shiftSearchResults.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.shiftSearchResults" type="string"/>
+        <put name="body"   value="/admin/shiftSearchResults.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+
+  <definition name="queries.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.queries" type="string"/>
+        <put name="body"   value="/admin/queries.jsp"/>
+  </definition>
+  <definition name="query.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.query" type="string"/>
+        <put name="body"   value="/admin/query.jsp"/>
+  </definition>
+
+  <definition name="changePassword.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.changePassword" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.changePassword" type="string"/>
+        <put name="body"   value="/admin/changePassword.jsp"/>
+  </definition>
+  <definition name="changeSecretWord.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.changeSecretWord" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.changeSecretWord" type="string"/>
+        <put name="body"   value="/admin/changeSecretWord.jsp"/>
+  </definition>
+  <definition name="reEnterPwd.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.reEnterPwd" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reEnterPwd" type="string"/>
+        <put name="body"   value="/admin/reEnterPwd.jsp"/>
+  </definition>
+  <definition name="agencyApplicantCopy.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyApplicantCopy" type="string"/>
+        <put name="body"   value="/admin/agencyApplicantCopy.jsp"/>
+  </definition>
+  <definition name="agencyApplicantCopySelect.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyApplicantCopySelect" type="string"/>
+        <put name="body"   value="/admin/agencyApplicantCopySelect.jsp"/>
+  </definition>
+
+</tiles-definitions>

@@ -1,0 +1,83 @@
+body {color:#000; background:#fff; font:70% verdana,tahoma,helvetica,sans-serif; margin:10px; padding:0px}
+
+img {border:0}
+
+input {color:#000;
+       font:100% verdana,tahoma,helvetica,sans-serif; 
+       padding:0px}
+
+select {color:#000;
+        font:100% verdana,tahoma,helvetica,sans-serif; 
+        padding:0px}
+
+textarea {color:#000;
+        font:100% verdana,tahoma,helvetica,sans-serif; 
+        padding:0px}
+
+.label {font-weight: bold;}
+	
+pre {color:#000;
+       font:100% verdana,tahoma,helvetica,sans-serif; 
+       padding:0px}
+ 
+button {color:#000;
+       font:100% verdana,tahoma,helvetica,sans-serif; 
+       padding:0px}
+
+table.list thead tr {
+	background-color: #ddd;
+}
+table.list tr.even {
+	background-color: #eee;
+}
+
+table.list tr.odd {
+	background-color: #fff;
+}
+
+table.list th {
+	background-color: #dff;
+	text-align:left;	
+}
+
+table.list tr.client {
+	background-color: #fff;
+	font-weight: normal;
+}
+table.list tr.site {
+	background-color: #fff;
+}
+table.list tr.manager {
+	background-color: #fff;
+}
+
+
+
+table.simple thead tr th {
+	background-color: #f0f0f0;
+}
+
+table.simple tr th {
+	background-color: #f0f0f0;
+}
+
+table.simple {
+	border: 1px solid #e0e0e0;
+	border-collapse: collapse;
+}
+
+table.simple td,table.simple th {
+/* background-color:#ffffff; */
+	border: 1px solid #e0e0e0;
+	padding-left:2px;
+	padding-right:2px;
+}
+
+td.inactive {
+	background-color: #808080;
+}
+
+.widebutton {
+  width: 200px;
+  height: 23px;
+}

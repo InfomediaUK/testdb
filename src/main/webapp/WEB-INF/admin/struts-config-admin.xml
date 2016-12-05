@@ -1,0 +1,3670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+  
+  <form-beans >
+    <form-bean name="ListFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean name="AgencyListFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agency" type="com.helmet.bean.Agency" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean name="AgencyApplicantCopyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="targetAgency" type="com.helmet.bean.Agency" />
+      <form-property name="sourceAgency" type="com.helmet.bean.Agency" />
+      <form-property name="targetAgencyId" type="java.lang.Integer" />
+      <form-property name="sourceAgencyId" type="java.lang.String" />
+      <form-property name="consultantId" type="java.lang.String" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean name="ClientUploadFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="uploadFile" type="org.apache.struts.upload.FormFile"/>
+    </form-bean>
+    <form-bean name="ClientListFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean name="AdministratorFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="administrator" type="com.helmet.bean.Administrator" />
+      <form-property name="confirmPwd" type="java.lang.String" />
+    </form-bean>
+    <form-bean name="AdministratorViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="administrator" type="com.helmet.bean.AdministratorEntity" />
+    </form-bean>
+    <form-bean name="CountryFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="country" type="com.helmet.bean.Country" />
+    </form-bean>
+    <form-bean name="EmailActionFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="emailAction" type="com.helmet.bean.EmailAction" />
+      <form-property name="text" type="java.lang.String" />
+      <form-property name="html" type="java.lang.String" />
+    </form-bean>
+    <form-bean name="DisciplineCategoryFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="disciplineCategory" type="com.helmet.bean.DisciplineCategory" />
+    </form-bean>
+    <form-bean name="PassportTypeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="passportType" type="com.helmet.bean.PassportType" />
+    </form-bean>
+    <form-bean name="VisaTypeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="visaType" type="com.helmet.bean.VisaType" />
+    </form-bean>
+    <form-bean name="ReEnterPwdFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="reEnterPwd" type="com.helmet.bean.ReEnterPwd" />
+    </form-bean>
+    <form-bean name="ClientFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.Client" />
+
+      <form-property name="logoFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="logo2File" type="org.apache.struts.upload.FormFile"/>
+    </form-bean>
+    <form-bean name="ClientViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUserEntity" />
+    </form-bean>
+    <form-bean name="DisplayOrderFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+    </form-bean>
+    <form-bean name="SiteFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="site" type="com.helmet.bean.Site" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="SiteViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="site" type="com.helmet.bean.SiteUserEntity" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="ManagerFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="confirmPwd" type="java.lang.String" />
+    </form-bean>
+    <form-bean name="ManagerViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.ManagerEntity" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="LocationFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="location" type="com.helmet.bean.Location" />
+      <form-property name="site" type="com.helmet.bean.SiteUser" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="LocationViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="location" type="com.helmet.bean.LocationEntity" />
+      <form-property name="site" type="com.helmet.bean.SiteUser" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="AdminAccessFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="adminAccess" type="com.helmet.bean.AdminAccess" />
+    </form-bean>
+    <form-bean name="AdministratorAccessFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="administrator" type="com.helmet.bean.Administrator" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="AdministratorAccessGroupFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="administrator" type="com.helmet.bean.Administrator" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="AdminAccessGroupFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="adminAccessGroup" type="com.helmet.bean.AdminAccessGroup" />
+    </form-bean>
+    <form-bean name="AdminAccessGroupViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="adminAccessGroup" type="com.helmet.bean.AdminAccessGroupEntity" />
+    </form-bean>
+    <form-bean name="AdminAccessGroupItemFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="adminAccessGroup" type="com.helmet.bean.AdminAccessGroup" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="LocationJobSubFamilyManagerFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="locationJobSubFamilyManager" type="com.helmet.bean.LocationJobSubFamilyManager" />
+    </form-bean>
+    <form-bean name="JobFamilyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamily" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="JobFamilyViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamilyEntity" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="ClientDisplayOrderFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+    </form-bean>
+    <form-bean name="JobSubFamilyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="jobSubFamily" type="com.helmet.bean.JobSubFamily" />
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamily" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="JobSubFamilyViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="jobSubFamily" type="com.helmet.bean.JobSubFamilyEntity" />
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamily" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="JobSubFamilyDisplayOrderFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamily" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+    </form-bean>
+    <form-bean name="JobProfileFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="jobProfile" type="com.helmet.bean.JobProfile" />
+      <form-property name="jobSubFamily" type="com.helmet.bean.JobSubFamily" />
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamily" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="JobProfileViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="jobProfile" type="com.helmet.bean.JobProfileUserEntity" />
+      <form-property name="jobSubFamily" type="com.helmet.bean.JobSubFamily" />
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamily" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="JobProfileDisplayOrderFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamily" />
+      <form-property name="jobSubFamily" type="com.helmet.bean.JobSubFamily" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+    </form-bean>
+    <form-bean name="LocationManagerJobProfileFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="GradeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="grade" type="com.helmet.bean.Grade" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="JobProfileGradeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="jobProfile" type="com.helmet.bean.JobProfile" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ShiftFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="site" type="com.helmet.bean.SiteUser" />
+      <form-property name="location" type="com.helmet.bean.Location" />
+      <form-property name="shift" type="com.helmet.bean.Shift" />
+      <form-property name="shiftStartHour" type="java.lang.String" />
+      <form-property name="shiftStartMinute" type="java.lang.String" />
+      <form-property name="shiftEndHour" type="java.lang.String" />
+      <form-property name="shiftEndMinute" type="java.lang.String" />
+      <form-property name="shiftBreakStartHour" type="java.lang.String" />
+      <form-property name="shiftBreakStartMinute" type="java.lang.String" />
+      <form-property name="shiftBreakEndHour" type="java.lang.String" />
+      <form-property name="shiftBreakEndMinute" type="java.lang.String" />
+    </form-bean>
+    <form-bean name="LocationDisplayOrderFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="site" type="com.helmet.bean.SiteUser" />
+      <form-property name="location" type="com.helmet.bean.Location" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+    </form-bean>
+    <form-bean name="SiteDisplayOrderFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="site" type="com.helmet.bean.SiteUser" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+    </form-bean>
+    <form-bean name="AgencyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agency" type="com.helmet.bean.Agency" />
+
+      <form-property name="logoFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="invoiceLogoFile" type="org.apache.struts.upload.FormFile"/>
+    </form-bean>
+    <form-bean name="AgencyViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agency" type="com.helmet.bean.AgencyUserEntity" />
+    </form-bean>
+    <form-bean name="ClientAgencyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.Client" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ClientReEnterPwdFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.Client" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ClientAgencyEditFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgency" type="com.helmet.bean.ClientAgency" />
+    </form-bean>
+    <form-bean name="ClientAgencyJobProfileFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="jobProfile" type="com.helmet.bean.JobProfile" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ClientAgencyJobProfileViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgencyJobProfile" type="com.helmet.bean.ClientAgencyJobProfileUserEntity" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="agency" type="com.helmet.bean.AgencyUser" />
+      <form-property name="jobProfile" type="com.helmet.bean.JobProfile" />
+      <form-property name="jobSubFamily" type="com.helmet.bean.JobSubFamily" />
+      <form-property name="jobFamily" type="com.helmet.bean.JobFamily" />
+    </form-bean>
+    <form-bean name="ClientAgencyJobProfileEditFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgencyJobProfile" type="com.helmet.bean.ClientAgencyJobProfile" />
+    </form-bean>
+    <form-bean name="ClientAgencyViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgency" type="com.helmet.bean.ClientAgencyUserEntity" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="ClientAgencyGradeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgency" type="com.helmet.bean.ClientAgency" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ClientAgencyGradeViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgencyGrade" type="com.helmet.bean.ClientAgencyGrade" />
+    </form-bean>
+    <form-bean name="ClientAgencyGradeEditFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgencyGrade" type="com.helmet.bean.ClientAgencyGrade" />
+    </form-bean>
+    <form-bean name="ReasonForRequestFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="reasonForRequest" type="com.helmet.bean.ReasonForRequest" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+    <form-bean name="ExpenseFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="site" type="com.helmet.bean.SiteUser" />
+      <form-property name="location" type="com.helmet.bean.Location" />
+      <form-property name="expense" type="com.helmet.bean.Expense" />
+      <form-property name="multiplierStr" type="java.lang.String" initial="1.00"/>
+      <form-property name="vatRateStr" type="java.lang.String" initial="0.00"/>
+    </form-bean>
+    <form-bean name="PublicHolidayFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="publicHoliday" type="com.helmet.bean.PublicHoliday" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="phDate" type="java.lang.String" />
+    </form-bean>
+    <form-bean name="UpliftFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="uplift" type="com.helmet.bean.Uplift" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean name="UpliftMinutesFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="uplift" type="com.helmet.bean.Uplift" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean name="ClientAgencyJobProfileGradeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgencyJobProfile" type="com.helmet.bean.ClientAgencyJobProfile" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ClientAgencyJobProfileGradeViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgencyJobProfileGrade" type="com.helmet.bean.ClientAgencyJobProfileGrade" />
+    </form-bean>
+    <form-bean name="ClientAgencyJobProfileGradeEditFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="clientAgencyJobProfileGrade" type="com.helmet.bean.ClientAgencyJobProfileGrade" />
+    </form-bean>
+    <form-bean name="DressCodeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="site" type="com.helmet.bean.SiteUser" />
+      <form-property name="location" type="com.helmet.bean.Location" />
+      <form-property name="dressCode" type="com.helmet.bean.DressCode" />
+    </form-bean>
+    <form-bean name="MgrAccessFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="mgrAccess" type="com.helmet.bean.MgrAccess" />
+    </form-bean>
+    <form-bean name="MgrAccessGroupFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="mgrAccessGroup" type="com.helmet.bean.MgrAccessGroup" />
+    </form-bean>
+    <form-bean name="MgrAccessGroupViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+      <form-property name="mgrAccessGroup" type="com.helmet.bean.MgrAccessGroupEntity" />
+    </form-bean>
+    <form-bean name="MgrAccessGroupItemFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="mgrAccessGroup" type="com.helmet.bean.MgrAccessGroup" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ManagerAccessFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ManagerAccessGroupFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ConsultantFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="consultant" type="com.helmet.bean.Consultant" />
+      <form-property name="agency" type="com.helmet.bean.AgencyUser" />
+      <form-property name="confirmPwd" type="java.lang.String" />
+      <form-property name="signatureFile" type="org.apache.struts.upload.FormFile"/>
+    </form-bean>
+    <form-bean name="ConsultantViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="consultant" type="com.helmet.bean.ConsultantEntity" />
+      <form-property name="agency" type="com.helmet.bean.AgencyUser" />
+    </form-bean>
+    <form-bean name="AgyAccessFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agyAccess" type="com.helmet.bean.AgyAccess" />
+    </form-bean>
+    <form-bean name="AgyAccessGroupFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agency" type="com.helmet.bean.AgencyUser" />
+      <form-property name="agyAccessGroup" type="com.helmet.bean.AgyAccessGroup" />
+    </form-bean>
+    <form-bean name="AgyAccessGroupViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agency" type="com.helmet.bean.AgencyUser" />
+      <form-property name="agyAccessGroup" type="com.helmet.bean.AgyAccessGroupEntity" />
+    </form-bean>
+    <form-bean name="AgyAccessGroupItemFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agyAccessGroup" type="com.helmet.bean.AgyAccessGroup" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ConsultantAccessFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="consultant" type="com.helmet.bean.Consultant" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="ConsultantAccessGroupFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="consultant" type="com.helmet.bean.Consultant" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="LocationJobProfileFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="location" type="com.helmet.bean.Location" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+    <form-bean name="LocationJobProfileViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="locationJobProfile" type="com.helmet.bean.LocationJobProfileUser" />
+    </form-bean>
+    <form-bean name="LocationJobProfileEditFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="locationJobProfile" type="com.helmet.bean.LocationJobProfileUser" />
+    </form-bean>
+    <form-bean name="BudgetTransactionFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="budgetTransaction" type="com.helmet.bean.BudgetTransaction" />
+      <form-property name="locationJobProfileUsers" type="java.util.List" />
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+    </form-bean>
+ 
+    <form-bean name="ShiftSearchFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="fromDate" type="java.lang.String" />
+      <form-property name="toDate" type="java.lang.String" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+ 
+    <form-bean name="QueryFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="id" type="java.lang.String" />
+      <form-property name="resultSetData" type="com.helmet.reporting.ResultSetData"/>
+    </form-bean>
+ 
+    <form-bean name="ChangePasswordFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="oldPwd" type="java.lang.String" />
+      <form-property name="newPwd" type="java.lang.String" />
+      <form-property name="confirmPwd" type="java.lang.String" />
+      <form-property name="pwdHint" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean name="ChangeSecretWordFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="oldSecretWord" type="java.lang.String" />
+      <form-property name="newSecretWord" type="java.lang.String" />
+      <form-property name="confirmSecretWord" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean name="ReEnterPwdFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="pwd" type="java.lang.String" />
+    </form-bean>
+
+  </form-beans>
+  
+  <global-exceptions />
+  
+  <global-forwards >
+    <forward name="home" path="/home.do" />
+    
+    <forward name="logout" path="/logoutProcess.do" />
+
+    <forward name="clientUpload" path="/clientUpload.do" />
+  
+    <forward name="administratorList" path="/administratorList.do" />
+    <forward name="administratorView" path="/administratorView.do" />
+    <forward name="administratorNew" path="/administratorNew.do" />
+    <forward name="administratorEdit" path="/administratorEdit.do" />
+    <forward name="administratorDelete" path="/administratorDelete.do" />
+    <forward name="administratorAudits" path="/administratorAudits.do" />
+
+    <forward name="administratorResetPwd" path="/administratorResetPwd.do" />
+    <forward name="administratorResetSecretWord" path="/administratorResetSecretWord.do" />
+
+    <forward name="connectionPool" path="connectionpool" />
+    <forward name="performanceMonitor" path="monitor/JAMonAdmin.jsp" />
+
+    <forward name="adminAccessList" path="/adminAccessList.do" />
+    <forward name="adminAccessView" path="/adminAccessView.do" />
+    <forward name="adminAccessNew" path="/adminAccessNew.do" />
+    <forward name="adminAccessEdit" path="/adminAccessEdit.do" />
+    <forward name="adminAccessDelete" path="/adminAccessDelete.do" />
+
+    <forward name="administratorAccessNew" path="/administratorAccessNew.do" />
+    <forward name="administratorAccessDelete" path="/administratorAccessDelete.do" />
+
+    <forward name="adminAccessGroupList" path="/adminAccessGroupList.do" />
+    <forward name="adminAccessGroupView" path="/adminAccessGroupView.do" />
+    <forward name="adminAccessGroupNew" path="/adminAccessGroupNew.do" />
+    <forward name="adminAccessGroupEdit" path="/adminAccessGroupEdit.do" />
+    <forward name="adminAccessGroupDelete" path="/adminAccessGroupDelete.do" />
+
+    <forward name="administratorAccessGroupNew" path="/administratorAccessGroupNew.do" />
+    <forward name="administratorAccessGroupDelete" path="/administratorAccessGroupDelete.do" />
+
+    <forward name="adminAccessGroupItemNew" path="/adminAccessGroupItemNew.do" />
+    <forward name="adminAccessGroupItemDelete" path="/adminAccessGroupItemDelete.do" />
+
+    <forward name="countryList" path="/countryList.do" />
+    <forward name="countryView" path="/countryView.do" />
+    <forward name="countryNew" path="/countryNew.do" />
+    <forward name="countryEdit" path="/countryEdit.do" />
+    <forward name="countryDelete" path="/countryDelete.do" />
+
+    <forward name="emailActionList" path="/emailActionList.do" />
+    <forward name="emailActionView" path="/emailActionView.do" />
+    <forward name="emailActionNew" path="/emailActionNew.do" />
+    <forward name="emailActionEdit" path="/emailActionEdit.do" />
+    <forward name="emailActionDelete" path="/emailActionDelete.do" />
+
+    <forward name="disciplineCategoryList" path="/disciplineCategoryList.do" />
+    <forward name="disciplineCategoryView" path="/disciplineCategoryView.do" />
+    <forward name="disciplineCategoryNew" path="/disciplineCategoryNew.do" />
+    <forward name="disciplineCategoryEdit" path="/disciplineCategoryEdit.do" />
+    <forward name="disciplineCategoryDelete" path="/disciplineCategoryDelete.do" />
+
+    <forward name="passportTypeList" path="/passportTypeList.do" />
+    <forward name="passportTypeView" path="/passportTypeView.do" />
+    <forward name="passportTypeNew"  path="/passportTypeNew.do" />
+    <forward name="passportTypeEdit" path="/passportTypeEdit.do" />
+    <forward name="passportTypeDelete" path="/passportTypeDelete.do" />
+
+    <forward name="visaTypeList" path="/visaTypeList.do" />
+    <forward name="visaTypeView" path="/visaTypeView.do" />
+    <forward name="visaTypeNew"  path="/visaTypeNew.do" />
+    <forward name="visaTypeEdit" path="/visaTypeEdit.do" />
+    <forward name="visaTypeDelete" path="/visaTypeDelete.do" />
+
+    <forward name="reEnterPwdList" path="/reEnterPwdList.do" />
+    <forward name="reEnterPwdView" path="/reEnterPwdView.do" />
+    <forward name="reEnterPwdNew" path="/reEnterPwdNew.do" />
+    <forward name="reEnterPwdEdit" path="/reEnterPwdEdit.do" />
+    <forward name="reEnterPwdDelete" path="/reEnterPwdDelete.do" />
+
+    <forward name="clientList" path="/clientList.do" />
+    <forward name="clientView" path="/clientView.do" />
+    <forward name="clientNew" path="/clientNew.do" />
+    <forward name="clientEdit" path="/clientEdit.do" />
+    <forward name="clientDelete" path="/clientDelete.do" />
+    <forward name="clientOrder" path="/clientOrder.do" />
+
+    <forward name="managerView" path="/managerView.do" />
+    <forward name="managerNew" path="/managerNew.do" />
+    <forward name="managerEdit" path="/managerEdit.do" />
+    <forward name="managerDelete" path="/managerDelete.do" />
+
+    <forward name="siteView" path="/siteView.do" />
+    <forward name="siteNew" path="/siteNew.do" />
+    <forward name="siteEdit" path="/siteEdit.do" />
+    <forward name="siteDelete" path="/siteDelete.do" />
+    <forward name="siteOrder" path="/siteOrder.do" />
+
+    <forward name="locationView" path="/locationView.do" />
+    <forward name="locationNew" path="/locationNew.do" />
+    <forward name="locationEdit" path="/locationEdit.do" />
+    <forward name="locationDelete" path="/locationDelete.do" />
+    <forward name="locationOrder" path="/locationOrder.do" />
+
+    <forward name="locationJobSubFamilyManagerNew" path="/locationJobSubFamilyManagerNew.do" />
+    <forward name="locationJobSubFamilyManagerDelete" path="/locationJobSubFamilyManagerDelete.do" />
+
+    <forward name="jobFamilyView" path="/jobFamilyView.do" />
+    <forward name="jobFamilyNew" path="/jobFamilyNew.do" />
+    <forward name="jobFamilyEdit" path="/jobFamilyEdit.do" />
+    <forward name="jobFamilyDelete" path="/jobFamilyDelete.do" />
+    <forward name="jobFamilyOrder" path="/jobFamilyOrder.do" />
+
+    <forward name="jobSubFamilyView" path="/jobSubFamilyView.do" />
+    <forward name="jobSubFamilyNew" path="/jobSubFamilyNew.do" />
+    <forward name="jobSubFamilyEdit" path="/jobSubFamilyEdit.do" />
+    <forward name="jobSubFamilyDelete" path="/jobSubFamilyDelete.do" />
+    <forward name="jobSubFamilyOrder" path="/jobSubFamilyOrder.do" />
+
+    <forward name="jobProfileView" path="/jobProfileView.do" />
+    <forward name="jobProfileNew" path="/jobProfileNew.do" />
+    <forward name="jobProfileEdit" path="/jobProfileEdit.do" />
+    <forward name="jobProfileDelete" path="/jobProfileDelete.do" />
+    <forward name="jobProfileOrder" path="/jobProfileOrder.do" />
+
+    <forward name="locationManagerJobProfileNew" path="/locationManagerJobProfileNew.do" />
+    <forward name="locationManagerJobProfileDelete" path="/locationManagerJobProfileDelete.do" />
+
+    <forward name="gradeView" path="/gradeView.do" />
+    <forward name="gradeNew" path="/gradeNew.do" />
+    <forward name="gradeEdit" path="/gradeEdit.do" />
+    <forward name="gradeDelete" path="/gradeDelete.do" />
+    <forward name="gradeOrder" path="/gradeOrder.do" />
+
+    <forward name="jobProfileGradeNew" path="/jobProfileGradeNew.do" />
+    <forward name="jobProfileGradeDelete" path="/jobProfileGradeDelete.do" />
+
+    <forward name="shiftView" path="/shiftView.do" />
+    <forward name="shiftNew" path="/shiftNew.do" />
+    <forward name="shiftEdit" path="/shiftEdit.do" />
+    <forward name="shiftDelete" path="/shiftDelete.do" />
+    <forward name="shiftOrder" path="/shiftOrder.do" />
+
+    <forward name="agencyApplicantCopyXML" path="/agencyApplicantCopyXML.do" />
+    <forward name="agencyApplicantCopy" path="/agencyApplicantCopy.do" />
+    <forward name="agencyApplicantCopySelect" path="/agencyApplicantCopySelect.do" />
+    <forward name="agencyApplicantCopyProcess" path="/agencyApplicantCopyProcess.do" />
+    <forward name="agencyList" path="/agencyList.do" />
+    <forward name="agencyView" path="/agencyView.do" />
+    <forward name="agencyNew" path="/agencyNew.do" />
+    <forward name="agencyEdit" path="/agencyEdit.do" />
+    <forward name="agencyDelete" path="/agencyDelete.do" />
+    <forward name="agencyOrder" path="/agencyOrder.do" />
+
+    <forward name="clientAgencyView" path="/clientAgencyView.do" />
+    <forward name="clientAgencyNew" path="/clientAgencyNew.do" />
+    <forward name="clientAgencyEdit" path="/clientAgencyEdit.do" />
+    <forward name="clientAgencyDelete" path="/clientAgencyDelete.do" />
+
+    <forward name="clientReEnterPwdNew" path="/clientReEnterPwdNew.do" />
+    <forward name="clientReEnterPwdDelete" path="/clientReEnterPwdDelete.do" />
+
+    <forward name="clientAgencyJobProfileNew" path="/clientAgencyJobProfileNew.do" />
+    <forward name="clientAgencyJobProfileDelete" path="/clientAgencyJobProfileDelete.do" />
+    <forward name="clientAgencyJobProfileView" path="/clientAgencyJobProfileView.do" />
+    <forward name="clientAgencyJobProfileEdit" path="/clientAgencyJobProfileEdit.do" />
+
+    <forward name="clientAgencyGradeNew" path="/clientAgencyGradeNew.do" />
+    <forward name="clientAgencyGradeDelete" path="/clientAgencyGradeDelete.do" />
+    <forward name="clientAgencyGradeView" path="/clientAgencyGradeView.do" />
+    <forward name="clientAgencyGradeEdit" path="/clientAgencyGradeEdit.do" />
+
+    <forward name="reasonForRequestView" path="/reasonForRequestView.do" />
+    <forward name="reasonForRequestNew" path="/reasonForRequestNew.do" />
+    <forward name="reasonForRequestEdit" path="/reasonForRequestEdit.do" />
+    <forward name="reasonForRequestDelete" path="/reasonForRequestDelete.do" />
+    <forward name="reasonForRequestOrder" path="/reasonForRequestOrder.do" />
+
+    <forward name="expenseView" path="/expenseView.do" />
+    <forward name="expenseNew" path="/expenseNew.do" />
+    <forward name="expenseEdit" path="/expenseEdit.do" />
+    <forward name="expenseDelete" path="/expenseDelete.do" />
+    <forward name="expenseOrder" path="/expenseOrder.do" />
+
+    <forward name="publicHolidayView" path="/publicHolidayView.do" />
+    <forward name="publicHolidayNew" path="/publicHolidayNew.do" />
+    <forward name="publicHolidayEdit" path="/publicHolidayEdit.do" />
+    <forward name="publicHolidayDelete" path="/publicHolidayDelete.do" />
+
+    <forward name="upliftList" path="/upliftList.do" />
+    <forward name="upliftView" path="/upliftView.do" />
+    <forward name="upliftNew" path="/upliftNew.do" />
+    <forward name="upliftEdit" path="/upliftEdit.do" />
+    <forward name="upliftDelete" path="/upliftDelete.do" />
+    <forward name="upliftMinutesEdit" path="/upliftMinutesEdit.do" />
+
+    <forward name="clientAgencyJobProfileGradeNew" path="/clientAgencyJobProfileGradeNew.do" />
+    <forward name="clientAgencyJobProfileGradeDelete" path="/clientAgencyJobProfileGradeDelete.do" />
+    <forward name="clientAgencyJobProfileGradeView" path="/clientAgencyJobProfileGradeView.do" />
+    <forward name="clientAgencyJobProfileGradeEdit" path="/clientAgencyJobProfileGradeEdit.do" />
+
+    <forward name="dressCodeView" path="/dressCodeView.do" />
+    <forward name="dressCodeNew" path="/dressCodeNew.do" />
+    <forward name="dressCodeEdit" path="/dressCodeEdit.do" />
+    <forward name="dressCodeDelete" path="/dressCodeDelete.do" />
+    <forward name="dressCodeOrder" path="/dressCodeOrder.do" />
+
+    <forward name="mgrAccessList" path="/mgrAccessList.do" />
+    <forward name="mgrAccessView" path="/mgrAccessView.do" />
+    <forward name="mgrAccessNew" path="/mgrAccessNew.do" />
+    <forward name="mgrAccessEdit" path="/mgrAccessEdit.do" />
+    <forward name="mgrAccessDelete" path="/mgrAccessDelete.do" />
+
+    <forward name="mgrAccessGroupList" path="/mgrAccessGroupList.do" />
+    <forward name="mgrAccessGroupView" path="/mgrAccessGroupView.do" />
+    <forward name="mgrAccessGroupNew" path="/mgrAccessGroupNew.do" />
+    <forward name="mgrAccessGroupEdit" path="/mgrAccessGroupEdit.do" />
+    <forward name="mgrAccessGroupDelete" path="/mgrAccessGroupDelete.do" />
+
+    <forward name="mgrAccessGroupItemNew" path="/mgrAccessGroupItemNew.do" />
+    <forward name="mgrAccessGroupItemDelete" path="/mgrAccessGroupItemDelete.do" />
+
+    <forward name="managerAccessNew" path="/managerAccessNew.do" />
+    <forward name="managerAccessDelete" path="/managerAccessDelete.do" />
+
+    <forward name="managerAccessGroupNew" path="/managerAccessGroupNew.do" />
+    <forward name="managerAccessGroupDelete" path="/managerAccessGroupDelete.do" />
+
+    <forward name="managerResetPwd" path="/managerResetPwd.do" />
+    <forward name="managerResetSecretWord" path="/managerResetSecretWord.do" />
+
+    <forward name="consultantView" path="/consultantView.do" />
+    <forward name="consultantNew" path="/consultantNew.do" />
+    <forward name="consultantEdit" path="/consultantEdit.do" />
+    <forward name="consultantDelete" path="/consultantDelete.do" />
+
+    <forward name="consultantResetPwd" path="/consultantResetPwd.do" />
+    <forward name="consultantResetSecretWord" path="/consultantResetSecretWord.do" />
+
+    <forward name="agyAccessList" path="/agyAccessList.do" />
+    <forward name="agyAccessView" path="/agyAccessView.do" />
+    <forward name="agyAccessNew" path="/agyAccessNew.do" />
+    <forward name="agyAccessEdit" path="/agyAccessEdit.do" />
+    <forward name="agyAccessDelete" path="/agyAccessDelete.do" />
+
+    <forward name="agyAccessGroupList" path="/agyAccessGroupList.do" />
+    <forward name="agyAccessGroupView" path="/agyAccessGroupView.do" />
+    <forward name="agyAccessGroupNew" path="/agyAccessGroupNew.do" />
+    <forward name="agyAccessGroupEdit" path="/agyAccessGroupEdit.do" />
+    <forward name="agyAccessGroupDelete" path="/agyAccessGroupDelete.do" />
+
+    <forward name="agyAccessGroupItemNew" path="/agyAccessGroupItemNew.do" />
+    <forward name="agyAccessGroupItemDelete" path="/agyAccessGroupItemDelete.do" />
+
+    <forward name="consultantAccessNew" path="/consultantAccessNew.do" />
+    <forward name="consultantAccessDelete" path="/consultantAccessDelete.do" />
+
+    <forward name="consultantAccessGroupNew" path="/consultantAccessGroupNew.do" />
+    <forward name="consultantAccessGroupDelete" path="/consultantAccessGroupDelete.do" />
+
+    <forward name="locationJobProfileView" path="/locationJobProfileView.do" />
+    <forward name="locationJobProfileEdit" path="/locationJobProfileEdit.do" />
+    <forward name="locationJobProfileNew" path="/locationJobProfileNew.do" />
+    <forward name="locationJobProfileDelete" path="/locationJobProfileDelete.do" />
+
+    <forward name="budgetTransactionList" path="/budgetTransactionList.do" />
+    <forward name="budgetTransactionNew" path="/budgetTransactionNew.do" />
+
+    <forward name="shiftSearch" path="/shiftSearch.do" />
+
+    <forward name="queries" path="/queries.do" />
+
+    <forward name="changePassword" path="/changePassword.do" />
+    <forward name="changeSecretWord" path="/changeSecretWord.do" />
+    <forward name="reEnterPwd" path="/reEnterPwd.do" />
+
+  </global-forwards>
+  
+  <action-mappings >
+
+		<action path="/home"
+		        type="org.apache.struts.actions.ForwardAction"
+		        parameter="homeAdmin.page"/>
+
+    <action path="/reEnterPwd"
+            type="com.helmet.application.admin.AdminForwardAction">
+        <forward name="success" path="reEnterPwd.page" />
+    </action>
+
+    <action path="/reEnterPwdProcess"
+            type="com.helmet.application.admin.ReEnterPwdProcess"
+            name="ReEnterPwdFormAdmin"
+            scope="request"
+            input="reEnterPwd.page"
+            validate="true">
+        <forward name="success" path="reEnterPwd.page" />
+    </action>
+
+    <action path="/changePassword"
+            type="com.helmet.application.admin.ChangePassword"
+            name="ChangePasswordFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="changePassword.page" />
+    </action>
+
+    <action path="/changePasswordProcess"
+            type="com.helmet.application.admin.ChangePasswordProcess"
+            name="ChangePasswordFormAdmin"
+            scope="request"
+            input="changePassword.page"
+            validate="true">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+    <action path="/changeSecretWord"
+            type="com.helmet.application.admin.ChangeSecretWord"
+            name="ChangeSecretWordFormAdmin"
+            scope="session"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="changeSecretWord.page" />
+    </action>
+
+    <action path="/changeSecretWordProcess"
+            type="com.helmet.application.admin.ChangeSecretWordProcess"
+            name="ChangeSecretWordFormAdmin"
+            scope="session"
+            input="changeSecretWord.page"
+            validate="true">
+        <forward name="success" path="/changeSecretWordProcess2.do" redirect="true" />
+    </action>
+
+    <action path="/changeSecretWordProcess2"
+            type="com.helmet.application.admin.ChangeSecretWordProcess2"
+            name="ChangeSecretWordFormAdmin"
+            scope="session"
+            input="changeSecretWord.page"
+            validate="true">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+    <action path="/logoutProcess"
+            type="com.helmet.application.admin.LogoutProcess">
+        <forward name="success" path="adminLoggedOut.page" redirect="true" />
+    </action>
+
+    <action path="/clientUpload"
+            type="com.helmet.application.admin.ClientUpload"
+            name="ClientUploadFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="clientUpload.page" />
+    </action>
+
+    <action path="/clientUploadProcess"
+            type="com.helmet.application.admin.ClientUploadProcess"
+            name="ClientUploadFormAdmin"
+            scope="request"
+            input="clientUpload.page"
+            validate="false">
+        <forward name="success" path="clientUploadProcessed.page" redirect="true"/>
+    </action>
+
+    <action path="/administratorList"
+            type="com.helmet.application.admin.AdministratorList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="administratorList.page" />
+    </action>
+
+    <action path="/administratorNew"
+            type="com.helmet.application.admin.AdministratorNew"
+            name="AdministratorFormAdmin"
+            scope="request"
+            input="/administratorList.do"
+            validate="false">
+        <forward name="success" path="administratorNew.page" />
+    </action>
+
+    <action path="/administratorNewProcess"
+            type="com.helmet.application.admin.AdministratorNewProcess"
+            name="AdministratorFormAdmin"
+            scope="request"
+            input="administratorNew.page"
+            validate="true">
+        <forward name="success" path="/administratorView.do" redirect="true" />
+    </action>
+
+    <action path="/administratorView"
+            type="com.helmet.application.admin.AdministratorView"
+            name="AdministratorViewFormAdmin"
+            scope="request"
+            input="/administratorList.do"
+            validate="false">
+        <forward name="success" path="administratorView.page" />
+    </action>
+
+    <action path="/administratorEdit"
+            type="com.helmet.application.admin.AdministratorEdit"
+            name="AdministratorFormAdmin"
+            scope="request"
+            input="/administratorList.do"
+            validate="false">
+        <forward name="success" path="administratorEdit.page" />
+    </action>
+
+    <action path="/administratorEditProcess"
+            type="com.helmet.application.admin.AdministratorEditProcess"
+            name="AdministratorFormAdmin"
+            scope="request"
+            input="administratorEdit.page"
+            validate="true">
+        <forward name="success" path="/administratorView.do" redirect="true" />
+    </action>
+
+    <action path="/administratorDelete"
+            type="com.helmet.application.admin.AdministratorDelete"
+            name="AdministratorFormAdmin"
+            scope="request"
+            input="/administratorList.do"
+            validate="false">
+        <forward name="success" path="administratorDelete.page" />
+    </action>
+
+    <action path="/administratorDeleteProcess"
+            type="com.helmet.application.admin.AdministratorDeleteProcess"
+            name="AdministratorFormAdmin"
+            scope="request"
+            input="administratorDelete.page"
+            validate="false">
+        <forward name="success" path="/administratorList.do" redirect="true" />
+    </action>
+
+    <action path="/administratorAudits"
+            type="com.helmet.application.admin.AdministratorAudits"
+            name="ListFormAdmin"
+            scope="request"
+            input="/administratorList.do"
+            validate="false">
+        <forward name="success" path="administratorAudits.page" />
+    </action>
+
+    <action path="/administratorAccessGroupNew"
+            type="com.helmet.application.admin.AdministratorAccessGroupNew"
+            name="AdministratorAccessGroupFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/administratorView.do" redirect="true" />
+    </action>
+
+    <action path="/administratorAccessGroupDelete"
+            type="com.helmet.application.admin.AdministratorAccessGroupDelete"
+            name="AdministratorAccessGroupFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/administratorView.do" redirect="true" />
+    </action>
+
+    <action path="/administratorAccessNew"
+            type="com.helmet.application.admin.AdministratorAccessNew"
+            name="AdministratorAccessFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/administratorView.do" redirect="true" />
+    </action>
+
+    <action path="/administratorAccessDelete"
+            type="com.helmet.application.admin.AdministratorAccessDelete"
+            name="AdministratorAccessFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/administratorView.do" redirect="true" />
+    </action>
+
+    <action path="/adminAccessList"
+            type="com.helmet.application.admin.AdminAccessList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="adminAccessList.page" />
+    </action>
+
+    <action path="/adminAccessNew"
+            type="com.helmet.application.admin.AdminAccessNew"
+            name="AdminAccessFormAdmin"
+            scope="request"
+            input="/adminAccessList.do"
+            validate="false">
+        <forward name="success" path="adminAccessNew.page" />
+    </action>
+
+    <action path="/adminAccessNewProcess"
+            type="com.helmet.application.admin.AdminAccessNewProcess"
+            name="AdminAccessFormAdmin"
+            scope="request"
+            input="adminAccessNew.page"
+            validate="true">
+        <forward name="success" path="/adminAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/adminAccessView"
+            type="com.helmet.application.admin.AdminAccessView"
+            name="AdminAccessFormAdmin"
+            scope="request"
+            input="/adminAccessList.do"
+            validate="false">
+        <forward name="success" path="adminAccessView.page" />
+    </action>
+
+    <action path="/adminAccessEdit"
+            type="com.helmet.application.admin.AdminAccessEdit"
+            name="AdminAccessFormAdmin"
+            scope="request"
+            input="/adminAccessList.do"
+            validate="false">
+        <forward name="success" path="adminAccessEdit.page" />
+    </action>
+
+    <action path="/adminAccessEditProcess"
+            type="com.helmet.application.admin.AdminAccessEditProcess"
+            name="AdminAccessFormAdmin"
+            scope="request"
+            input="adminAccessEdit.page"
+            validate="true">
+        <forward name="success" path="/adminAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/adminAccessDelete"
+            type="com.helmet.application.admin.AdminAccessView"
+            name="AdminAccessFormAdmin"
+            scope="request"
+            input="/adminAccessList.do"
+            validate="false">
+        <forward name="success" path="adminAccessDelete.page" />
+    </action>
+
+    <action path="/adminAccessDeleteProcess"
+            type="com.helmet.application.admin.AdminAccessDeleteProcess"
+            name="AdminAccessFormAdmin"
+            scope="request"
+            input="adminAccessDelete.page"
+            validate="false">
+        <forward name="success" path="/adminAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/adminAccessGroupList"
+            type="com.helmet.application.admin.AdminAccessGroupList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="adminAccessGroupList.page" />
+    </action>
+
+    <action path="/adminAccessGroupNew"
+            type="com.helmet.application.admin.AdminAccessGroupNew"
+            name="AdminAccessGroupFormAdmin"
+            scope="request"
+            input="/adminAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="adminAccessGroupNew.page" />
+    </action>
+
+    <action path="/adminAccessGroupNewProcess"
+            type="com.helmet.application.admin.AdminAccessGroupNewProcess"
+            name="AdminAccessGroupFormAdmin"
+            scope="request"
+            input="adminAccessGroupNew.page"
+            validate="true">
+        <forward name="success" path="/adminAccessGroupList.do" redirect="true" />
+    </action>
+
+    <action path="/adminAccessGroupView"
+            type="com.helmet.application.admin.AdminAccessGroupView"
+            name="AdminAccessGroupViewFormAdmin"
+            scope="request"
+            input="/adminAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="adminAccessGroupView.page" />
+    </action>
+
+    <action path="/adminAccessGroupEdit"
+            type="com.helmet.application.admin.AdminAccessGroupEdit"
+            name="AdminAccessGroupFormAdmin"
+            scope="request"
+            input="/adminAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="adminAccessGroupEdit.page" />
+    </action>
+
+    <action path="/adminAccessGroupEditProcess"
+            type="com.helmet.application.admin.AdminAccessGroupEditProcess"
+            name="AdminAccessGroupFormAdmin"
+            scope="request"
+            input="adminAccessGroupEdit.page"
+            validate="true">
+        <forward name="success" path="/adminAccessGroupList.do" redirect="true" />
+    </action>
+
+    <action path="/adminAccessGroupDelete"
+            type="com.helmet.application.admin.AdminAccessGroupView"
+            name="AdminAccessGroupViewFormAdmin"
+            scope="request"
+            input="/adminAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="adminAccessGroupDelete.page" />
+    </action>
+
+    <action path="/adminAccessGroupDeleteProcess"
+            type="com.helmet.application.admin.AdminAccessGroupDeleteProcess"
+            name="AdminAccessGroupViewFormAdmin"
+            scope="request"
+            input="adminAccessGroupDelete.page"
+            validate="false">
+        <forward name="success" path="/adminAccessGroupList.do" redirect="true" />
+    </action>
+
+    <action path="/adminAccessGroupItemNew"
+            type="com.helmet.application.admin.AdminAccessGroupItemNew"
+            name="AdminAccessGroupItemFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/adminAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/adminAccessGroupItemDelete"
+            type="com.helmet.application.admin.AdminAccessGroupItemDelete"
+            name="AdminAccessGroupItemFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/adminAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/countryList"
+            type="com.helmet.application.admin.CountryList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="countryList.page" />
+    </action>
+
+    <action path="/countryNew"
+            type="com.helmet.application.admin.CountryNew"
+            name="CountryFormAdmin"
+            scope="request"
+            input="/countryList.do"
+            validate="false">
+        <forward name="success" path="countryNew.page" />
+    </action>
+
+    <action path="/countryNewProcess"
+            type="com.helmet.application.admin.CountryNewProcess"
+            name="CountryFormAdmin"
+            scope="request"
+            input="countryNew.page"
+            validate="true">
+        <forward name="success" path="/countryList.do" redirect="true" />
+    </action>
+
+    <action path="/countryView"
+            type="com.helmet.application.admin.CountryView"
+            name="CountryFormAdmin"
+            scope="request"
+            input="/countryList.do"
+            validate="false">
+        <forward name="success" path="countryView.page" />
+    </action>
+
+    <action path="/countryEdit"
+            type="com.helmet.application.admin.CountryEdit"
+            name="CountryFormAdmin"
+            scope="request"
+            input="/countryList.do"
+            validate="false">
+        <forward name="success" path="countryEdit.page" />
+    </action>
+
+    <action path="/countryEditProcess"
+            type="com.helmet.application.admin.CountryEditProcess"
+            name="CountryFormAdmin"
+            scope="request"
+            input="countryEdit.page"
+            validate="true">
+        <forward name="success" path="/countryList.do" redirect="true" />
+    </action>
+
+    <action path="/countryDelete"
+            type="com.helmet.application.admin.CountryDelete"
+            name="CountryFormAdmin"
+            scope="request"
+            input="/countryList.do"
+            validate="false">
+        <forward name="success" path="countryDelete.page" />
+    </action>
+
+    <action path="/countryDeleteProcess"
+            type="com.helmet.application.admin.CountryDeleteProcess"
+            name="CountryFormAdmin"
+            scope="request"
+            input="countryDelete.page"
+            validate="false">
+        <forward name="success" path="/countryList.do" redirect="true" />
+    </action>
+
+    <action path="/emailActionList"
+            type="com.helmet.application.admin.EmailActionList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="emailActionList.page" />
+    </action>
+
+    <action path="/emailActionNew"
+            type="com.helmet.application.admin.EmailActionNew"
+            name="EmailActionFormAdmin"
+            scope="request"
+            input="/emailActionList.do"
+            validate="false">
+        <forward name="success" path="emailActionNew.page" />
+    </action>
+
+    <action path="/emailActionNewProcess"
+            type="com.helmet.application.admin.EmailActionNewProcess"
+            name="EmailActionFormAdmin"
+            scope="request"
+            input="emailActionNew.page"
+            validate="true">
+        <forward name="success" path="/emailActionList.do" redirect="true" />
+    </action>
+
+    <action path="/emailActionView"
+            type="com.helmet.application.admin.EmailActionView"
+            name="EmailActionFormAdmin"
+            scope="request"
+            input="/emailActionList.do"
+            validate="false">
+        <forward name="success" path="emailActionView.page" />
+    </action>
+
+    <action path="/emailActionEdit"
+            type="com.helmet.application.admin.EmailActionEdit"
+            name="EmailActionFormAdmin"
+            scope="request"
+            input="/emailActionList.do"
+            validate="false">
+        <forward name="success" path="emailActionEdit.page" />
+    </action>
+
+    <action path="/emailActionEditProcess"
+            type="com.helmet.application.admin.EmailActionEditProcess"
+            name="EmailActionFormAdmin"
+            scope="request"
+            input="emailActionEdit.page"
+            validate="true">
+        <forward name="success" path="/emailActionList.do" redirect="true" />
+    </action>
+
+    <action path="/emailActionDelete"
+            type="com.helmet.application.admin.EmailActionDelete"
+            name="EmailActionFormAdmin"
+            scope="request"
+            input="/emailActionList.do"
+            validate="false">
+        <forward name="success" path="emailActionDelete.page" />
+    </action>
+
+    <action path="/emailActionDeleteProcess"
+            type="com.helmet.application.admin.EmailActionDeleteProcess"
+            name="EmailActionFormAdmin"
+            scope="request"
+            input="emailActionDelete.page"
+            validate="false">
+        <forward name="success" path="/emailActionList.do" redirect="true" />
+    </action>
+
+    <action path="/disciplineCategoryList"
+            type="com.helmet.application.admin.DisciplineCategoryList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="disciplineCategoryList.page" />
+    </action>
+
+    <action path="/disciplineCategoryNew"
+            type="com.helmet.application.admin.DisciplineCategoryNew"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="/disciplineCategoryList.do"
+            validate="false">
+        <forward name="success" path="disciplineCategoryNew.page" />
+    </action>
+
+    <action path="/disciplineCategoryNewProcess"
+            type="com.helmet.application.admin.DisciplineCategoryNewProcess"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="disciplineCategoryNew.page"
+            validate="true">
+        <forward name="success" path="/disciplineCategoryList.do" redirect="true" />
+    </action>
+
+    <action path="/disciplineCategoryView"
+            type="com.helmet.application.admin.DisciplineCategoryView"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="/disciplineCategoryList.do"
+            validate="false">
+        <forward name="success" path="disciplineCategoryView.page" />
+    </action>
+
+    <action path="/disciplineCategoryEdit"
+            type="com.helmet.application.admin.DisciplineCategoryEdit"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="/disciplineCategoryList.do"
+            validate="false">
+        <forward name="success" path="disciplineCategoryEdit.page" />
+    </action>
+
+    <action path="/disciplineCategoryEditProcess"
+            type="com.helmet.application.admin.DisciplineCategoryEditProcess"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="disciplineCategoryEdit.page"
+            validate="true">
+        <forward name="success" path="/disciplineCategoryList.do" redirect="true" />
+    </action>
+
+    <action path="/disciplineCategoryDelete"
+            type="com.helmet.application.admin.DisciplineCategoryDelete"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="/disciplineCategoryList.do"
+            validate="false">
+        <forward name="success" path="disciplineCategoryDelete.page" />
+    </action>
+
+    <action path="/disciplineCategoryDeleteProcess"
+            type="com.helmet.application.admin.DisciplineCategoryDeleteProcess"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="disciplineCategoryDelete.page"
+            validate="false">
+        <forward name="success" path="/disciplineCategoryList.do" redirect="true" />
+    </action>
+
+    <action path="/passportTypeList"
+            type="com.helmet.application.admin.PassportTypeList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="passportTypeList.page" />
+    </action>
+
+    <action path="/passportTypeNew"
+            type="com.helmet.application.admin.PassportTypeNew"
+            name="PassportTypeFormAdmin"
+            scope="request"
+            input="/passportTypeList.do"
+            validate="false">
+        <forward name="success" path="passportTypeNew.page" />
+    </action>
+
+    <action path="/passportTypeNewProcess"
+            type="com.helmet.application.admin.PassportTypeNewProcess"
+            name="PassportTypeFormAdmin"
+            scope="request"
+            input="passportTypeNew.page"
+            validate="true">
+        <forward name="success" path="/passportTypeList.do" redirect="true" />
+    </action>
+
+    <action path="/passportTypeView"
+            type="com.helmet.application.admin.PassportTypeView"
+            name="PassportTypeFormAdmin"
+            scope="request"
+            input="/passportTypeList.do"
+            validate="false">
+        <forward name="success" path="passportTypeView.page" />
+    </action>
+
+    <action path="/passportTypeEdit"
+            type="com.helmet.application.admin.PassportTypeEdit"
+            name="PassportTypeFormAdmin"
+            scope="request"
+            input="/passportTypeList.do"
+            validate="false">
+        <forward name="success" path="passportTypeEdit.page" />
+    </action>
+
+    <action path="/passportTypeEditProcess"
+            type="com.helmet.application.admin.PassportTypeEditProcess"
+            name="PassportTypeFormAdmin"
+            scope="request"
+            input="passportTypeEdit.page"
+            validate="true">
+        <forward name="success" path="/passportTypeList.do" redirect="true" />
+    </action>
+
+    <action path="/passportTypeDelete"
+            type="com.helmet.application.admin.PassportTypeDelete"
+            name="PassportTypeFormAdmin"
+            scope="request"
+            input="/passportTypeList.do"
+            validate="false">
+        <forward name="success" path="passportTypeDelete.page" />
+    </action>
+
+    <action path="/passportTypeDeleteProcess"
+            type="com.helmet.application.admin.PassportTypeDeleteProcess"
+            name="PassportTypeFormAdmin"
+            scope="request"
+            input="passportTypeDelete.page"
+            validate="false">
+        <forward name="success" path="/passportTypeList.do" redirect="true" />
+    </action>
+
+    <action path="/visaTypeList"
+            type="com.helmet.application.admin.VisaTypeList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="visaTypeList.page" />
+    </action>
+
+    <action path="/visaTypeNew"
+            type="com.helmet.application.admin.VisaTypeNew"
+            name="VisaTypeFormAdmin"
+            scope="request"
+            input="/visaTypeList.do"
+            validate="false">
+        <forward name="success" path="visaTypeNew.page" />
+    </action>
+
+    <action path="/visaTypeNewProcess"
+            type="com.helmet.application.admin.VisaTypeNewProcess"
+            name="VisaTypeFormAdmin"
+            scope="request"
+            input="visaTypeNew.page"
+            validate="true">
+        <forward name="success" path="/visaTypeList.do" redirect="true" />
+    </action>
+
+    <action path="/visaTypeView"
+            type="com.helmet.application.admin.VisaTypeView"
+            name="VisaTypeFormAdmin"
+            scope="request"
+            input="/visaTypeList.do"
+            validate="false">
+        <forward name="success" path="visaTypeView.page" />
+    </action>
+
+    <action path="/visaTypeEdit"
+            type="com.helmet.application.admin.VisaTypeEdit"
+            name="VisaTypeFormAdmin"
+            scope="request"
+            input="/visaTypeList.do"
+            validate="false">
+        <forward name="success" path="visaTypeEdit.page" />
+    </action>
+
+    <action path="/visaTypeEditProcess"
+            type="com.helmet.application.admin.VisaTypeEditProcess"
+            name="VisaTypeFormAdmin"
+            scope="request"
+            input="visaTypeEdit.page"
+            validate="true">
+        <forward name="success" path="/visaTypeList.do" redirect="true" />
+    </action>
+
+    <action path="/visaTypeDelete"
+            type="com.helmet.application.admin.VisaTypeDelete"
+            name="VisaTypeFormAdmin"
+            scope="request"
+            input="/visaTypeList.do"
+            validate="false">
+        <forward name="success" path="visaTypeDelete.page" />
+    </action>
+
+    <action path="/visaTypeDeleteProcess"
+            type="com.helmet.application.admin.VisaTypeDeleteProcess"
+            name="VisaTypeFormAdmin"
+            scope="request"
+            input="visaTypeDelete.page"
+            validate="false">
+        <forward name="success" path="/visaTypeList.do" redirect="true" />
+    </action>
+
+    <action path="/reEnterPwdList"
+            type="com.helmet.application.admin.ReEnterPwdList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="reEnterPwdList.page" />
+    </action>
+
+    <action path="/reEnterPwdNew"
+            type="com.helmet.application.admin.ReEnterPwdNew"
+            name="ReEnterPwdFormAdmin"
+            scope="request"
+            input="/reEnterPwdList.do"
+            validate="false">
+        <forward name="success" path="reEnterPwdNew.page" />
+    </action>
+
+    <action path="/reEnterPwdNewProcess"
+            type="com.helmet.application.admin.ReEnterPwdNewProcess"
+            name="ReEnterPwdFormAdmin"
+            scope="request"
+            input="reEnterPwdNew.page"
+            validate="true">
+        <forward name="success" path="/reEnterPwdList.do" redirect="true" />
+    </action>
+
+    <action path="/reEnterPwdView"
+            type="com.helmet.application.admin.ReEnterPwdView"
+            name="ReEnterPwdFormAdmin"
+            scope="request"
+            input="/reEnterPwdList.do"
+            validate="false">
+        <forward name="success" path="reEnterPwdView.page" />
+    </action>
+
+    <action path="/reEnterPwdEdit"
+            type="com.helmet.application.admin.ReEnterPwdEdit"
+            name="ReEnterPwdFormAdmin"
+            scope="request"
+            input="/reEnterPwdList.do"
+            validate="false">
+        <forward name="success" path="reEnterPwdEdit.page" />
+    </action>
+
+    <action path="/reEnterPwdEditProcess"
+            type="com.helmet.application.admin.ReEnterPwdEditProcess"
+            name="ReEnterPwdFormAdmin"
+            scope="request"
+            input="reEnterPwdEdit.page"
+            validate="true">
+        <forward name="success" path="/reEnterPwdList.do" redirect="true" />
+    </action>
+
+    <action path="/reEnterPwdDelete"
+            type="com.helmet.application.admin.ReEnterPwdDelete"
+            name="ReEnterPwdFormAdmin"
+            scope="request"
+            input="/reEnterPwdList.do"
+            validate="false">
+        <forward name="success" path="reEnterPwdDelete.page" />
+    </action>
+
+    <action path="/reEnterPwdDeleteProcess"
+            type="com.helmet.application.admin.ReEnterPwdDeleteProcess"
+            name="ReEnterPwdFormAdmin"
+            scope="request"
+            input="reEnterPwdDelete.page"
+            validate="false">
+        <forward name="success" path="/reEnterPwdList.do" redirect="true" />
+    </action>
+
+    <action path="/jobFamilyView"
+            type="com.helmet.application.admin.JobFamilyView"
+            name="JobFamilyViewFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="jobFamilyView.page" />
+    </action>
+
+    <action path="/jobFamilyNew"
+            type="com.helmet.application.admin.JobFamilyNew"
+            name="JobFamilyFormAdmin"
+            scope="request"
+            input="/jobFamilyList.do"
+            validate="false">
+        <forward name="success" path="jobFamilyNew.page" />
+    </action>
+
+    <action path="/jobFamilyNewProcess"
+            type="com.helmet.application.admin.JobFamilyNewProcess"
+            name="JobFamilyFormAdmin"
+            scope="request"
+            input="jobFamilyNew.page"
+            validate="true">
+        <forward name="success" path="/jobFamilyView.do" redirect="true" />
+    </action>
+
+    <action path="/jobFamilyEdit"
+            type="com.helmet.application.admin.JobFamilyEdit"
+            name="JobFamilyFormAdmin"
+            scope="request"
+            input="/jobFamilyList.do"
+            validate="false">
+        <forward name="success" path="jobFamilyEdit.page" />
+    </action>
+
+    <action path="/jobFamilyEditProcess"
+            type="com.helmet.application.admin.JobFamilyEditProcess"
+            name="JobFamilyFormAdmin"
+            scope="request"
+            input="jobFamilyEdit.page"
+            validate="true">
+        <forward name="success" path="/jobFamilyView.do" redirect="true" />
+    </action>
+
+    <action path="/jobFamilyDelete"
+            type="com.helmet.application.admin.JobFamilyDelete"
+            name="JobFamilyFormAdmin"
+            scope="request"
+            input="/jobFamilyList.do"
+            validate="false">
+        <forward name="success" path="jobFamilyDelete.page" />
+    </action>
+
+    <action path="/jobFamilyDeleteProcess"
+            type="com.helmet.application.admin.JobFamilyDeleteProcess"
+            name="JobFamilyFormAdmin"
+            scope="request"
+            input="jobFamilyDelete.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/jobFamilyOrder"
+            type="com.helmet.application.admin.JobFamilyOrder"
+            name="ClientDisplayOrderFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="jobFamilyOrder.page" />
+    </action>
+
+    <action path="/jobFamilyOrderProcess"
+            type="com.helmet.application.admin.JobFamilyOrderProcess"
+            name="ClientDisplayOrderFormAdmin"
+            scope="request"
+            input="jobFamilyOrder.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/jobSubFamilyView"
+            type="com.helmet.application.admin.JobSubFamilyView"
+            name="JobSubFamilyViewFormAdmin"
+            scope="request"
+            input="/jobFamilyList.do"
+            validate="false">
+        <forward name="success" path="jobSubFamilyView.page" />
+    </action>
+
+    <action path="/jobSubFamilyNew"
+            type="com.helmet.application.admin.JobSubFamilyNew"
+            name="JobSubFamilyFormAdmin"
+            scope="request"
+            input="/jobFamilyView.do"
+            validate="false">
+        <forward name="success" path="jobSubFamilyNew.page" />
+    </action>
+
+    <action path="/jobSubFamilyNewProcess"
+            type="com.helmet.application.admin.JobSubFamilyNewProcess"
+            name="JobSubFamilyFormAdmin"
+            scope="request"
+            input="jobSubFamilyNew.page"
+            validate="true">
+        <forward name="success" path="/jobSubFamilyView.do" redirect="true" />
+    </action>
+
+    <action path="/jobSubFamilyEdit"
+            type="com.helmet.application.admin.JobSubFamilyEdit"
+            name="JobSubFamilyFormAdmin"
+            scope="request"
+            input="/jobFamilyView.do"
+            validate="false">
+        <forward name="success" path="jobSubFamilyEdit.page" />
+    </action>
+
+    <action path="/jobSubFamilyEditProcess"
+            type="com.helmet.application.admin.JobSubFamilyEditProcess"
+            name="JobSubFamilyFormAdmin"
+            scope="request"
+            input="jobSubFamilyEdit.page"
+            validate="true">
+        <forward name="success" path="/jobSubFamilyView.do" redirect="true" />
+    </action>
+
+    <action path="/jobSubFamilyDelete"
+            type="com.helmet.application.admin.JobSubFamilyView"
+            name="JobSubFamilyViewFormAdmin"
+            scope="request"
+            input="/jobSubFamilyView.do"
+            validate="false">
+        <forward name="success" path="jobSubFamilyDelete.page" />
+    </action>
+
+    <action path="/jobSubFamilyDeleteProcess"
+            type="com.helmet.application.admin.JobSubFamilyDeleteProcess"
+            name="JobSubFamilyViewFormAdmin"
+            scope="request"
+            input="jobSubFamilyDelete.page"
+            validate="false">
+        <forward name="success" path="/jobFamilyView.do" redirect="true" />
+    </action>
+
+    <action path="/jobSubFamilyOrder"
+            type="com.helmet.application.admin.JobSubFamilyOrder"
+            name="JobSubFamilyDisplayOrderFormAdmin"
+            scope="request"
+            input="/jobFamilyView.do"
+            validate="false">
+        <forward name="success" path="jobSubFamilyOrder.page" />
+    </action>
+
+    <action path="/jobSubFamilyOrderProcess"
+            type="com.helmet.application.admin.JobSubFamilyOrderProcess"
+            name="JobSubFamilyDisplayOrderFormAdmin"
+            scope="request"
+            input="jobSubFamilyOrder.page"
+            validate="true">
+        <forward name="success" path="/jobFamilyView.do" redirect="true" />
+    </action>
+
+    <action path="/jobProfileView"
+            type="com.helmet.application.admin.JobProfileView"
+            name="JobProfileViewFormAdmin"
+            scope="request"
+            input="/jobSubFamilyList.do"
+            validate="false">
+        <forward name="success" path="jobProfileView.page" />
+    </action>
+
+    <action path="/jobProfileNew"
+            type="com.helmet.application.admin.JobProfileNew"
+            name="JobProfileFormAdmin"
+            scope="request"
+            input="/jobSubFamilyView.do"
+            validate="false">
+        <forward name="success" path="jobProfileNew.page" />
+    </action>
+
+    <action path="/jobProfileNewProcess"
+            type="com.helmet.application.admin.JobProfileNewProcess"
+            name="JobProfileFormAdmin"
+            scope="request"
+            input="jobProfileNew.page"
+            validate="true">
+        <forward name="success" path="/jobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/jobProfileEdit"
+            type="com.helmet.application.admin.JobProfileEdit"
+            name="JobProfileFormAdmin"
+            scope="request"
+            input="/jobSubFamilyView.do"
+            validate="false">
+        <forward name="success" path="jobProfileEdit.page" />
+    </action>
+
+    <action path="/jobProfileEditProcess"
+            type="com.helmet.application.admin.JobProfileEditProcess"
+            name="JobProfileFormAdmin"
+            scope="request"
+            input="jobProfileEdit.page"
+            validate="true">
+        <forward name="success" path="/jobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/jobProfileDelete"
+            type="com.helmet.application.admin.JobProfileView"
+            name="JobProfileViewFormAdmin"
+            scope="request"
+            input="/jobProfileView.do"
+            validate="false">
+        <forward name="success" path="jobProfileDelete.page" />
+    </action>
+
+    <action path="/jobProfileDeleteProcess"
+            type="com.helmet.application.admin.JobProfileDeleteProcess"
+            name="JobProfileViewFormAdmin"
+            scope="request"
+            input="jobProfileDelete.page"
+            validate="false">
+        <forward name="success" path="/jobSubFamilyView.do" redirect="true" />
+    </action>
+
+    <action path="/jobProfileOrder"
+            type="com.helmet.application.admin.JobProfileOrder"
+            name="JobProfileDisplayOrderFormAdmin"
+            scope="request"
+            input="jobSubFamilyView.page"
+            validate="false">
+        <forward name="success" path="jobProfileOrder.page" />
+    </action>
+
+    <action path="/jobProfileOrderProcess"
+            type="com.helmet.application.admin.JobProfileOrderProcess"
+            name="JobProfileDisplayOrderFormAdmin"
+            scope="request"
+            input="jobProfileOrder.page"
+            validate="true">
+        <forward name="success" path="/jobSubFamilyView.do" redirect="true" />
+    </action>
+
+    <action path="/clientList"
+            type="com.helmet.application.admin.ClientList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="clientList.page" />
+    </action>
+
+    <action path="/clientView"
+            type="com.helmet.application.admin.ClientView"
+            name="ClientViewFormAdmin"
+            scope="request"
+            input="/clientList.do"
+            validate="false">
+        <forward name="success" path="clientView.page" />
+    </action>
+
+    <action path="/clientNew"
+            type="com.helmet.application.admin.ClientNew"
+            name="ClientFormAdmin"
+            scope="request"
+            input="/clientList.do"
+            validate="false">
+        <forward name="success" path="clientNew.page" />
+    </action>
+
+    <action path="/clientNewProcess"
+            type="com.helmet.application.admin.ClientNewProcess"
+            name="ClientFormAdmin"
+            scope="request"
+            input="clientNew.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/clientEdit"
+            type="com.helmet.application.admin.ClientEdit"
+            name="ClientFormAdmin"
+            scope="request"
+            input="/clientList.do"
+            validate="false">
+        <forward name="success" path="clientEdit.page" />
+    </action>
+
+    <action path="/clientEditProcess"
+            type="com.helmet.application.admin.ClientEditProcess"
+            name="ClientFormAdmin"
+            scope="request"
+            input="clientEdit.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/clientDelete"
+            type="com.helmet.application.admin.ClientView"
+            name="ClientViewFormAdmin"
+            scope="request"
+            input="/clientList.do"
+            validate="false">
+        <forward name="success" path="clientDelete.page" />
+    </action>
+
+    <action path="/clientDeleteProcess"
+            type="com.helmet.application.admin.ClientDeleteProcess"
+            name="ClientViewFormAdmin"
+            scope="request"
+            input="clientDelete.page"
+            validate="false">
+        <forward name="success" path="/clientList.do" redirect="true" />
+    </action>
+
+    <action path="/clientOrder"
+            type="com.helmet.application.admin.ClientOrder"
+            name="DisplayOrderFormAdmin"
+            scope="request"
+            input="/clientList.do"
+            validate="false">
+        <forward name="success" path="clientOrder.page" />
+    </action>
+
+    <action path="/clientOrderProcess"
+            type="com.helmet.application.admin.ClientOrderProcess"
+            name="DisplayOrderFormAdmin"
+            scope="request"
+            input="clientOrder.page"
+            validate="true">
+        <forward name="success" path="/clientList.do" redirect="true" />
+    </action>
+
+    <action path="/siteView"
+            type="com.helmet.application.admin.SiteView"
+            name="SiteViewFormAdmin"
+            scope="request"
+            input="/clientList.do"
+            validate="false">
+        <forward name="success" path="siteView.page" />
+    </action>
+
+    <action path="/siteNew"
+            type="com.helmet.application.admin.SiteNew"
+            name="SiteFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="siteNew.page" />
+    </action>
+
+    <action path="/siteNewProcess"
+            type="com.helmet.application.admin.SiteNewProcess"
+            name="SiteFormAdmin"
+            scope="request"
+            input="siteNew.page"
+            validate="true">
+        <forward name="success" path="/siteView.do" redirect="true" />
+    </action>
+
+    <action path="/siteEdit"
+            type="com.helmet.application.admin.SiteEdit"
+            name="SiteFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="siteEdit.page" />
+    </action>
+
+    <action path="/siteEditProcess"
+            type="com.helmet.application.admin.SiteEditProcess"
+            name="SiteFormAdmin"
+            scope="request"
+            input="siteEdit.page"
+            validate="true">
+        <forward name="success" path="/siteView.do" redirect="true" />
+    </action>
+
+    <action path="/siteDelete"
+            type="com.helmet.application.admin.SiteView"
+            name="SiteViewFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="siteDelete.page" />
+    </action>
+
+    <action path="/siteDeleteProcess"
+            type="com.helmet.application.admin.SiteDeleteProcess"
+            name="SiteViewFormAdmin"
+            scope="request"
+            input="siteDelete.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/siteOrder"
+            type="com.helmet.application.admin.SiteOrder"
+            name="ClientDisplayOrderFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="siteOrder.page" />
+    </action>
+
+    <action path="/siteOrderProcess"
+            type="com.helmet.application.admin.SiteOrderProcess"
+            name="ClientDisplayOrderFormAdmin"
+            scope="request"
+            input="siteOrder.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/managerView"
+            type="com.helmet.application.admin.ManagerView"
+            name="ManagerViewFormAdmin"
+            scope="request"
+            input="/clientList.do"
+            validate="false">
+        <forward name="success" path="managerView.page" />
+    </action>
+
+    <action path="/managerNew"
+            type="com.helmet.application.admin.ManagerNew"
+            name="ManagerFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="managerNew.page" />
+    </action>
+
+    <action path="/managerNewProcess"
+            type="com.helmet.application.admin.ManagerNewProcess"
+            name="ManagerFormAdmin"
+            scope="request"
+            input="managerNew.page"
+            validate="true">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/managerEdit"
+            type="com.helmet.application.admin.ManagerEdit"
+            name="ManagerFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="managerEdit.page" />
+    </action>
+
+    <action path="/managerEditProcess"
+            type="com.helmet.application.admin.ManagerEditProcess"
+            name="ManagerFormAdmin"
+            scope="request"
+            input="managerEdit.page"
+            validate="true">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/managerDelete"
+            type="com.helmet.application.admin.ManagerView"
+            name="ManagerViewFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="managerDelete.page" />
+    </action>
+
+    <action path="/managerDeleteProcess"
+            type="com.helmet.application.admin.ManagerDeleteProcess"
+            name="ManagerViewFormAdmin"
+            scope="request"
+            input="managerDelete.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/managerResetPwd"
+            type="com.helmet.application.admin.ManagerView"
+            name="ManagerViewFormAdmin"
+            scope="request"
+            input="managerView.page"
+            validate="false">
+        <forward name="success" path="managerResetPwd.page" />
+    </action>
+
+    <action path="/managerResetPwdProcess"
+            type="com.helmet.application.admin.ManagerResetPwdProcess"
+            name="ManagerViewFormAdmin"
+            scope="request"
+            input="managerResetPwd.page"
+            validate="false">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/managerResetSecretWord"
+            type="com.helmet.application.admin.ManagerView"
+            name="ManagerViewFormAdmin"
+            scope="request"
+            input="managerView.page"
+            validate="false">
+        <forward name="success" path="managerResetSecretWord.page" />
+    </action>
+
+    <action path="/managerResetSecretWordProcess"
+            type="com.helmet.application.admin.ManagerResetSecretWordProcess"
+            name="ManagerViewFormAdmin"
+            scope="request"
+            input="managerResetSecretWord.page"
+            validate="false">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/locationView"
+            type="com.helmet.application.admin.LocationView"
+            name="LocationViewFormAdmin"
+            scope="request"
+            input="/clientList.do"
+            validate="false">
+        <forward name="success" path="locationView.page" />
+    </action>
+
+    <action path="/locationNew"
+            type="com.helmet.application.admin.LocationNew"
+            name="LocationFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="locationNew.page" />
+    </action>
+
+    <action path="/locationNewProcess"
+            type="com.helmet.application.admin.LocationNewProcess"
+            name="LocationFormAdmin"
+            scope="request"
+            input="locationNew.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/locationEdit"
+            type="com.helmet.application.admin.LocationEdit"
+            name="LocationFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="locationEdit.page" />
+    </action>
+
+    <action path="/locationEditProcess"
+            type="com.helmet.application.admin.LocationEditProcess"
+            name="LocationFormAdmin"
+            scope="request"
+            input="locationEdit.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/locationDelete"
+            type="com.helmet.application.admin.LocationView"
+            name="LocationViewFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="locationDelete.page" />
+    </action>
+
+    <action path="/locationDeleteProcess"
+            type="com.helmet.application.admin.LocationDeleteProcess"
+            name="LocationViewFormAdmin"
+            scope="request"
+            input="locationDelete.page"
+            validate="false">
+        <forward name="success" path="/siteView.do" redirect="true" />
+    </action>
+
+    <action path="/locationOrder"
+            type="com.helmet.application.admin.LocationOrder"
+            name="SiteDisplayOrderFormAdmin"
+            scope="request"
+            input="/siteView.do"
+            validate="false">
+        <forward name="success" path="locationOrder.page" />
+    </action>
+
+    <action path="/locationOrderProcess"
+            type="com.helmet.application.admin.LocationOrderProcess"
+            name="LocationDisplayOrderFormAdmin"
+            scope="request"
+            input="locationOrder.page"
+            validate="true">
+        <forward name="success" path="/siteView.do" redirect="true" />
+    </action>
+
+    <action path="/locationManagerJobProfileNew"
+            type="com.helmet.application.admin.LocationManagerJobProfileNew"
+            name="LocationManagerJobProfileFormAdmin"
+            scope="request"
+            input="managerView.page"
+            validate="false">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/locationManagerJobProfileDelete"
+            type="com.helmet.application.admin.LocationManagerJobProfileDelete"
+            name="LocationManagerJobProfileFormAdmin"
+            scope="request"
+            input="managerView.page"
+            validate="false">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/gradeNew"
+            type="com.helmet.application.admin.GradeNew"
+            name="GradeFormAdmin"
+            scope="request"
+            input="/gradeList.do"
+            validate="false">
+        <forward name="success" path="gradeNew.page" />
+    </action>
+
+    <action path="/gradeNewProcess"
+            type="com.helmet.application.admin.GradeNewProcess"
+            name="GradeFormAdmin"
+            scope="request"
+            input="gradeNew.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/gradeView"
+            type="com.helmet.application.admin.GradeView"
+            name="GradeFormAdmin"
+            scope="request"
+            input="/gradeList.do"
+            validate="false">
+        <forward name="success" path="gradeView.page" />
+    </action>
+
+    <action path="/gradeEdit"
+            type="com.helmet.application.admin.GradeEdit"
+            name="GradeFormAdmin"
+            scope="request"
+            input="/gradeList.do"
+            validate="false">
+        <forward name="success" path="gradeEdit.page" />
+    </action>
+
+    <action path="/gradeEditProcess"
+            type="com.helmet.application.admin.GradeEditProcess"
+            name="GradeFormAdmin"
+            scope="request"
+            input="gradeEdit.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/gradeDelete"
+            type="com.helmet.application.admin.GradeView"
+            name="GradeFormAdmin"
+            scope="request"
+            input="/gradeList.do"
+            validate="false">
+        <forward name="success" path="gradeDelete.page" />
+    </action>
+
+    <action path="/gradeDeleteProcess"
+            type="com.helmet.application.admin.GradeDeleteProcess"
+            name="GradeFormAdmin"
+            scope="request"
+            input="gradeDelete.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/gradeOrder"
+            type="com.helmet.application.admin.GradeOrder"
+            name="ClientDisplayOrderFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="gradeOrder.page" />
+    </action>
+
+    <action path="/gradeOrderProcess"
+            type="com.helmet.application.admin.GradeOrderProcess"
+            name="ClientDisplayOrderFormAdmin"
+            scope="request"
+            input="gradeOrder.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/jobProfileGradeNew"
+            type="com.helmet.application.admin.JobProfileGradeNew"
+            name="JobProfileGradeFormAdmin"
+            scope="request"
+            input="jobProfileView.page"
+            validate="false">
+        <forward name="success" path="/jobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/jobProfileGradeDelete"
+            type="com.helmet.application.admin.JobProfileGradeDelete"
+            name="JobProfileGradeFormAdmin"
+            scope="request"
+            input="jobProfileView.page"
+            validate="false">
+        <forward name="success" path="/jobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/shiftNew"
+            type="com.helmet.application.admin.ShiftNew"
+            name="ShiftFormAdmin"
+            scope="request"
+            input="/locationView.do"
+            validate="false">
+        <forward name="success" path="shiftNew.page" />
+    </action>
+
+    <action path="/shiftNewProcess"
+            type="com.helmet.application.admin.ShiftNewProcess"
+            name="ShiftFormAdmin"
+            scope="request"
+            input="shiftNew.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/shiftView"
+            type="com.helmet.application.admin.ShiftView"
+            name="ShiftFormAdmin"
+            scope="request"
+            input="/locationView.do"
+            validate="false">
+        <forward name="success" path="shiftView.page" />
+    </action>
+
+
+    <action path="/shiftEdit"
+            type="com.helmet.application.admin.ShiftEdit"
+            name="ShiftFormAdmin"
+            scope="request"
+            input="/shiftView.do"
+            validate="false">
+        <forward name="success" path="shiftEdit.page" />
+    </action>
+
+    <action path="/shiftEditProcess"
+            type="com.helmet.application.admin.ShiftEditProcess"
+            name="ShiftFormAdmin"
+            scope="request"
+            input="shiftEdit.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/shiftDelete"
+            type="com.helmet.application.admin.ShiftView"
+            name="ShiftFormAdmin"
+            scope="request"
+            input="/shiftList.do"
+            validate="false">
+        <forward name="success" path="shiftDelete.page" />
+    </action>
+
+    <action path="/shiftDeleteProcess"
+            type="com.helmet.application.admin.ShiftDeleteProcess"
+            name="ShiftFormAdmin"
+            scope="request"
+            input="shiftDelete.page"
+            validate="false">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/shiftOrder"
+            type="com.helmet.application.admin.ShiftOrder"
+            name="LocationDisplayOrderFormAdmin"
+            scope="request"
+            input="/locationView.do"
+            validate="false">
+        <forward name="success" path="shiftOrder.page" />
+    </action>
+
+    <action path="/shiftOrderProcess"
+            type="com.helmet.application.admin.ShiftOrderProcess"
+            name="LocationDisplayOrderFormAdmin"
+            scope="request"
+            input="shiftOrder.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/agencyApplicantCopy"
+            type="com.helmet.application.admin.AgencyApplicantCopy"
+            name="AgencyApplicantCopyFormAdmin"
+            scope="request"
+            input="agencyView.do"
+            validate="false">
+        <forward name="success" path="agencyApplicantCopy.page" />
+    </action>
+
+    <action path="/agencyApplicantCopyXML"
+            type="com.helmet.application.admin.AgencyApplicantCopyXML"
+            name="AgencyApplicantCopyFormAdmin"
+            scope="request"
+            input="/agencyApplicantCopy.page"
+            validate="false">
+        <forward name="failure" path="/home.do" />
+    </action>
+
+    <action path="/agencyApplicantCopySelect"
+            type="com.helmet.application.admin.AgencyApplicantCopySelect"
+            name="AgencyApplicantCopyFormAdmin"
+            scope="request"
+            input="/agencyApplicantCopy.do"
+            validate="false">
+        <forward name="success" path="agencyApplicantCopySelect.page" />
+    </action>
+
+    <action path="/agencyApplicantCopyProcess"
+            type="com.helmet.application.admin.AgencyApplicantCopyProcess"
+            name="AgencyApplicantCopyFormAdmin"
+            scope="request"
+            input="/agencyApplicantCopySelect.do"
+            validate="false">
+        <forward name="success" path="/agencyApplicantCopySelect.do" />
+    </action>
+
+    <action path="/agencyList"
+            type="com.helmet.application.admin.AgencyList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="agencyList.page" />
+    </action>
+
+    <action path="/agencyView"
+            type="com.helmet.application.admin.AgencyView"
+            name="AgencyViewFormAdmin"
+            scope="request"
+            input="/agencyList.do"
+            validate="false">
+        <forward name="success" path="agencyView.page" />
+    </action>
+
+    <action path="/agencyNew"
+            type="com.helmet.application.admin.AgencyNew"
+            name="AgencyFormAdmin"
+            scope="request"
+            input="/agencyList.do"
+            validate="false">
+        <forward name="success" path="agencyNew.page" />
+    </action>
+
+    <action path="/agencyNewProcess"
+            type="com.helmet.application.admin.AgencyNewProcess"
+            name="AgencyFormAdmin"
+            scope="request"
+            input="agencyNew.page"
+            validate="true">
+        <forward name="success" path="/agencyView.do" redirect="true" />
+    </action>
+
+    <action path="/agencyEdit"
+            type="com.helmet.application.admin.AgencyEdit"
+            name="AgencyFormAdmin"
+            scope="request"
+            input="/agencyList.do"
+            validate="false">
+        <forward name="success" path="agencyEdit.page" />
+    </action>
+
+    <action path="/agencyEditProcess"
+            type="com.helmet.application.admin.AgencyEditProcess"
+            name="AgencyFormAdmin"
+            scope="request"
+            input="agencyEdit.page"
+            validate="true">
+        <forward name="success" path="/agencyView.do" redirect="true" />
+    </action>
+
+    <action path="/agencyDelete"
+            type="com.helmet.application.admin.AgencyView"
+            name="AgencyViewFormAdmin"
+            scope="request"
+            input="/agencyList.do"
+            validate="false">
+        <forward name="success" path="agencyDelete.page" />
+    </action>
+
+    <action path="/agencyDeleteProcess"
+            type="com.helmet.application.admin.AgencyDeleteProcess"
+            name="AgencyViewFormAdmin"
+            scope="request"
+            input="agencyDelete.page"
+            validate="false">
+        <forward name="success" path="/agencyList.do" redirect="true" />
+    </action>
+
+    <action path="/agencyOrder"
+            type="com.helmet.application.admin.AgencyOrder"
+            name="DisplayOrderFormAdmin"
+            scope="request"
+            input="/agencyList.do"
+            validate="false">
+        <forward name="success" path="agencyOrder.page" />
+    </action>
+
+    <action path="/agencyOrderProcess"
+            type="com.helmet.application.admin.AgencyOrderProcess"
+            name="DisplayOrderFormAdmin"
+            scope="request"
+            input="agencyOrder.page"
+            validate="true">
+        <forward name="success" path="/agencyList.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyNew"
+            type="com.helmet.application.admin.ClientAgencyNew"
+            name="ClientAgencyFormAdmin"
+            scope="request"
+            input="clientView.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyDelete"
+            type="com.helmet.application.admin.ClientAgencyDelete"
+            name="ClientAgencyFormAdmin"
+            scope="request"
+            input="clientView.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyEdit"
+            type="com.helmet.application.admin.ClientAgencyEdit"
+            name="ClientAgencyEditFormAdmin"
+            scope="request"
+            input="/clientAgencyView.page"
+            validate="false">
+        <forward name="success" path="clientAgencyEdit.page" />
+    </action>
+
+    <action path="/clientAgencyEditProcess"
+            type="com.helmet.application.admin.ClientAgencyEditProcess"
+            name="ClientAgencyEditFormAdmin"
+            scope="request"
+            input="clientAgencyEdit.page"
+            validate="true">
+        <forward name="success" path="/clientAgencyView.do" redirect="true" />
+    </action>
+
+    <action path="/clientReEnterPwdNew"
+            type="com.helmet.application.admin.ClientReEnterPwdNew"
+            name="ClientReEnterPwdFormAdmin"
+            scope="request"
+            input="clientView.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/clientReEnterPwdDelete"
+            type="com.helmet.application.admin.ClientReEnterPwdDelete"
+            name="ClientReEnterPwdFormAdmin"
+            scope="request"
+            input="clientView.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+
+
+    <action path="/clientAgencyJobProfileNew"
+            type="com.helmet.application.admin.ClientAgencyJobProfileNew"
+            name="ClientAgencyJobProfileFormAdmin"
+            scope="request"
+            input="jobProfileView.page"
+            validate="false">
+        <forward name="success" path="/jobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyJobProfileDelete"
+            type="com.helmet.application.admin.ClientAgencyJobProfileDelete"
+            name="ClientAgencyJobProfileFormAdmin"
+            scope="request"
+            input="jobProfileView.page"
+            validate="false">
+        <forward name="success" path="/jobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyJobProfileView"
+            type="com.helmet.application.admin.ClientAgencyJobProfileView"
+            name="ClientAgencyJobProfileViewFormAdmin"
+            scope="request"
+            input="/jobProfileView.page"
+            validate="false">
+        <forward name="success" path="clientAgencyJobProfileView.page" />
+    </action>
+
+    <action path="/clientAgencyJobProfileEdit"
+            type="com.helmet.application.admin.ClientAgencyJobProfileEdit"
+            name="ClientAgencyJobProfileEditFormAdmin"
+            scope="request"
+            input="/clientAgencyJobProfileView.page"
+            validate="false">
+        <forward name="success" path="clientAgencyJobProfileEdit.page" />
+    </action>
+
+    <action path="/clientAgencyJobProfileEditProcess"
+            type="com.helmet.application.admin.ClientAgencyJobProfileEditProcess"
+            name="ClientAgencyJobProfileEditFormAdmin"
+            scope="request"
+            input="clientAgencyJobProfileEdit.page"
+            validate="true">
+        <forward name="success" path="/clientAgencyJobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyView"
+            type="com.helmet.application.admin.ClientAgencyView"
+            name="ClientAgencyViewFormAdmin"
+            scope="request"
+            input="/clientView.page"
+            validate="false">
+        <forward name="success" path="clientAgencyView.page" />
+    </action>
+
+    <action path="/clientAgencyGradeNew"
+            type="com.helmet.application.admin.ClientAgencyGradeNew"
+            name="ClientAgencyGradeFormAdmin"
+            scope="request"
+            input="clientAgencyView.page"
+            validate="false">
+        <forward name="success" path="/clientAgencyView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyGradeDelete"
+            type="com.helmet.application.admin.ClientAgencyGradeDelete"
+            name="ClientAgencyGradeFormAdmin"
+            scope="request"
+            input="clientAgencyView.page"
+            validate="false">
+        <forward name="success" path="/clientAgencyView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyGradeView"
+            type="com.helmet.application.admin.ClientAgencyGradeView"
+            name="ClientAgencyGradeViewFormAdmin"
+            scope="request"
+            input="/clientAgencyView.page"
+            validate="false">
+        <forward name="success" path="clientAgencyGradeView.page" />
+    </action>
+
+    <action path="/clientAgencyGradeEdit"
+            type="com.helmet.application.admin.ClientAgencyGradeEdit"
+            name="ClientAgencyGradeEditFormAdmin"
+            scope="request"
+            input="/clientAgencyGradeView.page"
+            validate="false">
+        <forward name="success" path="clientAgencyGradeEdit.page" />
+    </action>
+
+    <action path="/clientAgencyGradeEditProcess"
+            type="com.helmet.application.admin.ClientAgencyGradeEditProcess"
+            name="ClientAgencyGradeEditFormAdmin"
+            scope="request"
+            input="clientAgencyGradeEdit.page"
+            validate="true">
+        <forward name="success" path="/clientAgencyView.do" redirect="true" />
+    </action>
+
+    <action path="/reasonForRequestNew"
+            type="com.helmet.application.admin.ReasonForRequestNew"
+            name="ReasonForRequestFormAdmin"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false">
+        <forward name="success" path="reasonForRequestNew.page" />
+    </action>
+
+    <action path="/reasonForRequestNewProcess"
+            type="com.helmet.application.admin.ReasonForRequestNewProcess"
+            name="ReasonForRequestFormAdmin"
+            scope="request"
+            input="reasonForRequestNew.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/reasonForRequestView"
+            type="com.helmet.application.admin.ReasonForRequestView"
+            name="ReasonForRequestFormAdmin"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false">
+        <forward name="success" path="reasonForRequestView.page" />
+    </action>
+
+    <action path="/reasonForRequestEdit"
+            type="com.helmet.application.admin.ReasonForRequestEdit"
+            name="ReasonForRequestFormAdmin"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false">
+        <forward name="success" path="reasonForRequestEdit.page" />
+    </action>
+
+    <action path="/reasonForRequestEditProcess"
+            type="com.helmet.application.admin.ReasonForRequestEditProcess"
+            name="ReasonForRequestFormAdmin"
+            scope="request"
+            input="reasonForRequestEdit.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/reasonForRequestDelete"
+            type="com.helmet.application.admin.ReasonForRequestView"
+            name="ReasonForRequestFormAdmin"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false">
+        <forward name="success" path="reasonForRequestDelete.page" />
+    </action>
+
+    <action path="/reasonForRequestDeleteProcess"
+            type="com.helmet.application.admin.ReasonForRequestDeleteProcess"
+            name="ReasonForRequestFormAdmin"
+            scope="request"
+            input="reasonForRequestDelete.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/reasonForRequestOrder"
+            type="com.helmet.application.admin.ReasonForRequestOrder"
+            name="ClientDisplayOrderFormAdmin"
+            scope="request"
+            input="/clientView.do"
+            validate="false">
+        <forward name="success" path="reasonForRequestOrder.page" />
+    </action>
+
+    <action path="/reasonForRequestOrderProcess"
+            type="com.helmet.application.admin.ReasonForRequestOrderProcess"
+            name="ClientDisplayOrderFormAdmin"
+            scope="request"
+            input="reasonForRequestOrder.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/publicHolidayNew"
+            type="com.helmet.application.admin.PublicHolidayNew"
+            name="PublicHolidayFormAdmin"
+            scope="request"
+            input="/publicHolidayList.do"
+            validate="false">
+        <forward name="success" path="publicHolidayNew.page" />
+    </action>
+
+    <action path="/publicHolidayNewProcess"
+            type="com.helmet.application.admin.PublicHolidayNewProcess"
+            name="PublicHolidayFormAdmin"
+            scope="request"
+            input="publicHolidayNew.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/publicHolidayView"
+            type="com.helmet.application.admin.PublicHolidayView"
+            name="PublicHolidayFormAdmin"
+            scope="request"
+            input="/publicHolidayList.do"
+            validate="false">
+        <forward name="success" path="publicHolidayView.page" />
+    </action>
+
+    <action path="/publicHolidayEdit"
+            type="com.helmet.application.admin.PublicHolidayEdit"
+            name="PublicHolidayFormAdmin"
+            scope="request"
+            input="/publicHolidayList.do"
+            validate="false">
+        <forward name="success" path="publicHolidayEdit.page" />
+    </action>
+
+    <action path="/publicHolidayEditProcess"
+            type="com.helmet.application.admin.PublicHolidayEditProcess"
+            name="PublicHolidayFormAdmin"
+            scope="request"
+            input="publicHolidayEdit.page"
+            validate="true">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/publicHolidayDelete"
+            type="com.helmet.application.admin.PublicHolidayView"
+            name="PublicHolidayFormAdmin"
+            scope="request"
+            input="/publicHolidayList.do"
+            validate="false">
+        <forward name="success" path="publicHolidayDelete.page" />
+    </action>
+
+    <action path="/publicHolidayDeleteProcess"
+            type="com.helmet.application.admin.PublicHolidayDeleteProcess"
+            name="PublicHolidayFormAdmin"
+            scope="request"
+            input="publicHolidayDelete.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/upliftList"
+            type="com.helmet.application.admin.UpliftList"
+            name="ClientListFormAdmin"
+            scope="request"
+            input="clientView.page"
+            validate="false">
+        <forward name="success" path="upliftList.page" />
+    </action>
+
+    <action path="/upliftNew"
+            type="com.helmet.application.admin.UpliftNew"
+            name="UpliftFormAdmin"
+            scope="request"
+            input="/upliftList.do"
+            validate="false">
+        <forward name="success" path="upliftNew.page" />
+    </action>
+
+    <action path="/upliftNewProcess"
+            type="com.helmet.application.admin.UpliftNewProcess"
+            name="UpliftFormAdmin"
+            scope="request"
+            input="upliftNew.page"
+            validate="true">
+        <forward name="success" path="/upliftList.do" redirect="true" />
+    </action>
+
+    <action path="/upliftView"
+            type="com.helmet.application.admin.UpliftView"
+            name="UpliftFormAdmin"
+            scope="request"
+            input="/upliftList.do"
+            validate="false">
+        <forward name="success" path="upliftView.page" />
+    </action>
+
+    <action path="/upliftEdit"
+            type="com.helmet.application.admin.UpliftEdit"
+            name="UpliftFormAdmin"
+            scope="request"
+            input="/upliftList.do"
+            validate="false">
+        <forward name="success" path="upliftEdit.page" />
+    </action>
+
+    <action path="/upliftEditProcess"
+            type="com.helmet.application.admin.UpliftEditProcess"
+            name="UpliftFormAdmin"
+            scope="request"
+            input="upliftEdit.page"
+            validate="true">
+        <forward name="success" path="/upliftList.do" redirect="true" />
+    </action>
+
+    <action path="/upliftDelete"
+            type="com.helmet.application.admin.UpliftView"
+            name="UpliftFormAdmin"
+            scope="request"
+            input="/upliftList.do"
+            validate="false">
+        <forward name="success" path="upliftDelete.page" />
+    </action>
+
+    <action path="/upliftDeleteProcess"
+            type="com.helmet.application.admin.UpliftDeleteProcess"
+            name="UpliftFormAdmin"
+            scope="request"
+            input="upliftDelete.page"
+            validate="false">
+        <forward name="success" path="/upliftList.do" redirect="true" />
+    </action>
+
+    <action path="/upliftMinutesEdit"
+            type="com.helmet.application.admin.UpliftMinutesEdit"
+            name="UpliftMinutesFormAdmin"
+            scope="request"
+            input="/upliftView.do"
+            validate="false">
+        <forward name="success" path="upliftMinutesEdit.page" />
+    </action>
+
+    <action path="/upliftMinutesEditProcess"
+            type="com.helmet.application.admin.UpliftMinutesEditProcess"
+            name="UpliftMinutesFormAdmin"
+            scope="request"
+            input="upliftMinutesEdit.page"
+            validate="true">
+        <forward name="success" path="/upliftView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyJobProfileGradeNew"
+            type="com.helmet.application.admin.ClientAgencyJobProfileGradeNew"
+            name="ClientAgencyJobProfileGradeFormAdmin"
+            scope="request"
+            input="clientAgencyJobProfileView.page"
+            validate="false">
+        <forward name="success" path="/clientAgencyJobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyJobProfileGradeDelete"
+            type="com.helmet.application.admin.ClientAgencyJobProfileGradeDelete"
+            name="ClientAgencyJobProfileGradeFormAdmin"
+            scope="request"
+            input="clientAgencyJobProfileView.page"
+            validate="false">
+        <forward name="success" path="/clientAgencyJobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/clientAgencyJobProfileGradeView"
+            type="com.helmet.application.admin.ClientAgencyJobProfileGradeView"
+            name="ClientAgencyJobProfileGradeViewFormAdmin"
+            scope="request"
+            input="/clientAgencyJobProfileView.page"
+            validate="false">
+        <forward name="success" path="clientAgencyJobProfileGradeView.page" />
+    </action>
+
+    <action path="/clientAgencyJobProfileGradeEdit"
+            type="com.helmet.application.admin.ClientAgencyJobProfileGradeEdit"
+            name="ClientAgencyJobProfileGradeEditFormAdmin"
+            scope="request"
+            input="/clientAgencyJobProfileGradeView.page"
+            validate="false">
+        <forward name="success" path="clientAgencyJobProfileGradeEdit.page" />
+    </action>
+
+    <action path="/clientAgencyJobProfileGradeEditProcess"
+            type="com.helmet.application.admin.ClientAgencyJobProfileGradeEditProcess"
+            name="ClientAgencyJobProfileGradeEditFormAdmin"
+            scope="request"
+            input="clientAgencyJobProfileGradeEdit.page"
+            validate="true">
+        <forward name="success" path="/clientAgencyJobProfileView.do" redirect="true" />
+    </action>
+
+    <action path="/expenseNew"
+            type="com.helmet.application.admin.ExpenseNew"
+            name="ExpenseFormAdmin"
+            scope="request"
+            input="/expenseList.do"
+            validate="false">
+        <forward name="success" path="expenseNew.page" />
+    </action>
+
+    <action path="/expenseNewProcess"
+            type="com.helmet.application.admin.ExpenseNewProcess"
+            name="ExpenseFormAdmin"
+            scope="request"
+            input="expenseNew.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/expenseView"
+            type="com.helmet.application.admin.ExpenseView"
+            name="ExpenseFormAdmin"
+            scope="request"
+            input="/expenseList.do"
+            validate="false">
+        <forward name="success" path="expenseView.page" />
+    </action>
+
+    <action path="/expenseEdit"
+            type="com.helmet.application.admin.ExpenseEdit"
+            name="ExpenseFormAdmin"
+            scope="request"
+            input="/expenseList.do"
+            validate="false">
+        <forward name="success" path="expenseEdit.page" />
+    </action>
+
+    <action path="/expenseEditProcess"
+            type="com.helmet.application.admin.ExpenseEditProcess"
+            name="ExpenseFormAdmin"
+            scope="request"
+            input="expenseEdit.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/expenseDelete"
+            type="com.helmet.application.admin.ExpenseView"
+            name="ExpenseFormAdmin"
+            scope="request"
+            input="/expenseList.do"
+            validate="false">
+        <forward name="success" path="expenseDelete.page" />
+    </action>
+
+    <action path="/expenseDeleteProcess"
+            type="com.helmet.application.admin.ExpenseDeleteProcess"
+            name="ExpenseFormAdmin"
+            scope="request"
+            input="expenseDelete.page"
+            validate="false">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/expenseOrder"
+            type="com.helmet.application.admin.ExpenseOrder"
+            name="LocationDisplayOrderFormAdmin"
+            scope="request"
+            input="/locationView.do"
+            validate="false">
+        <forward name="success" path="expenseOrder.page" />
+    </action>
+
+    <action path="/expenseOrderProcess"
+            type="com.helmet.application.admin.ExpenseOrderProcess"
+            name="LocationDisplayOrderFormAdmin"
+            scope="request"
+            input="expenseOrder.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/dressCodeNew"
+            type="com.helmet.application.admin.DressCodeNew"
+            name="DressCodeFormAdmin"
+            scope="request"
+            input="/locationView.do"
+            validate="false">
+        <forward name="success" path="dressCodeNew.page" />
+    </action>
+
+    <action path="/dressCodeNewProcess"
+            type="com.helmet.application.admin.DressCodeNewProcess"
+            name="DressCodeFormAdmin"
+            scope="request"
+            input="dressCodeNew.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+
+    <action path="/dressCodeView"
+            type="com.helmet.application.admin.DressCodeView"
+            name="DressCodeFormAdmin"
+            scope="request"
+            input="/locationView.do"
+            validate="false">
+        <forward name="success" path="dressCodeView.page" />
+    </action>
+
+
+    <action path="/dressCodeEdit"
+            type="com.helmet.application.admin.DressCodeEdit"
+            name="DressCodeFormAdmin"
+            scope="request"
+            input="/dressCodeView.do"
+            validate="false">
+        <forward name="success" path="dressCodeEdit.page" />
+    </action>
+
+    <action path="/dressCodeEditProcess"
+            type="com.helmet.application.admin.DressCodeEditProcess"
+            name="DressCodeFormAdmin"
+            scope="request"
+            input="dressCodeEdit.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/dressCodeDelete"
+            type="com.helmet.application.admin.DressCodeView"
+            name="DressCodeFormAdmin"
+            scope="request"
+            input="/dressCodeList.do"
+            validate="false">
+        <forward name="success" path="dressCodeDelete.page" />
+    </action>
+
+    <action path="/dressCodeDeleteProcess"
+            type="com.helmet.application.admin.DressCodeDeleteProcess"
+            name="DressCodeFormAdmin"
+            scope="request"
+            input="dressCodeDelete.page"
+            validate="false">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/dressCodeOrder"
+            type="com.helmet.application.admin.DressCodeOrder"
+            name="LocationDisplayOrderFormAdmin"
+            scope="request"
+            input="/locationView.do"
+            validate="false">
+        <forward name="success" path="dressCodeOrder.page" />
+    </action>
+
+    <action path="/dressCodeOrderProcess"
+            type="com.helmet.application.admin.DressCodeOrderProcess"
+            name="LocationDisplayOrderFormAdmin"
+            scope="request"
+            input="dressCodeOrder.page"
+            validate="true">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/mgrAccessList"
+            type="com.helmet.application.admin.MgrAccessList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="mgrAccessList.page" />
+    </action>
+
+    <action path="/mgrAccessNew"
+            type="com.helmet.application.admin.MgrAccessNew"
+            name="MgrAccessFormAdmin"
+            scope="request"
+            input="/mgrAccessList.do"
+            validate="false">
+        <forward name="success" path="mgrAccessNew.page" />
+    </action>
+
+    <action path="/mgrAccessNewProcess"
+            type="com.helmet.application.admin.MgrAccessNewProcess"
+            name="MgrAccessFormAdmin"
+            scope="request"
+            input="mgrAccessNew.page"
+            validate="true">
+        <forward name="success" path="/mgrAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/mgrAccessView"
+            type="com.helmet.application.admin.MgrAccessView"
+            name="MgrAccessFormAdmin"
+            scope="request"
+            input="/mgrAccessList.do"
+            validate="false">
+        <forward name="success" path="mgrAccessView.page" />
+    </action>
+
+    <action path="/mgrAccessEdit"
+            type="com.helmet.application.admin.MgrAccessEdit"
+            name="MgrAccessFormAdmin"
+            scope="request"
+            input="/mgrAccessList.do"
+            validate="false">
+        <forward name="success" path="mgrAccessEdit.page" />
+    </action>
+
+    <action path="/mgrAccessEditProcess"
+            type="com.helmet.application.admin.MgrAccessEditProcess"
+            name="MgrAccessFormAdmin"
+            scope="request"
+            input="mgrAccessEdit.page"
+            validate="true">
+        <forward name="success" path="/mgrAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/mgrAccessDelete"
+            type="com.helmet.application.admin.MgrAccessView"
+            name="MgrAccessFormAdmin"
+            scope="request"
+            input="/mgrAccessList.do"
+            validate="false">
+        <forward name="success" path="mgrAccessDelete.page" />
+    </action>
+
+    <action path="/mgrAccessDeleteProcess"
+            type="com.helmet.application.admin.MgrAccessDeleteProcess"
+            name="MgrAccessFormAdmin"
+            scope="request"
+            input="mgrAccessDelete.page"
+            validate="false">
+        <forward name="success" path="/mgrAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/mgrAccessGroupList"
+            type="com.helmet.application.admin.MgrAccessGroupList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="mgrAccessGroupList.page" />
+    </action>
+
+    <action path="/mgrAccessGroupNew"
+            type="com.helmet.application.admin.MgrAccessGroupNew"
+            name="MgrAccessGroupFormAdmin"
+            scope="request"
+            input="/mgrAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="mgrAccessGroupNew.page" />
+    </action>
+
+    <action path="/mgrAccessGroupNewProcess"
+            type="com.helmet.application.admin.MgrAccessGroupNewProcess"
+            name="MgrAccessGroupFormAdmin"
+            scope="request"
+            input="mgrAccessGroupNew.page"
+            validate="true">
+        <forward name="success" path="/mgrAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/mgrAccessGroupView"
+            type="com.helmet.application.admin.MgrAccessGroupView"
+            name="MgrAccessGroupViewFormAdmin"
+            scope="request"
+            input="/mgrAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="mgrAccessGroupView.page" />
+    </action>
+
+    <action path="/mgrAccessGroupEdit"
+            type="com.helmet.application.admin.MgrAccessGroupEdit"
+            name="MgrAccessGroupFormAdmin"
+            scope="request"
+            input="/mgrAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="mgrAccessGroupEdit.page" />
+    </action>
+
+    <action path="/mgrAccessGroupEditProcess"
+            type="com.helmet.application.admin.MgrAccessGroupEditProcess"
+            name="MgrAccessGroupFormAdmin"
+            scope="request"
+            input="mgrAccessGroupEdit.page"
+            validate="true">
+        <forward name="success" path="/mgrAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/mgrAccessGroupDelete"
+            type="com.helmet.application.admin.MgrAccessGroupView"
+            name="MgrAccessGroupViewFormAdmin"
+            scope="request"
+            input="/mgrAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="mgrAccessGroupDelete.page" />
+    </action>
+
+    <action path="/mgrAccessGroupDeleteProcess"
+            type="com.helmet.application.admin.MgrAccessGroupDeleteProcess"
+            name="MgrAccessGroupViewFormAdmin"
+            scope="request"
+            input="mgrAccessGroupDelete.page"
+            validate="false">
+        <forward name="success" path="/clientView.do" redirect="true" />
+    </action>
+
+    <action path="/mgrAccessGroupItemNew"
+            type="com.helmet.application.admin.MgrAccessGroupItemNew"
+            name="MgrAccessGroupItemFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/mgrAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/mgrAccessGroupItemDelete"
+            type="com.helmet.application.admin.MgrAccessGroupItemDelete"
+            name="MgrAccessGroupItemFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/mgrAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/managerAccessGroupNew"
+            type="com.helmet.application.admin.ManagerAccessGroupNew"
+            name="ManagerAccessGroupFormAdmin"
+            scope="request"
+            input="managerView.page"
+            validate="false">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/managerAccessGroupDelete"
+            type="com.helmet.application.admin.ManagerAccessGroupDelete"
+            name="ManagerAccessGroupFormAdmin"
+            scope="request"
+            input="managerView.page"
+            validate="false">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/managerAccessNew"
+            type="com.helmet.application.admin.ManagerAccessNew"
+            name="ManagerAccessFormAdmin"
+            scope="request"
+            input="managerView.page"
+            validate="false">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/managerAccessDelete"
+            type="com.helmet.application.admin.ManagerAccessDelete"
+            name="ManagerAccessFormAdmin"
+            scope="request"
+            input="managerView.page"
+            validate="false">
+        <forward name="success" path="/managerView.do" redirect="true" />
+    </action>
+
+    <action path="/consultantView"
+            type="com.helmet.application.admin.ConsultantView"
+            name="ConsultantViewFormAdmin"
+            scope="request"
+            input="/agencyList.do"
+            validate="false">
+        <forward name="success" path="consultantView.page" />
+    </action>
+
+    <action path="/consultantNew"
+            type="com.helmet.application.admin.ConsultantNew"
+            name="ConsultantFormAdmin"
+            scope="request"
+            input="/agencyView.do"
+            validate="false">
+        <forward name="success" path="consultantNew.page" />
+    </action>
+
+    <action path="/consultantNewProcess"
+            type="com.helmet.application.admin.ConsultantNewProcess"
+            name="ConsultantFormAdmin"
+            scope="request"
+            input="consultantNew.page"
+            validate="true">
+        <forward name="success" path="/consultantView.do" redirect="true" />
+    </action>
+
+    <action path="/consultantEdit"
+            type="com.helmet.application.admin.ConsultantEdit"
+            name="ConsultantFormAdmin"
+            scope="request"
+            input="/agencyView.do"
+            validate="false">
+        <forward name="success" path="consultantEdit.page" />
+    </action>
+
+    <action path="/consultantEditProcess"
+            type="com.helmet.application.admin.ConsultantEditProcess"
+            name="ConsultantFormAdmin"
+            scope="request"
+            input="consultantEdit.page"
+            validate="true">
+        <forward name="success" path="/consultantView.do" redirect="true" />
+    </action>
+
+    <action path="/consultantDelete"
+            type="com.helmet.application.admin.ConsultantView"
+            name="ConsultantViewFormAdmin"
+            scope="request"
+            input="/agencyView.do"
+            validate="false">
+        <forward name="success" path="consultantDelete.page" />
+    </action>
+
+    <action path="/consultantDeleteProcess"
+            type="com.helmet.application.admin.ConsultantDeleteProcess"
+            name="ConsultantViewFormAdmin"
+            scope="request"
+            input="consultantDelete.page"
+            validate="false">
+        <forward name="success" path="/agencyView.do" redirect="true" />
+    </action>
+
+    <action path="/agyAccessList"
+            type="com.helmet.application.admin.AgyAccessList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="agyAccessList.page" />
+    </action>
+
+    <action path="/agyAccessNew"
+            type="com.helmet.application.admin.AgyAccessNew"
+            name="AgyAccessFormAdmin"
+            scope="request"
+            input="/agyAccessList.do"
+            validate="false">
+        <forward name="success" path="agyAccessNew.page" />
+    </action>
+
+    <action path="/agyAccessNewProcess"
+            type="com.helmet.application.admin.AgyAccessNewProcess"
+            name="AgyAccessFormAdmin"
+            scope="request"
+            input="agyAccessNew.page"
+            validate="true">
+        <forward name="success" path="/agyAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/agyAccessView"
+            type="com.helmet.application.admin.AgyAccessView"
+            name="AgyAccessFormAdmin"
+            scope="request"
+            input="/agyAccessList.do"
+            validate="false">
+        <forward name="success" path="agyAccessView.page" />
+    </action>
+
+    <action path="/agyAccessEdit"
+            type="com.helmet.application.admin.AgyAccessEdit"
+            name="AgyAccessFormAdmin"
+            scope="request"
+            input="/agyAccessList.do"
+            validate="false">
+        <forward name="success" path="agyAccessEdit.page" />
+    </action>
+
+    <action path="/agyAccessEditProcess"
+            type="com.helmet.application.admin.AgyAccessEditProcess"
+            name="AgyAccessFormAdmin"
+            scope="request"
+            input="agyAccessEdit.page"
+            validate="true">
+        <forward name="success" path="/agyAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/agyAccessDelete"
+            type="com.helmet.application.admin.AgyAccessView"
+            name="AgyAccessFormAdmin"
+            scope="request"
+            input="/agyAccessList.do"
+            validate="false">
+        <forward name="success" path="agyAccessDelete.page" />
+    </action>
+
+    <action path="/agyAccessDeleteProcess"
+            type="com.helmet.application.admin.AgyAccessDeleteProcess"
+            name="AgyAccessFormAdmin"
+            scope="request"
+            input="agyAccessDelete.page"
+            validate="false">
+        <forward name="success" path="/agyAccessList.do" redirect="true" />
+    </action>
+
+    <action path="/agyAccessGroupList"
+            type="com.helmet.application.admin.AgyAccessGroupList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="agyAccessGroupList.page" />
+    </action>
+
+    <action path="/agyAccessGroupNew"
+            type="com.helmet.application.admin.AgyAccessGroupNew"
+            name="AgyAccessGroupFormAdmin"
+            scope="request"
+            input="/agyAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="agyAccessGroupNew.page" />
+    </action>
+
+    <action path="/agyAccessGroupNewProcess"
+            type="com.helmet.application.admin.AgyAccessGroupNewProcess"
+            name="AgyAccessGroupFormAdmin"
+            scope="request"
+            input="agyAccessGroupNew.page"
+            validate="true">
+        <forward name="success" path="/agyAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/agyAccessGroupView"
+            type="com.helmet.application.admin.AgyAccessGroupView"
+            name="AgyAccessGroupViewFormAdmin"
+            scope="request"
+            input="/agyAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="agyAccessGroupView.page" />
+    </action>
+
+    <action path="/agyAccessGroupEdit"
+            type="com.helmet.application.admin.AgyAccessGroupEdit"
+            name="AgyAccessGroupFormAdmin"
+            scope="request"
+            input="/agyAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="agyAccessGroupEdit.page" />
+    </action>
+
+    <action path="/agyAccessGroupEditProcess"
+            type="com.helmet.application.admin.AgyAccessGroupEditProcess"
+            name="AgyAccessGroupFormAdmin"
+            scope="request"
+            input="agyAccessGroupEdit.page"
+            validate="true">
+        <forward name="success" path="/agyAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/agyAccessGroupDelete"
+            type="com.helmet.application.admin.AgyAccessGroupView"
+            name="AgyAccessGroupViewFormAdmin"
+            scope="request"
+            input="/agyAccessGroupList.do"
+            validate="false">
+        <forward name="success" path="agyAccessGroupDelete.page" />
+    </action>
+
+    <action path="/agyAccessGroupDeleteProcess"
+            type="com.helmet.application.admin.AgyAccessGroupDeleteProcess"
+            name="AgyAccessGroupViewFormAdmin"
+            scope="request"
+            input="agyAccessGroupDelete.page"
+            validate="false">
+        <forward name="success" path="/agencyView.do" redirect="true" />
+    </action>
+
+    <action path="/agyAccessGroupItemNew"
+            type="com.helmet.application.admin.AgyAccessGroupItemNew"
+            name="AgyAccessGroupItemFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/agyAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/agyAccessGroupItemDelete"
+            type="com.helmet.application.admin.AgyAccessGroupItemDelete"
+            name="AgyAccessGroupItemFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="/agyAccessGroupView.do" redirect="true" />
+    </action>
+
+    <action path="/consultantAccessGroupNew"
+            type="com.helmet.application.admin.ConsultantAccessGroupNew"
+            name="ConsultantAccessGroupFormAdmin"
+            scope="request"
+            input="consultantView.page"
+            validate="false">
+        <forward name="success" path="/consultantView.do" redirect="true" />
+    </action>
+
+    <action path="/consultantAccessGroupDelete"
+            type="com.helmet.application.admin.ConsultantAccessGroupDelete"
+            name="ConsultantAccessGroupFormAdmin"
+            scope="request"
+            input="consultantView.page"
+            validate="false">
+        <forward name="success" path="/consultantView.do" redirect="true" />
+    </action>
+
+    <action path="/consultantAccessNew"
+            type="com.helmet.application.admin.ConsultantAccessNew"
+            name="ConsultantAccessFormAdmin"
+            scope="request"
+            input="consultantView.page"
+            validate="false">
+        <forward name="success" path="/consultantView.do" redirect="true" />
+    </action>
+
+    <action path="/consultantAccessDelete"
+            type="com.helmet.application.admin.ConsultantAccessDelete"
+            name="ConsultantAccessFormAdmin"
+            scope="request"
+            input="consultantView.page"
+            validate="false">
+        <forward name="success" path="/consultantView.do" redirect="true" />
+    </action>
+
+    <action path="/locationJobProfileNew"
+            type="com.helmet.application.admin.LocationJobProfileNew"
+            name="LocationJobProfileFormAdmin"
+            scope="request"
+            input="locationView.page"
+            validate="false">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/locationJobProfileDelete"
+            type="com.helmet.application.admin.LocationJobProfileDelete"
+            name="LocationJobProfileFormAdmin"
+            scope="request"
+            input="locationView.page"
+            validate="false">
+        <forward name="success" path="/locationView.do" redirect="true" />
+    </action>
+
+    <action path="/budgetTransactionList"
+            type="com.helmet.application.admin.BudgetTransactionList"
+            name="ClientListFormAdmin"
+            scope="request"
+            input="clientView.page"
+            validate="false">
+        <forward name="success" path="budgetTransactionList.page" />
+    </action>
+
+    <!-- form held in session JUST so list is preserved !!! -->
+    <action path="/budgetTransactionNew"
+            type="com.helmet.application.admin.BudgetTransactionNew"
+            name="BudgetTransactionFormAdmin"
+            scope="session"
+            input="/budgetTransactionList.do"
+            validate="false">
+        <forward name="success" path="budgetTransactionNew.page" />
+    </action>
+
+    <action path="/budgetTransactionNewProcess"
+            type="com.helmet.application.admin.BudgetTransactionNewProcess"
+            name="BudgetTransactionFormAdmin"
+            scope="session"
+            input="budgetTransactionNew.page"
+            validate="true">
+        <forward name="success" path="/budgetTransactionList.do" redirect="true" />
+    </action>
+
+    <action path="/locationJobProfileView"
+            type="com.helmet.application.admin.LocationJobProfileView"
+            name="LocationJobProfileViewFormAdmin"
+            scope="request"
+            input="/locationView.page"
+            validate="false">
+        <forward name="success" path="locationJobProfileView.page" />
+    </action>
+
+    <action path="/locationJobProfileEdit"
+            type="com.helmet.application.admin.LocationJobProfileEdit"
+            name="LocationJobProfileEditFormAdmin"
+            scope="request"
+            input="/locationJobProfileView.do"
+            validate="false">
+        <forward name="success" path="locationJobProfileEdit.page" />
+    </action>
+
+    <action path="/locationJobProfileEditProcess"
+            type="com.helmet.application.admin.LocationJobProfileEditProcess"
+            name="LocationJobProfileEditFormAdmin"
+            scope="request"
+            input="locationJobProfileEdit.page"
+            validate="true">
+        <forward name="success" path="/locationJobProfileView.do" redirect="true" />
+    </action>
+    
+    <action path="/consultantResetPwd"
+            type="com.helmet.application.admin.ConsultantView"
+            name="ConsultantViewFormAdmin"
+            scope="request"
+            input="consultantView.page"
+            validate="false">
+        <forward name="success" path="consultantResetPwd.page" />
+    </action>
+
+    <action path="/consultantResetPwdProcess"
+            type="com.helmet.application.admin.ConsultantResetPwdProcess"
+            name="ConsultantViewFormAdmin"
+            scope="request"
+            input="consultantResetPwd.page"
+            validate="false">
+        <forward name="success" path="/consultantView.do" redirect="true" />
+    </action>
+
+    <action path="/consultantResetSecretWord"
+            type="com.helmet.application.admin.ConsultantView"
+            name="ConsultantViewFormAdmin"
+            scope="request"
+            input="consultantView.page"
+            validate="false">
+        <forward name="success" path="consultantResetSecretWord.page" />
+    </action>
+
+    <action path="/consultantResetSecretWordProcess"
+            type="com.helmet.application.admin.ConsultantResetSecretWordProcess"
+            name="ConsultantViewFormAdmin"
+            scope="request"
+            input="consultantResetSecretWord.page"
+            validate="false">
+        <forward name="success" path="/consultantView.do" redirect="true" />
+    </action>
+
+    <action path="/administratorResetPwd"
+            type="com.helmet.application.admin.AdministratorView"
+            name="AdministratorViewFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="administratorResetPwd.page" />
+    </action>
+
+    <action path="/administratorResetPwdProcess"
+            type="com.helmet.application.admin.AdministratorResetPwdProcess"
+            name="AdministratorViewFormAdmin"
+            scope="request"
+            input="administratorResetPwd.page"
+            validate="false">
+        <forward name="success" path="/administratorView.do" redirect="true" />
+    </action>
+
+    <action path="/administratorResetSecretWord"
+            type="com.helmet.application.admin.AdministratorView"
+            name="AdministratorViewFormAdmin"
+            scope="request"
+            input="administratorView.page"
+            validate="false">
+        <forward name="success" path="administratorResetSecretWord.page" />
+    </action>
+
+    <action path="/administratorResetSecretWordProcess"
+            type="com.helmet.application.admin.AdministratorResetSecretWordProcess"
+            name="AdministratorViewFormAdmin"
+            scope="request"
+            input="administratorResetSecretWord.page"
+            validate="false">
+        <forward name="success" path="/administratorView.do" redirect="true" />
+    </action>
+
+    
+
+
+    <action path="/shiftSearch"
+            type="com.helmet.application.admin.ShiftSearch"
+            name="ShiftSearchFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="shiftSearch.page" />
+    </action>
+
+    <action path="/shiftSearchProcess"
+            type="com.helmet.application.admin.ShiftSearchProcess"
+            name="ShiftSearchFormAdmin"
+            scope="request"
+            input="shiftSearch.page"
+            validate="true">
+        <forward name="success" path="shiftSearchResults.page" />
+    </action>
+
+    <action path="/queries"
+            type="com.helmet.application.admin.Queries"
+            name="QueryFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="queries.page" />
+    </action>
+
+    <action path="/queryProcess"
+            type="com.helmet.application.admin.QueryProcess"
+            name="QueryFormAdmin"
+            scope="request"
+            input="query.page"
+            validate="true">
+        <forward name="success" path="query.page" />
+    </action>
+
+    
+    
+  </action-mappings>
+  
+  <message-resources null="false" parameter="AdminMessageResources" />
+  
+	<!-- Tiles Configuration -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+	  <set-property property="definitions-config"
+                  value="/WEB-INF/admin/tiles-defs-admin.xml,/WEB-INF/tiles-defs-mmj.xml"/>
+    <set-property property="moduleAware"
+                  value="true" />
+	</plug-in>
+  
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames"
+                  value="/org/apache/struts/validator/validator-rules.xml,/WEB-INF/admin/validation-admin.xml,/WEB-INF/validator-rules-mmj.xml" />
+    <set-property property="stopOnFirstError" value="false" />
+  </plug-in>
+
+</struts-config>

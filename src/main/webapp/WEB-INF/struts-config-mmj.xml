@@ -7,6 +7,23 @@
   
   <form-beans >
 
+    <form-bean name="AdminLoginForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="administrator" type="com.helmet.bean.Administrator" />
+    </form-bean>
+
+    <form-bean name="AdminSecretWordForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="secretWordKey1" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue1" type="java.lang.String" />
+      <form-property name="secretWordKey2" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue2" type="java.lang.String" />
+      <form-property name="secretWordKey3" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue3" type="java.lang.String" />
+    </form-bean>
+    
+    <form-bean name="AdminForgottenPwdForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="administrator" type="com.helmet.bean.Administrator" />
+    </form-bean>
+    
     <form-bean name="AgyLoginForm" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="consultant" type="com.helmet.bean.Consultant" />
       <form-property name="agencyCode" type="java.lang.String" />
@@ -43,6 +60,12 @@
     <forward name="error404" path="/error404.do" />
     <forward name="error500" path="/error500.do" />
 
+    <forward name="admin" path="/admin" />
+    <forward name="adminLogin" path="/adminLogin.do" />
+    <forward name="adminLoggedOut" path="/adminLoggedOut.do" />
+    <forward name="adminForgottenPwd" path="/adminForgottenPwd.do" />
+    <forward name="adminResetPwd" path="/adminResetPwd.do" />
+
     <forward name="agy" path="/agy" />
     <forward name="agyLogin" path="/agyLogin.do" />
     <forward name="agyLoggedOut" path="/agyLoggedOut.do" />
@@ -64,6 +87,104 @@
 	<action path="/error500"
 	        type="org.apache.struts.actions.ForwardAction"
 	        parameter="error500.page"/>
+
+    <action path="/adminLogin"
+            type="com.helmet.application.admin.Login"
+            name="AdminLoginForm"
+            scope="request"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="adminLogin.page" />
+    </action>
+
+    <action path="/adminLoginProcess"
+            type="com.helmet.application.admin.LoginProcess"
+            name="AdminLoginForm"
+            scope="request"
+            input="adminLogin.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/admin/home.do" redirect="true"/>
+        <forward name="cancel" path="/home.do" redirect="true"/>
+    </action>
+
+    <action path="/adminSecretWord"
+            type="com.helmet.application.admin.SecretWord"
+            name="AdminSecretWordForm"
+            scope="session"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="adminSecretWord.page" />
+    </action>
+
+    <action path="/adminSecretWordProcess"
+            type="com.helmet.application.admin.SecretWordProcess"
+            name="AdminSecretWordForm"
+            scope="session"
+            input="adminSecretWord.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/admin/home.do" redirect="true"/>
+        <forward name="cancel" path="/adminLoginCancelled.do" redirect="true"/>
+    </action>
+
+	<action path="/adminLoginCancelled"
+            type="com.helmet.application.admin.LoginCancelled">
+        <forward name="success" path="/home.do" />
+    </action>
+
+	<action path="/adminForgottenPwd"
+            type="com.helmet.application.admin.ForgottenPwd"
+            name="AdminForgottenPwdForm"
+            scope="request"
+            input="adminLogin.page"
+            validate="false">
+        <forward name="success" path="adminForgottenPwd.page" />
+    </action>
+
+    <action path="/adminForgottenPwdProcess"
+            type="com.helmet.application.admin.ForgottenPwdProcess"
+            name="AdminForgottenPwdForm"
+            scope="request"
+            input="adminForgottenPwd.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="adminPwdHint.page" redirect="true"/>
+        <forward name="cancel" path="/adminLogin.do" redirect="true"/>
+    </action>
+
+	<action path="/adminResetPwd"
+            type="com.helmet.application.admin.ForgottenPwd"
+            name="AdminForgottenPwdForm"
+            scope="request"
+            input="adminLogin.page"
+            validate="false">
+        <forward name="success" path="adminResetPwd.page" />
+    </action>
+
+    <action path="/adminResetPwdProcess"
+            type="com.helmet.application.admin.ForgottenPwdProcess"
+            name="AdminForgottenPwdForm"
+            scope="request"
+            input="adminResetPwd.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/adminResetPwdSendProcess.do"/>
+        <forward name="cancel" path="/adminLogin.do" redirect="true"/>
+    </action>
+
+    <action path="/adminResetPwdSendProcess"
+            type="com.helmet.application.admin.ResetPwdSendProcess"
+            name="AdminForgottenPwdForm"
+            scope="request"
+            input="adminResetPwd.page"
+            validate="true">
+        <forward name="success" path="adminResetPwdSent.page" redirect="true"/>
+    </action>
+
+	<action path="/adminLoggedOut"
+	        type="org.apache.struts.actions.ForwardAction"
+	        parameter="adminLoggedOut.page"/>
 
     <action path="/agyLogin"
             type="com.helmet.application.agy.Login"

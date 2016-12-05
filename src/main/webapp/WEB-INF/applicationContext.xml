@@ -13,6 +13,7 @@
   <bean id="serviceFactory" 
         class="com.helmet.api.ServiceFactory"
 		    factory-method="getInstance">
+		<property name="adminService" ref="adminService" />
 		<property name="agyService" ref="agyService" />
 	</bean>
 
@@ -144,6 +145,104 @@
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
+  <!-- adminService "proxy" - wraps any methods detailed in transactionAttribute property with a database transaction -->
+  <!--  -->
+  <!-- NOT currently working with Transactional annotations !!! -->
+  <!-- if it did it would mean transactions could be defined in the code of the service, which would be nice! -->
+  <!--  -->
+	<bean id="adminService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="adminServiceTarget"/>
+		<property name="transactionAttributes">
+			<props>
+<!-- 
+ 				<prop key="getAdministrators">PROPAGATION_REQUIRED</prop>
+ -->
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+ 			</props>
+		</property>
+<!-- for Transactional Annotations ... 
+	  <property name="transactionAttributeSource">
+	    <bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+	  </property>
+ -->
+	</bean>
+
+  <!-- adminService for "real" - this is the target of the adminService "proxy" - the class that is wrapped -->
+	<bean id="adminServiceTarget"	class="com.helmet.api.impl.DefaultAdminService" >
+		<!-- common DAOs -->
+		<property name="agencyInvoiceDAO" ref="agencyInvoiceDAO" />
+		<property name="agencyInvoiceCreditDAO" ref="agencyInvoiceCreditDAO" />
+		<property name="bookingDAO" ref="bookingDAO" />
+		<property name="bookingDateDAO" ref="bookingDateDAO" />
+		<property name="bookingExpenseDAO" ref="bookingExpenseDAO" />
+		<property name="bookingGradeDAO" ref="bookingGradeDAO" />
+		<property name="bookingGradeApplicantDAO" ref="bookingGradeApplicantDAO" />
+		<property name="bookingGradeApplicantDateDAO" ref="bookingGradeApplicantDateDAO" />
+		<property name="budgetTransactionDAO" ref="budgetTransactionDAO" />
+		<property name="clientDAO" ref="clientDAO" />
+		<property name="clientAgencyDAO" ref="clientAgencyDAO" />
+		<property name="clientAgencyGradeDAO" ref="clientAgencyGradeDAO" />
+		<property name="clientAgencyJobProfileDAO" ref="clientAgencyJobProfileDAO" />
+		<property name="clientAgencyJobProfileGradeDAO" ref="clientAgencyJobProfileGradeDAO" />
+		<property name="dressCodeDAO" ref="dressCodeDAO" />
+		<property name="expenseDAO" ref="expenseDAO" />
+		<property name="gradeDAO" ref="gradeDAO" />
+		<property name="invoiceDAO" ref="invoiceDAO" />
+		<property name="invoiceAgencyDAO" ref="invoiceAgencyDAO" />
+		<property name="jobProfileDAO" ref="jobProfileDAO" />
+		<property name="locationDAO" ref="locationDAO" />
+		<property name="locationJobProfileDAO" ref="locationJobProfileDAO" />
+		<property name="locationManagerJobProfileDAO" ref="locationManagerJobProfileDAO" />
+		<property name="managerDAO" ref="managerDAO" />
+		<property name="managerAccessDAO" ref="managerAccessDAO" />
+		<property name="managerAccessGroupDAO" ref="managerAccessGroupDAO" />
+<!-- 
+		<property name="mgrAccessDAO" ref="mgrAccessDAO" />
+		<property name="mgrAccessGroupDAO" ref="mgrAccessGroupDAO" />
+		<property name="mgrAccessGroupItemDAO" ref="mgrAccessGroupItemDAO" />
+-->
+		<property name="publicHolidayDAO" ref="publicHolidayDAO" />
+		<property name="reasonForRequestDAO" ref="reasonForRequestDAO" />
+		<property name="shiftDAO" ref="shiftDAO" />
+		<property name="siteDAO" ref="siteDAO" />
+		<property name="upliftDAO" ref="upliftDAO" />
+		<property name="upliftMinuteDAO" ref="upliftMinuteDAO" />
+		<property name="agencyDAO" ref="agencyDAO" />
+		<property name="nhsBackingReportDAO" ref="nhsBackingReportDAO" />
+        <property name="nhsBookingDAO" ref="nhsBookingDAO" />
+		<property name="areaOfSpecialityDAO" ref="areaOfSpecialityDAO" />
+		<property name="geographicalRegionDAO" ref="geographicalRegionDAO" />
+		<property name="disciplineCategoryDAO" ref="disciplineCategoryDAO" />
+		<property name="emailActionDAO" ref="emailActionDAO" />
+		<property name="passportTypeDAO" ref="passportTypeDAO" />
+		<property name="visaTypeDAO" ref="visaTypeDAO" />
+		<!-- specific DAOs -->
+		<property name="administratorDAO" ref="administratorDAO" />
+		<property name="adminAccessDAO" ref="adminAccessDAO" />
+		<property name="administratorAccessDAO" ref="administratorAccessDAO" />
+		<property name="administratorAccessGroupDAO" ref="administratorAccessGroupDAO" />
+		<property name="adminAccessGroupDAO" ref="adminAccessGroupDAO" />
+		<property name="adminAccessGroupItemDAO" ref="adminAccessGroupItemDAO" />
+		<property name="agyAccessDAO" ref="agyAccessDAO" />
+		<property name="agyAccessGroupDAO" ref="agyAccessGroupDAO" />
+		<property name="agyAccessGroupItemDAO" ref="agyAccessGroupItemDAO" />
+		<property name="clientReEnterPwdDAO" ref="clientReEnterPwdDAO" />
+		<property name="consultantDAO" ref="consultantDAO" />
+		<property name="consultantAccessDAO" ref="consultantAccessDAO" />
+		<property name="consultantAccessGroupDAO" ref="consultantAccessGroupDAO" />
+		<property name="countryDAO" ref="countryDAO" />
+		<property name="jobFamilyDAO" ref="jobFamilyDAO" />
+		<property name="jobProfileGradeDAO" ref="jobProfileGradeDAO" />
+		<property name="jobSubFamilyDAO" ref="jobSubFamilyDAO" />
+		<property name="reEnterPwdDAO" ref="reEnterPwdDAO" />
+    <!-- NEW >>>>> -->
+    <!-- <<<<< NEW -->
+		<property name="applicantDAO" ref="applicantDAO" />
+ 	</bean>
+
 	<bean id="agyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager" ref="transactionManager"/>
 		<property name="target" ref="agyServiceTarget"/>
@@ -223,6 +322,12 @@
 	</bean>
 
   <!-- Data Access Objects -->
+
+	<bean id="administratorDAO" 
+	      class="com.helmet.persistence.impl.DefaultAdministratorDAO" 
+	      init-method="init" >
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<bean id="countryDAO" 
 	      class="com.helmet.persistence.impl.DefaultCountryDAO" 
@@ -624,6 +729,7 @@
         <list>
 <!-- 
 -->
+            <value>adminServiceTarget</value>
             <value>agyServiceTarget</value>
         </list>
         <!-- can be wildcarded instead of listing individual beans
