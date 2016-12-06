@@ -47,15 +47,15 @@
 		<property name="sendAutoFillEmail" value="true" />
 		<property name="sendResetPwdEmail" value="false" />
 	</bean>
-<!--  	
+
     <bean id="smsHandler" 
         class="com.helmet.application.SmsHandler"
 		    factory-method="getInstance">
-		<property name="username" value="${smsHandler.username}" />
-		<property name="password" value="${smsHandler.password}" />
-		<property name="account" value="${smsHandler.account}" />
+		<property name="username" value="kevin@matchmyjob.co.uk" />
+		<property name="password" value="NDX2054" />
+		<property name="account" value="EX0037271" />
 	</bean>
--->
+
 	<bean id="fileHandler" class="com.helmet.application.FileHandler"
 		factory-method="getInstance">
 		<property name="tempFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
@@ -333,7 +333,7 @@
 	      factory-method="getInstance"
 		  init-method="init" >
 		<property name="dataSource" ref="dataSource" />
-		<property name="fileName" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}/queries.xml" />
+		<property name="fileName" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}/documents/xml/queries.xml" />
 	</bean>
 
   <!-- Data Access Objects -->
