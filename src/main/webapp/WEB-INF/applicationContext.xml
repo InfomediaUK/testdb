@@ -91,6 +91,19 @@
 		<property name="nhsPaymentsAcceptStatus" value="Paid in full" />
 	</bean>
 	
+   <bean id="tradeshiftHandler" 
+        class="com.helmet.application.TradeshiftHandler"
+        factory-method="getInstance">
+        <property name="hostName" value="https://api.tradeshift.com" />
+        <property name="tenantIdHeaderName" value="X-Tradeshift-TenantId" />
+        <property name="userAgent" value="TradeshiftJerseyTest/0.1" />
+        <property name="restUrlPart" value="/tradeshift/rest/external" />
+        <property name="documentsUrlPart" value="/documents" />
+        <property name="dispatcherUrlPart" value="/dispatcher" />
+        <property name="documentProfileId" value="nes.p5.invoice.ubl.2.1.dk" />
+        <property name="documentTypeCode" value="urn:tradeshift.com:api:1.0:documenttypecode" />
+   </bean>
+
   <bean id="callOffHandler" 
         class="com.helmet.application.CallOffHandler"
 		    init-method="init" destroy-method="cancel">
