@@ -9,7 +9,7 @@
  </xsl:template>
  
  <xsl:template match="query">
- <form action="{$submitURL}" method="get">
+ <form action="{$submitURL}" method="post">
  <input type="hidden" name="id" value="{@id}"/>
  <xsl:value-of select="@desc"/>
  <br/>
