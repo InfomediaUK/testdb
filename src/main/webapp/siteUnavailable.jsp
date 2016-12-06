@@ -27,9 +27,9 @@ padding-bottom:0.5em;
 }
 </style>
 <%
-String xmlFile = "file:///" + com.helmet.application.FileHandler.getInstance().getTempFileLocation() + "/../admin/siteUnavailable.xml";
+String xmlFile = "file:///" + com.helmet.application.FileHandler.getInstance().getXmlRealPath("/siteUnavailable.xml");
 pageContext.setAttribute("xmlFile", xmlFile);
-String xslFile = "file:///" + com.helmet.application.FileHandler.getInstance().getTempFileLocation() + "/../admin/siteUnavailable.xsl";
+String xslFile = "file:///" + com.helmet.application.FileHandler.getInstance().getXmlRealPath("/siteUnavailable.xsl");
 pageContext.setAttribute("xslFile", xslFile);
 %>
 <c:import var="xml" url="${xmlFile}"/>

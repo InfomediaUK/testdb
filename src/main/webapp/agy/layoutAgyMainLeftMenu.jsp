@@ -43,7 +43,7 @@
 </head>
 <body>
 
-<%-- jsp:include flush="true" page="/siteUnavailable.jsp"/--%>
+<jsp:include flush="true" page="/siteUnavailable.jsp"/>
 
 <bean:parameter id="bendyParam" name="bendy" value="" />
 <logic:equal name="bendyParam" value="false">

@@ -21,7 +21,7 @@
 	<link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/site.css" media="screen">
 	</head>
 	<body>
-		<%-- jsp:include flush="true" page="/siteUnavailable.jsp"/--%>
+		<jsp:include flush="true" page="/siteUnavailable.jsp"/>
 		<div align="center">
 			<table align="center">
 			  <tr>
