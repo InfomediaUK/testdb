@@ -304,6 +304,90 @@
     </init-param>
   </filter>
   <filter>
+    <filter-name>ZapLoginFilter</filter-name>
+    <filter-class>com.helmet.application.zap.filter.LoginFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/zapLogin.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>ZapCheckPwdFilter</filter-name>
+    <filter-class>com.helmet.application.zap.filter.CheckPwdFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/zap/changePassword.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern1</param-name>
+      <param-value>/zap/changeSecretWord.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern2</param-name>
+      <param-value>/zap/site.css</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern3</param-name>
+      <param-value>/zap/site.js</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern4</param-name>
+      <param-value>/zap/images/trans.gif</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern5</param-name>
+      <param-value>/zap/changePasswordProcess.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern6</param-name>
+      <param-value>/zap/changeSecretWordProcess.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern7</param-name>
+      <param-value>/zap/changeSecretWordProcess2.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>ZapSecretWordFilter</filter-name>
+    <filter-class>com.helmet.application.zap.filter.SecretWordFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/zapSecretWord.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>ZapCheckSecretWordFilter</filter-name>
+    <filter-class>com.helmet.application.zap.filter.CheckSecretWordFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/zap/changeSecretWord.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern1</param-name>
+      <param-value>/zap/site.css</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern2</param-name>
+      <param-value>/zap/site.js</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern3</param-name>
+      <param-value>/zap/images/trans.gif</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern4</param-name>
+      <param-value>/zap/changeSecretWordProcess.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>ZapPwdFilter</filter-name>
+    <filter-class>com.helmet.application.zap.filter.PwdFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/zap/reEnterPwd.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
     <filter-name>ResponseOverrideFilter</filter-name>
     <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
   </filter>
@@ -372,6 +456,22 @@
     <url-pattern>/app/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
+    <filter-name>ZapLoginFilter</filter-name>
+    <url-pattern>/zap/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>ZapSecretWordFilter</filter-name>
+    <url-pattern>/zap/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>ZapCheckSecretWordFilter</filter-name>
+    <url-pattern>/zap/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>ZapCheckPwdFilter</filter-name>
+    <url-pattern>/zap/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
     <filter-name>ResponseOverrideFilter</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
@@ -408,6 +508,10 @@
     <init-param>
       <param-name>config/app</param-name>
       <param-value>/WEB-INF/app/struts-config-app.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>config/zap</param-name>
+      <param-value>/WEB-INF/zap/struts-config-zap.xml</param-value>
     </init-param>
     <init-param> 
       <param-name>chainConfig</param-name> 

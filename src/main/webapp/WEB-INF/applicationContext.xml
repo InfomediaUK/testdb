@@ -16,6 +16,7 @@
 		<property name="adminService" ref="adminService" />
 		<property name="agyService" ref="agyService" />
 		<property name="appService" ref="appService" />
+		<property name="zapService" ref="zapService" />
 	</bean>
 
   <bean id="systemHandler" 
@@ -360,6 +361,30 @@
 		<property name="upliftMinuteDAO" ref="upliftMinuteDAO" />
         <property name="nhsBookingDAO" ref="nhsBookingDAO" />
  	</bean>
+
+	<bean id="zapService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="target" ref="zapServiceTarget" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- zapService for "real" - this is the target of the zapService "proxy" 
+		- the class that is wrapped -->
+	<bean id="zapServiceTarget" class="com.helmet.api.impl.DefaultZapService">
+		<!-- common DAOs -->
+		<property name="bookingDateDAO" ref="bookingDateDAO" />
+		<!-- specific DAOs -->
+		<property name="agencyDAO" ref="agencyDAO" />
+		<property name="applicantDAO" ref="applicantDAO" />
+		<property name="unavailableDAO" ref="unavailableDAO" />
+	</bean>
 
   <!-- XML Generator -->
 

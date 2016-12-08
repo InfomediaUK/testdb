@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN" "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+	<formset>
+
+    <constant>
+	    <constant-name>greaterThanZero</constant-name>
+	    <constant-value>^[1-9]+[0-9]*$</constant-value>
+    </constant>
+
+    <form name="ChangePasswordFormZap">
+      <field property="oldPwd"
+        depends="required,minlength,maxlength">
+        <arg0 key="label.oldPwd" />
+        <arg1 name="minlength" key="${var:minlength}"
+          resource="false" />
+        <arg1 name="maxlength" key="${var:maxlength}"
+          resource="false" />
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>5</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>20</var-value>
+        </var>
+      </field>
+      <field property="newPwd"
+        depends="required,minlength,maxlength">
+        <arg0 key="label.newPwd" />
+        <arg1 name="minlength" key="${var:minlength}"
+          resource="false" />
+        <arg1 name="maxlength" key="${var:maxlength}"
+          resource="false" />
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>5</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>20</var-value>
+        </var>
+      </field>
+      <field property="confirmPwd"
+        depends="required,maxlength,equal">
+        <arg0 key="label.confirmPwd" />
+        <arg1 name="minlength" key="${var:minlength}"
+          resource="false" />
+        <arg1 name="maxlength" key="${var:maxlength}"
+          resource="false" />
+        <arg0 name="equal" key="label.confirmPwd"/>
+        <arg1 name="equal" key="label.newPwd"/>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>20</var-value>
+        </var>
+        <var>
+          <var-name>field</var-name>
+          <var-value>newPwd</var-value>
+        </var>
+        <var>
+          <var-name>ignoreCase</var-name>
+          <var-value>false</var-value>
+        </var>
+      </field>
+      <field property="pwdHint"
+        depends="required,minlength,maxlength,notequal">
+        <arg0 key="label.pwdHint" />
+        <arg1 name="minlength" key="${var:minlength}"
+          resource="false" />
+        <arg1 name="maxlength" key="${var:maxlength}"
+          resource="false" />
+        <arg0 name="notequal" key="label.pwdHint"/>
+        <arg1 name="notequal" key="label.newPwd"/>
+        <var>
+          <var-name>minlength</var-name>
+          <var-value>1</var-value>
+        </var>
+        <var>
+          <var-name>maxlength</var-name>
+          <var-value>100</var-value>
+        </var>
+        <var>
+          <var-name>field</var-name>
+          <var-value>newPwd</var-value>
+        </var>
+        <var>
+          <var-name>ignoreCase</var-name>
+          <var-value>true</var-value>
+        </var>
+      </field>
+    </form>
+
+		<form name="ChangeSecretWordFormApp">
+			<field property="oldSecretWord"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.oldSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="newSecretWord"
+				depends="required,mask,minlength,maxlength">
+        <msg name="mask" key="errors.secretWord"/>
+				<arg0 key="label.newSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+		    <var>
+		        <var-name>mask</var-name>
+		        <var-value>^(?=.*[0-9])(?=.*[a-zA-Z]).{8,20}$</var-value>
+<!-- 
+ 		        <var-value>^[a-zA-Z0-9]*$</var-value>
+-->
+		    </var>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="confirmSecretWord"
+				depends="required,minlength,maxlength,equal">
+				<arg0 key="label.confirmSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+        <arg0 name="equal" key="label.confirmSecretWord"/>
+        <arg1 name="equal" key="label.newSecretWord"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+        <var>
+          <var-name>field</var-name>
+          <var-value>newSecretWord</var-value>
+        </var>
+        <var>
+          <var-name>ignoreCase</var-name>
+          <var-value>false</var-value>
+        </var>
+			</field>
+		</form>
+
+  </formset>
+  
+</form-validation>
+

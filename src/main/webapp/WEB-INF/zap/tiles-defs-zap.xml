@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+"http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+
+<tiles-definitions>
+  <!-- Main Layout -->
+  <definition name="layoutZap.main" path="/zap/layoutZapMainLeftMenu.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="blah zap description"/>
+        <put name="keywords"  value="blah, zap, keywords"/>
+        <put name="header" value="/zap/headerLeftMenu.jsp"/>
+        <put name="pageHelpKey"  value="pageHelp.noHelpAvailable" type="string"/>
+        <put name="menu" value="/zap/leftMenu.jsp"/>
+        <put name="body"   value=""/>
+        <put name="footer" value="/zap/footer.jsp" />
+        <put name="includeZapatec" value="false" type="string"/>
+        <put name="showHeaderLinks" value="true" type="string"/>
+  </definition>
+  <!-- Help Layout  Note. Uses /app JSP -->
+  <definition name="layoutZap.help" path="/app/layoutAppHelp.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="Help for applicants."/>
+        <put name="keywords"  value=""/>
+        <put name="body"   value=""/>
+  </definition>
+  <!-- Error Layout  Note. Uses /app JSP -->
+  <definition name="layoutZap.error" path="/app/layoutAppError.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="Error notification for applicants."/>
+        <put name="keywords"  value="error"/>
+        <put name="body"   value=""/>
+  </definition>
+  <definition name="homeZap.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.home" type="string"/>
+        <put name="pageHelpKey"  value="pageHelp.home" type="string"/>
+        <put name="body"   value="/zap/home.jsp"/>
+  </definition>
+  <!-- Applicant View -->
+  <definition name="applicantView.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.applicantView" type="string"/>
+        <put name="pageHelpKey"  value="pageHelp.applicantView" type="string"/>
+        <put name="body"   value="/zap/applicantView.jsp"/>
+  </definition>
+  <!-- Applicant Edit -->
+  <definition name="applicantEdit.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.applicantEdit" type="string"/>
+        <put name="pageHelpKey"  value="pageHelp.applicantEdit" type="string"/>
+        <put name="body"   value="/zap/applicantEdit.jsp"/>
+  </definition>
+  <!-- Applicant Booking Dates View -->
+  <definition name="applicantBookingDatesView.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.applicantBookingDatesView" type="string"/>
+        <put name="pageHelpKey"  value="pageHelp.applicantBookingDatesView" type="string"/>
+        <put name="body"   value="/zap/applicantBookingDatesView.jsp"/>
+  </definition>
+  <!-- Applicant Unavailable Edit -->
+  <definition name="applicantUnavailableEdit.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.applicantUnavailableEdit" type="string"/>
+        <put name="pageHelpKey"  value="pageHelp.applicantUnavailable" type="string"/>
+        <put name="body"   value="/zap/applicantUnavailableEdit.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <!-- Applicant Unavailable View -->
+  <definition name="applicantUnavailableView.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.applicantUnavailable" type="string"/>
+        <put name="pageHelpKey"  value="pageHelp.applicantUnavailable" type="string"/>
+        <put name="body"   value="/zap/applicantUnavailableView.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="changePassword.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.changePassword" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.changePassword" type="string"/>
+        <put name="body"   value="/zap/changePassword.jsp"/>
+  </definition>
+  <definition name="changeSecretWord.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.changeSecretWord" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.changeSecretWord" type="string"/>
+        <put name="body"   value="/zap/changeSecretWord.jsp"/>
+  </definition>
+  <definition name="reEnterPwd.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.reEnterPwd" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reEnterPwd" type="string"/>
+        <put name="body"   value="/zap/reEnterPwd.jsp"/>
+  </definition>
+  <definition name="help.page" extends="layoutZap.help">
+        <put name="titleKey" value="title.help" type="string"/>
+        <put name="body"   value="/zap/help.jsp"/>
+  </definition>
+  <definition name="fatalError.page" extends="layoutZap.error">
+        <put name="titleKey" value="title.fatalError" type="string"/>
+        <put name="body"   value="/zap/fatalError.jsp"/>
+  </definition>
+  <definition name="sendEmail.page" extends="layoutZap.main">
+        <put name="titleKey" value="title.sendEmail" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.sendEmail" type="string"/>
+        <put name="body"   value="/zap/sendEmail.jsp"/>
+  </definition>
+</tiles-definitions>

@@ -57,6 +57,15 @@
       <form-property name="secretWordValue3" type="java.lang.String" />
     </form-bean>
     
+    <form-bean name="ZapLoginForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="login" type="java.lang.String" />
+      <form-property name="pwd" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean name="ZapForgottenPwdForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="applicant" type="com.helmet.bean.Applicant" />
+    </form-bean>
+
   </form-beans>
   
 	<global-exceptions>
@@ -90,6 +99,12 @@
     <forward name="appLogin" path="/appLogin.do" />
     <forward name="appForgottenPwd" path="/appForgottenPwd.do" />
 
+    <forward name="zap" path="/zap" />
+    <forward name="zapLogin" path="/zapLogin.do" />
+    <forward name="zapLoggedOut" path="/zapLoggedOut.do" />
+    <forward name="zapForgottenPwd" path="/zapForgottenPwd.do" />
+    <forward name="zapResetPwd" path="/zapResetPwd.do" />
+    
   </global-forwards>
   
   <action-mappings >
@@ -354,6 +369,105 @@
 	<action path="/appForgottenPwd"
 	        type="org.apache.struts.actions.ForwardAction"
 	        parameter="home.page"/>
+
+    <action path="/zapLogin"
+            type="com.helmet.application.zap.Login"
+            name="ZapLoginForm"
+            scope="request"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="zapLogin.page" />
+    </action>
+
+    <action path="/zapLoginProcess"
+            type="com.helmet.application.zap.LoginProcess"
+            name="ZapLoginForm"
+            scope="request"
+            input="zapLogin.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/zap/home.do" redirect="true"/>
+        <forward name="cancel" path="/home.do" redirect="true"/>
+    </action>
+
+    <!-- NOTE. Uses same form as applicant -->
+    <action path="/zapSecretWord"
+            type="com.helmet.application.zap.SecretWord"
+            name="AppSecretWordForm"
+            scope="session"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="zapSecretWord.page" />
+    </action>
+
+    <action path="/zapSecretWordProcess"
+            type="com.helmet.application.zap.SecretWordProcess"
+            name="AppSecretWordForm"
+            scope="session"
+            input="zapSecretWord.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/zap/home.do" redirect="true"/>
+        <forward name="cancel" path="/zapLoginCancelled.do" redirect="true"/>
+    </action>
+
+	  <action path="/zapLoginCancelled"
+            type="com.helmet.application.zap.LoginCancelled">
+        <forward name="success" path="/home.do" />
+    </action>
+
+    <action path="/zapForgottenPwd"
+            type="com.helmet.application.zap.ForgottenPwd"
+            name="ZapForgottenPwdForm"
+            scope="request"
+            input="zapLogin.page"
+            validate="false">
+        <forward name="success" path="zapForgottenPwd.page" />
+    </action>
+
+    <action path="/zapForgottenPwdProcess"
+            type="com.helmet.application.zap.ForgottenPwdProcess"
+            name="ZapForgottenPwdForm"
+            scope="request"
+            input="zapForgottenPwd.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="zapPwdHint.page" redirect="true"/>
+        <forward name="cancel" path="/zapLogin.do" redirect="true"/>
+    </action>
+
+  <action path="/zapResetPwd"
+            type="com.helmet.application.zap.ForgottenPwd"
+            name="ZapForgottenPwdForm"
+            scope="request"
+            input="zapLogin.page"
+            validate="false">
+        <forward name="success" path="zapResetPwd.page" />
+    </action>
+
+    <action path="/zapResetPwdProcess"
+            type="com.helmet.application.zap.ForgottenPwdProcess"
+            name="ZapForgottenPwdForm"
+            scope="request"
+            input="zapResetPwd.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/zapResetPwdSendProcess.do"/>
+        <forward name="cancel" path="/zapLogin.do" redirect="true"/>
+    </action>
+
+    <action path="/zapResetPwdSendProcess"
+            type="com.helmet.application.zap.ResetPwdSendProcess"
+            name="ZapForgottenPwdForm"
+            scope="request"
+            input="zapResetPwd.page"
+            validate="true">
+        <forward name="success" path="zapResetPwdSent.page" redirect="true"/>
+    </action>
+
+	<action path="/zapLoggedOut"
+	        type="org.apache.struts.actions.ForwardAction"
+	        parameter="zapLoggedOut.page"/>
 
   </action-mappings>
   

@@ -1,0 +1,175 @@
+body {color:#000; background:#fff; font:70% verdana,tahoma,helvetica,sans-serif; margin:10px; padding:0px}
+
+img {border:0}
+
+input {font:100% verdana,tahoma,helvetica,sans-serif; padding:0px}
+
+select {font:100% verdana,tahoma,helvetica,sans-serif; padding:0px}
+
+textarea {font:100% verdana,tahoma,helvetica,sans-serif; padding:1px}
+
+h1 {font:100% verdana,tahoma,helvetica,sans-serif; font-weight: bold}
+
+h2 {font:100% verdana,tahoma,helvetica,sans-serif; font-weight: bold}
+
+a         { font:100% verdana,tahoma,helvetica,sans-serif; color:#cc0000; text-decoration:none; }
+a:link    { font:100% verdana,tahoma,helvetica,sans-serif; color:#cc0000; text-decoration:none; }
+a:visited { font:100% verdana,tahoma,helvetica,sans-serif; color:#cc0000; text-decoration:none; }
+a:active  { font:100% verdana,tahoma,helvetica,sans-serif; color:#cc0000; text-decoration:none; }
+a:hover   { font:100% verdana,tahoma,helvetica,sans-serif; color:#ff0000; text-decoration:underline; }
+
+.label { font:100% verdana,tahoma,helvetica,sans-serif; font-weight: bold;}       
+	
+pre {color:#000;
+       font:100% verdana,tahoma,helvetica,sans-serif; 
+       padding:0px}
+
+td.header {background:#ffffff;
+             padding:2px}
+
+td.headerLinks {background:#ffffff;
+             padding:2px;
+             color:#e0e0e0}
+
+td.footer {background:#ffffff;
+					padding:2px}
+
+td.pagehelp {background:#ffffff;
+             padding-left:0px;
+						 padding-top:2px}
+
+td.leftColumn {background:#ffffff;
+             padding:2px;
+             line-height:150%;
+             font-weight: bold}
+
+
+td.contentColumn {background:#ffffff;
+             padding:2px;
+             line-height:150%;
+             font-weight: normal}
+
+.title {font-weight: bold}
+
+table.radio {
+	border-spacing: 0px;
+}
+table.radio tr {
+		line-height:150%;
+}
+
+table.radio td {
+	padding-left:2px;
+	padding-right:2px;
+}
+
+table.simple thead tr th {
+	background-color: #f0f0f0;
+}
+
+table.simple tr th {
+	background-color: #f0f0f0;
+}
+
+table.simple {
+	border: 1px solid #e0e0e0;
+	border-collapse: collapse;
+}
+
+table.simple td,table.simple th {
+/* background-color:#ffffff; */
+	border: 1px solid #e0e0e0;
+	padding-left:2px;
+	padding-right:2px;
+}
+
+td.divider {
+	background-color: #e0e0e0;
+}
+
+tr.highlightoff { background-color: #ffffff;}
+tr.highlighton  { background-color: #fafafa;}
+
+table.tabs {
+	border-collapse: collapse;
+}
+td.tabSelected {
+	background-color: #e0e0e0;
+
+  BORDER-TOP: #000000 1px solid;
+  BORDER-LEFT: #000000 1px solid;
+  BORDER-RIGHT: #000000 1px solid;
+  BORDER-BOTTOM: #e0e0e0 1px solid;
+	
+	padding-left:2px;
+	padding-right:2px;
+	font-weight: bold;
+}
+td.tabNotSelected {
+	background-color: #ffffff;
+	border: 1px solid #000000;
+	padding-left:2px;
+	padding-right:2px;
+	font-weight: bold;
+}
+td.tabUnavailableClass {
+	background-color: #ffffff;
+	color: #a1a1a1;
+	border: 1px solid #000000;
+	padding-left:2px;
+	padding-right:2px;
+	font-weight: normal;
+}
+
+td.tabInvisibleClass {
+	background-color: #ffffff;
+	color: #000000;
+  BORDER-TOP: #ffffff 1px solid;
+  BORDER-LEFT: #ffffff 1px solid;
+  BORDER-RIGHT: #ffffff 1px solid;
+  BORDER-BOTTOM: #000000 1px solid;
+	padding-left:2px;
+	padding-right:2px;
+	font-weight: normal;
+}
+.titleButton {
+  WIDTH: 75px;
+  HEIGHT: 23px;
+}
+
+.confirmButton {
+  WIDTH: 75px;
+  HEIGHT: 23px;
+	color: #ff0000;
+}
+
+.s2{cursor:pointer;cursor:hand;font:bold 77% verdana;color:#000;background:#ddd;}
+	
+.wizardButton {
+  CURSOR: hand;
+  COLOR: #000000;
+  WIDTH: 75px;
+  HEIGHT: 23px;
+  TEXT-DECORATION: none;
+}
+
+.wizardButtonWide {
+  CURSOR: hand;
+  COLOR: #000000;
+  WIDTH: 150px;
+  HEIGHT: 23px;
+  TEXT-DECORATION: none;
+}
+.wizardButtonBT {
+  BACKGROUND: #EE86A4;
+  BORDER-TOP: #f7bdde 1px solid;
+  BORDER-LEFT: #f7bdde 1px solid;
+  BORDER-RIGHT: #e78cc6 1px solid;
+  BORDER-BOTTOM: #e78cc6 1px solid;
+  CURSOR: hand;
+  COLOR: #000000;
+  WIDTH: 75px;
+  HEIGHT: 19px;
+  TEXT-DECORATION: none;
+}
+

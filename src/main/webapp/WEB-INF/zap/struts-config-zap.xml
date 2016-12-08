@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+  
+  <form-beans>
+    <form-bean name="ApplicantFormZap" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="applicant" type="com.helmet.bean.Applicant" />
+      <form-property name="cvFormFile" type="org.apache.struts.upload.FormFile"/>
+    </form-bean>
+    <form-bean name="ApplicantBookingDatesViewFormZap" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="show" type="java.lang.String" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="weekToShow" type="java.lang.Integer" />
+      <form-property name="startDate" type="java.sql.Date" />
+      <form-property name="endDate" type="java.sql.Date" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      <form-property name="totalActualHours" type="java.math.BigDecimal" />
+    </form-bean>
+    <form-bean name="ApplicantUnavailableFormZap" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="unavailableDates" type="java.lang.String" />
+      <form-property name="noOfDates" type="java.lang.Integer" />
+    </form-bean>
+    <form-bean name="ChangePasswordFormZap" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="oldPwd" type="java.lang.String" initial="" />
+      <form-property name="newPwd" type="java.lang.String" initial="" />
+      <form-property name="confirmPwd" type="java.lang.String" initial="" />
+      <form-property name="pwdHint" type="java.lang.String" initial="" />
+    </form-bean>
+    <form-bean name="ChangeSecretWordFormZap" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="oldSecretWord" type="java.lang.String" />
+      <form-property name="newSecretWord" type="java.lang.String" />
+      <form-property name="confirmSecretWord" type="java.lang.String" />
+    </form-bean>
+    <form-bean name="SendEmailFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="referer" type="java.lang.String" />
+      <form-property name="subject" type="java.lang.String" />
+      <form-property name="message" type="java.lang.String" />
+      <form-property name="attachmentFileName" type="java.lang.String" />
+      <form-property name="attachment" type="java.lang.String" />
+    </form-bean>
+  </form-beans>
+
+  <global-exceptions />
+  
+  <global-forwards >
+    <forward name="home" path="/home.do" />
+    <forward name="applicantView" path="/applicantView.do" />
+    <forward name="applicantEdit" path="/applicantEdit.do" />
+    <forward name="applicantBookingDatesView" path="/applicantBookingDatesView.do" />
+    <forward name="applicantUnavailableEdit" path="/applicantUnavailableEdit.do" />
+    <forward name="applicantUnavailableView" path="/applicantUnavailableView.do" />
+    <forward name="applicantUnavailableProcess" path="/applicantUnavailableProcess.do" />
+    <forward name="changePassword" path="/changePassword.do" />
+    <forward name="changeSecretWord" path="/changeSecretWord.do" />
+    <forward name="reEnterPwd" path="/reEnterPwd.do" />
+    <forward name="logout" path="/logoutProcess.do" />
+    <forward name="help" path="/help.do" />
+    <forward name="fatalError" path="/fatalError.do" />
+    <forward name="sendEmail" path="/sendEmail.do" />
+  </global-forwards>
+  
+  <action-mappings>
+
+		<action path="/home"
+            type="com.helmet.application.zap.ApplicantView"
+            name="ApplicantFormZap"
+            scope="request"
+            input="homeZap.page"
+            validate="false">
+        <forward name="success" path="applicantView.page" />
+    </action>
+
+    <action path="/applicantView"
+            type="com.helmet.application.zap.ApplicantView"
+            name="ApplicantFormZap"
+            scope="request"
+            input="homeZap.page"
+            validate="false">
+        <forward name="success" path="applicantView.page" />
+    </action>
+
+    <action path="/applicantEdit"
+            type="com.helmet.application.zap.ApplicantEdit"
+            name="ApplicantFormZap"
+            scope="request"
+            input="/applicantView.do"
+            validate="false">
+        <forward name="success" path="applicantEdit.page" />
+    </action>
+
+    <action path="/applicantEditProcess"
+            type="com.helmet.application.zap.ApplicantEditProcess"
+            name="ApplicantFormZap"
+            scope="request"
+            input="applicantEdit.page"
+            validate="true">
+        <forward name="success" path="/applicantView.do" redirect="true" />
+    </action>
+
+    <action path="/applicantBookingDatesView"
+            type="com.helmet.application.zap.ApplicantBookingDatesView"
+            name="ApplicantBookingDatesViewFormZap"
+            scope="request"
+            input="homeZap.page"
+            validate="false">
+        <forward name="success" path="applicantBookingDatesView.page" />
+    </action>
+
+    <action path="/applicantUnavailableEdit"
+            type="com.helmet.application.zap.ApplicantUnavailable"
+            name="ApplicantUnavailableFormZap"
+            scope="request"
+            input="/applicantUnavailableView.do"
+            validate="false">
+        <forward name="success" path="applicantUnavailableEdit.page" />
+    </action>
+
+    <action path="/applicantUnavailableView"
+            type="com.helmet.application.zap.ApplicantUnavailable"
+            name="ApplicantUnavailableFormZap"
+            scope="request"
+            input="homeZap.page"
+            validate="false">
+        <forward name="success" path="applicantUnavailableView.page" />
+    </action>
+
+    <action path="/applicantUnavailableProcess"
+            type="com.helmet.application.zap.ApplicantUnavailableProcess"
+            name="ApplicantUnavailableFormZap"
+            scope="request"
+            input="applicantUnavailable.page"
+            validate="true">
+        <forward name="success" path="/applicantUnavailableView.do" redirect="true" />
+    </action>
+
+    <action path="/changePassword"
+            type="com.helmet.application.zap.ChangePassword"
+            name="ChangePasswordFormZap"
+            scope="request"
+            input="homeZap.page"
+            validate="false">
+        <forward name="success" path="changePassword.page" />
+    </action>
+
+    <action path="/changePasswordProcess"
+            type="com.helmet.application.zap.ChangePasswordProcess"
+            name="ChangePasswordFormZap"
+            scope="request"
+            input="changePassword.page"
+            validate="true">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+    <action path="/changeSecretWord"
+            type="com.helmet.application.zap.ChangeSecretWord"
+            name="ChangeSecretWordFormZap"
+            scope="session"
+            input="homeZap.page"
+            validate="false">
+        <forward name="success" path="changeSecretWord.page" />
+    </action>
+
+    <action path="/changeSecretWordProcess"
+            type="com.helmet.application.zap.ChangeSecretWordProcess"
+            name="ChangeSecretWordFormZap"
+            scope="session"
+            input="changeSecretWord.page"
+            validate="true">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+    <action path="/reEnterPwd"
+            type="com.helmet.application.zap.ZapForwardAction">
+        <forward name="success" path="reEnterPwd.page" />
+    </action>
+
+    <action path="/logoutProcess"
+            type="com.helmet.application.zap.LogoutProcess">
+        <forward name="success" path="zapLoggedOut.page" redirect="true" />
+    </action>
+
+	  <action path="/help"
+            type="com.helmet.application.zap.ZapForwardAction">
+        <forward name="success" path="help.page" />
+    </action>
+
+    <action path="/fatalError"
+            type="com.helmet.application.zap.ZapFatalErrorAction">
+        <forward name="success" path="fatalError.page" />
+    </action>
+
+    <action path="/sendEmail"
+            type="com.helmet.application.zap.SendEmail"
+            name="SendEmailFormAgy"
+            scope="request"
+            input="homeZap.page"
+            validate="false">
+        <forward name="success" path="sendEmail.page" />
+    </action>
+
+    <action path="/sendEmailProcess"
+            type="com.helmet.application.zap.SendEmailProcess"
+            name="SendEmailFormAgy"
+            scope="request"
+            input="sendEmail.page"
+            validate="true">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+  </action-mappings>
+
+  <message-resources null="false" parameter="ZapMessageResources" />
+  
+	<!-- Tiles Configuration -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+	  <set-property property="definitions-config"
+                  value="/WEB-INF/zap/tiles-defs-zap.xml,/WEB-INF/tiles-defs-mmj.xml"/>
+    <set-property property="moduleAware"
+                  value="true" />
+	</plug-in>
+  
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames"
+                  value="/org/apache/struts/validator/validator-rules.xml,/WEB-INF/zap/validation-zap.xml,/WEB-INF/validator-rules-mmj.xml" />
+    <set-property property="stopOnFirstError" value="false" />
+  </plug-in>
+
+</struts-config>
