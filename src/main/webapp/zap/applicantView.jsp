@@ -16,16 +16,16 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
 <mmj-app:applicant var="applicant"/>
 <table cellpadding="0" cellspacing="0" width="100%" height="30">
   <tr>
-		<td align="left" valign="middle" class="title">
+    <td align="left" valign="middle" class="title">
       <bean:message key="title.applicantView"/>&nbsp;<html:link forward="changeSecretWord" titleKey="link.title.changeSecretWord"><bean:message key="link.changeSecretWord"/></html:link>
       &nbsp;<html:link forward="changePassword" titleKey="link.title.changePassword"><bean:message key="link.changePassword"/></html:link>
-		</td>
+    </td>
 <logic:equal name="applicant" property="active" value="true">
-	  <td align="right" valign="middle" width="75">
-	    <html:form action="/applicantEdit.do" onsubmit="return singleSubmit();">
-	      <html:submit styleClass="titleButton"><bean:message key="button.edit"/></html:submit>
-	    </html:form>
-	  </td>
+    <td align="right" valign="middle" width="75">
+      <html:form action="/applicantEdit.do" onsubmit="return singleSubmit();">
+        <html:submit styleClass="titleButton"><bean:message key="button.edit"/></html:submit>
+      </html:form>
+    </td>
 </logic:equal>
   </tr>
 </table>
@@ -104,8 +104,8 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
             </tr>
           </table>
         </div>
-			  <div class="tabbertab">
-				  <h2>Current Documents</h2>
+        <div class="tabbertab">
+          <h2>Current Documents</h2>
           <table class="simple" width="100%">
             <tr>
               <th width="25%" align="left"class="label"><bean:message key="label.cvFilename"/></th>
@@ -137,6 +137,26 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
                 <bean:write name="applicant" property="crbDisclosureNumber" />
               </td>
             </tr>
+        <tr>
+          <th width="25%" align="left"class="label"><bean:message key="label.registeredWithDbsDate"/></th>
+          <td align="left">
+            <bean:write name="applicant" property="registeredWithDbsDate" formatKey="format.mediumDateFormat" />
+          </td>
+        </tr>
+        <tr>
+          <th width="25%" align="left"class="label"><bean:message key="label.dbsRenewalDate"/></th>
+          <td align="left">
+            <bean:write name="applicant" property="dbsRenewalDate" formatKey="format.mediumDateFormat" />
+          </td>
+        </tr>
+
+            <tr>
+              <th width="25%"  align="left" class="label"><bean:message key="label.dbsFilename"/></th>
+              <td align="left">
+                <bean:write name="applicant" property="dbsFilename"/>
+              </td>
+            </tr>
+
             <tr>
               <th width="25%" align="left"class="label"><bean:message key="label.reference1Filename"/></th>
               <td align="left">
@@ -237,8 +257,8 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
             </tr>
           </table>
         </div>
-			  <div class="tabbertab">
-				  <h2>ID Documents</h2>
+        <div class="tabbertab">
+          <h2>ID Documents</h2>
           <table class="simple" width="100%">
             <tr>
               <th width="25%" align="left"class="label"><bean:message key="label.photoFilename"/></th>
@@ -358,8 +378,8 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
             </tr>
           </table>
         </div>
-				<div class="tabbertab">
-		      <h2>Health Documents</h2>
+        <div class="tabbertab">
+          <h2>Health Documents</h2>
             <table class="simple" width="100%">
             <tr>
               <th width="25%" align="left"class="label"><bean:message key="label.varicellaFilename"/></th>
@@ -436,8 +456,8 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
             </tr>
           </table>
         </div>
-		    <div class="tabbertab">
-				  <h2>Certificates</h2>
+        <div class="tabbertab">
+          <h2>Certificates</h2>
           <table class="simple" width="100%">
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.drivingLicense"/></th>
@@ -604,13 +624,13 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
       </div>
     </td>
     <td align="center" valign="top" width="25%">
-			<logic:empty name="applicant" property="photoFilename" >
-			  <bean:message key="text.noPhotoAvailable"/>
-			</logic:empty>
-			<logic:notEmpty name="applicant" property="photoFilename" >
-			  <bean:define id="photoFileUrl" name="applicant" property="photoFileUrl" type="java.lang.String" />
-			  <html:img src="<%= request.getContextPath() + photoFileUrl %>" width="140" /> <!-- height="180" -->
-			</logic:notEmpty>
+      <logic:empty name="applicant" property="photoFilename" >
+        <bean:message key="text.noPhotoAvailable"/>
+      </logic:empty>
+      <logic:notEmpty name="applicant" property="photoFilename" >
+        <bean:define id="photoFileUrl" name="applicant" property="photoFileUrl" type="java.lang.String" />
+        <html:img src="<%= request.getContextPath() + photoFileUrl %>" width="140" /> <!-- height="180" -->
+      </logic:notEmpty>
     </td>
   </tr>
 </table>
