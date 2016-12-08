@@ -15,6 +15,7 @@
 		    factory-method="getInstance">
 		<property name="adminService" ref="adminService" />
 		<property name="agyService" ref="agyService" />
+		<property name="appService" ref="appService" />
 	</bean>
 
   <bean id="systemHandler" 
@@ -324,6 +325,40 @@
 		<property name="bookingDateExpenseDAO" ref="bookingDateExpenseDAO" />
 		<property name="bookingDateHourDAO" ref="bookingDateHourDAO" />
 		<property name="consultantDAO" ref="consultantDAO" />
+ 	</bean>
+
+	<bean id="appService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="appServiceTarget"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+ 			</props>
+		</property>
+	</bean>
+
+  <!-- appService for "real" - this is the target of the appService "proxy" - the class that is wrapped -->
+	<bean id="appServiceTarget"	class="com.helmet.api.impl.DefaultAppService" >
+		<!-- specific DAOs -->
+		<property name="agencyDAO" ref="agencyDAO" />
+		<property name="applicantDAO" ref="applicantDAO" />
+		<property name="bookingDAO" ref="bookingDAO" />
+		<property name="bookingDateDAO" ref="bookingDateDAO" />
+		<property name="bookingDateExpenseDAO" ref="bookingDateExpenseDAO" />
+		<property name="bookingDateHourDAO" ref="bookingDateHourDAO" />
+		<property name="bookingExpenseDAO" ref="bookingExpenseDAO" />
+		<property name="bookingGradeDAO" ref="bookingGradeDAO" />
+		<property name="bookingGradeApplicantDAO" ref="bookingGradeApplicantDAO" />
+		<property name="bookingGradeApplicantDateDAO" ref="bookingGradeApplicantDateDAO" />
+		<property name="clientDAO" ref="clientDAO" />
+		<property name="clientAgencyDAO" ref="clientAgencyDAO" />
+		<property name="jobProfileDAO" ref="jobProfileDAO" />
+		<property name="publicHolidayDAO" ref="publicHolidayDAO" />
+		<property name="upliftDAO" ref="upliftDAO" />
+		<property name="upliftMinuteDAO" ref="upliftMinuteDAO" />
+        <property name="nhsBookingDAO" ref="nhsBookingDAO" />
  	</bean>
 
   <!-- XML Generator -->
@@ -746,6 +781,7 @@
 -->
             <value>adminServiceTarget</value>
             <value>agyServiceTarget</value>
+            <value>appServiceTarget</value>
         </list>
         <!-- can be wildcarded instead of listing individual beans
         <value>*Service</value>
