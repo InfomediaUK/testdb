@@ -12,9 +12,19 @@
 <br/>
 <br/>
 <%
-String serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
-serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
-String mmjLogo = request.getContextPath() + "/images/" + serverNamePrefix + "master-logo.jpg";
+String serverNamePrefix = null;
+String mmjLogo = null;
+if (request.getServerName().startsWith("local"))
+{
+  serverNamePrefix = request.getServerName(); 
+  mmjLogo = request.getContextPath() + "/images/localmaster-logo.jpg";
+}
+else
+{
+  serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
+  serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
+  mmjLogo = request.getContextPath() + "/images/" + serverNamePrefix + "master-logo.jpg";
+}
 %>
 
 <tiles:useAttribute name="showHeaderLinks"/>

@@ -807,7 +807,19 @@ public class BookingGradeApplicantView extends AppAction
 
     Image mmjLogo = null;
 
-    String serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
+//    String serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
+//    serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
+//    String mmjLogoFilename = "/images/" + serverNamePrefix + "master-logo.jpg";
+    String serverName = request.getServerName();
+    String serverNamePrefix = null;
+    if (serverName.indexOf(".") == -1)
+    {
+      serverNamePrefix = "local";
+    }
+    else
+    {
+      serverNamePrefix = serverName.substring(0, serverName.indexOf("."));
+    }
     serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
     String mmjLogoFilename = "/images/" + serverNamePrefix + "master-logo.jpg";
 

@@ -45,9 +45,10 @@ HTTP 404 page not found
 
 <br/>
 <br/>
-
+Redo link.mgr
+<%-- 
 <html:link forward="mgr"><bean:message key="link.mgr" /></html:link>
-
+--%>
 
 <br/>
 <br/>
