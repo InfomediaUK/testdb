@@ -256,6 +256,54 @@
     </init-param>
   </filter>
   <filter>
+    <filter-name>AppLoginFilter</filter-name>
+    <filter-class>com.helmet.application.app.filter.LoginFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/appLogin.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>loginQueryStringPattern</param-name>
+      <param-value>^(login)=([0-9]+)\-([0-9]+)</param-value>
+    </init-param>
+    <init-param>
+      <param-name>bookingGradeApplicantIdGroup</param-name>
+      <param-value>2</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>AppSecretWordFilter</filter-name>
+    <filter-class>com.helmet.application.app.filter.SecretWordFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/appSecretWord.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>AppCheckSecretWordFilter</filter-name>
+    <filter-class>com.helmet.application.app.filter.CheckSecretWordFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/app/changeSecretWord.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern1</param-name>
+      <param-value>/app/site.css</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern2</param-name>
+      <param-value>/app/site.js</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern3</param-name>
+      <param-value>/app/images/trans.gif</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern4</param-name>
+      <param-value>/app/changeSecretWordProcess.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
     <filter-name>ResponseOverrideFilter</filter-name>
     <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
   </filter>
@@ -312,6 +360,18 @@
     <url-pattern>/agy/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
+    <filter-name>AppLoginFilter</filter-name>
+    <url-pattern>/app/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AppSecretWordFilter</filter-name>
+    <url-pattern>/app/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AppCheckSecretWordFilter</filter-name>
+    <url-pattern>/app/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
     <filter-name>ResponseOverrideFilter</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
@@ -344,6 +404,10 @@
     <init-param>
       <param-name>config/agy</param-name>
       <param-value>/WEB-INF/agy/struts-config-agy.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>config/app</param-name>
+      <param-value>/WEB-INF/app/struts-config-app.xml</param-value>
     </init-param>
     <init-param> 
       <param-name>chainConfig</param-name> 
@@ -427,6 +491,10 @@
     <taglib>
       <taglib-uri>/mmj-agy</taglib-uri>
       <taglib-location>/WEB-INF/tld/mmj-agy.tld</taglib-location>
+    </taglib>
+    <taglib>
+      <taglib-uri>/mmj-app</taglib-uri>
+      <taglib-location>/WEB-INF/tld/mmj-app.tld</taglib-location>
     </taglib>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>

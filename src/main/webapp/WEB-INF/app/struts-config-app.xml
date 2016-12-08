@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+  
+  <form-beans>
+    <form-bean name="ListFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean name="BookingGradeApplicantViewFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingGradeApplicant" type="com.helmet.bean.BookingGradeApplicantUserEntity" />
+      <form-property name="bookingReference" type="java.lang.String" />
+      <form-property name="showOnlyOutstanding" type="java.lang.Boolean" initial="true" />
+      <form-property name="show" type="java.lang.String" />
+      <form-property name="weekToShow" type="java.lang.Integer" />
+      <form-property name="totalAgreedHours" type="java.math.BigDecimal" />
+      <form-property name="totalAgreedValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualHours" type="java.math.BigDecimal" />
+      <form-property name="totalActualValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseValue" type="java.math.BigDecimal" />
+      <form-property name="selectedBookingDates" type="java.lang.String[]" initial="'0'" />
+      <form-property name="atLeastOneToSubmit" type="java.lang.Boolean" initial="false" />
+      <form-property name="startDate" type="java.sql.Date" />
+      <form-property name="endDate" type="java.sql.Date" />
+      <form-property name="nhsBooking" type="com.helmet.bean.NhsBooking" />
+      <form-property name="allowChange" type="java.lang.Boolean" initial="true" />
+      <form-property name="allowPrint" type="java.lang.Boolean" initial="false" />
+      <form-property name="nhsBookingError" type="java.lang.String" />
+    </form-bean>
+    <form-bean name="BookingDateViewFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
+    </form-bean>
+    <form-bean name="BookingDateFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
+
+      <form-property name="workedStartHour" type="java.lang.String" />
+      <form-property name="workedStartMinute" type="java.lang.String" />
+      <form-property name="workedEndHour" type="java.lang.String" />
+      <form-property name="workedEndMinute" type="java.lang.String" />
+      <form-property name="workedBreakStartHour" type="java.lang.String" />
+      <form-property name="workedBreakStartMinute" type="java.lang.String" />
+      <form-property name="workedBreakEndHour" type="java.lang.String" />
+      <form-property name="workedBreakEndMinute" type="java.lang.String" />
+      <form-property name="workedNoOfHours" type="java.math.BigDecimal" />
+
+    </form-bean>
+
+    <form-bean name="BookingDatesFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingGradeApplicant" type="com.helmet.bean.BookingGradeApplicantUserEntity" />
+      <form-property name="totalAgreedHours" type="java.math.BigDecimal" />
+      <form-property name="totalAgreedValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualHours" type="java.math.BigDecimal" />
+      <form-property name="totalActualValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseValue" type="java.math.BigDecimal" />
+      <form-property name="selectedBookingDates" type="java.lang.String[]" initial="'0'" />
+      <form-property name="atLeastOneToSubmit" type="java.lang.Boolean" initial="false" />
+      <form-property name="bookingDateIdStrs" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean name="BookingDateExpensesFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
+      <form-property name="expenses" type="java.util.List" />
+    </form-bean>
+    
+    <form-bean name="BookingDateExpenseFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="page" type="java.lang.Integer" initial="0" />
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
+      <form-property name="bookingExpensesText" type="java.lang.String" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="bookingExpense" type="com.helmet.bean.BookingExpense" />
+
+      <form-property name="qtyStr" type="java.lang.String" initial="0"/>
+      <form-property name="text" type="java.lang.String" />
+
+      <form-property name="qty" type="java.math.BigDecimal" initial="0"/>
+      <form-property name="value" type="java.math.BigDecimal" initial="0"/>
+      <form-property name="vatValue" type="java.math.BigDecimal" initial="0"/>
+
+      <form-property name="document" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="contentType" type="java.lang.String"/>
+      <form-property name="filename" type="java.lang.String"/>
+      <form-property name="fileSize" type="java.lang.Integer"/>
+      <form-property name="tempFileName" type="java.lang.String"/>
+      <form-property name="tempFileUrl" type="java.lang.String"/>
+      <form-property name="tempFilePath" type="java.lang.String"/>
+
+      <form-property name="bookingDateExpense" type="com.helmet.bean.BookingDateExpense" />
+
+    </form-bean>
+
+    <form-bean name="BookingDateExpenseViewFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingDateExpense" type="com.helmet.bean.BookingDateExpense" />
+      <form-property name="bookingExpense" type="com.helmet.bean.BookingExpense" />
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
+    </form-bean>
+    
+    <form-bean name="ChangeSecretWordFormApp" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="oldSecretWord" type="java.lang.String" />
+      <form-property name="newSecretWord" type="java.lang.String" />
+      <form-property name="confirmSecretWord" type="java.lang.String" />
+    </form-bean>
+
+  </form-beans>
+
+  <global-exceptions />
+  
+  <global-forwards >
+    <forward name="home" path="/bookingGradeApplicantView.do" />
+
+    <forward name="applicantView" path="../zap/applicantView.do" />
+    <forward name="applicantBookingDatesView" path="../zap/applicantBookingDatesView.do" />
+    <forward name="applicantUnavailableView" path="../zap/applicantUnavailableView.do" />
+    <forward name="sendEmail" path="../zap/sendEmail.do" />
+
+    <forward name="bookingGradeApplicantView" path="/bookingGradeApplicantView.do" />
+    <forward name="bookingGradeApplicantViewOutstanding" path="/bookingGradeApplicantView.do?show=outstanding" />
+    <forward name="bookingGradeApplicantViewWeekly" path="/bookingGradeApplicantView.do?show=weekly" />
+    <forward name="bookingGradeApplicantViewAll" path="/bookingGradeApplicantView.do?show=all" />
+
+    <forward name="bookingDateWorked" path="/bookingDateWorked.do" />
+    <forward name="bookingDateSubmit" path="/bookingDateSubmit.do" />
+    <forward name="bookingDateExpenses" path="/bookingDateExpenses.do" />
+    <forward name="bookingDateWithdraw" path="/bookingDateWithdraw.do" />
+
+    <forward name="bookingDatesSubmit" path="/bookingDatesSubmit.do" />
+
+    <forward name="bookingDateExpenseNew" path="/bookingDateExpenseNew.do" />
+    <forward name="bookingDateExpenseNew1" path="/bookingDateExpenseNew1.do" />
+    <forward name="bookingDateExpenseNew2" path="/bookingDateExpenseNew2.do" />
+    <forward name="bookingDateExpenseNew3" path="/bookingDateExpenseNew3.do" />
+    <forward name="bookingDateExpenseNewFinish" path="/bookingDateExpenseNewFinish.do" />
+
+    <forward name="bookingDateExpenseEdit" path="/bookingDateExpenseEdit.do" />
+    <forward name="bookingDateExpenseDelete" path="/bookingDateExpenseDelete.do" />
+
+    <forward name="changeSecretWord" path="/changeSecretWord.do" />
+
+    <forward name="logout" path="/logoutProcess.do" />
+    <forward name="toggleShowPageHelp" path="/toggleShowPageHelp.do" />
+    <forward name="toggleHideMoney" path="/toggleHideMoney.do" />
+
+    <forward name="help" path="/help.do" />
+
+  </global-forwards>
+  
+  <action-mappings>
+
+		<action path="/home"
+            type="com.helmet.application.app.BookingGradeApplicantView"
+            name="BookingGradeApplicantViewFormApp"
+            scope="request"
+            input="homeApp.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantView.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantView"
+            type="com.helmet.application.app.BookingGradeApplicantView"
+            name="BookingGradeApplicantViewFormApp"
+            scope="request"
+            input="homeApp.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantView.page" />
+    </action>
+
+    <action path="/bookingDateExpenses"
+            type="com.helmet.application.app.BookingDateExpenses"
+            name="BookingDateExpensesFormApp"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingDateExpenses.page" />
+    </action>
+
+    <action path="/bookingDateWorked"
+            type="com.helmet.application.app.BookingDateWorked"
+            name="BookingDateFormApp"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingDateWorked.page" />
+    </action>
+
+    <action path="/bookingDateWorkedProcess"
+            type="com.helmet.application.app.BookingDateWorkedProcess"
+            name="BookingDateFormApp"
+            scope="request"
+            input="bookingDateWorked.page"
+            validate="true">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDatesSubmit"
+            type="com.helmet.application.app.BookingDatesView"
+            name="BookingDatesFormApp"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingDatesSubmit.page" />
+    </action>
+
+    <action path="/bookingDatesSubmitProcess"
+            type="com.helmet.application.app.BookingDatesSubmitProcess"
+            name="BookingDatesFormApp"
+            scope="request"
+            input="/bookingDatesSubmit.do"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDateSubmit"
+            type="com.helmet.application.app.BookingDateView"
+            name="BookingDateViewFormApp"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingDateSubmit.page" />
+    </action>
+
+    <action path="/bookingDateSubmitProcess"
+            type="com.helmet.application.app.BookingDateSubmitProcess"
+            name="BookingDateViewFormApp"
+            scope="request"
+            input="bookingDateSubmit.page"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDateWithdraw"
+            type="com.helmet.application.app.BookingDateView"
+            name="BookingDateViewFormApp"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingDateWithdraw.page" />
+    </action>
+
+    <action path="/bookingDateWithdrawProcess"
+            type="com.helmet.application.app.BookingDateWithdrawProcess"
+            name="BookingDateViewFormApp"
+            scope="request"
+            input="bookingDateWithdraw.page"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDateExpenseNew"
+            type="com.helmet.application.app.BookingDateExpenseNew"
+            name="BookingDateExpenseFormApp"
+            scope="session"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="/bookingDateExpenseNew1.do" />
+    </action>
+
+    <action path="/bookingDateExpenseNew1"
+            type="com.helmet.application.app.BookingDateExpenseNew1"
+            name="BookingDateExpenseFormApp"
+            scope="session"
+            input="bookingGradeApplicantView.page"
+            validate="true">
+        <forward name="success" path="bookingDateExpenseNew1.page" />
+    </action>
+
+    <action path="/bookingDateExpenseNew2"
+            type="com.helmet.application.app.BookingDateExpenseNew2"
+            name="BookingDateExpenseFormApp"
+            scope="session"
+            input="bookingDateExpenseNew1.page"
+            validate="true">
+        <forward name="success" path="bookingDateExpenseNew2.page" />
+        <forward name="back" path="/bookingGradeApplicantView.do" redirect="true" />
+    </action>
+
+    <action path="/bookingDateExpenseNew3"
+            type="com.helmet.application.app.BookingDateExpenseNew3"
+            name="BookingDateExpenseFormApp"
+            scope="session"
+            input="bookingDateExpenseNew2.page"
+            validate="true">
+        <forward name="success" path="bookingDateExpenseNew3.page" />
+        <forward name="back" path="/bookingDateExpenseNew1.do" redirect="true" />
+<!-- 
+        <forward name="noCvRequiredSuccess" path="/bookingDateExpenseNew4.do" redirect="true" />
+        <forward name="noCvRequiredBack" path="/bookingDateExpenseNew2.do" redirect="true" />
+-->
+    </action>
+
+    <action path="/bookingDateExpenseNew4"
+            type="com.helmet.application.app.BookingDateExpenseNew4"
+            name="BookingDateExpenseFormApp"
+            scope="session"
+            input="bookingDateExpenseNew3.page"
+            validate="true">
+        <forward name="success" path="bookingDateExpenseNew4.page" />
+        <forward name="back" path="/bookingDateExpenseNew2.do" redirect="true" />
+    </action>
+
+    <action path="/bookingDateExpenseNewFinish"
+            type="com.helmet.application.app.BookingDateExpenseNewFinish"
+            name="BookingDateExpenseFormApp"
+            scope="session"
+            input="bookingDateExpenseNew4.page"
+            validate="true">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true" />
+        <forward name="back" path="/bookingDateExpenseNew3.do" redirect="true" />
+    </action>
+
+    <action path="/bookingDateExpenseEdit"
+            type="com.helmet.application.app.BookingDateExpenseEdit"
+            name="BookingDateExpenseFormApp"
+            scope="session"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="/bookingDateExpenseNew1.do" />
+    </action>
+
+    <action path="/bookingDateExpenseDelete"
+            type="com.helmet.application.app.BookingDateExpenseView"
+            name="BookingDateExpenseViewFormApp"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingDateExpenseDelete.page" />
+    </action>
+
+    <action path="/bookingDateExpenseDeleteProcess"
+            type="com.helmet.application.app.BookingDateExpenseDeleteProcess"
+            name="BookingDateExpenseViewFormApp"
+            scope="request"
+            input="bookingDateExpenseDelete.page"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true" />
+    </action>
+
+    <action path="/changeSecretWord"
+            type="com.helmet.application.app.ChangeSecretWord"
+            name="ChangeSecretWordFormApp"
+            scope="session"
+            input="homeApp.page"
+            validate="false">
+        <forward name="success" path="changeSecretWord.page" />
+    </action>
+
+    <action path="/changeSecretWordProcess"
+            type="com.helmet.application.app.ChangeSecretWordProcess"
+            name="ChangeSecretWordFormApp"
+            scope="session"
+            input="changeSecretWord.page"
+            validate="true">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+    <action path="/logoutProcess"
+            type="com.helmet.application.app.LogoutProcess">
+        <forward name="success" path="appLoggedOut.page" redirect="true" />
+    </action>
+
+    <action path="/toggleShowPageHelp"
+            type="com.helmet.application.app.ToggleShowPageHelp">
+        <forward name="success" path="/ok.txt" />
+    </action>
+
+    <action path="/toggleHideMoney"
+            type="com.helmet.application.app.ToggleHideMoney">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+	<action path="/help"
+            type="com.helmet.application.app.AppForwardAction">
+        <forward name="success" path="help.page" />
+    </action>
+
+  </action-mappings>
+
+  <message-resources null="false" parameter="AppMessageResources" />
+  
+	<!-- Tiles Configuration -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+	  <set-property property="definitions-config"
+                  value="/WEB-INF/app/tiles-defs-app.xml,/WEB-INF/tiles-defs-mmj.xml"/>
+    <set-property property="moduleAware"
+                  value="true" />
+	</plug-in>
+  
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames"
+                  value="/org/apache/struts/validator/validator-rules.xml,/WEB-INF/app/validation-app.xml,/WEB-INF/validator-rules-mmj.xml" />
+    <set-property property="stopOnFirstError" value="false" />
+  </plug-in>
+
+</struts-config>

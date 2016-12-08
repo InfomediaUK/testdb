@@ -11,10 +11,10 @@
 <html:link accesskey="c" forward="agy"><bean:message key="link.agy" /></html:link>
 <br/>
 <br/>
+<html:link accesskey="p" forward="app"><bean:message key="link.app" /></html:link>
 
 <%--
 <html:link accesskey="m" forward="mgr"><bean:message key="link.mgr" /></html:link>
-<html:link accesskey="p" forward="app"><bean:message key="link.app" /></html:link>
 <br/>
 <br/>
 <html:link accesskey="a" forward="admin"><bean:message key="link.admin" /></html:link>

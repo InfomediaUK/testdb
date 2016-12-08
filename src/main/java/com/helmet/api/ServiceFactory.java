@@ -7,6 +7,7 @@ public class ServiceFactory
 
   AdminService adminService;
   AgyService agyService;
+  AppService appService;
 
   public final static ServiceFactory getInstance()
   {
@@ -36,5 +37,14 @@ public class ServiceFactory
   {
     this.agyService = agyService;
   }
+
+  public AppService getAppService() {
+    return appService;
+  }
+
+  public void setAppService(AppService appService) {
+    this.appService = appService;
+  }
+
 
 }

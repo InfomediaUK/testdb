@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE form-validation PUBLIC "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN" "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+
+	<formset>
+
+    <constant>
+	    <constant-name>greaterThanZero</constant-name>
+	    <constant-value>^[1-9]+[0-9]*$</constant-value>
+    </constant>
+
+		<!-- 
+		<form name="BookingDateFormApp">
+			<field property="workedStartHour" 
+			    depends="required" >
+				<arg0 key="label.startHour" />
+			</field>
+			<field property="workedStartMinute" 
+			    depends="required" >
+				<arg0 key="label.startMinute" />
+			</field>
+			<field property="workedEndHour" 
+			    depends="required" >
+				<arg0 key="label.endHour" />
+			</field>
+			<field property="workedEndMinute" 
+			    depends="required" >
+				<arg0 key="label.endMinute" />
+			</field>
+		</form>
+	  -->
+	
+		<form name="BookingDateExpenseFormApp">
+			<field property="bookingExpense.bookingExpenseId"
+				depends="required,mask" page="1">
+				<msg name="required" key="errors.pleaseMakeASelection" />
+				<msg name="mask" key="errors.pleaseMakeASelection" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>${greaterThanZero}</var-value>
+				</var>
+			</field>
+			<field property="qtyStr" 
+			  depends="required, float" page="2">
+				<arg0 key="label.qty" />
+			</field>
+	  </form>
+
+		<form name="ChangeSecretWordFormApp">
+			<field property="oldSecretWord"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.oldSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="newSecretWord"
+				depends="required,mask,minlength,maxlength">
+        <msg name="mask" key="errors.secretWord"/>
+				<arg0 key="label.newSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+		    <var>
+		        <var-name>mask</var-name>
+		        <var-value>^(?=.*[0-9])(?=.*[a-zA-Z]).{8,20}$</var-value>
+<!-- 
+ 		        <var-value>^[a-zA-Z0-9]*$</var-value>
+-->
+		    </var>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="confirmSecretWord"
+				depends="required,minlength,maxlength,equal">
+				<arg0 key="label.confirmSecretWord" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+        <arg0 name="equal" key="label.confirmSecretWord"/>
+        <arg1 name="equal" key="label.newSecretWord"/>
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>8</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+        <var>
+          <var-name>field</var-name>
+          <var-value>newSecretWord</var-value>
+        </var>
+        <var>
+          <var-name>ignoreCase</var-name>
+          <var-value>false</var-value>
+        </var>
+			</field>
+		</form>
+
+  </formset>
+  
+</form-validation>

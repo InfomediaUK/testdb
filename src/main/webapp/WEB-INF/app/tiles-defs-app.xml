@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+"http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+
+<tiles-definitions>
+
+  <!-- Main Layout -->
+  <definition name="layoutApp.main" path="/app/layoutAppMainLeftMenu.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="blah app description"/>
+        <put name="keywords"  value="blah, app, keywords"/>
+        <put name="header" value="/app/headerLeftMenu.jsp"/>
+        <put name="pageHelpKey"  value="pageHelp.noHelpAvailable" type="string"/>
+        <put name="menu" value="/app/leftMenu.jsp"/>
+        <put name="body"   value=""/>
+        <put name="footer" value="/app/footer.jsp" />
+        <put name="includeZapatec" value="false" type="string"/>
+        <put name="showHeaderLinks" value="true" type="string"/>
+  </definition>
+  <definition name="layoutApp.help" path="/app/layoutAppHelp.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="Help for applicants."/>
+        <put name="keywords"  value=""/>
+        <put name="body"   value=""/>
+  </definition>
+  <definition name="homeApp.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.home" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.home" type="string"/>
+        <put name="body"   value="/app/home.jsp"/>
+  </definition>
+  <definition name="bookingGradeApplicantView.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingGradeApplicantView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantView" type="string"/>
+        <put name="body"   value="/app/bookingGradeApplicantView.jsp"/>
+  </definition>
+  <definition name="bookingDateWorked.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateWorked" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateWorked" type="string"/>
+        <put name="body"   value="/app/bookingDateWorked.jsp"/>
+  </definition>
+  <definition name="bookingDateSubmit.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateSubmit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateSubmit" type="string"/>
+        <put name="body"   value="/app/bookingDateSubmit.jsp"/>
+  </definition>
+  <definition name="bookingDateWithdraw.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateWithdraw" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateWithdraw" type="string"/>
+        <put name="body"   value="/app/bookingDateWithdraw.jsp"/>
+  </definition>
+  <definition name="bookingDateExpenses.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateExpenses" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateExpenses" type="string"/>
+        <put name="body"   value="/app/bookingDateExpenses.jsp"/>
+  </definition>
+  <definition name="bookingDateExpenseNew1.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateExpenseNew1" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateExpenseNew1" type="string"/>
+        <put name="body"   value="/app/bookingDateExpenseNew1.jsp"/>
+  </definition>
+  <definition name="bookingDateExpenseNew2.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateExpenseNew2" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateExpenseNew2" type="string"/>
+        <put name="body"   value="/app/bookingDateExpenseNew2.jsp"/>
+  </definition>
+  <definition name="bookingDateExpenseNew3.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateExpenseNew3" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateExpenseNew3" type="string"/>
+        <put name="body"   value="/app/bookingDateExpenseNew3.jsp"/>
+  </definition>
+  <definition name="bookingDateExpenseNew4.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateExpenseNew4" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateExpenseNew4" type="string"/>
+        <put name="body"   value="/app/bookingDateExpenseNew4.jsp"/>
+  </definition>
+  <definition name="bookingDateExpenseDelete.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDateExpenseDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateExpenseDelete" type="string"/>
+        <put name="body"   value="/app/bookingDateExpenseDelete.jsp"/>
+  </definition>
+  <definition name="bookingDatesSubmit.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.bookingDatesSubmit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDatesSubmit" type="string"/>
+        <put name="body"   value="/app/bookingDatesSubmit.jsp"/>
+  </definition>
+  <definition name="changeSecretWord.page" extends="layoutApp.main">
+        <put name="titleKey" value="title.changeSecretWord" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.changeSecretWord" type="string"/>
+        <put name="body"   value="/app/changeSecretWord.jsp"/>
+  </definition>
+  <definition name="help.page" extends="layoutApp.help">
+        <put name="titleKey" value="title.help" type="string"/>
+        <put name="body"   value="/app/help.jsp"/>
+  </definition>
+</tiles-definitions>
