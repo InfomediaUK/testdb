@@ -43,6 +43,20 @@
       <form-property name="agencyCode" type="java.lang.String" />
     </form-bean>
     
+    <form-bean name="AppLoginForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="login" type="java.lang.String" />
+      <form-property name="pwd" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean name="AppSecretWordForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="secretWordKey1" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue1" type="java.lang.String" />
+      <form-property name="secretWordKey2" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue2" type="java.lang.String" />
+      <form-property name="secretWordKey3" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue3" type="java.lang.String" />
+    </form-bean>
+    
   </form-beans>
   
 	<global-exceptions>
@@ -71,6 +85,10 @@
     <forward name="agyLoggedOut" path="/agyLoggedOut.do" />
     <forward name="agyForgottenPwd" path="/agyForgottenPwd.do" />
     <forward name="agyResetPwd" path="/agyResetPwd.do" />
+
+    <forward name="app" path="/app" />
+    <forward name="appLogin" path="/appLogin.do" />
+    <forward name="appForgottenPwd" path="/appForgottenPwd.do" />
 
   </global-forwards>
   
@@ -283,6 +301,59 @@
 	<action path="/agyLoggedOut"
 		        type="org.apache.struts.actions.ForwardAction"
 		        parameter="agyLoggedOut.page"/>
+
+    <action path="/appLogin"
+            type="com.helmet.application.app.Login"
+            name="AppLoginForm"
+            scope="request"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="appLogin.page" />
+    </action>
+
+    <action path="/appLoginProcess"
+            type="com.helmet.application.app.LoginProcess"
+            name="AppLoginForm"
+            scope="request"
+            input="appLogin.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/app/home.do" redirect="true"/>
+        <forward name="cancel" path="/home.do" redirect="true"/>
+    </action>
+
+    <action path="/appSecretWord"
+            type="com.helmet.application.app.SecretWord"
+            name="AppSecretWordForm"
+            scope="session"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="appSecretWord.page" />
+    </action>
+
+    <action path="/appSecretWordProcess"
+            type="com.helmet.application.app.SecretWordProcess"
+            name="AppSecretWordForm"
+            scope="session"
+            input="appSecretWord.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/app/home.do" redirect="true"/>
+        <forward name="cancel" path="/appLoginCancelled.do" redirect="true"/>
+    </action>
+
+	<action path="/appLoginCancelled"
+            type="com.helmet.application.app.LoginCancelled">
+        <forward name="success" path="/home.do" />
+    </action>
+
+	<action path="/appLoggedOut"
+	        type="org.apache.struts.actions.ForwardAction"
+	        parameter="appLoggedOut.page"/>
+
+	<action path="/appForgottenPwd"
+	        type="org.apache.struts.actions.ForwardAction"
+	        parameter="home.page"/>
 
   </action-mappings>
   
