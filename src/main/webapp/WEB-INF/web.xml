@@ -147,7 +147,115 @@
       <param-value>/admin/reEnterPwd.do</param-value>
     </init-param>
   </filter>
+ <filter>
+    <filter-name>MgrLoginFilter</filter-name>
+    <filter-class>com.helmet.application.mgr.filter.LoginFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/mgrLogin.do</param-value>
+    </init-param>
+  </filter>
   <filter>
+    <filter-name>MgrSecretWordFilter</filter-name>
+    <filter-class>com.helmet.application.mgr.filter.SecretWordFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/mgrSecretWord.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>MgrCheckPwdFilter</filter-name>
+    <filter-class>com.helmet.application.mgr.filter.CheckPwdFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/mgr/changePassword.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern1</param-name>
+      <param-value>/mgr/changeSecretWord.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern2</param-name>
+      <param-value>/mgr/site.css</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern3</param-name>
+      <param-value>/mgr/site.js</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern4</param-name>
+      <param-value>/mgr/images/trans.gif</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern5</param-name>
+      <param-value>/mgr/changePasswordProcess.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern6</param-name>
+      <param-value>/mgr/changeSecretWordProcess.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern7</param-name>
+      <param-value>/mgr/changeSecretWordProcess2.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>MgrCheckSecretWordFilter</filter-name>
+    <filter-class>com.helmet.application.mgr.filter.CheckSecretWordFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/mgr/changeSecretWord.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern1</param-name>
+      <param-value>/mgr/changePassword.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern2</param-name>
+      <param-value>/mgr/site.css</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern3</param-name>
+      <param-value>/mgr/site.js</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern4</param-name>
+      <param-value>/mgr/images/trans.gif</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern5</param-name>
+      <param-value>/mgr/changeSecretWordProcess.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern6</param-name>
+      <param-value>/mgr/changeSecretWordProcess2.do</param-value>
+    </init-param>
+    <init-param>
+      <param-name>ignorePattern7</param-name>
+      <param-value>/mgr/changePasswordProcess.do</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>MgrAccessFilter</filter-name>
+    <filter-class>com.helmet.application.mgr.filter.AccessFilter</filter-class>
+    <init-param>
+      <param-name>urlPattern</param-name>
+      <param-value>/mgr</param-value>
+    </init-param>
+    <init-param>
+      <param-name>accessDeniedPage</param-name>
+      <param-value>/mgr/accessDenied.jsp</param-value>
+    </init-param>
+  </filter>
+  <filter>
+    <filter-name>MgrPwdFilter</filter-name>
+    <filter-class>com.helmet.application.mgr.filter.PwdFilter</filter-class>
+    <init-param>
+      <param-name>loginPage</param-name>
+      <param-value>/mgr/reEnterPwd.do</param-value>
+    </init-param>
+  </filter>
+   <filter>
     <filter-name>AgyLoginFilter</filter-name>
     <filter-class>com.helmet.application.agy.filter.LoginFilter</filter-class>
     <init-param>
@@ -420,6 +528,62 @@
     <url-pattern>/admin/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
+    <filter-name>MgrLoginFilter</filter-name>
+    <url-pattern>/mgr/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrLoginFilter</filter-name>
+    <url-pattern>/mgrSecretWord.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrSecretWordFilter</filter-name>
+    <url-pattern>/mgr/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrAccessFilter</filter-name>
+    <url-pattern>/mgr/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrCheckPwdFilter</filter-name>
+    <url-pattern>/mgr/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrCheckSecretWordFilter</filter-name>
+    <url-pattern>/mgr/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrPwdFilter</filter-name>
+    <url-pattern>/mgr/changeSecretWordProcess2.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrPwdFilter</filter-name>
+    <url-pattern>/mgr/bookingSubmitProcess.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrPwdFilter</filter-name>
+    <url-pattern>/mgr/bookingCancelProcess2.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrPwdFilter</filter-name>
+    <url-pattern>/mgr/bookingDateActivateProcess.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrPwdFilter</filter-name>
+    <url-pattern>/mgr/bookingDatesActivateProcess.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrPwdFilter</filter-name>
+    <url-pattern>/mgr/bookingDateAuthorizeProcess.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrPwdFilter</filter-name>
+    <url-pattern>/mgr/bookingDatesAuthorizeProcess.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>MgrPwdFilter</filter-name>
+    <url-pattern>/mgr/budgetTransactionNewProcess2.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
     <filter-name>AgyLoginFilter</filter-name>
     <url-pattern>/agy/*</url-pattern>
   </filter-mapping>
@@ -500,6 +664,10 @@
     <init-param>
       <param-name>config/admin</param-name>
       <param-value>/WEB-INF/admin/struts-config-admin.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>config/mgr</param-name>
+      <param-value>/WEB-INF/mgr/struts-config-mgr.xml</param-value>
     </init-param>
     <init-param>
       <param-name>config/agy</param-name>
@@ -591,6 +759,10 @@
     <taglib>
       <taglib-uri>/mmj-admin</taglib-uri>
       <taglib-location>/WEB-INF/tld/mmj-admin.tld</taglib-location>
+    </taglib>
+    <taglib>
+      <taglib-uri>/mmj-mgr</taglib-uri>
+      <taglib-location>/WEB-INF/tld/mmj-mgr.tld</taglib-location>
     </taglib>
     <taglib>
       <taglib-uri>/mmj-agy</taglib-uri>
