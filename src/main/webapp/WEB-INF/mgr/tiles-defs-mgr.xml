@@ -1,0 +1,725 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+  "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+  <!-- Main Layout -->
+  <definition name="layoutMgr.main" path="/mgr/layoutMgrMainLeftMenu.jsp">
+        <put name="titleKey"  value="" type="string"/>
+        <put name="description"  value="blah mgr description"/>
+        <put name="keywords"  value="blah, mgr, keywords"/>
+        <put name="header" value="/mgr/headerLeftMenu.jsp"/>
+        <put name="pageHelpKey"  value="pageHelp.noHelpAvailable" type="string"/>
+        <put name="menu" value="/mgr/leftMenu.jsp"/>
+        <put name="body"   value=""/>
+        <put name="footer" value="/mgr/footer.jsp" />
+        <put name="includeZapatec" value="false" type="string"/>
+  </definition>
+
+  <definition name="homeMgr.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.home" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.home" type="string"/>
+        <put name="body"   value="/mgr/home.jsp"/>
+  </definition>
+
+  <definition name="bookingLocked.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingLocked" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingLocked" type="string"/>
+        <put name="body"   value="/mgr/bookingLocked.jsp"/>
+  </definition>
+
+  <!-- Location -->
+  <definition name="locationList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationList" type="string"/>
+        <put name="body"   value="/mgr/locationList.jsp"/>
+  </definition>
+  <!-- BudgetTransactionList -->
+  <definition name="budgetTransactionList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.budgetTransactionList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.budgetTransactionList" type="string"/>
+        <put name="body"   value="/mgr/budgetTransactionList.jsp"/>
+  </definition>
+  <definition name="budgetTransactionNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.budgetTransactionNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.budgetTransactionNew" type="string"/>
+        <put name="body"   value="/mgr/budgetTransactionNew.jsp"/>
+  </definition>
+  <definition name="shiftList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftList" type="string"/>
+        <put name="body"   value="/mgr/shiftList.jsp"/>
+  </definition>
+  <definition name="shiftsToActivate.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftsToActivate" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftsToActivate" type="string"/>
+        <put name="body"   value="/mgr/shiftsToActivate.jsp"/>
+  </definition>
+  <definition name="shiftsOutstanding.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftsOutstanding" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftsOutstanding" type="string"/>
+        <put name="body"   value="/mgr/shiftsOutstanding.jsp"/>
+  </definition>
+  <definition name="shiftListSubmitted.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftListSubmitted" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftListSubmitted" type="string"/>
+        <put name="body"   value="/mgr/shiftListSubmitted.jsp"/>
+  </definition>
+  <definition name="shiftListAuthorized.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftListAuthorized" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftListAuthorized" type="string"/>
+        <put name="body"   value="/mgr/shiftListAuthorized.jsp"/>
+  </definition>
+<!-- 
+  <definition name="shiftsUnfilled.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftsUnfilled" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftsUnfilled" type="string"/>
+        <put name="body"   value="/mgr/shifts.jsp"/>
+  </definition>
+-->
+  <definition name="shiftSearch.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftSearch" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftSearch" type="string"/>
+        <put name="body"   value="/mgr/shiftSearch.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="shiftSearchResults.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftSearchResults" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftSearchResults" type="string"/>
+        <put name="body"   value="/mgr/shiftSearchResults.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="shiftSearchResults2.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftSearchResults" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftSearchResults" type="string"/>
+        <put name="body"   value="/mgr/shiftSearchResults2.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="shiftSearchResults3.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftSearchResults" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftSearchResults" type="string"/>
+        <put name="body"   value="/mgr/shiftSearchResults3.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="bookingSearch.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingSearch" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingSearch" type="string"/>
+        <put name="body"   value="/mgr/bookingSearch.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="bookingSearchResults.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingSearchResults" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingSearchResults" type="string"/>
+        <put name="body"   value="/mgr/bookingSearchResults.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="bookingList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingList" type="string"/>
+        <put name="body"   value="/mgr/bookingList.jsp"/>
+  </definition>
+  <definition name="bookingView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingView" type="string"/>
+        <put name="body"   value="/mgr/bookingView.jsp"/>
+  </definition>
+
+  <definition name="bookingViewSummary.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingViewSummary" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingViewSummary" type="string"/>
+        <put name="body"   value="/mgr/bookingViewSummary.jsp"/>
+  </definition>
+  <definition name="bookingViewShifts.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingViewShifts" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingViewShifts" type="string"/>
+        <put name="body"   value="/mgr/bookingViewShifts.jsp"/>
+  </definition>
+  <definition name="bookingViewTimesheets.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingViewTimesheets" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingViewTimesheets" type="string"/>
+        <put name="body"   value="/mgr/bookingViewTimesheets.jsp"/>
+  </definition>
+  <definition name="bookingViewApplicants.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingViewApplicants" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingViewApplicants" type="string"/>
+        <put name="body"   value="/mgr/bookingViewApplicants.jsp"/>
+  </definition>
+  <definition name="bookingViewGrades.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingViewGrades" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingViewGrades" type="string"/>
+        <put name="body"   value="/mgr/bookingViewGrades.jsp"/>
+  </definition>
+
+  <definition name="bookingCancel.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingCancel" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingCancel" type="string"/>
+        <put name="body"   value="/mgr/bookingCancel.jsp"/>
+  </definition>
+  <definition name="bookingEditInfo.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingEditInfo" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingEditInfo" type="string"/>
+        <put name="body"   value="/mgr/bookingEditInfo.jsp"/>
+  </definition>
+  <definition name="bookingEditExpenses.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingEditExpenses" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingEditExpenses" type="string"/>
+        <put name="body"   value="/mgr/bookingEditExpenses.jsp"/>
+  </definition>
+  <definition name="bookingSubmit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingSubmit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingSubmit" type="string"/>
+        <put name="body"   value="/mgr/bookingSubmit.jsp"/>
+  </definition>
+  <definition name="orderStaff1.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff1" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff1" type="string"/>
+        <put name="body"   value="/mgr/orderStaff1.jsp"/>
+  </definition>
+  <definition name="orderStaff2.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff2" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff2" type="string"/>
+        <put name="body"   value="/mgr/orderStaff2.jsp"/>
+  </definition>
+  <definition name="orderStaff3.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff3" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff3" type="string"/>
+        <put name="body"   value="/mgr/orderStaff3.jsp"/>
+  </definition>
+  <definition name="orderStaff4.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff4" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff4" type="string"/>
+        <put name="body"   value="/mgr/orderStaff4.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="orderStaff5.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff5" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff5" type="string"/>
+        <put name="body"   value="/mgr/orderStaff5.jsp"/>
+  </definition>
+  <definition name="orderStaff6.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff6" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff6" type="string"/>
+        <put name="body"   value="/mgr/orderStaff6.jsp"/>
+  </definition>
+  <definition name="orderStaff7.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff7" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff7" type="string"/>
+        <put name="body"   value="/mgr/orderStaff7.jsp"/>
+  </definition>
+  <definition name="orderStaff8.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff8" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff8" type="string"/>
+        <put name="body"   value="/mgr/orderStaff8.jsp"/>
+  </definition>
+  <definition name="orderStaff9.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff9" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff9" type="string"/>
+        <put name="body"   value="/mgr/orderStaff9.jsp"/>
+  </definition>
+  <definition name="orderStaff10.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.orderStaff10" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.orderStaff10" type="string"/>
+        <put name="body"   value="/mgr/orderStaff10.jsp"/>
+  </definition>
+  <definition name="bookingGradeApplicantView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingGradeApplicantView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantView" type="string"/>
+        <put name="body"   value="/mgr/bookingGradeApplicantView.jsp"/>
+  </definition>
+  <definition name="bookingGradeApplicantReject.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingGradeApplicantReject" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantReject" type="string"/>
+        <put name="body"   value="/mgr/bookingGradeApplicantReject.jsp"/>
+  </definition>
+  <definition name="bookingGradeApplicantOffer.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingGradeApplicantOffer" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantOffer" type="string"/>
+        <put name="body"   value="/mgr/bookingGradeApplicantOffer.jsp"/>
+  </definition>
+  <definition name="bookingGradeApplicantRenegotiate.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingGradeApplicantRenegotiate" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantRenegotiate" type="string"/>
+        <put name="body"   value="/mgr/bookingGradeApplicantRenegotiate.jsp"/>
+  </definition>
+<!-- 
+  <definition name="bookingGradeApplicantActivate.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingGradeApplicantActivate" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantActivate" type="string"/>
+        <put name="body"   value="/mgr/bookingGradeApplicantActivate.jsp"/>
+  </definition>
+  <definition name="bookingGradeApplicantDateAuthorize.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingGradeApplicantDateAuthorize" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantDateAuthorize" type="string"/>
+        <put name="body"   value="/mgr/bookingGradeApplicantDateAuthorize.jsp"/>
+  </definition>
+  <definition name="bookingGradeApplicantDateReject.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingGradeApplicantDateReject" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantDateReject" type="string"/>
+        <put name="body"   value="/mgr/bookingGradeApplicantDateReject.jsp"/>
+  </definition>
+  <definition name="bookingGradeApplicantDateActivate.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingGradeApplicantDateActivate" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingGradeApplicantDateActivate" type="string"/>
+        <put name="body"   value="/mgr/bookingGradeApplicantDateActivate.jsp"/>
+  </definition>
+-->
+  <definition name="bookingDateView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDateView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateView" type="string"/>
+        <put name="body"   value="/mgr/bookingDateView.jsp"/>
+  </definition>
+  <definition name="bookingDateCancel.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDateCancel" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateCancel" type="string"/>
+        <put name="body"   value="/mgr/bookingDateCancel.jsp"/>
+  </definition>
+  <definition name="bookingDateActivate.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDateActivate" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateActivate" type="string"/>
+        <put name="body"   value="/mgr/bookingDateActivate.jsp"/>
+  </definition>
+  <definition name="bookingDateAuthorize.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDateAuthorize" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateAuthorize" type="string"/>
+        <put name="body"   value="/mgr/bookingDateAuthorize.jsp"/>
+  </definition>
+  <definition name="bookingDateReject.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDateReject" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateReject" type="string"/>
+        <put name="body"   value="/mgr/bookingDateReject.jsp"/>
+  </definition>
+  <definition name="bookingDateInvoice.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDateInvoice" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateInvoice" type="string"/>
+        <put name="body"   value="/mgr/bookingDateInvoice.jsp"/>
+  </definition>
+  <definition name="bookingDatesActivate.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDatesActivate" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDatesActivate" type="string"/>
+        <put name="body"   value="/mgr/bookingDatesActivate.jsp"/>
+  </definition>
+  <definition name="bookingDatesAuthorize.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDatesAuthorize" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDatesAuthorize" type="string"/>
+        <put name="body"   value="/mgr/bookingDatesAuthorize.jsp"/>
+  </definition>
+  <definition name="bookingDatesInvoice.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDatesInvoice" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDatesInvoice" type="string"/>
+        <put name="body"   value="/mgr/bookingDatesInvoice.jsp"/>
+  </definition>
+  <definition name="invoiceView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.invoiceView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.invoiceView" type="string"/>
+        <put name="body"   value="/mgr/invoiceView.jsp"/>
+  </definition>
+
+  <definition name="bookingExtend1.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingExtend1" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingExtend1" type="string"/>
+        <put name="body"   value="/mgr/bookingExtend1.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="bookingExtend2.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingExtend2" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingExtend2" type="string"/>
+        <put name="body"   value="/mgr/bookingExtend2.jsp"/>
+  </definition>
+  <definition name="bookingExtend3.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingExtend3" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingExtend3" type="string"/>
+        <put name="body"   value="/mgr/bookingExtend3.jsp"/>
+  </definition>
+
+  <definition name="bookingExtendCompleted1.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingExtend1" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingExtend1" type="string"/>
+        <put name="body"   value="/mgr/bookingExtendCompleted1.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="bookingExtendCompleted2.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingExtend2" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingExtend2" type="string"/>
+        <put name="body"   value="/mgr/bookingExtendCompleted2.jsp"/>
+  </definition>
+  <definition name="bookingExtendCompleted3.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingExtend3" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingExtend3" type="string"/>
+        <put name="body"   value="/mgr/bookingExtendCompleted3.jsp"/>
+  </definition>
+
+  <definition name="changePassword.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.changePassword" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.changePassword" type="string"/>
+        <put name="body"   value="/mgr/changePassword.jsp"/>
+  </definition>
+  <definition name="changeSecretWord.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.changeSecretWord" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.changeSecretWord" type="string"/>
+        <put name="body"   value="/mgr/changeSecretWord.jsp"/>
+  </definition>
+  <definition name="reEnterPwd.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.reEnterPwd" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reEnterPwd" type="string"/>
+        <put name="body"   value="/mgr/reEnterPwd.jsp"/>
+  </definition>
+  <definition name="agencyInvoiceView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.agencyInvoiceView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.agencyInvoiceView" type="string"/>
+        <put name="body"   value="/mgr/agencyInvoiceView.jsp"/>
+  </definition>
+  <definition name="agencyInvoiceList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.agencyInvoiceList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.agencyInvoiceList" type="string"/>
+        <put name="body"   value="/mgr/agencyInvoiceList.jsp"/>
+  </definition>
+  <definition name="agencyInvoiceListSubmitted.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.agencyInvoiceListSubmitted" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.agencyInvoiceListSubmitted" type="string"/>
+        <put name="body"   value="/mgr/agencyInvoiceListSubmitted.jsp"/>
+  </definition>
+  <definition name="agencyInvoiceListAuthorized.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.agencyInvoiceListAuthorized" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.agencyInvoiceListAuthorized" type="string"/>
+        <put name="body"   value="/mgr/agencyInvoiceListAuthorized.jsp"/>
+  </definition>
+  <definition name="agencyInvoicesAuthorize.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.agencyInvoicesAuthorize" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.agencyInvoicesAuthorize" type="string"/>
+        <put name="body"   value="/mgr/agencyInvoicesAuthorize.jsp"/>
+  </definition>
+  <definition name="agencyInvoicesMarkAsPaid.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.agencyInvoicesMarkAsPaid" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.agencyInvoicesMarkAsPaid" type="string"/>
+        <put name="body"   value="/mgr/agencyInvoicesMarkAsPaid.jsp"/>
+  </definition>
+  <definition name="bookingDateEditOvertime.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.bookingDateEditOvertime" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.bookingDateEditOvertime" type="string"/>
+        <put name="body"   value="/mgr/bookingDateEditOvertime.jsp"/>
+  </definition>
+  <!-- ReasonForRequest -->
+  <definition name="reasonForRequestList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.reasonForRequestList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reasonForRequestList" type="string"/>
+        <put name="body"   value="/mgr/reasonForRequestList.jsp"/>
+  </definition>
+  <definition name="reasonForRequestNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.reasonForRequestNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reasonForRequestNew" type="string"/>
+        <put name="body"   value="/mgr/reasonForRequestNew.jsp"/>
+  </definition>
+  <definition name="reasonForRequestView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.reasonForRequestView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reasonForRequestView" type="string"/>
+        <put name="body"   value="/mgr/reasonForRequestView.jsp"/>
+  </definition>
+  <definition name="reasonForRequestEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.reasonForRequestEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reasonForRequestEdit" type="string"/>
+        <put name="body"   value="/mgr/reasonForRequestEdit.jsp"/>
+  </definition>
+  <definition name="reasonForRequestDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.reasonForRequestDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reasonForRequestDelete" type="string"/>
+        <put name="body"   value="/mgr/reasonForRequestDelete.jsp"/>
+  </definition>
+  <definition name="reasonForRequestOrder.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.reasonForRequestOrder" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.reasonForRequestOrder" type="string"/>
+        <put name="body"   value="/mgr/reasonForRequestOrder.jsp"/>
+  </definition>
+  <!-- Grade -->
+  <definition name="gradeList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.gradeList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.gradeList" type="string"/>
+        <put name="body"   value="/mgr/gradeList.jsp"/>
+  </definition>
+  <definition name="gradeNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.gradeNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.gradeNew" type="string"/>
+        <put name="body"   value="/mgr/gradeNew.jsp"/>
+  </definition>
+  <definition name="gradeView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.gradeView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.gradeView" type="string"/>
+        <put name="body"   value="/mgr/gradeView.jsp"/>
+  </definition>
+  <definition name="gradeEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.gradeEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.gradeEdit" type="string"/>
+        <put name="body"   value="/mgr/gradeEdit.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="gradeDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.gradeDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.gradeDelete" type="string"/>
+        <put name="body"   value="/mgr/gradeDelete.jsp"/>
+  </definition>
+  <definition name="gradeOrder.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.gradeOrder" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.gradeOrder" type="string"/>
+        <put name="body"   value="/mgr/gradeOrder.jsp"/>
+  </definition>
+  <!-- PublicHoliday -->
+  <definition name="publicHolidayList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.publicHolidayList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.publicHolidayList" type="string"/>
+        <put name="body"   value="/mgr/publicHolidayList.jsp"/>
+  </definition>
+  <definition name="publicHolidayNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.publicHolidayNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.publicHolidayNew" type="string"/>
+        <put name="body"   value="/mgr/publicHolidayNew.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="publicHolidayView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.publicHolidayView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.publicHolidayView" type="string"/>
+        <put name="body"   value="/mgr/publicHolidayView.jsp"/>
+  </definition>
+  <definition name="publicHolidayEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.publicHolidayEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.publicHolidayEdit" type="string"/>
+        <put name="body"   value="/mgr/publicHolidayEdit.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="publicHolidayDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.publicHolidayDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.publicHolidayDelete" type="string"/>
+        <put name="body"   value="/mgr/publicHolidayDelete.jsp"/>
+  </definition>
+  <!-- client -->  
+  <definition name="clientView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.clientView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.clientView" type="string"/>
+        <put name="body"   value="/mgr/clientView.jsp"/>
+  </definition>
+  <definition name="clientEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.clientEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.clientEdit" type="string"/>
+        <put name="body"   value="/mgr/clientEdit.jsp"/>
+  </definition>
+  <!-- Site -->
+  <definition name="siteList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.siteList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.siteList" type="string"/>
+        <put name="body"   value="/mgr/siteList.jsp"/>
+  </definition>
+  <definition name="siteNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.siteNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.siteNew" type="string"/>
+        <put name="body"   value="/mgr/siteNew.jsp"/>
+  </definition>
+  <definition name="siteView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.siteView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.siteView" type="string"/>
+        <put name="body"   value="/mgr/siteView.jsp"/>
+  </definition>
+  <definition name="siteEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.siteEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.siteEdit" type="string"/>
+        <put name="body"   value="/mgr/siteEdit.jsp"/>
+  </definition>
+  <definition name="siteDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.siteDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.siteDelete" type="string"/>
+        <put name="body"   value="/mgr/siteDelete.jsp"/>
+  </definition>
+  <definition name="siteOrder.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.siteOrder" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.siteOrder" type="string"/>
+        <put name="body"   value="/mgr/siteOrder.jsp"/>
+  </definition>
+  <!-- Location -->
+  <definition name="locationNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationNew" type="string"/>
+        <put name="body"   value="/mgr/locationNew.jsp"/>
+  </definition>
+  <definition name="locationView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationView" type="string"/>
+        <put name="body"   value="/mgr/locationView.jsp"/>
+  </definition>
+  <definition name="locationEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationEdit" type="string"/>
+        <put name="body"   value="/mgr/locationEdit.jsp"/>
+  </definition>
+  <definition name="locationDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationDelete" type="string"/>
+        <put name="body"   value="/mgr/locationDelete.jsp"/>
+  </definition>
+  <definition name="locationOrder.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationOrder" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationOrder" type="string"/>
+        <put name="body"   value="/mgr/locationOrder.jsp"/>
+  </definition>
+  <!-- DressCode -->
+  <definition name="dressCodeNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.dressCodeNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.dressCodeNew" type="string"/>
+        <put name="body"   value="/mgr/dressCodeNew.jsp"/>
+  </definition>
+  <definition name="dressCodeView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.dressCodeView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.dressCodeView" type="string"/>
+        <put name="body"   value="/mgr/dressCodeView.jsp"/>
+  </definition>
+  <definition name="dressCodeEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.dressCodeEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.dressCodeEdit" type="string"/>
+        <put name="body"   value="/mgr/dressCodeEdit.jsp"/>
+  </definition>
+  <definition name="dressCodeDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.dressCodeDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.dressCodeDelete" type="string"/>
+        <put name="body"   value="/mgr/dressCodeDelete.jsp"/>
+  </definition>
+  <definition name="dressCodeOrder.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.dressCodeOrder" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.dressCodeOrder" type="string"/>
+        <put name="body"   value="/mgr/dressCodeOrder.jsp"/>
+  </definition>
+  <!-- Shift -->
+  <definition name="shiftNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftNew" type="string"/>
+        <put name="body"   value="/mgr/shiftNew.jsp"/>
+  </definition>
+  <definition name="shiftView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftView" type="string"/>
+        <put name="body"   value="/mgr/shiftView.jsp"/>
+  </definition>
+  <definition name="shiftEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftEdit" type="string"/>
+        <put name="body"   value="/mgr/shiftEdit.jsp"/>
+  </definition>
+  <definition name="shiftDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftDelete" type="string"/>
+        <put name="body"   value="/mgr/shiftDelete.jsp"/>
+  </definition>
+  <definition name="shiftOrder.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.shiftOrder" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.shiftOrder" type="string"/>
+        <put name="body"   value="/mgr/shiftOrder.jsp"/>
+  </definition>
+  <!-- Expense -->
+  <definition name="expenseNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.expenseNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.expenseNew" type="string"/>
+        <put name="body"   value="/mgr/expenseNew.jsp"/>
+  </definition>
+  <definition name="expenseView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.expenseView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.expenseView" type="string"/>
+        <put name="body"   value="/mgr/expenseView.jsp"/>
+  </definition>
+  <definition name="expenseEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.expenseEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.expenseEdit" type="string"/>
+        <put name="body"   value="/mgr/expenseEdit.jsp"/>
+  </definition>
+  <definition name="expenseDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.expenseDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.expenseDelete" type="string"/>
+        <put name="body"   value="/mgr/expenseDelete.jsp"/>
+  </definition>
+  <definition name="expenseOrder.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.expenseOrder" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.expenseOrder" type="string"/>
+        <put name="body"   value="/mgr/expenseOrder.jsp"/>
+  </definition>
+  <definition name="locationJobProfileView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationJobProfileView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationJobProfileView" type="string"/>
+        <put name="body"   value="/mgr/locationJobProfileView.jsp"/>
+  </definition>
+  <definition name="locationJobProfileEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationJobProfileEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationJobProfileEdit" type="string"/>
+        <put name="body"   value="/mgr/locationJobProfileEdit.jsp"/>
+  </definition>
+  <definition name="locationJobProfileAdd.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationJobProfileAdd" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationJobProfileAdd" type="string"/>
+        <put name="body"   value="/mgr/locationJobProfileAdd.jsp"/>
+  </definition>
+  <definition name="locationJobProfileRemove.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationJobProfileRemove" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationJobProfileRemove" type="string"/>
+        <put name="body"   value="/mgr/locationJobProfileRemove.jsp"/>
+  </definition>
+  <!-- Manager -->
+  <definition name="managerList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerList" type="string"/>
+        <put name="body"   value="/mgr/managerList.jsp"/>
+  </definition>
+  <definition name="managerNew.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerNew" type="string"/>
+        <put name="body"   value="/mgr/managerNew.jsp"/>
+  </definition>
+  <definition name="managerView.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerView" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerView" type="string"/>
+        <put name="body"   value="/mgr/managerView.jsp"/>
+  </definition>
+  <definition name="managerEdit.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerEdit" type="string"/>
+        <put name="body"   value="/mgr/managerEdit.jsp"/>
+  </definition>
+  <definition name="managerDelete.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerDelete" type="string"/>
+        <put name="body"   value="/mgr/managerDelete.jsp"/>
+  </definition>
+  <definition name="managerResetSecretWord.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerResetSecretWord" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerResetSecretWord" type="string"/>
+        <put name="body"   value="/mgr/managerResetSecretWord.jsp"/>
+  </definition>
+  <definition name="managerResetPassword.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerResetPassword" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerResetPassword" type="string"/>
+        <put name="body"   value="/mgr/managerResetPassword.jsp"/>
+  </definition>
+  <definition name="locationManagerJobProfileAdd.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationManagerJobProfileAdd" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationManagerJobProfileAdd" type="string"/>
+        <put name="body"   value="/mgr/locationManagerJobProfileAdd.jsp"/>
+  </definition>
+  <definition name="locationManagerJobProfileRemove.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.locationManagerJobProfileRemove" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.locationManagerJobProfileRemove" type="string"/>
+        <put name="body"   value="/mgr/locationManagerJobProfileRemove.jsp"/>
+  </definition>
+  <definition name="managerAccessGroupAdd.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerAccessGroupAdd" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerAccessGroupAdd" type="string"/>
+        <put name="body"   value="/mgr/managerAccessGroupAdd.jsp"/>
+  </definition>
+  <definition name="managerAccessGroupRemove.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.managerAccessGroupRemove" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.managerAccessGroupRemove" type="string"/>
+        <put name="body"   value="/mgr/managerAccessGroupRemove.jsp"/>
+  </definition>
+  <!-- Uplift -->
+  <definition name="upliftList.page" extends="layoutMgr.main">
+        <put name="titleKey" value="title.upliftList" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.upliftList" type="string"/>
+        <put name="body"   value="/mgr/upliftList.jsp"/>
+  </definition>
+  
+
+</tiles-definitions>

@@ -1,0 +1,2902 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  
+  <form-beans >
+    <form-bean dynamic="true" name="ListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean dynamic="true" name="LocationListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="totalBudget" type="java.math.BigDecimal" />
+      <form-property name="totalVatBudget" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseBudget" type="java.math.BigDecimal" />
+      <form-property name="totalNonPayBudget" type="java.math.BigDecimal" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+    <form-bean dynamic="true" name="BudgetTransactionListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="locationJobProfile" type="com.helmet.bean.LocationJobProfileUser" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="tab" type="java.lang.String" initial="pay" />
+    </form-bean>
+    <form-bean dynamic="true" name="BudgetTransactionNewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="locationJobProfile" type="com.helmet.bean.LocationJobProfileUser" />
+      <form-property name="budgetTransaction" type="com.helmet.bean.BudgetTransaction" />
+      <form-property name="valueStr" type="java.lang.String" initial="0" />
+      <form-property name="vatValueStr" type="java.lang.String" initial="0" />
+      <form-property name="expenseValueStr" type="java.lang.String" initial="0" />
+      <form-property name="nonPayValueStr" type="java.lang.String" initial="0" />
+      <form-property name="tab" type="java.lang.String" initial="pay" />
+    </form-bean>
+    <form-bean dynamic="true" name="HomeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="unfilledBookings" type="java.util.List" />
+      <form-property name="unfilledShifts" type="java.util.List" />
+      <form-property name="filledShifts" type="java.util.List" />
+    </form-bean>
+    <form-bean dynamic="true" name="BookingListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingStatus" type="java.lang.String" />
+      <form-property name="workedStatus" type="java.lang.String" />
+      <form-property name="bookingGradeApplicantDateStatus" type="java.lang.String" />
+
+      <form-property name="list" type="java.util.List" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      <form-property name="totalRRPValue" type="java.math.BigDecimal" />
+      <form-property name="totalAgreedValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualHours" type="java.math.BigDecimal" />
+    </form-bean>
+    <form-bean dynamic="true" name="OrderStaffFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="page" type="java.lang.Integer" initial="0" />
+      <form-property name="list" type="java.util.List" />
+      <!--  step 1 -->
+      <form-property name="reasonForRequest" type="com.helmet.bean.ReasonForRequest" />
+      <form-property name="reasonForRequestText" type="java.lang.String" />
+      <!--  step 2 -->
+      <form-property name="location" type="com.helmet.bean.LocationUser" />
+      <form-property name="origLocationId" type="java.lang.Integer" initial="0" />
+      <!--  step 3 -->      
+      <form-property name="jobProfile" type="com.helmet.bean.JobProfileUser" />
+      <form-property name="origJobProfileId" type="java.lang.Integer" initial="0" />
+      <!-- step 4 -->
+      <form-property name="dates" type="java.lang.String" />
+      <form-property name="bookingDates" type="com.helmet.bean.BookingDate[]" />
+      <form-property name="noOfDates" type="java.lang.Integer" />
+      <!-- step 5 -->
+      <form-property name="shifts" type="java.util.List" />
+      <form-property name="noOfShifts" type="java.lang.Integer" />
+      <form-property name="hourlyRate" type="java.math.BigDecimal" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      <form-property name="rrp" type="java.math.BigDecimal" />
+      <!-- step 6 -->
+      <form-property name="grades" type="java.util.List" />
+      <form-property name="clientAgencyJobProfileUsers" type="java.util.List" />
+      <form-property name="clientAgencyJobProfileGrades" type="java.util.Vector" />
+      <form-property name="clientAgencyJobProfileGradeUserArray" type="com.helmet.bean.ClientAgencyJobProfileGradeUser[]" />
+      <!-- step 7 -->
+      <form-property name="singleCandidate" type="java.lang.Boolean" initial="false" />
+      <form-property name="cvRequired" type="java.lang.Boolean" initial="false" />
+      <form-property name="interviewRequired" type="java.lang.Boolean" initial="false" />
+      <form-property name="canProvideAccommodation" type="java.lang.Boolean" initial="false" />
+      <form-property name="carRequired" type="java.lang.Boolean" initial="false" />
+      <form-property name="noOfDressCodes" type="java.lang.Integer" />
+      <form-property name="dressCode" type="com.helmet.bean.DressCode" />
+
+      <form-property name="selectedExpenses" type="java.lang.String[]" initial="'0'" />
+      <form-property name="expenseArray" type="com.helmet.bean.Expense[]" />
+      <form-property name="expensesText" type="java.lang.String" />
+
+      <form-property name="comments" type="java.lang.String" initial="" />
+      <form-property name="duration" type="java.lang.String" initial="" />
+      <form-property name="bookingReference" type="java.lang.String" initial="" />
+      <form-property name="contactName" type="java.lang.String" initial="" />
+      <form-property name="contactJobTitle" type="java.lang.String" initial="" />
+      <form-property name="contactEmailAddress" type="java.lang.String" initial="" />
+      <form-property name="contactTelephoneNumber" type="java.lang.String" initial="" />
+      <form-property name="accountContactName" type="java.lang.String" initial="" />
+      <form-property name="accountContactAddress" type="com.helmet.bean.Address" />
+      <form-property name="accountContactEmailAddress" type="java.lang.String" initial="" />
+
+      <form-property name="autoFill" type="java.lang.Boolean" initial="false" />
+      <form-property name="autoActivate" type="java.lang.Boolean" initial="false" />
+
+      <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
+
+    </form-bean>
+    <form-bean dynamic="true" name="BookingViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
+      <!--  used to lock the booking -->
+      <form-property name="bookingId" type="java.lang.Integer" />
+    </form-bean>
+    <form-bean dynamic="true" name="BookingGradeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingGrade" type="com.helmet.bean.BookingGrade" />
+    </form-bean>
+    <form-bean dynamic="true" name="BookingGradeApplicantViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingGradeApplicant" type="com.helmet.bean.BookingGradeApplicantUserEntity" />
+      <!--  used to lock the booking -->
+      <form-property name="bookingId" type="java.lang.Integer" />
+    </form-bean>
+
+<!--
+    <form-bean dynamic="true" name="BookingGradeApplicantDateViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingGradeApplicantDate" type="com.helmet.bean.BookingGradeApplicantDateUser" />
+      <form-property name="bookingId" type="java.lang.Integer" />
+    </form-bean>
+-->
+    <form-bean dynamic="true" name="ShiftSearchFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingId" type="java.lang.String" />
+      <form-property name="shiftNo" type="java.lang.String" />
+      <form-property name="loginId" type="java.lang.String" />
+      <form-property name="invoiceId" type="java.lang.String" />
+      <form-property name="bookingDateStatus" type="java.lang.String" />
+      <form-property name="singleCandidate" type="java.lang.String" />
+      <form-property name="activated" type="java.lang.String" />
+      <form-property name="fromDate" type="java.lang.String" />
+      <form-property name="toDate" type="java.lang.String" />
+      <form-property name="workedStatus" type="java.lang.String" />
+      <form-property name="siteId" type="java.lang.String" />
+      <form-property name="locationId" type="java.lang.String" />
+      <form-property name="jobProfileId" type="java.lang.String" />
+
+      <form-property name="list" type="java.util.List" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      <form-property name="totalRRPValue" type="java.math.BigDecimal" />
+      <form-property name="totalAgreedValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualHours" type="java.math.BigDecimal" />
+      <form-property name="totalActualVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalTotalVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualTotalValue" type="java.math.BigDecimal" />
+
+      <form-property name="canMultiActivate" type="java.lang.Boolean" initial="false"/>
+      <form-property name="canMultiAuthorize" type="java.lang.Boolean" initial="false"/>
+      <form-property name="canMultiInvoice" type="java.lang.Boolean" initial="false"/>
+
+      <form-property name="selectedBookingDates" type="java.lang.String[]" initial="'0'" />
+
+    </form-bean>
+
+    <form-bean dynamic="true" name="ShiftListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingDateStatus" type="java.lang.String" />
+      <form-property name="workedStatus" type="java.lang.String" />
+
+      <form-property name="list" type="java.util.List" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      <form-property name="totalRRPValue" type="java.math.BigDecimal" />
+      <form-property name="totalAgreedValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualHours" type="java.math.BigDecimal" />
+      <form-property name="totalActualVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalTotalVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualTotalValue" type="java.math.BigDecimal" />
+      
+      <form-property name="selectedBookingDates" type="java.lang.String[]" initial="'0'" />
+      
+    </form-bean>
+
+    <form-bean dynamic="true" name="BookingSearchFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingId" type="java.lang.String" />
+      <form-property name="bookingStatus" type="java.lang.String" />
+      <form-property name="singleCandidate" type="java.lang.String" />
+      <form-property name="fromDate" type="java.lang.String" />
+      <form-property name="toDate" type="java.lang.String" />
+      <form-property name="siteId" type="java.lang.String" />
+      <form-property name="locationId" type="java.lang.String" />
+      <form-property name="jobProfileId" type="java.lang.String" />
+
+      <form-property name="workedStatus" type="java.lang.String" />
+      <form-property name="bookingGradeApplicantDateStatus" type="java.lang.String" />
+
+      <form-property name="list" type="java.util.List" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      <form-property name="totalRRPValue" type="java.math.BigDecimal" />
+      <form-property name="totalAgreedValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualHours" type="java.math.BigDecimal" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="BookingDateFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDate" />
+      <!--  used to lock the booking -->
+      <form-property name="bookingId" type="java.lang.Integer" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="BookingDateUserApplicantFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+<!-- 
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
+-->
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicantEntity" />
+      <!--  used to lock the booking -->
+      <form-property name="bookingId" type="java.lang.Integer" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="BookingDatesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="selectedBookingDates" type="java.lang.String[]" initial="'0'" />
+      <form-property name="bookingDateIdStrs" type="java.lang.String" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      <form-property name="totalRRPValue" type="java.math.BigDecimal" />
+      <form-property name="totalAgreedValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualHours" type="java.math.BigDecimal" />
+      <form-property name="totalActualVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalTotalVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalActualTotalValue" type="java.math.BigDecimal" />
+      
+      <form-property name="pwd" type="java.lang.String" />
+    </form-bean>
+    
+    <form-bean dynamic="true" name="InvoiceViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="invoice" type="com.helmet.bean.InvoiceEntity" />
+    </form-bean>
+
+
+    <form-bean dynamic="true" name="BookingExtendFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="page" type="java.lang.Integer" initial="0" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="currentBookingDates" type="com.helmet.bean.BookingDateUser[]" />
+      <!-- step 1 -->
+      <form-property name="dates" type="java.lang.String" />
+      <form-property name="bookingDates" type="com.helmet.bean.BookingDateUser[]" />
+      <form-property name="noOfDates" type="java.lang.Integer" />
+      <!-- step 2 -->
+      <form-property name="shifts" type="java.util.List" />
+      <form-property name="noOfShifts" type="java.lang.Integer" />
+      <form-property name="hourlyRate" type="java.math.BigDecimal" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      <form-property name="rrp" type="java.math.BigDecimal" />
+
+      <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
+      <form-property name="bookingGradeApplicant" type="com.helmet.bean.BookingGradeApplicantUser" />
+      
+      <form-property name="chargeRateValueTotal" type="java.math.BigDecimal" />
+      <form-property name="payRateValueTotal" type="java.math.BigDecimal" />
+      <form-property name="wageRateValueTotal" type="java.math.BigDecimal" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ChangePasswordFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="oldPwd" type="java.lang.String" />
+      <form-property name="newPwd" type="java.lang.String" />
+      <form-property name="confirmPwd" type="java.lang.String" />
+      <form-property name="pwdHint" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ChangeSecretWordFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="oldSecretWord" type="java.lang.String" />
+      <form-property name="newSecretWord" type="java.lang.String" />
+      <form-property name="confirmSecretWord" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ReEnterPwdFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="pwd" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="BookingEditInfoFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
+      <!--  used to lock the booking -->
+      <form-property name="bookingId" type="java.lang.Integer" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="BookingEditExpensesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
+      <form-property name="selectedExpenses" type="java.lang.String[]" initial="'0'" />
+      <form-property name="list" type="java.util.List" />
+      <!--  used to lock the booking -->
+      <form-property name="bookingId" type="java.lang.Integer" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="AgencyInvoiceFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agencyInvoice" type="com.helmet.bean.AgencyInvoiceUserEntity" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="AgencyInvoiceListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="status" type="java.lang.String" />
+      <form-property name="list" type="java.util.List" />
+      <form-property name="totalPayRateValue" type="java.math.BigDecimal" />
+      <form-property name="totalWtdValue" type="java.math.BigDecimal" />
+      <form-property name="totalNiValue" type="java.math.BigDecimal" />
+      <form-property name="totalWageRateValue" type="java.math.BigDecimal" />
+      <form-property name="totalCommissionValue" type="java.math.BigDecimal" />
+      <form-property name="totalChargeRateValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseValue" type="java.math.BigDecimal" />
+      <form-property name="totalDiscountValue" type="java.math.BigDecimal" />
+      <form-property name="totalVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalTotal" type="java.math.BigDecimal" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+
+      <form-property name="selectedAgencyInvoices" type="java.lang.String[]" initial="'0'" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="AgencyInvoicesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+      <form-property name="totalPayRateValue" type="java.math.BigDecimal" />
+      <form-property name="totalWtdValue" type="java.math.BigDecimal" />
+      <form-property name="totalNiValue" type="java.math.BigDecimal" />
+      <form-property name="totalWageRateValue" type="java.math.BigDecimal" />
+      <form-property name="totalCommissionValue" type="java.math.BigDecimal" />
+      <form-property name="totalChargeRateValue" type="java.math.BigDecimal" />
+      <form-property name="totalExpenseValue" type="java.math.BigDecimal" />
+      <form-property name="totalDiscountValue" type="java.math.BigDecimal" />
+      <form-property name="totalVatValue" type="java.math.BigDecimal" />
+      <form-property name="totalTotal" type="java.math.BigDecimal" />
+      <form-property name="totalHours" type="java.math.BigDecimal" />
+      
+      <form-property name="selectedAgencyInvoices" type="java.lang.String[]" initial="'0'" />
+      <form-property name="agencyInvoiceIdStrs" type="java.lang.String" />
+
+      <form-property name="pwd" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="BookingDateEditOvertimeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="DisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="SiteDisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+
+      <form-property name="site" type="com.helmet.bean.Site" />
+
+    </form-bean>
+
+    <form-bean dynamic="true" name="LocationDisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+      <form-property name="commaDelimitedKey" type="java.lang.String" />
+      <form-property name="order" type="java.lang.String" />
+      <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
+
+      <form-property name="location" type="com.helmet.bean.Location" />
+
+    </form-bean>
+
+    <form-bean dynamic="true" name="ReasonForRequestFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="reasonForRequest" type="com.helmet.bean.ReasonForRequest" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="GradeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="grade" type="com.helmet.bean.Grade" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="PublicHolidayFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="publicHoliday" type="com.helmet.bean.PublicHoliday" />
+      <form-property name="phDate" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ClientFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="client" type="com.helmet.bean.ClientUser" />
+
+      <form-property name="logoFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="logo2File" type="org.apache.struts.upload.FormFile"/>
+    </form-bean>
+
+    <form-bean dynamic="true" name="SiteFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="site" type="com.helmet.bean.SiteUser" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="SiteViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="site" type="com.helmet.bean.SiteUserEntity" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="LocationFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="location" type="com.helmet.bean.Location" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="LocationViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="location" type="com.helmet.bean.LocationEntity" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="DressCodeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="dressCode" type="com.helmet.bean.DressCode" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ShiftFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="shift" type="com.helmet.bean.Shift" />
+
+      <form-property name="shiftStartHour" type="java.lang.String" />
+      <form-property name="shiftStartMinute" type="java.lang.String" />
+      <form-property name="shiftEndHour" type="java.lang.String" />
+      <form-property name="shiftEndMinute" type="java.lang.String" />
+      <form-property name="shiftBreakStartHour" type="java.lang.String" />
+      <form-property name="shiftBreakStartMinute" type="java.lang.String" />
+      <form-property name="shiftBreakEndHour" type="java.lang.String" />
+      <form-property name="shiftBreakEndMinute" type="java.lang.String" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ExpenseFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="expense" type="com.helmet.bean.Expense" />
+
+      <form-property name="multiplierStr" type="java.lang.String" initial="1.00"/>
+      <form-property name="vatRateStr" type="java.lang.String" initial="0.00"/>
+    </form-bean>
+
+    <form-bean dynamic="true" name="LocationJobProfileAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+      <form-property name="location" type="com.helmet.bean.Location" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="LocationJobProfileFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="locationJobProfile" type="com.helmet.bean.LocationJobProfileUser" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ManagerFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ManagerViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.ManagerEntity" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="LocationManagerJobProfileAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+
+    <form-bean dynamic="true" name="ManagerAccessGroupAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="list" type="java.util.List" />
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+      <form-property name="selectedItems" type="java.lang.String[]" />
+    </form-bean>
+
+  </form-beans>
+
+ <global-exceptions />
+  
+  <global-forwards >
+    <forward name="home" path="/home.do" />
+    
+    <!-- needs to do something rather more clever -->
+    <forward name="illegalaccess" path="/home.do" />
+    
+    <forward name="logout" path="/logoutProcess.do" />
+
+    <forward name="locationList" path="/locationList.do" />
+    
+    <forward name="budgetTransactionNew" path="/budgetTransactionNew.do?tab=pay" />
+    <forward name="budgetTransactionNewPay" path="/budgetTransactionNew.do?tab=pay" />
+    <forward name="budgetTransactionNewVat" path="/budgetTransactionNew.do?tab=vat" />
+    <forward name="budgetTransactionNewExpense" path="/budgetTransactionNew.do?tab=expense" />
+    <forward name="budgetTransactionNewNonPay" path="/budgetTransactionNew.do?tab=nonpay" />
+    
+    <forward name="budgetTransactionList" path="/budgetTransactionList.do?tab=pay" />
+    <forward name="budgetTransactionListPay" path="/budgetTransactionList.do?tab=pay" />
+    <forward name="budgetTransactionListVat" path="/budgetTransactionList.do?tab=vat" />
+    <forward name="budgetTransactionListExpense" path="/budgetTransactionList.do?tab=expense" />
+    <forward name="budgetTransactionListNonPay" path="/budgetTransactionList.do?tab=nonpay" />
+    
+    <forward name="bookingList" path="/bookingList.do" />
+    <forward name="bookingListDraft" path="/bookingList.do?bookingStatus=0" />
+    <forward name="bookingListUnfilled" path="/bookingList.do?bookingStatus=1" />
+    <forward name="bookingListOffered" path="/bookingList.do?bookingStatus=2" />
+    <forward name="bookingListFilled" path="/bookingList.do?bookingStatus=3" />
+    <forward name="bookingListCompleted" path="/bookingList.do?bookingStatus=4" />
+    <forward name="bookingListInvoiced" path="/bookingList.do?bookingStatus=5" />
+    <forward name="bookingListCancelled" path="/bookingList.do?bookingStatus=6" />
+
+    <forward name="bookingListTSSubmitted" path="/bookingList.do?workedStatus=1" />
+    <forward name="bookingListTSAuthorized" path="/bookingList.do?workedStatus=2" />
+    <forward name="bookingListTSRejected" path="/bookingList.do?workedStatus=3" />
+    <forward name="bookingListTSInvoiced" path="/bookingList.do?workedStatus=4" />
+    
+    <forward name="bookingListBGADOpen" path="/bookingList.do?bookingGradeApplicantDateStatus=1" />
+    <forward name="bookingListBGADOffered" path="/bookingList.do?bookingGradeApplicantDateStatus=2" />
+    <forward name="bookingListBGADFilled" path="/bookingList.do?bookingGradeApplicantDateStatus=3" />
+    <forward name="bookingListBGADRefused" path="/bookingList.do?bookingGradeApplicantDateStatus=4" />
+    <forward name="bookingListBGADUnsuccessful" path="/bookingList.do?bookingGradeApplicantDateStatus=5" />
+    <forward name="bookingListBGADRejected" path="/bookingList.do?bookingGradeApplicantDateStatus=6" />
+    
+<!-- 
+    <forward name="bookingView" path="/bookingViewSummary.do" />
+-->
+    <forward name="bookingViewSummary" path="/bookingViewSummary.do" />
+    <forward name="bookingViewShifts" path="/bookingViewShifts.do" />
+    <forward name="bookingViewGrades" path="/bookingViewGrades.do" />
+    <forward name="bookingViewApplicants" path="/bookingViewApplicants.do" />
+    <forward name="bookingViewTimesheets" path="/bookingViewTimesheets.do" />
+    
+    <forward name="bookingEdit" path="/bookingEdit.do" />
+    <forward name="bookingCancel" path="/bookingCancel.do" />
+    <forward name="bookingSubmit" path="/bookingSubmit.do" />
+    <forward name="bookingEditInfo" path="/bookingEditInfo.do" />
+    <forward name="bookingEditExpenses" path="/bookingEditExpenses.do" />
+    
+    <forward name="bookingExtend" path="/bookingExtend.do" />
+    <forward name="bookingExtendCompleted" path="/bookingExtendCompleted.do" />
+    <forward name="bookingGradeSubmit" path="/bookingGradeSubmitProcess.do" />
+    <forward name="orderStaff" path="/orderStaff.do" />
+    <forward name="orderStaff1" path="/orderStaff1.do" />
+    <forward name="orderStaff2" path="/orderStaff2.do" />
+    <forward name="orderStaff3" path="/orderStaff3.do" />
+    <forward name="orderStaff4" path="/orderStaff4.do" />
+    <forward name="orderStaff5" path="/orderStaff5.do" />
+    <forward name="orderStaff6" path="/orderStaff6.do" />
+    <forward name="orderStaff7" path="/orderStaff7.do" />
+    <forward name="orderStaff8" path="/orderStaff8.do" />
+    <forward name="orderStaff9" path="/orderStaff9.do" />
+    <forward name="orderStaff10" path="/orderStaff10.do" />
+    <forward name="orderStaff10Summary" path="/orderStaff10.do?tab=summary" />
+    <forward name="orderStaff10Shifts" path="/orderStaff10.do?tab=shifts" />
+    <forward name="orderStaff10Grades" path="/orderStaff10.do?tab=grades" />
+    <forward name="orderStaffFinish" path="/orderStaffFinish.do" />
+    <forward name="bookingGradeApplicantView" path="/bookingGradeApplicantView.do" />
+    <forward name="bookingGradeApplicantReject" path="/bookingGradeApplicantReject.do" />
+    <forward name="bookingGradeApplicantOffer" path="/bookingGradeApplicantOffer.do" />
+    <forward name="bookingGradeApplicantRenegotiate" path="/bookingGradeApplicantRenegotiate.do" />
+<!-- 
+    <forward name="bookingGradeApplicantActivate" path="/bookingGradeApplicantActivate.do" />
+    
+    <forward name="bookingGradeApplicantDateAuthorize" path="/bookingGradeApplicantDateAuthorize.do" />
+    <forward name="bookingGradeApplicantDateReject" path="/bookingGradeApplicantDateReject.do" />
+
+    <forward name="bookingGradeApplicantDateActivate" path="/bookingGradeApplicantDateActivate.do" />
+-->
+
+    <forward name="bookingDateView" path="/bookingDateView.do" />
+    <forward name="bookingDateViewPDF" path="/bookingDateViewPDF.do" />
+    
+    <forward name="bookingDateView" path="/bookingDateView.do?tab=summary" />
+    <forward name="bookingDateViewSummary" path="/bookingDateView.do?tab=summary" />
+    <forward name="bookingDateViewDetails" path="/bookingDateView.do?tab=details" />
+    <forward name="bookingDateViewExpenses" path="/bookingDateView.do?tab=expenses" />
+    <forward name="bookingDateViewHourly" path="/bookingDateView.do?tab=hourly" />
+    
+    <forward name="bookingDateCancel" path="/bookingDateCancel.do?tab=summary" />
+    <forward name="bookingDateCancelSummary" path="/bookingDateCancel.do?tab=summary" />
+    <forward name="bookingDateCancelDetails" path="/bookingDateCancel.do?tab=details" />
+    <forward name="bookingDateCancelExpenses" path="/bookingDateCancel.do?tab=expenses" />
+    <forward name="bookingDateCancelHourly" path="/bookingDateCancel.do?tab=hourly" />
+
+    <forward name="bookingDateCancelCompleted" path="/bookingDateCancel.do?tab=summary" />
+
+    <forward name="bookingDateActivate" path="/bookingDateActivate.do?tab=summary" />
+    <forward name="bookingDateActivateSummary" path="/bookingDateActivate.do?tab=summary" />
+    <forward name="bookingDateActivateDetails" path="/bookingDateActivate.do?tab=details" />
+    <forward name="bookingDateActivateExpenses" path="/bookingDateActivate.do?tab=expenses" />
+    <forward name="bookingDateActivateHourly" path="/bookingDateActivate.do?tab=hourly" />
+
+    <forward name="bookingDateAuthorize" path="/bookingDateAuthorize.do?tab=summary" />
+    <forward name="bookingDateAuthorizeSummary" path="/bookingDateAuthorize.do?tab=summary" />
+    <forward name="bookingDateAuthorizeDetails" path="/bookingDateAuthorize.do?tab=details" />
+    <forward name="bookingDateAuthorizeExpenses" path="/bookingDateAuthorize.do?tab=expenses" />
+    <forward name="bookingDateAuthorizeHourly" path="/bookingDateAuthorize.do?tab=hourly" />
+
+    <forward name="bookingDateReject" path="/bookingDateReject.do?tab=summary" />
+    <forward name="bookingDateRejectSummary" path="/bookingDateReject.do?tab=summary" />
+    <forward name="bookingDateRejectDetails" path="/bookingDateReject.do?tab=details" />
+    <forward name="bookingDateRejectExpenses" path="/bookingDateReject.do?tab=expenses" />
+    <forward name="bookingDateRejectHourly" path="/bookingDateReject.do?tab=hourly" />
+
+    <forward name="bookingDateInvoice" path="/bookingDateInvoice.do?tab=summary" />
+    <forward name="bookingDateInvoiceSummary" path="/bookingDateInvoice.do?tab=summary" />
+    <forward name="bookingDateInvoiceDetails" path="/bookingDateInvoice.do?tab=details" />
+    <forward name="bookingDateInvoiceExpenses" path="/bookingDateInvoice.do?tab=expenses" />
+    <forward name="bookingDateInvoiceHourly" path="/bookingDateInvoice.do?tab=hourly" />
+
+    <forward name="bookingDatesActivate" path="/bookingDatesActivate.do" />
+    <forward name="bookingDatesAuthorize" path="/bookingDatesAuthorize.do" />
+    <forward name="bookingDatesInvoice" path="/bookingDatesInvoice.do" />
+
+    <forward name="bookingDateEditOvertime" path="/bookingDateEditOvertime.do" />
+
+
+    <forward name="bookingSearch" path="/bookingSearch.do" />
+
+    <forward name="changePassword" path="/changePassword.do" />
+    <forward name="changeSecretWord" path="/changeSecretWord.do" />
+    <forward name="reEnterPwd" path="/reEnterPwd.do" />
+
+    <forward name="toggleShowPageHelp" path="/toggleShowPageHelp.do" />
+    
+    <forward name="bookingLocked" path="/bookingLocked.do" />
+
+<!-- 
+    <forward name="shifts" path="/shifts.do" />
+    <forward name="shiftsUnfilled" path="/shiftsUnfilled.do" />
+-->
+    <forward name="shiftListUnfilled" path="/shiftList.do?bookingDateStatus=1" />
+    <forward name="shiftListOffered" path="/shiftList.do?bookingDateStatus=2" />
+    <forward name="shiftsOutstanding" path="/shiftsOutstanding.do" />
+    <forward name="shiftsToActivate" path="/shiftsToActivate.do" />
+    <forward name="shiftSearch" path="/shiftSearch.do" />
+
+    <forward name="shiftSearchXML" path="/shiftSearchXML.do" />
+    
+    <forward name="shiftListTSSubmitted" path="/shiftListSubmitted.do?workedStatus=1" /> <!-- &amp;bookingDateStatus=3" />  -->
+    <forward name="shiftListTSAuthorized" path="/shiftListAuthorized.do?workedStatus=2" /> <!-- &amp;bookingDateStatus=3" />  -->
+    <forward name="shiftListTSRejected" path="/shiftList.do?workedStatus=3" /> <!-- &amp;bookingDateStatus=3" />  -->
+
+    <forward name="invoiceView" path="/invoiceView.do" />
+
+    <forward name="agencyInvoiceView" path="/agencyInvoiceView.do" />
+    
+    <forward name="agencyInvoiceList" path="/agencyInvoiceList.do" />
+    <forward name="agencyInvoiceListSubmitted" path="/agencyInvoiceListSubmitted.do?status=0" />
+    <forward name="agencyInvoiceListAuthorized" path="/agencyInvoiceListAuthorized.do?status=1" />
+
+    <forward name="agencyInvoicesAuthorize" path="/agencyInvoicesAuthorize.do" />
+
+    <forward name="reasonForRequestList" path="/reasonForRequestList.do" />
+    <forward name="reasonForRequestView" path="/reasonForRequestView.do" />
+    <forward name="reasonForRequestNew" path="/reasonForRequestNew.do" />
+    <forward name="reasonForRequestEdit" path="/reasonForRequestEdit.do" />
+    <forward name="reasonForRequestDelete" path="/reasonForRequestDelete.do" />
+    <forward name="reasonForRequestOrder" path="/reasonForRequestOrder.do" />
+
+    <forward name="gradeList" path="/gradeList.do" />
+    <forward name="gradeView" path="/gradeView.do" />
+    <forward name="gradeNew" path="/gradeNew.do" />
+    <forward name="gradeEdit" path="/gradeEdit.do" />
+    <forward name="gradeDelete" path="/gradeDelete.do" />
+    <forward name="gradeOrder" path="/gradeOrder.do" />
+
+    <forward name="publicHolidayList" path="/publicHolidayList.do" />
+    <forward name="publicHolidayView" path="/publicHolidayView.do" />
+    <forward name="publicHolidayNew" path="/publicHolidayNew.do" />
+    <forward name="publicHolidayEdit" path="/publicHolidayEdit.do" />
+    <forward name="publicHolidayDelete" path="/publicHolidayDelete.do" />
+
+    <forward name="clientView" path="/clientView.do" />
+    <forward name="clientEdit" path="/clientEdit.do" />
+
+    <forward name="siteList" path="/siteList.do" />
+    <forward name="siteView" path="/siteView.do" />
+    <forward name="siteNew" path="/siteNew.do" />
+    <forward name="siteEdit" path="/siteEdit.do" />
+    <forward name="siteDelete" path="/siteDelete.do" />
+    <forward name="siteOrder" path="/siteOrder.do" />
+
+    <forward name="locationView" path="/locationView.do" />
+    <forward name="locationNew" path="/locationNew.do" />
+    <forward name="locationEdit" path="/locationEdit.do" />
+    <forward name="locationDelete" path="/locationDelete.do" />
+    <forward name="locationOrder" path="/locationOrder.do" />
+
+    <forward name="dressCodeView" path="/dressCodeView.do" />
+    <forward name="dressCodeNew" path="/dressCodeNew.do" />
+    <forward name="dressCodeEdit" path="/dressCodeEdit.do" />
+    <forward name="dressCodeDelete" path="/dressCodeDelete.do" />
+    <forward name="dressCodeOrder" path="/dressCodeOrder.do" />
+
+    <forward name="shiftView" path="/shiftView.do" />
+    <forward name="shiftNew" path="/shiftNew.do" />
+    <forward name="shiftEdit" path="/shiftEdit.do" />
+    <forward name="shiftDelete" path="/shiftDelete.do" />
+    <forward name="shiftOrder" path="/shiftOrder.do" />
+
+    <forward name="expenseView" path="/expenseView.do" />
+    <forward name="expenseNew" path="/expenseNew.do" />
+    <forward name="expenseEdit" path="/expenseEdit.do" />
+    <forward name="expenseDelete" path="/expenseDelete.do" />
+    <forward name="expenseOrder" path="/expenseOrder.do" />
+
+    <forward name="locationJobProfileAdd" path="/locationJobProfileAdd.do" />
+    <forward name="locationJobProfileRemove" path="/locationJobProfileRemove.do" />
+    <forward name="locationJobProfileView" path="/locationJobProfileView.do" />
+    <forward name="locationJobProfileEdit" path="/locationJobProfileEdit.do" />
+
+    <forward name="managerList" path="/managerList.do" />
+    <forward name="managerView" path="/managerView.do" />
+    <forward name="managerNew" path="/managerNew.do" />
+    <forward name="managerEdit" path="/managerEdit.do" />
+    <forward name="managerDelete" path="/managerDelete.do" />
+    <forward name="managerResetSecretWord" path="/managerResetSecretWord.do" />
+    <forward name="managerResetPassword" path="/managerResetPassword.do" />
+
+    <forward name="upliftList" path="/upliftList.do" />
+
+  </global-forwards>
+  
+  <action-mappings >
+
+    <action path="/home"
+            type="com.helmet.application.mgr.HomeAction"
+            name="HomeFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="homeMgr.page" redirect="true" />
+    </action>
+
+    <action path="/budgetTransactionList"
+            type="com.helmet.application.mgr.BudgetTransactionList"
+            name="BudgetTransactionListFormMgr"
+            scope="request"
+            input="locationList.page"
+            validate="false">
+        <forward name="success" path="budgetTransactionList.page" />
+    </action>
+
+    <action path="/budgetTransactionNew"
+            type="com.helmet.application.mgr.BudgetTransactionNew"
+            name="BudgetTransactionNewFormMgr"
+            scope="session"
+            input="locationList.page"
+            validate="false">
+        <forward name="success" path="budgetTransactionNew.page" />
+    </action>
+
+
+    <action path="/budgetTransactionNewProcess"
+            type="com.helmet.application.mgr.BudgetTransactionNewProcess"
+            name="BudgetTransactionNewFormMgr"
+            scope="session"
+            input="budgetTransactionNew.page"
+            validate="true">
+        <forward name="success" path="/budgetTransactionNewProcess2.do" redirect="true" />
+    </action>
+
+    <action path="/budgetTransactionNewProcess2"
+            type="com.helmet.application.mgr.BudgetTransactionNewProcess2"
+            name="BudgetTransactionNewFormMgr"
+            scope="session"
+            input="budgetTransactionNew.page"
+            validate="true">
+        <forward name="success" path="/budgetTransactionList.do" redirect="true" />
+    </action>
+
+    <action path="/reEnterPwd"
+            type="com.helmet.application.mgr.MgrForwardAction">
+        <forward name="success" path="reEnterPwd.page" />
+    </action>
+
+    <action path="/reEnterPwdProcess"
+            type="com.helmet.application.mgr.ReEnterPwdProcess"
+            name="ReEnterPwdFormMgr"
+            scope="request"
+            input="reEnterPwd.page"
+            validate="true">
+        <forward name="success" path="reEnterPwd.page" />
+    </action>
+
+    <action path="/changePassword"
+            type="com.helmet.application.mgr.ChangePassword"
+            name="ChangePasswordFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="changePassword.page" />
+    </action>
+
+    <action path="/changePasswordProcess"
+            type="com.helmet.application.mgr.ChangePasswordProcess"
+            name="ChangePasswordFormMgr"
+            scope="request"
+            input="changePassword.page"
+            validate="true">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+    <action path="/changeSecretWord"
+            type="com.helmet.application.mgr.ChangeSecretWord"
+            name="ChangeSecretWordFormMgr"
+            scope="session"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="changeSecretWord.page" />
+    </action>
+
+    <action path="/changeSecretWordProcess"
+            type="com.helmet.application.mgr.ChangeSecretWordProcess"
+            name="ChangeSecretWordFormMgr"
+            scope="session"
+            input="changeSecretWord.page"
+            validate="true">
+        <forward name="success" path="/changeSecretWordProcess2.do" redirect="true" />
+    </action>
+
+    <action path="/changeSecretWordProcess2"
+            type="com.helmet.application.mgr.ChangeSecretWordProcess2"
+            name="ChangeSecretWordFormMgr"
+            scope="session"
+            input="changeSecretWord.page"
+            validate="true">
+        <forward name="success" path="/home.do" redirect="true" />
+    </action>
+
+    <action path="/bookingLocked"
+            type="com.helmet.application.mgr.MgrForwardAction">
+        <forward name="success" path="bookingLocked.page" redirect="true" />
+    </action>
+
+    <action path="/logoutProcess"
+            type="com.helmet.application.mgr.LogoutProcess">
+        <forward name="success" path="mgrLoggedOut.page" redirect="true" contextRelative="true" />
+    </action>
+
+    <action path="/locationList"
+            type="com.helmet.application.mgr.LocationList"
+            name="LocationListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="locationList.page" />
+    </action>
+
+    <action path="/shiftList"
+            type="com.helmet.application.mgr.ShiftList"
+            name="ShiftListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="shiftList.page" />
+    </action>
+
+    <action path="/shiftListSubmitted"
+            type="com.helmet.application.mgr.ShiftList"
+            name="ShiftListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="shiftListSubmitted.page" />
+    </action>
+
+    <action path="/shiftListAuthorized"
+            type="com.helmet.application.mgr.ShiftList"
+            name="ShiftListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="shiftListAuthorized.page" />
+    </action>
+
+    <action path="/shiftSearch"
+            type="com.helmet.application.mgr.ShiftSearch"
+            name="ShiftSearchFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="shiftSearch.page" />
+    </action>
+
+    <action path="/shiftSearchProcess"
+            type="com.helmet.application.mgr.ShiftSearchProcess"
+            name="ShiftSearchFormMgr"
+            scope="request"
+            input="shiftSearch.page"
+            validate="true">
+        <forward name="success" path="shiftSearchResults.page" />
+    </action>
+
+    <action path="/shiftSearchProcess2"
+            type="com.helmet.application.mgr.ShiftSearchProcess"
+            name="ShiftSearchFormMgr"
+            scope="request"
+            input="shiftSearch.page"
+            validate="true">
+        <forward name="success" path="shiftSearchResults2.page" />
+    </action>
+
+    <action path="/shiftSearchProcess3"
+            type="com.helmet.application.mgr.ShiftSearchProcess"
+            name="ShiftSearchFormMgr"
+            scope="request"
+            input="shiftSearch.page"
+            validate="true">
+        <forward name="success" path="shiftSearchResults3.page" />
+    </action>
+
+    <action path="/bookingList"
+            type="com.helmet.application.mgr.BookingList"
+            name="BookingListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="bookingList.page" />
+    </action>
+
+<!-- 
+    <action path="/bookingView"
+            type="com.helmet.application.mgr.BookingView"
+            name="BookingViewFormMgr"
+            scope="request"
+            input="bookingList.page"
+            validate="false">
+        <forward name="success" path="bookingView.page" />
+    </action>
+-->
+
+    <action path="/bookingViewSummary"
+            type="com.helmet.application.mgr.BookingViewSummary"
+            name="BookingViewFormMgr"
+            scope="request"
+            input="bookingList.page"
+            validate="false">
+        <forward name="success" path="bookingViewSummary.page" />
+    </action>
+
+    <action path="/bookingViewShifts"
+            type="com.helmet.application.mgr.BookingViewShifts"
+            name="BookingViewFormMgr"
+            scope="request"
+            input="bookingList.page"
+            validate="false">
+        <forward name="success" path="bookingViewShifts.page" />
+    </action>
+
+    <action path="/bookingViewGrades"
+            type="com.helmet.application.mgr.BookingViewGrades"
+            name="BookingViewFormMgr"
+            scope="request"
+            input="bookingList.page"
+            validate="false">
+        <forward name="success" path="bookingViewGrades.page" />
+    </action>
+
+    <action path="/bookingViewApplicants"
+            type="com.helmet.application.mgr.BookingViewApplicants"
+            name="BookingViewFormMgr"
+            scope="request"
+            input="bookingList.page"
+            validate="false">
+        <forward name="success" path="bookingViewApplicants.page" />
+    </action>
+
+    <action path="/bookingViewTimesheets"
+            type="com.helmet.application.mgr.BookingViewTimesheets"
+            name="BookingViewFormMgr"
+            scope="request"
+            input="bookingList.page"
+            validate="false">
+        <forward name="success" path="bookingViewTimesheets.page" />
+    </action>
+
+    <action path="/bookingEdit"
+            type="com.helmet.application.mgr.BookingEdit"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="/orderStaff1.do" />
+    </action>
+
+    <action path="/bookingCancel"
+            type="com.helmet.application.mgr.BookingViewShifts"
+            name="BookingViewFormMgr"
+            scope="session"
+            input="bookingViewShifts.page"
+            validate="false">
+        <forward name="success" path="bookingCancel.page" />
+    </action>
+
+    <action path="/bookingCancelProcess"
+            type="com.helmet.application.mgr.BookingCancelProcess"
+            name="BookingViewFormMgr"
+            scope="session"
+            input="/bookingCancel.do"
+            validate="true">
+        <forward name="success" path="/bookingCancelProcess2.do" redirect="true" />
+    </action>
+
+    <action path="/bookingCancelProcess2"
+            type="com.helmet.application.mgr.BookingCancelProcess2"
+            name="BookingViewFormMgr"
+            scope="session"
+            input="/bookingCancel.do"
+            validate="true">
+        <forward name="success" path="/bookingViewSummary.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingEditInfo"
+            type="com.helmet.application.mgr.BookingEditInfo"
+            name="BookingEditInfoFormMgr"
+            scope="session"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="bookingEditInfo.page" />
+    </action>
+
+    <action path="/bookingEditInfoProcess"
+            type="com.helmet.application.mgr.BookingEditInfoProcess"
+            name="BookingEditInfoFormMgr"
+            scope="session"
+            input="/bookingEditInfo.do"
+            validate="true">
+        <forward name="success" path="/bookingEditInfoProcess2.do" redirect="true" />
+    </action>
+
+    <action path="/bookingEditInfoProcess2"
+            type="com.helmet.application.mgr.BookingEditInfoProcess2"
+            name="BookingEditInfoFormMgr"
+            scope="session"
+            input="/bookingEditInfo.do"
+            validate="true">
+        <forward name="success" path="/bookingViewSummary.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingEditExpenses"
+            type="com.helmet.application.mgr.BookingEditExpenses"
+            name="BookingEditExpensesFormMgr"
+            scope="session"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="bookingEditExpenses.page" />
+    </action>
+
+    <action path="/bookingEditExpensesProcess"
+            type="com.helmet.application.mgr.BookingEditExpensesProcess"
+            name="BookingEditExpensesFormMgr"
+            scope="session"
+            input="/bookingEditExpenses.do"
+            validate="true">
+        <forward name="success" path="/bookingEditExpensesProcess2.do" redirect="true" />
+    </action>
+
+    <action path="/bookingEditExpensesProcess2"
+            type="com.helmet.application.mgr.BookingEditExpensesProcess2"
+            name="BookingEditExpensesFormMgr"
+            scope="session"
+            input="/bookingEditExpenses.do"
+            validate="true">
+        <forward name="success" path="/bookingViewSummary.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingSubmit"
+            type="com.helmet.application.mgr.BookingViewSummary"
+            name="BookingViewFormMgr"
+            scope="session"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="bookingSubmit.page" />
+    </action>
+
+    <action path="/bookingSubmitProcess"
+            type="com.helmet.application.mgr.BookingSubmitProcess"
+            name="BookingViewFormMgr"
+            scope="session"
+            input="bookingSubmit.page"
+            validate="false">
+        <forward name="success" path="/bookingViewSummary.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingExtend"
+            type="com.helmet.application.mgr.BookingExtend"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="/bookingExtend1.do" />
+    </action>
+
+    <action path="/bookingExtend1"
+            type="com.helmet.application.mgr.BookingExtend1"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingList.page"
+            validate="false">
+        <forward name="success" path="bookingExtend1.page" />
+    </action>
+
+    <action path="/bookingExtend2"
+            type="com.helmet.application.mgr.BookingExtend2"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingExtend1.page"
+            validate="true">
+        <forward name="success" path="bookingExtend2.page" />
+        <forward name="back" path="/home.do" redirect="true" />
+        <forward name="singleShiftSuccess" path="/bookingExtend3.do" redirect="true" />
+        <forward name="singleShiftBack" path="/bookingExtend1.do" redirect="true" />
+    </action>
+
+    <action path="/bookingExtend3"
+            type="com.helmet.application.mgr.BookingExtend3"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingExtend2.page"
+            validate="true">
+        <forward name="success" path="bookingExtend3.page" />
+        <forward name="back" path="/bookingExtend1.do" redirect="true" />
+    </action>
+
+    <action path="/bookingExtendFinish"
+            type="com.helmet.application.mgr.BookingExtendFinish"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingExtend3.page"
+            validate="true">
+        <forward name="success" path="/bookingViewSummary.do" redirect="true" />
+        <forward name="back" path="/bookingExtend2.do" redirect="true" />
+    </action>
+
+    <action path="/bookingExtendCompleted"
+            type="com.helmet.application.mgr.BookingExtend"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="/bookingExtendCompleted1.do" />
+    </action>
+
+    <action path="/bookingExtendCompleted1"
+            type="com.helmet.application.mgr.BookingExtend1"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="bookingExtendCompleted1.page" />
+    </action>
+
+    <action path="/bookingExtendCompleted2"
+            type="com.helmet.application.mgr.BookingExtend2"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingExtendCompleted1.page"
+            validate="true">
+        <forward name="success" path="bookingExtendCompleted2.page" />
+        <forward name="back" path="/home.do" redirect="true" />
+        <forward name="singleShiftSuccess" path="/bookingExtendCompleted3.do" redirect="true" />
+        <forward name="singleShiftBack" path="/bookingExtendCompleted1.do" redirect="true" />
+    </action>
+
+    <action path="/bookingExtendCompleted3"
+            type="com.helmet.application.mgr.BookingExtend3"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingExtendCompleted2.page"
+            validate="true">
+        <forward name="success" path="bookingExtendCompleted3.page" />
+        <forward name="back" path="/bookingExtendCompleted1.do" redirect="true" />
+    </action>
+
+    <action path="/bookingExtendCompletedFinish"
+            type="com.helmet.application.mgr.BookingExtendCompletedFinish"
+            name="BookingExtendFormMgr"
+            scope="session"
+            input="bookingExtendCompleted3.page"
+            validate="true">
+        <forward name="success" path="/bookingViewSummary.do" redirect="true" />
+        <forward name="back" path="/bookingExtendCompleted2.do" redirect="true" />
+    </action>
+
+    <action path="/bookingGradeSubmitProcess"
+            type="com.helmet.application.mgr.BookingGradeSubmitProcess"
+            name="BookingGradeFormMgr"
+            scope="request"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="/bookingViewSummary.do" redirect="true"/>
+    </action>
+
+    <action path="/orderStaff"
+            type="com.helmet.application.mgr.OrderStaff"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="/orderStaff1.do" />
+    </action>
+
+    <action path="/orderStaff1"
+            type="com.helmet.application.mgr.OrderStaff1"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="homeMgr.page"
+            validate="true">
+        <forward name="success" path="orderStaff1.page" />
+    </action>
+
+    <action path="/orderStaff2"
+            type="com.helmet.application.mgr.OrderStaff2"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff1.page"
+            validate="true">
+        <forward name="success" path="orderStaff2.page" />
+        <forward name="back" path="/home.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaff3"
+            type="com.helmet.application.mgr.OrderStaff3"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff2.page"
+            validate="true">
+        <forward name="success" path="orderStaff3.page" />
+        <forward name="back" path="/orderStaff1.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaff4"
+            type="com.helmet.application.mgr.OrderStaff4"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff3.page"
+            validate="true">
+        <forward name="success" path="orderStaff4.page" />
+        <forward name="back" path="/orderStaff2.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaff5"
+            type="com.helmet.application.mgr.OrderStaff5"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff4.page"
+            validate="true">
+        <forward name="success" path="orderStaff5.page" />
+        <forward name="back" path="/orderStaff3.do" redirect="true" />
+        <forward name="singleShiftSuccess" path="/orderStaff6.do" redirect="true" />
+        <forward name="singleShiftBack" path="/orderStaff4.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaff6"
+            type="com.helmet.application.mgr.OrderStaff6"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff5.page"
+            validate="true">
+        <forward name="success" path="orderStaff6.page" />
+        <forward name="back" path="/orderStaff4.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaff7"
+            type="com.helmet.application.mgr.OrderStaff7"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff6.page"
+            validate="true">
+        <forward name="success" path="orderStaff7.page" />
+        <forward name="back" path="/orderStaff5.do" redirect="true" />
+        <forward name="noSpecificsSuccess" path="/orderStaff8.do" redirect="true" />
+        <forward name="noSpecificsBack" path="/orderStaff6.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaff8"
+            type="com.helmet.application.mgr.OrderStaff8"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff7.page"
+            validate="true">
+        <forward name="success" path="orderStaff8.page" />
+        <forward name="back" path="/orderStaff6.do" redirect="true" />
+        <forward name="noExpenseSuccess" path="/orderStaff9.do" redirect="true" />
+        <forward name="noExpenseBack" path="/orderStaff7.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaff9"
+            type="com.helmet.application.mgr.OrderStaff9"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff8.page"
+            validate="true">
+        <forward name="success" path="orderStaff9.page" />
+        <forward name="back" path="/orderStaff7.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaff10"
+            type="com.helmet.application.mgr.OrderStaff10"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff9.page"
+            validate="true">
+        <forward name="success" path="orderStaff10.page" />
+        <forward name="back" path="/orderStaff8.do" redirect="true" />
+    </action>
+
+    <action path="/orderStaffFinish"
+            type="com.helmet.application.mgr.OrderStaffFinish"
+            name="OrderStaffFormMgr"
+            scope="session"
+            input="orderStaff10.page"
+            validate="true">
+        <forward name="success" path="/bookingViewSummary.do" redirect="true" />
+        <forward name="back" path="/orderStaff9.do" redirect="true" />
+    </action>
+
+    <action path="/bookingGradeApplicantView"
+            type="com.helmet.application.mgr.BookingGradeApplicantView"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="bookingViewSummary.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantView.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantReject"
+            type="com.helmet.application.mgr.BookingGradeApplicantView"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantReject.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantRejectProcess"
+            type="com.helmet.application.mgr.BookingGradeApplicantRejectProcess"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="/bookingGradeApplicantReject.do"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true" />
+    </action>
+
+    <action path="/bookingGradeApplicantOffer"
+            type="com.helmet.application.mgr.BookingGradeApplicantView"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantOffer.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantOfferProcess"
+            type="com.helmet.application.mgr.BookingGradeApplicantOfferProcess"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="bookingGradeApplicantOffer.page"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true" />
+    </action>
+
+    <action path="/bookingGradeApplicantRenegotiate"
+            type="com.helmet.application.mgr.BookingGradeApplicantView"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantRenegotiate.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantRenegotiateProcess"
+            type="com.helmet.application.mgr.BookingGradeApplicantRenegotiateProcess"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="/bookingGradeApplicantRenegotiate.do"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true" />
+    </action>
+
+<!-- 
+    <action path="/bookingGradeApplicantActivate"
+            type="com.helmet.application.mgr.BookingGradeApplicantView"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantActivate.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantActivateProcess"
+            type="com.helmet.application.mgr.BookingGradeApplicantActivateProcess"
+            name="BookingGradeApplicantViewFormMgr"
+            scope="request"
+            input="bookingGradeApplicantActivate.page"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true" />
+    </action>
+
+    <action path="/bookingGradeApplicantDateAuthorize"
+            type="com.helmet.application.mgr.BookingGradeApplicantDateView"
+            name="BookingGradeApplicantDateViewFormMgr"
+            scope="request"
+            input="/bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantDateAuthorize.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantDateAuthorizeProcess"
+            type="com.helmet.application.mgr.BookingGradeApplicantDateAuthorizeProcess"
+            name="BookingGradeApplicantDateViewFormMgr"
+            scope="request"
+            input="bookingGradeApplicantDateAuthorize.page"
+            validate="false">
+        <forward name="success" path="/bookingViewTimesheets.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingGradeApplicantDateReject"
+            type="com.helmet.application.mgr.BookingGradeApplicantDateView"
+            name="BookingGradeApplicantDateViewFormMgr"
+            scope="request"
+            input="/bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantDateReject.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantDateRejectProcess"
+            type="com.helmet.application.mgr.BookingGradeApplicantDateRejectProcess"
+            name="BookingGradeApplicantDateViewFormMgr"
+            scope="request"
+            input="/bookingGradeApplicantDateReject.do"
+            validate="false">
+        <forward name="success" path="/bookingViewTimesheets.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingGradeApplicantDateActivate"
+            type="com.helmet.application.mgr.BookingGradeApplicantDateView"
+            name="BookingGradeApplicantDateViewFormMgr"
+            scope="request"
+            input="/bookingGradeApplicantView.page"
+            validate="false">
+        <forward name="success" path="bookingGradeApplicantDateActivate.page" />
+    </action>
+
+    <action path="/bookingGradeApplicantDateActivateProcess"
+            type="com.helmet.application.mgr.BookingGradeApplicantDateActivateProcess"
+            name="BookingGradeApplicantDateViewFormMgr"
+            scope="request"
+            input="bookingGradeApplicantDateActivate.page"
+            validate="false">
+        <forward name="success" path="/bookingGradeApplicantView.do" redirect="true"/>
+    </action>
+-->
+
+    <action path="/bookingDateView"
+            type="com.helmet.application.mgr.BookingDateView"
+            name="BookingDateUserApplicantFormMgr"
+            scope="request"
+            input="/bookingViewShifts.page"
+            validate="false">
+        <forward name="success" path="bookingDateView.page" />
+    </action>
+
+    <action path="/bookingDateViewPDF"
+            type="com.helmet.application.mgr.BookingDateViewPDF"
+            name="BookingDateUserApplicantFormMgr"
+            scope="request"
+            input="/bookingViewShifts.page"
+            validate="false">
+        <forward name="failure" path="/home.do" />
+    </action>
+
+    <action path="/bookingDateCancel"
+            type="com.helmet.application.mgr.BookingDateView"
+            name="BookingDateUserApplicantFormMgr"
+            scope="request"
+            input="/bookingViewShifts.page"
+            validate="false">
+        <forward name="success" path="bookingDateCancel.page" />
+    </action>
+
+    <action path="/bookingDateCancelProcess"
+            type="com.helmet.application.mgr.BookingDateCancelProcess"
+            name="BookingDateUserApplicantFormMgr"
+            scope="request"
+            input="/bookingDateCancel.do"
+            validate="false">
+        <forward name="success" path="/bookingViewShifts.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDateActivate"
+            type="com.helmet.application.mgr.BookingDateView"
+            name="BookingDateUserApplicantFormMgr"
+            scope="session"
+            input="/bookingViewShifts.page"
+            validate="false">
+        <forward name="success" path="bookingDateActivate.page" />
+    </action>
+
+    <action path="/bookingDateActivateProcess"
+            type="com.helmet.application.mgr.BookingDateActivateProcess"
+            name="BookingDateUserApplicantFormMgr"
+            scope="session"
+            input="/bookingDateActivate.do"
+            validate="false">
+        <forward name="success" path="/bookingViewTimesheets.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDateAuthorize"
+            type="com.helmet.application.mgr.BookingDateView"
+            name="BookingDateUserApplicantFormMgr"
+            scope="session"
+            input="/bookingViewTimesheets.page"
+            validate="false">
+        <forward name="success" path="bookingDateAuthorize.page" />
+    </action>
+
+    <action path="/bookingDateAuthorizeProcess"
+            type="com.helmet.application.mgr.BookingDateAuthorizeProcess"
+            name="BookingDateUserApplicantFormMgr"
+            scope="session"
+            input="/bookingDateAuthorize.do"
+            validate="false">
+        <forward name="success" path="/bookingViewTimesheets.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDateReject"
+            type="com.helmet.application.mgr.BookingDateView"
+            name="BookingDateUserApplicantFormMgr"
+            scope="request"
+            input="/bookingViewTimesheets.page"
+            validate="false">
+        <forward name="success" path="bookingDateReject.page" />
+    </action>
+
+    <action path="/bookingDateRejectProcess"
+            type="com.helmet.application.mgr.BookingDateRejectProcess"
+            name="BookingDateUserApplicantFormMgr"
+            scope="request"
+            input="/bookingDateReject.do"
+            validate="false">
+        <forward name="success" path="/bookingViewTimesheets.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDateInvoice"
+            type="com.helmet.application.mgr.BookingDateView"
+            name="BookingDateUserApplicantFormMgr"
+            scope="request"
+            input="/bookingViewTimesheets.page"
+            validate="false">
+        <forward name="success" path="bookingDateInvoice.page" />
+    </action>
+
+    <action path="/bookingDateInvoiceProcess"
+            type="com.helmet.application.mgr.BookingDateInvoiceProcess"
+            name="BookingDateUserApplicantFormMgr"
+            scope="request"
+            input="/bookingDateInvoice.do"
+            validate="false">
+        <forward name="success" path="/bookingViewTimesheets.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDatesActivate"
+            type="com.helmet.application.mgr.BookingDatesView"
+            name="BookingDatesFormMgr"
+            scope="session"
+            input="/bookingSearchResults.page"
+            validate="false">
+        <forward name="success" path="bookingDatesActivate.page" />
+    </action>
+
+    <action path="/bookingDatesActivateProcess"
+            type="com.helmet.application.mgr.BookingDatesActivateProcess"
+            name="BookingDatesFormMgr"
+            scope="session"
+            input="/bookingDatesActivate.do"
+            validate="false">
+        <forward name="success" path="/home.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDatesAuthorize"
+            type="com.helmet.application.mgr.BookingDatesView"
+            name="BookingDatesFormMgr"
+            scope="session"
+            input="/bookingSearchResults.page"
+            validate="false">
+        <forward name="success" path="bookingDatesAuthorize.page" />
+    </action>
+
+    <action path="/bookingDatesAuthorizeProcess"
+            type="com.helmet.application.mgr.BookingDatesAuthorizeProcess"
+            name="BookingDatesFormMgr"
+            scope="session"
+            input="bookingDatesAuthorize.page"
+            validate="false">
+        <forward name="success" path="/home.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDatesInvoice"
+            type="com.helmet.application.mgr.BookingDatesView"
+            name="BookingDatesFormMgr"
+            scope="request"
+            input="/shiftList.page"
+            validate="false">
+        <forward name="success" path="bookingDatesInvoice.page" />
+    </action>
+
+    <action path="/bookingDatesInvoiceProcess"
+            type="com.helmet.application.mgr.BookingDatesInvoiceProcess"
+            name="BookingDatesFormMgr"
+            scope="request"
+            input="/bookingDatesInvoice.do"
+            validate="false">
+        <forward name="success" path="/invoiceView.do" redirect="true"/>
+    </action>
+
+    <action path="/invoiceView"
+            type="com.helmet.application.mgr.InvoiceView"
+            name="InvoiceViewFormMgr"
+            scope="request"
+            input="/shiftList.page"
+            validate="false">
+        <forward name="success" path="invoiceView.page" />
+    </action>
+
+    <action path="/bookingSearch"
+            type="com.helmet.application.mgr.BookingSearch"
+            name="BookingSearchFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="bookingSearch.page" />
+    </action>
+
+    <action path="/bookingSearchProcess"
+            type="com.helmet.application.mgr.BookingSearchProcess"
+            name="BookingSearchFormMgr"
+            scope="request"
+            input="bookingSearch.page"
+            validate="true">
+        <forward name="success" path="bookingSearchResults.page" />
+    </action>
+
+    <action path="/shiftSearchXML"
+            type="com.helmet.application.mgr.SearchXML"
+            name="ShiftSearchFormMgr"
+            scope="request"
+            input="/shiftSearch.page"
+            validate="false">
+        <forward name="failure" path="/home.do" />
+    </action>
+
+    <action path="/shiftsToActivate"
+            type="com.helmet.application.mgr.ShiftsToActivate"
+            name="ShiftListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="shiftsToActivate.page" />
+    </action>
+
+    <action path="/shiftsOutstanding"
+            type="com.helmet.application.mgr.ShiftsOutstanding"
+            name="ShiftListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="shiftsOutstanding.page" />
+    </action>
+
+    <action path="/agencyInvoiceView"
+            type="com.helmet.application.mgr.AgencyInvoiceView"
+            name="AgencyInvoiceFormMgr"
+            scope="request"
+            input="/shiftList.page"
+            validate="false">
+        <forward name="success" path="agencyInvoiceView.page" />
+    </action>
+
+    <action path="/agencyInvoiceList"
+            type="com.helmet.application.mgr.AgencyInvoiceList"
+            name="AgencyInvoiceListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="agencyInvoiceList.page" />
+    </action>
+
+    <action path="/agencyInvoiceListSubmitted"
+            type="com.helmet.application.mgr.AgencyInvoiceList"
+            name="AgencyInvoiceListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="agencyInvoiceListSubmitted.page" />
+    </action>
+
+    <action path="/agencyInvoiceListAuthorized"
+            type="com.helmet.application.mgr.AgencyInvoiceList"
+            name="AgencyInvoiceListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false">
+        <forward name="success" path="agencyInvoiceListAuthorized.page" />
+    </action>
+
+    <action path="/agencyInvoicesAuthorize"
+            type="com.helmet.application.mgr.AgencyInvoicesView"
+            name="AgencyInvoicesFormMgr"
+            scope="session"
+            input="/agencyInvoiceList.page"
+            validate="false">
+        <forward name="success" path="agencyInvoicesAuthorize.page" />
+    </action>
+
+    <action path="/agencyInvoicesAuthorizeProcess"
+            type="com.helmet.application.mgr.AgencyInvoicesAuthorizeProcess"
+            name="AgencyInvoicesFormMgr"
+            scope="session"
+            input="agencyInvoicesAuthorize.page"
+            validate="false">
+        <forward name="success" path="/home.do" redirect="true"/>
+    </action>
+
+    <action path="/agencyInvoicesMarkAsPaid"
+            type="com.helmet.application.mgr.AgencyInvoicesView"
+            name="AgencyInvoicesFormMgr"
+            scope="session"
+            input="/agencyInvoiceList.page"
+            validate="false">
+        <forward name="success" path="agencyInvoicesMarkAsPaid.page" />
+    </action>
+
+    <action path="/agencyInvoicesMarkAsPaidProcess"
+            type="com.helmet.application.mgr.AgencyInvoicesMarkAsPaidProcess"
+            name="AgencyInvoicesFormMgr"
+            scope="session"
+            input="agencyInvoicesMarkAsPaid.page"
+            validate="false">
+        <forward name="success" path="/home.do" redirect="true"/>
+    </action>
+
+    <action path="/bookingDateEditOvertime"
+            type="com.helmet.application.mgr.BookingDateEditOvertime"
+            name="BookingDateEditOvertimeFormMgr"
+            scope="session"
+            input="bookingViewShifts.page"
+            validate="false">
+        <forward name="success" path="bookingDateEditOvertime.page" />
+    </action>
+
+    <action path="/bookingDateEditOvertimeProcess"
+            type="com.helmet.application.mgr.BookingDateEditOvertimeProcess"
+            name="BookingDateEditOvertimeFormMgr"
+            scope="session"
+            input="/bookingDateEditOvertime.do"
+            validate="true">
+        <forward name="success" path="/bookingDateEditOvertimeProcess2.do" redirect="true" />
+    </action>
+
+    <action path="/bookingDateEditOvertimeProcess2"
+            type="com.helmet.application.mgr.BookingDateEditOvertimeProcess2"
+            name="BookingDateEditOvertimeFormMgr"
+            scope="session"
+            input="/bookingDateEditOvertime.do"
+            validate="true">
+        <forward name="success" path="/bookingViewShifts.do" redirect="true"/>
+    </action>
+
+	<!-- reasonForRequest -->
+    <action path="/reasonForRequestList"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="ListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false"
+            parameter="list">
+        <forward name="success" path="reasonForRequestList.page" />
+    </action>
+
+    <action path="/reasonForRequestNew"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="ReasonForRequestFormMgr"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="reasonForRequestNew.page" />
+    </action>
+
+    <action path="/reasonForRequestNewProcess"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="ReasonForRequestFormMgr"
+            scope="request"
+            input="reasonForRequestNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/reasonForRequestList.do" redirect="true" />
+        <forward name="cancel" path="/reasonForRequestList.do" redirect="true"/>
+    </action>
+
+    <action path="/reasonForRequestView"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="ReasonForRequestFormMgr"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="reasonForRequestView.page" />
+        <forward name="cancel" path="/reasonForRequestList.do" redirect="true"/>
+    </action>
+
+    <action path="/reasonForRequestEdit"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="ReasonForRequestFormMgr"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="reasonForRequestEdit.page" />
+    </action>
+
+    <action path="/reasonForRequestEditProcess"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="ReasonForRequestFormMgr"
+            scope="request"
+            input="reasonForRequestEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/reasonForRequestList.do" redirect="true" />
+        <forward name="cancel" path="/reasonForRequestView.do" redirect="true"/>
+    </action>
+
+    <action path="/reasonForRequestDelete"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="ReasonForRequestFormMgr"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="reasonForRequestDelete.page" />
+    </action>
+
+    <action path="/reasonForRequestDeleteProcess"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="ReasonForRequestFormMgr"
+            scope="request"
+            input="reasonForRequestDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/reasonForRequestList.do" redirect="true" />
+        <forward name="cancel" path="/reasonForRequestView.do" redirect="true"/>
+    </action>
+
+    <action path="/reasonForRequestOrder"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="DisplayOrderFormMgr"
+            scope="request"
+            input="/reasonForRequestList.do"
+            validate="false"
+            parameter="order">
+        <forward name="success" path="reasonForRequestOrder.page" />
+    </action>
+
+    <action path="/reasonForRequestOrderProcess"
+            type="com.helmet.application.mgr.ReasonForRequestActionDispatcher"
+            name="DisplayOrderFormMgr"
+            scope="request"
+            input="reasonForRequestOrder.page"
+            validate="true"
+            parameter="orderProcess">
+        <forward name="success" path="/reasonForRequestList.do" redirect="true" />
+        <forward name="cancel" path="/reasonForRequestList.do" redirect="true"/>
+    </action>
+
+	<!-- grade -->
+    <action path="/gradeList"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="ListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false"
+            parameter="list">
+        <forward name="success" path="gradeList.page" />
+    </action>
+
+    <action path="/gradeNew"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="GradeFormMgr"
+            scope="request"
+            input="/gradeList.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="gradeNew.page" />
+    </action>
+
+    <action path="/gradeNewProcess"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="GradeFormMgr"
+            scope="request"
+            input="gradeNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/gradeList.do" redirect="true" />
+        <forward name="cancel" path="/gradeList.do" redirect="true" />
+    </action>
+
+    <action path="/gradeView"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="GradeFormMgr"
+            scope="request"
+            input="/gradeList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="gradeView.page" />
+        <forward name="cancel" path="/gradeList.do" redirect="true" />
+    </action>
+
+    <action path="/gradeEdit"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="GradeFormMgr"
+            scope="request"
+            input="/gradeList.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="gradeEdit.page" />
+    </action>
+
+    <action path="/gradeEditProcess"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="GradeFormMgr"
+            scope="request"
+            input="gradeEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/gradeList.do" redirect="true" />
+        <forward name="cancel" path="/gradeView.do" redirect="true" />
+    </action>
+
+    <action path="/gradeDelete"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="GradeFormMgr"
+            scope="request"
+            input="/gradeList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="gradeDelete.page" />
+    </action>
+
+    <action path="/gradeDeleteProcess"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="GradeFormMgr"
+            scope="request"
+            input="gradeDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/gradeList.do" redirect="true" />
+        <forward name="cancel" path="/gradeView.do" redirect="true" />
+    </action>
+
+    <action path="/gradeOrder"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="DisplayOrderFormMgr"
+            scope="request"
+            input="/gradeList.do"
+            validate="false"
+            parameter="order">
+        <forward name="success" path="gradeOrder.page" />
+    </action>
+
+    <action path="/gradeOrderProcess"
+            type="com.helmet.application.mgr.GradeActionDispatcher"
+            name="DisplayOrderFormMgr"
+            scope="request"
+            input="gradeOrder.page"
+            validate="true"
+            parameter="orderProcess">
+        <forward name="success" path="/gradeList.do" redirect="true" />
+        <forward name="cancel" path="/gradeList.do" redirect="true" />
+    </action>
+
+	<!-- publicHoliday -->
+    <action path="/publicHolidayList"
+            type="com.helmet.application.mgr.PublicHolidayActionDispatcher"
+            name="ListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false"
+            parameter="list">
+        <forward name="success" path="publicHolidayList.page" />
+    </action>
+
+    <action path="/publicHolidayNew"
+            type="com.helmet.application.mgr.PublicHolidayActionDispatcher"
+            name="PublicHolidayFormMgr"
+            scope="request"
+            input="/publicHolidayList.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="publicHolidayNew.page" />
+    </action>
+
+    <action path="/publicHolidayNewProcess"
+            type="com.helmet.application.mgr.PublicHolidayActionDispatcher"
+            name="PublicHolidayFormMgr"
+            scope="request"
+            input="publicHolidayNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/publicHolidayList.do" redirect="true" />
+        <forward name="cancel" path="/publicHolidayList.do" redirect="true" />
+    </action>
+
+    <action path="/publicHolidayView"
+            type="com.helmet.application.mgr.PublicHolidayActionDispatcher"
+            name="PublicHolidayFormMgr"
+            scope="request"
+            input="/publicHolidayList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="publicHolidayView.page" />
+        <forward name="cancel" path="/publicHolidayList.do" redirect="true" />
+    </action>
+
+    <action path="/publicHolidayEdit"
+            type="com.helmet.application.mgr.PublicHolidayActionDispatcher"
+            name="PublicHolidayFormMgr"
+            scope="request"
+            input="/publicHolidayList.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="publicHolidayEdit.page" />
+    </action>
+
+    <action path="/publicHolidayEditProcess"
+            type="com.helmet.application.mgr.PublicHolidayActionDispatcher"
+            name="PublicHolidayFormMgr"
+            scope="request"
+            input="publicHolidayEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/publicHolidayList.do" redirect="true" />
+        <forward name="cancel" path="/publicHolidayView.do" redirect="true" />
+    </action>
+
+    <action path="/publicHolidayDelete"
+            type="com.helmet.application.mgr.PublicHolidayActionDispatcher"
+            name="PublicHolidayFormMgr"
+            scope="request"
+            input="/publicHolidayList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="publicHolidayDelete.page" />
+    </action>
+
+    <action path="/publicHolidayDeleteProcess"
+            type="com.helmet.application.mgr.PublicHolidayActionDispatcher"
+            name="PublicHolidayFormMgr"
+            scope="request"
+            input="publicHolidayDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/publicHolidayList.do" redirect="true" />
+        <forward name="cancel" path="/publicHolidayView.do" redirect="true" />
+    </action>
+
+    <action path="/clientView"
+            type="com.helmet.application.mgr.ClientActionDispatcher"
+            name="ClientFormMgr"
+            scope="request"
+            input="/home.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="clientView.page" />
+    </action>
+
+    <action path="/clientEdit"
+            type="com.helmet.application.mgr.ClientActionDispatcher"
+            name="ClientFormMgr"
+            scope="request"
+            input="/clientView.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="clientEdit.page" />
+    </action>
+
+    <action path="/clientEditProcess"
+            type="com.helmet.application.mgr.ClientActionDispatcher"
+            name="ClientFormMgr"
+            scope="request"
+            input="clientEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/clientView.do" redirect="true" />
+        <forward name="cancel" path="/clientView.do" redirect="true"/>
+    </action>
+
+	<!-- site -->
+    <action path="/siteList"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="ListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false"
+            parameter="list">
+        <forward name="success" path="siteList.page" />
+    </action>
+
+    <action path="/siteNew"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="SiteFormMgr"
+            scope="request"
+            input="/siteList.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="siteNew.page" />
+    </action>
+
+    <action path="/siteNewProcess"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="SiteFormMgr"
+            scope="request"
+            input="siteNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/siteList.do" redirect="true" />
+        <forward name="cancel" path="/siteList.do" redirect="true"/>
+    </action>
+
+    <action path="/siteView"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="SiteViewFormMgr"
+            scope="request"
+            input="/siteList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="siteView.page" />
+        <forward name="cancel" path="/siteList.do" redirect="true"/>
+    </action>
+
+    <action path="/siteEdit"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="SiteFormMgr"
+            scope="request"
+            input="/siteList.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="siteEdit.page" />
+    </action>
+
+    <action path="/siteEditProcess"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="SiteFormMgr"
+            scope="request"
+            input="siteEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/siteList.do" redirect="true" />
+        <forward name="cancel" path="/siteView.do" redirect="true"/>
+    </action>
+
+    <action path="/siteDelete"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="SiteViewFormMgr"
+            scope="request"
+            input="/siteList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="siteDelete.page" />
+    </action>
+
+    <action path="/siteDeleteProcess"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="SiteViewFormMgr"
+            scope="request"
+            input="siteDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/siteList.do" redirect="true" />
+        <forward name="cancel" path="/siteView.do" redirect="true"/>
+    </action>
+
+    <action path="/siteOrder"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="DisplayOrderFormMgr"
+            scope="request"
+            input="/siteList.do"
+            validate="false"
+            parameter="order">
+        <forward name="success" path="siteOrder.page" />
+    </action>
+
+    <action path="/siteOrderProcess"
+            type="com.helmet.application.mgr.SiteActionDispatcher"
+            name="DisplayOrderFormMgr"
+            scope="request"
+            input="siteOrder.page"
+            validate="true"
+            parameter="orderProcess">
+        <forward name="success" path="/siteList.do" redirect="true" />
+        <forward name="cancel" path="/siteList.do" redirect="true"/>
+    </action>
+
+	<!-- location -->
+
+    <action path="/locationNew"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="LocationFormMgr"
+            scope="request"
+            input="/siteView.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="locationNew.page" />
+    </action>
+
+    <action path="/locationNewProcess"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="LocationFormMgr"
+            scope="request"
+            input="locationNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/siteView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationView"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="LocationViewFormMgr"
+            scope="request"
+            input="/siteView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="locationView.page" />
+        <forward name="cancel" path="/siteView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationEdit"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="LocationFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="locationEdit.page" />
+    </action>
+
+    <action path="/locationEditProcess"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="LocationFormMgr"
+            scope="request"
+            input="locationEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationDelete"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="LocationViewFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="locationDelete.page" />
+    </action>
+
+    <action path="/locationDeleteProcess"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="LocationViewFormMgr"
+            scope="request"
+            input="locationDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/siteView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationOrder"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="SiteDisplayOrderFormMgr"
+            scope="request"
+            input="/siteView.do"
+            validate="false"
+            parameter="order">
+        <forward name="success" path="locationOrder.page" />
+    </action>
+
+    <action path="/locationOrderProcess"
+            type="com.helmet.application.mgr.LocationActionDispatcher"
+            name="SiteDisplayOrderFormMgr"
+            scope="request"
+            input="locationOrder.page"
+            validate="true"
+            parameter="orderProcess">
+        <forward name="success" path="/siteView.do" redirect="true" />
+        <forward name="cancel" path="/siteView.do" redirect="true"/>
+    </action>
+
+	<!-- dressCode-->
+
+    <action path="/dressCodeNew"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="DressCodeFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="dressCodeNew.page" />
+    </action>
+
+    <action path="/dressCodeNewProcess"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="DressCodeFormMgr"
+            scope="request"
+            input="dressCodeNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/dressCodeView"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="DressCodeFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="dressCodeView.page" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/dressCodeEdit"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="DressCodeFormMgr"
+            scope="request"
+            input="/dressCodeView.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="dressCodeEdit.page" />
+    </action>
+
+    <action path="/dressCodeEditProcess"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="DressCodeFormMgr"
+            scope="request"
+            input="locationEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/dressCodeView.do" redirect="true"/>
+    </action>
+
+    <action path="/dressCodeDelete"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="DressCodeFormMgr"
+            scope="request"
+            input="/dressCodeView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="dressCodeDelete.page" />
+    </action>
+
+    <action path="/dressCodeDeleteProcess"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="DressCodeFormMgr"
+            scope="request"
+            input="dressCodeDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/dressCodeView.do" redirect="true"/>
+    </action>
+
+    <action path="/dressCodeOrder"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="LocationDisplayOrderFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="order">
+        <forward name="success" path="dressCodeOrder.page" />
+    </action>
+
+    <action path="/dressCodeOrderProcess"
+            type="com.helmet.application.mgr.DressCodeActionDispatcher"
+            name="LocationDisplayOrderFormMgr"
+            scope="request"
+            input="dressCodeOrder.page"
+            validate="true"
+            parameter="orderProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+	<!-- shift-->
+
+    <action path="/shiftNew"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="ShiftFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="shiftNew.page" />
+    </action>
+
+    <action path="/shiftNewProcess"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="ShiftFormMgr"
+            scope="request"
+            input="shiftNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/shiftView"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="ShiftFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="shiftView.page" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/shiftEdit"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="ShiftFormMgr"
+            scope="request"
+            input="/shiftView.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="shiftEdit.page" />
+    </action>
+
+    <action path="/shiftEditProcess"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="ShiftFormMgr"
+            scope="request"
+            input="locationEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/shiftView.do" redirect="true"/>
+    </action>
+
+    <action path="/shiftDelete"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="ShiftFormMgr"
+            scope="request"
+            input="/shiftView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="shiftDelete.page" />
+    </action>
+
+    <action path="/shiftDeleteProcess"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="ShiftFormMgr"
+            scope="request"
+            input="shiftDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/shiftView.do" redirect="true"/>
+    </action>
+
+    <action path="/shiftOrder"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="LocationDisplayOrderFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="order">
+        <forward name="success" path="shiftOrder.page" />
+    </action>
+
+    <action path="/shiftOrderProcess"
+            type="com.helmet.application.mgr.ShiftActionDispatcher"
+            name="LocationDisplayOrderFormMgr"
+            scope="request"
+            input="shiftOrder.page"
+            validate="true"
+            parameter="orderProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+	<!-- expense-->
+
+    <action path="/expenseNew"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="ExpenseFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="expenseNew.page" />
+    </action>
+
+    <action path="/expenseNewProcess"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="ExpenseFormMgr"
+            scope="request"
+            input="expenseNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/expenseView"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="ExpenseFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="expenseView.page" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/expenseEdit"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="ExpenseFormMgr"
+            scope="request"
+            input="/expenseView.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="expenseEdit.page" />
+    </action>
+
+    <action path="/expenseEditProcess"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="ExpenseFormMgr"
+            scope="request"
+            input="locationEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/expenseView.do" redirect="true"/>
+    </action>
+
+    <action path="/expenseDelete"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="ExpenseFormMgr"
+            scope="request"
+            input="/expenseView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="expenseDelete.page" />
+    </action>
+
+    <action path="/expenseDeleteProcess"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="ExpenseFormMgr"
+            scope="request"
+            input="expenseDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/expenseView.do" redirect="true"/>
+    </action>
+
+    <action path="/expenseOrder"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="LocationDisplayOrderFormMgr"
+            scope="request"
+            input="/locationView.do"
+            validate="false"
+            parameter="order">
+        <forward name="success" path="expenseOrder.page" />
+    </action>
+
+    <action path="/expenseOrderProcess"
+            type="com.helmet.application.mgr.ExpenseActionDispatcher"
+            name="LocationDisplayOrderFormMgr"
+            scope="request"
+            input="expenseOrder.page"
+            validate="true"
+            parameter="orderProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+	<!-- locationJobProfile -->
+
+    <action path="/locationJobProfileAdd"
+            type="com.helmet.application.mgr.LocationJobProfileActionDispatcher"
+            name="LocationJobProfileAddRemoveFormMgr"
+            scope="request"
+            input="locationView.page"
+            validate="false"
+            parameter="add">
+        <forward name="success" path="locationJobProfileAdd.page" redirect="true" />
+    </action>
+
+    <action path="/locationJobProfileAddProcess"
+            type="com.helmet.application.mgr.LocationJobProfileActionDispatcher"
+            name="LocationJobProfileAddRemoveFormMgr"
+            scope="request"
+            input="locationJobProfileAdd.page"
+            validate="true"
+            parameter="addProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationJobProfileRemove"
+            type="com.helmet.application.mgr.LocationJobProfileActionDispatcher"
+            name="LocationJobProfileAddRemoveFormMgr"
+            scope="request"
+            input="locationView.page"
+            validate="false"
+            parameter="remove">
+        <forward name="success" path="locationJobProfileRemove.page" redirect="true" />
+    </action>
+
+    <action path="/locationJobProfileRemoveProcess"
+            type="com.helmet.application.mgr.LocationJobProfileActionDispatcher"
+            name="LocationJobProfileAddRemoveFormMgr"
+            scope="request"
+            input="locationJobProfileRemove.page"
+            validate="true"
+            parameter="removeProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationJobProfileView"
+            type="com.helmet.application.mgr.LocationJobProfileActionDispatcher"
+            name="LocationJobProfileFormMgr"
+            scope="request"
+            input="/locationView.page"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="locationJobProfileView.page" />
+        <forward name="cancel" path="/locationView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationJobProfileEdit"
+            type="com.helmet.application.mgr.LocationJobProfileActionDispatcher"
+            name="LocationJobProfileFormMgr"
+            scope="request"
+            input="/locationJobProfileView.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="locationJobProfileEdit.page" />
+    </action>
+
+    <action path="/locationJobProfileEditProcess"
+            type="com.helmet.application.mgr.LocationJobProfileActionDispatcher"
+            name="LocationJobProfileFormMgr"
+            scope="request"
+            input="locationJobProfileEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/locationView.do" redirect="true" />
+        <forward name="cancel" path="/locationJobProfileView.do" redirect="true"/>
+    </action>
+    
+	<!-- manager -->
+    <action path="/managerList"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false"
+            parameter="list">
+        <forward name="success" path="managerList.page" />
+    </action>
+
+    <action path="/managerNew"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerFormMgr"
+            scope="request"
+            input="/managerList.do"
+            validate="false"
+            parameter="newX">
+        <forward name="success" path="managerNew.page" />
+    </action>
+
+    <action path="/managerNewProcess"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerFormMgr"
+            scope="request"
+            input="managerNew.page"
+            validate="true"
+            parameter="newProcess">
+        <forward name="success" path="/managerView.do" redirect="true" />
+        <forward name="cancel" path="/managerList.do" redirect="true"/>
+    </action>
+
+    <action path="/managerView"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="/managerList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="managerView.page" />
+        <forward name="cancel" path="/managerList.do" redirect="true"/>
+    </action>
+
+    <action path="/managerEdit"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerFormMgr"
+            scope="request"
+            input="/managerList.do"
+            validate="false"
+            parameter="edit">
+        <forward name="success" path="managerEdit.page" />
+    </action>
+
+    <action path="/managerEditProcess"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerFormMgr"
+            scope="request"
+            input="managerEdit.page"
+            validate="true"
+            parameter="editProcess">
+        <forward name="success" path="/managerView.do" redirect="true" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/managerDelete"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="/managerList.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="managerDelete.page" />
+    </action>
+
+    <action path="/managerDeleteProcess"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="managerDelete.page"
+            validate="false"
+            parameter="deleteProcess">
+        <forward name="success" path="/managerList.do" redirect="true" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/managerResetSecretWord"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="managerView.page"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="managerResetSecretWord.page" />
+    </action>
+
+    <action path="/managerResetSecretWordProcess"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="managerResetSecretWord.page"
+            validate="false"
+            parameter="resetSecretWordProcess">
+        <forward name="success" path="/managerView.do" redirect="true" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/managerResetPassword"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="managerView.page"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="managerResetPassword.page" />
+    </action>
+
+    <action path="/managerResetPasswordProcess"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="managerResetPassword.page"
+            validate="false"
+            parameter="resetPasswordProcess">
+        <forward name="success" path="/managerView.do" redirect="true" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationManagerJobProfileAdd"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="/managerView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="locationManagerJobProfileAdd.page" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationManagerJobProfileAddProcess"
+            type="com.helmet.application.mgr.LocationManagerJobProfileActionDispatcher"
+            name="LocationManagerJobProfileAddRemoveFormMgr"
+            scope="request"
+            input="locationManagerJobProfileAdd.page"
+            validate="true"
+            parameter="addProcess">
+        <forward name="success" path="/managerView.do" redirect="true" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationManagerJobProfileRemove"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="/managerView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="locationManagerJobProfileRemove.page" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/locationManagerJobProfileRemoveProcess"
+            type="com.helmet.application.mgr.LocationManagerJobProfileActionDispatcher"
+            name="LocationManagerJobProfileAddRemoveFormMgr"
+            scope="request"
+            input="locationManagerJobProfileRemove.page"
+            validate="true"
+            parameter="removeProcess">
+        <forward name="success" path="/managerView.do" redirect="true" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/managerAccessGroupAdd"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="/managerView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="managerAccessGroupAdd.page" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/managerAccessGroupAddProcess"
+            type="com.helmet.application.mgr.ManagerAccessGroupActionDispatcher"
+            name="ManagerAccessGroupAddRemoveFormMgr"
+            scope="request"
+            input="managerAccessGroupAdd.page"
+            validate="true"
+            parameter="addProcess">
+        <forward name="success" path="/managerView.do" redirect="true" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/managerAccessGroupRemove"
+            type="com.helmet.application.mgr.ManagerActionDispatcher"
+            name="ManagerViewFormMgr"
+            scope="request"
+            input="/managerView.do"
+            validate="false"
+            parameter="view">
+        <forward name="success" path="managerAccessGroupRemove.page" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+    <action path="/managerAccessGroupRemoveProcess"
+            type="com.helmet.application.mgr.ManagerAccessGroupActionDispatcher"
+            name="ManagerAccessGroupAddRemoveFormMgr"
+            scope="request"
+            input="managerAccessGroupRemove.page"
+            validate="true"
+            parameter="removeProcess">
+        <forward name="success" path="/managerView.do" redirect="true" />
+        <forward name="cancel" path="/managerView.do" redirect="true"/>
+    </action>
+
+	<!-- uplift -->
+    <action path="/upliftList"
+            type="com.helmet.application.mgr.UpliftActionDispatcher"
+            name="ListFormMgr"
+            scope="request"
+            input="homeMgr.page"
+            validate="false"
+            parameter="list">
+        <forward name="success" path="upliftList.page" />
+    </action>
+
+
+
+    <action path="/toggleShowPageHelp"
+            type="com.helmet.application.mgr.ToggleShowPageHelp">
+        <forward name="success" path="/ok.txt" />
+    </action>
+
+  </action-mappings>
+
+  <message-resources null="false" parameter="MgrMessageResources" />
+  
+	<!-- Tiles Configuration -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+	  <set-property property="definitions-config"
+                  value="/WEB-INF/mgr/tiles-defs-mgr.xml,/WEB-INF/tiles-defs-mmj.xml"/>
+    <set-property property="moduleAware"
+                  value="true" />
+	</plug-in>
+  
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames"
+                  value="/org/apache/struts/validator/validator-rules.xml,/WEB-INF/mgr/validation-mgr.xml,/WEB-INF/validator-rules-mmj.xml" />
+    <set-property property="stopOnFirstError" value="false" />
+  </plug-in>
+
+</struts-config>
