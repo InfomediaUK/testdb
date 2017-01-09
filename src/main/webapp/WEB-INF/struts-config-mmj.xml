@@ -24,6 +24,25 @@
       <form-property name="administrator" type="com.helmet.bean.Administrator" />
     </form-bean>
     
+    <form-bean name="MgrLoginForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+      <form-property name="clientCode" type="java.lang.String" />
+    </form-bean>
+    
+    <form-bean name="MgrSecretWordForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="secretWordKey1" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue1" type="java.lang.String" />
+      <form-property name="secretWordKey2" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue2" type="java.lang.String" />
+      <form-property name="secretWordKey3" type="java.lang.Integer" initial="0" />
+      <form-property name="secretWordValue3" type="java.lang.String" />
+    </form-bean>
+    
+    <form-bean name="MgrForgottenPwdForm" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="manager" type="com.helmet.bean.Manager" />
+      <form-property name="clientCode" type="java.lang.String" />
+    </form-bean>
+    
     <form-bean name="AgyLoginForm" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="consultant" type="com.helmet.bean.Consultant" />
       <form-property name="agencyCode" type="java.lang.String" />
@@ -88,6 +107,12 @@
     <forward name="adminLoggedOut" path="/adminLoggedOut.do" />
     <forward name="adminForgottenPwd" path="/adminForgottenPwd.do" />
     <forward name="adminResetPwd" path="/adminResetPwd.do" />
+
+    <forward name="mgr" path="/mgr" />
+    <forward name="mgrLogin" path="/mgrLogin.do" />
+    <forward name="mgrLoggedOut" path="/mgrLoggedOut.do" />
+    <forward name="mgrForgottenPwd" path="/mgrForgottenPwd.do" />
+    <forward name="mgrResetPwd" path="/mgrResetPwd.do" />
 
     <forward name="agy" path="/agy" />
     <forward name="agyLogin" path="/agyLogin.do" />
@@ -218,6 +243,104 @@
 	<action path="/adminLoggedOut"
 	        type="org.apache.struts.actions.ForwardAction"
 	        parameter="adminLoggedOut.page"/>
+
+    <action path="/mgrLogin"
+            type="com.helmet.application.mgr.Login"
+            name="MgrLoginForm"
+            scope="request"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="mgrLogin.page" />
+    </action>
+
+    <action path="/mgrLoginProcess"
+            type="com.helmet.application.mgr.LoginProcess"
+            name="MgrLoginForm"
+            scope="request"
+            input="mgrLogin.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/mgr/home.do" redirect="true"/>
+        <forward name="cancel" path="/home.do" redirect="true"/>
+    </action>
+
+    <action path="/mgrSecretWord"
+            type="com.helmet.application.mgr.SecretWord"
+            name="MgrSecretWordForm"
+            scope="session"
+            input="/home.do"
+            validate="false">
+        <forward name="success" path="mgrSecretWord.page" />
+    </action>
+
+    <action path="/mgrSecretWordProcess"
+            type="com.helmet.application.mgr.SecretWordProcess"
+            name="MgrSecretWordForm"
+            scope="session"
+            input="mgrSecretWord.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/mgr/home.do" redirect="true"/>
+        <forward name="cancel" path="/mgrLoginCancelled.do" redirect="true"/>
+    </action>
+
+	<action path="/mgrLoginCancelled"
+            type="com.helmet.application.mgr.LoginCancelled">
+        <forward name="success" path="/home.do" />
+    </action>
+
+	<action path="/mgrForgottenPwd"
+            type="com.helmet.application.mgr.ForgottenPwd"
+            name="MgrForgottenPwdForm"
+            scope="request"
+            input="mgrLogin.page"
+            validate="false">
+        <forward name="success" path="mgrForgottenPwd.page" />
+    </action>
+
+    <action path="/mgrForgottenPwdProcess"
+            type="com.helmet.application.mgr.ForgottenPwdProcess"
+            name="MgrForgottenPwdForm"
+            scope="request"
+            input="mgrForgottenPwd.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="mgrPwdHint.page" redirect="true"/>
+        <forward name="cancel" path="/mgrLogin.do" redirect="true"/>
+    </action>
+
+	<action path="/mgrResetPwd"
+            type="com.helmet.application.mgr.ForgottenPwd"
+            name="MgrForgottenPwdForm"
+            scope="request"
+            input="mgrLogin.page"
+            validate="false">
+        <forward name="success" path="mgrResetPwd.page" />
+    </action>
+
+    <action path="/mgrResetPwdProcess"
+            type="com.helmet.application.mgr.ForgottenPwdProcess"
+            name="MgrForgottenPwdForm"
+            scope="request"
+            input="mgrResetPwd.page"
+            cancellable="true"
+            validate="true">
+        <forward name="success" path="/mgrResetPwdSendProcess.do"/>
+        <forward name="cancel" path="/mgrLogin.do" redirect="true"/>
+    </action>
+
+    <action path="/mgrResetPwdSendProcess"
+            type="com.helmet.application.mgr.ResetPwdSendProcess"
+            name="MgrForgottenPwdForm"
+            scope="request"
+            input="mgrResetPwd.page"
+            validate="true">
+        <forward name="success" path="mgrResetPwdSent.page" redirect="true"/>
+    </action>
+
+	<action path="/mgrLoggedOut"
+		        type="org.apache.struts.actions.ForwardAction"
+		        parameter="mgrLoggedOut.page"/>
 
     <action path="/agyLogin"
             type="com.helmet.application.agy.Login"

@@ -14,6 +14,7 @@
         class="com.helmet.api.ServiceFactory"
 		    factory-method="getInstance">
 		<property name="adminService" ref="adminService" />
+		<property name="mgrService" ref="mgrService" />
 		<property name="agyService" ref="agyService" />
 		<property name="appService" ref="appService" />
 		<property name="zapService" ref="zapService" />
@@ -258,6 +259,67 @@
     <!-- NEW >>>>> -->
     <!-- <<<<< NEW -->
 		<property name="applicantDAO" ref="applicantDAO" />
+ 	</bean>
+
+	<bean id="mgrService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="target" ref="mgrServiceTarget"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+ 			</props>
+		</property>
+	</bean>
+
+  <!-- mgrService for "real" - this is the target of the mgrService "proxy" - the class that is wrapped -->
+	<bean id="mgrServiceTarget"	class="com.helmet.api.impl.DefaultMgrService" >
+		<!--  -->
+		<property name="agyBookingOpenFromEmailAddress" value="${mgrServiceTarget.agyBookingOpenFromEmailAddress}" />
+		<property name="agyBookingOpenSubject" value="${mgrServiceTarget.agyBookingOpenSubject}" />
+		<property name="agyBookingOpenLink" value="${mgrServiceTarget.agyBookingOpenLink}" />
+		<!-- common DAOs -->
+		<property name="agencyInvoiceDAO" ref="agencyInvoiceDAO" />
+		<property name="agencyInvoiceCreditDAO" ref="agencyInvoiceCreditDAO" />
+		<property name="bookingDAO" ref="bookingDAO" />
+		<property name="bookingDateDAO" ref="bookingDateDAO" />
+		<property name="bookingExpenseDAO" ref="bookingExpenseDAO" />
+		<property name="bookingGradeDAO" ref="bookingGradeDAO" />
+		<property name="bookingGradeApplicantDAO" ref="bookingGradeApplicantDAO" />
+		<property name="bookingGradeApplicantDateDAO" ref="bookingGradeApplicantDateDAO" />
+		<property name="budgetTransactionDAO" ref="budgetTransactionDAO" />
+		<property name="clientDAO" ref="clientDAO" />
+		<property name="clientAgencyDAO" ref="clientAgencyDAO" />
+		<property name="clientAgencyGradeDAO" ref="clientAgencyGradeDAO" />
+		<property name="clientAgencyJobProfileDAO" ref="clientAgencyJobProfileDAO" />
+		<property name="clientAgencyJobProfileGradeDAO" ref="clientAgencyJobProfileGradeDAO" />
+		<property name="dressCodeDAO" ref="dressCodeDAO" />
+		<property name="expenseDAO" ref="expenseDAO" />
+		<property name="gradeDAO" ref="gradeDAO" />
+		<property name="invoiceDAO" ref="invoiceDAO" />
+		<property name="invoiceAgencyDAO" ref="invoiceAgencyDAO" />
+		<property name="jobProfileDAO" ref="jobProfileDAO" />
+		<property name="locationDAO" ref="locationDAO" />
+		<property name="locationJobProfileDAO" ref="locationJobProfileDAO" />
+		<property name="locationManagerJobProfileDAO" ref="locationManagerJobProfileDAO" />
+		<property name="managerDAO" ref="managerDAO" />
+		<property name="managerAccessDAO" ref="managerAccessDAO" />
+		<property name="managerAccessGroupDAO" ref="managerAccessGroupDAO" />
+		<property name="mgrAccessDAO" ref="mgrAccessDAO" />
+		<property name="mgrAccessGroupDAO" ref="mgrAccessGroupDAO" />
+		<property name="mgrAccessGroupItemDAO" ref="mgrAccessGroupItemDAO" />
+		<property name="publicHolidayDAO" ref="publicHolidayDAO" />
+		<property name="reasonForRequestDAO" ref="reasonForRequestDAO" />
+		<property name="shiftDAO" ref="shiftDAO" />
+		<property name="siteDAO" ref="siteDAO" />
+		<property name="upliftDAO" ref="upliftDAO" />
+		<property name="upliftMinuteDAO" ref="upliftMinuteDAO" />
+		<property name="agencyDAO" ref="agencyDAO" />
+		<!-- specific DAOs -->
+		<property name="bookingDateExpenseDAO" ref="bookingDateExpenseDAO" />
+		<property name="bookingDateHourDAO" ref="bookingDateHourDAO" />
+		<property name="clientReEnterPwdDAO" ref="clientReEnterPwdDAO" />
  	</bean>
 
 	<bean id="agyService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
@@ -660,6 +722,24 @@
 			<property name="dataSource" ref="dataSource"/>
 	</bean>
 
+	<bean id="mgrAccessDAO" 
+	      class="com.helmet.persistence.impl.DefaultMgrAccessDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="mgrAccessGroupDAO" 
+	      class="com.helmet.persistence.impl.DefaultMgrAccessGroupDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="mgrAccessGroupItemDAO" 
+	      class="com.helmet.persistence.impl.DefaultMgrAccessGroupItemDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
 	<bean id="managerAccessDAO" 
 	      class="com.helmet.persistence.impl.DefaultManagerAccessDAO" 
 	      init-method="init" >
@@ -805,6 +885,7 @@
 <!-- 
 -->
             <value>adminServiceTarget</value>
+            <value>mgrServiceTarget</value>
             <value>agyServiceTarget</value>
             <value>appServiceTarget</value>
         </list>
