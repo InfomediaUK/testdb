@@ -140,6 +140,24 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
               </td>
             </tr>
             <tr>
+              <th width="25%" align="left"class="label"><bean:message key="label.registeredWithDbsDate"/></th>
+              <td align="left">
+                <bean:write name="applicant" property="registeredWithDbsDate" formatKey="format.mediumDateFormat" />
+              </td>
+            </tr>
+            <tr>
+              <th width="25%" align="left"class="label"><bean:message key="label.dbsRenewalDate"/></th>
+              <td align="left">
+                <bean:write name="applicant" property="dbsRenewalDate" formatKey="format.mediumDateFormat" />
+              </td>
+            </tr>
+            <tr>
+              <th width="25%"  align="left" class="label"><bean:message key="label.dbsFilename"/></th>
+              <td align="left">
+                <bean:write name="applicant" property="dbsFilename"/>
+              </td>
+            </tr>
+            <tr>
               <th width="25%" align="left"class="label"><bean:message key="label.reference1Filename"/></th>
               <td align="left">
                 <bean:write name="applicant" property="reference1Filename"/>
