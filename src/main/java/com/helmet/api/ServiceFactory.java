@@ -6,6 +6,7 @@ public class ServiceFactory
   private static ServiceFactory instance;
 
   AdminService adminService;
+  MgrService mgrService;
   AgyService agyService;
   AppService appService;
   ZapService zapService;
@@ -27,6 +28,16 @@ public class ServiceFactory
   public void setAdminService(AdminService adminService)
   {
     this.adminService = adminService;
+  }
+
+  public MgrService getMgrService()
+  {
+    return mgrService;
+  }
+
+  public void setMgrService(MgrService mgrService)
+  {
+    this.mgrService = mgrService;
   }
 
   public AgyService getAgyService()
