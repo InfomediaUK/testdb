@@ -260,6 +260,7 @@ public class ApplicantWorkingList extends AgyAction
   private void updateHoursWorked(ApplicantWorking applicantWorking, int index, BookingDateUserApplicant bookingDateUserApplicant, Calendar calendar)
   {
     BigDecimal hours = null;
+//    System.out.println(bookingDateUserApplicant.getApplicantFullNameLastFirst());
     if (bookingDateUserApplicant.getWorkedEndTime().after(bookingDateUserApplicant.getWorkedStartTime()))
     {
       // The SIMPLE CASE: The shift is all in one calendar day.
@@ -285,36 +286,45 @@ public class ApplicantWorkingList extends AgyAction
       applicantWorking.updateHoursWorked(index + 1, hours);
       applicantWorking.setFinishedPeriodForDate(index + 1, getFinishedPeriodForTime(bookingDateUserApplicant.getWorkedEndTime().getTime()));
       applicantWorking.setWorkedStatusForDate(index + 1, bookingDateUserApplicant.getWorkedStatus());
-      if (bookingDateUserApplicant.getWorkedBreakEndTime().before(bookingDateUserApplicant.getWorkedBreakStartTime()))
+      if (bookingDateUserApplicant.getWorkedBreakStartTime() == null && bookingDateUserApplicant.getWorkedBreakEndTime() == null)
       {
-        // Break is in both today and tomorrow. That is, it spans midnight.
-        // Firstly, calculate break duration today.
-        Long breakInMilliseconds = (MILLISECONDS_IN_DAY - bookingDateUserApplicant.getWorkedBreakStartTime().getTime());
-        hours = new BigDecimal(breakInMilliseconds * -1l);
-        hours = hours.divide(MILLISECONDS_IN_HOUR, 2, RoundingMode.HALF_UP);
-        applicantWorking.updateHoursWorked(index, hours); 
-        // Secondly, calculate break duration tomorrow.
-        breakInMilliseconds = (bookingDateUserApplicant.getWorkedBreakEndTime().getTime());
-        hours = new BigDecimal(breakInMilliseconds * -1l);
-        hours = hours.divide(MILLISECONDS_IN_HOUR, 2, RoundingMode.HALF_UP);
-        applicantWorking.updateHoursWorked(index + 1, hours); 
+        // The Applicant did NOT take a break.
+        logger.debug("Applicant {} did not take a break {}", bookingDateUserApplicant.getApplicantFullNameLastFirst(), bookingDateUserApplicant.getBookingDate());
       }
       else
       {
-        // Break is wholly either in today or tomorrow. That is, it does NOT span midnight.
-        Long breakInMilliseconds = (bookingDateUserApplicant.getWorkedBreakEndTime().getTime() - bookingDateUserApplicant.getWorkedBreakStartTime().getTime());
-        hours = new BigDecimal(breakInMilliseconds * -1l);
-        hours = hours.divide(MILLISECONDS_IN_HOUR, 2, RoundingMode.HALF_UP);
-        if (bookingDateUserApplicant.getWorkedBreakStartTime().before(bookingDateUserApplicant.getWorkedStartTime()))
+        // The Applicant took a break.
+        if (bookingDateUserApplicant.getWorkedBreakEndTime().before(bookingDateUserApplicant.getWorkedBreakStartTime()))
         {
-          // Break is in today.
-          applicantWorking.updateHoursWorked(index, hours); 
+          // Break is in both today and tomorrow. That is, it spans midnight.
+          // Firstly, calculate break duration today.
+          Long breakInMilliseconds = (MILLISECONDS_IN_DAY - bookingDateUserApplicant.getWorkedBreakStartTime().getTime());
+          hours = new BigDecimal(breakInMilliseconds * -1l);
+          hours = hours.divide(MILLISECONDS_IN_HOUR, 2, RoundingMode.HALF_UP);
+          applicantWorking.updateHoursWorked(index, hours);
+          // Secondly, calculate break duration tomorrow.
+          breakInMilliseconds = (bookingDateUserApplicant.getWorkedBreakEndTime().getTime());
+          hours = new BigDecimal(breakInMilliseconds * -1l);
+          hours = hours.divide(MILLISECONDS_IN_HOUR, 2, RoundingMode.HALF_UP);
+          applicantWorking.updateHoursWorked(index + 1, hours);
         }
         else
         {
-          // Break is in tomorrow.
-          applicantWorking.updateHoursWorked(index + 1, hours); 
-        }
+          // Break is wholly either in today or tomorrow. That is, it does NOT span midnight.
+          Long breakInMilliseconds = (bookingDateUserApplicant.getWorkedBreakEndTime().getTime() - bookingDateUserApplicant.getWorkedBreakStartTime().getTime());
+          hours = new BigDecimal(breakInMilliseconds * -1l);
+          hours = hours.divide(MILLISECONDS_IN_HOUR, 2, RoundingMode.HALF_UP);
+          if (bookingDateUserApplicant.getWorkedBreakStartTime().before(bookingDateUserApplicant.getWorkedStartTime()))
+          {
+            // Break is in today.
+            applicantWorking.updateHoursWorked(index, hours);
+          }
+          else
+          {
+            // Break is in tomorrow.
+            applicantWorking.updateHoursWorked(index + 1, hours);
+          }
+        } 
       }
     }
   }
