@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts-config PUBLIC
-          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
-          "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 
 <struts-config>
   
   <form-beans >
-    <form-bean dynamic="true" name="ListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="list" type="java.util.List" />
     </form-bean>
-    <form-bean dynamic="true" name="LocationListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="LocationListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="totalBudget" type="java.math.BigDecimal" />
       <form-property name="totalVatBudget" type="java.math.BigDecimal" />
       <form-property name="totalExpenseBudget" type="java.math.BigDecimal" />
       <form-property name="totalNonPayBudget" type="java.math.BigDecimal" />
       <form-property name="list" type="java.util.List" />
     </form-bean>
-    <form-bean dynamic="true" name="BudgetTransactionListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BudgetTransactionListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="locationJobProfile" type="com.helmet.bean.LocationJobProfileUser" />
       <form-property name="list" type="java.util.List" />
       <form-property name="tab" type="java.lang.String" initial="pay" />
     </form-bean>
-    <form-bean dynamic="true" name="BudgetTransactionNewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BudgetTransactionNewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="locationJobProfile" type="com.helmet.bean.LocationJobProfileUser" />
       <form-property name="budgetTransaction" type="com.helmet.bean.BudgetTransaction" />
       <form-property name="valueStr" type="java.lang.String" initial="0" />
@@ -30,12 +30,12 @@
       <form-property name="nonPayValueStr" type="java.lang.String" initial="0" />
       <form-property name="tab" type="java.lang.String" initial="pay" />
     </form-bean>
-    <form-bean dynamic="true" name="HomeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="HomeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="unfilledBookings" type="java.util.List" />
       <form-property name="unfilledShifts" type="java.util.List" />
       <form-property name="filledShifts" type="java.util.List" />
     </form-bean>
-    <form-bean dynamic="true" name="BookingListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingStatus" type="java.lang.String" />
       <form-property name="workedStatus" type="java.lang.String" />
       <form-property name="bookingGradeApplicantDateStatus" type="java.lang.String" />
@@ -47,7 +47,7 @@
       <form-property name="totalActualValue" type="java.math.BigDecimal" />
       <form-property name="totalActualHours" type="java.math.BigDecimal" />
     </form-bean>
-    <form-bean dynamic="true" name="OrderStaffFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="OrderStaffFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="page" type="java.lang.Integer" initial="0" />
       <form-property name="list" type="java.util.List" />
       <!--  step 1 -->
@@ -104,27 +104,27 @@
       <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
 
     </form-bean>
-    <form-bean dynamic="true" name="BookingViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
       <!--  used to lock the booking -->
       <form-property name="bookingId" type="java.lang.Integer" />
     </form-bean>
-    <form-bean dynamic="true" name="BookingGradeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingGradeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingGrade" type="com.helmet.bean.BookingGrade" />
     </form-bean>
-    <form-bean dynamic="true" name="BookingGradeApplicantViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingGradeApplicantViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingGradeApplicant" type="com.helmet.bean.BookingGradeApplicantUserEntity" />
       <!--  used to lock the booking -->
       <form-property name="bookingId" type="java.lang.Integer" />
     </form-bean>
 
 <!--
-    <form-bean dynamic="true" name="BookingGradeApplicantDateViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingGradeApplicantDateViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingGradeApplicantDate" type="com.helmet.bean.BookingGradeApplicantDateUser" />
       <form-property name="bookingId" type="java.lang.Integer" />
     </form-bean>
 -->
-    <form-bean dynamic="true" name="ShiftSearchFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ShiftSearchFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingId" type="java.lang.String" />
       <form-property name="shiftNo" type="java.lang.String" />
       <form-property name="loginId" type="java.lang.String" />
@@ -159,7 +159,7 @@
 
     </form-bean>
 
-    <form-bean dynamic="true" name="ShiftListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ShiftListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingDateStatus" type="java.lang.String" />
       <form-property name="workedStatus" type="java.lang.String" />
 
@@ -179,7 +179,7 @@
       
     </form-bean>
 
-    <form-bean dynamic="true" name="BookingSearchFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingSearchFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingId" type="java.lang.String" />
       <form-property name="bookingStatus" type="java.lang.String" />
       <form-property name="singleCandidate" type="java.lang.String" />
@@ -200,13 +200,13 @@
       <form-property name="totalActualHours" type="java.math.BigDecimal" />
     </form-bean>
 
-    <form-bean dynamic="true" name="BookingDateFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingDateFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingDate" type="com.helmet.bean.BookingDate" />
       <!--  used to lock the booking -->
       <form-property name="bookingId" type="java.lang.Integer" />
     </form-bean>
 
-    <form-bean dynamic="true" name="BookingDateUserApplicantFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingDateUserApplicantFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
 <!-- 
       <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
 -->
@@ -215,7 +215,7 @@
       <form-property name="bookingId" type="java.lang.Integer" />
     </form-bean>
 
-    <form-bean dynamic="true" name="BookingDatesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingDatesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="selectedBookingDates" type="java.lang.String[]" initial="'0'" />
       <form-property name="bookingDateIdStrs" type="java.lang.String" />
       <form-property name="list" type="java.util.List" />
@@ -233,12 +233,12 @@
       <form-property name="pwd" type="java.lang.String" />
     </form-bean>
     
-    <form-bean dynamic="true" name="InvoiceViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="InvoiceViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="invoice" type="com.helmet.bean.InvoiceEntity" />
     </form-bean>
 
 
-    <form-bean dynamic="true" name="BookingExtendFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingExtendFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="page" type="java.lang.Integer" initial="0" />
       <form-property name="list" type="java.util.List" />
       <form-property name="currentBookingDates" type="com.helmet.bean.BookingDateUser[]" />
@@ -261,30 +261,30 @@
       <form-property name="wageRateValueTotal" type="java.math.BigDecimal" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ChangePasswordFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ChangePasswordFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="oldPwd" type="java.lang.String" />
       <form-property name="newPwd" type="java.lang.String" />
       <form-property name="confirmPwd" type="java.lang.String" />
       <form-property name="pwdHint" type="java.lang.String" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ChangeSecretWordFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ChangeSecretWordFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="oldSecretWord" type="java.lang.String" />
       <form-property name="newSecretWord" type="java.lang.String" />
       <form-property name="confirmSecretWord" type="java.lang.String" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ReEnterPwdFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ReEnterPwdFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="pwd" type="java.lang.String" />
     </form-bean>
 
-    <form-bean dynamic="true" name="BookingEditInfoFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingEditInfoFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
       <!--  used to lock the booking -->
       <form-property name="bookingId" type="java.lang.Integer" />
     </form-bean>
 
-    <form-bean dynamic="true" name="BookingEditExpensesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingEditExpensesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="booking" type="com.helmet.bean.BookingUserEntityMgr" />
       <form-property name="selectedExpenses" type="java.lang.String[]" initial="'0'" />
       <form-property name="list" type="java.util.List" />
@@ -292,11 +292,11 @@
       <form-property name="bookingId" type="java.lang.Integer" />
     </form-bean>
 
-    <form-bean dynamic="true" name="AgencyInvoiceFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="AgencyInvoiceFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="agencyInvoice" type="com.helmet.bean.AgencyInvoiceUserEntity" />
     </form-bean>
 
-    <form-bean dynamic="true" name="AgencyInvoiceListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="AgencyInvoiceListFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="status" type="java.lang.String" />
       <form-property name="list" type="java.util.List" />
       <form-property name="totalPayRateValue" type="java.math.BigDecimal" />
@@ -314,7 +314,7 @@
       <form-property name="selectedAgencyInvoices" type="java.lang.String[]" initial="'0'" />
     </form-bean>
 
-    <form-bean dynamic="true" name="AgencyInvoicesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="AgencyInvoicesFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="list" type="java.util.List" />
       <form-property name="totalPayRateValue" type="java.math.BigDecimal" />
       <form-property name="totalWtdValue" type="java.math.BigDecimal" />
@@ -334,18 +334,18 @@
       <form-property name="pwd" type="java.lang.String" />
     </form-bean>
 
-    <form-bean dynamic="true" name="BookingDateEditOvertimeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="BookingDateEditOvertimeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingDate" type="com.helmet.bean.BookingDateUserApplicant" />
     </form-bean>
 
-    <form-bean dynamic="true" name="DisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="DisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="list" type="java.util.List" />
       <form-property name="commaDelimitedKey" type="java.lang.String" />
       <form-property name="order" type="java.lang.String" />
       <form-property name="zeroiseDisplayOrder" type="java.lang.Boolean" />
     </form-bean>
 
-    <form-bean dynamic="true" name="SiteDisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="SiteDisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="list" type="java.util.List" />
       <form-property name="commaDelimitedKey" type="java.lang.String" />
       <form-property name="order" type="java.lang.String" />
@@ -355,7 +355,7 @@
 
     </form-bean>
 
-    <form-bean dynamic="true" name="LocationDisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="LocationDisplayOrderFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="list" type="java.util.List" />
       <form-property name="commaDelimitedKey" type="java.lang.String" />
       <form-property name="order" type="java.lang.String" />
@@ -365,47 +365,47 @@
 
     </form-bean>
 
-    <form-bean dynamic="true" name="ReasonForRequestFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ReasonForRequestFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="reasonForRequest" type="com.helmet.bean.ReasonForRequest" />
     </form-bean>
 
-    <form-bean dynamic="true" name="GradeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="GradeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="grade" type="com.helmet.bean.Grade" />
     </form-bean>
 
-    <form-bean dynamic="true" name="PublicHolidayFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="PublicHolidayFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="publicHoliday" type="com.helmet.bean.PublicHoliday" />
       <form-property name="phDate" type="java.lang.String" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ClientFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ClientFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="client" type="com.helmet.bean.ClientUser" />
 
       <form-property name="logoFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="logo2File" type="org.apache.struts.upload.FormFile"/>
     </form-bean>
 
-    <form-bean dynamic="true" name="SiteFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="SiteFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="site" type="com.helmet.bean.SiteUser" />
     </form-bean>
 
-    <form-bean dynamic="true" name="SiteViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="SiteViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="site" type="com.helmet.bean.SiteUserEntity" />
     </form-bean>
 
-    <form-bean dynamic="true" name="LocationFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="LocationFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="location" type="com.helmet.bean.Location" />
     </form-bean>
 
-    <form-bean dynamic="true" name="LocationViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="LocationViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="location" type="com.helmet.bean.LocationEntity" />
     </form-bean>
 
-    <form-bean dynamic="true" name="DressCodeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="DressCodeFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="dressCode" type="com.helmet.bean.DressCode" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ShiftFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ShiftFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="shift" type="com.helmet.bean.Shift" />
 
       <form-property name="shiftStartHour" type="java.lang.String" />
@@ -418,38 +418,38 @@
       <form-property name="shiftBreakEndMinute" type="java.lang.String" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ExpenseFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ExpenseFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="expense" type="com.helmet.bean.Expense" />
 
       <form-property name="multiplierStr" type="java.lang.String" initial="1.00"/>
       <form-property name="vatRateStr" type="java.lang.String" initial="0.00"/>
     </form-bean>
 
-    <form-bean dynamic="true" name="LocationJobProfileAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="LocationJobProfileAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="list" type="java.util.List" />
       <form-property name="location" type="com.helmet.bean.Location" />
       <form-property name="selectedItems" type="java.lang.String[]" />
     </form-bean>
 
-    <form-bean dynamic="true" name="LocationJobProfileFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="LocationJobProfileFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="locationJobProfile" type="com.helmet.bean.LocationJobProfileUser" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ManagerFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ManagerFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="manager" type="com.helmet.bean.Manager" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ManagerViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ManagerViewFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="manager" type="com.helmet.bean.ManagerEntity" />
     </form-bean>
 
-    <form-bean dynamic="true" name="LocationManagerJobProfileAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="LocationManagerJobProfileAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="list" type="java.util.List" />
       <form-property name="manager" type="com.helmet.bean.Manager" />
       <form-property name="selectedItems" type="java.lang.String[]" />
     </form-bean>
 
-    <form-bean dynamic="true" name="ManagerAccessGroupAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
+    <form-bean name="ManagerAccessGroupAddRemoveFormMgr" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="list" type="java.util.List" />
       <form-property name="manager" type="com.helmet.bean.Manager" />
       <form-property name="selectedItems" type="java.lang.String[]" />
@@ -817,7 +817,7 @@
 
     <action path="/logoutProcess"
             type="com.helmet.application.mgr.LogoutProcess">
-        <forward name="success" path="mgrLoggedOut.page" redirect="true" contextRelative="true" />
+        <forward name="success" path="mgrLoggedOut.page" redirect="true" />
     </action>
 
     <action path="/locationList"
