@@ -6,20 +6,18 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <br/>
 <br/>
-<%= session.getId() %>
+<%--= session.getId() --%>
 <%-- should be a tag --%>
-<br/>
-<br/>
 <%-- should be a tag --%>
 <%-- HAS TO BE KEPT CHECKED OUT FROM CVS --%>
 <%
 String major = "1";
-String minor = "6";
-String revision = "09";
-String build = "496"; // DO NOT EDIT BUILD. IT'S CHANGED BY ANT.
+String minor = "7";
+String revision = "01";
+String build = "500"; // DO NOT EDIT BUILD. IT'S CHANGED BY ANT.
 String time = "17 11 2016 19:19:22"; // DO NOT EDIT TIME. IT'S CHANGED BY ANT.
 String user = "infomedia"; // DO NOT EDIT USER. IT'S CHANGED BY ANT.
-%>		
+%>    
 <%= major %>.<%= minor %>.<%= revision %>.<%= build %>
 
 <br/> 
@@ -75,9 +73,9 @@ while (enames.hasMoreElements()) {
 <br/>
 --%>
 
-<%
+<%--
   String geoTrustImage = request.getContextPath() + "/images/quickssl_static.gif";
-%>
 <img src="<%= geoTrustImage %>" width="115" height="55" />
+--%>
 
 
