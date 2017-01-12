@@ -39,7 +39,7 @@ function checkedAll(frmname)
     <td align="left" valign="top" width="100%">
 			<div class="tabber">
         <div class="tabbertab">
-          <h2>New</h2>
+          <h2><bean:message key="label.new"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantNew" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -87,7 +87,7 @@ function checkedAll(frmname)
           </html:form>
         </div>
 			  <div class="tabbertab">
-				  <h2>CRB</h2>
+				  <h2><bean:message key="label.crb"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantCrbExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
 				    <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -132,7 +132,7 @@ function checkedAll(frmname)
 					</html:form>
 			  </div>
         <div class="tabbertab">
-          <h2>DBS</h2>
+          <h2><bean:message key="label.dbs"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantDbsExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -177,7 +177,7 @@ function checkedAll(frmname)
           </html:form>
         </div>
         <div class="tabbertab">
-          <h2>Fit To Work</h2>
+          <h2><bean:message key="label.fitToWork"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantFitToWorkExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -267,7 +267,7 @@ function checkedAll(frmname)
           </html:form>
         </div>
 			  <div class="tabbertab">
-				  <h2>Passport</h2>
+				  <h2><bean:message key="label.passport"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantPassportExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
 				    <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -312,7 +312,7 @@ function checkedAll(frmname)
           </html:form>
 				</div>
         <div class="tabbertab">
-          <h2>Training</h2>
+          <h2><bean:message key="label.training"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantTrainingExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -357,7 +357,7 @@ function checkedAll(frmname)
           </html:form>
         </div>
 			  <div class="tabbertab">
-				  <h2>Visa</h2>
+				  <h2><bean:message key="label.visa"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantVisaExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
 				    <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -402,7 +402,7 @@ function checkedAll(frmname)
           </html:form>
 				</div>
         <div class="tabbertab">
-          <h2>Driving License</h2>
+          <h2><bean:message key="label.drivingLicense"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantDrivingLicenseExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -447,7 +447,7 @@ function checkedAll(frmname)
           </html:form>
         </div>
         <div class="tabbertab">
-          <h2>Reference 1</h2>
+          <h2><bean:message key="label.reference1"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantReference1" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -492,7 +492,7 @@ function checkedAll(frmname)
           </html:form>
         </div>
         <div class="tabbertab">
-          <h2>Reference 2</h2>
+          <h2><bean:message key="label.reference2"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantReference2" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
@@ -548,7 +548,7 @@ function checkedAll(frmname)
     <td>
       <div class="tabber">
         <div class="tabbertab">
-          <h2>Recently Compliant</h2>
+          <h2><bean:message key="label.recentlyCompliant"/></h2>
           <table class="simple" width="100%">
             <thead>
               <tr>
@@ -627,7 +627,7 @@ function checkedAll(frmname)
           </table>
         </div>
         <div class="tabbertab">
-          <h2>Recent Prospects</h2>
+          <h2><bean:message key="label.recentProspects"/></h2>
           <table class="simple" width="100%">
             <thead>
               <tr>
@@ -670,7 +670,7 @@ function checkedAll(frmname)
           </table>
         </div>
         <div class="tabbertab">
-          <h2>Unarchived</h2>
+          <h2><bean:message key="label.unarchived"/></h2>
           <table class="simple" width="100%">
             <thead>
               <tr>
