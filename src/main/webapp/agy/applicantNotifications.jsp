@@ -29,15 +29,15 @@ function checkedAll(frmname)
 
 <table cellpadding="0" cellspacing="0" width="100%" height="30">
   <tr>
-		<td align="left" valign="middle" class="title">
+    <td align="left" valign="middle" class="title">
 <bean:message key="title.applicantNotifications"/>
-		</td>
+    </td>
   </tr>
 </table>
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
   <tr>
     <td align="left" valign="top" width="100%">
-			<div class="tabber">
+      <div class="tabber">
         <div class="tabbertab">
           <h2><bean:message key="label.new"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantNew" onsubmit="return singleSubmit();">
@@ -66,7 +66,7 @@ function checkedAll(frmname)
                   <input type="checkbox" name="<%= applicantNewCheckBox %>" value="<%= applicant.getApplicantId() %>">    
                 </td>
                 <td align="left"><bean:write name="applicant" property="creationTimestamp" formatKey="format.mediumDateFormat" /></td>
-						    <td align="left"><bean:write name="applicant" property="interviewDate" formatKey="format.mediumDateFormat" /></td>
+                <td align="left"><bean:write name="applicant" property="interviewDate" formatKey="format.mediumDateFormat" /></td>
                 <td align="left">    
                 <mmj-agy:hasAccess forward="applicantView">
                   <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
@@ -86,51 +86,51 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="16">
           </html:form>
         </div>
-			  <div class="tabbertab">
-				  <h2><bean:message key="label.crb"/></h2>
+        <div class="tabbertab">
+          <h2><bean:message key="label.crb"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantCrbExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
-				    <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
+            <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
 </mmj-agy:hasAccess>
-						<table class="simple" width="100%">
-						  <thead>
-							  <tr>
-							    <th align="center" width="2%">
-							      <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantCrbExpiry');"/>
-			            </th>
-							    <th align="left" width="18%"><bean:message key="label.crbExpiryDate"/></th>
-							    <th align="left" width="20%"><bean:message key="label.name"/></th>
-							    <th align="left" width="20%"><bean:message key="label.emailAddress"/></th>
-							    <th align="left" width="20%"><bean:message key="label.telephoneNumber"/></th>
-							    <th align="left" width="20%"><bean:message key="label.mobile"/></th>
-							  </tr>
-						  </thead>
-						  <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="crbList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
-					    <% String applicantCrbExpiryCheckBox = "applicantId"; %>
-						  <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
-						    <td align="left" valign="top">
-						      <input type="checkbox" name="<%= applicantCrbExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
-						    </td>
-						    <td align="left"><bean:write name="applicant" property="crbExpiryDate" formatKey="format.mediumDateFormat" /></td>
-						    <td align="left">    
-						    <mmj-agy:hasAccess forward="applicantView">
-						      <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
-						        <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
-						      </html:link>
-						    </mmj-agy:hasAccess>
-						    <mmj-agy:hasNoAccess forward="applicantView">
-						        <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
-						    </mmj-agy:hasNoAccess>
-						    </td>
-						    <td align="left"><bean:write name="applicant" property="user.emailAddress"/></td>   
-						    <td align="left"><bean:write name="applicant" property="telephoneNumber"/></td>
-						    <td align="left"><bean:write name="applicant" property="mobileNumber"/></td>
-						  </tr>   
-						  </logic:iterate>
-						</table>
-						<input type="hidden" name="emailActionId" value="1">
-					</html:form>
-			  </div>
+            <table class="simple" width="100%">
+              <thead>
+                <tr>
+                  <th align="center" width="2%">
+                    <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantCrbExpiry');"/>
+                  </th>
+                  <th align="left" width="18%"><bean:message key="label.crbExpiryDate"/></th>
+                  <th align="left" width="20%"><bean:message key="label.name"/></th>
+                  <th align="left" width="20%"><bean:message key="label.emailAddress"/></th>
+                  <th align="left" width="20%"><bean:message key="label.telephoneNumber"/></th>
+                  <th align="left" width="20%"><bean:message key="label.mobile"/></th>
+                </tr>
+              </thead>
+              <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="crbList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
+              <% String applicantCrbExpiryCheckBox = "applicantId"; %>
+              <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
+                <td align="left" valign="top">
+                  <input type="checkbox" name="<%= applicantCrbExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
+                </td>
+                <td align="left"><bean:write name="applicant" property="crbExpiryDate" formatKey="format.mediumDateFormat" /></td>
+                <td align="left">    
+                <mmj-agy:hasAccess forward="applicantView">
+                  <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
+                    <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
+                  </html:link>
+                </mmj-agy:hasAccess>
+                <mmj-agy:hasNoAccess forward="applicantView">
+                    <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
+                </mmj-agy:hasNoAccess>
+                </td>
+                <td align="left"><bean:write name="applicant" property="user.emailAddress"/></td>   
+                <td align="left"><bean:write name="applicant" property="telephoneNumber"/></td>
+                <td align="left"><bean:write name="applicant" property="mobileNumber"/></td>
+              </tr>   
+              </logic:iterate>
+            </table>
+            <input type="hidden" name="emailActionId" value="1">
+          </html:form>
+        </div>
         <div class="tabbertab">
           <h2><bean:message key="label.dbs"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantDbsExpiry" onsubmit="return singleSubmit();">
@@ -266,51 +266,51 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="3">
           </html:form>
         </div>
-			  <div class="tabbertab">
-				  <h2><bean:message key="label.passport"/></h2>
+        <div class="tabbertab">
+          <h2><bean:message key="label.passport"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantPassportExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
-				    <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
+            <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
 </mmj-agy:hasAccess>
-	          <table class="simple" width="100%">
-	            <thead>
-	              <tr>
-	                <th align="center" width="2%">
-	                  <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantPassportExpiry');"/>
-	                </th>
-	                <th align="left" width="18%"><bean:message key="label.passportExpiryDate"/></th>
-	                <th align="left" width="20%"><bean:message key="label.name"/></th>
-	                <th align="left" width="20%"><bean:message key="label.emailAddress"/></th>
-	                <th align="left" width="20%"><bean:message key="label.telephoneNumber"/></th>
-	                <th align="left" width="20%"><bean:message key="label.mobile"/></th>
-	              </tr>
-	            </thead>
-	            <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="passportList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
-	            <% String applicantPassportExpiryCheckBox = "applicantId"; %>
-	            <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
-	              <td align="left" valign="top">
-	                <input type="checkbox" name="<%= applicantPassportExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
-	              </td>
-	              <td align="left"><bean:write name="applicant" property="passportExpiryDate" formatKey="format.mediumDateFormat" /></td>
-	              <td align="left">    
-	              <mmj-agy:hasAccess forward="applicantView">
-	                <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
-	                  <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
-	                </html:link>
-	              </mmj-agy:hasAccess>
-	              <mmj-agy:hasNoAccess forward="applicantView">
-	                  <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
-	              </mmj-agy:hasNoAccess>
-	              </td>
-	              <td align="left"><bean:write name="applicant" property="user.emailAddress"/></td>   
-	              <td align="left"><bean:write name="applicant" property="telephoneNumber"/></td>
-	              <td align="left"><bean:write name="applicant" property="mobileNumber"/></td>
-	            </tr>   
-	            </logic:iterate>
-	          </table>
-						<input type="hidden" name="emailActionId" value="4">
+            <table class="simple" width="100%">
+              <thead>
+                <tr>
+                  <th align="center" width="2%">
+                    <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantPassportExpiry');"/>
+                  </th>
+                  <th align="left" width="18%"><bean:message key="label.passportExpiryDate"/></th>
+                  <th align="left" width="20%"><bean:message key="label.name"/></th>
+                  <th align="left" width="20%"><bean:message key="label.emailAddress"/></th>
+                  <th align="left" width="20%"><bean:message key="label.telephoneNumber"/></th>
+                  <th align="left" width="20%"><bean:message key="label.mobile"/></th>
+                </tr>
+              </thead>
+              <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="passportList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
+              <% String applicantPassportExpiryCheckBox = "applicantId"; %>
+              <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
+                <td align="left" valign="top">
+                  <input type="checkbox" name="<%= applicantPassportExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
+                </td>
+                <td align="left"><bean:write name="applicant" property="passportExpiryDate" formatKey="format.mediumDateFormat" /></td>
+                <td align="left">    
+                <mmj-agy:hasAccess forward="applicantView">
+                  <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
+                    <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
+                  </html:link>
+                </mmj-agy:hasAccess>
+                <mmj-agy:hasNoAccess forward="applicantView">
+                    <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
+                </mmj-agy:hasNoAccess>
+                </td>
+                <td align="left"><bean:write name="applicant" property="user.emailAddress"/></td>   
+                <td align="left"><bean:write name="applicant" property="telephoneNumber"/></td>
+                <td align="left"><bean:write name="applicant" property="mobileNumber"/></td>
+              </tr>   
+              </logic:iterate>
+            </table>
+            <input type="hidden" name="emailActionId" value="4">
           </html:form>
-				</div>
+        </div>
         <div class="tabbertab">
           <h2><bean:message key="label.training"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantTrainingExpiry" onsubmit="return singleSubmit();">
@@ -356,51 +356,51 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="5">
           </html:form>
         </div>
-			  <div class="tabbertab">
-				  <h2><bean:message key="label.visa"/></h2>
+        <div class="tabbertab">
+          <h2><bean:message key="label.visa"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantVisaExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
-				    <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
+            <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
 </mmj-agy:hasAccess>
-	          <table class="simple" width="100%">
-	            <thead>
-	              <tr>
-	                <th align="center" width="2%">
-	                  <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantVisaExpiry');"/>
-	                </th>
-	                <th align="left" width="18%"><bean:message key="label.visaExpiryDate"/></th>
-	                <th align="left" width="20%"><bean:message key="label.name"/></th>
-	                <th align="left" width="20%"><bean:message key="label.emailAddress"/></th>
-	                <th align="left" width="20%"><bean:message key="label.telephoneNumber"/></th>
-	                <th align="left" width="20%"><bean:message key="label.mobile"/></th>
-	              </tr>
-	            </thead>
-	            <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="visaList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
-	            <% String applicantVisaExpiryCheckBox = "applicantId"; %>
-	            <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
-	              <td align="left" valign="top">
-	                <input type="checkbox" name="<%= applicantVisaExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
-	              </td>
-	              <td align="left"><bean:write name="applicant" property="visaExpiryDate" formatKey="format.mediumDateFormat" /></td>
-	              <td align="left">    
-	              <mmj-agy:hasAccess forward="applicantView">
-	                <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
-	                  <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
-	                </html:link>
-	              </mmj-agy:hasAccess>
-	              <mmj-agy:hasNoAccess forward="applicantView">
-	                  <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
-	              </mmj-agy:hasNoAccess>
-	              </td>
-	              <td align="left"><bean:write name="applicant" property="user.emailAddress"/></td>   
-	              <td align="left"><bean:write name="applicant" property="telephoneNumber"/></td>
-	              <td align="left"><bean:write name="applicant" property="mobileNumber"/></td>
-	            </tr>   
-	            </logic:iterate>
-	          </table>
-						<input type="hidden" name="emailActionId" value="6">
+            <table class="simple" width="100%">
+              <thead>
+                <tr>
+                  <th align="center" width="2%">
+                    <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantVisaExpiry');"/>
+                  </th>
+                  <th align="left" width="18%"><bean:message key="label.visaExpiryDate"/></th>
+                  <th align="left" width="20%"><bean:message key="label.name"/></th>
+                  <th align="left" width="20%"><bean:message key="label.emailAddress"/></th>
+                  <th align="left" width="20%"><bean:message key="label.telephoneNumber"/></th>
+                  <th align="left" width="20%"><bean:message key="label.mobile"/></th>
+                </tr>
+              </thead>
+              <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="visaList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
+              <% String applicantVisaExpiryCheckBox = "applicantId"; %>
+              <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
+                <td align="left" valign="top">
+                  <input type="checkbox" name="<%= applicantVisaExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
+                </td>
+                <td align="left"><bean:write name="applicant" property="visaExpiryDate" formatKey="format.mediumDateFormat" /></td>
+                <td align="left">    
+                <mmj-agy:hasAccess forward="applicantView">
+                  <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
+                    <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
+                  </html:link>
+                </mmj-agy:hasAccess>
+                <mmj-agy:hasNoAccess forward="applicantView">
+                    <bean:write name="applicant" property="user.firstName"/>&nbsp;<bean:write name="applicant" property="user.lastName"/>
+                </mmj-agy:hasNoAccess>
+                </td>
+                <td align="left"><bean:write name="applicant" property="user.emailAddress"/></td>   
+                <td align="left"><bean:write name="applicant" property="telephoneNumber"/></td>
+                <td align="left"><bean:write name="applicant" property="mobileNumber"/></td>
+              </tr>   
+              </logic:iterate>
+            </table>
+            <input type="hidden" name="emailActionId" value="6">
           </html:form>
-				</div>
+        </div>
         <div class="tabbertab">
           <h2><bean:message key="label.drivingLicense"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantDrivingLicenseExpiry" onsubmit="return singleSubmit();">
@@ -536,8 +536,8 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="10">
           </html:form>
         </div>
-			</div>
-	  </td>
+      </div>
+    </td>
   </tr>
   <tr>
     <td>
@@ -677,14 +677,14 @@ function checkedAll(frmname)
                 <th align="left"><bean:message key="label.name"/></th>
                 <th align="left"><bean:message key="label.emailAddress"/></th>
                 <th align="left"><bean:message key="label.mobile"/></th>
-						    <th align="left"><bean:message key="label.availability"/></th>
-						    <th align="left"><bean:message key="label.disciplineCategory"/></th>
-						    <th align="left"><bean:message key="label.clientGroup"/></th>
-						    <th align="left"><bean:message key="label.professionalReference"/></th>
-						    <th align="center"><bean:message key="label.ftw"/></th>
-						    <th align="center"><bean:message key="label.crb"/></th>
-						    <th align="center"><bean:message key="label.mt"/></th>
-						    <th align="center"><bean:message key="label.compliant"/></th>
+                <th align="left"><bean:message key="label.availability"/></th>
+                <th align="left"><bean:message key="label.disciplineCategory"/></th>
+                <th align="left"><bean:message key="label.clientGroup"/></th>
+                <th align="left"><bean:message key="label.professionalReference"/></th>
+                <th align="center"><bean:message key="label.ftw"/></th>
+                <th align="center"><bean:message key="label.crb"/></th>
+                <th align="center"><bean:message key="label.mt"/></th>
+                <th align="center"><bean:message key="label.compliant"/></th>
               </tr>
             </thead>
             <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="unarchivedList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
@@ -701,49 +701,49 @@ function checkedAll(frmname)
               </td>
               <td align="left"><bean:write name="applicant" property="user.emailAddress"/></td>   
               <td align="left"><bean:write name="applicant" property="mobileNumber"/></td>
-					    <td align="left"><bean:write name="applicant" property="availabilityDate" formatKey="format.mediumDateFormat"/></td>   
-					    <td align="left"><bean:write name="applicant" property="disciplineCategoryName"/></td>   
-					    <td align="left">
-						  <logic:equal name="applicant" property="clientGroup" value="1">
-					        <bean:message key="label.adults"/>
-					    </logic:equal>
-							<logic:equal name="applicant" property="clientGroup" value="2">
-					        <bean:message key="label.paeds"/>
-					    </logic:equal>
-					    </td>   
-					    <td align="left"><bean:write name="applicant" property="hpcNumber"/></td>   
-					    <td align="center">
-								<logic:equal name="applicant" property="hasCurrentFitToWork" value="true">
-							    <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
-							  </logic:equal>
-							  <logic:notEqual name="applicant" property="hasCurrentFitToWork" value="true">
-							    <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
-							  </logic:notEqual>
-					    </td>
-					    <td align="center">
-								<logic:equal name="applicant" property="hasCurrentCRB" value="true">
-							    <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
-							  </logic:equal>
-								<logic:notEqual name="applicant" property="hasCurrentCRB" value="true">
-							    <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
-							  </logic:notEqual>
-					    </td>
-					    <td align="center">
-								<logic:equal name="applicant" property="hasCurrentTraining" value="true">
-							    <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
-							  </logic:equal>
-								<logic:notEqual name="applicant" property="hasCurrentTraining" value="true">
-							    <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
-							  </logic:notEqual>
-					    </td>
-					    <td align="center">
-								<logic:equal name="applicant" property="compliant" value="true">
-							    <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
-							  </logic:equal>
-								<logic:notEqual name="applicant" property="compliant" value="true">
-							    <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
-							  </logic:notEqual>
-					    </td>
+              <td align="left"><bean:write name="applicant" property="availabilityDate" formatKey="format.mediumDateFormat"/></td>   
+              <td align="left"><bean:write name="applicant" property="disciplineCategoryName"/></td>   
+              <td align="left">
+              <logic:equal name="applicant" property="clientGroup" value="1">
+                  <bean:message key="label.adults"/>
+              </logic:equal>
+              <logic:equal name="applicant" property="clientGroup" value="2">
+                  <bean:message key="label.paeds"/>
+              </logic:equal>
+              </td>   
+              <td align="left"><bean:write name="applicant" property="hpcNumber"/></td>   
+              <td align="center">
+                <logic:equal name="applicant" property="hasCurrentFitToWork" value="true">
+                  <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
+                </logic:equal>
+                <logic:notEqual name="applicant" property="hasCurrentFitToWork" value="true">
+                  <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
+                </logic:notEqual>
+              </td>
+              <td align="center">
+                <logic:equal name="applicant" property="hasCurrentCRB" value="true">
+                  <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
+                </logic:equal>
+                <logic:notEqual name="applicant" property="hasCurrentCRB" value="true">
+                  <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
+                </logic:notEqual>
+              </td>
+              <td align="center">
+                <logic:equal name="applicant" property="hasCurrentTraining" value="true">
+                  <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
+                </logic:equal>
+                <logic:notEqual name="applicant" property="hasCurrentTraining" value="true">
+                  <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
+                </logic:notEqual>
+              </td>
+              <td align="center">
+                <logic:equal name="applicant" property="compliant" value="true">
+                  <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
+                </logic:equal>
+                <logic:notEqual name="applicant" property="compliant" value="true">
+                  <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
+                </logic:notEqual>
+              </td>
             </tr>   
             </logic:iterate>
           </table>
@@ -760,10 +760,10 @@ function checkedAll(frmname)
     <td>
 <mmj-agy:hasAccess forward="applicantEdit">
       <html:form action="/applicantsCompliancyTest.do" onsubmit="return singleSubmit();">
-		    <html:submit styleClass="wideButton">Compliancy Check</html:submit>
-		  </html:form>
+        <html:submit styleClass="wideButton">Compliancy Check</html:submit>
+      </html:form>
 </mmj-agy:hasAccess>
     </td>
   </tr>
 </table>
-					
+          
