@@ -24,19 +24,19 @@
 <link rel="icon" href="<%= request.getContextPath() %>/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="<%= request.getContextPath() %>/favicon.ico" type="image/x-icon">
 <logic:equal name="includeZapatec" property="value" value="true">
-<link rel="stylesheet" type="text/css" media="all" href="/mmj/zapatec/themes/winxp.css" title="Calendar Theme - winxp.css">
-<link href="/mmj/zapatec/doc/css/zpcal.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="<%= request.getContextPath() %>/zapatec/themes/winxp.css" title="Calendar Theme - winxp.css">
+<link href="<%= request.getContextPath() %>/zapatec/doc/css/zpcal.css" rel="stylesheet" type="text/css">
 </logic:equal>
 <link type="text/css" rel="stylesheet" href="site.css" media="screen">
 <link type="text/css" rel="stylesheet" href="<%= request.getContextPath() %>/tabber.css" media="screen">
 <logic:equal name="includeZapatec" property="value" value="true">
 <!-- import the calendar script -->
-<script type="text/javascript" src="/mmj/zapatec/src/utils.js"></script>
-<script type="text/javascript" src="/mmj/zapatec/src/calendar.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/zapatec/src/utils.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/zapatec/src/calendar.js"></script>
 <!-- import the language module -->
-<script type="text/javascript" src="/mmj/zapatec/lang/calendar-en.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/zapatec/lang/calendar-en.js"></script>
 <!-- import the calendar setup script -->
-<script type="text/javascript" src="/mmj/zapatec/src/calendar-setup.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/zapatec/src/calendar-setup.js"></script>
 </logic:equal>
 <script language="javascript" type="text/javascript" src="site.js"></script>
 <script language="javascript" type="text/javascript" src="<%= request.getContextPath() %>/tabber.js"></script>
