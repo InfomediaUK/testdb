@@ -424,6 +424,7 @@
                   <html:option value="1"><bean:message key="label.appliedFor"/></html:option>
                   <html:option value="2"><bean:message key="label.pending"/></html:option>
                   <html:option value="3"><bean:message key="label.received"/></html:option>
+                  <html:option value="4"><bean:message key="label.temporary"/></html:option>
                 </html:select>
               </td>
             </tr>
