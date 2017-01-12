@@ -849,6 +849,9 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 <logic:equal name="ApplicantFormAgy" property="applicant.fitToWorkStatus" value="3">
                 <bean:message key="label.received"/>
 </logic:equal>
+<logic:equal name="ApplicantFormAgy" property="applicant.fitToWorkStatus" value="4">
+                <bean:message key="label.temporary"/>
+</logic:equal>
               </td>
             </tr>
             <tr>
