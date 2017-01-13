@@ -41,7 +41,7 @@ public class NhsBackingReportView extends NhsBackingReportCommon
       String nhsBackingReportDocumentationFile = FileHandler.getInstance().getNhsBackingReportFileFolder() + "/a" + getConsultantLoggedIn().getAgencyId() + "/" + nhsBackingReportUser.getDocumentationFileName();
       String nhsBackingReportDocumentationFilePath = FileHandler.getInstance().getNhsBackingReportFileLocation() + nhsBackingReportDocumentationFile;
       File fileNhsBackingReportDocumentation = new File(nhsBackingReportDocumentationFilePath);
-      dynaForm.set("nhsBackingReportDocumentationFile", fileNhsBackingReportDocumentation.exists() ? nhsBackingReportDocumentationFile : nhsBackingReportUser.getDocumentationFileName() + "Not Found.");
+      dynaForm.set("nhsBackingReportDocumentationFile", fileNhsBackingReportDocumentation.exists() ? nhsBackingReportDocumentationFile : nhsBackingReportUser.getDocumentationFileName() + " Not Found.");
       dynaForm.set("nhsBackingReportDocumentationFileDate", new Date(fileNhsBackingReportDocumentation.lastModified()));
       long fileSize = fileNhsBackingReportDocumentation.length() / 1000;
       dynaForm.set("nhsBackingReportDocumentationFileSize", new Long(fileSize));
@@ -51,7 +51,7 @@ public class NhsBackingReportView extends NhsBackingReportCommon
       String nhsBackingReportRejectedDocumentationFile = FileHandler.getInstance().getNhsBackingReportFileFolder() + "/a" + getConsultantLoggedIn().getAgencyId() + "/" + nhsBackingReportUser.getRejectedDocumentationFileName();
       String nhsBackingReportRejectedDocumentationFilePath = FileHandler.getInstance().getNhsBackingReportFileLocation() + nhsBackingReportRejectedDocumentationFile;
       File fileNhsBackingReportRejectedDocumentation = new File(nhsBackingReportRejectedDocumentationFilePath);
-      dynaForm.set("nhsBackingReportRejectedDocumentationFile", fileNhsBackingReportRejectedDocumentation.exists() ? nhsBackingReportRejectedDocumentationFile : nhsBackingReportUser.getDocumentationFileName() + "Not Found.");
+      dynaForm.set("nhsBackingReportRejectedDocumentationFile", fileNhsBackingReportRejectedDocumentation.exists() ? nhsBackingReportRejectedDocumentationFile : nhsBackingReportUser.getDocumentationFileName() + " Not Found.");
       dynaForm.set("nhsBackingReportRejectedDocumentationFileDate", new Date(fileNhsBackingReportRejectedDocumentation.lastModified()));
       long fileSize = fileNhsBackingReportRejectedDocumentation.length() / 1000;
       dynaForm.set("nhsBackingReportRejectedDocumentationFileSize", new Long(fileSize));
