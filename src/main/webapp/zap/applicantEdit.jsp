@@ -140,17 +140,23 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
               </td>
             </tr>
             <tr>
-              <th width="25%" align="left"class="label"><bean:message key="label.registeredWithDbsDate"/></th>
+              <th width="25%" align="left"class="label"><bean:message key="label.crbDisclosureNumber"/></th>
               <td align="left">
-                <bean:write name="applicant" property="registeredWithDbsDate" formatKey="format.mediumDateFormat" />
+                <bean:write name="applicant" property="crbDisclosureNumber" />
               </td>
             </tr>
-            <tr>
-              <th width="25%" align="left"class="label"><bean:message key="label.dbsRenewalDate"/></th>
-              <td align="left">
-                <bean:write name="applicant" property="dbsRenewalDate" formatKey="format.mediumDateFormat" />
-              </td>
-            </tr>
+		    <tr>
+			  <th width="25%" align="left"class="label"><bean:message key="label.registeredWithDbsDate"/></th>
+			  <td align="left">
+				<bean:write name="applicant" property="registeredWithDbsDate" formatKey="format.mediumDateFormat" />
+			  </td>
+			</tr>
+			<tr>
+			  <th width="25%" align="left"class="label"><bean:message key="label.dbsRenewalDate"/></th>
+			  <td align="left">
+				<bean:write name="applicant" property="dbsRenewalDate" formatKey="format.mediumDateFormat" />
+			  </td>
+			</tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.dbsFilename"/></th>
               <td align="left">
@@ -307,18 +313,35 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
               </td>
             </tr>
             <tr>
-              <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddressFilename"/></th>
+              <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress1Filename"/></th>
               <td align="left">
-                <bean:write name="applicant" property="proofOfAddressFilename"/>
+                <bean:write name="applicant" property="proofOfAddress1Filename"/>
               </td>
             </tr>
             <tr>
-              <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress"/></th>
+              <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress1"/></th>
               <td align="left">
-                <logic:equal name="applicant" property="proofOfAddress" value="true">
+                <logic:equal name="applicant" property="proofOfAddress1" value="true">
               <bean:message key="label.yes"/>
                 </logic:equal>
-                <logic:notEqual name="applicant" property="proofOfAddress" value="true">
+                <logic:notEqual name="applicant" property="proofOfAddress1" value="true">
+              <bean:message key="label.no"/>
+                </logic:notEqual>
+              </td>
+            </tr>
+            <tr>
+              <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress2Filename"/></th>
+              <td align="left">
+                <bean:write name="applicant" property="proofOfAddress2Filename"/>
+              </td>
+            </tr>
+            <tr>
+              <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress2"/></th>
+              <td align="left">
+                <logic:equal name="applicant" property="proofOfAddress2" value="true">
+              <bean:message key="label.yes"/>
+                </logic:equal>
+                <logic:notEqual name="applicant" property="proofOfAddress2" value="true">
               <bean:message key="label.no"/>
                 </logic:notEqual>
               </td>
