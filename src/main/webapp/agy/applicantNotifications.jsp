@@ -222,7 +222,7 @@ function checkedAll(frmname)
           </html:form>
         </div>
         <div class="tabbertab">
-          <h2>HPC</h2>
+          <h2><bean:message key="label.professionalRegistration"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantHpcExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
