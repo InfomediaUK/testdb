@@ -1036,7 +1036,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
             </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.hpc"/></th>
-              <th  align="left" class="label">(HCPC/NMC)</th>
+              <th  align="left" class="label">(HCPC/NMC/HCA)</th>
             </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
@@ -1046,6 +1046,9 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
                 </logic:equal>
                 <logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="1">
                   <bean:message key="label.temp"/>
+                </logic:equal>
+                <logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="2">
+                  <bean:message key="label.hca"/>
                 </logic:equal>
               </td>
             </tr>

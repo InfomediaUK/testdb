@@ -509,6 +509,7 @@
                 <html:select name="ApplicantFormAgy" property="applicant.ahpRegistrationType" tabindex="66">
                   <html:option value="0"><bean:message key="label.full"/></html:option>
                   <html:option value="1"><bean:message key="label.temp"/></html:option>
+                  <html:option value="2"><bean:message key="label.hca"/></html:option>
                 </html:select>
               </td>
             </tr>
