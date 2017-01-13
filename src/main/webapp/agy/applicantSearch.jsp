@@ -424,15 +424,31 @@
         </td>
       </tr>
       <tr>
-        <th align="left" class="label"><bean:message key="label.hasProofOfAddress"/></th>
+        <th align="left" class="label"><bean:message key="label.hasProofOfAddress1"/></th>
 		    <td>
-		      <html:radio property="hasProofOfAddressOperator" value="<%= Constants.AND %>"/>
+		      <html:radio property="hasProofOfAddress1Operator" value="<%= Constants.AND %>"/>
 		    </td>
 		    <td>
-		      <html:radio property="hasProofOfAddressOperator" value="<%= Constants.OR %>"/>
+		      <html:radio property="hasProofOfAddress1Operator" value="<%= Constants.OR %>"/>
 		    </td>
         <td align="left">
-          <html:select property="hasProofOfAddress" tabindex="1">
+          <html:select property="hasProofOfAddress1" tabindex="1">
+            <html:option value=""><bean:message key="label.pleaseSelect"/></html:option>
+            <html:option value="true"><bean:message key="label.yes"/></html:option>
+            <html:option value="false"><bean:message key="label.no"/></html:option>
+          </html:select>
+        </td>
+      </tr>
+      <tr>
+        <th align="left" class="label"><bean:message key="label.hasProofOfAddress2"/></th>
+		    <td>
+		      <html:radio property="hasProofOfAddress2Operator" value="<%= Constants.AND %>"/>
+		    </td>
+		    <td>
+		      <html:radio property="hasProofOfAddress2Operator" value="<%= Constants.OR %>"/>
+		    </td>
+        <td align="left">
+          <html:select property="hasProofOfAddress2" tabindex="1">
             <html:option value=""><bean:message key="label.pleaseSelect"/></html:option>
             <html:option value="true"><bean:message key="label.yes"/></html:option>
             <html:option value="false"><bean:message key="label.no"/></html:option>

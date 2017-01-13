@@ -86,8 +86,10 @@ public class ApplicantSearch extends AgyAction {
       dynaForm.set("hasTrainingCertificateOperator", (String)session.getAttribute("hasTrainingCertificateOperator"));
       session.setAttribute("hasPassportOperator", session.getAttribute("hasPassportOperator") == null ? Constants.AND : (String)session.getAttribute("hasPassportOperator"));      
       dynaForm.set("hasPassportOperator", (String)session.getAttribute("hasPassportOperator"));
-      session.setAttribute("hasProofOfAddressOperator", session.getAttribute("hasProofOfAddressOperator") == null ? Constants.AND : (String)session.getAttribute("hasProofOfAddressOperator"));      
-      dynaForm.set("hasProofOfAddressOperator", (String)session.getAttribute("hasProofOfAddressOperator"));
+      session.setAttribute("hasProofOfAddress1Operator", session.getAttribute("hasProofOfAddress1Operator") == null ? Constants.AND : (String)session.getAttribute("hasProofOfAddress1Operator"));      
+      dynaForm.set("hasProofOfAddress1Operator", (String)session.getAttribute("hasProofOfAddress1Operator"));
+      session.setAttribute("hasProofOfAddress2Operator", session.getAttribute("hasProofOfAddress2Operator") == null ? Constants.AND : (String)session.getAttribute("hasProofOfAddress2Operator"));      
+      dynaForm.set("hasProofOfAddress2Operator", (String)session.getAttribute("hasProofOfAddress2Operator"));
       session.setAttribute("hasBirthCertificateOperator", session.getAttribute("hasBirthCertificateOperator") == null ? Constants.AND : (String)session.getAttribute("hasBirthCertificateOperator"));      
       dynaForm.set("hasBirthCertificateOperator", (String)session.getAttribute("hasBirthCertificateOperator"));
       session.setAttribute("hasOverseasPoliceClearanceOperator", session.getAttribute("hasOverseasPoliceClearanceOperator") == null ? Constants.AND : (String)session.getAttribute("hasOverseasPoliceClearanceOperator"));      

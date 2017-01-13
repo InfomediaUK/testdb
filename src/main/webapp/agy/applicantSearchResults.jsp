@@ -219,10 +219,18 @@ function checkedAll(frmname)
 				        </tr>
 				        <tr>
 				          <th  width="50%">
-				            Proof of Address
+				            Proof of Address 1
 				          </th>
 				          <td  width="50%">
-      				      <bean:write name="applicant" property="proofOfAddressFilename"/>&nbsp;
+      				      <bean:write name="applicant" property="proofOfAddress1Filename"/>&nbsp;
+				          </td>
+				        </tr>
+				        <tr>
+				          <th  width="50%">
+				            Proof of Address 2
+				          </th>
+				          <td  width="50%">
+      				      <bean:write name="applicant" property="proofOfAddress2Filename"/>&nbsp;
 				          </td>
 				        </tr>
 				        <tr>

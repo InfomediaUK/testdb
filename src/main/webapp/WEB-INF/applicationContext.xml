@@ -136,7 +136,8 @@
         <entry key="applicant.hasCurrentTraining" value="TRUE"/>
         <entry key="applicant.hasCurrentVisa" value="TRUE"/>
         <entry key="applicant.hasBirthCertificate" value="TRUE"/>
-        <entry key="applicant.hasProofOfAddress" value="TRUE"/>
+        <entry key="applicant.hasProofOfAddress1" value="TRUE"/>
+        <entry key="applicant.hasProofOfAddress2" value="TRUE"/>
         <entry key="applicant.niNumberReceived" value="TRUE"/>
       </map>
     </property>

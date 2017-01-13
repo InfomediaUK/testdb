@@ -38,7 +38,6 @@ import com.helmet.bean.BookingGradeApplicantDateUserEntity;
 import com.helmet.bean.BookingGradeApplicantUser;
 import com.helmet.bean.BookingGradeApplicantUserEntity;
 import com.helmet.bean.BookingGradeUser;
-import com.helmet.bean.BookingUser;
 import com.helmet.bean.Client;
 import com.helmet.bean.ClientAgencyJobProfileGrade;
 import com.helmet.bean.ClientAgencyJobProfileGradeUser;
@@ -51,7 +50,6 @@ import com.helmet.bean.IntValue;
 import com.helmet.bean.InvoiceAgency;
 import com.helmet.bean.InvoiceAgencyUser;
 import com.helmet.bean.InvoiceAgencyUserEntity;
-import com.helmet.bean.JobProfile;
 import com.helmet.bean.JobProfileUser;
 import com.helmet.bean.Location;
 import com.helmet.bean.LocationUser;
@@ -72,10 +70,7 @@ import com.helmet.persistence.AgyAccessDAO;
 import com.helmet.persistence.ApplicantDAO;
 import com.helmet.persistence.BookingDateExpenseDAO;
 import com.helmet.persistence.BookingDateHourDAO;
-import com.helmet.persistence.BookingGradeDAO;
 import com.helmet.persistence.ConsultantDAO;
-import com.helmet.persistence.EmailActionDAO;
-import com.helmet.persistence.NhsBookingDAO;
 import com.helmet.persistence.SubcontractInvoiceDAO;
 import com.helmet.persistence.SubcontractInvoiceItemDAO;
 import com.helmet.persistence.UnavailableDAO;
@@ -83,17 +78,15 @@ import com.helmet.persistence.Utilities;
 
 public class DefaultAgyService extends DefaultCommonService implements AgyService {
 
-  private ConsultantDAO consultantDAO;
+	private ConsultantDAO consultantDAO;
 
-  private AgyAccessDAO agyAccessDAO;
+	private AgyAccessDAO agyAccessDAO;
 
-  private ApplicantDAO applicantDAO;
+	private ApplicantDAO applicantDAO;
 
-  private BookingDateExpenseDAO bookingDateExpenseDAO;
+	private BookingDateExpenseDAO bookingDateExpenseDAO;
 
-  private BookingDateHourDAO bookingDateHourDAO;
-
-  private EmailActionDAO emailActionDAO;
+	private BookingDateHourDAO bookingDateHourDAO;
 
   private UnavailableDAO unavailableDAO;
     
@@ -101,30 +94,25 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
   
   private SubcontractInvoiceItemDAO subcontractInvoiceItemDAO;
   
-  public void setConsultantDAO(ConsultantDAO consultantDAO) {
-    this.consultantDAO = consultantDAO;
-  }
+	public void setConsultantDAO(ConsultantDAO consultantDAO) {
+		this.consultantDAO = consultantDAO;
+	}
 
-  public void setAgyAccessDAO(AgyAccessDAO agyAccessDAO) {
-    this.agyAccessDAO = agyAccessDAO;
-  }
+	public void setAgyAccessDAO(AgyAccessDAO agyAccessDAO) {
+		this.agyAccessDAO = agyAccessDAO;
+	}
 
-  public void setApplicantDAO(ApplicantDAO applicantDAO) {
-    this.applicantDAO = applicantDAO;
-  }
+	public void setApplicantDAO(ApplicantDAO applicantDAO) {
+		this.applicantDAO = applicantDAO;
+	}
 
-  public void setBookingDateExpenseDAO(BookingDateExpenseDAO bookingDateExpenseDAO) {
-    this.bookingDateExpenseDAO = bookingDateExpenseDAO;
-  }
+	public void setBookingDateExpenseDAO(BookingDateExpenseDAO bookingDateExpenseDAO) {
+		this.bookingDateExpenseDAO = bookingDateExpenseDAO;
+	}
 
-  public void setBookingDateHourDAO(BookingDateHourDAO bookingDateHourDAO) {
-    this.bookingDateHourDAO = bookingDateHourDAO;
-  }
-
-  public void setEmailActionDAO(EmailActionDAO emailActionDAO)
-  {
-    this.emailActionDAO = emailActionDAO;
-  }
+	public void setBookingDateHourDAO(BookingDateHourDAO bookingDateHourDAO) {
+		this.bookingDateHourDAO = bookingDateHourDAO;
+	}
 
   public void setUnavailableDAO(UnavailableDAO unavailableDAO) 
   {
@@ -143,89 +131,89 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 
   public Consultant validateLogin(Consultant consultant) {
 
-    Consultant consultantX = consultantDAO.getConsultantForLogin(consultant.getAgencyId(), consultant.getUser().getLogin());
-    if (consultantX == null) {
-      throw new DataNotFoundException();
-    }
-    String encryptedPwd = Utilities.encryptPassword(consultant.getUser().getPwd());
-    if (!encryptedPwd.equals(consultantX.getUser().getPwd())) {
-      consultant.getUser().setPwdHint(consultantX.getUser().getPwdHint());
-      throw new InvalidDetailException();
-    }
-    return consultantX;
+		Consultant consultantX = consultantDAO.getConsultantForLogin(consultant.getAgencyId(), consultant.getUser().getLogin());
+		if (consultantX == null) {
+			throw new DataNotFoundException();
+		}
+		String encryptedPwd = Utilities.encryptPassword(consultant.getUser().getPwd());
+		if (!encryptedPwd.equals(consultantX.getUser().getPwd())) {
+			consultant.getUser().setPwdHint(consultantX.getUser().getPwdHint());
+			throw new InvalidDetailException();
+		}
+		return consultantX;
 
-  }
+	}
 
-  public List<AgyAccess> getActiveAgyAccessesForConsultant(Integer consultantId) {
+	public List<AgyAccess> getActiveAgyAccessesForConsultant(Integer consultantId) {
 
-    List<AgyAccess> agyAccesses = null;
-    agyAccesses = agyAccessDAO.getActiveAgyAccessesForConsultant(consultantId);
-    return agyAccesses;
+		List<AgyAccess> agyAccesses = null;
+		agyAccesses = agyAccessDAO.getActiveAgyAccessesForConsultant(consultantId);
+		return agyAccesses;
 
-  }
+	}
  
-  public List<Booking> getBookingsForBookingReference(String bookingReference) 
+	public List<Booking> getBookingsForBookingReference(String bookingReference) 
   {
-    List<Booking> booking = getBookingDAO().getBookingsForBookingReference(bookingReference);
-    return booking;
-  }
+		List<Booking> booking = getBookingDAO().getBookingsForBookingReference(bookingReference);
+		return booking;
+	}
 
-//  public List<BookingUserAgy> getBookingUserAgysForAgency(Integer agencyId) {
+//	public List<BookingUserAgy> getBookingUserAgysForAgency(Integer agencyId) {
 //
-//    List<BookingUserAgy> bookingUserAgys = null;
-//    bookingUserAgys = getBookingDAO().getBookingUserAgysForAgency(agencyId, true);
-//    return bookingUserAgys;
+//		List<BookingUserAgy> bookingUserAgys = null;
+//		bookingUserAgys = getBookingDAO().getBookingUserAgysForAgency(agencyId, true);
+//		return bookingUserAgys;
 //
-//  }
+//	}
 
-//  public BookingUserEntityAgy getBookingUserEntityAgy(Integer bookingId, Integer agencyId) {
-//    
-//    BookingUserEntityAgy bookingUserEntityAgy = null;
-//      bookingUserEntityAgy = getBookingDAO().getBookingUserEntityAgy(bookingId);
-//      bookingUserEntityAgy.setBookingDates(bookingDateDAO.getBookingDatesForBooking(bookingId, true));
-//      bookingUserEntityAgy.setBookingExpenseUsers(bookingExpenseDAO.getBookingExpenseUsersForBooking(bookingId, true));
-//      bookingUserEntityAgy.setBookingGradeUser(getBookingGradeDAO().getBookingGradeUserForBookingAndAgency(bookingId, agencyId, true));
-//      bookingUserEntityAgy.setBookingGradeApplicantUsers(getBookingGradeApplicantDAO().getBookingGradeApplicantUsersForBookingAndAgency(bookingId, agencyId, true));
-//      return bookingUserEntityAgy;
+//	public BookingUserEntityAgy getBookingUserEntityAgy(Integer bookingId, Integer agencyId) {
+//		
+//		BookingUserEntityAgy bookingUserEntityAgy = null;
+//    	bookingUserEntityAgy = getBookingDAO().getBookingUserEntityAgy(bookingId);
+//    	bookingUserEntityAgy.setBookingDates(bookingDateDAO.getBookingDatesForBooking(bookingId, true));
+//    	bookingUserEntityAgy.setBookingExpenseUsers(bookingExpenseDAO.getBookingExpenseUsersForBooking(bookingId, true));
+//    	bookingUserEntityAgy.setBookingGradeUser(getBookingGradeDAO().getBookingGradeUserForBookingAndAgency(bookingId, agencyId, true));
+//    	bookingUserEntityAgy.setBookingGradeApplicantUsers(getBookingGradeApplicantDAO().getBookingGradeApplicantUsersForBookingAndAgency(bookingId, agencyId, true));
+//    	return bookingUserEntityAgy;
 //
-//  }
+//	}
 
-  public Consultant getConsultant(Integer consultantId) {
+	public Consultant getConsultant(Integer consultantId) {
 
-    Consultant consultant = null;
-    consultant = consultantDAO.getConsultant(consultantId);
-    return consultant;
+		Consultant consultant = null;
+		consultant = consultantDAO.getConsultant(consultantId);
+		return consultant;
 
-  }
+	}
 
-  public int updateConsultant(Consultant consultant, Integer auditorId) {
+	public int updateConsultant(Consultant consultant, Integer auditorId) {
 
-    int rc = consultantDAO.updateConsultant(consultant, auditorId);
-    return rc;
-  
-  }
+		int rc = consultantDAO.updateConsultant(consultant, auditorId);
+		return rc;
+	
+	}
 
-  public int updateConsultantShowPageHelp(Consultant consultant, Integer auditorId) {
+	public int updateConsultantShowPageHelp(Consultant consultant, Integer auditorId) {
 
-    int rc = consultantDAO.updateConsultantShowPageHelp(consultant, auditorId);
-    return rc;
-  
-  }
+		int rc = consultantDAO.updateConsultantShowPageHelp(consultant, auditorId);
+		return rc;
+	
+	}
 
-  public Agency getAgencyForCode(String agencyCode) {
+	public Agency getAgencyForCode(String agencyCode) {
 
-    Agency agency = getAgencyDAO().getAgencyForCode(agencyCode);
-    if (agency == null) {
-      throw new DataNotFoundException();
-    }
-    return agency;
+		Agency agency = getAgencyDAO().getAgencyForCode(agencyCode);
+		if (agency == null) {
+			throw new DataNotFoundException();
+		}
+		return agency;
 
-  }
+	}
 
-  /*
-   * Applicant stuff
-   */
-  
+	/*
+	 * Applicant stuff
+	 */
+	
   public List<Applicant> getApplicantsForAgency(Integer agencyId) {
 
     List<Applicant> applicants = null;
@@ -379,13 +367,13 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 
   }
   
-  public Applicant getApplicant(Integer applicantId) {
-    
-    Applicant applicant = null;
-      applicant = applicantDAO.getApplicant(applicantId);
-    return applicant;
-    
-  }
+	public Applicant getApplicant(Integer applicantId) {
+		
+		Applicant applicant = null;
+    	applicant = applicantDAO.getApplicant(applicantId);
+		return applicant;
+		
+	}
 
   public List<ApplicantClientBooking> getApplicantClientBookings(Integer applicantId, Integer clientId, Integer agencyId, Date searchDate) 
   {
@@ -394,28 +382,28 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return applicantClientBookings;
   }
 
-  public int insertApplicant(Applicant applicant, Integer auditorId) {
+	public int insertApplicant(Applicant applicant, Integer auditorId) {
 
-    Applicant duplicateApplicant = applicantDAO.getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
-    if (duplicateApplicant != null) {
-      throw new DuplicateDataException("login");
-    }
+		Applicant duplicateApplicant = applicantDAO.getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
+		if (duplicateApplicant != null) {
+			throw new DuplicateDataException("login");
+		}
         int rc = applicantDAO.insertApplicant(applicant, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int updateApplicant(Applicant applicant, Integer auditorId) {
+	public int updateApplicant(Applicant applicant, Integer auditorId) {
 
-    Applicant duplicateApplicant = applicantDAO.getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
-    if (duplicateApplicant != null &&
-      !duplicateApplicant.getApplicantId().equals(applicant.getApplicantId())) {
-      throw new DuplicateDataException("login");
-    }
+		Applicant duplicateApplicant = applicantDAO.getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
+		if (duplicateApplicant != null &&
+			!duplicateApplicant.getApplicantId().equals(applicant.getApplicantId())) {
+			throw new DuplicateDataException("login");
+		}
         int rc = applicantDAO.updateApplicant(applicant, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
   public int archiveApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId) 
   {
@@ -463,65 +451,65 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return getBookingGradeDAO().updateBookingGradeStatus(bookingGradeId, noOfChanges, auditorId, status);
   }
 
-  public int insertBookingGradeApplicant(BookingGradeApplicant bookingGradeApplicant, BookingGradeApplicantDate[] bookingGradeApplicantDates, Integer auditorId) {
+	public int insertBookingGradeApplicant(BookingGradeApplicant bookingGradeApplicant, BookingGradeApplicantDate[] bookingGradeApplicantDates, Integer auditorId) {
 
-    int rc = getBookingGradeApplicantDAO().insertBookingGradeApplicant(bookingGradeApplicant, auditorId);
-    for (BookingGradeApplicantDate bookingGradeApplicantDate: bookingGradeApplicantDates) {
-      bookingGradeApplicantDate.setBookingGradeApplicantId(bookingGradeApplicant.getBookingGradeApplicantId());
-      int d = getBookingGradeApplicantDateDAO().insertBookingGradeApplicantDate(bookingGradeApplicantDate, auditorId);
-    }
+		int rc = getBookingGradeApplicantDAO().insertBookingGradeApplicant(bookingGradeApplicant, auditorId);
+		for (BookingGradeApplicantDate bookingGradeApplicantDate: bookingGradeApplicantDates) {
+			bookingGradeApplicantDate.setBookingGradeApplicantId(bookingGradeApplicant.getBookingGradeApplicantId());
+			int d = getBookingGradeApplicantDateDAO().insertBookingGradeApplicantDate(bookingGradeApplicantDate, auditorId);
+		}
 
-    return rc;
+		return rc;
 
-  }
-  
-  public int updateBookingGradeApplicant(BookingGradeApplicant bookingGradeApplicant, BookingGradeApplicantDate[] bookingGradeApplicantDates, Integer auditorId) {
-    
-    int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicant(bookingGradeApplicant, auditorId);
-    
-    List<BookingGradeApplicantDateUser> oldDates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicant.getBookingGradeApplicantId(), true);
+	}
+	
+	public int updateBookingGradeApplicant(BookingGradeApplicant bookingGradeApplicant, BookingGradeApplicantDate[] bookingGradeApplicantDates, Integer auditorId) {
+		
+		int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicant(bookingGradeApplicant, auditorId);
+		
+		List<BookingGradeApplicantDateUser> oldDates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicant.getBookingGradeApplicantId(), true);
  
-    for (BookingGradeApplicantDate bookingGradeApplicantDate: oldDates) {
-      int d = getBookingGradeApplicantDateDAO().deleteBookingGradeApplicantDate(bookingGradeApplicantDate.getBookingGradeApplicantDateId(), bookingGradeApplicantDate.getNoOfChanges(), auditorId);
-    }
+		for (BookingGradeApplicantDate bookingGradeApplicantDate: oldDates) {
+			int d = getBookingGradeApplicantDateDAO().deleteBookingGradeApplicantDate(bookingGradeApplicantDate.getBookingGradeApplicantDateId(), bookingGradeApplicantDate.getNoOfChanges(), auditorId);
+		}
+		
+		for (BookingGradeApplicantDate bookingGradeApplicantDate: bookingGradeApplicantDates) {
+			bookingGradeApplicantDate.setBookingGradeApplicantId(bookingGradeApplicant.getBookingGradeApplicantId());
+			int d = getBookingGradeApplicantDateDAO().insertBookingGradeApplicantDate(bookingGradeApplicantDate, auditorId);
+		}
+
+		return rc;
+	}
+
+	public int updateBookingGradeAsViewed(Integer bookingGradeId, Integer noOfChanges, Integer auditorId) {
+
+		int rc = getBookingGradeDAO().updateBookingGradeViewed(bookingGradeId, true, noOfChanges, auditorId);
+		return rc;
+	
+	}
+
+	public int updateBookingGradeAsNotViewed(Integer bookingGradeId, Integer noOfChanges, Integer auditorId) {
+
+		int rc = getBookingGradeDAO().updateBookingGradeViewed(bookingGradeId, false, noOfChanges, auditorId);
+		return rc;
+	
+	}
+
+	public BookingGradeAgy getBookingGradeAgy(Integer bookingGradeId, Integer agencyId) {
+		
+		BookingGradeAgy bookingGradeAgy = null;
+		bookingGradeAgy = getBookingGradeDAO().getBookingGradeAgy(bookingGradeId, agencyId);
+		return bookingGradeAgy;
+		
+	}
+
+	public List<BookingGradeAgy> getBookingGradeAgysForAgency(Integer agencyId, Boolean singleCandidate) {
+		
+		List<BookingGradeAgy> bookingGradeAgys = null;
+		bookingGradeAgys = getBookingGradeDAO().getBookingGradeAgysForAgency(agencyId, singleCandidate, true);
+		return bookingGradeAgys;
     
-    for (BookingGradeApplicantDate bookingGradeApplicantDate: bookingGradeApplicantDates) {
-      bookingGradeApplicantDate.setBookingGradeApplicantId(bookingGradeApplicant.getBookingGradeApplicantId());
-      int d = getBookingGradeApplicantDateDAO().insertBookingGradeApplicantDate(bookingGradeApplicantDate, auditorId);
-    }
-
-    return rc;
-  }
-
-  public int updateBookingGradeAsViewed(Integer bookingGradeId, Integer noOfChanges, Integer auditorId) {
-
-    int rc = getBookingGradeDAO().updateBookingGradeViewed(bookingGradeId, true, noOfChanges, auditorId);
-    return rc;
-  
-  }
-
-  public int updateBookingGradeAsNotViewed(Integer bookingGradeId, Integer noOfChanges, Integer auditorId) {
-
-    int rc = getBookingGradeDAO().updateBookingGradeViewed(bookingGradeId, false, noOfChanges, auditorId);
-    return rc;
-  
-  }
-
-  public BookingGradeAgy getBookingGradeAgy(Integer bookingGradeId, Integer agencyId) {
-    
-    BookingGradeAgy bookingGradeAgy = null;
-    bookingGradeAgy = getBookingGradeDAO().getBookingGradeAgy(bookingGradeId, agencyId);
-    return bookingGradeAgy;
-    
-  }
-
-  public List<BookingGradeAgy> getBookingGradeAgysForAgency(Integer agencyId, Boolean singleCandidate) {
-    
-    List<BookingGradeAgy> bookingGradeAgys = null;
-    bookingGradeAgys = getBookingGradeDAO().getBookingGradeAgysForAgency(agencyId, singleCandidate, true);
-    return bookingGradeAgys;
-    
-  }
+	}
 
   public List<BookingGradeAgy> getBookingGradeAgysForAgencyAndDateRange(Integer agencyId, Date startDate, Date endDate, Boolean singleCandidate, boolean showOnlyActive) 
   {
@@ -532,60 +520,60 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     
   }
 
-  
-  public List<BookingGradeAgy> getBookingGradeAgysForAgencyAndStatus(Integer agencyId, Integer bookingGradeStatus, Boolean singleCandidate, Boolean viewed) {
+	
+	public List<BookingGradeAgy> getBookingGradeAgysForAgencyAndStatus(Integer agencyId, Integer bookingGradeStatus, Boolean singleCandidate, Boolean viewed) {
 
-    List<BookingGradeAgy> bookingGradeAgys = null;
-    bookingGradeAgys = getBookingGradeDAO().getBookingGradeAgysForAgencyAndStatus(agencyId, bookingGradeStatus, singleCandidate, viewed);
-    return bookingGradeAgys;
+		List<BookingGradeAgy> bookingGradeAgys = null;
+		bookingGradeAgys = getBookingGradeDAO().getBookingGradeAgysForAgencyAndStatus(agencyId, bookingGradeStatus, singleCandidate, viewed);
+		return bookingGradeAgys;
 
-  }
+	}
 
-  
-  public List<BookingGradeAgy> getBookingGradeAgysForBookingGradeApplicantDateAgencyAndStatus(Integer agencyId, Integer bookingGradeApplicantDateStatus, Boolean singleCandidate) {
+	
+	public List<BookingGradeAgy> getBookingGradeAgysForBookingGradeApplicantDateAgencyAndStatus(Integer agencyId, Integer bookingGradeApplicantDateStatus, Boolean singleCandidate) {
 
-    List<BookingGradeAgy> bookingGradeAgys = null;
-    bookingGradeAgys = getBookingGradeDAO().getBookingGradeAgysForAgencyAndBookingGradeApplicantDateStatus(agencyId, bookingGradeApplicantDateStatus, singleCandidate);
-    return bookingGradeAgys;
-    
-  }
-  
-  
-  public List<BookingGradeAgy> getBookingGradeAgysForAgencyUnviewed(Integer agencyId, Boolean singleCandidate) {
+		List<BookingGradeAgy> bookingGradeAgys = null;
+		bookingGradeAgys = getBookingGradeDAO().getBookingGradeAgysForAgencyAndBookingGradeApplicantDateStatus(agencyId, bookingGradeApplicantDateStatus, singleCandidate);
+		return bookingGradeAgys;
+		
+	}
+	
+	
+	public List<BookingGradeAgy> getBookingGradeAgysForAgencyUnviewed(Integer agencyId, Boolean singleCandidate) {
 
-    List<BookingGradeAgy> bookingGradeAgys = null;
-    bookingGradeAgys = getBookingGradeDAO().getBookingGradeAgysForAgencyUnviewed(agencyId, singleCandidate);
-    return bookingGradeAgys;
+		List<BookingGradeAgy> bookingGradeAgys = null;
+		bookingGradeAgys = getBookingGradeDAO().getBookingGradeAgysForAgencyUnviewed(agencyId, singleCandidate);
+		return bookingGradeAgys;
 
-  }
-  
-  public BookingGradeAgyEntity getBookingGradeAgyEntity(Integer bookingGradeId, Integer agencyId) {
+	}
+	
+	public BookingGradeAgyEntity getBookingGradeAgyEntity(Integer bookingGradeId, Integer agencyId) {
 
-//    java.util.Date before = null;
-//    java.util.Date after = null;
-    
-    BookingGradeAgyEntity bookingGradeAgy = null;
+//		java.util.Date before = null;
+//		java.util.Date after = null;
+		
+		BookingGradeAgyEntity bookingGradeAgy = null;
 
-//    before = new java.util.Date();
-    bookingGradeAgy = getBookingGradeDAO().getBookingGradeAgyEntity(bookingGradeId, agencyId);
-//    after = new java.util.Date();
-//    System.out.println(after.getTime() -  before.getTime());
-    
-    if (bookingGradeAgy != null) {
+//		before = new java.util.Date();
+		bookingGradeAgy = getBookingGradeDAO().getBookingGradeAgyEntity(bookingGradeId, agencyId);
+//		after = new java.util.Date();
+//		System.out.println(after.getTime() -  before.getTime());
+		
+		if (bookingGradeAgy != null) {
 
-//      before = new java.util.Date();
-        List<BookingDateUserApplicant> bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBooking(agencyId, bookingGradeAgy.getBookingId());
-//        after = new java.util.Date();
-//        System.out.println(after.getTime() -  before.getTime());
-      
-      List<BookingDateUser> bookingDates = new ArrayList<BookingDateUser>();
+//			before = new java.util.Date();
+     		List<BookingDateUserApplicant> bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBooking(agencyId, bookingGradeAgy.getBookingId());
+//    		after = new java.util.Date();
+//    		System.out.println(after.getTime() -  before.getTime());
+			
+			List<BookingDateUser> bookingDates = new ArrayList<BookingDateUser>();
 
-//      before = new java.util.Date();
-        for (BookingDateUserApplicant bookingDateUserApplicant: bookingDateUserApplicants) 
+//			before = new java.util.Date();
+	     	for (BookingDateUserApplicant bookingDateUserApplicant: bookingDateUserApplicants) 
         {
-          
-          BookingDateUser bookingDateUser = bookingDateUserApplicant;
-          
+	     		
+	     		BookingDateUser bookingDateUser = bookingDateUserApplicant;
+	     		
           if (bookingGradeAgy.getBookingRate().compareTo(BigDecimal.ZERO) == 0)
           {
             // This is defending against something that should NEVER happen. Lyndon 23/05/2013.
@@ -610,96 +598,96 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
               bookingDateUser.setPayRateValue(bookingDateUser.getValue().multiply((bookingDateUserApplicant.getPayRate().divide(bookingGradeAgy.getBookingRate(), 5, RoundingMode.HALF_UP))));
               bookingDateUser.setWageRateValue(bookingDateUser.getValue().multiply((bookingDateUserApplicant.getWageRate().divide(bookingGradeAgy.getBookingRate(), 5, RoundingMode.HALF_UP))));
             }
-          }         
+          }	     		
           bookingDates.add(bookingDateUser);
-            
-        }
-//      after = new java.util.Date();
-//      System.out.println(after.getTime() -  before.getTime());
+		     		
+		    }
+//			after = new java.util.Date();
+//			System.out.println(after.getTime() -  before.getTime());
 
-        bookingGradeAgy.setBookingDateUsers(bookingDates);
-        
-//      before = new java.util.Date();
-      bookingGradeAgy.setBookingExpenses(getBookingExpenseDAO().getBookingExpensesForBooking(bookingGradeAgy.getBookingId(), true));
-//      after = new java.util.Date();
-//      System.out.println(after.getTime() -  before.getTime());
+		    bookingGradeAgy.setBookingDateUsers(bookingDates);
+	     	
+//			before = new java.util.Date();
+			bookingGradeAgy.setBookingExpenses(getBookingExpenseDAO().getBookingExpensesForBooking(bookingGradeAgy.getBookingId(), true));
+//			after = new java.util.Date();
+//			System.out.println(after.getTime() -  before.getTime());
 
-//      before = new java.util.Date();
-      bookingGradeAgy.setBookingGradeApplicantUsers(getBookingGradeApplicantDAO().getBookingGradeApplicantUsersForBookingGradeAndAgency(bookingGradeAgy.getBookingGradeId(), agencyId, true));
-//      after = new java.util.Date();
-//      System.out.println(after.getTime() -  before.getTime());
+//			before = new java.util.Date();
+			bookingGradeAgy.setBookingGradeApplicantUsers(getBookingGradeApplicantDAO().getBookingGradeApplicantUsersForBookingGradeAndAgency(bookingGradeAgy.getBookingGradeId(), agencyId, true));
+//			after = new java.util.Date();
+//			System.out.println(after.getTime() -  before.getTime());
 
-    }
-    
-    return bookingGradeAgy;
+		}
+		
+		return bookingGradeAgy;
 
-  }
+	}
 
-  public List<BookingDateUser> getBookingDateUsersForBookingAndAgency(Integer bookingId, Integer agencyId) {
+	public List<BookingDateUser> getBookingDateUsersForBookingAndAgency(Integer bookingId, Integer agencyId) {
 
-    List<BookingDateUser> bookingDateUsers = null;
-    bookingDateUsers = getBookingDateDAO().getBookingDateUsersForBookingAndAgency(bookingId, agencyId, true);
-    return bookingDateUsers;
+		List<BookingDateUser> bookingDateUsers = null;
+		bookingDateUsers = getBookingDateDAO().getBookingDateUsersForBookingAndAgency(bookingId, agencyId, true);
+		return bookingDateUsers;
 
-  }
+	}
 
-  public BookingGradeApplicantUserEntity getBookingGradeApplicantUserEntity(Integer bookingGradeApplicantId) {
+	public BookingGradeApplicantUserEntity getBookingGradeApplicantUserEntity(Integer bookingGradeApplicantId) {
 
-    BookingGradeApplicantUserEntity bookingGradeApplicantUser = null;
-    bookingGradeApplicantUser = getBookingGradeApplicantDAO().getBookingGradeApplicantUserEntity(bookingGradeApplicantId);
+		BookingGradeApplicantUserEntity bookingGradeApplicantUser = null;
+		bookingGradeApplicantUser = getBookingGradeApplicantDAO().getBookingGradeApplicantUserEntity(bookingGradeApplicantId);
 
-    bookingGradeApplicantUser.setBookingGradeApplicantDateUserEntities(getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUserEntitiesForBookingGradeApplicant(bookingGradeApplicantId, true));
-    
-    IntValue expensesCount = getBookingGradeApplicantDAO().getBookingExpensesCount(bookingGradeApplicantUser.getBookingId());
-    
-    if (expensesCount.getValue() > 0) {
-      for (BookingGradeApplicantDateUserEntity bookingGradeApplicantDateUserEntity: bookingGradeApplicantUser.getBookingGradeApplicantDateUserEntities()) {
-        bookingGradeApplicantDateUserEntity.setBookingDateExpenseUsers(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingGradeApplicantDateUserEntity.getBookingDateId()));
-      }
-    }
-    
-    bookingGradeApplicantUser.setBookingExpensesCount(expensesCount);
-    
-    //    bookingGradeApplicantUser.setBookingDateUserApplicants(getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingGradeApplicant(bookingGradeApplicantUser.getAgencyId(), null, null, bookingGradeApplicantId));
-    
-    return bookingGradeApplicantUser;
+		bookingGradeApplicantUser.setBookingGradeApplicantDateUserEntities(getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUserEntitiesForBookingGradeApplicant(bookingGradeApplicantId, true));
+		
+		IntValue expensesCount = getBookingGradeApplicantDAO().getBookingExpensesCount(bookingGradeApplicantUser.getBookingId());
+		
+		if (expensesCount.getValue() > 0) {
+			for (BookingGradeApplicantDateUserEntity bookingGradeApplicantDateUserEntity: bookingGradeApplicantUser.getBookingGradeApplicantDateUserEntities()) {
+				bookingGradeApplicantDateUserEntity.setBookingDateExpenseUsers(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingGradeApplicantDateUserEntity.getBookingDateId()));
+			}
+		}
+		
+		bookingGradeApplicantUser.setBookingExpensesCount(expensesCount);
+		
+		//		bookingGradeApplicantUser.setBookingDateUserApplicants(getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingGradeApplicant(bookingGradeApplicantUser.getAgencyId(), null, null, bookingGradeApplicantId));
+		
+		return bookingGradeApplicantUser;
 
-  }
+	}
 
-  public int updateBookingGradeApplicantRefuse(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
+	public int updateBookingGradeApplicantRefuse(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
 
-      // update all bookingGradeApplicantDates
-  
-      List<BookingGradeApplicantDateUser> dates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
-      
+	    // update all bookingGradeApplicantDates
+	
+	    List<BookingGradeApplicantDateUser> dates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
+	   	
         Integer bookingId = null;
         
-      for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: dates) {
-  
-          if (bookingGradeApplicantDateUser.getStatus() == BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_OFFERED) {
+	    for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: dates) {
+	
+        	if (bookingGradeApplicantDateUser.getStatus() == BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_OFFERED) {
 
-            // this date has been offered to thgis applicant - not all will be as may be offered to others, so
-            // as it is being refused make it open again
-            
-            BookingDate bookingDate = getBookingDateDAO().getBookingDate(bookingGradeApplicantDateUser.getBookingDateId());
-            int bd = getBookingDateDAO().updateBookingDateRefused(bookingDate.getBookingDateId(), 
-                                                         bookingDate.getNoOfChanges(), 
-                                                         auditorId);
+        		// this date has been offered to thgis applicant - not all will be as may be offered to others, so
+        		// as it is being refused make it open again
+        		
+        		BookingDate bookingDate = getBookingDateDAO().getBookingDate(bookingGradeApplicantDateUser.getBookingDateId());
+        		int bd = getBookingDateDAO().updateBookingDateRefused(bookingDate.getBookingDateId(), 
+        				                                         bookingDate.getNoOfChanges(), 
+        				                                         auditorId);
 
-            // used below
-            bookingId = bookingDate.getBookingId();
-            
-              // set record to refused if still 'open'
-              
-            int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
-              bookingGradeApplicantDateUser.getNoOfChanges(),
-              auditorId,
-              BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_REFUSED);
-        
-          }
+        		// used below
+        		bookingId = bookingDate.getBookingId();
+        		
+            	// set record to refused if still 'open'
+            	
+    	    	int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
+	    				bookingGradeApplicantDateUser.getNoOfChanges(),
+	    				auditorId,
+	    				BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_REFUSED);
+	    	
+        	}
 
-    }
-      
+		}
+	    
         if (bookingId != null) {
             Booking booking = getBookingDAO().getBooking(bookingId);
             if (booking.getSingleCandidate()) {
@@ -707,340 +695,340 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
             }
         }
 
-      int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bookingGradeApplicantId, noOfChanges, auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_REFUSED);
-    return rc;
+	    int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bookingGradeApplicantId, noOfChanges, auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_REFUSED);
+		return rc;
 
-  }
-  
-  public int updateBookingGradeApplicantWithdraw(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
+	}
+	
+	public int updateBookingGradeApplicantWithdraw(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
 
-      // update all bookingGradeApplicantDates
-  
-      List<BookingGradeApplicantDateUser> dates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
-      
-      for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: dates) {
-  
-          // set record to withdrawn
-          
-        int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
-            bookingGradeApplicantDateUser.getNoOfChanges(),
-            auditorId,
-            BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_WITHDRAWN);
-        
-    }
-      
-      int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bookingGradeApplicantId, noOfChanges, auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_WITHDRAWN);
-    return rc;
+	    // update all bookingGradeApplicantDates
+	
+	    List<BookingGradeApplicantDateUser> dates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
+	   	
+	    for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: dates) {
+	
+        	// set record to withdrawn
+        	
+	    	int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
+    				bookingGradeApplicantDateUser.getNoOfChanges(),
+    				auditorId,
+    				BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_WITHDRAWN);
+	    	
+		}
+	    
+	    int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bookingGradeApplicantId, noOfChanges, auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_WITHDRAWN);
+		return rc;
 
-  }
-  
-  public int updateBookingGradeApplicantAccept(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
+	}
+	
+	public int updateBookingGradeApplicantAccept(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
 
-      List<BookingGradeApplicantDateUser> bookingGradeApplicantDates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
+	    List<BookingGradeApplicantDateUser> bookingGradeApplicantDates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
 
-      BigDecimal filledValue = new BigDecimal(0);
-      BigDecimal unFilledValue = new BigDecimal(0);
-      
-      String bookingDateIdStrs = "";
-      
-      for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: bookingGradeApplicantDates) {
-        
-        if (bookingGradeApplicantDateUser.getStatus() == BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_OFFERED) {
-  
-          // this date has been offered to this applicant - not all will be as may be offered to others, so
-          // as it is being accepted make it filled
-          
-          BookingDate bookingDate = getBookingDateDAO().getBookingDate(bookingGradeApplicantDateUser.getBookingDateId());
-          int bd = getBookingDateDAO().updateBookingDateFilled(bookingDate.getBookingDateId(), 
-                                                      bookingDate.getNoOfChanges(), 
-                                                      auditorId, 
-                                                      bookingGradeApplicantDateUser.getBookingGradeApplicantDateId());
-  
-          // sum up the 'agency' value of the dates that we are filling
-          filledValue = filledValue.add(bookingGradeApplicantDateUser.getValue());
-          // sum up the 'rrp' value of the dates that we are filling so the budgets can be adjusted
-          unFilledValue = unFilledValue.add(bookingDate.getValue());
-          
-          int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
-              bookingGradeApplicantDateUser.getNoOfChanges(),
-              auditorId,
-              BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_FILLED);
-        
-          if (!"".equals(bookingDateIdStrs)) {
-            bookingDateIdStrs = bookingDateIdStrs + ",";
-          }
-        bookingDateIdStrs = bookingDateIdStrs + bookingDate.getBookingDateId();
+	    BigDecimal filledValue = new BigDecimal(0);
+	    BigDecimal unFilledValue = new BigDecimal(0);
+	    
+    	String bookingDateIdStrs = "";
+    	
+	    for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: bookingGradeApplicantDates) {
+	    	
+	    	if (bookingGradeApplicantDateUser.getStatus() == BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_OFFERED) {
+	
+	    		// this date has been offered to this applicant - not all will be as may be offered to others, so
+	    		// as it is being accepted make it filled
+	    		
+	    		BookingDate bookingDate = getBookingDateDAO().getBookingDate(bookingGradeApplicantDateUser.getBookingDateId());
+	    		int bd = getBookingDateDAO().updateBookingDateFilled(bookingDate.getBookingDateId(), 
+	    				                                        bookingDate.getNoOfChanges(), 
+	    				                                        auditorId, 
+	    				                                        bookingGradeApplicantDateUser.getBookingGradeApplicantDateId());
+	
+	    		// sum up the 'agency' value of the dates that we are filling
+	    		filledValue = filledValue.add(bookingGradeApplicantDateUser.getValue());
+	    		// sum up the 'rrp' value of the dates that we are filling so the budgets can be adjusted
+	    		unFilledValue = unFilledValue.add(bookingDate.getValue());
+	    		
+		    	int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
+	    				bookingGradeApplicantDateUser.getNoOfChanges(),
+	    				auditorId,
+	    				BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_FILLED);
+	    	
+	    		if (!"".equals(bookingDateIdStrs)) {
+	    			bookingDateIdStrs = bookingDateIdStrs + ",";
+	    		}
+				bookingDateIdStrs = bookingDateIdStrs + bookingDate.getBookingDateId();
 
-        // set ALL OTHER 'open' and 'renegotiate' applicant bookingGradeApplicantDate records to 'unsuccessful'
-          
-          List<BookingGradeApplicantDate> dates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDatesForBookingDateAndStatus(bookingDate.getBookingDateId(), BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_OPEN);
-          
-          dates.addAll(getBookingGradeApplicantDateDAO().getBookingGradeApplicantDatesForBookingDateAndStatus(bookingDate.getBookingDateId(), BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_RENEGOTIATE));
-          
-          for (BookingGradeApplicantDate bgadu: dates) {
-            
-            int x = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bgadu.getBookingGradeApplicantDateId(),
-                bgadu.getNoOfChanges(),
-                auditorId,
-                BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_UNSUCCESSFUL);
-          
-          }
-          
-        }
-      }
+				// set ALL OTHER 'open' and 'renegotiate' applicant bookingGradeApplicantDate records to 'unsuccessful'
+		    	
+			    List<BookingGradeApplicantDate> dates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDatesForBookingDateAndStatus(bookingDate.getBookingDateId(), BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_OPEN);
+			    
+			    dates.addAll(getBookingGradeApplicantDateDAO().getBookingGradeApplicantDatesForBookingDateAndStatus(bookingDate.getBookingDateId(), BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_RENEGOTIATE));
+			   	
+			    for (BookingGradeApplicantDate bgadu: dates) {
+			    	
+			    	int x = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bgadu.getBookingGradeApplicantDateId(),
+			    			bgadu.getNoOfChanges(),
+		    				auditorId,
+		    				BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_UNSUCCESSFUL);
+		    	
+			    }
+		    	
+	    	}
+	    }
 
-      // long winded way of getting to booking but ...
-      
-      BookingGradeApplicantUser bookingGradeApplicant = getBookingGradeApplicantDAO().getBookingGradeApplicantUser(bookingGradeApplicantId);
-      BookingGrade bookingGrade = getBookingGradeDAO().getBookingGrade(bookingGradeApplicant.getBookingGradeId());
-      Booking booking = getBookingDAO().getBooking(bookingGrade.getBookingId());
-      
+	    // long winded way of getting to booking but ...
+	    
+	    BookingGradeApplicantUser bookingGradeApplicant = getBookingGradeApplicantDAO().getBookingGradeApplicantUser(bookingGradeApplicantId);
+	    BookingGrade bookingGrade = getBookingGradeDAO().getBookingGrade(bookingGradeApplicant.getBookingGradeId());
+	    Booking booking = getBookingDAO().getBooking(bookingGrade.getBookingId());
+	    
         // if there are no dates left to fill mark the booking as filled
-      IntValue countNotFilled = getBookingDAO().getBookingCountNotFilled(booking.getBookingId());
-      if (countNotFilled.getValue() == 0) {
-        
-        // set all 'open' and 'renegotiate' bookingApplicants to 'unsuccessful'
-        
-        // TODO - SHOULD not be passing -999 as clientId !!!
-        Integer clientId = new Integer(-999);
-        
-        List<BookingGradeApplicantUser> bookingGradeApplicants = getBookingGradeApplicantDAO().getBookingGradeApplicantUsersForBookingAndClient(booking.getBookingId(), clientId, true);
-        for (BookingGradeApplicantUser bga: bookingGradeApplicants) {
-          if (bga.getStatus() == BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_OPEN ||
-            bga.getStatus() == BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_RENEGOTIATE) {
-            int a = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bga.getBookingGradeApplicantId(), bga.getNoOfChanges(), auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_UNSUCCESSFUL);
-          }
-        }
-        
-        // set all 'open' bookingGrades to 'closed'
-        List<BookingGradeUser> bookingGrades = getBookingGradeDAO().getBookingGradeUsersForBooking(booking.getBookingId(), true);
-        for (BookingGradeUser bg: bookingGrades) {
-          if (bg.getStatus() == BookingGrade.BOOKINGGRADE_STATUS_OPEN) {
-            int g = getBookingGradeDAO().updateBookingGradeStatus(bg.getBookingGradeId(), bg.getNoOfChanges(), auditorId, BookingGrade.BOOKINGGRADE_STATUS_CLOSED);
-          }
-        }
+	    IntValue countNotFilled = getBookingDAO().getBookingCountNotFilled(booking.getBookingId());
+	    if (countNotFilled.getValue() == 0) {
+		    
+	    	// set all 'open' and 'renegotiate' bookingApplicants to 'unsuccessful'
+	    	
+	    	// TODO - SHOULD not be passing -999 as clientId !!!
+	    	Integer clientId = new Integer(-999);
+	    	
+		    List<BookingGradeApplicantUser> bookingGradeApplicants = getBookingGradeApplicantDAO().getBookingGradeApplicantUsersForBookingAndClient(booking.getBookingId(), clientId, true);
+		    for (BookingGradeApplicantUser bga: bookingGradeApplicants) {
+		    	if (bga.getStatus() == BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_OPEN ||
+		    		bga.getStatus() == BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_RENEGOTIATE) {
+			    	int a = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bga.getBookingGradeApplicantId(), bga.getNoOfChanges(), auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_UNSUCCESSFUL);
+		    	}
+		    }
+		    
+		    // set all 'open' bookingGrades to 'closed'
+		    List<BookingGradeUser> bookingGrades = getBookingGradeDAO().getBookingGradeUsersForBooking(booking.getBookingId(), true);
+		    for (BookingGradeUser bg: bookingGrades) {
+		    	if (bg.getStatus() == BookingGrade.BOOKINGGRADE_STATUS_OPEN) {
+			    	int g = getBookingGradeDAO().updateBookingGradeStatus(bg.getBookingGradeId(), bg.getNoOfChanges(), auditorId, BookingGrade.BOOKINGGRADE_STATUS_CLOSED);
+		    	}
+		    }
             // set the booking as 'closed' and update (add to) the booking.filledValue
-        int b = getBookingDAO().updateBookingClosed(booking.getBookingId(), booking.getNoOfChanges(), auditorId, filledValue);
-      }
-      else {
+		    int b = getBookingDAO().updateBookingClosed(booking.getBookingId(), booking.getNoOfChanges(), auditorId, filledValue);
+	    }
+	    else {
             // update (add to) the booking.filledValue
-        int b = getBookingDAO().updateBookingFilledValue(booking.getBookingId(), booking.getNoOfChanges(), auditorId, filledValue);
-      }
+	    	int b = getBookingDAO().updateBookingFilledValue(booking.getBookingId(), booking.getNoOfChanges(), auditorId, filledValue);
+	    }
 
-      int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bookingGradeApplicantId, noOfChanges, auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_FILLED);
+	    int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bookingGradeApplicantId, noOfChanges, auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_FILLED);
 
         // TODO 
-    DecimalFormat df = new DecimalFormat("#000");
-      rc = insertBudgetTransaction(booking.getLocationId(), 
-                             booking.getJobProfileId(), 
-                             unFilledValue.subtract(filledValue),
-                             new BigDecimal(0), new BigDecimal(0), new BigDecimal(0),
-                             "Applicant (" + bookingGradeApplicant.getApplicantFullNameLastFirst() + ") accepted - " + df.format(booking.getBookingId()), 
-                             auditorId);
-      
+		DecimalFormat df = new DecimalFormat("#000");
+	    rc = insertBudgetTransaction(booking.getLocationId(), 
+				                     booking.getJobProfileId(), 
+				                     unFilledValue.subtract(filledValue),
+				                     new BigDecimal(0), new BigDecimal(0), new BigDecimal(0),
+				                     "Applicant (" + bookingGradeApplicant.getApplicantFullNameLastFirst() + ") accepted - " + df.format(booking.getBookingId()), 
+				                     auditorId);
+	    
         if (booking.getAutoActivate()) {
-          // if auto activate ....
-          int bda = updateBookingDatesActivated(bookingDateIdStrs, auditorId);
+        	// if auto activate ....
+        	int bda = updateBookingDatesActivated(bookingDateIdStrs, auditorId);
         }
-      
-      return rc;
+     	
+	    return rc;
 
-  }
-  
-  public int updateBookingGradeApplicantSubmit(Integer bookingId, Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
-    
-    int rc = 0;
-      // if booking is autoFill call autoFill method ...  
-    Booking booking = getBookingDAO().getBooking(bookingId);
-    if (booking.getAutoFill()) {
-      rc = updateBookingGradeApplicantAutoFill(bookingGradeApplicantId, noOfChanges, auditorId);
-    }
-    else {
-      rc = updateBookingGradeApplicantOpen(bookingGradeApplicantId, noOfChanges, auditorId);
-    }
-    return rc; 
+	}
+	
+	public int updateBookingGradeApplicantSubmit(Integer bookingId, Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
+		
+		int rc = 0;
+	    // if booking is autoFill call autoFill method ...	
+		Booking booking = getBookingDAO().getBooking(bookingId);
+		if (booking.getAutoFill()) {
+			rc = updateBookingGradeApplicantAutoFill(bookingGradeApplicantId, noOfChanges, auditorId);
+		}
+		else {
+			rc = updateBookingGradeApplicantOpen(bookingGradeApplicantId, noOfChanges, auditorId);
+		}
+		return rc; 
 
-  }
+	}
 
-  public int updateBookingGradeApplicantOpen(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
+	public int updateBookingGradeApplicantOpen(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
 
         int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bookingGradeApplicantId, noOfChanges, auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_OPEN);
         List<BookingGradeApplicantDateUser> bookingGradeApplicantDateUsers = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
-    for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: bookingGradeApplicantDateUsers) {
-      int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
-                                          bookingGradeApplicantDateUser.getNoOfChanges(),
-                                          auditorId,
-                                          BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_OPEN);
-    }
+		for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: bookingGradeApplicantDateUsers) {
+			int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
+																					bookingGradeApplicantDateUser.getNoOfChanges(),
+																					auditorId,
+																					BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_OPEN);
+		}
         return rc;
 
-  }
-  
-  public int updateBookingGradeApplicantAutoFill(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
+	}
+	
+	public int updateBookingGradeApplicantAutoFill(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId) {
 
-    int datesFilled = 0;
-    
-      List<BookingGradeApplicantDateUser> bookingGradeApplicantDates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
-      
-      BigDecimal filledValue = new BigDecimal(0);
-      BigDecimal unFilledValue = new BigDecimal(0);
-      
-      String bookingDateIdStrs = "";
-      
-      for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: bookingGradeApplicantDates) {
-        
-        if (bookingGradeApplicantDateUser.getBookingDateStatus() == BookingDate.BOOKINGDATE_STATUS_OPEN) {
-  
-          // this date is open so fill it
-          
-          BookingDate bookingDate = getBookingDateDAO().getBookingDate(bookingGradeApplicantDateUser.getBookingDateId());
-          int bd = getBookingDateDAO().updateBookingDateFilled(bookingDate.getBookingDateId(), 
-                                                      bookingDate.getNoOfChanges(), 
-                                                      auditorId, 
-                                                      bookingGradeApplicantDateUser.getBookingGradeApplicantDateId());
-  
-          // sum up the 'agency' value of the dates that we are filling
-          filledValue = filledValue.add(bookingGradeApplicantDateUser.getValue());
-          // sum up the 'rrp' value of the dates that we are filling so the budgets can be adjusted
-          unFilledValue = unFilledValue.add(bookingDate.getValue());
+		int datesFilled = 0;
+		
+	    List<BookingGradeApplicantDateUser> bookingGradeApplicantDates = getBookingGradeApplicantDateDAO().getBookingGradeApplicantDateUsersForBookingGradeApplicant(bookingGradeApplicantId, true);
+	   	
+	    BigDecimal filledValue = new BigDecimal(0);
+	    BigDecimal unFilledValue = new BigDecimal(0);
+	    
+    	String bookingDateIdStrs = "";
+    	
+	    for (BookingGradeApplicantDateUser bookingGradeApplicantDateUser: bookingGradeApplicantDates) {
+	    	
+	    	if (bookingGradeApplicantDateUser.getBookingDateStatus() == BookingDate.BOOKINGDATE_STATUS_OPEN) {
+	
+	    		// this date is open so fill it
+	    		
+	    		BookingDate bookingDate = getBookingDateDAO().getBookingDate(bookingGradeApplicantDateUser.getBookingDateId());
+	    		int bd = getBookingDateDAO().updateBookingDateFilled(bookingDate.getBookingDateId(), 
+	    				                                        bookingDate.getNoOfChanges(), 
+	    				                                        auditorId, 
+	    				                                        bookingGradeApplicantDateUser.getBookingGradeApplicantDateId());
+	
+	    		// sum up the 'agency' value of the dates that we are filling
+	    		filledValue = filledValue.add(bookingGradeApplicantDateUser.getValue());
+	    		// sum up the 'rrp' value of the dates that we are filling so the budgets can be adjusted
+	    		unFilledValue = unFilledValue.add(bookingDate.getValue());
 
-          int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
-              bookingGradeApplicantDateUser.getNoOfChanges(),
-              auditorId,
-              BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_FILLED);
-          
-          datesFilled++;
-        
-          if (!"".equals(bookingDateIdStrs)) {
-            bookingDateIdStrs = bookingDateIdStrs + ",";
-          }
-        bookingDateIdStrs = bookingDateIdStrs + bookingDate.getBookingDateId();
-        }
-        else {
-          
-          int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
-              bookingGradeApplicantDateUser.getNoOfChanges(),
-              auditorId,
-              BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_UNSUCCESSFUL);
+	    		int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
+	    				bookingGradeApplicantDateUser.getNoOfChanges(),
+	    				auditorId,
+	    				BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_FILLED);
+		    	
+		    	datesFilled++;
+	    	
+	    		if (!"".equals(bookingDateIdStrs)) {
+	    			bookingDateIdStrs = bookingDateIdStrs + ",";
+	    		}
+				bookingDateIdStrs = bookingDateIdStrs + bookingDate.getBookingDateId();
+	    	}
+	    	else {
+	    		
+		    	int d = getBookingGradeApplicantDateDAO().updateBookingGradeApplicantDateStatus(bookingGradeApplicantDateUser.getBookingGradeApplicantDateId(),
+	    				bookingGradeApplicantDateUser.getNoOfChanges(),
+	    				auditorId,
+	    				BookingGradeApplicantDate.BOOKINGGRADEAPPLICANTDATE_STATUS_UNSUCCESSFUL);
 
-        }
-      }
+	    	}
+	    }
 
-      // long winded way of getting to booking but ...
-      
-      BookingGradeApplicantUser bookingGradeApplicant = getBookingGradeApplicantDAO().getBookingGradeApplicantUser(bookingGradeApplicantId);
-      BookingGrade bookingGrade = getBookingGradeDAO().getBookingGrade(bookingGradeApplicant.getBookingGradeId());
-      Booking booking = getBookingDAO().getBooking(bookingGrade.getBookingId());
-      
+	    // long winded way of getting to booking but ...
+	    
+	    BookingGradeApplicantUser bookingGradeApplicant = getBookingGradeApplicantDAO().getBookingGradeApplicantUser(bookingGradeApplicantId);
+	    BookingGrade bookingGrade = getBookingGradeDAO().getBookingGrade(bookingGradeApplicant.getBookingGradeId());
+	    Booking booking = getBookingDAO().getBooking(bookingGrade.getBookingId());
+	    
         // if there are no dates left to fill mark the booking as filled
-      IntValue countNotFilled = getBookingDAO().getBookingCountNotFilled(booking.getBookingId());
-      if (countNotFilled.getValue() == 0) {
-        
-        // set all 'open' bookingApplicants to 'unsuccessful'
-        
-        // TODO - SHOULD not be passing -999 as clientId !!!
-        Integer clientId = new Integer(-999);
-        
-        List<BookingGradeApplicantUser> bookingGradeApplicants = getBookingGradeApplicantDAO().getBookingGradeApplicantUsersForBookingAndClient(booking.getBookingId(), clientId, true);
-        for (BookingGradeApplicantUser bga: bookingGradeApplicants) {
-          if (bga.getStatus() == BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_OPEN) {
-            int a = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bga.getBookingGradeApplicantId(), bga.getNoOfChanges(), auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_UNSUCCESSFUL);
-          }
-        }
-        
-        // set all 'open' bookingGrades to 'closed'
-        List<BookingGradeUser> bookingGrades = getBookingGradeDAO().getBookingGradeUsersForBooking(booking.getBookingId(), true);
-        for (BookingGradeUser bg: bookingGrades) {
-          if (bg.getStatus() == BookingGrade.BOOKINGGRADE_STATUS_OPEN) {
-            int g = getBookingGradeDAO().updateBookingGradeStatus(bg.getBookingGradeId(), bg.getNoOfChanges(), auditorId, BookingGrade.BOOKINGGRADE_STATUS_CLOSED);
-          }
-        }
+	    IntValue countNotFilled = getBookingDAO().getBookingCountNotFilled(booking.getBookingId());
+	    if (countNotFilled.getValue() == 0) {
+		    
+	    	// set all 'open' bookingApplicants to 'unsuccessful'
+	    	
+	    	// TODO - SHOULD not be passing -999 as clientId !!!
+	    	Integer clientId = new Integer(-999);
+	    	
+		    List<BookingGradeApplicantUser> bookingGradeApplicants = getBookingGradeApplicantDAO().getBookingGradeApplicantUsersForBookingAndClient(booking.getBookingId(), clientId, true);
+		    for (BookingGradeApplicantUser bga: bookingGradeApplicants) {
+		    	if (bga.getStatus() == BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_OPEN) {
+			    	int a = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bga.getBookingGradeApplicantId(), bga.getNoOfChanges(), auditorId, BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_UNSUCCESSFUL);
+		    	}
+		    }
+		    
+		    // set all 'open' bookingGrades to 'closed'
+		    List<BookingGradeUser> bookingGrades = getBookingGradeDAO().getBookingGradeUsersForBooking(booking.getBookingId(), true);
+		    for (BookingGradeUser bg: bookingGrades) {
+		    	if (bg.getStatus() == BookingGrade.BOOKINGGRADE_STATUS_OPEN) {
+			    	int g = getBookingGradeDAO().updateBookingGradeStatus(bg.getBookingGradeId(), bg.getNoOfChanges(), auditorId, BookingGrade.BOOKINGGRADE_STATUS_CLOSED);
+		    	}
+		    }
             // set the booking as 'closed' and update (add to) the booking.filledValue
-        int b = getBookingDAO().updateBookingClosed(booking.getBookingId(), booking.getNoOfChanges(), auditorId, filledValue);
-      }
-      else {
+		    int b = getBookingDAO().updateBookingClosed(booking.getBookingId(), booking.getNoOfChanges(), auditorId, filledValue);
+	    }
+	    else {
             // update (add to) the booking.filledValue
-        int b = getBookingDAO().updateBookingFilledValue(booking.getBookingId(), booking.getNoOfChanges(), auditorId, filledValue);
-      }
-      
+	    	int b = getBookingDAO().updateBookingFilledValue(booking.getBookingId(), booking.getNoOfChanges(), auditorId, filledValue);
+	    }
+	    
         int bookingGradeApplicantStatus = datesFilled > 0 ? BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_FILLED : BookingGradeApplicant.BOOKINGGRADEAPPLICANT_STATUS_UNSUCCESSFUL;
-      
+	    
         int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantStatus(bookingGradeApplicantId, 
-                                               noOfChanges, auditorId, 
-                                               bookingGradeApplicantStatus);
+	    			                                   noOfChanges, auditorId, 
+	    			                                   bookingGradeApplicantStatus);
 
         // TODO 
         // TODO 
-    DecimalFormat df = new DecimalFormat("#000");
-    rc = insertBudgetTransaction(booking.getLocationId(), 
-                             booking.getJobProfileId(), 
-                             unFilledValue.subtract(filledValue),
-                             new BigDecimal(0), new BigDecimal(0), new BigDecimal(0),
-                             "Applicant (" + bookingGradeApplicant.getApplicantFullNameLastFirst() + ") auto filled - " + df.format(booking.getBookingId()), 
-                             auditorId);
+		DecimalFormat df = new DecimalFormat("#000");
+		rc = insertBudgetTransaction(booking.getLocationId(), 
+				                     booking.getJobProfileId(), 
+				                     unFilledValue.subtract(filledValue),
+				                     new BigDecimal(0), new BigDecimal(0), new BigDecimal(0),
+				                     "Applicant (" + bookingGradeApplicant.getApplicantFullNameLastFirst() + ") auto filled - " + df.format(booking.getBookingId()), 
+				                     auditorId);
 
 
-    // TODO temporarily send an email to kevin@matchmyjob.co.uk
-    //
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		// TODO temporarily send an email to kevin@matchmyjob.co.uk
+		//
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    if (MailHandler.getInstance().getSendAutoFillEmail()) {
-      
-        String from = "autofilled@matchmyjob.co.uk";
-          String to = "kevin@matchmyjob.co.uk";
-          String subject = "Booking Auto Filled";
+		if (MailHandler.getInstance().getSendAutoFillEmail()) {
+			
+	    	String from = "autofilled@matchmyjob.co.uk";
+	        String to = "kevin@matchmyjob.co.uk";
+	        String subject = "Booking Auto Filled";
 
-          StringBuffer content = new StringBuffer();
-          content.append("\n");
-          content.append("Booking Auto Filled");
-          content.append("\n\n");
-          content.append("Booking No.");
-          content.append("\t");
-          content.append(bookingGrade.getBookingId());
-          content.append("\n");
-          content.append("Client");
-          content.append("\t");
-          content.append(bookingGradeApplicant.getClientName() + " " + bookingGradeApplicant.getClientCode());
-          content.append("\n");
+	        StringBuffer content = new StringBuffer();
+	        content.append("\n");
+	        content.append("Booking Auto Filled");
+	        content.append("\n\n");
+	        content.append("Booking No.");
+	        content.append("\t");
+	        content.append(bookingGrade.getBookingId());
+	        content.append("\n");
+	        content.append("Client");
+	        content.append("\t");
+	        content.append(bookingGradeApplicant.getClientName() + " " + bookingGradeApplicant.getClientCode());
+	        content.append("\n");
 
-          String contentType = "text/plain";
+	        String contentType = "text/plain";
 
-          int status = MailHandler.getInstance().sendSingleMail(from, to, subject, content.toString(), contentType);
-          System.out.println(status);
+	        int status = MailHandler.getInstance().sendSingleMail(from, to, subject, content.toString(), contentType);
+	        System.out.println(status);
 
-    }
+		}
         
-    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    
+		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		
         if (booking.getAutoActivate()) {
-          // if auto activate ....
-          int bda = updateBookingDatesActivated(bookingDateIdStrs, auditorId);
+        	// if auto activate ....
+        	int bda = updateBookingDatesActivated(bookingDateIdStrs, auditorId);
         }
-      
-      
-      
-      
-      return rc;
+     	
+     	
+     	
+     	
+	    return rc;
 
-  }
-  
+	}
+	
   public int updateBookingGradeApplicantChecklistCreatedTime(Integer bookingGradeApplicantId, Integer noOfChanges, Integer auditorId, Date checklistCreatedTime) 
   {
     int rc = getBookingGradeApplicantDAO().updateBookingGradeApplicantChecklistCreatedTime(bookingGradeApplicantId, noOfChanges, auditorId, checklistCreatedTime);
     return rc;
   }
-  
-  public BookingGrade getBookingGrade(Integer bookingGradeId) {
-    
-    BookingGrade bookingGrade = null;
-      bookingGrade = getBookingGradeDAO().getBookingGrade(bookingGradeId);
-    return bookingGrade;
+	
+	public BookingGrade getBookingGrade(Integer bookingGradeId) {
+		
+		BookingGrade bookingGrade = null;
+    	bookingGrade = getBookingGradeDAO().getBookingGrade(bookingGradeId);
+		return bookingGrade;
 
-  }
+	}
 
   // NOTE. There can be more that ONE BookingGrade for a Booking so ONLY use this when you know for a fact
   //       that there is only one. Eg. For an NHS Booking.
@@ -1051,38 +1039,38 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return bookingGrade;
   }
 
-//  public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgency(Integer agencyId, Boolean singleCandidate, Boolean viewed) {
-//    
-//    List<BookingDateUserApplicant> bookingDateUserApplicants = null;
-//    bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForAgency(agencyId, singleCandidate, viewed);
-//    return bookingDateUserApplicants;
+//	public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgency(Integer agencyId, Boolean singleCandidate, Boolean viewed) {
+//		
+//		List<BookingDateUserApplicant> bookingDateUserApplicants = null;
+//		bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForAgency(agencyId, singleCandidate, viewed);
+//		return bookingDateUserApplicants;
 //
-//  }
+//	}
 //
-//  public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgencyAndStatus(Integer agencyId, Boolean singleCandidate, Boolean viewed, Integer bookingDateStatus) {
-//    
-//    List<BookingDateUserApplicant> bookingDateUserApplicants = null;
-//    bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndStatus(agencyId, singleCandidate, viewed, bookingDateStatus);
-//    return bookingDateUserApplicants;
+//	public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgencyAndStatus(Integer agencyId, Boolean singleCandidate, Boolean viewed, Integer bookingDateStatus) {
+//		
+//		List<BookingDateUserApplicant> bookingDateUserApplicants = null;
+//		bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndStatus(agencyId, singleCandidate, viewed, bookingDateStatus);
+//		return bookingDateUserApplicants;
 //
-//  }
+//	}
 
-  public List<BookingDateUserGrade> getBookingDateUserGradesForAgency(Integer agencyId, Boolean singleCandidate, Boolean viewed) {
-    
-    List<BookingDateUserGrade> bookingDateUserGrades = null;
-    bookingDateUserGrades = getBookingDateDAO().getBookingDateUserGradesForAgency(agencyId, singleCandidate, viewed);
-    return bookingDateUserGrades;
+	public List<BookingDateUserGrade> getBookingDateUserGradesForAgency(Integer agencyId, Boolean singleCandidate, Boolean viewed) {
+		
+		List<BookingDateUserGrade> bookingDateUserGrades = null;
+		bookingDateUserGrades = getBookingDateDAO().getBookingDateUserGradesForAgency(agencyId, singleCandidate, viewed);
+		return bookingDateUserGrades;
 
-  }
-  
-  public List<BookingDateUserGrade> getBookingDateUserGradesForAgencyAndStatus(Integer agencyId, Boolean singleCandidate, Boolean viewed, Integer bookingGradeStatus) {
-    
-    List<BookingDateUserGrade> bookingDateUserGrades = null;
-    bookingDateUserGrades = getBookingDateDAO().getBookingDateUserGradesForAgencyAndStatus(agencyId, singleCandidate, viewed, bookingGradeStatus);
-    return bookingDateUserGrades;
+	}
+	
+	public List<BookingDateUserGrade> getBookingDateUserGradesForAgencyAndStatus(Integer agencyId, Boolean singleCandidate, Boolean viewed, Integer bookingGradeStatus) {
+		
+		List<BookingDateUserGrade> bookingDateUserGrades = null;
+		bookingDateUserGrades = getBookingDateDAO().getBookingDateUserGradesForAgencyAndStatus(agencyId, singleCandidate, viewed, bookingGradeStatus);
+		return bookingDateUserGrades;
 
-  }
-  
+	}
+	
   public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgency(Integer agencyId, 
       Integer bookingId, Integer bookingDateId, Integer bookingGradeApplicantId, Integer invoiceId, Integer bookingGradeStatus, Integer bookingDateStatus, Integer workedStatus,                                                  
           Boolean singleCandidate, Boolean activated, Boolean viewed, Integer clientId, Integer siteId, Integer locationId, Integer jobProfileId, Integer applicantId, 
@@ -1179,34 +1167,34 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return bookingDatePagingGroupSize;
   }
 
-  public List<BookingDateUserApplicant> getBookingDateUserApplicantsToActivateForAgency(Integer agencyId) {
-    
-    List<BookingDateUserApplicant> bookingDateUserApplicants = null;
-    bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsToActivateForAgency(agencyId);
-    return bookingDateUserApplicants;
+	public List<BookingDateUserApplicant> getBookingDateUserApplicantsToActivateForAgency(Integer agencyId) {
+		
+		List<BookingDateUserApplicant> bookingDateUserApplicants = null;
+		bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsToActivateForAgency(agencyId);
+		return bookingDateUserApplicants;
 
-  }
+	}
 
-  public List<BookingDateUserApplicantEntity> getBookingDateUserApplicantEntitiesForAgency(Integer agencyId, 
-      Integer bookingId, Integer bookingDateId, Integer bookingGradeApplicantId, Integer invoiceId, Integer bookingGradeStatus, Integer bookingDateStatus, Integer workedStatus,                                                  
-          Boolean singleCandidate, Boolean activated, Boolean viewed, Integer clientId, Integer siteId, Integer locationId, Integer jobProfileId, Integer applicantId, 
-          Date fromDate, Date toDate) {
+	public List<BookingDateUserApplicantEntity> getBookingDateUserApplicantEntitiesForAgency(Integer agencyId, 
+			Integer bookingId, Integer bookingDateId, Integer bookingGradeApplicantId, Integer invoiceId, Integer bookingGradeStatus, Integer bookingDateStatus, Integer workedStatus,                                                  
+        	Boolean singleCandidate, Boolean activated, Boolean viewed, Integer clientId, Integer siteId, Integer locationId, Integer jobProfileId, Integer applicantId, 
+        	Date fromDate, Date toDate) {
 
-    List<BookingDateUserApplicantEntity> bookingDateUserApplicants = null;
-    bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgency(agencyId, 
-        bookingId, bookingDateId, bookingGradeApplicantId, invoiceId, bookingGradeStatus, bookingDateStatus, workedStatus, 
-        singleCandidate, activated, viewed, clientId, siteId, locationId, jobProfileId, applicantId,
-        fromDate, toDate);
-    
-    // add in other stuff ! like expenses and hours
+		List<BookingDateUserApplicantEntity> bookingDateUserApplicants = null;
+		bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgency(agencyId, 
+				bookingId, bookingDateId, bookingGradeApplicantId, invoiceId, bookingGradeStatus, bookingDateStatus, workedStatus, 
+				singleCandidate, activated, viewed, clientId, siteId, locationId, jobProfileId, applicantId,
+				fromDate, toDate);
+		
+		// add in other stuff ! like expenses and hours
         for (BookingDateUserApplicantEntity bookingDateUserApplicantEntity: bookingDateUserApplicants) {
-        bookingDateUserApplicantEntity.setBookingDateHours(bookingDateHourDAO.getBookingDateHoursForBookingDate(bookingDateUserApplicantEntity.getBookingDateId(), true));
-        bookingDateUserApplicantEntity.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDateUserApplicantEntity.getBookingDateId()));
+    		bookingDateUserApplicantEntity.setBookingDateHours(bookingDateHourDAO.getBookingDateHoursForBookingDate(bookingDateUserApplicantEntity.getBookingDateId(), true));
+    		bookingDateUserApplicantEntity.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDateUserApplicantEntity.getBookingDateId()));
         }
-    
-    return bookingDateUserApplicants;
+		
+		return bookingDateUserApplicants;
 
-  }
+	}
 
   public Client getClientForReference(String reference) 
   {
@@ -1214,67 +1202,67 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     client = getClientDAO().getClientForReference(reference);
     return client;
   }
-  
-  public List<StatusCount> getBookingStatusCountsForAgency(Integer agencyId) {
+	
+	public List<StatusCount> getBookingStatusCountsForAgency(Integer agencyId) {
 
-    List<StatusCount> statusCounts = null;
-    statusCounts = getBookingGradeDAO().getBookingStatusCountsForAgency(agencyId);
-    return statusCounts;
-  
-  }
+		List<StatusCount> statusCounts = null;
+		statusCounts = getBookingGradeDAO().getBookingStatusCountsForAgency(agencyId);
+		return statusCounts;
+	
+	}
 
-  public List<StatusCount> getShiftStatusCountsForAgency(Integer agencyId) {
+	public List<StatusCount> getShiftStatusCountsForAgency(Integer agencyId) {
 
-    List<StatusCount> statusCounts = null;
-    statusCounts = getBookingGradeDAO().getShiftStatusCountsForAgency(agencyId);
-    return statusCounts;
-  
-  }
+		List<StatusCount> statusCounts = null;
+		statusCounts = getBookingGradeDAO().getShiftStatusCountsForAgency(agencyId);
+		return statusCounts;
+	
+	}
 
-  public List<StatusCount> getBookingGradeApplicantDateStatusCountsForAgency(Integer agencyId) {
+	public List<StatusCount> getBookingGradeApplicantDateStatusCountsForAgency(Integer agencyId) {
 
-    List<StatusCount> statusCounts = null;
-    statusCounts = getBookingGradeDAO().getBookingGradeApplicantDateStatusCountsForAgency(agencyId);
-    return statusCounts;
-  
-  }
+		List<StatusCount> statusCounts = null;
+		statusCounts = getBookingGradeDAO().getBookingGradeApplicantDateStatusCountsForAgency(agencyId);
+		return statusCounts;
+	
+	}
 
-  public List<StatusCount> getShiftWorkedStatusCountsForAgency(Integer agencyId) {
+	public List<StatusCount> getShiftWorkedStatusCountsForAgency(Integer agencyId) {
 
-    List<StatusCount> statusCounts = null;
-    statusCounts = getBookingGradeDAO().getShiftWorkedStatusCountsForAgency(agencyId);
-    return statusCounts;
-  
-  }
+		List<StatusCount> statusCounts = null;
+		statusCounts = getBookingGradeDAO().getShiftWorkedStatusCountsForAgency(agencyId);
+		return statusCounts;
+	
+	}
 
-  public List<StatusCount> getAgencyInvoiceStatusCountsForAgency(Integer agencyId) {
-    
-    List<StatusCount> statusCounts = null;
-    statusCounts = getBookingDAO().getAgencyInvoiceStatusCountsForAgency(agencyId);
-    return statusCounts;
+	public List<StatusCount> getAgencyInvoiceStatusCountsForAgency(Integer agencyId) {
+		
+		List<StatusCount> statusCounts = null;
+		statusCounts = getBookingDAO().getAgencyInvoiceStatusCountsForAgency(agencyId);
+		return statusCounts;
 
-  }
-  
-  public IntValue getBookingGradeIdForAgencyAndBookingDate(Integer agencyId, Integer bookingId) {
-    
-    IntValue bookingGradeId = null;
-      bookingGradeId = getBookingGradeDAO().getBookingGradeIdForAgencyAndBookingDate(agencyId, bookingId);
-    return bookingGradeId;
+	}
+	
+	public IntValue getBookingGradeIdForAgencyAndBookingDate(Integer agencyId, Integer bookingId) {
+		
+		IntValue bookingGradeId = null;
+    	bookingGradeId = getBookingGradeDAO().getBookingGradeIdForAgencyAndBookingDate(agencyId, bookingId);
+		return bookingGradeId;
 
-  }
+	}
 
-    public IntValue getShiftsToActivateCountForAgency(Integer agencyId) {
+  	public IntValue getShiftsToActivateCountForAgency(Integer agencyId) {
 
-    return getBookingDAO().getShiftsToActivateCountForAgency(agencyId);
-      
-    }
-  
-    public IntValue getShiftsOutstandingCountForAgency(Integer agencyId) {
+		return getBookingDAO().getShiftsToActivateCountForAgency(agencyId);
+  		
+  	}
+	
+  	public IntValue getShiftsOutstandingCountForAgency(Integer agencyId) {
 
-    return getBookingDAO().getShiftsOutstandingCountForAgency(agencyId);
-      
-    }
-  
+		return getBookingDAO().getShiftsOutstandingCountForAgency(agencyId);
+  		
+  	}
+	
     public List<ClientUser> getClientUsersForAgency(Integer agencyId) {
       
       List<ClientUser> clients = null;
@@ -1290,13 +1278,13 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
       return clients;
     }
 
-  public List<SiteUser> getSiteUsersForAgency(Integer agencyId, Integer clientId) {
+	public List<SiteUser> getSiteUsersForAgency(Integer agencyId, Integer clientId) {
 
-    List<SiteUser> sites = null;
-    sites = getSiteDAO().getSiteUsersForAgency(agencyId, clientId);
-    return sites;
+		List<SiteUser> sites = null;
+		sites = getSiteDAO().getSiteUsersForAgency(agencyId, clientId);
+		return sites;
 
-  }
+	}
 
   // NEW -->
   public List<Site> getSitesForNhsLocation(Integer clientId, String nhsLocation) 
@@ -1318,367 +1306,367 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
   }
   // <-- NEW
   
-  public List<LocationUser> getLocationUsersForAgency(Integer agencyId, Integer clientId, Integer siteId) {
+	public List<LocationUser> getLocationUsersForAgency(Integer agencyId, Integer clientId, Integer siteId) {
 
-    List<LocationUser> locationUsers = null;
-    locationUsers = getLocationDAO().getLocationUsersForAgency(agencyId, clientId, siteId);
-    return locationUsers;
+		List<LocationUser> locationUsers = null;
+		locationUsers = getLocationDAO().getLocationUsersForAgency(agencyId, clientId, siteId);
+		return locationUsers;
 
-  }
+	}
 
-  public List<JobProfileUser> getJobProfileUsersForAgency(Integer agencyId, Integer clientId, Integer siteId, Integer locationId) {
+	public List<JobProfileUser> getJobProfileUsersForAgency(Integer agencyId, Integer clientId, Integer siteId, Integer locationId) {
 
-    List<JobProfileUser> jobProfileUsers = null;
-    jobProfileUsers = getJobProfileDAO().getJobProfileUsersForAgency(agencyId, clientId, siteId, locationId);
-    return jobProfileUsers;
+		List<JobProfileUser> jobProfileUsers = null;
+		jobProfileUsers = getJobProfileDAO().getJobProfileUsersForAgency(agencyId, clientId, siteId, locationId);
+		return jobProfileUsers;
 
-  }
-  
-//  public List<LocationUser> getLocationUsersForAgencyForSite(Integer agencyId, Integer siteId) {
+	}
+	
+//	public List<LocationUser> getLocationUsersForAgencyForSite(Integer agencyId, Integer siteId) {
 //
-//    List<LocationUser> locationUsers = null;
-//    locationUsers = locationDAO.getLocationUsersForAgencyForSite(agencyId, siteId);
-//    return locationUsers;
+//		List<LocationUser> locationUsers = null;
+//		locationUsers = locationDAO.getLocationUsersForAgencyForSite(agencyId, siteId);
+//		return locationUsers;
 //
-//  }
-  
-//  public List<JobProfileUser> getJobProfileUsersForAgencyForLocation(Integer agencyId, Integer locationId) {
+//	}
+	
+//	public List<JobProfileUser> getJobProfileUsersForAgencyForLocation(Integer agencyId, Integer locationId) {
 //
-//    List<JobProfileUser> jobProfileUsers = null;
-//    jobProfileUsers = jobProfileDAO.getJobProfileUsersForAgencyForLocation(agencyId, locationId);
-//    return jobProfileUsers;
+//		List<JobProfileUser> jobProfileUsers = null;
+//		jobProfileUsers = jobProfileDAO.getJobProfileUsersForAgencyForLocation(agencyId, locationId);
+//		return jobProfileUsers;
 //
-//  }
+//	}
 
-//  public List<JobProfileUser> getJobProfileUsersForAgencyForSite(Integer agencyId, Integer siteId) {
+//	public List<JobProfileUser> getJobProfileUsersForAgencyForSite(Integer agencyId, Integer siteId) {
 //
-//    List<JobProfileUser> jobProfileUsers = null;
-//    jobProfileUsers = jobProfileDAO.getJobProfileUsersForAgencyForSite(agencyId, siteId);
-//    return jobProfileUsers;
+//		List<JobProfileUser> jobProfileUsers = null;
+//		jobProfileUsers = jobProfileDAO.getJobProfileUsersForAgencyForSite(agencyId, siteId);
+//		return jobProfileUsers;
 //
-//  }
+//	}
 
-  public InvoiceAgencyUser getInvoiceAgencyUserForInvoiceForAgency(Integer invoiceId, Integer agencyId) {
-    
-    InvoiceAgencyUser invoiceAgency = null;
-    invoiceAgency = getInvoiceAgencyDAO().getInvoiceAgencyUserForInvoiceForAgency(invoiceId, agencyId);
-    return invoiceAgency;
+	public InvoiceAgencyUser getInvoiceAgencyUserForInvoiceForAgency(Integer invoiceId, Integer agencyId) {
+		
+		InvoiceAgencyUser invoiceAgency = null;
+		invoiceAgency = getInvoiceAgencyDAO().getInvoiceAgencyUserForInvoiceForAgency(invoiceId, agencyId);
+		return invoiceAgency;
 
-  }
-  
-  public InvoiceAgencyUserEntity getInvoiceAgencyUserEntityForInvoiceForAgency(Integer invoiceId, Integer agencyId) {
-    
-    InvoiceAgencyUserEntity invoiceAgency = null;
-    invoiceAgency = getInvoiceAgencyDAO().getInvoiceAgencyUserEntityForInvoiceForAgency(invoiceId, agencyId);
-    
-    if (invoiceAgency != null) {
-      // NOTE - parameters are agencyId THEN invoiceId
-      invoiceAgency.setBookingDateUserApplicants(getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndInvoice(agencyId, invoiceId));
+	}
+	
+	public InvoiceAgencyUserEntity getInvoiceAgencyUserEntityForInvoiceForAgency(Integer invoiceId, Integer agencyId) {
+		
+		InvoiceAgencyUserEntity invoiceAgency = null;
+		invoiceAgency = getInvoiceAgencyDAO().getInvoiceAgencyUserEntityForInvoiceForAgency(invoiceId, agencyId);
+		
+		if (invoiceAgency != null) {
+			// NOTE - parameters are agencyId THEN invoiceId
+			invoiceAgency.setBookingDateUserApplicants(getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndInvoice(agencyId, invoiceId));
 
-      // TODO - soooo rubbishly slow!
-      
-      if (invoiceAgency.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
-          // expenses
-        for (BookingDateUserApplicantEntity bookingDate: invoiceAgency.getBookingDateUserApplicants()) {
-          if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
-            bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
-          }
-        }
-      }
-      
-    }
-    
-    return invoiceAgency;
+			// TODO - soooo rubbishly slow!
+			
+			if (invoiceAgency.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
+			    // expenses
+				for (BookingDateUserApplicantEntity bookingDate: invoiceAgency.getBookingDateUserApplicants()) {
+					if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
+						bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
+					}
+				}
+			}
+			
+		}
+		
+		return invoiceAgency;
 
-  }
+	}
 
-  public int updateInvoiceAgency(InvoiceAgency invoiceAgency, Integer auditorId) {
+	public int updateInvoiceAgency(InvoiceAgency invoiceAgency, Integer auditorId) {
 
         int rc = getInvoiceAgencyDAO().updateInvoiceAgency(invoiceAgency, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public JobProfileUser getJobProfileUser(Integer jobProfileId) {
-    
-    JobProfileUser jobProfile = null;
-    jobProfile = getJobProfileDAO().getJobProfileUser(jobProfileId);
-    return jobProfile;
+	public JobProfileUser getJobProfileUser(Integer jobProfileId) {
+		
+		JobProfileUser jobProfile = null;
+		jobProfile = getJobProfileDAO().getJobProfileUser(jobProfileId);
+		return jobProfile;
 
-  }
+	}
 
-  public ClientAgencyJobProfileGrade getClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId) {
+	public ClientAgencyJobProfileGrade getClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId) {
 
-    ClientAgencyJobProfileGrade clientAgencyJobProfileGrade = null;
-    clientAgencyJobProfileGrade = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGrade(clientAgencyJobProfileGradeId);
-    return clientAgencyJobProfileGrade;
-    
-  }
-  
-  public List<ClientAgencyJobProfileGradeUser> getClientAgencyJobProfileUsersForClientAgencyJobProfile(Integer clientAgencyJobProfileId) {
-    
-    List<ClientAgencyJobProfileGradeUser> clientAgencyJobProfileUsers = null;
-    clientAgencyJobProfileUsers = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGradeUsersForClientAgencyJobProfile(clientAgencyJobProfileId);
-    return clientAgencyJobProfileUsers;
+		ClientAgencyJobProfileGrade clientAgencyJobProfileGrade = null;
+		clientAgencyJobProfileGrade = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGrade(clientAgencyJobProfileGradeId);
+		return clientAgencyJobProfileGrade;
+		
+	}
+	
+	public List<ClientAgencyJobProfileGradeUser> getClientAgencyJobProfileUsersForClientAgencyJobProfile(Integer clientAgencyJobProfileId) {
+		
+		List<ClientAgencyJobProfileGradeUser> clientAgencyJobProfileUsers = null;
+		clientAgencyJobProfileUsers = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGradeUsersForClientAgencyJobProfile(clientAgencyJobProfileId);
+		return clientAgencyJobProfileUsers;
 
-  }
-  
-  public AgencyInvoiceUser getAgencyInvoiceUser(Integer agencyInvoiceId) {
-    
-    AgencyInvoiceUser agencyInvoice = null;
-    agencyInvoice = getAgencyInvoiceDAO().getAgencyInvoiceUser(agencyInvoiceId);
-    return agencyInvoice;
+	}
+	
+	public AgencyInvoiceUser getAgencyInvoiceUser(Integer agencyInvoiceId) {
+		
+		AgencyInvoiceUser agencyInvoice = null;
+		agencyInvoice = getAgencyInvoiceDAO().getAgencyInvoiceUser(agencyInvoiceId);
+		return agencyInvoice;
 
-  }
-  
-  public AgencyInvoiceUserEntity getAgencyInvoiceUserEntity(Integer agencyInvoiceId) {
-    
-    AgencyInvoiceUserEntity agencyInvoice = null;
-    agencyInvoice = getAgencyInvoiceDAO().getAgencyInvoiceUserEntity(agencyInvoiceId);
-    
-    if (agencyInvoice != null) {
-      
-      //
+	}
+	
+	public AgencyInvoiceUserEntity getAgencyInvoiceUserEntity(Integer agencyInvoiceId) {
+		
+		AgencyInvoiceUserEntity agencyInvoice = null;
+		agencyInvoice = getAgencyInvoiceDAO().getAgencyInvoiceUserEntity(agencyInvoiceId);
+		
+		if (agencyInvoice != null) {
+			
+			//
 
-      List <BookingDateUserApplicantEntity> bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice(agencyInvoice.getAgencyId(), agencyInvoiceId); 
+			List <BookingDateUserApplicantEntity> bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice(agencyInvoice.getAgencyId(), agencyInvoiceId); 
 
-      // TODO - soooo rubbishly slow!
-      
-      for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) {
-        if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
-          bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
-        }
-        if (bookingDate.getWorkedNoOfHours().compareTo(new BigDecimal(0)) > 0) {
-          // only get workedNoOfHours > 0
-          bookingDate.setBookingDateHours(bookingDateHourDAO.getBookingDateHoursForBookingDate(bookingDate.getBookingDateId(), true));
-        }
-      }
-      
-//      if (agencyInvoice.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
-//      
-//        // expenses
-//        for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) {
-//          if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
-//            bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
-//          }
-//        }
-//      }
-      
-      agencyInvoice.setBookingDateUserApplicants(bookingDateUserApplicants);
+			// TODO - soooo rubbishly slow!
+			
+			for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) {
+				if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
+					bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
+				}
+				if (bookingDate.getWorkedNoOfHours().compareTo(new BigDecimal(0)) > 0) {
+					// only get workedNoOfHours > 0
+					bookingDate.setBookingDateHours(bookingDateHourDAO.getBookingDateHoursForBookingDate(bookingDate.getBookingDateId(), true));
+				}
+			}
+			
+//			if (agencyInvoice.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
+//			
+//				// expenses
+//				for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) {
+//					if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
+//						bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
+//					}
+//				}
+//			}
+			
+			agencyInvoice.setBookingDateUserApplicants(bookingDateUserApplicants);
 
-    
-    }
-    
-    return agencyInvoice;
+		
+		}
+		
+		return agencyInvoice;
 
-  }
-  
-  public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgencyAndBookingDates(Integer agencyId, String bookingDateIdStrs) {
+	}
+	
+	public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgencyAndBookingDates(Integer agencyId, String bookingDateIdStrs) {
 
-    List<BookingDateUserApplicant> bookingDateUserApplicants = null;
-    bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingDates(agencyId, bookingDateIdStrs);
-    return bookingDateUserApplicants;
-  
-  }
+		List<BookingDateUserApplicant> bookingDateUserApplicants = null;
+		bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingDates(agencyId, bookingDateIdStrs);
+		return bookingDateUserApplicants;
+	
+	}
 
     public int insertAgencyInvoice(Integer agencyId, String bookingDateIdStrs, Integer auditorId) {
-      
-      List<BookingDateUserApplicant> bookingDates = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingDates(agencyId, bookingDateIdStrs);
+    	
+    	List<BookingDateUserApplicant> bookingDates = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingDates(agencyId, bookingDateIdStrs);
 
-      BigDecimal chargeRateValue = new BigDecimal(0);
-      BigDecimal payRateValue = new BigDecimal(0);
-      BigDecimal wageRateValue = new BigDecimal(0);
-      BigDecimal wtdValue = new BigDecimal(0);
-      BigDecimal niValue = new BigDecimal(0);
-      BigDecimal commissionValue = new BigDecimal(0);
-      BigDecimal expenseValue = new BigDecimal(0);
-      BigDecimal vatValue = new BigDecimal(0);
-      BigDecimal noOfHours = new BigDecimal(0);
-      BigDecimal feeValue = new BigDecimal(0);
+    	BigDecimal chargeRateValue = new BigDecimal(0);
+    	BigDecimal payRateValue = new BigDecimal(0);
+    	BigDecimal wageRateValue = new BigDecimal(0);
+    	BigDecimal wtdValue = new BigDecimal(0);
+    	BigDecimal niValue = new BigDecimal(0);
+    	BigDecimal commissionValue = new BigDecimal(0);
+    	BigDecimal expenseValue = new BigDecimal(0);
+    	BigDecimal vatValue = new BigDecimal(0);
+    	BigDecimal noOfHours = new BigDecimal(0);
+    	BigDecimal feeValue = new BigDecimal(0);
 
-      for (BookingDateUserApplicant bookingDate: bookingDates) {
+    	for (BookingDateUserApplicant bookingDate: bookingDates) {
 
-        chargeRateValue = chargeRateValue.add(bookingDate.getWorkedChargeRateValue());
-      payRateValue = payRateValue.add(bookingDate.getWorkedPayRateValue());
-      wageRateValue = wageRateValue.add(bookingDate.getWorkedWageRateValue());
-      wtdValue = wtdValue.add(bookingDate.getWorkedWtdValue());
-      niValue = niValue.add(bookingDate.getWorkedNiValue());
-      commissionValue = commissionValue.add(bookingDate.getWorkedCommissionValue());
-      expenseValue = expenseValue.add(bookingDate.getExpenseValue());
-      vatValue = vatValue.add(bookingDate.getTotalVatValue());
-      noOfHours = noOfHours.add(bookingDate.getWorkedNoOfHours());
-          feeValue = feeValue.add(bookingDate.getFeeValue());
-          
-    }
-      
-      AgencyInvoice agencyInvoice = new AgencyInvoice();
-      agencyInvoice.setAgencyId(agencyId);
-      
-      // using the first one ...
-      agencyInvoice.setClientId(bookingDates.get(0).getClientId());
-      
-      agencyInvoice.setChargeRateValue(chargeRateValue);
-      agencyInvoice.setPayRateValue(payRateValue);
-      agencyInvoice.setWageRateValue(wageRateValue);
-      agencyInvoice.setWtdValue(wtdValue);
-      agencyInvoice.setNiValue(niValue);
-      agencyInvoice.setCommissionValue(commissionValue);
-      agencyInvoice.setExpenseValue(expenseValue);
-      agencyInvoice.setVatValue(vatValue);
-      agencyInvoice.setNoOfHours(noOfHours);
-      agencyInvoice.setFeeValue(feeValue);
-      
-      int rc = getAgencyInvoiceDAO().insertAgencyInvoice(agencyInvoice, auditorId);
+	    	chargeRateValue = chargeRateValue.add(bookingDate.getWorkedChargeRateValue());
+			payRateValue = payRateValue.add(bookingDate.getWorkedPayRateValue());
+			wageRateValue = wageRateValue.add(bookingDate.getWorkedWageRateValue());
+			wtdValue = wtdValue.add(bookingDate.getWorkedWtdValue());
+			niValue = niValue.add(bookingDate.getWorkedNiValue());
+			commissionValue = commissionValue.add(bookingDate.getWorkedCommissionValue());
+			expenseValue = expenseValue.add(bookingDate.getExpenseValue());
+			vatValue = vatValue.add(bookingDate.getTotalVatValue());
+		 	noOfHours = noOfHours.add(bookingDate.getWorkedNoOfHours());
+	        feeValue = feeValue.add(bookingDate.getFeeValue());
+	        
+		}
+    	
+    	AgencyInvoice agencyInvoice = new AgencyInvoice();
+    	agencyInvoice.setAgencyId(agencyId);
+    	
+    	// using the first one ...
+    	agencyInvoice.setClientId(bookingDates.get(0).getClientId());
+    	
+    	agencyInvoice.setChargeRateValue(chargeRateValue);
+    	agencyInvoice.setPayRateValue(payRateValue);
+    	agencyInvoice.setWageRateValue(wageRateValue);
+    	agencyInvoice.setWtdValue(wtdValue);
+    	agencyInvoice.setNiValue(niValue);
+    	agencyInvoice.setCommissionValue(commissionValue);
+    	agencyInvoice.setExpenseValue(expenseValue);
+    	agencyInvoice.setVatValue(vatValue);
+    	agencyInvoice.setNoOfHours(noOfHours);
+    	agencyInvoice.setFeeValue(feeValue);
+    	
+    	int rc = getAgencyInvoiceDAO().insertAgencyInvoice(agencyInvoice, auditorId);
 
-      Integer agencyInvoiceId = agencyInvoice.getAgencyInvoiceId();
-      
-      for (BookingDate bookingDate: bookingDates) {
-        rc = getBookingDateDAO().updateBookingDateInvoiced(bookingDate.getBookingDateId(), agencyInvoiceId, bookingDate.getNoOfChanges(), auditorId);
-      }
-      
-      // TODO a bit odd !!!
-      return agencyInvoiceId;
-      
+    	Integer agencyInvoiceId = agencyInvoice.getAgencyInvoiceId();
+    	
+    	for (BookingDate bookingDate: bookingDates) {
+    		rc = getBookingDateDAO().updateBookingDateInvoiced(bookingDate.getBookingDateId(), agencyInvoiceId, bookingDate.getNoOfChanges(), auditorId);
+    	}
+    	
+    	// TODO a bit odd !!!
+    	return agencyInvoiceId;
+    	
     }
     
     public boolean getBookingDatesAlreadyInvoiced(Integer agencyId, String bookingDateIdStrs) {
 
-      List<BookingDateUserApplicant> bookingDates = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingDates(agencyId, bookingDateIdStrs);
+    	List<BookingDateUserApplicant> bookingDates = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingDates(agencyId, bookingDateIdStrs);
 
-      for (BookingDate bookingDate: bookingDates) {
-        if (bookingDate.getWorkedStatus() == BookingDate.BOOKINGDATE_WORKEDSTATUS_INVOICED) {
-          return true;
-        }
-      }
-      return false;
+    	for (BookingDate bookingDate: bookingDates) {
+    		if (bookingDate.getWorkedStatus() == BookingDate.BOOKINGDATE_WORKEDSTATUS_INVOICED) {
+    			return true;
+    		}
+    	}
+    	return false;
 
     }
 
     public boolean getBookingDatesAlreadyAuthorized(Integer agencyId, String bookingDateIdStrs) {
 
-      List<BookingDateUserApplicant> bookingDates = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingDates(agencyId, bookingDateIdStrs);
+    	List<BookingDateUserApplicant> bookingDates = getBookingDateDAO().getBookingDateUserApplicantsForAgencyAndBookingDates(agencyId, bookingDateIdStrs);
 
-      for (BookingDate bookingDate: bookingDates) {
-        if (bookingDate.getWorkedStatus() == BookingDate.BOOKINGDATE_WORKEDSTATUS_AUTHORIZED) {
-          return true;
-        }
-      }
-      return false;
+    	for (BookingDate bookingDate: bookingDates) {
+    		if (bookingDate.getWorkedStatus() == BookingDate.BOOKINGDATE_WORKEDSTATUS_AUTHORIZED) {
+    			return true;
+    		}
+    	}
+    	return false;
 
     }
 
     public int updateAgencyInvoice(AgencyInvoice agencyInvoice, Integer auditorId) {
 
         int rc = getAgencyInvoiceDAO().updateAgencyInvoice(agencyInvoice, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int updateAgencyInvoiceTimesheet(AgencyInvoice agencyInvoice, Integer auditorId) {
+	public int updateAgencyInvoiceTimesheet(AgencyInvoice agencyInvoice, Integer auditorId) {
 
         int rc = getAgencyInvoiceDAO().updateAgencyInvoiceTimesheet(agencyInvoice, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
     public int updateAgencyInvoiceCredited(Integer agencyInvoiceId, Integer noOfChanges, Integer auditorId, String reasonText) {
-      
-      // create the agencyInvoiceCredit
-      AgencyInvoiceCredit agencyInvoiceCredit = new AgencyInvoiceCredit();
-      agencyInvoiceCredit.setAgencyInvoiceId(agencyInvoiceId);
-      agencyInvoiceCredit.setReasonText(reasonText);
-      //
-      int rc = getAgencyInvoiceCreditDAO().insertAgencyInvoiceCredit(agencyInvoiceCredit, auditorId);
-      
-      Integer agencyInvoiceCreditId = agencyInvoiceCredit.getAgencyInvoiceCreditId();
-      
-      // update all the bookingDates for the agencyInvoice
-      rc = getBookingDateDAO().updateBookingDatesCreditedForAgencyInvoice(agencyInvoiceId, auditorId, agencyInvoiceCreditId);
-      
+    	
+    	// create the agencyInvoiceCredit
+    	AgencyInvoiceCredit agencyInvoiceCredit = new AgencyInvoiceCredit();
+    	agencyInvoiceCredit.setAgencyInvoiceId(agencyInvoiceId);
+    	agencyInvoiceCredit.setReasonText(reasonText);
+    	//
+    	int rc = getAgencyInvoiceCreditDAO().insertAgencyInvoiceCredit(agencyInvoiceCredit, auditorId);
+    	
+    	Integer agencyInvoiceCreditId = agencyInvoiceCredit.getAgencyInvoiceCreditId();
+    	
+    	// update all the bookingDates for the agencyInvoice
+    	rc = getBookingDateDAO().updateBookingDatesCreditedForAgencyInvoice(agencyInvoiceId, auditorId, agencyInvoiceCreditId);
+    	
 
-      
-      
-      // TODO - need to add the budget back in for each of the bookingDates - still not taking discount into account - in or out
-      
-//      // adjust budget - give the money back!
-//    DecimalFormat df = new DecimalFormat("#000");
-//      
+    	
+    	
+    	// TODO - need to add the budget back in for each of the bookingDates - still not taking discount into account - in or out
+    	
+//    	// adjust budget - give the money back!
+//		DecimalFormat df = new DecimalFormat("#000");
+//    	
 //        // if completed (authorized !!!) need to use worked values
 //        // if filled use the 'agreed' agency value else use RRP value
 //
-//    BigDecimal value = bookingDate.getStatus() == BookingDate.BOOKINGDATE_STATUS_COMPLETED ? bookingDate.getWorkedChargeRateValue() :
-//                bookingDate.getStatus() == BookingDate.BOOKINGDATE_STATUS_FILLED ? agyValue : 
-//                  bookingDate.getValue();
-//    BigDecimal vatValue = bookingDate.getStatus() == BookingDate.BOOKINGDATE_STATUS_COMPLETED ? bookingDate.getTotalVatValue() : 
-//                new BigDecimal(0);
-//    BigDecimal expenseValue = bookingDate.getStatus() == BookingDate.BOOKINGDATE_STATUS_COMPLETED ? bookingDate.getExpenseValue() : 
-//                  new BigDecimal(0);
-//    BigDecimal nonPayValue = new BigDecimal(0);
-//    
+//		BigDecimal value = bookingDate.getStatus() == BookingDate.BOOKINGDATE_STATUS_COMPLETED ? bookingDate.getWorkedChargeRateValue() :
+//								bookingDate.getStatus() == BookingDate.BOOKINGDATE_STATUS_FILLED ? agyValue : 
+//									bookingDate.getValue();
+//		BigDecimal vatValue = bookingDate.getStatus() == BookingDate.BOOKINGDATE_STATUS_COMPLETED ? bookingDate.getTotalVatValue() : 
+//								new BigDecimal(0);
+//		BigDecimal expenseValue = bookingDate.getStatus() == BookingDate.BOOKINGDATE_STATUS_COMPLETED ? bookingDate.getExpenseValue() : 
+//									new BigDecimal(0);
+//		BigDecimal nonPayValue = new BigDecimal(0);
+//		
 //        rc = insertBudgetTransaction(booking.getLocationId(), 
 //                                     booking.getJobProfileId(), 
 //                                     value, 
-//                                   vatValue, 
-//                                   expenseValue, 
-//                                   nonPayValue,
+//       		                         vatValue, 
+//       		                         expenseValue, 
+//       		                         nonPayValue,
 //                                     // needs to be multi-lingual
 //                                     "Cancelled shift - " + df.format(bookingDate.getBookingId()) + "." + df.format(bookingDate.getBookingDateId()), 
-//                                   auditorId);
-      
-      
-      
-      // update the agencyInvoice
-      rc = getAgencyInvoiceDAO().updateAgencyInvoiceCredited(agencyInvoiceId, noOfChanges, auditorId, agencyInvoiceCreditId);
-    return rc;
+//	                                 auditorId);
+    	
+    	
+    	
+    	// update the agencyInvoice
+    	rc = getAgencyInvoiceDAO().updateAgencyInvoiceCredited(agencyInvoiceId, noOfChanges, auditorId, agencyInvoiceCreditId);
+		return rc;
 
     }
 
-  public List<AgencyInvoiceUser> getAgencyInvoiceUsersForAgencyAndStatus(Integer agencyId, Integer status) {
-    
-    List<AgencyInvoiceUser> agencyInvoices = null;
-    agencyInvoices = getAgencyInvoiceDAO().getAgencyInvoiceUsersForAgencyAndStatus(agencyId, status);
-    return agencyInvoices;
-    
-  }
+	public List<AgencyInvoiceUser> getAgencyInvoiceUsersForAgencyAndStatus(Integer agencyId, Integer status) {
+		
+		List<AgencyInvoiceUser> agencyInvoices = null;
+		agencyInvoices = getAgencyInvoiceDAO().getAgencyInvoiceUsersForAgencyAndStatus(agencyId, status);
+		return agencyInvoices;
+		
+	}
 
-  public List<AgencyInvoiceUser> getAgencyInvoiceUsersForAgency(Integer agencyId, Integer agencyInvoiceId, 
-      Integer clientId, Integer status, Date fromDate, Date toDate) {
+	public List<AgencyInvoiceUser> getAgencyInvoiceUsersForAgency(Integer agencyId, Integer agencyInvoiceId, 
+			Integer clientId, Integer status, Date fromDate, Date toDate) {
 
-    List<AgencyInvoiceUser> agencyInvoices = null;
-    agencyInvoices = getAgencyInvoiceDAO().getAgencyInvoiceUsersForAgency(agencyId, agencyInvoiceId, clientId, status, fromDate, toDate);
-    return agencyInvoices;
-    
-  }
-  
-  
-  public Consultant validateSecretWord(Consultant consultant) {
+		List<AgencyInvoiceUser> agencyInvoices = null;
+		agencyInvoices = getAgencyInvoiceDAO().getAgencyInvoiceUsersForAgency(agencyId, agencyInvoiceId, clientId, status, fromDate, toDate);
+		return agencyInvoices;
+		
+	}
+	
+	
+	public Consultant validateSecretWord(Consultant consultant) {
 
-    Consultant consultantX = consultantDAO.getConsultantForLogin(consultant.getAgencyId(), consultant.getUser().getLogin());
-    if (consultantX == null) {
-      throw new DataNotFoundException();
-    }
-    if (!consultant.getUser().getSecretWord().equalsIgnoreCase(consultantX.getUser().getSecretWord())) {
-      throw new InvalidDetailException();
-    }
-    consultant.getUser().setPwdHint(consultantX.getUser().getPwdHint());
-    consultant.setConsultantId(consultantX.getConsultantId());
-    return consultantX;
+		Consultant consultantX = consultantDAO.getConsultantForLogin(consultant.getAgencyId(), consultant.getUser().getLogin());
+		if (consultantX == null) {
+			throw new DataNotFoundException();
+		}
+		if (!consultant.getUser().getSecretWord().equalsIgnoreCase(consultantX.getUser().getSecretWord())) {
+			throw new InvalidDetailException();
+		}
+		consultant.getUser().setPwdHint(consultantX.getUser().getPwdHint());
+		consultant.setConsultantId(consultantX.getConsultantId());
+		return consultantX;
 
-  }
+	}
 
-    public int updateConsultantPwd(Integer consultantId, String newPwd, String pwdHint, Integer noOfChanges, Integer auditorId) {
+  	public int updateConsultantPwd(Integer consultantId, String newPwd, String pwdHint, Integer noOfChanges, Integer auditorId) {
 
-    int rc = consultantDAO.updateConsultantPwd(consultantId, newPwd, pwdHint, noOfChanges, auditorId);
-    return rc;
+		int rc = consultantDAO.updateConsultantPwd(consultantId, newPwd, pwdHint, noOfChanges, auditorId);
+		return rc;
 
-    }
-  
-    public int updateConsultantSecretWord(Integer consultantId, String newSecretWord, Integer noOfChanges, Integer auditorId) {
+  	}
+	
+  	public int updateConsultantSecretWord(Integer consultantId, String newSecretWord, Integer noOfChanges, Integer auditorId) {
 
-    int rc = consultantDAO.updateConsultantSecretWord(consultantId, newSecretWord, noOfChanges, auditorId);
-    return rc;
+		int rc = consultantDAO.updateConsultantSecretWord(consultantId, newSecretWord, noOfChanges, auditorId);
+		return rc;
 
-    }
+  	}
 
     public int updateApplicantChecklistCreatedTime(Integer applicantId, Integer noOfChanges, Integer auditorId, Date checklistCreatedTime) 
     {
@@ -1699,21 +1687,21 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return rc;
   }
   
-  public List<BookingDateUserApplicant> getBookingDateUserApplicantsForApplicantForAgency(Integer applicantId, Integer agencyId) {
+	public List<BookingDateUserApplicant> getBookingDateUserApplicantsForApplicantForAgency(Integer applicantId, Integer agencyId) {
 
-    List<BookingDateUserApplicant> bookingDateUserApplicants = null;
-    bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForApplicantForAgency(applicantId, agencyId);
-    return bookingDateUserApplicants;
+		List<BookingDateUserApplicant> bookingDateUserApplicants = null;
+		bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForApplicantForAgency(applicantId, agencyId);
+		return bookingDateUserApplicants;
 
-  }
+	}
 
-  public List<BookingDateUserApplicant> getBookingDateUserApplicantsForApplicantForAgencyAndDateRange(Integer applicantId, Integer agencyId, Date fromDate, Date toDate) {
+	public List<BookingDateUserApplicant> getBookingDateUserApplicantsForApplicantForAgencyAndDateRange(Integer applicantId, Integer agencyId, Date fromDate, Date toDate) {
 
-    List<BookingDateUserApplicant> bookingDateUserApplicants = null;
-    bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForApplicantForAgencyAndDateRange(applicantId, agencyId, fromDate, toDate);
-    return bookingDateUserApplicants;
+		List<BookingDateUserApplicant> bookingDateUserApplicants = null;
+		bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantsForApplicantForAgencyAndDateRange(applicantId, agencyId, fromDate, toDate);
+		return bookingDateUserApplicants;
 
-  }
+	}
   // NEW ->
   public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgencyAndDateRange(Integer agencyId, Date fromDate, Date toDate) 
   {
@@ -1729,29 +1717,29 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 
   }
   // NEW <-
-  public List<Grade> getGradesForJobProfile(Integer jobProfileId) {
+	public List<Grade> getGradesForJobProfile(Integer jobProfileId) {
 
-    List<Grade> grades = null;
-    grades = getGradeDAO().getGradesForJobProfile(jobProfileId);
-    return grades;
+		List<Grade> grades = null;
+		grades = getGradeDAO().getGradesForJobProfile(jobProfileId);
+		return grades;
 
-  }
+	}
 
-  public List<ClientAgencyJobProfileUser> getClientAgencyJobProfileUsersForJobProfileAndAgency(Integer jobProfileId, Integer agencyId) {
+	public List<ClientAgencyJobProfileUser> getClientAgencyJobProfileUsersForJobProfileAndAgency(Integer jobProfileId, Integer agencyId) {
 
-    List<ClientAgencyJobProfileUser> clientAgencyJobProfileUsers = null;
-    clientAgencyJobProfileUsers = getClientAgencyJobProfileDAO().getClientAgencyJobProfileUsersForJobProfileAndAgency(jobProfileId, agencyId);
-    return clientAgencyJobProfileUsers;
+		List<ClientAgencyJobProfileUser> clientAgencyJobProfileUsers = null;
+		clientAgencyJobProfileUsers = getClientAgencyJobProfileDAO().getClientAgencyJobProfileUsersForJobProfileAndAgency(jobProfileId, agencyId);
+		return clientAgencyJobProfileUsers;
 
-  }
+	}
 
-  public List<ClientAgencyJobProfileGrade> getClientAgencyJobProfileGradesForJobProfileAndAgency(Integer jobProfileId, Integer agencyId) {
+	public List<ClientAgencyJobProfileGrade> getClientAgencyJobProfileGradesForJobProfileAndAgency(Integer jobProfileId, Integer agencyId) {
 
-    List<ClientAgencyJobProfileGrade> clientAgencyJobProfileGrades = null;
-    clientAgencyJobProfileGrades = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGradesForJobProfileAndAgency(jobProfileId, agencyId);
-    return clientAgencyJobProfileGrades;
+		List<ClientAgencyJobProfileGrade> clientAgencyJobProfileGrades = null;
+		clientAgencyJobProfileGrades = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGradesForJobProfileAndAgency(jobProfileId, agencyId);
+		return clientAgencyJobProfileGrades;
 
-  }
+	}
 
   public List<ClientAgencyJobProfileGradeUser> getClientAgencyJobProfileGradeUsersForClientAgencyJobProfile(Integer clientId, Integer agencyId, Integer jobProfileId)
   {
@@ -1760,30 +1748,30 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return clientAgencyJobProfileGradeUsers;
   }
   
-  public ClientAgencyJobProfileGradeUser getClientAgencyJobProfileGradeUser(Integer clientAgencyJobProfileGradeId) {
+	public ClientAgencyJobProfileGradeUser getClientAgencyJobProfileGradeUser(Integer clientAgencyJobProfileGradeId) {
 
-    ClientAgencyJobProfileGradeUser clientAgencyJobProfileGradeUser = null;
-    clientAgencyJobProfileGradeUser = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGradeUser(clientAgencyJobProfileGradeId);
-    return clientAgencyJobProfileGradeUser;
+		ClientAgencyJobProfileGradeUser clientAgencyJobProfileGradeUser = null;
+		clientAgencyJobProfileGradeUser = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGradeUser(clientAgencyJobProfileGradeId);
+		return clientAgencyJobProfileGradeUser;
 
-  }
+	}
 
-  public BookingDateUserApplicant getBookingDateUserApplicantForAgencyAndBookingDate(Integer agencyId, Integer bookingDateId) {
+	public BookingDateUserApplicant getBookingDateUserApplicantForAgencyAndBookingDate(Integer agencyId, Integer bookingDateId) {
 
-    BookingDateUserApplicant bookingDateUserApplicant = null;
-    bookingDateUserApplicant = getBookingDateDAO().getBookingDateUserApplicantForAgencyAndBookingDate(agencyId, bookingDateId);
-    return bookingDateUserApplicant;
+		BookingDateUserApplicant bookingDateUserApplicant = null;
+		bookingDateUserApplicant = getBookingDateDAO().getBookingDateUserApplicantForAgencyAndBookingDate(agencyId, bookingDateId);
+		return bookingDateUserApplicant;
 
-  }
+	}
 
-  public AgencyInvoiceCredit getAgencyInvoiceCredit(Integer agencyInvoiceCreditId) {
-    
-    AgencyInvoiceCredit agencyInvoiceCredit = null;
-    agencyInvoiceCredit = getAgencyInvoiceCreditDAO().getAgencyInvoiceCredit(agencyInvoiceCreditId);
-    return agencyInvoiceCredit;
+	public AgencyInvoiceCredit getAgencyInvoiceCredit(Integer agencyInvoiceCreditId) {
+		
+		AgencyInvoiceCredit agencyInvoiceCredit = null;
+		agencyInvoiceCredit = getAgencyInvoiceCreditDAO().getAgencyInvoiceCredit(agencyInvoiceCreditId);
+		return agencyInvoiceCredit;
 
-  }
-  
+	}
+	
   public List<Unavailable> getActiveUnavailablesInDateRange(Integer agencyId, java.util.Date fromDate, java.util.Date toDate)
   {
     List<Unavailable> unavailables = null;
@@ -2055,10 +2043,10 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return listSubcontractInvoiceItemHistory;
   }
   
-  public EmailAction getEmailAction(Integer emailActionId) {
-    
+  public EmailAction getEmailAction(Integer emailActionId) 
+  {
     EmailAction emailAction = null;
-    emailAction = emailActionDAO.getEmailAction(emailActionId);
+    emailAction = getEmailActionDAO().getEmailAction(emailActionId);
     return emailAction;
   }
 

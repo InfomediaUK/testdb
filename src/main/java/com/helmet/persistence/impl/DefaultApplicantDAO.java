@@ -158,8 +158,10 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		insertApplicantSQL.append("  DEGREE, ");
 		insertApplicantSQL.append("  BIRTHCERTIFICATEFILENAME, ");
 		insertApplicantSQL.append("  BIRTHCERTIFICATE, ");
-		insertApplicantSQL.append("  PROOFOFADDRESSFILENAME, ");
-		insertApplicantSQL.append("  PROOFOFADDRESS, ");
+    insertApplicantSQL.append("  PROOFOFADDRESS1FILENAME, ");
+    insertApplicantSQL.append("  PROOFOFADDRESS1, ");
+    insertApplicantSQL.append("  PROOFOFADDRESS2FILENAME, ");
+    insertApplicantSQL.append("  PROOFOFADDRESS2, ");
 		insertApplicantSQL.append("  NINUMBERSTATUS, ");
 		insertApplicantSQL.append("  FITTOWORKFILENAME, ");
 		insertApplicantSQL.append("  FITTOWORKEXPIRYDATE, ");
@@ -231,6 +233,8 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
+    insertApplicantSQL.append("  ^, ");
+    insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
@@ -388,8 +392,10 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		updateApplicantSQL.append("     DEGREE = ^, ");
 		updateApplicantSQL.append("     BIRTHCERTIFICATEFILENAME = ^, ");
 		updateApplicantSQL.append("     BIRTHCERTIFICATE = ^, ");
-		updateApplicantSQL.append("     PROOFOFADDRESSFILENAME = ^, ");
-		updateApplicantSQL.append("     PROOFOFADDRESS = ^, ");
+    updateApplicantSQL.append("     PROOFOFADDRESS1FILENAME = ^, ");
+    updateApplicantSQL.append("     PROOFOFADDRESS1 = ^, ");
+    updateApplicantSQL.append("     PROOFOFADDRESS2FILENAME = ^, ");
+    updateApplicantSQL.append("     PROOFOFADDRESS2 = ^, ");
 		updateApplicantSQL.append("     NINUMBERSTATUS = ^, ");
 		updateApplicantSQL.append("     FITTOWORKFILENAME = ^, ");
 		updateApplicantSQL.append("     FITTOWORKEXPIRYDATE = ^, ");
@@ -598,8 +604,10 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		selectApplicantsSQL.append("       A.DEGREE, ");
 		selectApplicantsSQL.append("       A.BIRTHCERTIFICATEFILENAME, ");
 		selectApplicantsSQL.append("       A.BIRTHCERTIFICATE, ");
-		selectApplicantsSQL.append("       A.PROOFOFADDRESSFILENAME, ");
-		selectApplicantsSQL.append("       A.PROOFOFADDRESS, ");
+    selectApplicantsSQL.append("       A.PROOFOFADDRESS1FILENAME, ");
+    selectApplicantsSQL.append("       A.PROOFOFADDRESS1, ");
+    selectApplicantsSQL.append("       A.PROOFOFADDRESS2FILENAME, ");
+    selectApplicantsSQL.append("       A.PROOFOFADDRESS2, ");
 		selectApplicantsSQL.append("       A.NINUMBERSTATUS, ");
 		selectApplicantsSQL.append("       A.FITTOWORKFILENAME, ");
 		selectApplicantsSQL.append("       A.FITTOWORKEXPIRYDATE, ");
@@ -1018,12 +1026,19 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
           applicantSearchParameters.getHasPassport(), 
           "A.PASSPORTFILENAME");
     }
-    if (applicantSearchParameters.getHasProofOfAddress() != null)
+    if (applicantSearchParameters.getHasProofOfAddress1() != null)
     {
-      booleanColumn(applicantSearchParameters.getHasProofOfAddressOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
-          applicantSearchParameters.getHasProofOfAddressOperator(), 
-          applicantSearchParameters.getHasProofOfAddress(), 
-          "A.PROOFOFADDRESS");
+      booleanColumn(applicantSearchParameters.getHasProofOfAddress1Operator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
+          applicantSearchParameters.getHasProofOfAddress1Operator(), 
+          applicantSearchParameters.getHasProofOfAddress1(), 
+          "A.PROOFOFADDRESS1");
+    }
+    if (applicantSearchParameters.getHasProofOfAddress2() != null)
+    {
+      booleanColumn(applicantSearchParameters.getHasProofOfAddress2Operator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
+          applicantSearchParameters.getHasProofOfAddress2Operator(), 
+          applicantSearchParameters.getHasProofOfAddress2(), 
+          "A.PROOFOFADDRESS2");
     }
     if (applicantSearchParameters.getHasBirthCertificate() != null)
     {
@@ -1504,8 +1519,10 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getDegree());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBirthCertificateFilename());
     Utilities.replace(sql, applicant.getBirthCertificate());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getProofOfAddressFilename());
-    Utilities.replace(sql, applicant.getProofOfAddress());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getProofOfAddress1Filename());
+    Utilities.replace(sql, applicant.getProofOfAddress1());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getProofOfAddress2Filename());
+    Utilities.replace(sql, applicant.getProofOfAddress2());
     Utilities.replace(sql, applicant.getNiNumberStatus());
     Utilities.replaceAndQuoteNullable(sql, applicant.getFitToWorkFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getFitToWorkExpiryDate());
@@ -1622,8 +1639,10 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getDegree());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBirthCertificateFilename());
     Utilities.replace(sql, applicant.getBirthCertificate());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getProofOfAddressFilename());
-    Utilities.replace(sql, applicant.getProofOfAddress());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getProofOfAddress1Filename());
+    Utilities.replace(sql, applicant.getProofOfAddress1());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getProofOfAddress2Filename());
+    Utilities.replace(sql, applicant.getProofOfAddress2());
     Utilities.replace(sql, applicant.getNiNumberStatus());
     Utilities.replaceAndQuoteNullable(sql, applicant.getFitToWorkFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getFitToWorkExpiryDate());

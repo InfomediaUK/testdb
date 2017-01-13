@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -15,7 +14,6 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
-import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.upload.FormFile;
 import org.apache.struts.util.MessageResources;
@@ -150,12 +148,18 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       applicant.setBirthCertificateFilename("birthcertificate" + getFileExtension(uploadFilename));
     }
-    uploadFormFile = (FormFile)dynaForm.get("proofOfAddressFormFile");
+    uploadFormFile = (FormFile)dynaForm.get("proofOfAddress1FormFile");
     uploadFilename = uploadFormFile.getFileName();
     if (StringUtils.isNotEmpty(uploadFilename))
     {
-      applicant.setProofOfAddressFilename("proofofaddress" + getFileExtension(uploadFilename));
+      applicant.setProofOfAddress1Filename("proofofaddress1" + getFileExtension(uploadFilename));
     }
+    uploadFormFile = (FormFile)dynaForm.get("proofOfAddress2FormFile");
+    uploadFilename = uploadFormFile.getFileName();
+    if (StringUtils.isNotEmpty(uploadFilename))
+    {
+      applicant.setProofOfAddress2Filename("proofofaddress2" + getFileExtension(uploadFilename));
+    }    
     uploadFormFile = (FormFile)dynaForm.get("fitToWorkFormFile");
     uploadFilename = uploadFormFile.getFileName();
     if (StringUtils.isNotEmpty(uploadFilename))
@@ -299,7 +303,8 @@ public abstract class ApplicantCommonProcess extends AgyAction
     controlUploadFile(dynaForm, "reference1FormFile", applicant.getReference1FileUrl());
 //    controlUploadFile(dynaForm, "cvFormFile", applicant.getCvFileUrl());
     controlUploadFile(dynaForm, "birthCertificateFormFile", applicant.getBirthCertificateFileUrl());
-    controlUploadFile(dynaForm, "proofOfAddressFormFile", applicant.getProofOfAddressFileUrl());
+    controlUploadFile(dynaForm, "proofOfAddress1FormFile", applicant.getProofOfAddress1FileUrl());
+    controlUploadFile(dynaForm, "proofOfAddress2FormFile", applicant.getProofOfAddress2FileUrl());
     controlUploadFile(dynaForm, "fitToWorkFormFile", applicant.getFitToWorkFileUrl());
     controlUploadFile(dynaForm, "passportFormFile", applicant.getPassportFileUrl());
     controlUploadFile(dynaForm, "trainingFormFile", applicant.getTrainingFileUrl());

@@ -363,7 +363,8 @@
       <form-property name="reference1FormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="cvFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="birthCertificateFormFile" type="org.apache.struts.upload.FormFile"/>
-      <form-property name="proofOfAddressFormFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="proofOfAddress1FormFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="proofOfAddress2FormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="fitToWorkFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="passportFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="trainingFormFile" type="org.apache.struts.upload.FormFile"/>
@@ -506,8 +507,10 @@
       <form-property name="hasTrainingCertificateOperator" type="java.lang.String" />
       <form-property name="hasPassport" type="java.lang.String" />
       <form-property name="hasPassportOperator" type="java.lang.String" />
-      <form-property name="hasProofOfAddress" type="java.lang.String" />
-      <form-property name="hasProofOfAddressOperator" type="java.lang.String" />
+      <form-property name="hasProofOfAddress1" type="java.lang.String" />
+      <form-property name="hasProofOfAddress1Operator" type="java.lang.String" />
+      <form-property name="hasProofOfAddress2" type="java.lang.String" />
+      <form-property name="hasProofOfAddress2Operator" type="java.lang.String" />
       <form-property name="hasBirthCertificate" type="java.lang.String" />
       <form-property name="hasBirthCertificateOperator" type="java.lang.String" />
       <form-property name="hasOverseasPoliceClearance" type="java.lang.String" />

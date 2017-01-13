@@ -83,8 +83,10 @@ public class ApplicantSearchProcess extends AgyAction
     String hasTrainingCertificate = (String)dynaForm.get("hasTrainingCertificate");
     String hasPassportOperator = (String)dynaForm.get("hasPassportOperator");
     String hasPassport = (String)dynaForm.get("hasPassport");
-    String hasProofOfAddressOperator = (String)dynaForm.get("hasProofOfAddressOperator");
-    String hasProofOfAddress = (String)dynaForm.get("hasProofOfAddress");
+    String hasProofOfAddress1Operator = (String)dynaForm.get("hasProofOfAddress1Operator");
+    String hasProofOfAddress1 = (String)dynaForm.get("hasProofOfAddress1");
+    String hasProofOfAddress2Operator = (String)dynaForm.get("hasProofOfAddress2Operator");
+    String hasProofOfAddress2 = (String)dynaForm.get("hasProofOfAddress2");
     String hasBirthCertificateOperator = (String)dynaForm.get("hasBirthCertificateOperator");
     String hasBirthCertificate = (String)dynaForm.get("hasBirthCertificate");
     String hasOverseasPoliceClearanceOperator = (String)dynaForm.get("hasOverseasPoliceClearanceOperator");
@@ -236,9 +238,12 @@ public class ApplicantSearchProcess extends AgyAction
     applicantSearchParameters.setHasPassportOperator("".equals(hasPassport) ? null : hasPassportOperator);
     session.setAttribute("hasPassportOperator", hasPassportOperator);
     applicantSearchParameters.setHasPassport("".equals(hasPassport) ? null : "true".equals(hasPassport));
-    applicantSearchParameters.setHasProofOfAddressOperator("".equals(hasProofOfAddress) ? null : hasProofOfAddressOperator);
-    session.setAttribute("hasProofOfAddressOperator", hasProofOfAddressOperator);
-    applicantSearchParameters.setHasProofOfAddress("".equals(hasProofOfAddress) ? null : "true".equals(hasProofOfAddress));
+    applicantSearchParameters.setHasProofOfAddress1Operator("".equals(hasProofOfAddress1) ? null : hasProofOfAddress1Operator);
+    session.setAttribute("hasProofOfAddress1Operator", hasProofOfAddress1Operator);
+    applicantSearchParameters.setHasProofOfAddress1("".equals(hasProofOfAddress1) ? null : "true".equals(hasProofOfAddress1));
+    applicantSearchParameters.setHasProofOfAddress2Operator("".equals(hasProofOfAddress2) ? null : hasProofOfAddress2Operator);
+    session.setAttribute("hasProofOfAddress2Operator", hasProofOfAddress2Operator);
+    applicantSearchParameters.setHasProofOfAddress2("".equals(hasProofOfAddress2) ? null : "true".equals(hasProofOfAddress2));
     applicantSearchParameters.setHasBirthCertificateOperator("".equals(hasBirthCertificate) ? null : hasBirthCertificateOperator);
     session.setAttribute("hasBirthCertificateOperator", hasBirthCertificateOperator);
     applicantSearchParameters.setHasBirthCertificate("".equals(hasBirthCertificate) ? null : "true".equals(hasBirthCertificate));

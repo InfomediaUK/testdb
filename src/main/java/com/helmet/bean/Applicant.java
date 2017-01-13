@@ -91,9 +91,13 @@ public class Applicant extends Base
 
   private Boolean birthCertificate = false;
 
-  private String proofOfAddressFilename;
+  private String proofOfAddress1Filename;
 
-  private Boolean proofOfAddress = false;
+  private Boolean proofOfAddress1 = false;
+
+  private String proofOfAddress2Filename;
+
+  private Boolean proofOfAddress2 = false;
 
   private Integer niNumberStatus;
 
@@ -825,31 +829,56 @@ public class Applicant extends Base
     this.performanceEvaluationDate = performanceEvaluationDate;
   }
 
-  public Boolean getProofOfAddress()
+  public Boolean getProofOfAddress1()
   {
-    return proofOfAddress;
+    return proofOfAddress1;
   }
 
-  public void setProofOfAddress(Boolean proofOfAddress)
+  public void setProofOfAddress1(Boolean proofOfAddress1)
   {
-    this.proofOfAddress = proofOfAddress;
+    this.proofOfAddress1 = proofOfAddress1;
   }
 
-  public String getProofOfAddressFilename()
+  public String getProofOfAddress1Filename()
   {
-    return proofOfAddressFilename;
+    return proofOfAddress1Filename;
   }
 
-  public void setProofOfAddressFilename(String proofOfAddressFilename)
+  public void setProofOfAddress1Filename(String proofOfAddress1Filename)
   {
-    this.proofOfAddressFilename = proofOfAddressFilename;
+    this.proofOfAddress1Filename = proofOfAddress1Filename;
   }
 
-  public String getProofOfAddressFileUrl()
+  public String getProofOfAddress1FileUrl()
   {
-    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + proofOfAddressFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + proofOfAddress1Filename;
   }
 
+  public Boolean getProofOfAddress2()
+  {
+    return proofOfAddress2;
+  }
+
+  public void setProofOfAddress2(Boolean proofOfAddress2)
+  {
+    this.proofOfAddress2 = proofOfAddress2;
+  }
+
+  public String getProofOfAddress2Filename()
+  {
+    return proofOfAddress2Filename;
+  }
+
+  public void setProofOfAddress2Filename(String proofOfAddress2Filename)
+  {
+    this.proofOfAddress2Filename = proofOfAddress2Filename;
+  }
+
+  public String getProofOfAddress2FileUrl()
+  {
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + proofOfAddress2Filename;
+  }
+  
   public String getReference1()
   {
     return reference1;
@@ -1432,8 +1461,10 @@ public class Applicant extends Base
     setPassportNumber(rs.getString("PASSPORTNUMBER"));
     setPerformanceEvaluation(rs.getBoolean("PERFORMANCEEVALUATION"));
     setPerformanceEvaluationDate(rs.getDate("PERFORMANCEEVALUATIONDATE"));
-    setProofOfAddress(rs.getBoolean("PROOFOFADDRESS"));
-    setProofOfAddressFilename(rs.getString("PROOFOFADDRESSFILENAME"));
+    setProofOfAddress1(rs.getBoolean("PROOFOFADDRESS1"));
+    setProofOfAddress1Filename(rs.getString("PROOFOFADDRESS1FILENAME"));
+    setProofOfAddress2(rs.getBoolean("PROOFOFADDRESS2"));
+    setProofOfAddress2Filename(rs.getString("PROOFOFADDRESS2FILENAME"));
     setReference1(rs.getString("REFERENCE1"));
     setReference1Date(rs.getDate("REFERENCE1DATE"));
     setReference1Filename(rs.getString("REFERENCE1FILENAME"));
@@ -1601,10 +1632,16 @@ public class Applicant extends Base
     return birthCertificate == null ? false : birthCertificateFilename != null;
   }
   
-  public Boolean getHasProofOfAddress()
+  public Boolean getHasProofOfAddress1()
   {
-    // True: Must have proofOfAddress flag set AND proofOfAddressFilename entered.
-    return proofOfAddress == null ? false : proofOfAddressFilename != null;
+    // True: Must have proofOfAddress1 flag set AND proofOfAddress1Filename entered.
+    return proofOfAddress1 == null ? false : proofOfAddress1Filename != null;
+  }
+  
+  public Boolean getHasProofOfAddress2()
+  {
+    // True: Must have proofOfAddress2 flag set AND proofOfAddress2Filename entered.
+    return proofOfAddress2 == null ? false : proofOfAddress2Filename != null;
   }
   
   public Boolean getNiNumberReceived()

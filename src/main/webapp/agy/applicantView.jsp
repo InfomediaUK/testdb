@@ -585,33 +585,65 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddressFilename"/></th>
+					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress1Filename"/></th>
 					    <td align="left">
-					      <bean:define id="proofOfAddressFileUrl" name="ApplicantFormAgy" property="applicant.proofOfAddressFileUrl" type="java.lang.String" />
+					      <bean:define id="proofOfAddress1FileUrl" name="ApplicantFormAgy" property="applicant.proofOfAddress1FileUrl" type="java.lang.String" />
 					      <% 
-					      fileUrl = request.getContextPath() + proofOfAddressFileUrl;
+					      fileUrl = request.getContextPath() + proofOfAddress1FileUrl;
 					      %>
 <logic:equal name="consultant" property="canViewDocuments" value="true">
-                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="ApplicantFormAgy" property="applicant.proofOfAddressFilename"/></html:link>
+                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="ApplicantFormAgy" property="applicant.proofOfAddress1Filename"/></html:link>
 </logic:equal>
 <logic:notEqual name="consultant" property="canViewDocuments" value="true">
-                <bean:write name="ApplicantFormAgy" property="applicant.proofOfAddressFilename"/>
+                <bean:write name="ApplicantFormAgy" property="applicant.proofOfAddress1Filename"/>
 </logic:notEqual>
 <mmj-agy:hasAccess forward="applicantEdit">
-  <logic:present name="ApplicantFormAgy" property="applicant.proofOfAddressFilename">
+  <logic:present name="ApplicantFormAgy" property="applicant.proofOfAddress1Filename">
 	              &nbsp;
-	              <a href="<%= deleteFileUrl %>&filename=<bean:write name="ApplicantFormAgy" property="applicant.proofOfAddressFilename"/>&fileProperty=proofOfAddress"><bean:message key="link.delete"/></a>
+	              <a href="<%= deleteFileUrl %>&filename=<bean:write name="ApplicantFormAgy" property="applicant.proofOfAddress1Filename"/>&fileProperty=proofOfAddress1"><bean:message key="link.delete"/></a>
 	</logic:present>
 </mmj-agy:hasAccess>
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress"/></th>
+					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress1"/></th>
 					    <td align="left">
-					      <logic:equal name="ApplicantFormAgy" property="applicant.proofOfAddress" value="true">
+					      <logic:equal name="ApplicantFormAgy" property="applicant.proofOfAddress1" value="true">
 							<bean:message key="label.yes"/>
 					      </logic:equal>
-					      <logic:notEqual name="ApplicantFormAgy" property="applicant.proofOfAddress" value="true">
+					      <logic:notEqual name="ApplicantFormAgy" property="applicant.proofOfAddress1" value="true">
+							<bean:message key="label.no"/>
+					      </logic:notEqual>
+					    </td>
+					  </tr>
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress2Filename"/></th>
+					    <td align="left">
+					      <bean:define id="proofOfAddress2FileUrl" name="ApplicantFormAgy" property="applicant.proofOfAddress2FileUrl" type="java.lang.String" />
+					      <% 
+					      fileUrl = request.getContextPath() + proofOfAddress2FileUrl;
+					      %>
+<logic:equal name="consultant" property="canViewDocuments" value="true">
+                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="ApplicantFormAgy" property="applicant.proofOfAddress2Filename"/></html:link>
+</logic:equal>
+<logic:notEqual name="consultant" property="canViewDocuments" value="true">
+                <bean:write name="ApplicantFormAgy" property="applicant.proofOfAddress2Filename"/>
+</logic:notEqual>
+<mmj-agy:hasAccess forward="applicantEdit">
+  <logic:present name="ApplicantFormAgy" property="applicant.proofOfAddress2Filename">
+	              &nbsp;
+	              <a href="<%= deleteFileUrl %>&filename=<bean:write name="ApplicantFormAgy" property="applicant.proofOfAddress2Filename"/>&fileProperty=proofOfAddress2"><bean:message key="link.delete"/></a>
+	</logic:present>
+</mmj-agy:hasAccess>
+					    </td>
+					  </tr>
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress2"/></th>
+					    <td align="left">
+					      <logic:equal name="ApplicantFormAgy" property="applicant.proofOfAddress2" value="true">
+							<bean:message key="label.yes"/>
+					      </logic:equal>
+					      <logic:notEqual name="ApplicantFormAgy" property="applicant.proofOfAddress2" value="true">
 							<bean:message key="label.no"/>
 					      </logic:notEqual>
 					    </td>

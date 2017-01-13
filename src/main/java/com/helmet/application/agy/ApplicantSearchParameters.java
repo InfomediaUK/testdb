@@ -32,8 +32,10 @@ public class ApplicantSearchParameters
   private Boolean hasTrainingCertificate;
   private String hasPassportOperator;
   private Boolean hasPassport;
-  private String hasProofOfAddressOperator;
-  private Boolean hasProofOfAddress;
+  private String hasProofOfAddress1Operator;
+  private Boolean hasProofOfAddress1;
+  private String hasProofOfAddress2Operator;
+  private Boolean hasProofOfAddress2;
   private String hasBirthCertificateOperator;
   private Boolean hasBirthCertificate;
   private String hasOverseasPoliceClearanceOperator;
@@ -629,21 +631,41 @@ public class ApplicantSearchParameters
   {
     this.hasOverseasPoliceClearance = hasOverseasPoliceClearance;
   }
-  public String getHasProofOfAddressOperator()
+  public String getHss2Operator()
   {
-    return hasProofOfAddressOperator;
+    return hasProofOfAddress1Operator;
   }
-  public void setHasProofOfAddressOperator(String hasProofOfAddressOperator)
+  public String getHasProofOfAddress1Operator()
   {
-    this.hasProofOfAddressOperator = hasProofOfAddressOperator;
+    return hasProofOfAddress1Operator;
   }
-  public Boolean getHasProofOfAddress()
+  public void setHasProofOfAddress1Operator(String hasProofOfAddress1Operator)
   {
-    return hasProofOfAddress;
+    this.hasProofOfAddress1Operator = hasProofOfAddress1Operator;
   }
-  public void setHasProofOfAddress(Boolean hasProofOfAddress)
+  public Boolean getHasProofOfAddress1()
   {
-    this.hasProofOfAddress = hasProofOfAddress;
+    return hasProofOfAddress1;
+  }
+  public void setHasProofOfAddress1(Boolean hasProofOfAddress1)
+  {
+    this.hasProofOfAddress1 = hasProofOfAddress1;
+  }
+  public String getHasProofOfAddress2Operator()
+  {
+    return hasProofOfAddress2Operator;
+  }
+  public void setHasProofOfAddress2Operator(String hasProofOfAddress2Operator)
+  {
+    this.hasProofOfAddress2Operator = hasProofOfAddress2Operator;
+  }
+  public Boolean getHasProofOfAddress2()
+  {
+    return hasProofOfAddress2;
+  }
+  public void setHasProofOfAddress2(Boolean hasProofOfAddress2)
+  {
+    this.hasProofOfAddress2 = hasProofOfAddress2;
   }
   public String getHasTrainingCertificateOperator()
   {

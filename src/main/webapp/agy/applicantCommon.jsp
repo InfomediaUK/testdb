@@ -331,13 +331,23 @@
 					    <td align="left"><html:checkbox property="applicant.birthCertificate" tabindex="45" /></td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddressFile"/></th>
-					    <td align="left"><html:file property="proofOfAddressFormFile" size="30" tabindex="46" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.proofOfAddressFilename"/></td>
+					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress1File"/></th>
+					    <td align="left"><html:file property="proofOfAddress1FormFile" size="30" tabindex="46" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.proofOfAddress1Filename"/></td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress"/></th>
-					    <td align="left"><html:checkbox property="applicant.proofOfAddress" tabindex="47" /></td>
+					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress1"/></th>
+					    <td align="left"><html:checkbox property="applicant.proofOfAddress1" tabindex="47" /></td>
 					  </tr>
+
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress2File"/></th>
+					    <td align="left"><html:file property="proofOfAddress2FormFile" size="30" tabindex="46" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.proofOfAddress2Filename"/></td>
+					  </tr>
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.proofOfAddress2"/></th>
+					    <td align="left"><html:checkbox property="applicant.proofOfAddress2" tabindex="47" /></td>
+					  </tr>
+
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.passportFile"/></th>
 					    <td align="left"><html:file property="passportFormFile" size="30" tabindex="49" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.passportFilename"/></td>
@@ -666,7 +676,8 @@
 <html:hidden property="applicant.photoFilename" />
 <html:hidden property="applicant.cvFilename" />
 <html:hidden property="applicant.birthCertificateFilename" />
-<html:hidden property="applicant.proofOfAddressFilename" />
+<html:hidden property="applicant.proofOfAddress1Filename" />
+<html:hidden property="applicant.proofOfAddress2Filename" />
 <html:hidden property="applicant.fitToWorkFilename" />
 <html:hidden property="applicant.passportFilename" />
 <html:hidden property="applicant.trainingFilename" />
