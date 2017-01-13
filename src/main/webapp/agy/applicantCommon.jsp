@@ -501,7 +501,7 @@
             </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.hpc"/></th>
-              <th  align="left" class="label">(HCPC/NMC)</th>
+              <th  align="left" class="label">(HCPC/NMC/HCA)</th>
             </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
