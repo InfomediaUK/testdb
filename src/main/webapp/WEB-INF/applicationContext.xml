@@ -217,11 +217,9 @@
 		<property name="managerDAO" ref="managerDAO" />
 		<property name="managerAccessDAO" ref="managerAccessDAO" />
 		<property name="managerAccessGroupDAO" ref="managerAccessGroupDAO" />
-<!-- 
 		<property name="mgrAccessDAO" ref="mgrAccessDAO" />
 		<property name="mgrAccessGroupDAO" ref="mgrAccessGroupDAO" />
 		<property name="mgrAccessGroupItemDAO" ref="mgrAccessGroupItemDAO" />
--->
 		<property name="publicHolidayDAO" ref="publicHolidayDAO" />
 		<property name="reasonForRequestDAO" ref="reasonForRequestDAO" />
 		<property name="shiftDAO" ref="shiftDAO" />
