@@ -1620,28 +1620,130 @@ public class Applicant extends Base
     return true;
   }
   
+  public String getHasCurrentVisaIfRequired()
+  {
+    if (requiresVisa)
+    {
+      // Visa required, check that its Expiry Date is in the future.
+      if (visaExpiryDate == null)
+      {
+        return "No";
+      }
+      else
+      {
+        if (dateInFuture(visaExpiryDate))
+        {
+          return "Yes";
+        }
+        else
+        {
+          return "No";
+        }
+      }
+    }
+    // Visa NOT required. The implicit visa is always 'current'.
+    return "Not Required";
+  }
+  
   public Boolean getHasDegree()
   {
     // True: Must have degree flag set. ***** Maybe needs degreeDetail entered too. *****
-    return degree == null ? false : true;
+    return degree;
   }
   
   public Boolean getHasBirthCertificate()
   {
     // True: Must have birthCertificate flag set AND birthCertificateFilename entered.
-    return birthCertificate == null ? false : birthCertificateFilename != null;
+    return birthCertificate;
   }
   
   public Boolean getHasProofOfAddress1()
   {
     // True: Must have proofOfAddress1 flag set AND proofOfAddress1Filename entered.
-    return proofOfAddress1 == null ? false : proofOfAddress1Filename != null;
+    return proofOfAddress1 == true && proofOfAddress1Filename != null;
   }
   
   public Boolean getHasProofOfAddress2()
   {
     // True: Must have proofOfAddress2 flag set AND proofOfAddress2Filename entered.
-    return proofOfAddress2 == null ? false : proofOfAddress2Filename != null;
+    return proofOfAddress2 == true && proofOfAddress2Filename != null;
+  }
+  
+  public Boolean getDocumentsRequired()
+  {
+    Boolean documentsRequired = new Boolean(false);
+    if (getHasCurrentIdDocument() == true)
+    {
+      if (getHasCurrentVisaIfRequired().equals("Yes") || getHasCurrentVisaIfRequired().equals("Not Required"))
+      {
+        if (getHasCurrentCRB())
+        {
+          if (getHasCurrentTraining())
+          {
+            if (getHasBirthCertificate())
+            {
+              if (getHasDegree())
+              {
+                if (getHasProofOfAddress1())
+                {
+                  if (getHasProofOfAddress2())
+                  {
+                    if (getOverseasPoliceClearance())
+                    {
+                      if (getNiNumberReceived())
+                      {
+                        
+                      }
+                      else
+                      {
+                        documentsRequired = true;
+                      }
+                    }
+                    else
+                    {
+                      documentsRequired = true;
+                    }
+                  }
+                  else
+                  {
+                    documentsRequired = true;
+                  }
+                }
+                else
+                {
+                  documentsRequired = true;
+                }
+              }
+              else
+              {
+                documentsRequired = true;
+              }
+            }
+            else
+            {
+              documentsRequired = true;
+            }
+          }
+          else
+          {
+            documentsRequired = true;
+          }
+        }
+        else
+        {
+          documentsRequired = true;
+        }
+      }
+      else
+      {
+        documentsRequired = true;
+      }
+    }
+    else
+    {
+      documentsRequired = true;
+    }
+    return documentsRequired;
   }
   
   public Boolean getNiNumberReceived()

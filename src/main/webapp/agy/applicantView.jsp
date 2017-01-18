@@ -24,7 +24,7 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
 String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssuedBy;
 %>
 <mmj-agy:consultant var="consultant"/>
-<table cellpadding="0" cellspacing="0" width="100%" height="30">
+<table cellpadding="0" cellspacing="0" width="100%" height="30" border="0">
   <tr>
 		<td align="left" valign="middle" class="title">
       <bean:message key="title.applicantView"/>&nbsp;
@@ -39,9 +39,16 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 <logic:equal name="ApplicantFormAgy" property="applicant.active" value="true">
 	<mmj-agy:hasAccess forward="applicantEdit">
 	    <html:form action="/applicantEdit.do" onsubmit="return singleSubmit();">
-	    <input type="hidden" name="applicant.applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
-	    <td align="right" valign="middle" width="80"><html:submit styleClass="titleButton"><bean:message key="button.edit"/></html:submit></td>
+	      <input type="hidden" name="applicant.applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
+	      <td align="right" valign="middle" width="80"><html:submit styleClass="titleButton"><bean:message key="button.edit"/></html:submit></td>
 	    </html:form>
+  <logic:notEmpty name="ApplicantFormAgy" property="applicant.documentsRequired">
+        <html:form action="/applicantEmailProcess.do" styleId="ApplicantNew" onsubmit="return singleSubmit();">
+	      <input type="hidden" name="applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
+          <input type="hidden" name="emailActionId" value="8">
+          <td align="right" valign="middle" width="80"><html:submit styleClass="wideButton"><bean:message key="button.requestDocuments"/></html:submit></td>
+        </html:form>
+  </logic:notEmpty>
 	</mmj-agy:hasAccess>
 	<logic:notEqual name="ApplicantFormAgy" property="applicant.archived" value="true">
 		<mmj-agy:hasAccess forward="applicantArchive">
