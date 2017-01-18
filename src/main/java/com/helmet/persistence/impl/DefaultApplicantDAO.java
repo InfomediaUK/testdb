@@ -65,7 +65,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 
   private static StringBuffer selectActiveApplicantsForAgencyHpcAboutToExpireSQL;
 
-  private static StringBuffer selectActiveApplicantsForAgencyPassportAboutToExpireSQL;
+  private static StringBuffer selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL;
 
   private static StringBuffer selectActiveApplicantsForAgencyTrainingAboutToExpireSQL;
 
@@ -165,9 +165,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		insertApplicantSQL.append("  NINUMBERSTATUS, ");
 		insertApplicantSQL.append("  FITTOWORKFILENAME, ");
 		insertApplicantSQL.append("  FITTOWORKEXPIRYDATE, ");
-		insertApplicantSQL.append("  PASSPORTFILENAME, ");
-		insertApplicantSQL.append("  PASSPORTEXPIRYDATE, ");
-		insertApplicantSQL.append("  PASSPORTNUMBER, ");
+		insertApplicantSQL.append("  IDDOCUMENTFILENAME, ");
+		insertApplicantSQL.append("  IDDOCUMENTEXPIRYDATE, ");
+		insertApplicantSQL.append("  IDDOCUMENTNUMBER, ");
 		insertApplicantSQL.append("  TRAININGFILENAME, ");
 		insertApplicantSQL.append("  TRAININGEXPIRYDATE, ");
 		insertApplicantSQL.append("  CRBFILENAME, ");
@@ -197,7 +197,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     insertApplicantSQL.append("  BANKSORTCODE, ");
     insertApplicantSQL.append("  BANKACCOUNTNAME, ");
     insertApplicantSQL.append("  BANKACCOUNTNUMBER, ");
-    insertApplicantSQL.append("  PASSPORTTYPE, ");
+    insertApplicantSQL.append("  IDDOCUMENT, ");
     insertApplicantSQL.append("  LANGUAGECOMPETENCY, ");
     insertApplicantSQL.append("  FITTOWORKISSUEDBY, ");
     insertApplicantSQL.append("  IVSEPPFILENAME, ");
@@ -399,9 +399,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		updateApplicantSQL.append("     NINUMBERSTATUS = ^, ");
 		updateApplicantSQL.append("     FITTOWORKFILENAME = ^, ");
 		updateApplicantSQL.append("     FITTOWORKEXPIRYDATE = ^, ");
-		updateApplicantSQL.append("     PASSPORTFILENAME = ^, ");
-		updateApplicantSQL.append("     PASSPORTEXPIRYDATE = ^, ");
-		updateApplicantSQL.append("     PASSPORTNUMBER = ^, ");
+		updateApplicantSQL.append("     IDDOCUMENTFILENAME = ^, ");
+		updateApplicantSQL.append("     IDDOCUMENTEXPIRYDATE = ^, ");
+		updateApplicantSQL.append("     IDDOCUMENTNUMBER = ^, ");
 		updateApplicantSQL.append("     TRAININGFILENAME = ^, ");
 		updateApplicantSQL.append("     TRAININGEXPIRYDATE = ^, ");
 		updateApplicantSQL.append("     CRBFILENAME = ^, ");
@@ -432,7 +432,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     updateApplicantSQL.append("     BANKSORTCODE = ^, ");
     updateApplicantSQL.append("     BANKACCOUNTNAME = ^, ");
     updateApplicantSQL.append("     BANKACCOUNTNUMBER = ^, ");
-    updateApplicantSQL.append("     PASSPORTTYPE = ^, ");
+    updateApplicantSQL.append("     IDDOCUMENT = ^, ");
     updateApplicantSQL.append("     LANGUAGECOMPETENCY = ^, ");
     updateApplicantSQL.append("     FITTOWORKISSUEDBY = ^, ");
     updateApplicantSQL.append("     IVSEPPFILENAME = ^, ");
@@ -611,9 +611,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		selectApplicantsSQL.append("       A.NINUMBERSTATUS, ");
 		selectApplicantsSQL.append("       A.FITTOWORKFILENAME, ");
 		selectApplicantsSQL.append("       A.FITTOWORKEXPIRYDATE, ");
-		selectApplicantsSQL.append("       A.PASSPORTFILENAME, ");
-		selectApplicantsSQL.append("       A.PASSPORTEXPIRYDATE, ");
-		selectApplicantsSQL.append("       A.PASSPORTNUMBER, ");
+		selectApplicantsSQL.append("       A.IDDOCUMENTFILENAME, ");
+		selectApplicantsSQL.append("       A.IDDOCUMENTEXPIRYDATE, ");
+		selectApplicantsSQL.append("       A.IDDOCUMENTNUMBER, ");
 		selectApplicantsSQL.append("       A.TRAININGFILENAME, ");
 		selectApplicantsSQL.append("       A.TRAININGEXPIRYDATE, ");
 		selectApplicantsSQL.append("       A.CRBFILENAME, ");
@@ -645,7 +645,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       A.BANKSORTCODE, ");
     selectApplicantsSQL.append("       A.BANKACCOUNTNAME, ");
     selectApplicantsSQL.append("       A.BANKACCOUNTNUMBER, ");
-    selectApplicantsSQL.append("       A.PASSPORTTYPE, ");
+    selectApplicantsSQL.append("       A.IDDOCUMENT, ");
     selectApplicantsSQL.append("       A.LANGUAGECOMPETENCY, ");
     selectApplicantsSQL.append("       A.FITTOWORKISSUEDBY, ");
     selectApplicantsSQL.append("       A.IVSEPPFILENAME, ");
@@ -673,7 +673,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       AOS2.NAME AS AREAOFSPECIALITYNAME2, ");
     selectApplicantsSQL.append("       GR.NAME AS GEOGRAPHICALREGIONNAME, ");
     selectApplicantsSQL.append("       DC.NAME AS DISCIPLINECATEGORYNAME, ");
-    selectApplicantsSQL.append("       PT.NAME AS PASSPORTTYPENAME, ");
+    selectApplicantsSQL.append("       ID.NAME AS IDDOCUMENTNAME, ");
     selectApplicantsSQL.append("       VT.NAME AS VISATYPENAME, ");
 		selectApplicantsSQL.append("       C.NAME AS COUNTRYNAME ");
 		selectApplicantsSQL.append("FROM APPLICANT A ");
@@ -683,7 +683,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("LEFT OUTER JOIN GEOGRAPHICALREGION GR ON (GR.GEOGRAPHICALREGIONID = A.GEOGRAPHICALREGIONID) ");
     selectApplicantsSQL.append("LEFT OUTER JOIN DISCIPLINECATEGORY DC ON (DC.DISCIPLINECATEGORYID = A.DISCIPLINECATEGORYID) ");
     // NEW -->     ************** Colums do NOT have ID suffix ********************
-    selectApplicantsSQL.append("LEFT OUTER JOIN PASSPORTTYPE PT ON (PT.PASSPORTTYPEID = A.PASSPORTTYPE) ");
+    selectApplicantsSQL.append("LEFT OUTER JOIN IDDOCUMENT ID ON (ID.IDDOCUMENTID = A.IDDOCUMENT) ");
     selectApplicantsSQL.append("LEFT OUTER JOIN VISATYPE VT ON (VT.VISATYPEID = A.VISATYPE) ");
     // <-- NEW
 		// Get select Applicant SQL.
@@ -748,11 +748,11 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectActiveApplicantsForAgencyHpcAboutToExpireSQL.append("AND A.HPCEXPIRYDATE IS NOT NULL ");
     selectActiveApplicantsForAgencyHpcAboutToExpireSQL.append("AND A.HPCEXPIRYDATE < ^ ");
     selectActiveApplicantsForAgencyHpcAboutToExpireSQL.append("ORDER BY A.HPCEXPIRYDATE DESC ");
-    // Get select Active Applicants for Agency with Passport about to expire.
-    selectActiveApplicantsForAgencyPassportAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
-    selectActiveApplicantsForAgencyPassportAboutToExpireSQL.append("AND A.PASSPORTEXPIRYDATE IS NOT NULL ");
-    selectActiveApplicantsForAgencyPassportAboutToExpireSQL.append("AND A.PASSPORTEXPIRYDATE < ^ ");
-    selectActiveApplicantsForAgencyPassportAboutToExpireSQL.append("ORDER BY A.PASSPORTEXPIRYDATE DESC ");
+    // Get select Active Applicants for Agency with IdDocument about to expire.
+    selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
+    selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.append("AND A.IDDOCUMENTEXPIRYDATE IS NOT NULL ");
+    selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.append("AND A.IDDOCUMENTEXPIRYDATE < ^ ");
+    selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.append("ORDER BY A.IDDOCUMENTEXPIRYDATE DESC ");
     // Get select Active Applicants for Agency with Training about to expire.
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE IS NOT NULL ");
@@ -1019,12 +1019,12 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
           applicantSearchParameters.getHasTrainingCertificate(), 
           "A.TRAININGFILENAME");
     }
-    if (applicantSearchParameters.getHasPassport() != null)
+    if (applicantSearchParameters.getHasIdDocument() != null)
     {
-      nullableColumn(applicantSearchParameters.getHasPassportOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
-          applicantSearchParameters.getHasPassportOperator(), 
-          applicantSearchParameters.getHasPassport(), 
-          "A.PASSPORTFILENAME");
+      nullableColumn(applicantSearchParameters.getHasIdDocumentOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
+          applicantSearchParameters.getHasIdDocumentOperator(), 
+          applicantSearchParameters.getHasIdDocument(), 
+          "A.IDDOCUMENTFILENAME");
     }
     if (applicantSearchParameters.getHasProofOfAddress1() != null)
     {
@@ -1136,12 +1136,12 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
           applicantSearchParameters.getVisaExpiryDate(), 
           "A.VISAEXPIRYDATE");
     }
-    if (applicantSearchParameters.getPassportExpiryDate() != null)
+    if (applicantSearchParameters.getIdDocumentExpiryDate() != null)
     {
-      dateColumn(applicantSearchParameters.getPassportExpiryDateOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
-          applicantSearchParameters.getPassportExpiryDateOperator(), 
-          applicantSearchParameters.getPassportExpiryDate(), 
-          "A.PASSPORTEXPIRYDATE");
+      dateColumn(applicantSearchParameters.getIdDocumentExpiryDateOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
+          applicantSearchParameters.getIdDocumentExpiryDateOperator(), 
+          applicantSearchParameters.getIdDocumentExpiryDate(), 
+          "A.IDDOCUMENTEXPIRYDATE");
     }
     if (applicantSearchParameters.getCrbExpiryDate() != null)
     {
@@ -1342,9 +1342,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Applicant.class.getName());
   }
 
-  public List<Applicant> getApplicantsForAgencyPassportAboutToExpire(Integer agencyId, Date dateToCheck)
+  public List<Applicant> getApplicantsForAgencyIdDocumentAboutToExpire(Integer agencyId, Date dateToCheck)
   {
-    StringBuffer sql = new StringBuffer(selectActiveApplicantsForAgencyPassportAboutToExpireSQL.toString());
+    StringBuffer sql = new StringBuffer(selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.toString());
     // Replace the parameters with supplied values.
     Utilities.replace(sql, agencyId);
     Utilities.replaceAndQuote(sql, dateToCheck);
@@ -1526,9 +1526,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getNiNumberStatus());
     Utilities.replaceAndQuoteNullable(sql, applicant.getFitToWorkFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getFitToWorkExpiryDate());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getPassportFilename());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getPassportExpiryDate());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getPassportNumber());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getIdDocumentFilename());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getIdDocumentExpiryDate());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getIdDocumentNumber());
     Utilities.replaceAndQuoteNullable(sql, applicant.getTrainingFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getTrainingExpiryDate());
     Utilities.replaceAndQuoteNullable(sql, applicant.getCrbFilename());
@@ -1558,7 +1558,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankSortCode());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankAccountName());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankAccountNumber());
-    Utilities.replace(sql, applicant.getPassportType());
+    Utilities.replace(sql, applicant.getIdDocument());
     Utilities.replace(sql, applicant.getLanguageCompetency());
     Utilities.replace(sql, applicant.getFitToWorkIssuedBy());
     Utilities.replaceAndQuoteNullable(sql, applicant.getIvsEppFilename());
@@ -1646,9 +1646,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getNiNumberStatus());
     Utilities.replaceAndQuoteNullable(sql, applicant.getFitToWorkFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getFitToWorkExpiryDate());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getPassportFilename());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getPassportExpiryDate());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getPassportNumber());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getIdDocumentFilename());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getIdDocumentExpiryDate());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getIdDocumentNumber());
     Utilities.replaceAndQuoteNullable(sql, applicant.getTrainingFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getTrainingExpiryDate());
     Utilities.replaceAndQuoteNullable(sql, applicant.getCrbFilename());
@@ -1679,7 +1679,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankSortCode());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankAccountName());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankAccountNumber());
-    Utilities.replace(sql, applicant.getPassportType());
+    Utilities.replace(sql, applicant.getIdDocument());
     Utilities.replace(sql, applicant.getLanguageCompetency());
     Utilities.replace(sql, applicant.getFitToWorkIssuedBy());
     Utilities.replaceAndQuoteNullable(sql, applicant.getIvsEppFilename());

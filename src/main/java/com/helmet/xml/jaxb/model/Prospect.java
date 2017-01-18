@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
 @XmlType(propOrder = { "agencyId", "firstName", "lastName", "gender", "mobileTelephone", "email", "profession", "availableForWork", 
-    "disciplineId", "passportId", "visaId", "lengthOfStay", "documentFileName"})
+    "disciplineId", "idDocumentId", "visaId", "lengthOfStay", "documentFileName"})
 public class Prospect
 {
   private Integer agencyId;
@@ -17,7 +17,7 @@ public class Prospect
   private String profession;
   private String availableForWork;
   private Integer disciplineId;
-  private Integer passportId;
+  private Integer idDocumentId;
   private Integer visaId;
   private String lengthOfStay;
   private String documentFileName;
@@ -112,14 +112,14 @@ public class Prospect
     this.disciplineId = discipline;
   }
 
-  public Integer getPassportId()
+  public Integer getIdDocumentId()
   {
-    return passportId;
+    return idDocumentId;
   }
 
-  public void setPassportId(Integer passportId)
+  public void setIdDocumentId(Integer idDocumentId)
   {
-    this.passportId = passportId;
+    this.idDocumentId = idDocumentId;
   }
 
   public Integer getVisaId()
@@ -194,8 +194,8 @@ public class Prospect
     stringBuilder.append("disciplineId=[");
     stringBuilder.append(disciplineId);
     stringBuilder.append("], ");
-    stringBuilder.append("passportId=[");
-    stringBuilder.append(passportId);
+    stringBuilder.append("idDocumentId=[");
+    stringBuilder.append(idDocumentId);
     stringBuilder.append("]");
     stringBuilder.append("visaId=[");
     stringBuilder.append(visaId);

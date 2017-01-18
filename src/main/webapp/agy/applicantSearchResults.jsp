@@ -159,10 +159,10 @@ function checkedAll(frmname)
 				        </tr>
 				        <tr>
 				          <th>
-				            Passport
+				            Id Document
 				          </th>
 				          <td>
-      				      <bean:write name="applicant" property="passportExpiryDate" formatKey="format.mediumDateFormat"/>&nbsp; 
+      				      <bean:write name="applicant" property="idDocumentExpiryDate" formatKey="format.mediumDateFormat"/>&nbsp; 
 				          </td>
 				        </tr>
 				        <tr>
@@ -235,10 +235,10 @@ function checkedAll(frmname)
 				        </tr>
 				        <tr>
 				          <th  width="50%">
-				            Passport
+				            Id Document
 				          </th>
 				          <td  width="50%">
-      				      <bean:write name="applicant" property="passportFilename"/>&nbsp;
+      				      <bean:write name="applicant" property="idDocumentFilename"/>&nbsp;
 				          </td>
 				        </tr>
 				      </table>

@@ -50,7 +50,7 @@ public class ApplicantNotificationsAction extends AgyAction
     List<Applicant> dbsList = agyService.getApplicantsForAgencyDbsAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> fitToWorkList = agyService.getApplicantsForAgencyFitToWorkAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> hpcList = agyService.getApplicantsForAgencyHpcAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
-    List<Applicant> passportList = agyService.getApplicantsForAgencyPassportAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
+    List<Applicant> idDocumentList = agyService.getApplicantsForAgencyIdDocumentAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> trainingList = agyService.getApplicantsForAgencyTrainingAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> visaList = agyService.getApplicantsForAgencyVisaAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> reference1List = agyService.getApplicantsForAgencyReference1NotSatisfied(getConsultantLoggedIn().getAgencyId(), dateToday);
@@ -68,7 +68,7 @@ public class ApplicantNotificationsAction extends AgyAction
     dynaForm.set("dbsList", dbsList);
     dynaForm.set("fitToWorkList", fitToWorkList);
     dynaForm.set("hpcList", hpcList);
-    dynaForm.set("passportList", passportList);
+    dynaForm.set("idDocumentList", idDocumentList);
     dynaForm.set("trainingList", trainingList);
     dynaForm.set("visaList", visaList);
     dynaForm.set("reference1List", reference1List);

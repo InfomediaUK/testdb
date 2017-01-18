@@ -176,26 +176,26 @@
         <put name="titleKey" value="title.disciplineCategoryDelete" type="string"/>
         <put name="body"   value="/admin/disciplineCategoryDelete.jsp"/>
   </definition>
-  <!-- PassportType -->
-  <definition name="passportTypeList.page" extends="layoutAdmin.main">
-        <put name="titleKey" value="title.passportTypeList" type="string"/>
-        <put name="body"   value="/admin/passportTypeList.jsp"/>
+  <!-- idDocument -->
+  <definition name="idDocumentList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.idDocumentList" type="string"/>
+        <put name="body"   value="/admin/idDocumentList.jsp"/>
   </definition>
-  <definition name="passportTypeNew.page" extends="layoutAdmin.main">
-        <put name="titleKey" value="title.passportTypeNew" type="string"/>
-        <put name="body"   value="/admin/passportTypeNew.jsp"/>
+  <definition name="idDocumentNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.idDocumentNew" type="string"/>
+        <put name="body"   value="/admin/idDocumentNew.jsp"/>
   </definition>
-  <definition name="passportTypeView.page" extends="layoutAdmin.main">
-        <put name="titleKey" value="title.passportTypeView" type="string"/>
-        <put name="body"   value="/admin/passportTypeView.jsp"/>
+  <definition name="idDocumentView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.idDocumentView" type="string"/>
+        <put name="body"   value="/admin/idDocumentView.jsp"/>
   </definition>
-  <definition name="passportTypeEdit.page" extends="layoutAdmin.main">
-        <put name="titleKey" value="title.passportTypeEdit" type="string"/>
-        <put name="body"   value="/admin/passportTypeEdit.jsp"/>
+  <definition name="idDocumentEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.idDocumentEdit" type="string"/>
+        <put name="body"   value="/admin/idDocumentEdit.jsp"/>
   </definition>
-  <definition name="passportTypeDelete.page" extends="layoutAdmin.main">
-        <put name="titleKey" value="title.passportTypeDelete" type="string"/>
-        <put name="body"   value="/admin/passportTypeDelete.jsp"/>
+  <definition name="idDocumentDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.idDocumentDelete" type="string"/>
+        <put name="body"   value="/admin/idDocumentDelete.jsp"/>
   </definition>
   <!-- VisaType -->
   <definition name="visaTypeList.page" extends="layoutAdmin.main">

@@ -10,8 +10,6 @@
 <bean:message key="title.emailActionList"/>
 
 <br/>
-<b><bean:message key="warning.emailNotifications.changes"/></b>
-<br/>
 
 <mmj-admin:hasAccess forward="emailActionNew" >
 <html:link forward="emailActionNew"><bean:message key="link.new"/></html:link>

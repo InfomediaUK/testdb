@@ -38,7 +38,7 @@ import com.helmet.bean.ConsultantEntity;
 import com.helmet.bean.Country;
 import com.helmet.bean.IntValue;
 import com.helmet.bean.VisaType;
-import com.helmet.bean.PassportType;
+import com.helmet.bean.IdDocument;
 import com.helmet.bean.DisciplineCategory;
 import com.helmet.bean.AreaOfSpeciality;
 import com.helmet.bean.EmailAction;
@@ -113,15 +113,15 @@ public interface AdminService extends CommonService {
   public int updateVisaTypeDisplayOrder(VisaType visaType, Integer auditorId);
   public int deleteVisaType(Integer visaTypeId, Integer noOfChanges, Integer auditorId);
 
-  public List<com.helmet.xml.jaxb.model.PassportType> getJerseyPassportTypes(boolean showOnlyActive); 
-  public com.helmet.xml.jaxb.model.PassportType getJerseyPassportType(Integer passportTypeId);
-  public PassportType getPassportType(Integer passportTypeId);
-  public PassportType getPassportTypeForCode(String code);
-  public PassportType getPassportTypeForName(String name);
-  public int insertPassportType(PassportType passportType, Integer auditorId);
-  public int updatePassportType(PassportType passportType, Integer auditorId);
-  public int updatePassportTypeDisplayOrder(PassportType passportType, Integer auditorId);
-  public int deletePassportType(Integer passportTypeId, Integer noOfChanges, Integer auditorId);
+  public List<com.helmet.xml.jaxb.model.IdDocument> getJerseyIdDocuments(boolean showOnlyActive); 
+  public com.helmet.xml.jaxb.model.IdDocument getJerseyIdDocument(Integer idDocumentId);
+  public IdDocument getIdDocument(Integer idDocumentId);
+  public IdDocument getIdDocumentForCode(String code);
+  public IdDocument getIdDocumentForName(String name);
+  public int insertIdDocument(IdDocument idDocument, Integer auditorId);
+  public int updateIdDocument(IdDocument idDocument, Integer auditorId);
+  public int updateIdDocumentDisplayOrder(IdDocument idDocument, Integer auditorId);
+  public int deleteIdDocument(Integer idDocumentId, Integer noOfChanges, Integer auditorId);
 
   public List<com.helmet.xml.jaxb.model.Agency> getJerseyAgencies(boolean showOnlyActive); 
   public com.helmet.xml.jaxb.model.Agency getJerseyAgency(Integer agencyId);

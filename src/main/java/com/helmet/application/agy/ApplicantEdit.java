@@ -45,7 +45,7 @@ public class ApplicantEdit extends ApplicantCommon
     String reference2DateStr = applicant.getReference2Date() == null ? "" : sdf.format(applicant.getReference2Date());
     String reference1DateStr = applicant.getReference1Date() == null ? "" : sdf.format(applicant.getReference1Date());
     String fitToWorkExpiryDateStr = applicant.getFitToWorkExpiryDate() == null ? "" : sdf.format(applicant.getFitToWorkExpiryDate());
-    String passportExpiryDateStr = applicant.getPassportExpiryDate() == null ? "" : sdf.format(applicant.getPassportExpiryDate());
+    String idDocumentExpiryDateStr = applicant.getIdDocumentExpiryDate() == null ? "" : sdf.format(applicant.getIdDocumentExpiryDate());
     String trainingExpiryDateStr = applicant.getTrainingExpiryDate() == null ? "" : sdf.format(applicant.getTrainingExpiryDate());
     String crbExpiryDateStr = applicant.getCrbExpiryDate() == null ? "" : sdf.format(applicant.getCrbExpiryDate());
     String crbIssueDateStr = applicant.getCrbIssueDate() == null ? "" : sdf.format(applicant.getCrbIssueDate());
@@ -71,7 +71,7 @@ public class ApplicantEdit extends ApplicantCommon
     dynaForm.set("reference2DateStr", reference2DateStr);
     dynaForm.set("reference1DateStr", reference1DateStr);
     dynaForm.set("fitToWorkExpiryDateStr", fitToWorkExpiryDateStr);
-    dynaForm.set("passportExpiryDateStr", passportExpiryDateStr);
+    dynaForm.set("idDocumentExpiryDateStr", idDocumentExpiryDateStr);
     dynaForm.set("trainingExpiryDateStr", trainingExpiryDateStr);
     dynaForm.set("crbExpiryDateStr", crbExpiryDateStr);
     dynaForm.set("crbIssueDateStr", crbIssueDateStr);

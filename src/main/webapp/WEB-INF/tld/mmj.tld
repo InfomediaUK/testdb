@@ -105,11 +105,11 @@
   </tag>
   
   <tag>
-    <name>passportTypeList</name>
-    <tag-class>com.helmet.taglib.PassportTypeListTag</tag-class>
+    <name>idDocumentList</name>
+    <tag-class>com.helmet.taglib.IdDocumentListTag</tag-class>
     <body-content>JSP</body-content>
     <description>
-      Sets the passportTypeList in a 'scope'
+      Sets the idDocumentList in a 'scope'
     </description>
     <attribute>
         <name>var</name>

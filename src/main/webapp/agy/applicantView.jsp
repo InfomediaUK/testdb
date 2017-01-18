@@ -649,41 +649,41 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.passportFilename"/></th>
+					    <th width="25%" align="left"class="label"><bean:message key="label.idDocumentFilename"/></th>
 					    <td align="left">
-					      <bean:define id="passportFileUrl" name="ApplicantFormAgy" property="applicant.passportFileUrl" type="java.lang.String" />
+					      <bean:define id="idDocumentFileUrl" name="ApplicantFormAgy" property="applicant.idDocumentFileUrl" type="java.lang.String" />
 					      <% 
-					      fileUrl = request.getContextPath() + passportFileUrl;
+					      fileUrl = request.getContextPath() + idDocumentFileUrl;
 					      %>
 <logic:equal name="consultant" property="canViewDocuments" value="true">
-                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="ApplicantFormAgy" property="applicant.passportFilename"/></html:link>
+                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="ApplicantFormAgy" property="applicant.idDocumentFilename"/></html:link>
 </logic:equal>
 <logic:notEqual name="consultant" property="canViewDocuments" value="true">
-                <bean:write name="ApplicantFormAgy" property="applicant.passportFilename"/>
+                <bean:write name="ApplicantFormAgy" property="applicant.idDocumentFilename"/>
 </logic:notEqual>
 <mmj-agy:hasAccess forward="applicantEdit">
-  <logic:present name="ApplicantFormAgy" property="applicant.passportFilename">
+  <logic:present name="ApplicantFormAgy" property="applicant.idDocumentFilename">
 	              &nbsp;
-	              <a href="<%= deleteFileUrl %>&filename=<bean:write name="ApplicantFormAgy" property="applicant.passportFilename"/>&fileProperty=passport"><bean:message key="link.delete"/></a>
+	              <a href="<%= deleteFileUrl %>&filename=<bean:write name="ApplicantFormAgy" property="applicant.idDocumentFilename"/>&fileProperty=idDocument"><bean:message key="link.delete"/></a>
 	</logic:present>
 </mmj-agy:hasAccess>
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.passportExpiryDate"/></th>
+					    <th width="25%" align="left"class="label"><bean:message key="label.idDocumentExpiryDate"/></th>
 					    <td align="left">
-						    <bean:write name="ApplicantFormAgy" property="applicant.passportExpiryDate" formatKey="format.mediumDateFormat"/>
+						    <bean:write name="ApplicantFormAgy" property="applicant.idDocumentExpiryDate" formatKey="format.mediumDateFormat"/>
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.passportNumber"/></th>
+					    <th width="25%" align="left"class="label"><bean:message key="label.idDocumentNumber"/></th>
 					    <td align="left">
-						    <bean:write name="ApplicantFormAgy" property="applicant.passportNumber"/>
+						    <bean:write name="ApplicantFormAgy" property="applicant.idDocumentNumber"/>
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.passportType"/></th>
-					    <td align="left"><bean:write name="ApplicantFormAgy" property="applicant.passportTypeName"/></td>
+					    <th width="25%" align="left"class="label"><bean:message key="label.idDocumentType"/></th>
+					    <td align="left"><bean:write name="ApplicantFormAgy" property="applicant.idDocumentName"/></td>
 					  </tr>
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.niNumberStatus"/></th>

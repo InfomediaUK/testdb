@@ -75,9 +75,9 @@ public class ApplicantDeleteFileProcess extends AgyAction
       {
         clearProofOfAddress2AssociatedFields(applicant);
       }
-      if (fileProperty.equals("passport"))
+      if (fileProperty.equals("idDocument"))
       {
-        clearPassportAssociatedFields(applicant);
+        clearIdDocumentAssociatedFields(applicant);
       }
       if (fileProperty.equals("fitToWork"))
       {
@@ -237,10 +237,10 @@ public class ApplicantDeleteFileProcess extends AgyAction
     applicant.setProofOfAddress2(false);
   }
 
-  private void clearPassportAssociatedFields(Applicant applicant)
+  private void clearIdDocumentAssociatedFields(Applicant applicant)
   {
-    applicant.setPassportExpiryDate(null);
-    applicant.setPassportNumber(null);
+    applicant.setIdDocumentExpiryDate(null);
+    applicant.setIdDocumentNumber(null);
   }
   
   private void clearFitToWorkAssociatedFields(Applicant applicant)

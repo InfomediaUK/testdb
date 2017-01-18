@@ -349,24 +349,24 @@
 					  </tr>
 
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.passportFile"/></th>
-					    <td align="left"><html:file property="passportFormFile" size="30" tabindex="49" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.passportFilename"/></td>
+					    <th width="25%" align="left"class="label"><bean:message key="label.idDocumentFile"/></th>
+					    <td align="left"><html:file property="idDocumentFormFile" size="30" tabindex="49" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.idDocumentFilename"/></td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.passportExpiryDate"/></th>
-					    <td align="left"><html:text property="passportExpiryDateStr" tabindex="50" />&nbsp;<bean:message key="text.dateFormat"/></td>
+					    <th width="25%" align="left"class="label"><bean:message key="label.idDocumentExpiryDate"/></th>
+					    <td align="left"><html:text property="idDocumentExpiryDateStr" tabindex="50" />&nbsp;<bean:message key="text.dateFormat"/></td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.passportNumber"/></th>
-					    <td align="left"><html:text property="applicant.passportNumber" size="30" maxlength="50" tabindex="51" /></td>
+					    <th width="25%" align="left"class="label"><bean:message key="label.idDocumentNumber"/></th>
+					    <td align="left"><html:text property="applicant.idDocumentNumber" size="30" maxlength="50" tabindex="51" /></td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.passportType"/></th>
+					    <th width="25%" align="left"class="label"><bean:message key="label.idDocument"/></th>
 					    <td align="left">
-                <mmj:passportTypeList var="passportTypeList" />
-                <html:select property="applicant.passportType" tabindex="51">
+                <mmj:idDocumentList var="idDocumentList" />
+                <html:select property="applicant.idDocument" tabindex="51">
                   <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
-                  <html:options collection="passportTypeList" labelProperty="name" property="passportTypeId" />
+                  <html:options collection="idDocumentList" labelProperty="name" property="idDocumentId" />
                 </html:select>
 					    </td>
 					  </tr>
@@ -679,7 +679,7 @@
 <html:hidden property="applicant.proofOfAddress1Filename" />
 <html:hidden property="applicant.proofOfAddress2Filename" />
 <html:hidden property="applicant.fitToWorkFilename" />
-<html:hidden property="applicant.passportFilename" />
+<html:hidden property="applicant.idDocumentFilename" />
 <html:hidden property="applicant.trainingFilename" />
 <html:hidden property="applicant.crbFilename" />
 <html:hidden property="applicant.hpcFilename" />

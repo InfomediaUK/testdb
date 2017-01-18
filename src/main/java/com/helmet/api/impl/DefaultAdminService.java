@@ -45,7 +45,7 @@ import com.helmet.bean.ConsultantEntity;
 import com.helmet.bean.Country;
 import com.helmet.bean.DisciplineCategory;
 import com.helmet.bean.IntValue;
-import com.helmet.bean.PassportType;
+import com.helmet.bean.IdDocument;
 import com.helmet.bean.VisaType;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.AreaOfSpeciality;
@@ -84,42 +84,42 @@ import com.helmet.persistence.Utilities;
 
 public class DefaultAdminService extends DefaultCommonService implements AdminService {
 
-  private AdministratorDAO administratorDAO;
-  
+	private AdministratorDAO administratorDAO;
+	
   private ReEnterPwdDAO reEnterPwdDAO;
-  
-  private ClientReEnterPwdDAO clientReEnterPwdDAO;
-  
-  private AdminAccessDAO adminAccessDAO;
-  
-  private AdministratorAccessDAO administratorAccessDAO;
-  
-  private AdminAccessGroupDAO adminAccessGroupDAO;
-  
-  private AdministratorAccessGroupDAO administratorAccessGroupDAO;
-  
-  private AdminAccessGroupItemDAO adminAccessGroupItemDAO;
-  
-  private JobFamilyDAO jobFamilyDAO;
-  
-  private JobSubFamilyDAO jobSubFamilyDAO;
-  
-  private JobProfileGradeDAO jobProfileGradeDAO;
-  
-  private ConsultantDAO consultantDAO;
-  
-  private AgyAccessDAO agyAccessDAO;
-  
-  private AgyAccessGroupDAO agyAccessGroupDAO;
-  
-  private AgyAccessGroupItemDAO agyAccessGroupItemDAO;
-  
-  private ConsultantAccessDAO consultantAccessDAO;
-  
-  private ConsultantAccessGroupDAO consultantAccessGroupDAO;
-  
-  private BudgetTransactionDAO budgetTransactionDAO;
-  
+	
+	private ClientReEnterPwdDAO clientReEnterPwdDAO;
+	
+	private AdminAccessDAO adminAccessDAO;
+	
+	private AdministratorAccessDAO administratorAccessDAO;
+	
+	private AdminAccessGroupDAO adminAccessGroupDAO;
+	
+	private AdministratorAccessGroupDAO administratorAccessGroupDAO;
+	
+	private AdminAccessGroupItemDAO adminAccessGroupItemDAO;
+	
+	private JobFamilyDAO jobFamilyDAO;
+	
+	private JobSubFamilyDAO jobSubFamilyDAO;
+	
+	private JobProfileGradeDAO jobProfileGradeDAO;
+	
+	private ConsultantDAO consultantDAO;
+	
+	private AgyAccessDAO agyAccessDAO;
+	
+	private AgyAccessGroupDAO agyAccessGroupDAO;
+	
+	private AgyAccessGroupItemDAO agyAccessGroupItemDAO;
+	
+	private ConsultantAccessDAO consultantAccessDAO;
+	
+	private ConsultantAccessGroupDAO consultantAccessGroupDAO;
+	
+	private BudgetTransactionDAO budgetTransactionDAO;
+	
   private ApplicantDAO applicantDAO;
 
   private BookingGradeApplicantDAO bookingGradeApplicantDAO;
@@ -134,252 +134,252 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     this.applicantDAO = applicantDAO;
   }
 
-  public void setAdministratorDAO(AdministratorDAO administratorDAO) {
-    this.administratorDAO = administratorDAO;
-  }
+	public void setAdministratorDAO(AdministratorDAO administratorDAO) {
+		this.administratorDAO = administratorDAO;
+	}
 
-  public void setReEnterPwdDAO(ReEnterPwdDAO reEnterPwdDAO) {
-    this.reEnterPwdDAO = reEnterPwdDAO;
-  }
+	public void setReEnterPwdDAO(ReEnterPwdDAO reEnterPwdDAO) {
+		this.reEnterPwdDAO = reEnterPwdDAO;
+	}
 
-  public void setClientReEnterPwdDAO(ClientReEnterPwdDAO clientReEnterPwdDAO) {
-    this.clientReEnterPwdDAO = clientReEnterPwdDAO;
-  }
+	public void setClientReEnterPwdDAO(ClientReEnterPwdDAO clientReEnterPwdDAO) {
+		this.clientReEnterPwdDAO = clientReEnterPwdDAO;
+	}
 
-  public void setAdminAccessDAO(AdminAccessDAO adminAccessDAO) {
-    this.adminAccessDAO = adminAccessDAO;
-  }
+	public void setAdminAccessDAO(AdminAccessDAO adminAccessDAO) {
+		this.adminAccessDAO = adminAccessDAO;
+	}
 
-  public void setAdministratorAccessDAO(AdministratorAccessDAO administratorAccessDAO) {
-    this.administratorAccessDAO = administratorAccessDAO;
-  }
+	public void setAdministratorAccessDAO(AdministratorAccessDAO administratorAccessDAO) {
+		this.administratorAccessDAO = administratorAccessDAO;
+	}
 
-  public void setAdminAccessGroupDAO(AdminAccessGroupDAO adminAccessGroupDAO) {
-    this.adminAccessGroupDAO = adminAccessGroupDAO;
-  }
+	public void setAdminAccessGroupDAO(AdminAccessGroupDAO adminAccessGroupDAO) {
+		this.adminAccessGroupDAO = adminAccessGroupDAO;
+	}
 
-  public void setAdministratorAccessGroupDAO(AdministratorAccessGroupDAO administratorAccessGroupDAO) {
-    this.administratorAccessGroupDAO = administratorAccessGroupDAO;
-  }
+	public void setAdministratorAccessGroupDAO(AdministratorAccessGroupDAO administratorAccessGroupDAO) {
+		this.administratorAccessGroupDAO = administratorAccessGroupDAO;
+	}
 
-  public void setAdminAccessGroupItemDAO(AdminAccessGroupItemDAO adminAccessGroupItemDAO) {
-    this.adminAccessGroupItemDAO = adminAccessGroupItemDAO;
-  }
+	public void setAdminAccessGroupItemDAO(AdminAccessGroupItemDAO adminAccessGroupItemDAO) {
+		this.adminAccessGroupItemDAO = adminAccessGroupItemDAO;
+	}
 
-  public void setJobFamilyDAO(JobFamilyDAO jobFamilyDAO) {
-    this.jobFamilyDAO = jobFamilyDAO;
-  }
+	public void setJobFamilyDAO(JobFamilyDAO jobFamilyDAO) {
+		this.jobFamilyDAO = jobFamilyDAO;
+	}
 
-  public void setJobSubFamilyDAO(JobSubFamilyDAO jobSubFamilyDAO) {
-    this.jobSubFamilyDAO = jobSubFamilyDAO;
-  }
+	public void setJobSubFamilyDAO(JobSubFamilyDAO jobSubFamilyDAO) {
+		this.jobSubFamilyDAO = jobSubFamilyDAO;
+	}
 
-  public void setJobProfileGradeDAO(JobProfileGradeDAO jobProfileGradeDAO) {
-    this.jobProfileGradeDAO = jobProfileGradeDAO;
-  }
+	public void setJobProfileGradeDAO(JobProfileGradeDAO jobProfileGradeDAO) {
+		this.jobProfileGradeDAO = jobProfileGradeDAO;
+	}
 
-  public void setConsultantDAO(ConsultantDAO consultantDAO) {
-    this.consultantDAO = consultantDAO;
-  }
+	public void setConsultantDAO(ConsultantDAO consultantDAO) {
+		this.consultantDAO = consultantDAO;
+	}
 
-  public void setAgyAccessDAO(AgyAccessDAO agyAccessDAO) {
-    this.agyAccessDAO = agyAccessDAO;
-  }
+	public void setAgyAccessDAO(AgyAccessDAO agyAccessDAO) {
+		this.agyAccessDAO = agyAccessDAO;
+	}
 
-  public void setAgyAccessGroupDAO(AgyAccessGroupDAO agyAccessGroupDAO) {
-    this.agyAccessGroupDAO = agyAccessGroupDAO;
-  }
+	public void setAgyAccessGroupDAO(AgyAccessGroupDAO agyAccessGroupDAO) {
+		this.agyAccessGroupDAO = agyAccessGroupDAO;
+	}
 
-  public void setAgyAccessGroupItemDAO(AgyAccessGroupItemDAO agyAccessGroupItemDAO) {
-    this.agyAccessGroupItemDAO = agyAccessGroupItemDAO;
-  }
+	public void setAgyAccessGroupItemDAO(AgyAccessGroupItemDAO agyAccessGroupItemDAO) {
+		this.agyAccessGroupItemDAO = agyAccessGroupItemDAO;
+	}
 
-  public void setConsultantAccessDAO(ConsultantAccessDAO consultantAccessDAO) {
-    this.consultantAccessDAO = consultantAccessDAO;
-  }
+	public void setConsultantAccessDAO(ConsultantAccessDAO consultantAccessDAO) {
+		this.consultantAccessDAO = consultantAccessDAO;
+	}
 
-  public void setConsultantAccessGroupDAO(
-      ConsultantAccessGroupDAO consultantAccessGroupDAO) {
-    this.consultantAccessGroupDAO = consultantAccessGroupDAO;
-  }
+	public void setConsultantAccessGroupDAO(
+			ConsultantAccessGroupDAO consultantAccessGroupDAO) {
+		this.consultantAccessGroupDAO = consultantAccessGroupDAO;
+	}
 
-  public void setBudgetTransactionDAO(BudgetTransactionDAO budgetTransactionDAO) {
-    this.budgetTransactionDAO = budgetTransactionDAO;
-  }
+	public void setBudgetTransactionDAO(BudgetTransactionDAO budgetTransactionDAO) {
+		this.budgetTransactionDAO = budgetTransactionDAO;
+	}
 
   public void setBookingGradeApplicantDAO(BookingGradeApplicantDAO bookingGradeApplicantDAO)
   {
     this.bookingGradeApplicantDAO = bookingGradeApplicantDAO;
   }
   
-  /*
-   * Administrator stuff ...
-   * 
-   */
-  
+	/*
+	 * Administrator stuff ...
+	 * 
+	 */
+	
   public List<Administrator> getAdministratorAudits() {
 
-    List<Administrator> administrators = null;
-    administrators = administratorDAO.getAdministratorAudits();
-    return administrators;
-    
-  }
-  public List<Administrator> getAdministrators(boolean showOnlyActive) {
+		List<Administrator> administrators = null;
+		administrators = administratorDAO.getAdministratorAudits();
+		return administrators;
+		
+	}
+	public List<Administrator> getAdministrators(boolean showOnlyActive) {
 
-    List<Administrator> administrators = null;
-    administrators = administratorDAO.getAdministrators(showOnlyActive);
-    return administrators;
-    
-  }
-  public Administrator getAdministrator(Integer administratorId) {
-    
-    Administrator administrator = null;
-      administrator = administratorDAO.getAdministrator(administratorId);
-    return administrator;
-    
-  }
-  public AdministratorEntity getAdministratorEntity(Integer administratorId) {
+		List<Administrator> administrators = null;
+		administrators = administratorDAO.getAdministrators(showOnlyActive);
+		return administrators;
+		
+	}
+	public Administrator getAdministrator(Integer administratorId) {
+		
+		Administrator administrator = null;
+    	administrator = administratorDAO.getAdministrator(administratorId);
+		return administrator;
+		
+	}
+	public AdministratorEntity getAdministratorEntity(Integer administratorId) {
 
-    AdministratorEntity administratorEntity = null;
-    administratorEntity = administratorDAO.getAdministratorEntity(administratorId);
-    administratorEntity.setAdministratorAccessUsers(administratorAccessDAO.getAdministratorAccessUsersForAdministrator(administratorId));
-    administratorEntity.setAdminAccesses(adminAccessDAO.getAdminAccessesNotForAdministrator(administratorId));
-    administratorEntity.setAdministratorAccessGroupUsers(administratorAccessGroupDAO.getAdministratorAccessGroupUsersForAdministrator(administratorId));
-    administratorEntity.setAdminAccessGroups(adminAccessGroupDAO.getAdminAccessGroupsNotForAdministrator(administratorId));
-    return administratorEntity;
+		AdministratorEntity administratorEntity = null;
+		administratorEntity = administratorDAO.getAdministratorEntity(administratorId);
+		administratorEntity.setAdministratorAccessUsers(administratorAccessDAO.getAdministratorAccessUsersForAdministrator(administratorId));
+		administratorEntity.setAdminAccesses(adminAccessDAO.getAdminAccessesNotForAdministrator(administratorId));
+		administratorEntity.setAdministratorAccessGroupUsers(administratorAccessGroupDAO.getAdministratorAccessGroupUsersForAdministrator(administratorId));
+		administratorEntity.setAdminAccessGroups(adminAccessGroupDAO.getAdminAccessGroupsNotForAdministrator(administratorId));
+		return administratorEntity;
 
-  }
-  public int insertAdministrator(Administrator administrator, Integer administratorId) {
+	}
+	public int insertAdministrator(Administrator administrator, Integer administratorId) {
 
-    Administrator duplicateAdministrator = administratorDAO.getAdministratorForLogin(administrator.getUser().getLogin());
-    if (duplicateAdministrator != null) {
-      throw new DuplicateDataException("login");
-    }
-    int rc = administratorDAO.insertAdministrator(administrator, administratorId);
-        return rc;      
-  
-  }
-  public int updateAdministrator(Administrator administrator, Integer auditorId) {
+		Administrator duplicateAdministrator = administratorDAO.getAdministratorForLogin(administrator.getUser().getLogin());
+		if (duplicateAdministrator != null) {
+			throw new DuplicateDataException("login");
+		}
+		int rc = administratorDAO.insertAdministrator(administrator, administratorId);
+        return rc;			
+	
+	}
+	public int updateAdministrator(Administrator administrator, Integer auditorId) {
 
-    Administrator duplicateAdministrator = administratorDAO.getAdministratorForLogin(administrator.getUser().getLogin());
-    if (duplicateAdministrator != null && 
-      !duplicateAdministrator.getAdministratorId().equals(administrator.getAdministratorId())) {
-      throw new DuplicateDataException("login");
-    }
-    int rc = administratorDAO.updateAdministrator(administrator, auditorId);
-    return rc;
-  
-  }
-  public int deleteAdministrator(Integer administratorId, Integer noOfChanges, Integer auditorId) {
+		Administrator duplicateAdministrator = administratorDAO.getAdministratorForLogin(administrator.getUser().getLogin());
+		if (duplicateAdministrator != null && 
+			!duplicateAdministrator.getAdministratorId().equals(administrator.getAdministratorId())) {
+			throw new DuplicateDataException("login");
+		}
+		int rc = administratorDAO.updateAdministrator(administrator, auditorId);
+		return rc;
+	
+	}
+	public int deleteAdministrator(Integer administratorId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = administratorDAO.deleteAdministrator(administratorId, noOfChanges, auditorId);
-    return rc;
-  
-  }
-  public Administrator validateLogin(Administrator administrator) {
+		int rc = administratorDAO.deleteAdministrator(administratorId, noOfChanges, auditorId);
+		return rc;
+	
+	}
+	public Administrator validateLogin(Administrator administrator) {
 
-    Administrator administratorX = administratorDAO.getAdministratorForLogin(administrator.getUser().getLogin());
-    if (administratorX == null) {
-      throw new DataNotFoundException();
-    }
-    String encryptedPwd = Utilities.encryptPassword(administrator.getUser().getPwd());
-    if (!encryptedPwd.equals(administratorX.getUser().getPwd())) {
-      administrator.getUser().setPwdHint(administratorX.getUser().getPwdHint());
-      throw new InvalidDetailException();
-    }
-      return administratorX;
-  
-  }
-  
-  
-  public Administrator validateSecretWord(Administrator administrator) {
+		Administrator administratorX = administratorDAO.getAdministratorForLogin(administrator.getUser().getLogin());
+		if (administratorX == null) {
+			throw new DataNotFoundException();
+		}
+		String encryptedPwd = Utilities.encryptPassword(administrator.getUser().getPwd());
+		if (!encryptedPwd.equals(administratorX.getUser().getPwd())) {
+			administrator.getUser().setPwdHint(administratorX.getUser().getPwdHint());
+			throw new InvalidDetailException();
+		}
+    	return administratorX;
+	
+	}
+	
+	
+	public Administrator validateSecretWord(Administrator administrator) {
 
-    Administrator administratorX = administratorDAO.getAdministratorForLogin(administrator.getUser().getLogin());
-    if (administratorX == null) {
-      throw new DataNotFoundException();
-    }
-    if (!administrator.getUser().getSecretWord().equalsIgnoreCase(administratorX.getUser().getSecretWord())) {
-      throw new InvalidDetailException();
-    }
-    administrator.getUser().setPwdHint(administratorX.getUser().getPwdHint());
-    administrator.setAdministratorId(administratorX.getAdministratorId());
-    return administratorX;
+		Administrator administratorX = administratorDAO.getAdministratorForLogin(administrator.getUser().getLogin());
+		if (administratorX == null) {
+			throw new DataNotFoundException();
+		}
+		if (!administrator.getUser().getSecretWord().equalsIgnoreCase(administratorX.getUser().getSecretWord())) {
+			throw new InvalidDetailException();
+		}
+		administrator.getUser().setPwdHint(administratorX.getUser().getPwdHint());
+		administrator.setAdministratorId(administratorX.getAdministratorId());
+		return administratorX;
 
-  }
+	}
 
-    public int updateAdministratorPwd(Integer administratorId, String newPwd, String pwdHint, Integer noOfChanges, Integer auditorId) {
+  	public int updateAdministratorPwd(Integer administratorId, String newPwd, String pwdHint, Integer noOfChanges, Integer auditorId) {
 
-    int rc = administratorDAO.updateAdministratorPwd(administratorId, newPwd, pwdHint, noOfChanges, auditorId);
-    return rc;
+		int rc = administratorDAO.updateAdministratorPwd(administratorId, newPwd, pwdHint, noOfChanges, auditorId);
+		return rc;
 
-    }
-  
-    public int updateAdministratorSecretWord(Integer administratorId, String newSecretWord, Integer noOfChanges, Integer auditorId) {
+  	}
+	
+  	public int updateAdministratorSecretWord(Integer administratorId, String newSecretWord, Integer noOfChanges, Integer auditorId) {
 
-    int rc = administratorDAO.updateAdministratorSecretWord(administratorId, newSecretWord, noOfChanges, auditorId);
-    return rc;
+		int rc = administratorDAO.updateAdministratorSecretWord(administratorId, newSecretWord, noOfChanges, auditorId);
+		return rc;
 
-    }
+  	}
 
-    
-  
-  
-  
-  
-  
-  /*
-   * Country stuff ...
-   * 
-   */
+  	
+	
+	
+	
+	
+	
+	/*
+	 * Country stuff ...
+	 * 
+	 */
 
-//  public List<Country> getCountries() {
+//	public List<Country> getCountries() {
 //
-//    return getCountries(false);
-//    
-//  }
-  public Country getCountry(Integer countryId) {
-    
-    Country country = null;
-    country = getCountryDAO().getCountry(countryId);
-    return country;
-    
-  }
-  public int insertCountry(Country country, Integer auditorId) {
+//		return getCountries(false);
+//		
+//	}
+	public Country getCountry(Integer countryId) {
+		
+		Country country = null;
+		country = getCountryDAO().getCountry(countryId);
+		return country;
+		
+	}
+	public int insertCountry(Country country, Integer auditorId) {
 
-    Country duplicateCountry = getCountryDAO().getCountryForName(country.getName());
-    if (duplicateCountry != null) {
-      throw new DuplicateDataException("name");
-    }
-    duplicateCountry = getCountryDAO().getCountryForIsoCode(country.getIsoCode());
-    if (duplicateCountry != null) {
-      throw new DuplicateDataException("isoCode");
-    }
-    int rc = getCountryDAO().insertCountry(country, auditorId);
-    return rc;
-  
-  }
-  public int updateCountry(Country country, Integer auditorId) {
+		Country duplicateCountry = getCountryDAO().getCountryForName(country.getName());
+		if (duplicateCountry != null) {
+			throw new DuplicateDataException("name");
+		}
+		duplicateCountry = getCountryDAO().getCountryForIsoCode(country.getIsoCode());
+		if (duplicateCountry != null) {
+			throw new DuplicateDataException("isoCode");
+		}
+		int rc = getCountryDAO().insertCountry(country, auditorId);
+		return rc;
+	
+	}
+	public int updateCountry(Country country, Integer auditorId) {
 
-    Country duplicateCountry = getCountryDAO().getCountryForName(country.getName());
-    if (duplicateCountry != null && 
-      !duplicateCountry.getCountryId().equals(country.getCountryId())) {
-      throw new DuplicateDataException("name");
-    }
-    duplicateCountry = getCountryDAO().getCountryForIsoCode(country.getIsoCode());
-    if (duplicateCountry != null && 
-      !duplicateCountry.getCountryId().equals(country.getCountryId())) {
-      throw new DuplicateDataException("isoCode");
-    }
-    int rc = getCountryDAO().updateCountry(country, auditorId);
-    return rc;
-  
-  }
-  public int deleteCountry(Integer countryId, Integer noOfChanges, Integer auditorId) {
+		Country duplicateCountry = getCountryDAO().getCountryForName(country.getName());
+		if (duplicateCountry != null && 
+			!duplicateCountry.getCountryId().equals(country.getCountryId())) {
+			throw new DuplicateDataException("name");
+		}
+		duplicateCountry = getCountryDAO().getCountryForIsoCode(country.getIsoCode());
+		if (duplicateCountry != null && 
+			!duplicateCountry.getCountryId().equals(country.getCountryId())) {
+			throw new DuplicateDataException("isoCode");
+		}
+		int	rc = getCountryDAO().updateCountry(country, auditorId);
+		return rc;
+	
+	}
+	public int deleteCountry(Integer countryId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = getCountryDAO().deleteCountry(countryId, noOfChanges, auditorId);
-    return rc;
-  
-  }
+		int rc = getCountryDAO().deleteCountry(countryId, noOfChanges, auditorId);
+		return rc;
+	
+	}
 // NEW -->
   public EmailAction getEmailAction(Integer emailActionId) {
     
@@ -697,93 +697,93 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     int rc = getVisaTypeDAO().deleteVisaType(visaTypeId, noOfChanges, auditorId);
     return rc;
   }
-  public List<com.helmet.xml.jaxb.model.PassportType> getJerseyPassportTypes(boolean showOnlyActive) 
+  public List<com.helmet.xml.jaxb.model.IdDocument> getJerseyIdDocuments(boolean showOnlyActive) 
   {
-    List<PassportType> passportTypes = null;
-    passportTypes = getPassportTypeDAO().getPassportTypes(showOnlyActive);
-    List<com.helmet.xml.jaxb.model.PassportType> jerseyPassportTypes = new ArrayList<com.helmet.xml.jaxb.model.PassportType>();
-    for (PassportType passportType : passportTypes)
+    List<IdDocument> idDocuments = null;
+    idDocuments = getIdDocumentDAO().getIdDocuments(showOnlyActive);
+    List<com.helmet.xml.jaxb.model.IdDocument> jerseyIdDocuments = new ArrayList<com.helmet.xml.jaxb.model.IdDocument>();
+    for (IdDocument idDocument : idDocuments)
     {
-      jerseyPassportTypes.add(fillJerseyPassportType(passportType));
+      jerseyIdDocuments.add(fillJerseyIdDocument(idDocument));
     }
-    return jerseyPassportTypes;
+    return jerseyIdDocuments;
   }
-  public com.helmet.xml.jaxb.model.PassportType getJerseyPassportType(Integer passportTypeId)
+  public com.helmet.xml.jaxb.model.IdDocument getJerseyIdDocument(Integer idDocumentId)
   {
-    PassportType passportType = null;
-    passportType = getPassportTypeDAO().getPassportType(passportTypeId);
-    if (passportType == null)
+    IdDocument idDocument = null;
+    idDocument = getIdDocumentDAO().getIdDocument(idDocumentId);
+    if (idDocument == null)
     {
-      throw new RuntimeException("Get: PassportType with " + passportTypeId + " not found");
+      throw new RuntimeException("Get: IdDocument with " + idDocumentId + " not found");
     }
-    return fillJerseyPassportType(passportType);
+    return fillJerseyIdDocument(idDocument);
   }
-  private com.helmet.xml.jaxb.model.PassportType fillJerseyPassportType(PassportType passportType)
+  private com.helmet.xml.jaxb.model.IdDocument fillJerseyIdDocument(IdDocument idDocument)
   {
-    com.helmet.xml.jaxb.model.PassportType jerseyPassportType = new com.helmet.xml.jaxb.model.PassportType();
-    jerseyPassportType.setId(passportType.getPassportTypeId());
-    jerseyPassportType.setCode(passportType.getCode());
-    jerseyPassportType.setName(passportType.getName());
-    jerseyPassportType.setDisplayOrder(passportType.getDisplayOrder());
-    return jerseyPassportType;
+    com.helmet.xml.jaxb.model.IdDocument jerseyIdDocument = new com.helmet.xml.jaxb.model.IdDocument();
+    jerseyIdDocument.setId(idDocument.getIdDocumentId());
+    jerseyIdDocument.setCode(idDocument.getCode());
+    jerseyIdDocument.setName(idDocument.getName());
+    jerseyIdDocument.setDisplayOrder(idDocument.getDisplayOrder());
+    return jerseyIdDocument;
   }
-  public PassportType getPassportType(Integer passportTypeId) 
+  public IdDocument getIdDocument(Integer idDocumentId) 
   {
-    PassportType passportType = null;
-    passportType = getPassportTypeDAO().getPassportType(passportTypeId);
-    return passportType;
+    IdDocument idDocument = null;
+    idDocument = getIdDocumentDAO().getIdDocument(idDocumentId);
+    return idDocument;
   }
-  public PassportType getPassportTypeForCode(String code) 
-  {
-    
-    PassportType passportType = null;
-    passportType = getPassportTypeDAO().getPassportTypeForCode(code);
-    return passportType;
-    
-  }
-  public PassportType getPassportTypeForName(String name) 
+  public IdDocument getIdDocumentForCode(String code) 
   {
     
-    PassportType passportType = null;
-    passportType = getPassportTypeDAO().getPassportTypeForCode(name);
-    return passportType;
+    IdDocument idDocument = null;
+    idDocument = getIdDocumentDAO().getIdDocumentForCode(code);
+    return idDocument;
     
   }
-  public int insertPassportType(PassportType passportType, Integer passportTypeId) 
+  public IdDocument getIdDocumentForName(String name) 
   {
-    PassportType duplicatePassportType = getPassportTypeDAO().getPassportTypeForName(passportType.getName());
-    if (duplicatePassportType != null) {
+    
+    IdDocument idDocument = null;
+    idDocument = getIdDocumentDAO().getIdDocumentForCode(name);
+    return idDocument;
+    
+  }
+  public int insertIdDocument(IdDocument idDocument, Integer idDocumentId) 
+  {
+    IdDocument duplicateIdDocument = getIdDocumentDAO().getIdDocumentForName(idDocument.getName());
+    if (duplicateIdDocument != null) {
       throw new DuplicateDataException("name");
     }
-    duplicatePassportType = getPassportTypeDAO().getPassportTypeForCode(passportType.getCode());
-    if (duplicatePassportType != null) {
+    duplicateIdDocument = getIdDocumentDAO().getIdDocumentForCode(idDocument.getCode());
+    if (duplicateIdDocument != null) {
       throw new DuplicateDataException("code");
     }
-    int rc = getPassportTypeDAO().insertPassportType(passportType, passportTypeId);
+    int rc = getIdDocumentDAO().insertIdDocument(idDocument, idDocumentId);
     return rc;
   }
-  public int updatePassportType(PassportType passportType, Integer auditorId) 
+  public int updateIdDocument(IdDocument idDocument, Integer auditorId) 
   {
-    PassportType duplicatePassportType = getPassportTypeDAO().getPassportTypeForName(passportType.getName());
-    if (duplicatePassportType != null && 
-      !duplicatePassportType.getPassportTypeId().equals(passportType.getPassportTypeId())) {
+    IdDocument duplicateIdDocument = getIdDocumentDAO().getIdDocumentForName(idDocument.getName());
+    if (duplicateIdDocument != null && 
+      !duplicateIdDocument.getIdDocumentId().equals(idDocument.getIdDocumentId())) {
       throw new DuplicateDataException("name");
     }
-    duplicatePassportType = getPassportTypeDAO().getPassportTypeForCode(passportType.getCode());
-    if (duplicatePassportType != null && 
-      !duplicatePassportType.getPassportTypeId().equals(passportType.getPassportTypeId())) {
+    duplicateIdDocument = getIdDocumentDAO().getIdDocumentForCode(idDocument.getCode());
+    if (duplicateIdDocument != null && 
+      !duplicateIdDocument.getIdDocumentId().equals(idDocument.getIdDocumentId())) {
       throw new DuplicateDataException("code");
     }
-    int rc = getPassportTypeDAO().updatePassportType(passportType, auditorId);
+    int rc = getIdDocumentDAO().updateIdDocument(idDocument, auditorId);
     return rc;
   }
-  public int updatePassportTypeDisplayOrder(PassportType passportType, Integer auditorId) 
+  public int updateIdDocumentDisplayOrder(IdDocument idDocument, Integer auditorId) 
   {
-    int rc = getPassportTypeDAO().updatePassportType(passportType, auditorId);
+    int rc = getIdDocumentDAO().updateIdDocument(idDocument, auditorId);
     return rc;
   }
-  public int deletePassportType(Integer passportTypeId, Integer noOfChanges, Integer auditorId){
-    int rc = getPassportTypeDAO().deletePassportType(passportTypeId, noOfChanges, auditorId);
+  public int deleteIdDocument(Integer idDocumentId, Integer noOfChanges, Integer auditorId){
+    int rc = getIdDocumentDAO().deleteIdDocument(idDocumentId, noOfChanges, auditorId);
     return rc;
   }
   public List<com.helmet.xml.jaxb.model.Agency> getJerseyAgencies(boolean showOnlyActive) 
@@ -818,59 +818,59 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
   }
   public List<ReEnterPwd> getReEnterPwds(boolean showOnlyActive) {
 
-    List<ReEnterPwd> reEnterPwds = null;
-    reEnterPwds = reEnterPwdDAO.getReEnterPwds(showOnlyActive);
-    return reEnterPwds;
-    
-  }
-  public ReEnterPwd getReEnterPwd(Integer reEnterPwdId) {
-    
-    ReEnterPwd reEnterPwd = null;
-    reEnterPwd = reEnterPwdDAO.getReEnterPwd(reEnterPwdId);
-    return reEnterPwd;
-    
-  }
-  public int insertReEnterPwd(ReEnterPwd reEnterPwd, Integer reEnterPwdId) {
+		List<ReEnterPwd> reEnterPwds = null;
+		reEnterPwds = reEnterPwdDAO.getReEnterPwds(showOnlyActive);
+		return reEnterPwds;
+		
+	}
+	public ReEnterPwd getReEnterPwd(Integer reEnterPwdId) {
+		
+		ReEnterPwd reEnterPwd = null;
+		reEnterPwd = reEnterPwdDAO.getReEnterPwd(reEnterPwdId);
+		return reEnterPwd;
+		
+	}
+	public int insertReEnterPwd(ReEnterPwd reEnterPwd, Integer reEnterPwdId) {
 
-    ReEnterPwd duplicateReEnterPwd = reEnterPwdDAO.getReEnterPwdForName(reEnterPwd.getName());
-    if (duplicateReEnterPwd != null) {
-      throw new DuplicateDataException("name");
-    }
-    int rc = reEnterPwdDAO.insertReEnterPwd(reEnterPwd, reEnterPwdId);
-    return rc;
-  
-  }
-  public int updateReEnterPwd(ReEnterPwd reEnterPwd, Integer auditorId) {
+		ReEnterPwd duplicateReEnterPwd = reEnterPwdDAO.getReEnterPwdForName(reEnterPwd.getName());
+		if (duplicateReEnterPwd != null) {
+			throw new DuplicateDataException("name");
+		}
+		int rc = reEnterPwdDAO.insertReEnterPwd(reEnterPwd, reEnterPwdId);
+		return rc;
+	
+	}
+	public int updateReEnterPwd(ReEnterPwd reEnterPwd, Integer auditorId) {
 
-    ReEnterPwd duplicateReEnterPwd = reEnterPwdDAO.getReEnterPwdForName(reEnterPwd.getName());
-    if (duplicateReEnterPwd != null && 
-      !duplicateReEnterPwd.getReEnterPwdId().equals(reEnterPwd.getReEnterPwdId())) {
-      throw new DuplicateDataException("name");
-    }
-    int rc = reEnterPwdDAO.updateReEnterPwd(reEnterPwd, auditorId);
-    return rc;
-  
-  }
-  public int deleteReEnterPwd(Integer reEnterPwdId, Integer noOfChanges, Integer auditorId) {
+		ReEnterPwd duplicateReEnterPwd = reEnterPwdDAO.getReEnterPwdForName(reEnterPwd.getName());
+		if (duplicateReEnterPwd != null && 
+			!duplicateReEnterPwd.getReEnterPwdId().equals(reEnterPwd.getReEnterPwdId())) {
+			throw new DuplicateDataException("name");
+		}
+		int	rc = reEnterPwdDAO.updateReEnterPwd(reEnterPwd, auditorId);
+		return rc;
+	
+	}
+	public int deleteReEnterPwd(Integer reEnterPwdId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = reEnterPwdDAO.deleteReEnterPwd(reEnterPwdId, noOfChanges, auditorId);
-    return rc;
-  
-  }
+		int rc = reEnterPwdDAO.deleteReEnterPwd(reEnterPwdId, noOfChanges, auditorId);
+		return rc;
+	
+	}
 
-  
-  /*
-   * Client stuff ...
-   * 
-   */
+	
+	/*
+	 * Client stuff ...
+	 * 
+	 */
 
-  public Client getClient(Integer clientId) {
-    
-    Client client = null;
-    client = getClientDAO().getClient(clientId);
-    return client;
-    
-  }
+	public Client getClient(Integer clientId) {
+		
+		Client client = null;
+		client = getClientDAO().getClient(clientId);
+		return client;
+		
+	}
 
   public Client getClientForReference(String reference) 
   {
@@ -886,1093 +886,1093 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     return clients;
   }
 
-  public ClientUserEntity getClientUserEntity(Integer clientId) {
-    
-    return getClientUserEntity(clientId, true);
-  
-  }
+	public ClientUserEntity getClientUserEntity(Integer clientId) {
+		
+		return getClientUserEntity(clientId, true);
+	
+	}
 
-  
-  public ClientUserEntity getClientUserEntity(Integer clientId, boolean showOnlyActive) {
+	
+	public ClientUserEntity getClientUserEntity(Integer clientId, boolean showOnlyActive) {
 
-    ClientUserEntity clientUserEntity = null;
-    clientUserEntity = getClientDAO().getClientUserEntity(clientId);
-    clientUserEntity.setSites(getSiteDAO().getSiteUsersForClient(clientId, showOnlyActive));
-    clientUserEntity.setManagers(getManagerDAO().getManagersForClient(clientId, showOnlyActive));
-    clientUserEntity.setJobFamilies(jobFamilyDAO.getJobFamiliesForClient(clientId, showOnlyActive));
-    clientUserEntity.setGrades(getGradeDAO().getGradesForClient(clientId, showOnlyActive));
-    clientUserEntity.setClientAgencies(getClientAgencyDAO().getClientAgencyUsersForClient(clientId));
-    clientUserEntity.setAgencies(getAgencyDAO().getAgencyUsersNotForClient(clientId));
-    clientUserEntity.setReasonForRequests(getReasonForRequestDAO().getReasonForRequestsForClient(clientId, showOnlyActive));
-    clientUserEntity.setPublicHolidays(getPublicHolidayDAO().getPublicHolidaysForClient(clientId, showOnlyActive));
-//    clientUserEntity.setUplifts(upliftDAO.getUpliftsForClient(clientId, showOnlyActive));
-    clientUserEntity.setMgrAccessGroups(getMgrAccessGroupDAO().getMgrAccessGroupsForClient(clientId, showOnlyActive));
-    
-    clientUserEntity.setClientReEnterPwds(clientReEnterPwdDAO.getClientReEnterPwdUsersForClient(clientId));
-    clientUserEntity.setReEnterPwds(reEnterPwdDAO.getReEnterPwdsNotForClient(clientId));
-    
-    return clientUserEntity;
+		ClientUserEntity clientUserEntity = null;
+		clientUserEntity = getClientDAO().getClientUserEntity(clientId);
+		clientUserEntity.setSites(getSiteDAO().getSiteUsersForClient(clientId, showOnlyActive));
+		clientUserEntity.setManagers(getManagerDAO().getManagersForClient(clientId, showOnlyActive));
+		clientUserEntity.setJobFamilies(jobFamilyDAO.getJobFamiliesForClient(clientId, showOnlyActive));
+		clientUserEntity.setGrades(getGradeDAO().getGradesForClient(clientId, showOnlyActive));
+		clientUserEntity.setClientAgencies(getClientAgencyDAO().getClientAgencyUsersForClient(clientId));
+		clientUserEntity.setAgencies(getAgencyDAO().getAgencyUsersNotForClient(clientId));
+		clientUserEntity.setReasonForRequests(getReasonForRequestDAO().getReasonForRequestsForClient(clientId, showOnlyActive));
+		clientUserEntity.setPublicHolidays(getPublicHolidayDAO().getPublicHolidaysForClient(clientId, showOnlyActive));
+//		clientUserEntity.setUplifts(upliftDAO.getUpliftsForClient(clientId, showOnlyActive));
+		clientUserEntity.setMgrAccessGroups(getMgrAccessGroupDAO().getMgrAccessGroupsForClient(clientId, showOnlyActive));
+		
+		clientUserEntity.setClientReEnterPwds(clientReEnterPwdDAO.getClientReEnterPwdUsersForClient(clientId));
+		clientUserEntity.setReEnterPwds(reEnterPwdDAO.getReEnterPwdsNotForClient(clientId));
+		
+		return clientUserEntity;
 
-  }
+	}
 
-  public List<ClientUserEntity> getClientUserEntities(boolean showOnlyActive) {
-    
-    List<ClientUserEntity> clientUserEntities = null;
-    clientUserEntities = getClientDAO().getClientUserEntities(showOnlyActive);
-    
-    for (ClientUserEntity clientUserEntity: clientUserEntities) {
-      clientUserEntity.setSites(getSiteDAO().getSiteUsersForClient(clientUserEntity.getClientId(), showOnlyActive));
-      clientUserEntity.setManagers(getManagerDAO().getManagersForClient(clientUserEntity.getClientId(), showOnlyActive));
-    }
-    
-    return clientUserEntities;
-    
-  }
-  public int insertClient(Client client, Integer auditorId) {
+	public List<ClientUserEntity> getClientUserEntities(boolean showOnlyActive) {
+		
+		List<ClientUserEntity> clientUserEntities = null;
+		clientUserEntities = getClientDAO().getClientUserEntities(showOnlyActive);
+		
+		for (ClientUserEntity clientUserEntity: clientUserEntities) {
+			clientUserEntity.setSites(getSiteDAO().getSiteUsersForClient(clientUserEntity.getClientId(), showOnlyActive));
+			clientUserEntity.setManagers(getManagerDAO().getManagersForClient(clientUserEntity.getClientId(), showOnlyActive));
+		}
+		
+		return clientUserEntities;
+		
+	}
+	public int insertClient(Client client, Integer auditorId) {
 
-    Client duplicateClient = getClientDAO().getClientForName(client.getName());
-    if (duplicateClient != null) {
-      throw new DuplicateDataException("name");
-    }
-    duplicateClient = getClientDAO().getClientForCode(client.getCode());
-    if (duplicateClient != null) {
-      throw new DuplicateDataException("code");
-    }
-    
-    int rc = getClientDAO().insertClient(client, auditorId);
-    return rc;
-  
-  }
-  
-  // update moved to common service
+		Client duplicateClient = getClientDAO().getClientForName(client.getName());
+		if (duplicateClient != null) {
+			throw new DuplicateDataException("name");
+		}
+		duplicateClient = getClientDAO().getClientForCode(client.getCode());
+		if (duplicateClient != null) {
+			throw new DuplicateDataException("code");
+		}
+		
+		int rc = getClientDAO().insertClient(client, auditorId);
+		return rc;
+	
+	}
+	
+	// update moved to common service
 
-  public int deleteClient(Integer clientId, Integer noOfChanges, Integer auditorId) {
+	public int deleteClient(Integer clientId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = getClientDAO().deleteClient(clientId, noOfChanges, auditorId);
-    return rc;
-  
-  }
-  
-  public int updateClientDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
-    int rc = 0;
+		int rc = getClientDAO().deleteClient(clientId, noOfChanges, auditorId);
+		return rc;
+	
+	}
+	
+	public int updateClientDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
+		int rc = 0;
 
-    StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
-    String commaDelimitedKey = null;
-    int displayOrder = 0;
-    while (stringTokenizer.hasMoreTokens())
-    {
-        commaDelimitedKey = stringTokenizer.nextToken();
-        if (!zeroiseDisplayOrder)
-        {
-          // Increment the display order.
-          displayOrder++;
-        }
-      StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
-      Integer clientId = Integer.parseInt(st.nextToken());
-      Integer noOfChanges = Integer.parseInt(st.nextToken());
-        rc += getClientDAO().updateClientDisplayOrder(clientId, displayOrder, noOfChanges, auditorId);
-    }
-    
-    return rc;
-  }
-  
-  /*
-   * AdminAccess stuff
-   * 
-   */
+		StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
+		String commaDelimitedKey = null;
+		int displayOrder = 0;
+		while (stringTokenizer.hasMoreTokens())
+		{
+		    commaDelimitedKey = stringTokenizer.nextToken();
+		    if (!zeroiseDisplayOrder)
+		    {
+		      // Increment the display order.
+		      displayOrder++;
+		    }
+			StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
+			Integer clientId = Integer.parseInt(st.nextToken());
+			Integer noOfChanges = Integer.parseInt(st.nextToken());
+		    rc += getClientDAO().updateClientDisplayOrder(clientId, displayOrder, noOfChanges, auditorId);
+		}
+		
+		return rc;
+	}
+	
+	/*
+	 * AdminAccess stuff
+	 * 
+	 */
 
-  public List<AdminAccess> getAdminAccesses(boolean showOnlyActive) {
+	public List<AdminAccess> getAdminAccesses(boolean showOnlyActive) {
 
-    List<AdminAccess> adminAccesses = null;
-    adminAccesses = adminAccessDAO.getAdminAccesses(showOnlyActive);
-    return adminAccesses;
+		List<AdminAccess> adminAccesses = null;
+		adminAccesses = adminAccessDAO.getAdminAccesses(showOnlyActive);
+		return adminAccesses;
 
-  }
-  public List<AdminAccess> getActiveAdminAccessesForAdministrator(Integer administratorId) {
+	}
+	public List<AdminAccess> getActiveAdminAccessesForAdministrator(Integer administratorId) {
 
-    List<AdminAccess> adminAccesses = null;
-    adminAccesses = adminAccessDAO.getActiveAdminAccessesForAdministrator(administratorId);
-    return adminAccesses;
+		List<AdminAccess> adminAccesses = null;
+		adminAccesses = adminAccessDAO.getActiveAdminAccessesForAdministrator(administratorId);
+		return adminAccesses;
 
-  }
-  public AdminAccess getAdminAccess(Integer adminAccessId) {
+	}
+	public AdminAccess getAdminAccess(Integer adminAccessId) {
 
-    AdminAccess adminAccess = null;
-    adminAccess = adminAccessDAO.getAdminAccess(adminAccessId);
-    return adminAccess;
+		AdminAccess adminAccess = null;
+		adminAccess = adminAccessDAO.getAdminAccess(adminAccessId);
+		return adminAccess;
 
-  }
-  public int insertAdminAccess(AdminAccess adminAccess, Integer auditorId) {
+	}
+	public int insertAdminAccess(AdminAccess adminAccess, Integer auditorId) {
 
-    AdminAccess duplicateAdminAccess = adminAccessDAO.getAdminAccessForName(adminAccess.getName());
-    if (duplicateAdminAccess != null) {
-      throw new DuplicateDataException("name");
-    }
-    int rc = adminAccessDAO.insertAdminAccess(adminAccess, auditorId);
-    return rc;
+		AdminAccess duplicateAdminAccess = adminAccessDAO.getAdminAccessForName(adminAccess.getName());
+		if (duplicateAdminAccess != null) {
+			throw new DuplicateDataException("name");
+		}
+		int rc = adminAccessDAO.insertAdminAccess(adminAccess, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int updateAdminAccess(AdminAccess adminAccess, Integer auditorId) {
+	public int updateAdminAccess(AdminAccess adminAccess, Integer auditorId) {
 
-    AdminAccess duplicateAdminAccess = adminAccessDAO.getAdminAccessForName(adminAccess.getName());
-    if (duplicateAdminAccess  != null && 
-      !duplicateAdminAccess.getAdminAccessId().equals(adminAccess.getAdminAccessId())) {
-      throw new DuplicateDataException("name");
-    }
+		AdminAccess duplicateAdminAccess = adminAccessDAO.getAdminAccessForName(adminAccess.getName());
+		if (duplicateAdminAccess  != null && 
+			!duplicateAdminAccess.getAdminAccessId().equals(adminAccess.getAdminAccessId())) {
+			throw new DuplicateDataException("name");
+		}
         int rc = adminAccessDAO.updateAdminAccess(adminAccess, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteAdminAccess(Integer adminAccessId, Integer noOfChanges, Integer auditorId) {
+	public int deleteAdminAccess(Integer adminAccessId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = adminAccessDAO.deleteAdminAccess(adminAccessId, noOfChanges, auditorId);
-    return rc;
+		int rc = adminAccessDAO.deleteAdminAccess(adminAccessId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  /*
-   * AdministratorAccess stuff
-   * 
-   */
+	/*
+	 * AdministratorAccess stuff
+	 * 
+	 */
 
-  public List<AdministratorAccessUser> getAdministratorAccessUsersForAdministrator(Integer administratorId) {
+	public List<AdministratorAccessUser> getAdministratorAccessUsersForAdministrator(Integer administratorId) {
 
-    List<AdministratorAccessUser> administratorAccesses = null;
-    administratorAccesses = administratorAccessDAO.getAdministratorAccessUsersForAdministrator(administratorId);
-    return administratorAccesses;
+		List<AdministratorAccessUser> administratorAccesses = null;
+		administratorAccesses = administratorAccessDAO.getAdministratorAccessUsersForAdministrator(administratorId);
+		return administratorAccesses;
 
-  }
+	}
 
-  public int insertAdministratorAccess(AdministratorAccess administratorAccess, Integer auditorId) {
+	public int insertAdministratorAccess(AdministratorAccess administratorAccess, Integer auditorId) {
 
         int rc = administratorAccessDAO.insertAdministratorAccess(administratorAccess, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteAdministratorAccess(Integer administratorAccessId, Integer noOfChanges, Integer auditorId) {
+	public int deleteAdministratorAccess(Integer administratorAccessId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = administratorAccessDAO.deleteAdministratorAccess(administratorAccessId, noOfChanges, auditorId);
-    return rc;
+		int rc = administratorAccessDAO.deleteAdministratorAccess(administratorAccessId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  /*
-   * AdminAccessGroup stuff
-   * 
-   */
-  
-  public List<AdminAccessGroup> getAdminAccessGroups(boolean showOnlyActive) {
+	/*
+	 * AdminAccessGroup stuff
+	 * 
+	 */
+	
+	public List<AdminAccessGroup> getAdminAccessGroups(boolean showOnlyActive) {
 
-    List<AdminAccessGroup> adminAccessGroups = null;
-    adminAccessGroups = adminAccessGroupDAO.getAdminAccessGroups(showOnlyActive);
-    return adminAccessGroups;
+		List<AdminAccessGroup> adminAccessGroups = null;
+		adminAccessGroups = adminAccessGroupDAO.getAdminAccessGroups(showOnlyActive);
+		return adminAccessGroups;
 
-  }
-  public AdminAccessGroup getAdminAccessGroup(Integer adminAccessGroupId) {
+	}
+	public AdminAccessGroup getAdminAccessGroup(Integer adminAccessGroupId) {
 
-    AdminAccessGroup adminAccessGroup = null;
-    adminAccessGroup = adminAccessGroupDAO.getAdminAccessGroup(adminAccessGroupId);
-    return adminAccessGroup;
+		AdminAccessGroup adminAccessGroup = null;
+		adminAccessGroup = adminAccessGroupDAO.getAdminAccessGroup(adminAccessGroupId);
+		return adminAccessGroup;
 
-  }
-  public AdminAccessGroupEntity getAdminAccessGroupEntity(Integer adminAccessGroupId) {
+	}
+	public AdminAccessGroupEntity getAdminAccessGroupEntity(Integer adminAccessGroupId) {
 
-    AdminAccessGroupEntity adminAccessGroupEntity = null;
-    adminAccessGroupEntity = adminAccessGroupDAO.getAdminAccessGroupEntity(adminAccessGroupId);
-    adminAccessGroupEntity.setAdminAccessGroupItemUsers(adminAccessGroupItemDAO.getAdminAccessGroupItemUsersForAdminAccessGroup(adminAccessGroupId));
-    adminAccessGroupEntity.setAdminAccesses(adminAccessDAO.getAdminAccessesNotForAdminAccessGroup(adminAccessGroupId));
-    return adminAccessGroupEntity;
+		AdminAccessGroupEntity adminAccessGroupEntity = null;
+		adminAccessGroupEntity = adminAccessGroupDAO.getAdminAccessGroupEntity(adminAccessGroupId);
+		adminAccessGroupEntity.setAdminAccessGroupItemUsers(adminAccessGroupItemDAO.getAdminAccessGroupItemUsersForAdminAccessGroup(adminAccessGroupId));
+		adminAccessGroupEntity.setAdminAccesses(adminAccessDAO.getAdminAccessesNotForAdminAccessGroup(adminAccessGroupId));
+		return adminAccessGroupEntity;
 
-  }
-  public int insertAdminAccessGroup(AdminAccessGroup adminAccessGroup, Integer auditorId) {
+	}
+	public int insertAdminAccessGroup(AdminAccessGroup adminAccessGroup, Integer auditorId) {
 
-    AdminAccessGroup duplicateAdminAccessGroup = adminAccessGroupDAO.getAdminAccessGroupForName(adminAccessGroup.getName());
-    if (duplicateAdminAccessGroup != null) {
-      throw new DuplicateDataException("name");
-    }
-    int rc = adminAccessGroupDAO.insertAdminAccessGroup(adminAccessGroup, auditorId);
-    return rc;
+		AdminAccessGroup duplicateAdminAccessGroup = adminAccessGroupDAO.getAdminAccessGroupForName(adminAccessGroup.getName());
+		if (duplicateAdminAccessGroup != null) {
+			throw new DuplicateDataException("name");
+		}
+		int rc = adminAccessGroupDAO.insertAdminAccessGroup(adminAccessGroup, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int updateAdminAccessGroup(AdminAccessGroup adminAccessGroup, Integer auditorId) {
+	public int updateAdminAccessGroup(AdminAccessGroup adminAccessGroup, Integer auditorId) {
 
-    AdminAccessGroup duplicateAdminAccessGroup = adminAccessGroupDAO.getAdminAccessGroupForName(adminAccessGroup.getName());
-    if (duplicateAdminAccessGroup  != null && 
-      !duplicateAdminAccessGroup.getAdminAccessGroupId().equals(adminAccessGroup.getAdminAccessGroupId())) {
-      throw new DuplicateDataException("name");
-    }
+		AdminAccessGroup duplicateAdminAccessGroup = adminAccessGroupDAO.getAdminAccessGroupForName(adminAccessGroup.getName());
+		if (duplicateAdminAccessGroup  != null && 
+			!duplicateAdminAccessGroup.getAdminAccessGroupId().equals(adminAccessGroup.getAdminAccessGroupId())) {
+			throw new DuplicateDataException("name");
+		}
         int rc = adminAccessGroupDAO.updateAdminAccessGroup(adminAccessGroup, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteAdminAccessGroup(Integer adminAccessGroupId, Integer noOfChanges, Integer auditorId) {
+	public int deleteAdminAccessGroup(Integer adminAccessGroupId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = adminAccessGroupDAO.deleteAdminAccessGroup(adminAccessGroupId, noOfChanges, auditorId);
-    return rc;
+		int rc = adminAccessGroupDAO.deleteAdminAccessGroup(adminAccessGroupId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  /*
-   * AdministratorAccessGroup stuff
-   * 
-   */
+	/*
+	 * AdministratorAccessGroup stuff
+	 * 
+	 */
 
-  public List<AdministratorAccessGroupUser> getAdministratorAccessGroupUsersForAdministrator(Integer administratorId) {
+	public List<AdministratorAccessGroupUser> getAdministratorAccessGroupUsersForAdministrator(Integer administratorId) {
 
-    List<AdministratorAccessGroupUser> administratorAccessGroupes = null;
-    administratorAccessGroupes = administratorAccessGroupDAO.getAdministratorAccessGroupUsersForAdministrator(administratorId);
-    return administratorAccessGroupes;
+		List<AdministratorAccessGroupUser> administratorAccessGroupes = null;
+		administratorAccessGroupes = administratorAccessGroupDAO.getAdministratorAccessGroupUsersForAdministrator(administratorId);
+		return administratorAccessGroupes;
 
-  }
+	}
 
-  public int insertAdministratorAccessGroup(AdministratorAccessGroup administratorAccessGroup, Integer auditorId) {
+	public int insertAdministratorAccessGroup(AdministratorAccessGroup administratorAccessGroup, Integer auditorId) {
 
         int rc = administratorAccessGroupDAO.insertAdministratorAccessGroup(administratorAccessGroup, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteAdministratorAccessGroup(Integer administratorAccessGroupId, Integer noOfChanges, Integer auditorId) {
+	public int deleteAdministratorAccessGroup(Integer administratorAccessGroupId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = administratorAccessGroupDAO.deleteAdministratorAccessGroup(administratorAccessGroupId, noOfChanges, auditorId);
-    return rc;
+		int rc = administratorAccessGroupDAO.deleteAdministratorAccessGroup(administratorAccessGroupId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int insertAdminAccessGroupItem(AdminAccessGroupItem adminAccessGroupItem, Integer auditorId) {
+	public int insertAdminAccessGroupItem(AdminAccessGroupItem adminAccessGroupItem, Integer auditorId) {
 
         int rc = adminAccessGroupItemDAO.insertAdminAccessGroupItem(adminAccessGroupItem, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteAdminAccessGroupItem(Integer adminAccessGroupItemId, Integer noOfChanges, Integer auditorId) {
+	public int deleteAdminAccessGroupItem(Integer adminAccessGroupItemId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = adminAccessGroupItemDAO.deleteAdminAccessGroupItem(adminAccessGroupItemId, noOfChanges, auditorId);
-    return rc;
+		int rc = adminAccessGroupItemDAO.deleteAdminAccessGroupItem(adminAccessGroupItemId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  /*
-   * JobFamily stuff
-   * 
-   */
+	/*
+	 * JobFamily stuff
+	 * 
+	 */
 
-  public List<JobFamily> getJobFamiliesForClient(Integer clientId, boolean showOnlyActive) {
+	public List<JobFamily> getJobFamiliesForClient(Integer clientId, boolean showOnlyActive) {
 
-    List<JobFamily> jobFamilies = null;
-    jobFamilies = jobFamilyDAO.getJobFamiliesForClient(clientId, showOnlyActive);
-    return jobFamilies;
+		List<JobFamily> jobFamilies = null;
+		jobFamilies = jobFamilyDAO.getJobFamiliesForClient(clientId, showOnlyActive);
+		return jobFamilies;
 
-  }
+	}
 
-  public JobFamily getJobFamily(Integer jobFamilyId) {
+	public JobFamily getJobFamily(Integer jobFamilyId) {
 
-    JobFamily jobFamily = null;
-    jobFamily = jobFamilyDAO.getJobFamily(jobFamilyId);
-    return jobFamily;
+		JobFamily jobFamily = null;
+		jobFamily = jobFamilyDAO.getJobFamily(jobFamilyId);
+		return jobFamily;
 
-  }
-  public JobFamilyEntity getJobFamilyEntity(Integer jobFamilyId, boolean showOnlyActive) {
+	}
+	public JobFamilyEntity getJobFamilyEntity(Integer jobFamilyId, boolean showOnlyActive) {
 
-    JobFamilyEntity jobFamilyEntity = null;
-    jobFamilyEntity = jobFamilyDAO.getJobFamilyEntity(jobFamilyId);
-    jobFamilyEntity.setJobSubFamilies(jobSubFamilyDAO.getJobSubFamiliesForJobFamily(jobFamilyId, showOnlyActive));
-    return jobFamilyEntity;
+		JobFamilyEntity jobFamilyEntity = null;
+		jobFamilyEntity = jobFamilyDAO.getJobFamilyEntity(jobFamilyId);
+		jobFamilyEntity.setJobSubFamilies(jobSubFamilyDAO.getJobSubFamiliesForJobFamily(jobFamilyId, showOnlyActive));
+		return jobFamilyEntity;
 
-  }
+	}
 
-  public int insertJobFamily(JobFamily jobFamily, Integer auditorId) {
+	public int insertJobFamily(JobFamily jobFamily, Integer auditorId) {
 
-    JobFamily duplicateJobFamily = jobFamilyDAO.getJobFamilyForName(jobFamily.getClientId(), jobFamily.getName());
-    if (duplicateJobFamily != null) {
-      throw new DuplicateDataException("name");
-    }
-    if (jobFamily.getCode() != null && !"".equals(jobFamily.getCode())) {
-      // not mandatory, so olny check if entered
-      duplicateJobFamily = jobFamilyDAO.getJobFamilyForCode(jobFamily.getClientId(), jobFamily.getCode());
-      if (duplicateJobFamily != null) {
-        throw new DuplicateDataException("code");
-      }
-    }
-    
+		JobFamily duplicateJobFamily = jobFamilyDAO.getJobFamilyForName(jobFamily.getClientId(), jobFamily.getName());
+		if (duplicateJobFamily != null) {
+			throw new DuplicateDataException("name");
+		}
+		if (jobFamily.getCode() != null && !"".equals(jobFamily.getCode())) {
+			// not mandatory, so olny check if entered
+			duplicateJobFamily = jobFamilyDAO.getJobFamilyForCode(jobFamily.getClientId(), jobFamily.getCode());
+			if (duplicateJobFamily != null) {
+				throw new DuplicateDataException("code");
+			}
+		}
+		
         int rc = jobFamilyDAO.insertJobFamily(jobFamily, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int updateJobFamily(JobFamily jobFamily, Integer auditorId) {
+	public int updateJobFamily(JobFamily jobFamily, Integer auditorId) {
 
-    JobFamily duplicateJobFamily = jobFamilyDAO.getJobFamilyForName(jobFamily.getClientId(), jobFamily.getName());
-    if (duplicateJobFamily != null &&
-      !duplicateJobFamily.getJobFamilyId().equals(jobFamily.getJobFamilyId())) {
-      throw new DuplicateDataException("name");
-    }
-    if (jobFamily.getCode() != null && !"".equals(jobFamily.getCode())) {
-      // not mandatory, so olny check if entered
-      duplicateJobFamily = jobFamilyDAO.getJobFamilyForCode(jobFamily.getClientId(), jobFamily.getCode());
-      if (duplicateJobFamily != null &&
-        !duplicateJobFamily.getJobFamilyId().equals(jobFamily.getJobFamilyId())) {
-        throw new DuplicateDataException("code");
-      }
-    }
-      
+		JobFamily duplicateJobFamily = jobFamilyDAO.getJobFamilyForName(jobFamily.getClientId(), jobFamily.getName());
+		if (duplicateJobFamily != null &&
+			!duplicateJobFamily.getJobFamilyId().equals(jobFamily.getJobFamilyId())) {
+			throw new DuplicateDataException("name");
+		}
+		if (jobFamily.getCode() != null && !"".equals(jobFamily.getCode())) {
+			// not mandatory, so olny check if entered
+			duplicateJobFamily = jobFamilyDAO.getJobFamilyForCode(jobFamily.getClientId(), jobFamily.getCode());
+			if (duplicateJobFamily != null &&
+				!duplicateJobFamily.getJobFamilyId().equals(jobFamily.getJobFamilyId())) {
+				throw new DuplicateDataException("code");
+			}
+		}
+			
         int rc = jobFamilyDAO.updateJobFamily(jobFamily, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteJobFamily(Integer jobFamilyId, Integer noOfChanges, Integer auditorId) {
+	public int deleteJobFamily(Integer jobFamilyId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = jobFamilyDAO.deleteJobFamily(jobFamilyId, noOfChanges, auditorId);
-    return rc;
+		int rc = jobFamilyDAO.deleteJobFamily(jobFamilyId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int updateJobFamilyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
-    int rc = 0;
+	public int updateJobFamilyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
+		int rc = 0;
 
-    StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
-    String commaDelimitedKey = null;
-    int displayOrder = 0;
-    while (stringTokenizer.hasMoreTokens())
-    {
-        commaDelimitedKey = stringTokenizer.nextToken();
-        if (!zeroiseDisplayOrder)
-        {
-          // Increment the display order.
-          displayOrder++;
-        }
-      StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
-      Integer jobFamilyId = Integer.parseInt(st.nextToken());
-      Integer noOfChanges = Integer.parseInt(st.nextToken());
-        rc += jobFamilyDAO.updateJobFamilyDisplayOrder(jobFamilyId, displayOrder, noOfChanges, auditorId);
-    }
-    
-    return rc;
-  }
-  
-  /*
-   * JobSubFamily stuff
-   * 
-   */
+		StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
+		String commaDelimitedKey = null;
+		int displayOrder = 0;
+		while (stringTokenizer.hasMoreTokens())
+		{
+		    commaDelimitedKey = stringTokenizer.nextToken();
+		    if (!zeroiseDisplayOrder)
+		    {
+		      // Increment the display order.
+		      displayOrder++;
+		    }
+			StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
+			Integer jobFamilyId = Integer.parseInt(st.nextToken());
+			Integer noOfChanges = Integer.parseInt(st.nextToken());
+		    rc += jobFamilyDAO.updateJobFamilyDisplayOrder(jobFamilyId, displayOrder, noOfChanges, auditorId);
+		}
+		
+		return rc;
+	}
+	
+	/*
+	 * JobSubFamily stuff
+	 * 
+	 */
 
-  public JobSubFamily getJobSubFamily(Integer jobSubFamilyId) {
+	public JobSubFamily getJobSubFamily(Integer jobSubFamilyId) {
 
-    JobSubFamily jobSubFamily = null;
-    jobSubFamily = jobSubFamilyDAO.getJobSubFamily(jobSubFamilyId);
-    return jobSubFamily;
+		JobSubFamily jobSubFamily = null;
+		jobSubFamily = jobSubFamilyDAO.getJobSubFamily(jobSubFamilyId);
+		return jobSubFamily;
 
-  }
+	}
 
-  public JobSubFamilyEntity getJobSubFamilyEntity(Integer jobSubFamilyId, boolean showOnlyActive) {
+	public JobSubFamilyEntity getJobSubFamilyEntity(Integer jobSubFamilyId, boolean showOnlyActive) {
 
-    JobSubFamilyEntity jobSubFamilyEntity = null;
-    jobSubFamilyEntity = jobSubFamilyDAO.getJobSubFamilyEntity(jobSubFamilyId);
-    jobSubFamilyEntity.setJobProfiles(getJobProfileDAO().getJobProfilesForJobSubFamily(jobSubFamilyId, showOnlyActive));
-    return jobSubFamilyEntity;
+		JobSubFamilyEntity jobSubFamilyEntity = null;
+		jobSubFamilyEntity = jobSubFamilyDAO.getJobSubFamilyEntity(jobSubFamilyId);
+		jobSubFamilyEntity.setJobProfiles(getJobProfileDAO().getJobProfilesForJobSubFamily(jobSubFamilyId, showOnlyActive));
+		return jobSubFamilyEntity;
 
-  }
+	}
 
-  public List<JobSubFamily> getJobSubFamiliesForJobFamily(Integer jobFamilyId, boolean showOnlyActive) {
+	public List<JobSubFamily> getJobSubFamiliesForJobFamily(Integer jobFamilyId, boolean showOnlyActive) {
 
-    List<JobSubFamily> jobSubFamilies = null;
-    jobSubFamilies = jobSubFamilyDAO.getJobSubFamiliesForJobFamily(jobFamilyId, showOnlyActive);
-    return jobSubFamilies;
+		List<JobSubFamily> jobSubFamilies = null;
+		jobSubFamilies = jobSubFamilyDAO.getJobSubFamiliesForJobFamily(jobFamilyId, showOnlyActive);
+		return jobSubFamilies;
 
-  }
+	}
 
-  public int insertJobSubFamily(JobSubFamily jobSubFamily, Integer auditorId) {
+	public int insertJobSubFamily(JobSubFamily jobSubFamily, Integer auditorId) {
 
-    JobSubFamily duplicateJobSubFamily = jobSubFamilyDAO.getJobSubFamilyForName(jobSubFamily.getJobFamilyId(), jobSubFamily.getName());
-    if (duplicateJobSubFamily != null) {
-      throw new DuplicateDataException("name");
-    }
-    if (jobSubFamily.getCode() != null && !"".equals(jobSubFamily.getCode())) {
-      // not mandatory, so olny check if entered
-      duplicateJobSubFamily = jobSubFamilyDAO.getJobSubFamilyForCode(jobSubFamily.getJobFamilyId(), jobSubFamily.getCode());
-      if (duplicateJobSubFamily != null) {
-        throw new DuplicateDataException("code");
-      }
-    }
-    
+		JobSubFamily duplicateJobSubFamily = jobSubFamilyDAO.getJobSubFamilyForName(jobSubFamily.getJobFamilyId(), jobSubFamily.getName());
+		if (duplicateJobSubFamily != null) {
+			throw new DuplicateDataException("name");
+		}
+		if (jobSubFamily.getCode() != null && !"".equals(jobSubFamily.getCode())) {
+			// not mandatory, so olny check if entered
+			duplicateJobSubFamily = jobSubFamilyDAO.getJobSubFamilyForCode(jobSubFamily.getJobFamilyId(), jobSubFamily.getCode());
+			if (duplicateJobSubFamily != null) {
+				throw new DuplicateDataException("code");
+			}
+		}
+		
         int rc = jobSubFamilyDAO.insertJobSubFamily(jobSubFamily, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int updateJobSubFamily(JobSubFamily jobSubFamily, Integer auditorId) {
+	public int updateJobSubFamily(JobSubFamily jobSubFamily, Integer auditorId) {
 
-    JobSubFamily duplicateJobSubFamily = jobSubFamilyDAO.getJobSubFamilyForName(jobSubFamily.getJobFamilyId(), jobSubFamily.getName());
-    if (duplicateJobSubFamily != null &&
-      !duplicateJobSubFamily.getJobSubFamilyId().equals(jobSubFamily.getJobSubFamilyId())) {
-      throw new DuplicateDataException("name");
-    }
-    if (jobSubFamily.getCode() != null && !"".equals(jobSubFamily.getCode())) {
-      // not mandatory, so olny check if entered
-      duplicateJobSubFamily = jobSubFamilyDAO.getJobSubFamilyForCode(jobSubFamily.getJobFamilyId(), jobSubFamily.getCode());
-      if (duplicateJobSubFamily != null &&
-        !duplicateJobSubFamily.getJobSubFamilyId().equals(jobSubFamily.getJobSubFamilyId())) {
-        throw new DuplicateDataException("code");
-      }
-    }
-    
+		JobSubFamily duplicateJobSubFamily = jobSubFamilyDAO.getJobSubFamilyForName(jobSubFamily.getJobFamilyId(), jobSubFamily.getName());
+		if (duplicateJobSubFamily != null &&
+			!duplicateJobSubFamily.getJobSubFamilyId().equals(jobSubFamily.getJobSubFamilyId())) {
+			throw new DuplicateDataException("name");
+		}
+		if (jobSubFamily.getCode() != null && !"".equals(jobSubFamily.getCode())) {
+			// not mandatory, so olny check if entered
+			duplicateJobSubFamily = jobSubFamilyDAO.getJobSubFamilyForCode(jobSubFamily.getJobFamilyId(), jobSubFamily.getCode());
+			if (duplicateJobSubFamily != null &&
+				!duplicateJobSubFamily.getJobSubFamilyId().equals(jobSubFamily.getJobSubFamilyId())) {
+				throw new DuplicateDataException("code");
+			}
+		}
+		
         int rc = jobSubFamilyDAO.updateJobSubFamily(jobSubFamily, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteJobSubFamily(Integer jobSubFamilyId, Integer noOfChanges, Integer auditorId) {
+	public int deleteJobSubFamily(Integer jobSubFamilyId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = jobSubFamilyDAO.deleteJobSubFamily(jobSubFamilyId, noOfChanges, auditorId);
-    return rc;
+		int rc = jobSubFamilyDAO.deleteJobSubFamily(jobSubFamilyId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int updateJobSubFamilyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
-    int rc = 0;
+	public int updateJobSubFamilyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
+		int rc = 0;
 
-    StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
-    String commaDelimitedKey = null;
-    int displayOrder = 0;
-    while (stringTokenizer.hasMoreTokens())
-    {
-        commaDelimitedKey = stringTokenizer.nextToken();
-        if (!zeroiseDisplayOrder)
-        {
-          // Increment the display order.
-          displayOrder++;
-        }
-      StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
-      Integer jobSubFamilyId = Integer.parseInt(st.nextToken());
-      Integer noOfChanges = Integer.parseInt(st.nextToken());
-        rc += jobSubFamilyDAO.updateJobSubFamilyDisplayOrder(jobSubFamilyId, displayOrder, noOfChanges, auditorId);
-    }
-    
-    return rc;
-  }
-  
-  /*
-   * JobProfile stuff
-   * 
-   */
+		StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
+		String commaDelimitedKey = null;
+		int displayOrder = 0;
+		while (stringTokenizer.hasMoreTokens())
+		{
+		    commaDelimitedKey = stringTokenizer.nextToken();
+		    if (!zeroiseDisplayOrder)
+		    {
+		      // Increment the display order.
+		      displayOrder++;
+		    }
+			StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
+			Integer jobSubFamilyId = Integer.parseInt(st.nextToken());
+			Integer noOfChanges = Integer.parseInt(st.nextToken());
+		    rc += jobSubFamilyDAO.updateJobSubFamilyDisplayOrder(jobSubFamilyId, displayOrder, noOfChanges, auditorId);
+		}
+		
+		return rc;
+	}
+	
+	/*
+	 * JobProfile stuff
+	 * 
+	 */
 
-  public JobProfile getJobProfile(Integer jobProfileId) {
+	public JobProfile getJobProfile(Integer jobProfileId) {
 
-    JobProfile jobProfile = null;
-    jobProfile = getJobProfileDAO().getJobProfile(jobProfileId);
-    return jobProfile;
+		JobProfile jobProfile = null;
+		jobProfile = getJobProfileDAO().getJobProfile(jobProfileId);
+		return jobProfile;
 
-  }
+	}
 
-  public JobProfileUserEntity getJobProfileUserEntity(Integer jobProfileId) {
+	public JobProfileUserEntity getJobProfileUserEntity(Integer jobProfileId) {
 
-    JobProfileUserEntity jobProfileUserEntity = null;
-    jobProfileUserEntity = getJobProfileDAO().getJobProfileUserEntity(jobProfileId);
-    jobProfileUserEntity.setJobProfileGradeUsers(jobProfileGradeDAO.getJobProfileGradeUsersForJobProfile(jobProfileId));
-    jobProfileUserEntity.setGrades(getGradeDAO().getGradesNotForJobProfile(jobProfileUserEntity.getClientId(), jobProfileId));
-    jobProfileUserEntity.setClientAgencyJobProfileUsers(getClientAgencyJobProfileDAO().getClientAgencyJobProfileUsersForJobProfile(jobProfileId));
-    jobProfileUserEntity.setClientAgencyUsers(getClientAgencyDAO().getClientAgencyUsersNotForJobProfile(jobProfileUserEntity.getClientId(), jobProfileId));
-    return jobProfileUserEntity;
+		JobProfileUserEntity jobProfileUserEntity = null;
+		jobProfileUserEntity = getJobProfileDAO().getJobProfileUserEntity(jobProfileId);
+		jobProfileUserEntity.setJobProfileGradeUsers(jobProfileGradeDAO.getJobProfileGradeUsersForJobProfile(jobProfileId));
+		jobProfileUserEntity.setGrades(getGradeDAO().getGradesNotForJobProfile(jobProfileUserEntity.getClientId(), jobProfileId));
+		jobProfileUserEntity.setClientAgencyJobProfileUsers(getClientAgencyJobProfileDAO().getClientAgencyJobProfileUsersForJobProfile(jobProfileId));
+		jobProfileUserEntity.setClientAgencyUsers(getClientAgencyDAO().getClientAgencyUsersNotForJobProfile(jobProfileUserEntity.getClientId(), jobProfileId));
+		return jobProfileUserEntity;
 
-  }
+	}
 
-  public List<JobProfile> getJobProfilesForJobSubFamily(Integer jobSubFamilyId, boolean showOnlyActive) {
+	public List<JobProfile> getJobProfilesForJobSubFamily(Integer jobSubFamilyId, boolean showOnlyActive) {
 
-    List<JobProfile> jobProfiles = null;
-    jobProfiles = getJobProfileDAO().getJobProfilesForJobSubFamily(jobSubFamilyId, showOnlyActive);
-    return jobProfiles;
+		List<JobProfile> jobProfiles = null;
+		jobProfiles = getJobProfileDAO().getJobProfilesForJobSubFamily(jobSubFamilyId, showOnlyActive);
+		return jobProfiles;
 
-  }
+	}
 
-  public int insertJobProfile(JobProfile jobProfile, Integer auditorId) {
+	public int insertJobProfile(JobProfile jobProfile, Integer auditorId) {
 
-    JobProfile duplicateJobProfile = getJobProfileDAO().getJobProfileForName(jobProfile.getJobSubFamilyId(), jobProfile.getName());
-    if (duplicateJobProfile != null) {
-      throw new DuplicateDataException("name");
-    }
-    if (jobProfile.getCode() != null && !"".equals(jobProfile.getCode())) {
-      // not mandatory, so olny check if entered
-      duplicateJobProfile = getJobProfileDAO().getJobProfileForCode(jobProfile.getJobSubFamilyId(), jobProfile.getCode());
-      if (duplicateJobProfile != null) {
-        throw new DuplicateDataException("code");
-      }
-    }
-    
+		JobProfile duplicateJobProfile = getJobProfileDAO().getJobProfileForName(jobProfile.getJobSubFamilyId(), jobProfile.getName());
+		if (duplicateJobProfile != null) {
+			throw new DuplicateDataException("name");
+		}
+		if (jobProfile.getCode() != null && !"".equals(jobProfile.getCode())) {
+			// not mandatory, so olny check if entered
+			duplicateJobProfile = getJobProfileDAO().getJobProfileForCode(jobProfile.getJobSubFamilyId(), jobProfile.getCode());
+			if (duplicateJobProfile != null) {
+				throw new DuplicateDataException("code");
+			}
+		}
+		
         int rc = getJobProfileDAO().insertJobProfile(jobProfile, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int updateJobProfile(JobProfile jobProfile, Integer auditorId) {
+	public int updateJobProfile(JobProfile jobProfile, Integer auditorId) {
 
-    JobProfile duplicateJobProfile = getJobProfileDAO().getJobProfileForName(jobProfile.getJobSubFamilyId(), jobProfile.getName());
-    if (duplicateJobProfile != null &&
-      !duplicateJobProfile.getJobProfileId().equals(jobProfile.getJobProfileId())) {
-      throw new DuplicateDataException("name");
-    }
-    if (jobProfile.getCode() != null && !"".equals(jobProfile.getCode())) {
-      // not mandatory, so olny check if entered
-      duplicateJobProfile = getJobProfileDAO().getJobProfileForCode(jobProfile.getJobSubFamilyId(), jobProfile.getCode());
-      if (duplicateJobProfile != null &&
-        !duplicateJobProfile.getJobProfileId().equals(jobProfile.getJobProfileId())) {
-        throw new DuplicateDataException("code");
-      }
-    }
-    
+		JobProfile duplicateJobProfile = getJobProfileDAO().getJobProfileForName(jobProfile.getJobSubFamilyId(), jobProfile.getName());
+		if (duplicateJobProfile != null &&
+			!duplicateJobProfile.getJobProfileId().equals(jobProfile.getJobProfileId())) {
+			throw new DuplicateDataException("name");
+		}
+		if (jobProfile.getCode() != null && !"".equals(jobProfile.getCode())) {
+			// not mandatory, so olny check if entered
+			duplicateJobProfile = getJobProfileDAO().getJobProfileForCode(jobProfile.getJobSubFamilyId(), jobProfile.getCode());
+			if (duplicateJobProfile != null &&
+				!duplicateJobProfile.getJobProfileId().equals(jobProfile.getJobProfileId())) {
+				throw new DuplicateDataException("code");
+			}
+		}
+		
         int rc = getJobProfileDAO().updateJobProfile(jobProfile, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteJobProfile(Integer jobProfileId, Integer noOfChanges, Integer auditorId) {
+	public int deleteJobProfile(Integer jobProfileId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = getJobProfileDAO().deleteJobProfile(jobProfileId, noOfChanges, auditorId);
-    return rc;
+		int rc = getJobProfileDAO().deleteJobProfile(jobProfileId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int updateJobProfileDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
-    int rc = 0;
+	public int updateJobProfileDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
+		int rc = 0;
 
-    StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
-    String commaDelimitedKey = null;
-    int displayOrder = 0;
-    while (stringTokenizer.hasMoreTokens())
-    {
-        commaDelimitedKey = stringTokenizer.nextToken();
-        if (!zeroiseDisplayOrder)
-        {
-          // Increment the display order.
-          displayOrder++;
-        }
-      StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
-      Integer jobProfileId = Integer.parseInt(st.nextToken());
-      Integer noOfChanges = Integer.parseInt(st.nextToken());
-        rc += getJobProfileDAO().updateJobProfileDisplayOrder(jobProfileId, displayOrder, noOfChanges, auditorId);
-    }
-    
-    return rc;
-  }
-  
-  public int insertJobProfileGrade(JobProfileGrade jobProfileGrade, Integer auditorId) {
+		StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
+		String commaDelimitedKey = null;
+		int displayOrder = 0;
+		while (stringTokenizer.hasMoreTokens())
+		{
+		    commaDelimitedKey = stringTokenizer.nextToken();
+		    if (!zeroiseDisplayOrder)
+		    {
+		      // Increment the display order.
+		      displayOrder++;
+		    }
+			StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
+			Integer jobProfileId = Integer.parseInt(st.nextToken());
+			Integer noOfChanges = Integer.parseInt(st.nextToken());
+		    rc += getJobProfileDAO().updateJobProfileDisplayOrder(jobProfileId, displayOrder, noOfChanges, auditorId);
+		}
+		
+		return rc;
+	}
+	
+	public int insertJobProfileGrade(JobProfileGrade jobProfileGrade, Integer auditorId) {
 
         int rc = jobProfileGradeDAO.insertJobProfileGrade(jobProfileGrade, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteJobProfileGrade(Integer jobProfileGradeId, Integer noOfChanges, Integer auditorId) {
+	public int deleteJobProfileGrade(Integer jobProfileGradeId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = jobProfileGradeDAO.deleteJobProfileGrade(jobProfileGradeId, noOfChanges, auditorId);
-    return rc;
+		int rc = jobProfileGradeDAO.deleteJobProfileGrade(jobProfileGradeId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  /*
-   * Agency stuff ...
-   * 
-   */
+	/*
+	 * Agency stuff ...
+	 * 
+	 */
 
-  public Agency getAgency(Integer agencyId) {
-    
-    Agency agency = null;
-    agency = getAgencyDAO().getAgency(agencyId);
-    return agency;
-    
-  }
-  public AgencyUser getAgencyUser(Integer agencyId) {
-    
-    AgencyUser agencyUser = null;
-    agencyUser = getAgencyDAO().getAgencyUser(agencyId);
-    return agencyUser;
-    
-  }
+	public Agency getAgency(Integer agencyId) {
+		
+		Agency agency = null;
+		agency = getAgencyDAO().getAgency(agencyId);
+		return agency;
+		
+	}
+	public AgencyUser getAgencyUser(Integer agencyId) {
+		
+		AgencyUser agencyUser = null;
+		agencyUser = getAgencyDAO().getAgencyUser(agencyId);
+		return agencyUser;
+		
+	}
   public Consultant getProspectConsultant(Integer agencyId)
   {
     return consultantDAO.getProspectConsultant(agencyId);
   }
-  public AgencyUserEntity getAgencyUserEntity(Integer agencyId, boolean showOnlyActive) {
+	public AgencyUserEntity getAgencyUserEntity(Integer agencyId, boolean showOnlyActive) {
 
-    AgencyUserEntity agencyUserEntity = null;
-    agencyUserEntity = getAgencyDAO().getAgencyUserEntity(agencyId);
-    agencyUserEntity.setConsultants(consultantDAO.getConsultantsForAgency(agencyId, showOnlyActive));
-    agencyUserEntity.setAgyAccessGroups(agyAccessGroupDAO.getAgyAccessGroupsForAgency(agencyId, showOnlyActive));
-    agencyUserEntity.setClientAgencyUsers(getClientAgencyDAO().getClientAgencyUsersForAgency(agencyId, showOnlyActive));
-    return agencyUserEntity;
+		AgencyUserEntity agencyUserEntity = null;
+		agencyUserEntity = getAgencyDAO().getAgencyUserEntity(agencyId);
+		agencyUserEntity.setConsultants(consultantDAO.getConsultantsForAgency(agencyId, showOnlyActive));
+		agencyUserEntity.setAgyAccessGroups(agyAccessGroupDAO.getAgyAccessGroupsForAgency(agencyId, showOnlyActive));
+		agencyUserEntity.setClientAgencyUsers(getClientAgencyDAO().getClientAgencyUsersForAgency(agencyId, showOnlyActive));
+		return agencyUserEntity;
 
-  }
-  public int insertAgency(Agency agency, Integer auditorId) {
+	}
+	public int insertAgency(Agency agency, Integer auditorId) {
 
-    Agency duplicateAgency = getAgencyDAO().getAgencyForName(agency.getName());
-    if (duplicateAgency != null) {
-      throw new DuplicateDataException("name");
-    }
-    duplicateAgency = getAgencyDAO().getAgencyForCode(agency.getCode());
-    if (duplicateAgency != null) {
-      throw new DuplicateDataException("code");
-    }
-    
-    int rc = getAgencyDAO().insertAgency(agency, auditorId);
-    return rc;
-  
-  }
-  public int updateAgency(Agency agency, Integer auditorId) {
+		Agency duplicateAgency = getAgencyDAO().getAgencyForName(agency.getName());
+		if (duplicateAgency != null) {
+			throw new DuplicateDataException("name");
+		}
+		duplicateAgency = getAgencyDAO().getAgencyForCode(agency.getCode());
+		if (duplicateAgency != null) {
+			throw new DuplicateDataException("code");
+		}
+		
+		int rc = getAgencyDAO().insertAgency(agency, auditorId);
+		return rc;
+	
+	}
+	public int updateAgency(Agency agency, Integer auditorId) {
 
-    Agency duplicateAgency = getAgencyDAO().getAgencyForName(agency.getName());
-    if (duplicateAgency != null &&
-      !duplicateAgency.getAgencyId().equals(agency.getAgencyId())) {
-      throw new DuplicateDataException("name");
-    }
-    duplicateAgency = getAgencyDAO().getAgencyForCode(agency.getCode());
-    if (duplicateAgency != null &&
-      !duplicateAgency.getAgencyId().equals(agency.getAgencyId())) {
-      throw new DuplicateDataException("code");
-    }
+		Agency duplicateAgency = getAgencyDAO().getAgencyForName(agency.getName());
+		if (duplicateAgency != null &&
+			!duplicateAgency.getAgencyId().equals(agency.getAgencyId())) {
+			throw new DuplicateDataException("name");
+		}
+		duplicateAgency = getAgencyDAO().getAgencyForCode(agency.getCode());
+		if (duplicateAgency != null &&
+			!duplicateAgency.getAgencyId().equals(agency.getAgencyId())) {
+			throw new DuplicateDataException("code");
+		}
 
-    int rc = getAgencyDAO().updateAgency(agency, auditorId);
-    return rc;
-  
-  }
-  public int deleteAgency(Integer agencyId, Integer noOfChanges, Integer auditorId) {
+		int rc = getAgencyDAO().updateAgency(agency, auditorId);
+		return rc;
+	
+	}
+	public int deleteAgency(Integer agencyId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = getAgencyDAO().deleteAgency(agencyId, noOfChanges, auditorId);
-    return rc;
-  
-  }
-  
-  public int updateAgencyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
-    int rc = 0;
+		int rc = getAgencyDAO().deleteAgency(agencyId, noOfChanges, auditorId);
+		return rc;
+	
+	}
+	
+	public int updateAgencyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId) {
+		int rc = 0;
 
-    StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
-    String commaDelimitedKey = null;
-    int displayOrder = 0;
-    while (stringTokenizer.hasMoreTokens())
-    {
-        commaDelimitedKey = stringTokenizer.nextToken();
-        if (!zeroiseDisplayOrder)
-        {
-          // Increment the display order.
-          displayOrder++;
-        }
-      StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
-      Integer agencyId = Integer.parseInt(st.nextToken());
-      Integer noOfChanges = Integer.parseInt(st.nextToken());
-        rc += getAgencyDAO().updateAgencyDisplayOrder(agencyId, displayOrder, noOfChanges, auditorId);
-    }
-    
-    return rc;
-  }
-  
-  public int insertClientReEnterPwd(ClientReEnterPwd clientReEnterPwd, Integer auditorId) {
+		StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
+		String commaDelimitedKey = null;
+		int displayOrder = 0;
+		while (stringTokenizer.hasMoreTokens())
+		{
+		    commaDelimitedKey = stringTokenizer.nextToken();
+		    if (!zeroiseDisplayOrder)
+		    {
+		      // Increment the display order.
+		      displayOrder++;
+		    }
+			StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
+			Integer agencyId = Integer.parseInt(st.nextToken());
+			Integer noOfChanges = Integer.parseInt(st.nextToken());
+		    rc += getAgencyDAO().updateAgencyDisplayOrder(agencyId, displayOrder, noOfChanges, auditorId);
+		}
+		
+		return rc;
+	}
+	
+	public int insertClientReEnterPwd(ClientReEnterPwd clientReEnterPwd, Integer auditorId) {
 
         int rc = clientReEnterPwdDAO.insertClientReEnterPwd(clientReEnterPwd, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteClientReEnterPwd(Integer clientReEnterPwdId, Integer noOfChanges, Integer auditorId) {
+	public int deleteClientReEnterPwd(Integer clientReEnterPwdId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = clientReEnterPwdDAO.deleteClientReEnterPwd(clientReEnterPwdId, noOfChanges, auditorId);
-    return rc;
+		int rc = clientReEnterPwdDAO.deleteClientReEnterPwd(clientReEnterPwdId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int insertClientAgencyJobProfile(ClientAgencyJobProfile clientAgencyJobProfile, Integer auditorId) {
+	public int insertClientAgencyJobProfile(ClientAgencyJobProfile clientAgencyJobProfile, Integer auditorId) {
 
         int rc = getClientAgencyJobProfileDAO().insertClientAgencyJobProfile(clientAgencyJobProfile, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteClientAgencyJobProfile(Integer clientAgencyJobProfileId, Integer noOfChanges, Integer auditorId) {
+	public int deleteClientAgencyJobProfile(Integer clientAgencyJobProfileId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = getClientAgencyJobProfileDAO().deleteClientAgencyJobProfile(clientAgencyJobProfileId, noOfChanges, auditorId);
-    return rc;
+		int rc = getClientAgencyJobProfileDAO().deleteClientAgencyJobProfile(clientAgencyJobProfileId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public ClientAgencyJobProfile getClientAgencyJobProfile(Integer clientAgencyJobProfileId) {
-    
-    ClientAgencyJobProfile clientAgencyJobProfile = null;
-    clientAgencyJobProfile = getClientAgencyJobProfileDAO().getClientAgencyJobProfile(clientAgencyJobProfileId);
-    return clientAgencyJobProfile;
-    
-  }
+	public ClientAgencyJobProfile getClientAgencyJobProfile(Integer clientAgencyJobProfileId) {
+		
+		ClientAgencyJobProfile clientAgencyJobProfile = null;
+		clientAgencyJobProfile = getClientAgencyJobProfileDAO().getClientAgencyJobProfile(clientAgencyJobProfileId);
+		return clientAgencyJobProfile;
+		
+	}
 
-  public ClientAgencyJobProfileUserEntity getClientAgencyJobProfileUserEntity(Integer clientAgencyJobProfileId) {
-    
-    ClientAgencyJobProfileUserEntity clientAgencyJobProfileUserEntity = null;
-    clientAgencyJobProfileUserEntity = getClientAgencyJobProfileDAO().getClientAgencyJobProfileUserEntity(clientAgencyJobProfileId);
-    clientAgencyJobProfileUserEntity.setClientAgencyJobProfileGradeUsers(getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGradeUsersForClientAgencyJobProfile(clientAgencyJobProfileId));
-    clientAgencyJobProfileUserEntity.setGrades(getGradeDAO().getGradesNotForClientAgencyJobProfile(clientAgencyJobProfileUserEntity.getJobProfileId(), clientAgencyJobProfileId));
-    return clientAgencyJobProfileUserEntity;
-    
-  }
+	public ClientAgencyJobProfileUserEntity getClientAgencyJobProfileUserEntity(Integer clientAgencyJobProfileId) {
+		
+		ClientAgencyJobProfileUserEntity clientAgencyJobProfileUserEntity = null;
+		clientAgencyJobProfileUserEntity = getClientAgencyJobProfileDAO().getClientAgencyJobProfileUserEntity(clientAgencyJobProfileId);
+		clientAgencyJobProfileUserEntity.setClientAgencyJobProfileGradeUsers(getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGradeUsersForClientAgencyJobProfile(clientAgencyJobProfileId));
+		clientAgencyJobProfileUserEntity.setGrades(getGradeDAO().getGradesNotForClientAgencyJobProfile(clientAgencyJobProfileUserEntity.getJobProfileId(), clientAgencyJobProfileId));
+		return clientAgencyJobProfileUserEntity;
+		
+	}
 
-  public int updateClientAgencyJobProfile(ClientAgencyJobProfile clientAgencyJobProfile, Integer auditorId) {
+	public int updateClientAgencyJobProfile(ClientAgencyJobProfile clientAgencyJobProfile, Integer auditorId) {
 
-    int rc = getClientAgencyJobProfileDAO().updateClientAgencyJobProfile(clientAgencyJobProfile, auditorId);
-    return rc;
-  
-  }
+		int	rc = getClientAgencyJobProfileDAO().updateClientAgencyJobProfile(clientAgencyJobProfile, auditorId);
+		return rc;
+	
+	}
 
-  public int insertClientAgencyJobProfileGrade(ClientAgencyJobProfileGrade clientAgencyJobProfileGrade, Integer auditorId) {
+	public int insertClientAgencyJobProfileGrade(ClientAgencyJobProfileGrade clientAgencyJobProfileGrade, Integer auditorId) {
 
         int rc = getClientAgencyJobProfileGradeDAO().insertClientAgencyJobProfileGrade(clientAgencyJobProfileGrade, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId, Integer noOfChanges, Integer auditorId) {
+	public int deleteClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = getClientAgencyJobProfileGradeDAO().deleteClientAgencyJobProfileGrade(clientAgencyJobProfileGradeId, noOfChanges, auditorId);
-    return rc;
+		int rc = getClientAgencyJobProfileGradeDAO().deleteClientAgencyJobProfileGrade(clientAgencyJobProfileGradeId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public ClientAgencyJobProfileGrade getClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId) {
-    
-    ClientAgencyJobProfileGrade clientAgencyJobProfileGrade = null;
-    clientAgencyJobProfileGrade = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGrade(clientAgencyJobProfileGradeId);
-    return clientAgencyJobProfileGrade;
-    
-  }
+	public ClientAgencyJobProfileGrade getClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId) {
+		
+		ClientAgencyJobProfileGrade clientAgencyJobProfileGrade = null;
+		clientAgencyJobProfileGrade = getClientAgencyJobProfileGradeDAO().getClientAgencyJobProfileGrade(clientAgencyJobProfileGradeId);
+		return clientAgencyJobProfileGrade;
+		
+	}
 
-  public int updateClientAgencyJobProfileGrade(ClientAgencyJobProfileGrade clientAgencyJobProfileGrade, Integer auditorId) {
+	public int updateClientAgencyJobProfileGrade(ClientAgencyJobProfileGrade clientAgencyJobProfileGrade, Integer auditorId) {
 
-    int rc = getClientAgencyJobProfileGradeDAO().updateClientAgencyJobProfileGrade(clientAgencyJobProfileGrade, auditorId);
-    return rc;
-  
-  }
+		int	rc = getClientAgencyJobProfileGradeDAO().updateClientAgencyJobProfileGrade(clientAgencyJobProfileGrade, auditorId);
+		return rc;
+	
+	}
 
-  /*
-   * Consultant stuff ...
-   * 
-   */
-  
-  public List<Consultant> getConsultantsForAgency(Integer agencyId, boolean showOnlyActive) {
+	/*
+	 * Consultant stuff ...
+	 * 
+	 */
+	
+	public List<Consultant> getConsultantsForAgency(Integer agencyId, boolean showOnlyActive) {
 
-    List<Consultant> consultants = null;
-    consultants = consultantDAO.getConsultantsForAgency(agencyId, showOnlyActive);
-    return consultants;
-  }
+		List<Consultant> consultants = null;
+		consultants = consultantDAO.getConsultantsForAgency(agencyId, showOnlyActive);
+		return consultants;
+	}
 
-  public Consultant getConsultant(Integer consultantId) {
-    
-    Consultant consultant = null;
-      consultant = consultantDAO.getConsultant(consultantId);
-    return consultant;
-    
-  }
+	public Consultant getConsultant(Integer consultantId) {
+		
+		Consultant consultant = null;
+    	consultant = consultantDAO.getConsultant(consultantId);
+		return consultant;
+		
+	}
 
-  public ConsultantEntity getConsultantEntity(Integer consultantId) {
+	public ConsultantEntity getConsultantEntity(Integer consultantId) {
 
-    ConsultantEntity consultantEntity = null;
-    consultantEntity = consultantDAO.getConsultantEntity(consultantId);
-    consultantEntity.setConsultantAccessUsers(consultantAccessDAO.getConsultantAccessUsersForConsultant(consultantId));
-    consultantEntity.setAgyAccesses(agyAccessDAO.getAgyAccessesNotForConsultant(consultantId));
-    consultantEntity.setConsultantAccessGroupUsers(consultantAccessGroupDAO.getConsultantAccessGroupUsersForConsultant(consultantId));
-    consultantEntity.setAgyAccessGroups(agyAccessGroupDAO.getAgyAccessGroupsNotForConsultant(consultantEntity.getAgencyId(), consultantId));
-    return consultantEntity;
+		ConsultantEntity consultantEntity = null;
+		consultantEntity = consultantDAO.getConsultantEntity(consultantId);
+		consultantEntity.setConsultantAccessUsers(consultantAccessDAO.getConsultantAccessUsersForConsultant(consultantId));
+		consultantEntity.setAgyAccesses(agyAccessDAO.getAgyAccessesNotForConsultant(consultantId));
+		consultantEntity.setConsultantAccessGroupUsers(consultantAccessGroupDAO.getConsultantAccessGroupUsersForConsultant(consultantId));
+		consultantEntity.setAgyAccessGroups(agyAccessGroupDAO.getAgyAccessGroupsNotForConsultant(consultantEntity.getAgencyId(), consultantId));
+		return consultantEntity;
 
-  }
+	}
 
-  
-  public int insertConsultant(Consultant consultant, Integer auditorId) {
+	
+	public int insertConsultant(Consultant consultant, Integer auditorId) {
 
-    Consultant duplicateConsultant = consultantDAO.getConsultantForLogin(consultant.getAgencyId(), consultant.getUser().getLogin());
-    if (duplicateConsultant != null) {
-      throw new DuplicateDataException("login");
-    }
+		Consultant duplicateConsultant = consultantDAO.getConsultantForLogin(consultant.getAgencyId(), consultant.getUser().getLogin());
+		if (duplicateConsultant != null) {
+			throw new DuplicateDataException("login");
+		}
         int rc = consultantDAO.insertConsultant(consultant, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int updateConsultant(Consultant consultant, Integer auditorId) {
+	public int updateConsultant(Consultant consultant, Integer auditorId) {
 
-    Consultant duplicateConsultant = consultantDAO.getConsultantForLogin(consultant.getAgencyId(), consultant.getUser().getLogin());
-    if (duplicateConsultant != null &&
-      !duplicateConsultant.getConsultantId().equals(consultant.getConsultantId())) {
-      throw new DuplicateDataException("login");
-    }
+		Consultant duplicateConsultant = consultantDAO.getConsultantForLogin(consultant.getAgencyId(), consultant.getUser().getLogin());
+		if (duplicateConsultant != null &&
+			!duplicateConsultant.getConsultantId().equals(consultant.getConsultantId())) {
+			throw new DuplicateDataException("login");
+		}
         int rc = consultantDAO.updateConsultant(consultant, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteConsultant(Integer consultantId, Integer noOfChanges, Integer auditorId) {
+	public int deleteConsultant(Integer consultantId, Integer noOfChanges, Integer auditorId) {
 
         int rc = consultantDAO.deleteConsultant(consultantId, noOfChanges, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-    public int updateConsultantPwd(Integer consultantId, String newPwd, String pwdHint, Integer noOfChanges, Integer auditorId) {
+  	public int updateConsultantPwd(Integer consultantId, String newPwd, String pwdHint, Integer noOfChanges, Integer auditorId) {
 
-    int rc = consultantDAO.updateConsultantPwd(consultantId, newPwd, pwdHint, noOfChanges, auditorId);
-    return rc;
-  
-  }
-  
-    public int updateConsultantSecretWord(Integer consultantId, String newSecretWord, Integer noOfChanges, Integer auditorId) {
+		int rc = consultantDAO.updateConsultantPwd(consultantId, newPwd, pwdHint, noOfChanges, auditorId);
+		return rc;
+	
+	}
+	
+  	public int updateConsultantSecretWord(Integer consultantId, String newSecretWord, Integer noOfChanges, Integer auditorId) {
 
-    int rc = consultantDAO.updateConsultantSecretWord(consultantId, newSecretWord, noOfChanges, auditorId);
-    return rc;
-  
-  }
-  
-  /*
-   * AgyAccess stuff
-   * 
-   */
+		int rc = consultantDAO.updateConsultantSecretWord(consultantId, newSecretWord, noOfChanges, auditorId);
+		return rc;
+	
+	}
+	
+	/*
+	 * AgyAccess stuff
+	 * 
+	 */
 
-  public List<AgyAccess> getAgyAccesses(boolean showOnlyActive) {
+	public List<AgyAccess> getAgyAccesses(boolean showOnlyActive) {
 
-    List<AgyAccess> agyAccesses = null;
-    agyAccesses = agyAccessDAO.getAgyAccesses(showOnlyActive);
-    return agyAccesses;
+		List<AgyAccess> agyAccesses = null;
+		agyAccesses = agyAccessDAO.getAgyAccesses(showOnlyActive);
+		return agyAccesses;
 
-  }
-  public List<AgyAccess> getActiveAgyAccessesForConsultant(Integer consultantId) {
+	}
+	public List<AgyAccess> getActiveAgyAccessesForConsultant(Integer consultantId) {
 
-    List<AgyAccess> agyAccesses = null;
-    agyAccesses = agyAccessDAO.getActiveAgyAccessesForConsultant(consultantId);
-    return agyAccesses;
+		List<AgyAccess> agyAccesses = null;
+		agyAccesses = agyAccessDAO.getActiveAgyAccessesForConsultant(consultantId);
+		return agyAccesses;
 
-  }
-  public AgyAccess getAgyAccess(Integer agyAccessId) {
+	}
+	public AgyAccess getAgyAccess(Integer agyAccessId) {
 
-    AgyAccess agyAccess = null;
-    agyAccess = agyAccessDAO.getAgyAccess(agyAccessId);
-    return agyAccess;
+		AgyAccess agyAccess = null;
+		agyAccess = agyAccessDAO.getAgyAccess(agyAccessId);
+		return agyAccess;
 
-  }
-  public int insertAgyAccess(AgyAccess agyAccess, Integer auditorId) {
+	}
+	public int insertAgyAccess(AgyAccess agyAccess, Integer auditorId) {
 
-    AgyAccess duplicateAgyAccess = agyAccessDAO.getAgyAccessForName(agyAccess.getName());
-    if (duplicateAgyAccess != null) {
-      throw new DuplicateDataException("name");
-    }
-    int rc = agyAccessDAO.insertAgyAccess(agyAccess, auditorId);
-    return rc;
+		AgyAccess duplicateAgyAccess = agyAccessDAO.getAgyAccessForName(agyAccess.getName());
+		if (duplicateAgyAccess != null) {
+			throw new DuplicateDataException("name");
+		}
+		int rc = agyAccessDAO.insertAgyAccess(agyAccess, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int updateAgyAccess(AgyAccess agyAccess, Integer auditorId) {
+	public int updateAgyAccess(AgyAccess agyAccess, Integer auditorId) {
 
-    AgyAccess duplicateAgyAccess = agyAccessDAO.getAgyAccessForName(agyAccess.getName());
-    if (duplicateAgyAccess  != null && 
-      !duplicateAgyAccess.getAgyAccessId().equals(agyAccess.getAgyAccessId())) {
-      throw new DuplicateDataException("name");
-    }
+		AgyAccess duplicateAgyAccess = agyAccessDAO.getAgyAccessForName(agyAccess.getName());
+		if (duplicateAgyAccess  != null && 
+			!duplicateAgyAccess.getAgyAccessId().equals(agyAccess.getAgyAccessId())) {
+			throw new DuplicateDataException("name");
+		}
         int rc = agyAccessDAO.updateAgyAccess(agyAccess, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteAgyAccess(Integer agyAccessId, Integer noOfChanges, Integer auditorId) {
+	public int deleteAgyAccess(Integer agyAccessId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = agyAccessDAO.deleteAgyAccess(agyAccessId, noOfChanges, auditorId);
-    return rc;
+		int rc = agyAccessDAO.deleteAgyAccess(agyAccessId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  /*
-   * AgyAccessGroup stuff
-   * 
-   */
-  
-  public List<AgyAccessGroup> getAgyAccessGroupsForAgency(Integer agencyId, boolean showOnlyActive) {
+	/*
+	 * AgyAccessGroup stuff
+	 * 
+	 */
+	
+	public List<AgyAccessGroup> getAgyAccessGroupsForAgency(Integer agencyId, boolean showOnlyActive) {
 
-    List<AgyAccessGroup> agyAccessGroups = null;
-    agyAccessGroups = agyAccessGroupDAO.getAgyAccessGroupsForAgency(agencyId, showOnlyActive);
-    return agyAccessGroups;
+		List<AgyAccessGroup> agyAccessGroups = null;
+		agyAccessGroups = agyAccessGroupDAO.getAgyAccessGroupsForAgency(agencyId, showOnlyActive);
+		return agyAccessGroups;
 
-  }
-  public AgyAccessGroup getAgyAccessGroup(Integer agyAccessGroupId) {
+	}
+	public AgyAccessGroup getAgyAccessGroup(Integer agyAccessGroupId) {
 
-    AgyAccessGroup agyAccessGroup = null;
-    agyAccessGroup = agyAccessGroupDAO.getAgyAccessGroup(agyAccessGroupId);
-    return agyAccessGroup;
+		AgyAccessGroup agyAccessGroup = null;
+		agyAccessGroup = agyAccessGroupDAO.getAgyAccessGroup(agyAccessGroupId);
+		return agyAccessGroup;
 
-  }
-  public AgyAccessGroupEntity getAgyAccessGroupEntity(Integer agyAccessGroupId) {
+	}
+	public AgyAccessGroupEntity getAgyAccessGroupEntity(Integer agyAccessGroupId) {
 
-    AgyAccessGroupEntity agyAccessGroupEntity = null;
-    agyAccessGroupEntity = agyAccessGroupDAO.getAgyAccessGroupEntity(agyAccessGroupId);
-    agyAccessGroupEntity.setAgyAccessGroupItemUsers(agyAccessGroupItemDAO.getAgyAccessGroupItemUsersForAgyAccessGroup(agyAccessGroupId));
-    agyAccessGroupEntity.setAgyAccesses(agyAccessDAO.getAgyAccessesNotForAgyAccessGroup(agyAccessGroupId));
-    return agyAccessGroupEntity;
+		AgyAccessGroupEntity agyAccessGroupEntity = null;
+		agyAccessGroupEntity = agyAccessGroupDAO.getAgyAccessGroupEntity(agyAccessGroupId);
+		agyAccessGroupEntity.setAgyAccessGroupItemUsers(agyAccessGroupItemDAO.getAgyAccessGroupItemUsersForAgyAccessGroup(agyAccessGroupId));
+		agyAccessGroupEntity.setAgyAccesses(agyAccessDAO.getAgyAccessesNotForAgyAccessGroup(agyAccessGroupId));
+		return agyAccessGroupEntity;
 
-  }
-  public int insertAgyAccessGroup(AgyAccessGroup agyAccessGroup, Integer auditorId) {
+	}
+	public int insertAgyAccessGroup(AgyAccessGroup agyAccessGroup, Integer auditorId) {
 
-    AgyAccessGroup duplicateAgyAccessGroup = agyAccessGroupDAO.getAgyAccessGroupForName(agyAccessGroup.getAgencyId(), agyAccessGroup.getName());
-    if (duplicateAgyAccessGroup != null) {
-      throw new DuplicateDataException("name");
-    }
-    int rc = agyAccessGroupDAO.insertAgyAccessGroup(agyAccessGroup, auditorId);
-    return rc;
+		AgyAccessGroup duplicateAgyAccessGroup = agyAccessGroupDAO.getAgyAccessGroupForName(agyAccessGroup.getAgencyId(), agyAccessGroup.getName());
+		if (duplicateAgyAccessGroup != null) {
+			throw new DuplicateDataException("name");
+		}
+		int rc = agyAccessGroupDAO.insertAgyAccessGroup(agyAccessGroup, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int updateAgyAccessGroup(AgyAccessGroup agyAccessGroup, Integer auditorId) {
+	public int updateAgyAccessGroup(AgyAccessGroup agyAccessGroup, Integer auditorId) {
 
-    AgyAccessGroup duplicateAgyAccessGroup = agyAccessGroupDAO.getAgyAccessGroupForName(agyAccessGroup.getAgencyId(), agyAccessGroup.getName());
-    if (duplicateAgyAccessGroup  != null && 
-      !duplicateAgyAccessGroup.getAgyAccessGroupId().equals(agyAccessGroup.getAgyAccessGroupId())) {
-      throw new DuplicateDataException("name");
-    }
+		AgyAccessGroup duplicateAgyAccessGroup = agyAccessGroupDAO.getAgyAccessGroupForName(agyAccessGroup.getAgencyId(), agyAccessGroup.getName());
+		if (duplicateAgyAccessGroup  != null && 
+			!duplicateAgyAccessGroup.getAgyAccessGroupId().equals(agyAccessGroup.getAgyAccessGroupId())) {
+			throw new DuplicateDataException("name");
+		}
         int rc = agyAccessGroupDAO.updateAgyAccessGroup(agyAccessGroup, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteAgyAccessGroup(Integer agyAccessGroupId, Integer noOfChanges, Integer auditorId) {
+	public int deleteAgyAccessGroup(Integer agyAccessGroupId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = agyAccessGroupDAO.deleteAgyAccessGroup(agyAccessGroupId, noOfChanges, auditorId);
-    return rc;
+		int rc = agyAccessGroupDAO.deleteAgyAccessGroup(agyAccessGroupId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public int insertAgyAccessGroupItem(AgyAccessGroupItem agyAccessGroupItem, Integer auditorId) {
+	public int insertAgyAccessGroupItem(AgyAccessGroupItem agyAccessGroupItem, Integer auditorId) {
 
         int rc = agyAccessGroupItemDAO.insertAgyAccessGroupItem(agyAccessGroupItem, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteAgyAccessGroupItem(Integer agyAccessGroupItemId, Integer noOfChanges, Integer auditorId) {
+	public int deleteAgyAccessGroupItem(Integer agyAccessGroupItemId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = agyAccessGroupItemDAO.deleteAgyAccessGroupItem(agyAccessGroupItemId, noOfChanges, auditorId);
-    return rc;
+		int rc = agyAccessGroupItemDAO.deleteAgyAccessGroupItem(agyAccessGroupItemId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  
-  /*
-   * ConsultantAccess stuff
-   * 
-   */
+	
+	/*
+	 * ConsultantAccess stuff
+	 * 
+	 */
 
-  public List<ConsultantAccessUser> getConsultantAccessUsersForConsultant(Integer consultantId) {
+	public List<ConsultantAccessUser> getConsultantAccessUsersForConsultant(Integer consultantId) {
 
-    List<ConsultantAccessUser> consultantAccesses = null;
-    consultantAccesses = consultantAccessDAO.getConsultantAccessUsersForConsultant(consultantId);
-    return consultantAccesses;
+		List<ConsultantAccessUser> consultantAccesses = null;
+		consultantAccesses = consultantAccessDAO.getConsultantAccessUsersForConsultant(consultantId);
+		return consultantAccesses;
 
-  }
+	}
 
-  public int insertConsultantAccess(ConsultantAccess consultantAccess, Integer auditorId) {
+	public int insertConsultantAccess(ConsultantAccess consultantAccess, Integer auditorId) {
 
         int rc = consultantAccessDAO.insertConsultantAccess(consultantAccess, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteConsultantAccess(Integer consultantAccessId, Integer noOfChanges, Integer auditorId) {
+	public int deleteConsultantAccess(Integer consultantAccessId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = consultantAccessDAO.deleteConsultantAccess(consultantAccessId, noOfChanges, auditorId);
-    return rc;
+		int rc = consultantAccessDAO.deleteConsultantAccess(consultantAccessId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  /*
-   * ConsultantAccessGroup stuff
-   * 
-   */
+	/*
+	 * ConsultantAccessGroup stuff
+	 * 
+	 */
 
-  public List<ConsultantAccessGroupUser> getConsultantAccessGroupUsersForConsultant(Integer consultantId) {
+	public List<ConsultantAccessGroupUser> getConsultantAccessGroupUsersForConsultant(Integer consultantId) {
 
-    List<ConsultantAccessGroupUser> consultantAccessGroupes = null;
-    consultantAccessGroupes = consultantAccessGroupDAO.getConsultantAccessGroupUsersForConsultant(consultantId);
-    return consultantAccessGroupes;
+		List<ConsultantAccessGroupUser> consultantAccessGroupes = null;
+		consultantAccessGroupes = consultantAccessGroupDAO.getConsultantAccessGroupUsersForConsultant(consultantId);
+		return consultantAccessGroupes;
 
-  }
+	}
 
-  public int insertConsultantAccessGroup(ConsultantAccessGroup consultantAccessGroup, Integer auditorId) {
+	public int insertConsultantAccessGroup(ConsultantAccessGroup consultantAccessGroup, Integer auditorId) {
 
         int rc = consultantAccessGroupDAO.insertConsultantAccessGroup(consultantAccessGroup, auditorId);
-    return rc;
+		return rc;
 
-  }
+	}
 
-  public int deleteConsultantAccessGroup(Integer consultantAccessGroupId, Integer noOfChanges, Integer auditorId) {
+	public int deleteConsultantAccessGroup(Integer consultantAccessGroupId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = consultantAccessGroupDAO.deleteConsultantAccessGroup(consultantAccessGroupId, noOfChanges, auditorId);
-    return rc;
+		int rc = consultantAccessGroupDAO.deleteConsultantAccessGroup(consultantAccessGroupId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  /*
-   * BudgetTransaction stuff
-   * 
-   */
+	/*
+	 * BudgetTransaction stuff
+	 * 
+	 */
 
-  public List<BudgetTransactionUser> getBudgetTransactionUsersForClient(Integer clientId, boolean showOnlyActive) {
+	public List<BudgetTransactionUser> getBudgetTransactionUsersForClient(Integer clientId, boolean showOnlyActive) {
 
-    List<BudgetTransactionUser> budgetTransactions = null;
-    budgetTransactions = budgetTransactionDAO.getBudgetTransactionUsersForClient(clientId, showOnlyActive);
-    return budgetTransactions;
+		List<BudgetTransactionUser> budgetTransactions = null;
+		budgetTransactions = budgetTransactionDAO.getBudgetTransactionUsersForClient(clientId, showOnlyActive);
+		return budgetTransactions;
 
-  }
+	}
 
-  public BudgetTransaction getBudgetTransaction(Integer budgetTransactionId) {
+	public BudgetTransaction getBudgetTransaction(Integer budgetTransactionId) {
 
-    BudgetTransaction budgetTransaction = null;
-    budgetTransaction = budgetTransactionDAO.getBudgetTransaction(budgetTransactionId);
-    return budgetTransaction;
+		BudgetTransaction budgetTransaction = null;
+		budgetTransaction = budgetTransactionDAO.getBudgetTransaction(budgetTransactionId);
+		return budgetTransaction;
 
-  }
+	}
 
-  public int insertBudgetTransaction(BudgetTransaction budgetTransaction, Integer auditorId) {
+	public int insertBudgetTransaction(BudgetTransaction budgetTransaction, Integer auditorId) {
 
-    LocationJobProfile locationJobProfile = getLocationJobProfileDAO().getLocationJobProfile(budgetTransaction.getLocationJobProfileId());
-    //
-    budgetTransaction.setBalance(locationJobProfile.getBudget().add(budgetTransaction.getValue()));
-    budgetTransaction.setVatBalance(locationJobProfile.getVatBudget().add(budgetTransaction.getVatValue()));
-    budgetTransaction.setExpenseBalance(locationJobProfile.getExpenseBudget().add(budgetTransaction.getExpenseValue()));
-    budgetTransaction.setNonPayBalance(locationJobProfile.getNonPayBudget().add(budgetTransaction.getNonPayValue()));
+		LocationJobProfile locationJobProfile = getLocationJobProfileDAO().getLocationJobProfile(budgetTransaction.getLocationJobProfileId());
+		//
+		budgetTransaction.setBalance(locationJobProfile.getBudget().add(budgetTransaction.getValue()));
+		budgetTransaction.setVatBalance(locationJobProfile.getVatBudget().add(budgetTransaction.getVatValue()));
+		budgetTransaction.setExpenseBalance(locationJobProfile.getExpenseBudget().add(budgetTransaction.getExpenseValue()));
+		budgetTransaction.setNonPayBalance(locationJobProfile.getNonPayBudget().add(budgetTransaction.getNonPayValue()));
         //
-    int rc = budgetTransactionDAO.insertBudgetTransaction(budgetTransaction, auditorId);
-    // add the value to the locationJobProfile
-    rc = getLocationJobProfileDAO().updateLocationJobProfileBudget(budgetTransaction.getLocationJobProfileId(), 
-                                  budgetTransaction.getValue(), 
-                                  budgetTransaction.getVatValue(), 
-                                  budgetTransaction.getExpenseValue(), 
-                                  budgetTransaction.getNonPayValue(), 
-                                  locationJobProfile.getNoOfChanges(), 
-                                                          auditorId);
-    //
-    return rc;
+		int rc = budgetTransactionDAO.insertBudgetTransaction(budgetTransaction, auditorId);
+		// add the value to the locationJobProfile
+		rc = getLocationJobProfileDAO().updateLocationJobProfileBudget(budgetTransaction.getLocationJobProfileId(), 
+																  budgetTransaction.getValue(), 
+																  budgetTransaction.getVatValue(), 
+																  budgetTransaction.getExpenseValue(), 
+																  budgetTransaction.getNonPayValue(), 
+																  locationJobProfile.getNoOfChanges(), 
+				                                                  auditorId);
+		//
+		return rc;
 
-  }
+	}
 
-//  public int updateBudgetTransaction(BudgetTransaction budgetTransaction, Integer auditorId) {
+//	public int updateBudgetTransaction(BudgetTransaction budgetTransaction, Integer auditorId) {
 //
 //        int rc = budgetTransactionDAO.updateBudgetTransaction(budgetTransaction, auditorId);
-//    return rc;
+//		return rc;
 //
-//  }
+//	}
 
-  public int deleteBudgetTransaction(Integer budgetTransactionId, Integer noOfChanges, Integer auditorId) {
+	public int deleteBudgetTransaction(Integer budgetTransactionId, Integer noOfChanges, Integer auditorId) {
 
-    int rc = budgetTransactionDAO.deleteBudgetTransaction(budgetTransactionId, noOfChanges, auditorId);
-    return rc;
+		int rc = budgetTransactionDAO.deleteBudgetTransaction(budgetTransactionId, noOfChanges, auditorId);
+		return rc;
 
-  }
+	}
 
-  public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAdmin(Date fromDate, Date toDate) 
+	public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAdmin(Date fromDate, Date toDate) 
   {
-    return  getBookingDateDAO().getBookingDateUserApplicantsForAdmin(fromDate, toDate);
-  }
+		return 	getBookingDateDAO().getBookingDateUserApplicantsForAdmin(fromDate, toDate);
+	}
 
   public IntValue getActiveBookingGradeApplicantsCountForClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId)
   {

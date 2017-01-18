@@ -267,8 +267,8 @@ function checkedAll(frmname)
           </html:form>
         </div>
 			  <div class="tabbertab">
-				  <h2><bean:message key="label.passport"/></h2>
-          <html:form action="/applicantEmailProcess.do" styleId="ApplicantPassportExpiry" onsubmit="return singleSubmit();">
+				  <h2><bean:message key="label.idDocument"/></h2>
+          <html:form action="/applicantEmailProcess.do" styleId="ApplicantIdDocumentExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
 				    <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
 </mmj-agy:hasAccess>
@@ -276,22 +276,22 @@ function checkedAll(frmname)
 	            <thead>
 	              <tr>
 	                <th align="center" width="2%">
-	                  <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantPassportExpiry');"/>
+	                  <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantIdDocumentExpiry');"/>
 	                </th>
-	                <th align="left" width="18%"><bean:message key="label.passportExpiryDate"/></th>
+	                <th align="left" width="18%"><bean:message key="label.idDocumentExpiryDate"/></th>
 	                <th align="left" width="20%"><bean:message key="label.name"/></th>
 	                <th align="left" width="20%"><bean:message key="label.emailAddress"/></th>
 	                <th align="left" width="20%"><bean:message key="label.telephoneNumber"/></th>
 	                <th align="left" width="20%"><bean:message key="label.mobile"/></th>
 	              </tr>
 	            </thead>
-	            <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="passportList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
-	            <% String applicantPassportExpiryCheckBox = "applicantId"; %>
+	            <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="idDocumentList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
+	            <% String applicantIdDocumentExpiryCheckBox = "applicantId"; %>
 	            <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
 	              <td align="left" valign="top">
-	                <input type="checkbox" name="<%= applicantPassportExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
+	                <input type="checkbox" name="<%= applicantIdDocumentExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
 	              </td>
-	              <td align="left"><bean:write name="applicant" property="passportExpiryDate" formatKey="format.mediumDateFormat" /></td>
+	              <td align="left"><bean:write name="applicant" property="idDocumentExpiryDate" formatKey="format.mediumDateFormat" /></td>
 	              <td align="left">    
 	              <mmj-agy:hasAccess forward="applicantView">
 	                <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >

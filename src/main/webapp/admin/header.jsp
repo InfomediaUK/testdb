@@ -168,9 +168,9 @@
   <html:link forward="disciplineCategoryList"><bean:message key="link.disciplineCategoryList"/></html:link>
 </li>
 </mmj-admin:hasAccess>
-<mmj-admin:hasAccess forward="passportTypeList">
+<mmj-admin:hasAccess forward="idDocumentList">
 <li class="navMain">
-  <html:link forward="passportTypeList"><bean:message key="link.passportTypeList"/></html:link>
+  <html:link forward="idDocumentList"><bean:message key="link.idDocumentList"/></html:link>
 </li>
 </mmj-admin:hasAccess>
 <mmj-admin:hasAccess forward="visaTypeList">

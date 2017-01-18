@@ -132,7 +132,7 @@
         <entry key="applicant.hasCurrentCRB" value="TRUE"/>
         <entry key="applicant.hasCurrentFitToWork" value="TRUE"/>
         <entry key="applicant.hasCurrentHPC" value="TRUE"/>
-        <entry key="applicant.hasCurrentPassport" value="TRUE"/>
+        <entry key="applicant.hasCurrentIdDocument" value="TRUE"/>
         <entry key="applicant.hasCurrentTraining" value="TRUE"/>
         <entry key="applicant.hasCurrentVisa" value="TRUE"/>
         <entry key="applicant.hasBirthCertificate" value="TRUE"/>
@@ -234,7 +234,7 @@
 		<property name="geographicalRegionDAO" ref="geographicalRegionDAO" />
 		<property name="disciplineCategoryDAO" ref="disciplineCategoryDAO" />
 		<property name="emailActionDAO" ref="emailActionDAO" />
-		<property name="passportTypeDAO" ref="passportTypeDAO" />
+		<property name="idDocumentDAO" ref="idDocumentDAO" />
 		<property name="visaTypeDAO" ref="visaTypeDAO" />
 		<!-- specific DAOs -->
 		<property name="administratorDAO" ref="administratorDAO" />
@@ -379,7 +379,7 @@
 		<property name="geographicalRegionDAO" ref="geographicalRegionDAO" />
 		<property name="disciplineCategoryDAO" ref="disciplineCategoryDAO" />
 		<property name="emailActionDAO" ref="emailActionDAO" />
-		<property name="passportTypeDAO" ref="passportTypeDAO" />
+		<property name="idDocumentDAO" ref="idDocumentDAO" />
 		<property name="visaTypeDAO" ref="visaTypeDAO" />
 		<!-- specific DAOs -->
 		<property name="agyAccessDAO" ref="agyAccessDAO" />
@@ -499,8 +499,8 @@
 	      init-method="init" >
 			<property name="dataSource" ref="dataSource"/>
 	</bean>
-	<bean id="passportTypeDAO" 
-	      class="com.helmet.persistence.impl.DefaultPassportTypeDAO" 
+	<bean id="idDocumentDAO" 
+	      class="com.helmet.persistence.impl.DefaultIdDocumentDAO" 
 	      init-method="init" >
 			<property name="dataSource" ref="dataSource"/>
 	</bean>

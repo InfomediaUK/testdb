@@ -9,8 +9,6 @@
 
 <bean:message key="title.emailActionView"/>
 <br/>
-<b><bean:message key="warning.emailNotifications.changes"/></b>
-<br/>
 
 <table>
   <tr>

@@ -30,8 +30,8 @@ public class ApplicantSearchParameters
   private Boolean hasHPCDocument;
   private String hasTrainingCertificateOperator;
   private Boolean hasTrainingCertificate;
-  private String hasPassportOperator;
-  private Boolean hasPassport;
+  private String hasIdDocumentOperator;
+  private Boolean hasIdDocument;
   private String hasProofOfAddress1Operator;
   private Boolean hasProofOfAddress1;
   private String hasProofOfAddress2Operator;
@@ -64,9 +64,9 @@ public class ApplicantSearchParameters
   private String visaExpiryDateOperator;
   private String visaExpiryDateLabel;
   private Date visaExpiryDate;
-  private String passportExpiryDateOperator;
-  private String passportExpiryDateLabel;
-  private Date passportExpiryDate;
+  private String idDocumentExpiryDateOperator;
+  private String idDocumentExpiryDateLabel;
+  private Date idDocumentExpiryDate;
   private String crbExpiryDateOperator;
   private String crbExpiryDateLabel;
   private Date crbExpiryDate;
@@ -423,29 +423,29 @@ public class ApplicantSearchParameters
   {
     this.hpcExpiryDate = hpcExpiryDate;
   }
-  public String getPassportExpiryDateOperator()
+  public String getIdDocumentExpiryDateOperator()
   {
-    return passportExpiryDateOperator;
+    return idDocumentExpiryDateOperator;
   }
-  public void setPassportExpiryDateOperator(String passportExpiryDateOperator)
+  public void setIdDocumentExpiryDateOperator(String idDocumentExpiryDateOperator)
   {
-    this.passportExpiryDateOperator = passportExpiryDateOperator;
+    this.idDocumentExpiryDateOperator = idDocumentExpiryDateOperator;
   }
-  public String getPassportExpiryDateLabel()
+  public String getIdDocumentExpiryDateLabel()
   {
-    return passportExpiryDateLabel;
+    return idDocumentExpiryDateLabel;
   }
-  public void setPassportExpiryDateLabel(String passportExpiryDateLabel)
+  public void setIdDocumentExpiryDateLabel(String idDocumentExpiryDateLabel)
   {
-    this.passportExpiryDateLabel = passportExpiryDateLabel;
+    this.idDocumentExpiryDateLabel = idDocumentExpiryDateLabel;
   }
-  public Date getPassportExpiryDate()
+  public Date getIdDocumentExpiryDate()
   {
-    return passportExpiryDate;
+    return idDocumentExpiryDate;
   }
-  public void setPassportExpiryDate(Date passportExpiryDate)
+  public void setIdDocumentExpiryDate(Date idDocumentExpiryDate)
   {
-    this.passportExpiryDate = passportExpiryDate;
+    this.idDocumentExpiryDate = idDocumentExpiryDate;
   }
   public String getTrainingExpiryDateOperator()
   {
@@ -535,21 +535,21 @@ public class ApplicantSearchParameters
   {
     this.hasHPCDocument = hasHPCDocument;
   }
-  public String getHasPassportOperator()
+  public String getHasIdDocumentOperator()
   {
-    return hasPassportOperator;
+    return hasIdDocumentOperator;
   }
-  public void setHasPassportOperator(String hasPassportOperator)
+  public void setHasIdDocumentOperator(String hasIdDocumentOperator)
   {
-    this.hasPassportOperator = hasPassportOperator;
+    this.hasIdDocumentOperator = hasIdDocumentOperator;
   }
-  public Boolean getHasPassport()
+  public Boolean getHasIdDocument()
   {
-    return hasPassport;
+    return hasIdDocument;
   }
-  public void setHasPassport(Boolean hasPassport)
+  public void setHasIdDocument(Boolean hasIdDocument)
   {
-    this.hasPassport = hasPassport;
+    this.hasIdDocument = hasIdDocument;
   }
   public String getHasBirthCertificateOperator()
   {

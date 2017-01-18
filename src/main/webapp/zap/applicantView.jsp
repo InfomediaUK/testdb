@@ -341,27 +341,27 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
             </tr>
 
             <tr>
-              <th width="25%" align="left"class="label"><bean:message key="label.passportFilename"/></th>
+              <th width="25%" align="left"class="label"><bean:message key="label.idDocumentFilename"/></th>
               <td align="left">
-                <bean:write name="applicant" property="passportFilename"/>
+                <bean:write name="applicant" property="idDocumentFilename"/>
               </td>
             </tr>
             <tr>
-              <th width="25%" align="left"class="label"><bean:message key="label.passportExpiryDate"/></th>
+              <th width="25%" align="left"class="label"><bean:message key="label.idDocumentExpiryDate"/></th>
               <td align="left">
-                <bean:write name="applicant" property="passportExpiryDate" formatKey="format.mediumDateFormat"/>
+                <bean:write name="applicant" property="idDocumentExpiryDate" formatKey="format.mediumDateFormat"/>
               </td>
             </tr>
             <tr>
-              <th width="25%" align="left"class="label"><bean:message key="label.passportNumber"/></th>
+              <th width="25%" align="left"class="label"><bean:message key="label.idDocumentNumber"/></th>
               <td align="left">
-                <bean:write name="applicant" property="passportNumber"/>
+                <bean:write name="applicant" property="idDocumentNumber"/>
               </td>
             </tr>
             <tr>
-              <th width="25%" align="left"class="label"><bean:message key="label.passportType"/></th>
+              <th width="25%" align="left"class="label"><bean:message key="label.idDocument"/></th>
               <td align="left">
-                <bean:write name="applicant" property="passportTypeName"/>
+                <bean:write name="applicant" property="idDocumentName"/>
               </td>
             </tr>
             <tr>

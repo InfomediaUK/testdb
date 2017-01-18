@@ -47,7 +47,7 @@ import com.helmet.bean.MgrAccessGroupItem;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.NhsBackingReportUser;
 import com.helmet.bean.NhsBooking;
-import com.helmet.bean.PassportType;
+import com.helmet.bean.IdDocument;
 import com.helmet.bean.PublicHoliday;
 import com.helmet.bean.ReasonForRequest;
 import com.helmet.bean.RecordCount;
@@ -306,7 +306,7 @@ public interface CommonService {
   public List<DisciplineCategory> getDisciplineCategories(boolean showOnlyActive);
   public List<EmailAction> getEmailActions(boolean showOnlyActive);
   public List<GeographicalRegion> getGeographicalRegions(boolean showOnlyActive);
-  public List<PassportType> getPassportTypes(boolean showOnlyActive);
+  public List<IdDocument> getIdDocuments(boolean showOnlyActive);
   public List<VisaType> getVisaTypes(boolean showOnlyActive);
 
 }

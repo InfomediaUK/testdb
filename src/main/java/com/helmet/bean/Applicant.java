@@ -105,11 +105,11 @@ public class Applicant extends Base
 
   private Date fitToWorkExpiryDate;
 
-  private String passportFilename;
+  private String idDocumentFilename;
 
-  private Date passportExpiryDate;
+  private Date idDocumentExpiryDate;
 
-  private String passportNumber;
+  private String idDocumentNumber;
 
   private String trainingFilename;
 
@@ -155,7 +155,7 @@ public class Applicant extends Base
 
   private String disciplineCategoryName;
   private String visaTypeName;
-  private String passportTypeName;
+  private String idDocumentName;
   private Integer fitToWorkStatus;
   private Integer clientGroup;
   private Boolean drivingLicense = false;
@@ -169,7 +169,7 @@ public class Applicant extends Base
   private String bankSortCode;
   private String bankAccountName;
   private String bankAccountNumber;
-  private Integer passportType;
+  private Integer idDocument;
   private Boolean languageCompetency = false;
   private Integer fitToWorkIssuedBy;
   private String ivsEppFilename;
@@ -614,14 +614,14 @@ public class Applicant extends Base
     this.disciplineCategoryName = disciplineCategoryName;
   }
 
-  public String getPassportTypeName()
+  public String getIdDocumentName()
   {
-    return passportTypeName;
+    return idDocumentName;
   }
 
-  public void setPassportTypeName(String passportTypeName)
+  public void setIdDocumentName(String idDocumentName)
   {
-    this.passportTypeName = passportTypeName;
+    this.idDocumentName = idDocumentName;
   }
 
   public String getVisaTypeName()
@@ -774,39 +774,39 @@ public class Applicant extends Base
     this.overseasPoliceClearance = overseasPoliceClearance;
   }
 
-  public Date getPassportExpiryDate()
+  public Date getIdDocumentExpiryDate()
   {
-    return passportExpiryDate;
+    return idDocumentExpiryDate;
   }
 
-  public void setPassportExpiryDate(Date passportExpiryDate)
+  public void setIdDocumentExpiryDate(Date idDocumentExpiryDate)
   {
-    this.passportExpiryDate = passportExpiryDate;
+    this.idDocumentExpiryDate = idDocumentExpiryDate;
   }
 
-  public String getPassportFilename()
+  public String getIdDocumentFilename()
   {
-    return passportFilename;
+    return idDocumentFilename;
   }
 
-  public void setPassportFilename(String passportFilename)
+  public void setIdDocumentFilename(String idDocumentFilename)
   {
-    this.passportFilename = passportFilename;
+    this.idDocumentFilename = idDocumentFilename;
   }
 
-  public String getPassportFileUrl()
+  public String getIdDocumentFileUrl()
   {
-    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + passportFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + idDocumentFilename;
   }
 
-  public String getPassportNumber()
+  public String getIdDocumentNumber()
   {
-    return passportNumber;
+    return idDocumentNumber;
   }
 
-  public void setPassportNumber(String passportNumber)
+  public void setIdDocumentNumber(String idDocumentNumber)
   {
-    this.passportNumber = passportNumber;
+    this.idDocumentNumber = idDocumentNumber;
   }
 
   public Boolean getPerformanceEvaluation()
@@ -1164,14 +1164,14 @@ public class Applicant extends Base
     this.languageCompetency = languageCompetency;
   }
 
-  public Integer getPassportType()
+  public Integer getIdDocument()
   {
-    return passportType;
+    return idDocument;
   }
 
-  public void setPassportType(Integer passportType)
+  public void setIdDocument(Integer idDocument)
   {
-    this.passportType = passportType;
+    this.idDocument = idDocument;
   }
 
   public Integer getFitToWorkIssuedBy()
@@ -1456,9 +1456,9 @@ public class Applicant extends Base
     setMmrx2Filename(rs.getString("MMRX2FILENAME"));
     setNiNumberStatus(rs.getInt("NINUMBERSTATUS"));
     setOverseasPoliceClearance(rs.getBoolean("OVERSEASPOLICECLEARANCE"));
-    setPassportExpiryDate(rs.getDate("PASSPORTEXPIRYDATE"));
-    setPassportFilename(rs.getString("PASSPORTFILENAME"));
-    setPassportNumber(rs.getString("PASSPORTNUMBER"));
+    setIdDocumentExpiryDate(rs.getDate("IDDOCUMENTEXPIRYDATE"));
+    setIdDocumentFilename(rs.getString("IDDOCUMENTFILENAME"));
+    setIdDocumentNumber(rs.getString("IDDOCUMENTNUMBER"));
     setPerformanceEvaluation(rs.getBoolean("PERFORMANCEEVALUATION"));
     setPerformanceEvaluationDate(rs.getDate("PERFORMANCEEVALUATIONDATE"));
     setProofOfAddress1(rs.getBoolean("PROOFOFADDRESS1"));
@@ -1490,7 +1490,7 @@ public class Applicant extends Base
     setGeographicalRegionName(rs.getString("GEOGRAPHICALREGIONNAME"));
     setDisciplineCategoryId(rs.getInt("DISCIPLINECATEGORYID"));
     setDisciplineCategoryName(rs.getString("DISCIPLINECATEGORYNAME"));
-    setPassportTypeName(rs.getString("PASSPORTTYPENAME"));
+    setIdDocumentName(rs.getString("IDDOCUMENTNAME"));
     setVisaTypeName(rs.getString("VISATYPENAME"));
     setClientGroup(rs.getInt("CLIENTGROUP"));
     setDrivingLicense(rs.getBoolean("DRIVINGLICENSE"));
@@ -1505,7 +1505,7 @@ public class Applicant extends Base
     setBankSortCode(rs.getString("BANKSORTCODE"));
     setBankAccountName(rs.getString("BANKACCOUNTNAME"));
     setBankAccountNumber(rs.getString("BANKACCOUNTNUMBER"));
-    setPassportType(rs.getInt("PASSPORTTYPE"));
+    setIdDocument(rs.getInt("IDDOCUMENT"));
     setLanguageCompetency(rs.getBoolean("LANGUAGECOMPETENCY"));
     setFitToWorkIssuedBy(rs.getInt("FITTOWORKISSUEDBY"));
     setIvsEppFilename(rs.getString("IVSEPPFILENAME"));
@@ -1573,9 +1573,9 @@ public class Applicant extends Base
     return dbsRenewalDate == null ? false : dateInFuture(dbsRenewalDate) && (dbsFilename != null);
   }
   
-  public Boolean getHasCurrentPassport()
+  public Boolean getHasCurrentIdDocument()
   {
-    return passportExpiryDate == null ? false : dateInFuture(passportExpiryDate);
+    return idDocumentExpiryDate == null ? false : dateInFuture(idDocumentExpiryDate);
   }
   
   public Boolean getHasCurrentTraining()

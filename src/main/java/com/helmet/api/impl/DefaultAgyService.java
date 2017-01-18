@@ -278,10 +278,10 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     applicants = applicantDAO.getApplicantsForAgencyHpcAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
-  public List<Applicant> getApplicantsForAgencyPassportAboutToExpire(Integer agencyId, Date dateToCheck)
+  public List<Applicant> getApplicantsForAgencyIdDocumentAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyPassportAboutToExpire(agencyId, dateToCheck);
+    applicants = applicantDAO.getApplicantsForAgencyIdDocumentAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyTrainingAboutToExpire(Integer agencyId, Date dateToCheck)

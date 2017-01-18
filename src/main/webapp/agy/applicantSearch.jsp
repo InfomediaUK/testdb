@@ -204,15 +204,15 @@
 		    </td>
 		  </tr>
 		  <tr>
-		    <th align="left" class="label"><bean:message key="label.passportExpiresOnOrBefore"/></th>
+		    <th align="left" class="label"><bean:message key="label.idDocumentExpiresOnOrBefore"/></th>
 		    <td>
-		      <html:radio property="passportExpiryDateOperator" value="<%= Constants.AND %>"/>
+		      <html:radio property="idDocumentExpiryDateOperator" value="<%= Constants.AND %>"/>
 		    </td>
 		    <td>
-		      <html:radio property="passportExpiryDateOperator" value="<%= Constants.OR %>"/>
+		      <html:radio property="idDocumentExpiryDateOperator" value="<%= Constants.OR %>"/>
 		    </td>
 		    <td align="left">
-		      <html:text property="passportExpiryDate"/>&nbsp;<bean:message key="text.dateFormat"/>
+		      <html:text property="idDocumentExpiryDate"/>&nbsp;<bean:message key="text.dateFormat"/>
 		    </td>
 		  </tr>
 		  <tr>
@@ -408,15 +408,15 @@
         </td>
       </tr>
       <tr>
-        <th align="left" class="label"><bean:message key="label.hasPassport"/></th>
+        <th align="left" class="label"><bean:message key="label.hasIdDocument"/></th>
 		    <td>
-		      <html:radio property="hasPassportOperator" value="<%= Constants.AND %>"/>
+		      <html:radio property="hasIdDocumentOperator" value="<%= Constants.AND %>"/>
 		    </td>
 		    <td>
-		      <html:radio property="hasPassportOperator" value="<%= Constants.OR %>"/>
+		      <html:radio property="hasIdDocumentOperator" value="<%= Constants.OR %>"/>
 		    </td>
         <td align="left">
-          <html:select property="hasPassport" tabindex="1">
+          <html:select property="hasIdDocument" tabindex="1">
             <html:option value=""><bean:message key="label.pleaseSelect"/></html:option>
             <html:option value="true"><bean:message key="label.yes"/></html:option>
             <html:option value="false"><bean:message key="label.no"/></html:option>

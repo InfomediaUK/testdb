@@ -64,8 +64,8 @@ public abstract class ApplicantCommonProcess extends AgyAction
     applicant.setReference1Date(convertDate(dateStr, sdf, errors, messageResources, "label.reference1Date"));
     dateStr = (String) dynaForm.get("fitToWorkExpiryDateStr");
     applicant.setFitToWorkExpiryDate(convertDate(dateStr, sdf, errors, messageResources, "label.fitToWorkExpiryDate"));
-    dateStr = (String) dynaForm.get("passportExpiryDateStr");
-    applicant.setPassportExpiryDate(convertDate(dateStr, sdf, errors, messageResources, "label.passportExpiryDate"));
+    dateStr = (String) dynaForm.get("idDocumentExpiryDateStr");
+    applicant.setIdDocumentExpiryDate(convertDate(dateStr, sdf, errors, messageResources, "label.idDocumentExpiryDate"));
     dateStr = (String) dynaForm.get("trainingExpiryDateStr");
     applicant.setTrainingExpiryDate(convertDate(dateStr, sdf, errors, messageResources, "label.trainingExpiryDate"));
     dateStr = (String) dynaForm.get("crbExpiryDateStr");
@@ -166,11 +166,11 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       applicant.setFitToWorkFilename("fittowork" + getFileExtension(uploadFilename));
     }
-    uploadFormFile = (FormFile)dynaForm.get("passportFormFile");
+    uploadFormFile = (FormFile)dynaForm.get("idDocumentFormFile");
     uploadFilename = uploadFormFile.getFileName();
     if (StringUtils.isNotEmpty(uploadFilename))
     {
-      applicant.setPassportFilename("passport" + getFileExtension(uploadFilename));
+      applicant.setIdDocumentFilename("iddocument" + getFileExtension(uploadFilename));
     }
     uploadFormFile = (FormFile)dynaForm.get("trainingFormFile");
     uploadFilename = uploadFormFile.getFileName();
@@ -306,7 +306,7 @@ public abstract class ApplicantCommonProcess extends AgyAction
     controlUploadFile(dynaForm, "proofOfAddress1FormFile", applicant.getProofOfAddress1FileUrl());
     controlUploadFile(dynaForm, "proofOfAddress2FormFile", applicant.getProofOfAddress2FileUrl());
     controlUploadFile(dynaForm, "fitToWorkFormFile", applicant.getFitToWorkFileUrl());
-    controlUploadFile(dynaForm, "passportFormFile", applicant.getPassportFileUrl());
+    controlUploadFile(dynaForm, "idDocumentFormFile", applicant.getIdDocumentFileUrl());
     controlUploadFile(dynaForm, "trainingFormFile", applicant.getTrainingFileUrl());
     controlUploadFile(dynaForm, "crbFormFile", applicant.getCrbFileUrl());
     controlUploadFile(dynaForm, "hpcFormFile", applicant.getHpcFileUrl());

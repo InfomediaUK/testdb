@@ -46,8 +46,8 @@
     <form-bean name="DisciplineCategoryFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="disciplineCategory" type="com.helmet.bean.DisciplineCategory" />
     </form-bean>
-    <form-bean name="PassportTypeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
-      <form-property name="passportType" type="com.helmet.bean.PassportType" />
+    <form-bean name="IdDocumentFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="idDocument" type="com.helmet.bean.IdDocument" />
     </form-bean>
     <form-bean name="VisaTypeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="visaType" type="com.helmet.bean.VisaType" />
@@ -472,11 +472,11 @@
     <forward name="disciplineCategoryEdit" path="/disciplineCategoryEdit.do" />
     <forward name="disciplineCategoryDelete" path="/disciplineCategoryDelete.do" />
 
-    <forward name="passportTypeList" path="/passportTypeList.do" />
-    <forward name="passportTypeView" path="/passportTypeView.do" />
-    <forward name="passportTypeNew"  path="/passportTypeNew.do" />
-    <forward name="passportTypeEdit" path="/passportTypeEdit.do" />
-    <forward name="passportTypeDelete" path="/passportTypeDelete.do" />
+    <forward name="idDocumentList" path="/idDocumentList.do" />
+    <forward name="idDocumentView" path="/idDocumentView.do" />
+    <forward name="idDocumentNew"  path="/idDocumentNew.do" />
+    <forward name="idDocumentEdit" path="/idDocumentEdit.do" />
+    <forward name="idDocumentDelete" path="/idDocumentDelete.do" />
 
     <forward name="visaTypeList" path="/visaTypeList.do" />
     <forward name="visaTypeView" path="/visaTypeView.do" />
@@ -1271,76 +1271,76 @@
         <forward name="success" path="/disciplineCategoryList.do" redirect="true" />
     </action>
 
-    <action path="/passportTypeList"
-            type="com.helmet.application.admin.PassportTypeList"
+    <action path="/idDocumentList"
+            type="com.helmet.application.admin.IdDocumentList"
             name="ListFormAdmin"
             scope="request"
             input="homeAdmin.page"
             validate="false">
-        <forward name="success" path="passportTypeList.page" />
+        <forward name="success" path="idDocumentList.page" />
     </action>
 
-    <action path="/passportTypeNew"
-            type="com.helmet.application.admin.PassportTypeNew"
-            name="PassportTypeFormAdmin"
+    <action path="/idDocumentNew"
+            type="com.helmet.application.admin.IdDocumentNew"
+            name="IdDocumentFormAdmin"
             scope="request"
-            input="/passportTypeList.do"
+            input="/idDocumentList.do"
             validate="false">
-        <forward name="success" path="passportTypeNew.page" />
+        <forward name="success" path="idDocumentNew.page" />
     </action>
 
-    <action path="/passportTypeNewProcess"
-            type="com.helmet.application.admin.PassportTypeNewProcess"
-            name="PassportTypeFormAdmin"
+    <action path="/idDocumentNewProcess"
+            type="com.helmet.application.admin.IdDocumentNewProcess"
+            name="IdDocumentFormAdmin"
             scope="request"
-            input="passportTypeNew.page"
+            input="idDocumentNew.page"
             validate="true">
-        <forward name="success" path="/passportTypeList.do" redirect="true" />
+        <forward name="success" path="/idDocumentList.do" redirect="true" />
     </action>
 
-    <action path="/passportTypeView"
-            type="com.helmet.application.admin.PassportTypeView"
-            name="PassportTypeFormAdmin"
+    <action path="/idDocumentView"
+            type="com.helmet.application.admin.IdDocumentView"
+            name="IdDocumentFormAdmin"
             scope="request"
-            input="/passportTypeList.do"
+            input="/idDocumentList.do"
             validate="false">
-        <forward name="success" path="passportTypeView.page" />
+        <forward name="success" path="idDocumentView.page" />
     </action>
 
-    <action path="/passportTypeEdit"
-            type="com.helmet.application.admin.PassportTypeEdit"
-            name="PassportTypeFormAdmin"
+    <action path="/idDocumentEdit"
+            type="com.helmet.application.admin.IdDocumentEdit"
+            name="IdDocumentFormAdmin"
             scope="request"
-            input="/passportTypeList.do"
+            input="/idDocumentList.do"
             validate="false">
-        <forward name="success" path="passportTypeEdit.page" />
+        <forward name="success" path="idDocumentEdit.page" />
     </action>
 
-    <action path="/passportTypeEditProcess"
-            type="com.helmet.application.admin.PassportTypeEditProcess"
-            name="PassportTypeFormAdmin"
+    <action path="/idDocumentEditProcess"
+            type="com.helmet.application.admin.IdDocumentEditProcess"
+            name="IdDocumentFormAdmin"
             scope="request"
-            input="passportTypeEdit.page"
+            input="idDocumentEdit.page"
             validate="true">
-        <forward name="success" path="/passportTypeList.do" redirect="true" />
+        <forward name="success" path="/idDocumentList.do" redirect="true" />
     </action>
 
-    <action path="/passportTypeDelete"
-            type="com.helmet.application.admin.PassportTypeDelete"
-            name="PassportTypeFormAdmin"
+    <action path="/idDocumentDelete"
+            type="com.helmet.application.admin.IdDocumentDelete"
+            name="IdDocumentFormAdmin"
             scope="request"
-            input="/passportTypeList.do"
+            input="/idDocumentList.do"
             validate="false">
-        <forward name="success" path="passportTypeDelete.page" />
+        <forward name="success" path="idDocumentDelete.page" />
     </action>
 
-    <action path="/passportTypeDeleteProcess"
-            type="com.helmet.application.admin.PassportTypeDeleteProcess"
-            name="PassportTypeFormAdmin"
+    <action path="/idDocumentDeleteProcess"
+            type="com.helmet.application.admin.IdDocumentDeleteProcess"
+            name="IdDocumentFormAdmin"
             scope="request"
-            input="passportTypeDelete.page"
+            input="idDocumentDelete.page"
             validate="false">
-        <forward name="success" path="/passportTypeList.do" redirect="true" />
+        <forward name="success" path="/idDocumentList.do" redirect="true" />
     </action>
 
     <action path="/visaTypeList"

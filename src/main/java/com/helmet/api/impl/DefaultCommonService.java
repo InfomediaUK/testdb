@@ -64,7 +64,7 @@ import com.helmet.bean.MgrAccessGroupItem;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.NhsBackingReportUser;
 import com.helmet.bean.NhsBooking;
-import com.helmet.bean.PassportType;
+import com.helmet.bean.IdDocument;
 import com.helmet.bean.PublicHoliday;
 import com.helmet.bean.ReasonForRequest;
 import com.helmet.bean.RecordCount;
@@ -113,7 +113,7 @@ import com.helmet.persistence.MgrAccessGroupDAO;
 import com.helmet.persistence.MgrAccessGroupItemDAO;
 import com.helmet.persistence.NhsBackingReportDAO;
 import com.helmet.persistence.NhsBookingDAO;
-import com.helmet.persistence.PassportTypeDAO;
+import com.helmet.persistence.IdDocumentDAO;
 import com.helmet.persistence.PublicHolidayDAO;
 import com.helmet.persistence.ReasonForRequestDAO;
 import com.helmet.persistence.ShiftDAO;
@@ -132,7 +132,7 @@ public abstract class DefaultCommonService implements CommonService {
   
   private DisciplineCategoryDAO disciplineCategoryDAO;
 
-  private PassportTypeDAO passportTypeDAO;
+  private IdDocumentDAO idDocumentDAO;
 
   private VisaTypeDAO visaTypeDAO;
 
@@ -246,14 +246,14 @@ public abstract class DefaultCommonService implements CommonService {
     this.disciplineCategoryDAO = disciplineCategoryDAO;
   }
 
-  public PassportTypeDAO getPassportTypeDAO()
+  public IdDocumentDAO getIdDocumentDAO()
   {
-    return passportTypeDAO;
+    return idDocumentDAO;
   }
 
-  public void setPassportTypeDAO(PassportTypeDAO passportTypeDAO)
+  public void setIdDocumentDAO(IdDocumentDAO idDocumentDAO)
   {
-    this.passportTypeDAO = passportTypeDAO;
+    this.idDocumentDAO = idDocumentDAO;
   }
 
   public VisaTypeDAO getVisaTypeDAO()
@@ -3079,11 +3079,11 @@ public abstract class DefaultCommonService implements CommonService {
     return disciplineCategories;
   }
 
-  public List<PassportType> getPassportTypes(boolean showOnlyActive) 
+  public List<IdDocument> getIdDocuments(boolean showOnlyActive) 
   {
-    List<PassportType> passportTypes = null;
-    passportTypes = passportTypeDAO.getPassportTypes(showOnlyActive);
-    return passportTypes;
+    List<IdDocument> idDocuments = null;
+    idDocuments = idDocumentDAO.getIdDocuments(showOnlyActive);
+    return idDocuments;
   }
 
   public List<VisaType> getVisaTypes(boolean showOnlyActive) 

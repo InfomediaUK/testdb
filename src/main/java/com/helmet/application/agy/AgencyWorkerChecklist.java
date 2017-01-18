@@ -30,7 +30,7 @@ import com.helmet.bean.BookingExpense;
 import com.helmet.bean.BookingGradeAgyEntity;
 import com.helmet.bean.BookingGradeApplicantUserEntity;
 import com.helmet.bean.ClientUser;
-import com.helmet.bean.PassportType;
+import com.helmet.bean.IdDocument;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -692,7 +692,7 @@ public abstract class AgencyWorkerChecklist extends AgyAction
     logger.debug("AgencyWorkerChecklist.createThirdTableRow3And4 - Starts...");
     String verifiedIdText = null;
     String nationalityAndImmigrationText = null;
-    String passportExpiryDate = null;
+    String idDocumentExpiryDate = null;
     String visaExpiryDate = null;
     // Third Row.
     float[] columnWidths = {25, 55, 10, 10}; // percentage
@@ -704,22 +704,22 @@ public abstract class AgencyWorkerChecklist extends AgyAction
     cell = new PdfPCell(new Paragraph(messageResources.getMessage("label.applicantChecklist.verifiedId"), TD_FONTBOLD));
     cell.setFixedHeight(20);
     table.addCell(cell);
-    if (StringUtils.isNotEmpty(applicant.getPassportFilename()) && StringUtils.isNotEmpty(applicant.getPassportNumber()))
+    if (StringUtils.isNotEmpty(applicant.getIdDocumentFilename()) && StringUtils.isNotEmpty(applicant.getIdDocumentNumber()))
     {
-      // Both Passport Filename and Passport Number have been entered.
-      verifiedIdText = messageResources.getMessage("label.applicantChecklist.passport");
-      if (applicant.getPassportType() != null && applicant.getPassportType() > 0)
+      // Both IdDocument Filename and IdDocument Number have been entered.
+      verifiedIdText = messageResources.getMessage("label.applicantChecklist.idDocument");
+      if (applicant.getIdDocument() != null && applicant.getIdDocument() > 0)
       {
         AdminService adminService = ServiceFactory.getInstance().getAdminService();
-        PassportType passportType = adminService.getPassportType(applicant.getPassportType());
-        passportExpiryDate = applicant.getPassportExpiryDate()== null ? messageResources.getMessage("label.applicantChecklist.notGiven") : mdf.format(applicant.getPassportExpiryDate());
-        verifiedIdText += " (" + passportType.getName() + ") " + messageResources.getMessage("label.applicantChecklist.expires") + ": " + passportExpiryDate;;
+        IdDocument idDocumentType = adminService.getIdDocument(applicant.getIdDocument());
+        idDocumentExpiryDate = applicant.getIdDocumentExpiryDate()== null ? messageResources.getMessage("label.applicantChecklist.notGiven") : mdf.format(applicant.getIdDocumentExpiryDate());
+        verifiedIdText += " (" + idDocumentType.getName() + ") " + messageResources.getMessage("label.applicantChecklist.expires") + ": " + idDocumentExpiryDate;;
       }
       cell = new PdfPCell(new Paragraph(verifiedIdText, TD_FONT));
     }
     else
     {
-      // Either of Passport Filename or Passport Number have NOT been entered. Blank Cell.
+      // Either of IdDocument Filename or IdDocument Number have NOT been entered. Blank Cell.
       cell = new PdfPCell();
     }
     table.addCell(cell);

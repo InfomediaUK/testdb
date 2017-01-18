@@ -3,7 +3,6 @@ package com.helmet.application.agy;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,6 @@ import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
-import com.helmet.application.Constants;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Applicant;
 
@@ -81,8 +79,8 @@ public class ApplicantSearchProcess extends AgyAction
     String hasHPCDocument = (String)dynaForm.get("hasHPCDocument");
     String hasTrainingCertificateOperator = (String)dynaForm.get("hasTrainingCertificateOperator");
     String hasTrainingCertificate = (String)dynaForm.get("hasTrainingCertificate");
-    String hasPassportOperator = (String)dynaForm.get("hasPassportOperator");
-    String hasPassport = (String)dynaForm.get("hasPassport");
+    String hasIdDocumentOperator = (String)dynaForm.get("hasIdDocumentOperator");
+    String hasIdDocument = (String)dynaForm.get("hasIdDocument");
     String hasProofOfAddress1Operator = (String)dynaForm.get("hasProofOfAddress1Operator");
     String hasProofOfAddress1 = (String)dynaForm.get("hasProofOfAddress1");
     String hasProofOfAddress2Operator = (String)dynaForm.get("hasProofOfAddress2Operator");
@@ -121,16 +119,16 @@ public class ApplicantSearchProcess extends AgyAction
       session.setAttribute("visaExpiryDateOperator", visaExpiryDateOperator);      
       applicantSearchParameters.setVisaExpiryDateLabel(messageResources.getMessage("label.visaExpiresOnOrBefore"));
     }
-    String passportExpiryDateStr = (String)dynaForm.get("passportExpiryDate");
-    Date passportExpiryDate = null;
-    if (StringUtils.isNotEmpty(passportExpiryDateStr))
+    String idDocumentExpiryDateStr = (String)dynaForm.get("idDocumentExpiryDate");
+    Date idDocumentExpiryDate = null;
+    if (StringUtils.isNotEmpty(idDocumentExpiryDateStr))
     {
-      String passportExpiryDateOperator = (String)dynaForm.get("passportExpiryDateOperator");
-      passportExpiryDate = getDate(sdf, passportExpiryDateStr, errors, messageResources, "label.passportExpiresOnOrBefore");
-      applicantSearchParameters.setPassportExpiryDate(passportExpiryDate);
-      applicantSearchParameters.setPassportExpiryDateOperator(passportExpiryDateOperator);
-      session.setAttribute("passportExpiryDateOperator", passportExpiryDateOperator);      
-      applicantSearchParameters.setPassportExpiryDateLabel(messageResources.getMessage("label.passportExpiresOnOrBefore"));
+      String idDocumentExpiryDateOperator = (String)dynaForm.get("idDocumentExpiryDateOperator");
+      idDocumentExpiryDate = getDate(sdf, idDocumentExpiryDateStr, errors, messageResources, "label.idDocumentExpiresOnOrBefore");
+      applicantSearchParameters.setIdDocumentExpiryDate(idDocumentExpiryDate);
+      applicantSearchParameters.setIdDocumentExpiryDateOperator(idDocumentExpiryDateOperator);
+      session.setAttribute("idDocumentExpiryDateOperator", idDocumentExpiryDateOperator);      
+      applicantSearchParameters.setIdDocumentExpiryDateLabel(messageResources.getMessage("label.idDocumentExpiresOnOrBefore"));
     }
     String crbExpiryDateStr = (String)dynaForm.get("crbExpiryDate");
     Date crbExpiryDate = null;
@@ -235,9 +233,9 @@ public class ApplicantSearchProcess extends AgyAction
     applicantSearchParameters.setHasTrainingCertificateOperator("".equals(hasTrainingCertificate) ? null : hasTrainingCertificateOperator);
     session.setAttribute("hasTrainingCertificateOperator", hasTrainingCertificateOperator);
     applicantSearchParameters.setHasTrainingCertificate("".equals(hasTrainingCertificate) ? null : "true".equals(hasTrainingCertificate));
-    applicantSearchParameters.setHasPassportOperator("".equals(hasPassport) ? null : hasPassportOperator);
-    session.setAttribute("hasPassportOperator", hasPassportOperator);
-    applicantSearchParameters.setHasPassport("".equals(hasPassport) ? null : "true".equals(hasPassport));
+    applicantSearchParameters.setHasIdDocumentOperator("".equals(hasIdDocument) ? null : hasIdDocumentOperator);
+    session.setAttribute("hasIdDocumentOperator", hasIdDocumentOperator);
+    applicantSearchParameters.setHasIdDocument("".equals(hasIdDocument) ? null : "true".equals(hasIdDocument));
     applicantSearchParameters.setHasProofOfAddress1Operator("".equals(hasProofOfAddress1) ? null : hasProofOfAddress1Operator);
     session.setAttribute("hasProofOfAddress1Operator", hasProofOfAddress1Operator);
     applicantSearchParameters.setHasProofOfAddress1("".equals(hasProofOfAddress1) ? null : "true".equals(hasProofOfAddress1));

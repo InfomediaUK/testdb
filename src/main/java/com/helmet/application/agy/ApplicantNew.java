@@ -39,7 +39,7 @@ public class ApplicantNew extends AgyAction {
       dynaForm.set("reference2DateStr", "");
       dynaForm.set("reference1DateStr", "");
       dynaForm.set("fitToWorkExpiryDateStr", "");
-      dynaForm.set("passportExpiryDateStr", "");
+      dynaForm.set("idDocumentExpiryDateStr", "");
       dynaForm.set("trainingExpiryDateStr", "");
       dynaForm.set("crbExpiryDateStr", "");
       dynaForm.set("crbIssueDateStr", "");
