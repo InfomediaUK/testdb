@@ -23,6 +23,7 @@
   <tr>
     <th align="left"><bean:message key="label.name" /></th>
     <th align="left"><bean:message key="label.code" /></th>
+    <th align="left"><bean:message key="label.idDocumentType" /></th>
     <th align="left"><bean:message key="label.active" /></th>
     <th align="left"><bean:message key="label.order" /></th>
   </tr>
@@ -43,6 +44,14 @@
     </td>
     <td align="left">
       <bean:write name="idDocument" property="code"/>
+    </td>
+    <td align="left">
+<logic:equal name="idDocument" property="idDocumentType" value="0">
+       <bean:message key="label.passport"/>
+</logic:equal>
+<logic:equal name="idDocument" property="idDocumentType" value="1">
+       <bean:message key="label.idCard"/>
+</logic:equal>
     </td>
     <td align="left">
       <bean:write name="idDocument" property="active"/>

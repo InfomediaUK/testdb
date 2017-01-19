@@ -24,6 +24,15 @@
 	    <td align="left"><html:text name="IdDocumentFormAdmin" property="idDocument.code" size="60" /></td>
 	  </tr>
 	  <tr>
+	    <td align="left"><bean:message key="label.idDocumentType"/></td>
+	    <td align="left">
+          <html:select name="IdDocumentFormAdmin" property="idDocument.idDocumentType">
+            <html:option value="0"><bean:message key="label.passport"/></html:option>
+            <html:option value="1"><bean:message key="label.idCard"/></html:option>
+          </html:select>
+	    </td>
+	  </tr>
+	  <tr>
 	    <td align="left"><bean:message key="label.displayOrder"/></td>
 	     <td align="left"><html:text name="IdDocumentFormAdmin" property="idDocument.displayOrder" size="10" /></td>
 	   </tr>

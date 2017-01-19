@@ -24,6 +24,17 @@
     <td align="left"><bean:write name="IdDocumentFormAdmin" property="idDocument.code"/></td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.idDocumentType"/></td>
+    <td align="left">
+<logic:equal name="IdDocumentFormAdmin" property="idDocument.idDocumentType" value="0">
+       <bean:message key="label.passport"/>
+</logic:equal>
+<logic:equal name="IdDocumentFormAdmin" property="idDocument.idDocumentType" value="1">
+       <bean:message key="label.idCard"/>
+</logic:equal>
+    </td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.displayOrder"/></td>
     <td align="left"><bean:write name="IdDocumentFormAdmin" property="idDocument.displayOrder"/></td>
   </tr>

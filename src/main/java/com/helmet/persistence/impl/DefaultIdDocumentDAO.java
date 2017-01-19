@@ -42,6 +42,7 @@ public class DefaultIdDocumentDAO extends JdbcDaoSupport implements IdDocumentDA
 		insertIdDocumentSQL.append("  IDDOCUMENTID, ");
 		insertIdDocumentSQL.append("  CODE, ");
     insertIdDocumentSQL.append("  NAME, ");
+    insertIdDocumentSQL.append("  IDDOCUMENTTYPE, ");
     insertIdDocumentSQL.append("  DISPLAYORDER, ");
     insertIdDocumentSQL.append("  CREATIONTIMESTAMP, ");
     insertIdDocumentSQL.append("  AUDITORID, ");
@@ -50,6 +51,7 @@ public class DefaultIdDocumentDAO extends JdbcDaoSupport implements IdDocumentDA
 		insertIdDocumentSQL.append("VALUES  ");
 		insertIdDocumentSQL.append("(  ");
 		insertIdDocumentSQL.append("  ^, ");
+    insertIdDocumentSQL.append("  ^, ");
     insertIdDocumentSQL.append("  ^, ");
     insertIdDocumentSQL.append("  ^, ");
     insertIdDocumentSQL.append("  ^, ");
@@ -64,6 +66,7 @@ public class DefaultIdDocumentDAO extends JdbcDaoSupport implements IdDocumentDA
 		updateIdDocumentSQL.append("SET  NOOFCHANGES = NOOFCHANGES + 1, ");
 		updateIdDocumentSQL.append("     CODE = ^, ");
     updateIdDocumentSQL.append("     NAME = ^, ");
+    updateIdDocumentSQL.append("     IDDOCUMENTTYPE = ^, ");
     updateIdDocumentSQL.append("     DISPLAYORDER = ^, ");
     updateIdDocumentSQL.append("     AUDITORID = ^, ");
     updateIdDocumentSQL.append("     AUDITTIMESTAMP = ^ ");
@@ -127,6 +130,7 @@ public class DefaultIdDocumentDAO extends JdbcDaoSupport implements IdDocumentDA
 		Utilities.replace(sql, idDocument.getIdDocumentId());
 		Utilities.replaceAndQuote(sql, idDocument.getCode());
     Utilities.replaceAndQuote(sql, idDocument.getName());
+    Utilities.replace(sql, idDocument.getIdDocumentType());
     Utilities.replace(sql, idDocument.getDisplayOrder());
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     Utilities.replace(sql, auditorId);
@@ -141,6 +145,7 @@ public class DefaultIdDocumentDAO extends JdbcDaoSupport implements IdDocumentDA
 		// Replace the parameters with supplied values.
 		Utilities.replaceAndQuote(sql, idDocument.getCode());
     Utilities.replaceAndQuote(sql, idDocument.getName());
+    Utilities.replace(sql, idDocument.getIdDocumentType());
     Utilities.replace(sql, idDocument.getDisplayOrder());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
