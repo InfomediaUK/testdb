@@ -6,6 +6,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <br/>
 <br/>
+<html:link accesskey="m" forward="mgr"><bean:message key="link.mgr" /></html:link>
 <br/>
 <br/>
 <html:link accesskey="c" forward="agy"><bean:message key="link.agy" /></html:link>
@@ -14,8 +15,7 @@
 <html:link accesskey="p" forward="app"><bean:message key="link.app" /></html:link>
 
 <%--
-<html:link accesskey="m" forward="mgr"><bean:message key="link.mgr" /></html:link>
-<br/>
+ %><br/>
 <br/>
 <html:link accesskey="a" forward="admin"><bean:message key="link.admin" /></html:link>
 <br/>
