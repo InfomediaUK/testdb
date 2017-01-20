@@ -3,9 +3,11 @@ package com.helmet.application;
 import java.util.HashMap;
 import java.util.Properties;
 
+import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Session;
+import javax.mail.Store;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -15,6 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 import org.apache.commons.validator.routines.EmailValidator;
+
+import com.sun.mail.imap.protocol.FLAGS;
 
 /**
  * Handles sending of emails either single or multiple mail merge.
@@ -274,11 +278,11 @@ public class MailHandler {
 		  Transport transport = null;
 		  try
 		  {
-        transport = session.getTransport();
+        transport = session.getTransport("smtp");
   			// Create a message.
-  			MimeMessage mimeMessage = new MimeMessage(session);
+  			MimeMessage mimeMessage = new CustomMimeMessage(session);
   			// Added header stuff. 23/07/2016 Lyndon
-//  			mimeMessage.addHeader("Content-type", "text/HTML; charset=UTF-8");
+  			mimeMessage.addHeader("Content-type", "text/HTML; charset=UTF-8");
 //  			mimeMessage.addHeader("format", "flowed");
 //  			mimeMessage.addHeader("Content-Transfer-Encoding", "8bit");
   			if (StringUtils.isEmpty(from)) 
@@ -318,6 +322,24 @@ public class MailHandler {
         transport.connect();
   			// Send the mail.
         transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+        Store store = null;
+        try
+        {
+          store = session.getStore("imap");
+          //store.connect("mail.easily.co.uk", from, "eFTba8JnAeYbdk"); // For lyndon@matchmyjob.co.uk
+          store.connect("mail.easily.co.uk", from, "helmet22");
+          Folder folder = (Folder)store.getFolder("Sent");
+          folder.open(Folder.READ_WRITE);
+          folder.appendMessages(new Message[]{mimeMessage});
+          mimeMessage.setFlag(FLAGS.Flag.RECENT, true);
+        }
+        finally
+        {
+          if (store != null)
+          {
+            store.close();
+          }
+        }
       }
       finally
       {
