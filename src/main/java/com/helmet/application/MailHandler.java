@@ -42,6 +42,8 @@ public class MailHandler {
   private String hostValue;
   private String portName;
   private String portValue;
+  private String imapHostName;
+  private String imapHostValue;
 	private String connectionTimeoutName;
 	private String connectionTimeoutValue;
 	private String timeoutName;
@@ -186,6 +188,26 @@ public class MailHandler {
     this.portValue = portValue;
   }
 
+  public String getImapHostName()
+  {
+    return imapHostName;
+  }
+
+  public void setImapHostName(String imapHostName)
+  {
+    this.imapHostName = imapHostName;
+  }
+
+  public String getImapHostValue()
+  {
+    return imapHostValue;
+  }
+
+  public void setImapHostValue(String imapHostValue)
+  {
+    this.imapHostValue = imapHostValue;
+  }
+
   public String getUserName()
   {
     return userName;
@@ -327,7 +349,7 @@ public class MailHandler {
         {
           store = session.getStore("imap");
           //store.connect("mail.easily.co.uk", from, "eFTba8JnAeYbdk"); // For lyndon@matchmyjob.co.uk
-          store.connect("mail.easily.co.uk", from, "helmet22");
+          store.connect(imapHostValue, from, password);
           Folder folder = (Folder)store.getFolder("Sent");
           folder.open(Folder.READ_WRITE);
           folder.appendMessages(new Message[]{mimeMessage});

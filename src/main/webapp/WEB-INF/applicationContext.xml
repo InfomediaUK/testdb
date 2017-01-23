@@ -39,6 +39,8 @@
 		<property name="hostValue" value="smtp.easily.co.uk" />
 		<property name="portName" value="mail.smtp.port" />
 		<property name="portValue" value="1025" />
+		<property name="imapHostName" value="mail.imap.host" />
+		<property name="imapHostValue" value="mail.easily.co.uk" />
 		<property name="userName" value="cgg0dhqh51j0" />
 		<property name="password" value="helmet22" />
 		<property name="connectionTimeoutName" value="mail.smtp.connectiontimeout" />
