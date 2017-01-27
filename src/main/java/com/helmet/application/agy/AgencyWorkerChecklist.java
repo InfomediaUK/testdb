@@ -182,13 +182,28 @@ public abstract class AgencyWorkerChecklist extends AgyAction
     Integer clientLogoHeight = null;
     try
     {
-      agencyInvoiceLogo = Image.getInstance(FileHandler.getInstance().getFileLocation() + agency.getInvoiceLogoUrl());
-      applicantPhoto    = Image.getInstance(FileHandler.getInstance().getFileLocation() + applicant.getPhotoDocumentUrl());
+      String fileName = FileHandler.getInstance().getFileLocation() + agency.getInvoiceLogoUrl();
+      File agencyInvoiceLogoFile = new File(fileName);
+      if (agencyInvoiceLogoFile.exists())
+      {
+        agencyInvoiceLogo = Image.getInstance(fileName);
+      }
+      fileName = FileHandler.getInstance().getFileLocation() + applicant.getPhotoDocumentUrl();
+      File applicantPhotoFile = new File(fileName);
+      if (applicantPhotoFile.exists())
+      {
+        applicantPhoto    = Image.getInstance(fileName);
+      }
       if (client != null)
       {
-        clientLogo = Image.getInstance(FileHandler.getInstance().getFileLocation() + client.getLogoUrl());
-        clientLogoWidth = client.getLogoWidth();
-        clientLogoHeight = client.getLogoHeight();
+        fileName = FileHandler.getInstance().getFileLocation() + client.getLogoUrl();
+        File clientLogoFile = new File(fileName);
+        if (clientLogoFile.exists())
+        {
+          clientLogo = Image.getInstance(fileName);
+          clientLogoWidth = client.getLogoWidth();
+          clientLogoHeight = client.getLogoHeight();
+        }
       }      
     }
     catch (MalformedURLException e)
@@ -918,6 +933,11 @@ public abstract class AgencyWorkerChecklist extends AgyAction
         training.append(messageResources.getMessage("label.basicLifeSupportTraining"));
         training.append(". ");
       }
+      if (applicant.getNeonatalLifeSupportTraining())
+      {
+        training.append(messageResources.getMessage("label.neonatalLifeSupportTraining"));
+        training.append(". ");
+      }
       if (applicant.getElearningTraining())
       {
         training.append(messageResources.getMessage("label.elearningTraining"));
@@ -1194,7 +1214,20 @@ public abstract class AgencyWorkerChecklist extends AgyAction
     Image signature = null;
     try
     {
-      signature = Image.getInstance(FileHandler.getInstance().getConsultantFileLocation() + getConsultantLoggedIn().getSignatureFileUrl());
+      String fileName = null;
+      if (getConsultantLoggedIn().getSignatureFileUrl() == null)
+      {
+        logger.debug("Consultant {} does NOT have a signature file URL", getConsultantLoggedIn().getUser().getFullName());
+      }
+      else
+      {
+        fileName = FileHandler.getInstance().getConsultantFileLocation() + getConsultantLoggedIn().getSignatureFileUrl();
+        File signatureFile = new File(fileName);
+        if (signatureFile.exists())
+        {
+          signature = Image.getInstance(fileName);
+        }
+      }
     }
     catch (MalformedURLException e)
     {

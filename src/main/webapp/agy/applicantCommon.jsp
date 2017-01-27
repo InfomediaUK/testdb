@@ -492,28 +492,32 @@
 					  </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.basicLifeSupportTraining"/></th>
-					    <td align="left"><html:checkbox property="applicant.basicLifeSupportTraining" tabindex="66" /></td>
+			  <td align="left"><html:checkbox property="applicant.basicLifeSupportTraining" tabindex="66" /></td>
+            </tr>
+            <tr>
+              <th width="25%"  align="left" class="label"><bean:message key="label.neonatalLifeSupportTraining"/></th>
+		      <td align="left"><html:checkbox property="applicant.neonatalLifeSupportTraining" tabindex="66" /></td>
             </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.elearningTraining"/></th>
-					    <td align="left"><html:checkbox property="applicant.elearningTraining" tabindex="66" /></td>
+			  <td align="left"><html:checkbox property="applicant.elearningTraining" tabindex="66" /></td>
             </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.povaTraining"/></th>
-					    <td align="left"><html:checkbox property="applicant.povaTraining" tabindex="66" /></td>
+			  <td align="left"><html:checkbox property="applicant.povaTraining" tabindex="66" /></td>
             </tr>
             <tr>
               <th width="25%" align="left"class="label"><bean:message key="label.paediatricLifeSupportFile"/></th>
               <td align="left"><html:file property="paediatricLifeSupportFormFile" size="30" tabindex="66" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.paediatricLifeSupportFilename"/></td>
             </tr>
-					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.paediatricLifeSupportIssuedDate"/></th>
-					    <td align="left"><html:text property="paediatricLifeSupportIssuedDateStr" tabindex="66"/>&nbsp;<bean:message key="text.dateFormat"/></td>
-					  </tr>
-      		  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpc"/></th>
-					    <th  align="left" class="label">(HCPC/NMC/HCA)</th>
-					  </tr>
+			<tr>
+	          <th width="25%"  align="left" class="label"><bean:message key="label.paediatricLifeSupportIssuedDate"/></th>
+			  <td align="left"><html:text property="paediatricLifeSupportIssuedDateStr" tabindex="66"/>&nbsp;<bean:message key="text.dateFormat"/></td>
+		    </tr>
+      		<tr>
+			  <th width="25%"  align="left" class="label"><bean:message key="label.hpc"/></th>
+			  <th  align="left" class="label">(HCPC/NMC/HCA)</th>
+			</tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
               <td align="left">

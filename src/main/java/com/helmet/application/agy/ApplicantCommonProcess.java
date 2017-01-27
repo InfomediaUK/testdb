@@ -14,6 +14,7 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.upload.FormFile;
 import org.apache.struts.util.MessageResources;
@@ -216,6 +217,22 @@ public abstract class ApplicantCommonProcess extends AgyAction
       applicant.setEnglishTestCertificateFilename("englishtestcertificate" + getFileExtension(uploadFilename));
     }
     // <-- NEW
+//    if (applicant.getIdDocument().equals(AgyConstants.BRITISH_ID_DOCUMENT))
+//    {
+//      // British Passport.
+//      if (applicant.getRequiresVisa())
+//      {
+//        errors.add("applicant", new ActionMessage("error.visa.notRequired"));
+//      }
+//    }
+//    else
+//    {
+//      // NOT a British Passport. Visa is required.
+//      if (applicant.getRequiresVisa().equals(false))
+//      {
+//        errors.add("applicant", new ActionMessage("error.visa.required"));
+//      }
+//    }
   }
 
   protected void uploadPhotoFile(Applicant applicant, FormFile photoFile)

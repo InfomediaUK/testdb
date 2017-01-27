@@ -1028,6 +1028,17 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
               </td>
             </tr>
             <tr>
+              <th width="25%"  align="left" class="label"><bean:message key="label.neonatalLifeSupportTraining"/></th>
+              <td align="left">
+                <logic:equal name="ApplicantFormAgy" property="applicant.neonatalLifeSupportTraining" value="true">
+                  <bean:message key="label.yes"/>
+                </logic:equal>
+                <logic:notEqual name="ApplicantFormAgy" property="applicant.neonatalLifeSupportTraining" value="true">
+                  <bean:message key="label.no"/>
+                </logic:notEqual>
+              </td>
+            </tr>
+            <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.elearningTraining"/></th>
               <td align="left">
                 <logic:equal name="ApplicantFormAgy" property="applicant.elearningTraining" value="true">

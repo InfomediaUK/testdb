@@ -177,6 +177,7 @@ public class Applicant extends Base
   private Boolean basicLifeSupportTraining = false;
   private Boolean elearningTraining = false;
   private Boolean povaTraining = false;
+  private Boolean neonatalLifeSupportTraining = false;
   private Integer ahpRegistrationType;
   private Date hpcLastCheckedDate;
   private Integer hpcAlertNotification;
@@ -1239,6 +1240,16 @@ public class Applicant extends Base
     this.povaTraining = povaTraining;
   }
 
+  public Boolean getNeonatalLifeSupportTraining()
+  {
+    return neonatalLifeSupportTraining;
+  }
+
+  public void setNeonatalLifeSupportTraining(Boolean neonatalLifeSupportTraining)
+  {
+    this.neonatalLifeSupportTraining = neonatalLifeSupportTraining;
+  }
+
   public Integer getAhpRegistrationType()
   {
     return ahpRegistrationType;
@@ -1513,6 +1524,7 @@ public class Applicant extends Base
     setBasicLifeSupportTraining(rs.getBoolean("BASICLIFESUPPORTTRAINING"));
     setElearningTraining(rs.getBoolean("ELEARNINGTRAINING"));
     setPovaTraining(rs.getBoolean("POVATRAINING"));
+    setNeonatalLifeSupportTraining(rs.getBoolean("NEONATALLIFESUPPORTTRAINING"));
     setAhpRegistrationType(rs.getInt("AHPREGISTRATIONTYPE"));
     setHpcLastCheckedDate(rs.getDate("HPCLASTCHECKEDDATE"));
     setHpcAlertNotification(rs.getInt("HPCALERTNOTIFICATION"));
