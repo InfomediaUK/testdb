@@ -206,9 +206,9 @@ String nhsBookingApplicantNotifyAction = request.getContextPath() + "/agy/nhsBoo
 				        <bean:write name="nhsBooking" property="status"/>
 				      </td>
 				      <td align="right" <logic:equal name="nhsBooking" property="active" value="false">class="nhsBookingDeleted"</logic:equal>><%-- Value --%>
-				      <logic:greaterThan name="nhsBooking" property="value" value="0">
+				      <logic:notEqual name="nhsBooking" property="value" value="0">
 				        <bean:message key="label.currencySymbol"/><bean:write name="nhsBooking" property="value" format="#,##0.00"/>
-				      </logic:greaterThan>
+				      </logic:notEqual>
 				      <logic:equal name="nhsBooking" property="value" value="0">
 				        &nbsp;
 				      </logic:equal>
