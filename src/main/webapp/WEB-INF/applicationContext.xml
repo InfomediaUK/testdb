@@ -134,7 +134,7 @@
         <entry key="applicant.hasCurrentCRB" value="TRUE"/>
         <entry key="applicant.hasCurrentFitToWork" value="TRUE"/>
         <entry key="applicant.hasCurrentHPC" value="TRUE"/>
-        <entry key="applicant.hasCurrentIdDocument" value="TRUE"/>
+        <entry key="applicant.hasRightToWork" value="TRUE"/>
         <entry key="applicant.hasCurrentTraining" value="TRUE"/>
         <entry key="applicant.hasCurrentVisa" value="TRUE"/>
         <entry key="applicant.hasBirthCertificate" value="TRUE"/>
