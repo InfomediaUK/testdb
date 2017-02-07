@@ -9,6 +9,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.helmet.application.Constants;
 import com.helmet.application.FileHandler;
+import com.helmet.application.agy.AgyConstants;
 
 public class Applicant extends Base
 {
@@ -1588,6 +1589,44 @@ public class Applicant extends Base
   public Boolean getHasCurrentIdDocument()
   {
     return idDocumentExpiryDate == null ? false : dateInFuture(idDocumentExpiryDate);
+  }
+  
+  public Boolean getHasValidIdDocument()
+  { 
+    Boolean validIdDocument = getHasCurrentIdDocument();
+    if (validIdDocument)
+    {
+      // ID Document has Expiry Date in future.
+      if (StringUtils.isEmpty(idDocumentNumber))
+      {
+        // ID Document Number NOT supplied.
+        validIdDocument = false;
+      }
+      else
+      {
+        if (StringUtils.isEmpty(idDocumentFilename))
+        {
+          // ID Document (Image) File NOT supplied.
+          validIdDocument = false;
+        }
+      }
+    }
+    return validIdDocument;
+  }
+  
+  public Boolean getHasRightToWork()
+  {
+    Boolean rightToWork = getHasValidIdDocument();
+    if (getIdDocument().equals(AgyConstants.BRITISH_ID_DOCUMENT))
+    {
+      // British person...
+      if (rightToWork == false)
+      {
+        // British person but no valid ID Document. Check Birth Certificate and NI Number.
+        rightToWork = getHasBirthCertificate() && getNiNumberReceived();
+      }
+    }
+    return rightToWork;
   }
   
   public Boolean getHasCurrentTraining()
