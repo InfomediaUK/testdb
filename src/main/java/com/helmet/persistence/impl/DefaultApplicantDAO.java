@@ -205,6 +205,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     insertApplicantSQL.append("  BASICLIFESUPPORTTRAINING, ");
     insertApplicantSQL.append("  ELEARNINGTRAINING, ");
     insertApplicantSQL.append("  POVATRAINING, ");
+    insertApplicantSQL.append("  NEONATALLIFESUPPORTTRAINING, ");
     insertApplicantSQL.append("  AHPREGISTRATIONTYPE, ");
     insertApplicantSQL.append("  HPCLASTCHECKEDDATE, ");
     insertApplicantSQL.append("  HPCALERTNOTIFICATION, ");
@@ -229,6 +230,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
+    insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
@@ -440,6 +442,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     updateApplicantSQL.append("     BASICLIFESUPPORTTRAINING = ^, ");
     updateApplicantSQL.append("     ELEARNINGTRAINING = ^, ");
     updateApplicantSQL.append("     POVATRAINING = ^, ");
+    updateApplicantSQL.append("     NEONATALLIFESUPPORTTRAINING = ^, ");
     updateApplicantSQL.append("     AHPREGISTRATIONTYPE = ^, ");
     updateApplicantSQL.append("     HPCLASTCHECKEDDATE = ^, ");
     updateApplicantSQL.append("     HPCALERTNOTIFICATION = ^, ");
@@ -653,6 +656,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       A.BASICLIFESUPPORTTRAINING, ");
     selectApplicantsSQL.append("       A.ELEARNINGTRAINING, ");
     selectApplicantsSQL.append("       A.POVATRAINING, ");
+    selectApplicantsSQL.append("       A.NEONATALLIFESUPPORTTRAINING, ");
     selectApplicantsSQL.append("       A.AHPREGISTRATIONTYPE, ");
     selectApplicantsSQL.append("       A.HPCLASTCHECKEDDATE, ");
     selectApplicantsSQL.append("       A.HPCALERTNOTIFICATION, ");
@@ -1566,6 +1570,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getBasicLifeSupportTraining());
     Utilities.replace(sql, applicant.getElearningTraining());
     Utilities.replace(sql, applicant.getPovaTraining());
+    Utilities.replace(sql, applicant.getNeonatalLifeSupportTraining());
     Utilities.replace(sql, applicant.getAhpRegistrationType());
     Utilities.replaceAndQuoteNullable(sql, applicant.getHpcLastCheckedDate());
     Utilities.replace(sql, applicant.getHpcAlertNotification());
@@ -1687,6 +1692,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getBasicLifeSupportTraining());
     Utilities.replace(sql, applicant.getElearningTraining());
     Utilities.replace(sql, applicant.getPovaTraining());
+    Utilities.replace(sql, applicant.getNeonatalLifeSupportTraining());
     Utilities.replace(sql, applicant.getAhpRegistrationType());
     Utilities.replaceAndQuoteNullable(sql, applicant.getHpcLastCheckedDate());
     Utilities.replace(sql, applicant.getHpcAlertNotification());
