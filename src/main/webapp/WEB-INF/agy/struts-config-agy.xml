@@ -649,6 +649,7 @@
       <form-property name="applicantId" type="java.lang.String" />
       
       <form-property name="list" type="java.util.List" />
+      <form-property name="applicantList" type="java.util.List" />
 
       <form-property name="totalHours" type="java.math.BigDecimal" />
       <form-property name="totalRRPValue" type="java.math.BigDecimal" />

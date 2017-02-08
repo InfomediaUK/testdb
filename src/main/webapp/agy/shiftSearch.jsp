@@ -199,6 +199,7 @@ for (int i = 1; i < com.helmet.bean.BookingGrade.BOOKINGGRADE_STATUS_DESCRIPTION
       </div>
     </td>
   </tr>
+<!--
   <tr>
     <th>
       <bean:message key="label.applicant"/>
@@ -211,6 +212,19 @@ for (int i = 1; i < com.helmet.bean.BookingGrade.BOOKINGGRADE_STATUS_DESCRIPTION
       <div id="text5" style="display:none">
       <input type="text" disabled="disabled" style="width:397px; height:17px; border-width:2px; border-color:white; border-style:none" value="<bean:message key="label.loading"/>"/>
       </div>
+    </td>
+  </tr>
+-->
+  <tr>
+    <th>
+      <bean:message key="label.applicant"/>
+    </th>
+    <td>
+      <bean:define id="applicants" name="ShiftSearchFormAgy" property="applicantList"/>
+      <html:select name="ShiftSearchFormAgy" property="applicantId" style="width:400px" tabindex="1">
+        <option selected="selected" value="0"><bean:message key="label.pleaseSelect"/></option>
+        <html:options collection="applicants" labelProperty="fullName" property="applicantId" />
+      </html:select>
     </td>
   </tr>
   <tr>
@@ -277,7 +291,7 @@ function doSearchAndSubmit(formName, actionName) {
     document.ShiftSearchFormAgy.siteId.value = '';
     document.ShiftSearchFormAgy.locationId.value = '';
     document.ShiftSearchFormAgy.jobProfileId.value = '';
-    document.ShiftSearchFormAgy.applicantId.value = '';
+    document.ShiftSearchFormAgy.applicantId.value = '0';
     document.ShiftSearchFormAgy.fromDate.value = '';
     document.ShiftSearchFormAgy.toDate.value = '';
     document.ShiftSearchFormAgy.workedStatus.value = '';
@@ -509,7 +523,7 @@ function loadJobProfiles() {
 }
 
 function loadApplicants() {
-	loadSelectField("5", "<%= request.getContextPath() %>/agy/shiftSearchXML.do?agencyId=<bean:write name="consultant" property="agencyId"/>&type=applicant", applicantsCallbackMethod);
+//	loadSelectField("5", "<%= request.getContextPath() %>/agy/shiftSearchXML.do?agencyId=<bean:write name="consultant" property="agencyId"/>&type=applicant", applicantsCallbackMethod);
 }
 
 function loadClientsAndSetUsingRequestValue() {
@@ -536,7 +550,7 @@ function loadApplicantsAndSetUsingRequestValue() {
 }
 
 loadClientsAndSetUsingRequestValue();
-loadApplicantsAndSetUsingRequestValue();
+//loadApplicantsAndSetUsingRequestValue();
 
 //-->
 </script>

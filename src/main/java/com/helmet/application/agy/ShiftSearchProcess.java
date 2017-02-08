@@ -26,6 +26,7 @@ import com.helmet.application.comparator.BookingDateUserApplicantComparatorByApp
 import com.helmet.application.comparator.BookingDateUserApplicantComparatorByBookingDateAndStartTime;
 import com.helmet.application.comparator.BookingDateUserApplicantComparatorByJobProfileName;
 import com.helmet.application.comparator.BookingDateUserApplicantComparatorMiData;
+import com.helmet.bean.Applicant;
 import com.helmet.bean.BookingDate;
 import com.helmet.bean.BookingDateUserApplicant;
 import com.helmet.bean.BookingDateUserApplicantEntity;
@@ -37,11 +38,8 @@ public class ShiftSearchProcess extends AgyAction
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
-
     logger.entry("In coming !!!");
-
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     String bookingIdStr = (String) dynaForm.get("bookingId");
     String shiftNoStr = (String) dynaForm.get("shiftNo");
     String loginIdStr = (String) dynaForm.get("loginId");
@@ -166,9 +164,10 @@ public class ShiftSearchProcess extends AgyAction
 
     dynaForm.set("canMultiInvoice", bookingId != null && bookingDateStatus != null && bookingDateStatus.equals(BookingDate.BOOKINGDATE_STATUS_COMPLETED) && workedStatus != null
         && workedStatus.equals(BookingDate.BOOKINGDATE_WORKEDSTATUS_AUTHORIZED) && clientId != null && applicantId != null);
-
+    // Reload Applicant List.
+    List<Applicant> applicantList = agyService.getApplicantsForAgency(getConsultantLoggedIn().getAgencyId());
+    dynaForm.set("applicantList", applicantList);
     logger.exit("Out going !!!");
-
     return mapping.findForward("success");
 
   }
