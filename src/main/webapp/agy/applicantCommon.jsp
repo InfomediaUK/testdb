@@ -522,8 +522,8 @@
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
               <td align="left">
                 <html:select name="ApplicantFormAgy" property="applicant.ahpRegistrationType" tabindex="66">
-                  <html:option value="0"><bean:message key="label.full"/></html:option>
-                  <html:option value="1"><bean:message key="label.temp"/></html:option>
+                  <html:option value="0"><bean:message key="label.hcpc"/></html:option>
+                  <html:option value="1"><bean:message key="label.nmc"/></html:option>
                   <html:option value="2"><bean:message key="label.hca"/></html:option>
                 </html:select>
               </td>

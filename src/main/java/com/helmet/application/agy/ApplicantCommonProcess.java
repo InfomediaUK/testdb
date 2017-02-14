@@ -217,22 +217,24 @@ public abstract class ApplicantCommonProcess extends AgyAction
       applicant.setEnglishTestCertificateFilename("englishtestcertificate" + getFileExtension(uploadFilename));
     }
     // <-- NEW
-//    if (applicant.getIdDocument().equals(AgyConstants.BRITISH_ID_DOCUMENT))
-//    {
-//      // British Passport.
-//      if (applicant.getRequiresVisa())
-//      {
-//        errors.add("applicant", new ActionMessage("error.visa.notRequired"));
-//      }
-//    }
-//    else
-//    {
-//      // NOT a British Passport. Visa is required.
-//      if (applicant.getRequiresVisa().equals(false))
-//      {
-//        errors.add("applicant", new ActionMessage("error.visa.required"));
-//      }
-//    }
+    if (applicant.getRequiresVisa())
+    {
+      // Visa Required.
+      if (applicant.getVisaType().equals(0))
+      {
+        // Error, Visa Type NOT selected.
+        errors.add("applicant", new ActionMessage("error.visaType.required"));
+      }
+    }
+    else
+    {
+      // Visa NOT Required.
+      if (applicant.getVisaType() > 0)
+      {
+        // Error, Visa Type selected.
+        errors.add("applicant", new ActionMessage("error.visaType.notRequired"));
+      }
+    }
   }
 
   protected void uploadPhotoFile(Applicant applicant, FormFile photoFile)

@@ -1544,7 +1544,7 @@ public class Applicant extends Base
     // <-- NEW
   }
 
-  public Boolean getHasCurrentCRB()
+  public Boolean getHasCurrentDisclosure()
   {
     java.util.Date today = new java.util.Date();
     Calendar calendar = Calendar.getInstance();
@@ -1574,7 +1574,18 @@ public class Applicant extends Base
     return fitToWorkExpiryDate == null ? false : dateInFuture(fitToWorkExpiryDate);
   }
   
-  public Boolean getHasCurrentHPC()
+  public Boolean getHasValidProfessionalRegistration()
+  {
+    if (ahpRegistrationType == 2)
+    {
+      // HCA, no need to validate registration file or expiry date...
+      return true;
+    }
+    // NOT HCA...
+    return getHasCurrentProfessionalRegistration();
+  }
+  
+  public Boolean getHasCurrentProfessionalRegistration()
   {
     // True: Must have hpcExpiryDate set AND hpcExpiryDate must not be before today AND hpcFilename entered.
     return hpcExpiryDate == null ? false : dateInFuture(hpcExpiryDate) && (hpcFilename != null);
@@ -1611,6 +1622,11 @@ public class Applicant extends Base
         }
       }
     }
+    else
+    {
+      // Has NO valid ID Document. A Birth Certificate will do (apparently)...
+      validIdDocument = getHasBirthCertificate();
+    }
     return validIdDocument;
   }
   
@@ -1627,6 +1643,16 @@ public class Applicant extends Base
       }
     }
     return rightToWork;
+  }
+
+  public Boolean getHasOverseasPoliceClearanceIfRequired()
+  { 
+    Boolean cool = arrivalInCountryDate == null;
+    if (!cool)
+    {
+      cool = getOverseasPoliceClearance();
+    }
+    return cool;
   }
   
   public Boolean getHasCurrentTraining()
@@ -1727,7 +1753,7 @@ public class Applicant extends Base
     {
       if (getHasCurrentVisaIfRequired().equals("Yes") || getHasCurrentVisaIfRequired().equals("Not Required"))
       {
-        if (getHasCurrentCRB())
+        if (getHasCurrentDisclosure())
         {
           if (getHasCurrentTraining())
           {

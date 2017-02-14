@@ -129,18 +129,17 @@
 		<property name="endOfReasonMarker" value="****** End of Compliancy Test Failed ******" />
     <property name="metaData">
       <map>
-        <entry key="applicant.niNumber" value="NOT EMPTY"/>
         <entry key="applicant.hpcNumber" value="NOT EMPTY"/>
-        <entry key="applicant.hasCurrentCRB" value="TRUE"/>
+        <entry key="applicant.hasCurrentDisclosure" value="TRUE"/>
         <entry key="applicant.hasCurrentFitToWork" value="TRUE"/>
-        <entry key="applicant.hasCurrentHPC" value="TRUE"/>
-        <entry key="applicant.hasRightToWork" value="TRUE"/>
+        <entry key="applicant.hasValidProfessionalRegistration" value="TRUE"/>
+        <entry key="applicant.hasValidIdDocument" value="TRUE"/>
         <entry key="applicant.hasCurrentTraining" value="TRUE"/>
         <entry key="applicant.hasCurrentVisa" value="TRUE"/>
-        <entry key="applicant.hasBirthCertificate" value="TRUE"/>
         <entry key="applicant.hasProofOfAddress1" value="TRUE"/>
         <entry key="applicant.hasProofOfAddress2" value="TRUE"/>
         <entry key="applicant.niNumberReceived" value="TRUE"/>
+        <entry key="applicant.hasOverseasPoliceClearanceIfRequired" value="TRUE"/>
       </map>
     </property>
   </bean>

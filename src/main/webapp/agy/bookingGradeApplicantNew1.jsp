@@ -94,10 +94,10 @@ session.setAttribute("applicantIndexLetter", indexLetter);
 		  </logic:empty>
     </td>
     <td align="center">
-			<logic:equal name="applicant" property="hasCurrentCRB" value="true">
+			<logic:equal name="applicant" property="hasCurrentDisclosure" value="true">
 		    <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
 		  </logic:equal>
-			<logic:notEqual name="applicant" property="hasCurrentCRB" value="true">
+			<logic:notEqual name="applicant" property="hasCurrentDisclosure" value="true">
 		    <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
 		  </logic:notEqual>
     </td>
@@ -141,7 +141,7 @@ session.setAttribute("applicantIndexLetter", indexLetter);
 		  </logic:empty>
     </td>
     <td align="center">
-      n/a<!-- hasCurrentCRB -->
+      n/a<!-- hasCurrentDisclosure -->
     </td>
     </label>
   </tr>

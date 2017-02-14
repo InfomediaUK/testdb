@@ -599,10 +599,10 @@ function checkedAll(frmname)
                 </logic:notEqual>
               </td>
               <td align="center">
-                <logic:equal name="applicant" property="hasCurrentCRB" value="true">
+                <logic:equal name="applicant" property="hasCurrentDisclosure" value="true">
                   <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
                 </logic:equal>
-                <logic:notEqual name="applicant" property="hasCurrentCRB" value="true">
+                <logic:notEqual name="applicant" property="hasCurrentDisclosure" value="true">
                   <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
                 </logic:notEqual>
               </td>
@@ -721,10 +721,10 @@ function checkedAll(frmname)
 							  </logic:notEqual>
 					    </td>
 					    <td align="center">
-								<logic:equal name="applicant" property="hasCurrentCRB" value="true">
+								<logic:equal name="applicant" property="hasCurrentDisclosure" value="true">
 							    <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
 							  </logic:equal>
-								<logic:notEqual name="applicant" property="hasCurrentCRB" value="true">
+								<logic:notEqual name="applicant" property="hasCurrentDisclosure" value="true">
 							    <html:img src="images/checkboxdisabledoff.bmp" width="13" height="13" />
 							  </logic:notEqual>
 					    </td>

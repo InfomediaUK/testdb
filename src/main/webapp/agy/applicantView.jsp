@@ -1095,10 +1095,10 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
 					    <td align="left">
                 <logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="0">
-                  <bean:message key="label.full"/>
+                  <bean:message key="label.hcpc"/>
                 </logic:equal>
                 <logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="1">
-                  <bean:message key="label.temp"/>
+                  <bean:message key="label.nmc"/>
                 </logic:equal>
                 <logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="2">
                   <bean:message key="label.hca"/>
