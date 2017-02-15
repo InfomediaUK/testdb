@@ -1622,7 +1622,7 @@ public class Applicant extends Base
         }
       }
     }
-    else
+    if (!validIdDocument)
     {
       // Has NO valid ID Document. A Birth Certificate will do (apparently)...
       validIdDocument = getHasBirthCertificate();
