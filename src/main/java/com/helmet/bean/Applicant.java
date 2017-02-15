@@ -1765,7 +1765,7 @@ public class Applicant extends Base
                 {
                   if (getHasProofOfAddress2())
                   {
-                    if (getOverseasPoliceClearance())
+                    if (getHasOverseasPoliceClearanceIfRequired())
                     {
                       if (getNiNumberReceived())
                       {
