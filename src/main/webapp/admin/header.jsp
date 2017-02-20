@@ -178,6 +178,13 @@
   <html:link forward="visaTypeList"><bean:message key="link.visaTypeList"/></html:link>
 </li>
 </mmj-admin:hasAccess>
+
+<mmj-admin:hasAccess forward="siteUnavailableView">
+<li class="navMain">
+  <html:link forward="siteUnavailableView"><bean:message key="link.siteUnavailableView"/></html:link>
+</li>
+</mmj-admin:hasAccess>
+
 </ul>
 </div>
 

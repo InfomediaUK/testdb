@@ -218,6 +218,15 @@
         <put name="titleKey" value="title.visaTypeDelete" type="string"/>
         <put name="body"   value="/admin/visaTypeDelete.jsp"/>
   </definition>
+  <!-- SiteUnavailable -->
+  <definition name="siteUnavailableView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.siteUnavailableView" type="string"/>
+        <put name="body"   value="/admin/siteUnavailableView.jsp"/>
+  </definition>
+  <definition name="siteUnavailableEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.siteUnavailableEdit" type="string"/>
+        <put name="body"   value="/admin/siteUnavailableEdit.jsp"/>
+  </definition>
   <!-- ReEnterPwd -->
   <definition name="reEnterPwdList.page" extends="layoutAdmin.main">
         <put name="titleKey" value="title.reEnterPwdList" type="string"/>

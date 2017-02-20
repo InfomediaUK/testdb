@@ -52,6 +52,11 @@
     <form-bean name="VisaTypeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="visaType" type="com.helmet.bean.VisaType" />
     </form-bean>
+
+    <form-bean name="SiteUnavailableFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="text" type="java.lang.String" />
+    </form-bean>
+
     <form-bean name="ReEnterPwdFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="reEnterPwd" type="com.helmet.bean.ReEnterPwd" />
     </form-bean>
@@ -483,6 +488,9 @@
     <forward name="visaTypeNew"  path="/visaTypeNew.do" />
     <forward name="visaTypeEdit" path="/visaTypeEdit.do" />
     <forward name="visaTypeDelete" path="/visaTypeDelete.do" />
+
+    <forward name="siteUnavailableView" path="/siteUnavailableView.do" />
+    <forward name="siteUnavailableEdit" path="/siteUnavailableEdit.do" />
 
     <forward name="reEnterPwdList" path="/reEnterPwdList.do" />
     <forward name="reEnterPwdView" path="/reEnterPwdView.do" />
@@ -1413,6 +1421,33 @@
             input="visaTypeDelete.page"
             validate="false">
         <forward name="success" path="/visaTypeList.do" redirect="true" />
+    </action>
+
+    <action path="/siteUnavailableView"
+            type="com.helmet.application.admin.SiteUnavailableView"
+            name="SiteUnavailableFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="siteUnavailableView.page" />
+    </action>
+
+    <action path="/siteUnavailableEdit"
+            type="com.helmet.application.admin.SiteUnavailableView"
+            name="SiteUnavailableFormAdmin"
+            scope="request"
+            input="/siteUnavailableView.do"
+            validate="false">
+        <forward name="success" path="siteUnavailableEdit.page" />
+    </action>
+
+    <action path="/siteUnavailableEditProcess"
+            type="com.helmet.application.admin.SiteUnavailableEditProcess"
+            name="SiteUnavailableFormAdmin"
+            scope="request"
+            input="siteUnavailableEdit.page"
+            validate="true">
+        <forward name="success" path="/siteUnavailableView.do" redirect="true" />
     </action>
 
     <action path="/reEnterPwdList"
