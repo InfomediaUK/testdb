@@ -199,7 +199,7 @@ for (int i = 1; i < com.helmet.bean.BookingGrade.BOOKINGGRADE_STATUS_DESCRIPTION
       </div>
     </td>
   </tr>
-<!--
+<!--  
   <tr>
     <th>
       <bean:message key="label.applicant"/>
@@ -222,7 +222,7 @@ for (int i = 1; i < com.helmet.bean.BookingGrade.BOOKINGGRADE_STATUS_DESCRIPTION
     <td>
       <bean:define id="applicants" name="ShiftSearchFormAgy" property="applicantList"/>
       <html:select name="ShiftSearchFormAgy" property="applicantId" style="width:400px" tabindex="1">
-        <option selected="selected" value="0"><bean:message key="label.pleaseSelect"/></option>
+        <option selected="selected" value=""><bean:message key="label.pleaseSelect"/></option>
         <html:options collection="applicants" labelProperty="fullName" property="applicantId" />
       </html:select>
     </td>
