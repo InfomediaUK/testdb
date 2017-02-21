@@ -3,7 +3,9 @@ package com.helmet.application.agy;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
@@ -70,21 +72,29 @@ public class NhsBookingsBookTaskProcess extends AgyAction
 //      return mapping.findForward("error");
     }
     // Get the NHSBookingIds from the request and make a list.
-    Enumeration paramNames = request.getParameterNames();
+    Enumeration<String> paramNames = request.getParameterNames();
     List<Integer> listNhsBookingId = new ArrayList<Integer>();
+    Set<Integer> setNotDuplicate = new HashSet<Integer>();
     while(paramNames.hasMoreElements()) 
     {
       String paramName = (String)paramNames.nextElement();
       if (paramName.equals("nhsBookingId"))
       {
         String[] paramValues = request.getParameterValues(paramName);
+        Integer nhsBookingId = null;
         for(String param : paramValues) 
         {
-          // For each NHS Booking to be booked...
-          listNhsBookingId.add(Integer.parseInt(param));
+          nhsBookingId = Integer.parseInt(param);
+          // NOTE. This duplicate check is 'belts & braces' to prevent the strange occurance of duplicate bookings...
+          if (setNotDuplicate.add(nhsBookingId))
+          {
+            // For each NHS Booking to be booked. Note. Cannot be duplicate here...
+            listNhsBookingId.add(nhsBookingId);
+          }
         }
       }
     }
+    setNotDuplicate = null;
     // Create an NHSBookingsBookTask that will do the actual booking.
     NhsBookingsBookTask nhsBookingsBookTask = new NhsBookingsBookTask(agyService, agency, clientUser, siteUser, locationUser, jobProfileUser, clientAgencyJobProfileGradeUser, getConsultantLoggedIn(), hourlyRate, wageRate, value, messageResources, cssFileName, serverName, listNhsBookingId);
     ExecutorService executorService = (ExecutorService)request.getSession().getServletContext().getAttribute(AgyConstants.NHS_EXECUTOR);

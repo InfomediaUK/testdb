@@ -355,7 +355,7 @@ public class NhsBooking extends Base
 
   public boolean isReadyToBook()
   {
-    return bookingId == null && isValid();
+    return bookingId == 0 && isValid();
   }
 
   public void load(SqlRowSet rs)

@@ -141,62 +141,95 @@ public class NhsBookingsBookTask implements Callable<NhsBookingsBookTaskResult>
       nhsBooking = agyService.getNhsBooking(nhsBookingId);
       if (nhsBooking != null)
       {
-        shift = agyService.getShift(nhsBooking.getShiftId());
-        bookingDates = new BookingDate[1];
-        bookingDate = loadBookingDate(nhsBooking, shift);
-        bookingDates[0] = bookingDate;
-        newBooking = loadBooking(nhsBooking, clientUser, locationUser, jobProfileUser, clientAgencyJobProfileGradeUser, reasonForRequest, shift, listPublicHoliday, listUplift, bookingDates);
-        rowCount += agyService.insertBooking(newBooking, bookingDates, bookingGrades, bookingExpenses, consultantLoggedIn.getConsultantId());
-        if (lockBooking(newBooking.getBookingId()))
+        if (nhsBooking.isReadyToBook())
         {
-          try
+          // This check is 'belts & braces' to prevent the strange occurance of duplicate bookings...
+          // This NHS Booking has NOT already been booked...
+          shift = agyService.getShift(nhsBooking.getShiftId());
+          bookingDates = new BookingDate[1];
+          bookingDate = loadBookingDate(nhsBooking, shift);
+          bookingDates[0] = bookingDate;
+          newBooking = loadBooking(nhsBooking, clientUser, locationUser, jobProfileUser, clientAgencyJobProfileGradeUser, reasonForRequest, shift, listPublicHoliday, listUplift, bookingDates);
+          rowCount += agyService.insertBooking(newBooking, bookingDates, bookingGrades, bookingExpenses, consultantLoggedIn.getConsultantId());
+          if (lockBooking(newBooking.getBookingId()))
           {
-            rowCount += agyService.updateBookingOpen(newBooking.getBookingId(), 0, consultantLoggedIn.getConsultantId());
+            try
+            {
+              rowCount += agyService.updateBookingOpen(newBooking.getBookingId(), 0, consultantLoggedIn.getConsultantId());
+            }
+            finally
+            {
+              unlockBooking(newBooking.getBookingId());
+            }
           }
-          finally
+          bookingGrade = agyService.getBookingGradeForBookingClientAgencyJobProfileGrade(newBooking.getBookingId(), clientAgencyJobProfileGradeUser.getClientAgencyJobProfileGradeId());
+          nhsBooking.setBookingId(newBooking.getBookingId());
+          nhsBooking.setBookingTime(new Timestamp(new Date().getTime()));
+          nhsBooking.setBookingDateId(bookingDate.getBookingDateId());
+          nhsBooking.setBookingGradeId(bookingGrade.getBookingGradeId());
+          nhsBooking.setValue(value);
+          agyService.updateNhsBooking(nhsBooking, consultantLoggedIn.getConsultantId());
+          bookingGradeApplicant = loadBookingGradeApplicant(nhsBooking.getApplicantId(), bookingGrade, wageRate);
+          bookingGradeApplicantDate = loadBookingGradeApplicantDate(bookingDate, bookingGradeApplicant, newBooking);
+          bookingGradeApplicantDates[0] = bookingGradeApplicantDate;
+          rowCount += agyService.insertBookingGradeApplicant(bookingGradeApplicant, bookingGradeApplicantDates, consultantLoggedIn.getConsultantId());
+          rowCount += agyService.updateBookingGradeApplicantSubmit(newBooking.getBookingId(), bookingGradeApplicant.getBookingGradeApplicantId(), bookingGradeApplicant.getNoOfChanges(),
+              consultantLoggedIn.getConsultantId());
+          bookingGradeApplicantUserEntity = agyService.getBookingGradeApplicantUserEntity(bookingGradeApplicant.getBookingGradeApplicantId());
+          // Setting the BookingGrade's Status to CLOSED is necessary to allow the BookingGradeAgyEntity to be found from the following line of code. 
+          int bookingGradeRowCount = agyService.updateBookingGradeStatus(bookingGrade.getBookingGradeId(), bookingGrade.getNoOfChanges(), consultantLoggedIn.getConsultantId(),
+              BookingGrade.BOOKINGGRADE_STATUS_CLOSED);
+          if (bookingGradeRowCount == 0)
           {
-            unlockBooking(newBooking.getBookingId());
+            // Something has gone wrong! Try to recover by reselecting the BookingGrade and setting its status to CLOSED.
+            bookingGrade = agyService.getBookingGrade(bookingGrade.getBookingGradeId());
+            agyService.updateBookingGradeStatus(bookingGrade.getBookingGradeId(), bookingGrade.getNoOfChanges(), consultantLoggedIn.getConsultantId(), BookingGrade.BOOKINGGRADE_STATUS_CLOSED);
           }
-        }
-        bookingGrade = agyService.getBookingGradeForBookingClientAgencyJobProfileGrade(newBooking.getBookingId(), clientAgencyJobProfileGradeUser.getClientAgencyJobProfileGradeId());
-        nhsBooking.setBookingId(newBooking.getBookingId());
-        nhsBooking.setBookingTime(new Timestamp(new Date().getTime()));
-        nhsBooking.setBookingDateId(bookingDate.getBookingDateId());
-        nhsBooking.setBookingGradeId(bookingGrade.getBookingGradeId());
-        nhsBooking.setValue(value);
-        agyService.updateNhsBooking(nhsBooking, consultantLoggedIn.getConsultantId());
-        bookingGradeApplicant = loadBookingGradeApplicant(nhsBooking.getApplicantId(), bookingGrade, wageRate);
-        bookingGradeApplicantDate = loadBookingGradeApplicantDate(bookingDate, bookingGradeApplicant, newBooking);
-        bookingGradeApplicantDates[0] = bookingGradeApplicantDate;
-        rowCount += agyService.insertBookingGradeApplicant(bookingGradeApplicant, bookingGradeApplicantDates, consultantLoggedIn.getConsultantId());
-        rowCount += agyService.updateBookingGradeApplicantSubmit(newBooking.getBookingId(), bookingGradeApplicant.getBookingGradeApplicantId(), bookingGradeApplicant.getNoOfChanges(), consultantLoggedIn.getConsultantId());
-        bookingGradeApplicantUserEntity = agyService.getBookingGradeApplicantUserEntity(bookingGradeApplicant.getBookingGradeApplicantId());
-        // Setting the BookingGrade's Status to CLOSED is necessary to allow the BookingGradeAgyEntity to be found from the following line of code. 
-        int bookingGradeRowCount = agyService.updateBookingGradeStatus(bookingGrade.getBookingGradeId(), bookingGrade.getNoOfChanges(), consultantLoggedIn.getConsultantId(), BookingGrade.BOOKINGGRADE_STATUS_CLOSED);
-        if (bookingGradeRowCount == 0)
-        {
-          // Something has gone wrong! Try to recover by reselecting the BookingGrade and setting its status to CLOSED.
-          bookingGrade = agyService.getBookingGrade(bookingGrade.getBookingGradeId());
-          agyService.updateBookingGradeStatus(bookingGrade.getBookingGradeId(), bookingGrade.getNoOfChanges(), consultantLoggedIn.getConsultantId(), BookingGrade.BOOKINGGRADE_STATUS_CLOSED);
-        }
-        bookingGradeAgyEntity = agyService.getBookingGradeAgyEntity(bookingGrade.getBookingGradeId(), agency.getAgencyId());
-        applicantBookingConfirmationMessage = new ApplicantBookingConfirmationMessage(bookingGradeApplicantUserEntity, bookingGradeAgyEntity, agency, clientUser, consultantLoggedIn, messageResources, serverName);
-        fromNiceEmailAddress = applicantBookingConfirmationMessage.getFromNiceEmailAddress();
-        toNiceEmailAddress = applicantBookingConfirmationMessage.getToNiceEmailAddress();
-        subject = applicantBookingConfirmationMessage.getSubject();
-        message = applicantBookingConfirmationMessage.getMessage();
-        multipartEmailer = new MultipartEmailer(agency, messageResources, cssFileName, serverName, fromNiceEmailAddress, toNiceEmailAddress, null, fromNiceEmailAddress, subject, message, null);
-        status = multipartEmailer.sendEmail();
-        if (status == 0)
-        {
-          nhsBooking = agyService.getNhsBooking(nhsBooking.getNhsBookingId());
-          nhsBooking.setApplicantNotificationSent(new Timestamp(new java.util.Date().getTime()));
-          rowCount += agyService.updateNhsBookingApplicantNotificationSent(nhsBooking, consultantLoggedIn.getConsultantId());
-          nhsBookingsBookTaskResult.setBookingsProcessedOk(nhsBookingsBookTaskResult.getBookingsProcessedOk() + 1);
+          bookingGradeAgyEntity = agyService.getBookingGradeAgyEntity(bookingGrade.getBookingGradeId(), agency.getAgencyId());
+          applicantBookingConfirmationMessage = new ApplicantBookingConfirmationMessage(bookingGradeApplicantUserEntity, bookingGradeAgyEntity, agency, clientUser, consultantLoggedIn,
+              messageResources, serverName);
+          fromNiceEmailAddress = applicantBookingConfirmationMessage.getFromNiceEmailAddress();
+          toNiceEmailAddress = applicantBookingConfirmationMessage.getToNiceEmailAddress();
+          subject = applicantBookingConfirmationMessage.getSubject();
+          message = applicantBookingConfirmationMessage.getMessage();
+          multipartEmailer = new MultipartEmailer(agency, messageResources, cssFileName, serverName, fromNiceEmailAddress, toNiceEmailAddress, null, fromNiceEmailAddress, subject, message, null);
+          status = multipartEmailer.sendEmail();
+          if (status == 0)
+          {
+            nhsBooking = agyService.getNhsBooking(nhsBooking.getNhsBookingId());
+            nhsBooking.setApplicantNotificationSent(new Timestamp(new java.util.Date().getTime()));
+            rowCount += agyService.updateNhsBookingApplicantNotificationSent(nhsBooking, consultantLoggedIn.getConsultantId());
+            nhsBookingsBookTaskResult.setBookingsProcessedOk(nhsBookingsBookTaskResult.getBookingsProcessedOk() + 1);
+          }
+          else
+          {
+            nhsBookingsBookTaskResult.setBookingsFailed(nhsBookingsBookTaskResult.getBookingsFailed() + 1);
+          } 
         }
         else
         {
-          nhsBookingsBookTaskResult.setBookingsFailed(nhsBookingsBookTaskResult.getBookingsFailed() + 1);
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> WARNING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          logger.warn("Attempt to book an NHS Booking that is already booked.");
+          logger.warn(nhsBooking.toString());
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+          logger.warn("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< WARNING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
       }
     }
