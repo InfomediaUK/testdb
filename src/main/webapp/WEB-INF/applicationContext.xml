@@ -19,7 +19,11 @@
 		<property name="appService" ref="appService" />
 		<property name="zapService" ref="zapService" />
 	</bean>
-
+<!--
+#  blank - no automatic popup, even first time thru
+#  doInformPopupHelp - if first time thru, inform user that help is available via an alert, don't auto popup, avoiding popup blocker issues
+#  doPopupHelp - if first time thru, auto popup the help, this may cause issues with popup blockers 
+-->
   <bean id="systemHandler" 
         class="com.helmet.application.SystemHandler"
 		    factory-method="getInstance">
@@ -278,7 +282,7 @@
 		<!--  -->
 		<property name="agyBookingOpenFromEmailAddress" value="${mgrServiceTarget.agyBookingOpenFromEmailAddress}" />
 		<property name="agyBookingOpenSubject" value="${mgrServiceTarget.agyBookingOpenSubject}" />
-		<property name="agyBookingOpenLink" value="${mgrServiceTarget.agyBookingOpenLink}" />
+		<property name="agyBookingOpenLink" value="/agy/bookingGradeViewSummary.do?bookingGrade.bookingGradeId=" />
 		<!-- common DAOs -->
 		<property name="agencyInvoiceDAO" ref="agencyInvoiceDAO" />
 		<property name="agencyInvoiceCreditDAO" ref="agencyInvoiceCreditDAO" />
