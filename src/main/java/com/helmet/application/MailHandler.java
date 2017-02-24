@@ -343,8 +343,9 @@ public class MailHandler {
   				mimeMessage.setContent(content, contentType);
   			}
   			TimeZone tz = TimeZone.getTimeZone("GMT");
-  			Calendar c = Calendar.getInstance(tz);
-  			mimeMessage.setSentDate(c.getTime());
+  			Calendar calendar = Calendar.getInstance();
+  			calendar.setTimeZone(tz);
+  			mimeMessage.setSentDate(calendar.getTime());
         transport.connect();
   			// Send the mail.
         transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
