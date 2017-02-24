@@ -3,10 +3,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x" %>
 
-<bean:write name="QueryFormAdmin" property="fileName"/>
+<bean:write name="QueryFormAdmin" property="fileName"/><br />
+<mmj-admin:hasAccess forward="queriesView" >
+  <html:link forward="queriesView"><bean:message key="link.viewXml"/></html:link>
+</mmj-admin:hasAccess>
 <br /><br />
 <c:url value="http://${pageContext.request.serverName}${pageContext.request.contextPath}/admin/queryProcess.do" var="submitURL"/>
 

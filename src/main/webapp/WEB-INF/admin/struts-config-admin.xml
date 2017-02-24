@@ -53,6 +53,10 @@
       <form-property name="visaType" type="com.helmet.bean.VisaType" />
     </form-bean>
 
+    <form-bean name="QueriesFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="queriesXml" type="java.lang.String" />
+    </form-bean>
+
     <form-bean name="SiteUnavailableFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="text" type="java.lang.String" />
     </form-bean>
@@ -492,6 +496,9 @@
 
     <forward name="siteUnavailableView" path="/siteUnavailableView.do" />
     <forward name="siteUnavailableEdit" path="/siteUnavailableEdit.do" />
+
+    <forward name="queriesView" path="/queriesView.do" />
+    <forward name="queriesEdit" path="/queriesEdit.do" />
 
     <forward name="reEnterPwdList" path="/reEnterPwdList.do" />
     <forward name="reEnterPwdView" path="/reEnterPwdView.do" />
@@ -1449,6 +1456,33 @@
             input="siteUnavailableEdit.page"
             validate="true">
         <forward name="success" path="/siteUnavailableView.do" redirect="true" />
+    </action>
+
+    <action path="/queriesView"
+            type="com.helmet.application.admin.QueriesView"
+            name="QueriesFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="queriesView.page" />
+    </action>
+
+    <action path="/queriesEdit"
+            type="com.helmet.application.admin.QueriesView"
+            name="QueriesFormAdmin"
+            scope="request"
+            input="/queriesView.do"
+            validate="false">
+        <forward name="success" path="queriesEdit.page" />
+    </action>
+
+    <action path="/queriesEditProcess"
+            type="com.helmet.application.admin.QueriesEditProcess"
+            name="QueriesFormAdmin"
+            scope="request"
+            input="queriesEdit.page"
+            validate="true">
+        <forward name="success" path="/queriesView.do" redirect="true" />
     </action>
 
     <action path="/reEnterPwdList"

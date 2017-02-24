@@ -86,6 +86,13 @@ public class XMLGenerator extends JdbcDaoSupport
 
   public void init()
   {
+    queries.clear();
+    loadQueries(fileName);
+  }
+
+  public void reloadXml()
+  {
+    queries.clear();
     loadQueries(fileName);
   }
 

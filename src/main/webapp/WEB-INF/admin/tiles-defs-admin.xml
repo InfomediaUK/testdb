@@ -227,6 +227,15 @@
         <put name="titleKey" value="title.siteUnavailableEdit" type="string"/>
         <put name="body"   value="/admin/siteUnavailableEdit.jsp"/>
   </definition>
+  <!-- Queries -->
+  <definition name="queriesView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.queriesView" type="string"/>
+        <put name="body"   value="/admin/queriesView.jsp"/>
+  </definition>
+  <definition name="queriesEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.queriesEdit" type="string"/>
+        <put name="body"   value="/admin/queriesEdit.jsp"/>
+  </definition>
   <!-- ReEnterPwd -->
   <definition name="reEnterPwdList.page" extends="layoutAdmin.main">
         <put name="titleKey" value="title.reEnterPwdList" type="string"/>
