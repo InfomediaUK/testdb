@@ -23,5 +23,5 @@ else
   mmjLogo = request.getContextPath() + "/images/localmaster-logo.jpg";
 }
 %>
-<html:link page="/.." titleKey="title.mmjLogo"><html:img src="<%= mmjLogo %>" width="150" height="58" /></html:link>
+<html:link page="/home.do" titleKey="title.mmjLogo"><html:img src="<%= mmjLogo %>" width="150" height="58" /></html:link>
 <jsp:include flush="true" page="/sessionStuff.jsp"/>
