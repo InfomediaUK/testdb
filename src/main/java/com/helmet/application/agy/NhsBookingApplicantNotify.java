@@ -71,7 +71,7 @@ public class NhsBookingApplicantNotify extends AgyAction
         String toNiceEmailAddress = applicantBookingConfirmationMessage.getToNiceEmailAddress();
         String subject = applicantBookingConfirmationMessage.getSubject();
         String message = applicantBookingConfirmationMessage.getMessage();
-        MultipartEmailer multipartEmailer = new MultipartEmailer(agency, messageResources, cssFileName, serverName, fromNiceEmailAddress, toNiceEmailAddress, null, fromNiceEmailAddress, subject, message, null);
+        MultipartEmailer multipartEmailer = new MultipartEmailer(agency, messageResources, cssFileName, serverName, fromNiceEmailAddress, toNiceEmailAddress, null, null, subject, message, null);
         int status = multipartEmailer.sendEmail();
         if (status == 0)
         {

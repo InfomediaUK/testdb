@@ -192,7 +192,7 @@ public class NhsBookingsBookTask implements Callable<NhsBookingsBookTaskResult>
           toNiceEmailAddress = applicantBookingConfirmationMessage.getToNiceEmailAddress();
           subject = applicantBookingConfirmationMessage.getSubject();
           message = applicantBookingConfirmationMessage.getMessage();
-          multipartEmailer = new MultipartEmailer(agency, messageResources, cssFileName, serverName, fromNiceEmailAddress, toNiceEmailAddress, null, fromNiceEmailAddress, subject, message, null);
+          multipartEmailer = new MultipartEmailer(agency, messageResources, cssFileName, serverName, fromNiceEmailAddress, toNiceEmailAddress, null, null, subject, message, null);
           status = multipartEmailer.sendEmail();
           if (status == 0)
           {
