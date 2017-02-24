@@ -218,8 +218,8 @@
       <form-property name="locationUser" type="com.helmet.bean.LocationUser" />
       <form-property name="jobProfileUser" type="com.helmet.bean.JobProfileUser" />
       <form-property name="hourlyRate" type="java.math.BigDecimal" />
-      <form-property name="wageRate" type="java.math.BigDecimal" />
-      <form-property name="value" type="java.math.BigDecimal" />
+      <form-property name="wageRate" type="java.math.BigDecimal" initial="0.00"/>
+      <form-property name="value" type="java.math.BigDecimal" initial="0.00" />
       <form-property name="clientAgencyJobProfileGradeId" type="java.lang.Integer" />
       <form-property name="bookingGroupName" type="java.lang.String" />
       <form-property name="bookingReference" type="java.lang.String" initial="" />

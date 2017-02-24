@@ -1116,6 +1116,17 @@
 			</field>
 		</form>
 		
+		<form name="NhsBookingsBookFormAgy">
+			<field property="wageRate"
+				depends="required">
+				<arg0 key="label.wageRate" />
+			</field>
+			<field property="value"
+				depends="required">
+				<arg0 key="label.value" />
+			</field>
+		</form>
+		
   </formset>
   
 </form-validation>
