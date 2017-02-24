@@ -1,7 +1,9 @@
 package com.helmet.application;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.TimeZone;
 
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -340,7 +342,9 @@ public class MailHandler {
   			{
   				mimeMessage.setContent(content, contentType);
   			}
-  			mimeMessage.setSentDate(new java.util.Date());
+  			TimeZone tz = TimeZone.getTimeZone("GMT");
+  			Calendar c = Calendar.getInstance(tz);
+  			mimeMessage.setSentDate(c.getTime());
         transport.connect();
   			// Send the mail.
         transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
