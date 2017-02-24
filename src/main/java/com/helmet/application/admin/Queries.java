@@ -11,25 +11,23 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.application.admin.abztract.AdminAction;
+import com.helmet.reporting.XMLGenerator;
 
 
-public class Queries extends AdminAction {
+public class Queries extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
-    	logger.entry("In coming !!!");
-
-		
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
-    }
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    XMLGenerator xmlGenerator = XMLGenerator.getInstance();
+    String fileName = xmlGenerator.getFileName();
+    dynaForm.set("fileName", fileName);
+    logger.exit("Out going !!!");
+    return mapping.findForward("success");
+  }
 
 }

@@ -393,6 +393,7 @@
     </form-bean>
  
     <form-bean name="QueryFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="fileName" type="java.lang.String" />
       <form-property name="id" type="java.lang.String" />
       <form-property name="resultSetData" type="com.helmet.reporting.ResultSetData"/>
     </form-bean>

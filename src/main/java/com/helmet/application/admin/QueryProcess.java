@@ -15,39 +15,38 @@ import com.helmet.reporting.ResultSetData;
 import com.helmet.reporting.XMLGenerator;
 
 
-public class QueryProcess extends AdminAction {
+public class QueryProcess extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    String id = request.getParameter("id");
 
-    	logger.entry("In coming !!!");
+    XMLGenerator xmlGenerator = XMLGenerator.getInstance();
 
-		String id = request.getParameter("id");
+    String paramNames[] = xmlGenerator.getParamNames(id);
+    int paramCount = paramNames.length;
+    String paramValues[] = new String[paramCount];
 
-		XMLGenerator xmlGenerator = XMLGenerator.getInstance();
-
-		String paramNames[] = xmlGenerator.getParamNames(id);
-		int paramCount = paramNames.length;
-		String paramValues[] = new String[paramCount];
-
-		for (int i = 0; i < paramCount; i++) {
-			paramValues[i] = request.getParameter(paramNames[i]);
-		}
-
-		ResultSetData resultSetData = xmlGenerator.getResultSetData(id, paramValues);
-
-		dynaForm.set("resultSetData", resultSetData);
-    	
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
-
+    for (int i = 0; i < paramCount; i++)
+    {
+      paramValues[i] = request.getParameter(paramNames[i]);
     }
+
+    ResultSetData resultSetData = xmlGenerator.getResultSetData(id, paramValues);
+
+    String fileName = xmlGenerator.getFileName();
+    dynaForm.set("fileName", fileName);
+    dynaForm.set("resultSetData", resultSetData);
+
+    logger.exit("Out going !!!");
+
+    return mapping.findForward("success");
+
+  }
 
 }

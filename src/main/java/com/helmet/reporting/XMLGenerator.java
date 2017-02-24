@@ -21,6 +21,8 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.beanutils.ResultSetDynaClass;
 import org.apache.commons.beanutils.RowSetDynaClass;
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,142 +32,181 @@ import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-public class XMLGenerator extends JdbcDaoSupport {
-	/**
-	 * @label singleton
-	 */
-	private static XMLGenerator xmlGenerator;
+public class XMLGenerator extends JdbcDaoSupport
+{
+  /**
+   * @label singleton
+   */
+  private static XMLGenerator xmlGenerator;
 
-	HashMap queries;
-	
-	String fileName;
-	
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
+  HashMap queries;
 
-	/**
-	 * Get instance of the XMLGenerator object. If it does not yet exist, create
-	 * it.
-	 */
-	public static XMLGenerator getInstance() {
-		if (xmlGenerator == null) {
-			// NOT instantiated yet so create it.
-			synchronized (XMLGenerator.class) {
-				// Only ONE thread at a time here!
-				if (xmlGenerator == null) {
-					xmlGenerator = new XMLGenerator();
-				}
-			}
-		}
-		return xmlGenerator;
-	}
+  String fileName;
 
-	/**
-	 * Empty constructor.
-	 */
-	public XMLGenerator() {
-		queries = new HashMap();
-	}
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-	public void init() {
-    	loadQueries(fileName);
-	}
+  public String getFileName()
+  {
+    return fileName;
+  }
 
-	private void loadQueries(String fileName) {
+  public void setFileName(String fileName)
+  {
+    this.fileName = fileName;
+  }
 
-		try {
+  /**
+   * Get instance of the XMLGenerator object. If it does not yet exist, create
+   * it.
+   */
+  public static XMLGenerator getInstance()
+  {
+    if (xmlGenerator == null)
+    {
+      // NOT instantiated yet so create it.
+      synchronized (XMLGenerator.class)
+      {
+        // Only ONE thread at a time here!
+        if (xmlGenerator == null)
+        {
+          xmlGenerator = new XMLGenerator();
+        }
+      }
+    }
+    return xmlGenerator;
+  }
 
-			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
-					.newInstance();
-			DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-			Document doc = docBuilder.parse(new File(fileName));
+  /**
+   * Empty constructor.
+   */
+  public XMLGenerator()
+  {
+    queries = new HashMap();
+  }
 
-			// normalize text representation
-			doc.getDocumentElement().normalize();
-//			System.out.println("Root element of the doc is "
-//					+ doc.getDocumentElement().getNodeName());
+  public void init()
+  {
+    loadQueries(fileName);
+  }
 
-			NodeList listOfQueries = doc.getElementsByTagName("query");
-			int totalQueries = listOfQueries.getLength();
-//			System.out.println("Total no of queries : " + totalQueries);
+  private void loadQueries(String fileName)
+  {
+    logger.debug("loadQueries({})", fileName);
+    File file = new File(fileName);
+    
+    if (file.exists())
+    {
+      try
+      {
 
-			for (int s = 0; s < listOfQueries.getLength(); s++) {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document doc = docBuilder.parse(new File(fileName));
 
-                QueryData qd = new QueryData();
+        // normalize text representation
+        doc.getDocumentElement().normalize();
+        // System.out.println("Root element of the doc is "
+        // + doc.getDocumentElement().getNodeName());
 
-				Node queryNode = listOfQueries.item(s);
-				if (queryNode.getNodeType() == Node.ELEMENT_NODE) {
+        NodeList listOfQueries = doc.getElementsByTagName("query");
+        int totalQueries = listOfQueries.getLength();
+        // System.out.println("Total no of queries : " + totalQueries);
 
-					Element queryElement = (Element) queryNode;
+        for (int s = 0; s < listOfQueries.getLength(); s++)
+        {
 
-					String queryId = queryElement.getAttribute("id");
-					qd.setId(queryId);
-					String queryName = queryElement.getAttribute("name");
-					qd.setName(queryName);
-					String queryDesc = queryElement.getAttribute("desc");
-					qd.setDesc(queryDesc);
+          QueryData qd = new QueryData();
 
-					NodeList sqlList = queryElement.getElementsByTagName("sql");
-					Element sqlElement = (Element) sqlList.item(0);
-					NodeList textSQLList = sqlElement.getChildNodes();
-					String sql = ((Node) textSQLList.item(0)).getNodeValue().trim();
-					qd.setSql(sql);
-					NodeList paramsList = queryElement.getElementsByTagName("params");
-					if (paramsList.getLength() > 0) {
-						Element paramsElement = (Element) paramsList.item(0);
-						NodeList paramList = paramsElement.getElementsByTagName("param");
-						qd.setParams(new String[paramList.getLength()]);
-						for (int p = 0; p < paramList.getLength(); p++) {
-							Element paramElement = (Element) paramList.item(p);
-							String paramName = paramElement.getAttribute("name");
-							String paramTitle = paramElement.getAttribute("title");
-							String paramType = paramElement.getAttribute("type");
-//							System.out.println("Param : " + paramName + " " + paramTitle + " " + paramType);
-							qd.getParams()[p] = paramName;
-						}
-					}
-					else {
-						qd.setParams(new String[0]);
-					}
+          Node queryNode = listOfQueries.item(s);
+          if (queryNode.getNodeType() == Node.ELEMENT_NODE)
+          {
 
-					queries.put(queryId, qd);
+            Element queryElement = (Element)queryNode;
 
-				}// end of if clause
+            String queryId = queryElement.getAttribute("id");
+            qd.setId(queryId);
+            String queryName = queryElement.getAttribute("name");
+            qd.setName(queryName);
+            String queryDesc = queryElement.getAttribute("desc");
+            qd.setDesc(queryDesc);
 
-			}// end of for loop with s var
+            NodeList sqlList = queryElement.getElementsByTagName("sql");
+            Element sqlElement = (Element)sqlList.item(0);
+            NodeList textSQLList = sqlElement.getChildNodes();
+            String sql = ((Node)textSQLList.item(0)).getNodeValue().trim();
+            qd.setSql(sql);
+            NodeList paramsList = queryElement.getElementsByTagName("params");
+            if (paramsList.getLength() > 0)
+            {
+              Element paramsElement = (Element)paramsList.item(0);
+              NodeList paramList = paramsElement.getElementsByTagName("param");
+              qd.setParams(new String[paramList.getLength()]);
+              for (int p = 0; p < paramList.getLength(); p++)
+              {
+                Element paramElement = (Element)paramList.item(p);
+                String paramName = paramElement.getAttribute("name");
+                String paramTitle = paramElement.getAttribute("title");
+                String paramType = paramElement.getAttribute("type");
+                // System.out.println("Param : " + paramName + " " + paramTitle +
+                // " " + paramType);
+                qd.getParams()[p] = paramName;
+              }
+            }
+            else
+            {
+              qd.setParams(new String[0]);
+            }
 
-		} catch (SAXParseException err) {
-			System.out.println("** Parsing error" + ", line "
-					+ err.getLineNumber() + ", uri " + err.getSystemId());
-			System.out.println(" " + err.getMessage());
+            queries.put(queryId, qd);
 
-		} catch (SAXException e) {
-			Exception x = e.getException();
-			((x == null) ? e : x).printStackTrace();
+          } // end of if clause
 
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
+        } // end of for loop with s var
 
+      }
+      catch (SAXParseException err)
+      {
+        System.out.println("** Parsing error" + ", line " + err.getLineNumber() + ", uri " + err.getSystemId());
+        System.out.println(" " + err.getMessage());
+        logger.debug("** Parsing error, line {}, uri {}", err.getLineNumber(), err.getSystemId());
+        logger.debug(err.getMessage());
+      }
+      catch (SAXException e)
+      {
+        Exception x = e.getException();
+        ((x == null) ? e : x).printStackTrace();
 
-	}
+      }
+      catch (Throwable t)
+      {
+        t.printStackTrace();
+      } 
+    }
+    else
+    {
+      logger.debug("Queries xml file NOT FOUND - {}", fileName);
+      setFileName(fileName + " ***** NOT FOUND *****");
+    }
 
+  }
 
-	public String[] getParamNames(String id) {
-		  QueryData qd = (QueryData)queries.get(id);
-		  return qd.getParams();
-		}
+  public String[] getParamNames(String id)
+  {
+    QueryData qd = (QueryData)queries.get(id);
+    return qd.getParams();
+  }
 
-	public String getSQL(String id, String[] paramValues) {
-		  QueryData qd = (QueryData)queries.get(id);
-		  String sql = qd.getSql();
-		  String[] params = qd.getParams();
-		  for (int i = 0; i < paramValues.length; i++) {
-		  	sql = sql.replaceAll(params[i], paramValues[i]);
-		  }
-		  return sql;
-	}
+  public String getSQL(String id, String[] paramValues)
+  {
+    QueryData qd = (QueryData)queries.get(id);
+    String sql = qd.getSql();
+    String[] params = qd.getParams();
+    for (int i = 0; i < paramValues.length; i++)
+    {
+      sql = sql.replaceAll(params[i], paramValues[i]);
+    }
+    return sql;
+  }
 
   /**
    * Defaults to show names of columns.
@@ -174,47 +215,55 @@ public class XMLGenerator extends JdbcDaoSupport {
    * @param paramValues
    * @return
    */
-  public String getDataAsString(String id, String[] paramValues) 
+  public String getDataAsString(String id, String[] paramValues)
   {
     return getDataAsString(id, paramValues, true);
   }
-  
-	public String getDataAsString(String id, String[] paramValues, boolean showNames) 
+
+  public String getDataAsString(String id, String[] paramValues, boolean showNames)
   {
-		String sql = getSQL(id, paramValues);
-		Document document = getDataAsDocument(sql, showNames);
-		return convertDocumentToString(document);
-	}
+    String sql = getSQL(id, paramValues);
+    Document document = getDataAsDocument(sql, showNames);
+    return convertDocumentToString(document);
+  }
 
-	public String getDataAsString() {
-		Document document = getDataAsDocument(null, true);
-		return convertDocumentToString(document);
-	}
+  public String getDataAsString()
+  {
+    Document document = getDataAsDocument(null, true);
+    return convertDocumentToString(document);
+  }
 
-	private String convertDocumentToString(Document document) {
+  private String convertDocumentToString(Document document)
+  {
 
-		TransformerFactory tFactory = TransformerFactory.newInstance();
-		Transformer transformer = null;
-		try {
-			transformer = tFactory.newTransformer();
-		} catch (TransformerConfigurationException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+    TransformerFactory tFactory = TransformerFactory.newInstance();
+    Transformer transformer = null;
+    try
+    {
+      transformer = tFactory.newTransformer();
+    }
+    catch (TransformerConfigurationException e1)
+    {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
 
-		DOMSource source = new DOMSource(document);
-		StringWriter sw = new StringWriter();
-		StreamResult result = new StreamResult(sw);
-		try {
-			transformer.transform(source, result);
-		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return sw.toString();
-	}
+    DOMSource source = new DOMSource(document);
+    StringWriter sw = new StringWriter();
+    StreamResult result = new StreamResult(sw);
+    try
+    {
+      transformer.transform(source, result);
+    }
+    catch (TransformerException e)
+    {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return sw.toString();
+  }
 
-	private Document getDataAsDocument(String sql, boolean showNames) 
+  private Document getDataAsDocument(String sql, boolean showNames)
   {
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = null;
@@ -259,8 +308,8 @@ public class XMLGenerator extends JdbcDaoSupport {
       {
         // Add names element to root node.
         root.appendChild(names);
-      } 
-      
+      }
+
       /* Move the cursor through the data one row at a time. */
       while (rs.next())
       {
@@ -305,7 +354,8 @@ public class XMLGenerator extends JdbcDaoSupport {
     // made.
     try
     {
-      if (conn != null) conn.rollback();
+      if (conn != null)
+        conn.rollback();
     }
     catch (java.sql.SQLException e)
     {
@@ -313,7 +363,8 @@ public class XMLGenerator extends JdbcDaoSupport {
     }
     try
     {
-      if (conn != null) conn.close();
+      if (conn != null)
+        conn.close();
     }
     catch (java.sql.SQLException e)
     {
@@ -323,218 +374,257 @@ public class XMLGenerator extends JdbcDaoSupport {
     return document;
   }
 
-	public ResultSetData getResultSetData(String id, String[] paramValues) {
-		
-		String sql = getSQL(id, paramValues);
-		ResultSetData resultSetData = getResultSetData(sql);
-		return resultSetData;
+  public ResultSetData getResultSetData(String id, String[] paramValues)
+  {
 
-	}
-	
-	private ResultSetData getResultSetData(String sql) {
+    String sql = getSQL(id, paramValues);
+    ResultSetData resultSetData = getResultSetData(sql);
+    return resultSetData;
 
-		Connection conn = getConnection();
+  }
 
-		ResultSetData resultSetData = new ResultSetData();
-		
-		try {
+  private ResultSetData getResultSetData(String sql)
+  {
 
-			ResultSet rs = getResultSet(conn, sql);
+    Connection conn = getConnection();
 
-	    	resultSetData.setDynaBeans(new RowSetDynaClass(rs, false));
-	    	resultSetData.setDynaProperties(new ResultSetDynaClass(rs, false).getDynaProperties());
+    ResultSetData resultSetData = new ResultSetData();
 
-		} catch (SQLException e) {
-			System.out.println("SQL Exception: " + e.getMessage());
-			showSQLException(e);
-			return null;
-		}
-		finally {
+    try
+    {
 
-		}
+      ResultSet rs = getResultSet(conn, sql);
 
-		// Before we close the connection, let's rollback any changes we may have made.
-		try {
-			if (conn != null)
-				conn.rollback();
-		} catch (java.sql.SQLException e) {
-			showSQLException(e);
-		}
-		try {
-			if (conn != null)
-				conn.close();
-		} catch (java.sql.SQLException e) {
-			showSQLException(e);
-		}
+      resultSetData.setDynaBeans(new RowSetDynaClass(rs, false));
+      resultSetData.setDynaProperties(new ResultSetDynaClass(rs, false).getDynaProperties());
 
-		return resultSetData;
-	}
+    }
+    catch (SQLException e)
+    {
+      System.out.println("SQL Exception: " + e.getMessage());
+      showSQLException(e);
+      return null;
+    }
+    finally
+    {
 
+    }
 
-//	private Connection getConnection() {
-//    	Connection conn = null;
-//        try {
-//			conn = DatabaseServer.getDatabaseConnection();
-//		} catch (DatabaseAccessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return conn;
-//	}
-//
-//	private void putConnection(Connection conn) {
-//        DatabaseServer.dropDatabaseConnection(conn);
-//	}
+    // Before we close the connection, let's rollback any changes we may have
+    // made.
+    try
+    {
+      if (conn != null)
+        conn.rollback();
+    }
+    catch (java.sql.SQLException e)
+    {
+      showSQLException(e);
+    }
+    try
+    {
+      if (conn != null)
+        conn.close();
+    }
+    catch (java.sql.SQLException e)
+    {
+      showSQLException(e);
+    }
 
-    private Connection getConnectionHardCoded() {
+    return resultSetData;
+  }
 
-    	Connection conn = null;
+  // private Connection getConnection() {
+  // Connection conn = null;
+  // try {
+  // conn = DatabaseServer.getDatabaseConnection();
+  // } catch (DatabaseAccessException e) {
+  // // TODO Auto-generated catch block
+  // e.printStackTrace();
+  // }
+  // return conn;
+  // }
+  //
+  // private void putConnection(Connection conn) {
+  // DatabaseServer.dropDatabaseConnection(conn);
+  // }
 
-//		String databaseURL = "jdbc:firebirdsql://127.0.0.1/c:/Database/commerce.gdb";
-//		String user = "ADMINDBA";
-//		String password = "admindba";
-//		String driverName = "org.firebirdsql.jdbc.FBDriver";
+  private Connection getConnectionHardCoded()
+  {
 
-		String databaseURL = "jdbc:postgresql://puri.gointernet.co.uk:5432/sbdev";
-		String user = "gopg";
-		String password = "N0m1nat3";
-		String driverName = "org.postgresql.Driver";
+    Connection conn = null;
 
-		try {
-//			System.out.println("Try to get a Connection");
+    // String databaseURL =
+    // "jdbc:firebirdsql://127.0.0.1/c:/Database/commerce.gdb";
+    // String user = "ADMINDBA";
+    // String password = "admindba";
+    // String driverName = "org.firebirdsql.jdbc.FBDriver";
 
-			Class.forName(driverName);
-			try {
-				conn = java.sql.DriverManager.getConnection(databaseURL, user,
-						password);
-//				System.out.println("Connection established.");
-			} catch (java.sql.SQLException e) {
-//				System.out
-//						.println("Unable to establish a connection through the driver manager.");
-				showSQLException(e);
-				return null;
-			}
+    String databaseURL = "jdbc:postgresql://puri.gointernet.co.uk:5432/sbdev";
+    String user = "gopg";
+    String password = "N0m1nat3";
+    String driverName = "org.postgresql.Driver";
 
-			// Let's disable the default autocommit so we can undo our changes later...
-			try {
-				conn.setAutoCommit(false);
-//				System.out.println("Auto-commit is disabled.");
-			} catch (java.sql.SQLException e) {
-//				System.out.println("Unable to disable autocommit.");
-				showSQLException(e);
-				return null;
-			}
-		} catch (java.lang.ClassNotFoundException e) {
-			// A call to Class.forName() forces us to consider this exception :-)...
-//			System.out.println("InterClient not found in class path");
-			System.out.println(e.getMessage());
-		}
-		return conn;
-	}
+    try
+    {
+      // System.out.println("Try to get a Connection");
 
-	private ResultSet getResultSet(Connection conn, String sql) throws SQLException {
+      Class.forName(driverName);
+      try
+      {
+        conn = java.sql.DriverManager.getConnection(databaseURL, user, password);
+        // System.out.println("Connection established.");
+      }
+      catch (java.sql.SQLException e)
+      {
+        // System.out
+        // .println("Unable to establish a connection through the driver
+        // manager.");
+        showSQLException(e);
+        return null;
+      }
 
-		// Create a Statement object.
-		Statement stmt = conn.createStatement();
-		// Execute an SQL query and get a Result Set object.
-        if (sql == null) {
+      // Let's disable the default autocommit so we can undo our changes
+      // later...
+      try
+      {
+        conn.setAutoCommit(false);
+        // System.out.println("Auto-commit is disabled.");
+      }
+      catch (java.sql.SQLException e)
+      {
+        // System.out.println("Unable to disable autocommit.");
+        showSQLException(e);
+        return null;
+      }
+    }
+    catch (java.lang.ClassNotFoundException e)
+    {
+      // A call to Class.forName() forces us to consider this exception :-)...
+      // System.out.println("InterClient not found in class path");
+      System.out.println(e.getMessage());
+    }
+    return conn;
+  }
 
-			StringBuffer query = new StringBuffer();
+  private ResultSet getResultSet(Connection conn, String sql) throws SQLException
+  {
 
-			query.append("SELECT ");
-			query.append("COMPANYNAME, ");
-			query.append("COMPANYTRADINGNAME AS tradingName, ");
-			query.append("COMPANYINARCADE, ");
-			query.append("COMPANYLASTORDACKTIME, ");
-			query.append("COUNT(companyid) as c, ");
-			query.append("sum(companyid) as s ");
-			query.append("FROM company ");
-			query.append("GROUP BY 1,2,3,4");
+    // Create a Statement object.
+    Statement stmt = conn.createStatement();
+    // Execute an SQL query and get a Result Set object.
+    if (sql == null)
+    {
 
-			//		query.append("SELECT ");
-			//        query.append("trim(tuu.username) AS promoter, ");
-			//        query.append("cs.name AS clicksource, ");
-			//        query.append("c.timestamp AS timestamp, ");
-			//        query.append("c.value AS value, ");
-			//        query.append("'sb'||c.visibleelmt_id AS uniqueid, ");
-			//        query.append("ccp.authcode AS authcode, ");
-			//        query.append("trim(u.username) AS username ");
-			//        query.append("FROM ");
-			//        query.append("  gwccredit c ");
-			//        query.append("    LEFT JOIN gwcccpayment ccp ON ccp.visibleelmt_id = c.visibleelmt_id, ");
-			//        query.append("  gwcaccount a, ");
-			//        query.append("  gwcuser u  ");
-			//        query.append("    LEFT JOIN gwcclicksource cs ON cs.clicksource_id = u.clicksource_id ");
-			//        query.append("    LEFT JOIN gwctrafficuser tu ON tu.trafficuser_id = cs.trafficuser_pro_id ");
-			//        query.append("    LEFT JOIN gwcuser tuu       ON tuu.user_id = tu.user_id ");
-			//        query.append("WHERE  ");
-			//        query.append("c.timestamp BETWEEN ");
-			//        query.append("'2005-05-01 00:00:00.000' AND CURRENT_TIMESTAMP ");
-			//        query.append("AND a.account_id = c.account_id ");
-			//        query.append("AND u.user_id = a.user_id ");
-			//        query.append("ORDER BY promoter, clicksource, timestamp, value, authcode, username ");
+      StringBuffer query = new StringBuffer();
 
-			//		query += "SELECT ";
-			//		query += "    cs.name as click, count(u.user_id) as count ";
-			//		query += "    from gwcusg usg, gwcusgentry usge, gwcuser u ";
-			//		query += "        LEFT JOIN gwcclicksource cs ON cs.clicksource_id = u.clicksource_id ";
-			//		query += "    where usg.name = 'Member' ";
-			//		query += "    and usge.usg_id = usg.usg_id ";
-			//		query += "    and u.user_id = usge.user_id ";
-			//		query += "    and u.user_id in ";
-			//		query += "    ( ";
-			//		query += "     select a.user_id ";
-			//		query += "     from gwcaccount a, gwccredit c ";
-			//		query += "     where c.account_id = a.account_id ";
-			//		query += "    ) ";
-			//		query += "    group by 1 ";
+      query.append("SELECT ");
+      query.append("COMPANYNAME, ");
+      query.append("COMPANYTRADINGNAME AS tradingName, ");
+      query.append("COMPANYINARCADE, ");
+      query.append("COMPANYLASTORDACKTIME, ");
+      query.append("COUNT(companyid) as c, ");
+      query.append("sum(companyid) as s ");
+      query.append("FROM company ");
+      query.append("GROUP BY 1,2,3,4");
 
-			//		query += "select username, count(user_id) from gwcuser group by 1";
-			//
-			//query += "select u.title, count(*) ";
-			//query += "from gwcusg usg, gwcusgentry usge, gwcuser u, gwcclicksource cs ";
-			//query += "where usg.name = 'Member' ";
-			//query += "and usge.usg_id = usg.usg_id ";
-			//query += "and u.user_id = usge.user_id ";
-			//query += "and cs.clicksource_id = u.clicksource_id ";
-			//query += "and cs.name = 'cliterati' ";
-			//query += "group by 1 ";
-			//query += "order by 2 desc ";
-			//
-			//		query += "select 1 as sort, 'credits' as type, sum(value) as value ";
-			//		query += "from gwccredit ";
-			//		query += "union ";
-			//		query += "select 2 as sort, 'debits' as type, sum(value) as value ";
-			//		query += "from gwcdebit ";
-			//		query += "union ";
-			//		query += "select 3 as sort, 'unspent vouchers' as type, sum(value) as value ";
-			//		query += "from gwcvoucher ";
-			//		query += "where debit_id is null ";
-			//		query += "union ";
-			//		query += "select 4 as sort, 'account balances' as type, sum(balance) as value ";
-			//		query += "from gwcaccount ";
-			//		query += "order by 1 ";
-			//		query += "; ";
+      // query.append("SELECT ");
+      // query.append("trim(tuu.username) AS promoter, ");
+      // query.append("cs.name AS clicksource, ");
+      // query.append("c.timestamp AS timestamp, ");
+      // query.append("c.value AS value, ");
+      // query.append("'sb'||c.visibleelmt_id AS uniqueid, ");
+      // query.append("ccp.authcode AS authcode, ");
+      // query.append("trim(u.username) AS username ");
+      // query.append("FROM ");
+      // query.append(" gwccredit c ");
+      // query.append(" LEFT JOIN gwcccpayment ccp ON ccp.visibleelmt_id =
+      // c.visibleelmt_id, ");
+      // query.append(" gwcaccount a, ");
+      // query.append(" gwcuser u ");
+      // query.append(" LEFT JOIN gwcclicksource cs ON cs.clicksource_id =
+      // u.clicksource_id ");
+      // query.append(" LEFT JOIN gwctrafficuser tu ON tu.trafficuser_id =
+      // cs.trafficuser_pro_id ");
+      // query.append(" LEFT JOIN gwcuser tuu ON tuu.user_id = tu.user_id ");
+      // query.append("WHERE ");
+      // query.append("c.timestamp BETWEEN ");
+      // query.append("'2005-05-01 00:00:00.000' AND CURRENT_TIMESTAMP ");
+      // query.append("AND a.account_id = c.account_id ");
+      // query.append("AND u.user_id = a.user_id ");
+      // query.append("ORDER BY promoter, clicksource, timestamp, value,
+      // authcode, username ");
 
-			sql = query.toString();
-        }
+      // query += "SELECT ";
+      // query += " cs.name as click, count(u.user_id) as count ";
+      // query += " from gwcusg usg, gwcusgentry usge, gwcuser u ";
+      // query += " LEFT JOIN gwcclicksource cs ON cs.clicksource_id =
+      // u.clicksource_id ";
+      // query += " where usg.name = 'Member' ";
+      // query += " and usge.usg_id = usg.usg_id ";
+      // query += " and u.user_id = usge.user_id ";
+      // query += " and u.user_id in ";
+      // query += " ( ";
+      // query += " select a.user_id ";
+      // query += " from gwcaccount a, gwccredit c ";
+      // query += " where c.account_id = a.account_id ";
+      // query += " ) ";
+      // query += " group by 1 ";
 
-		ResultSet rs = stmt.executeQuery(sql);
+      // query += "select username, count(user_id) from gwcuser group by 1";
+      //
+      // query += "select u.title, count(*) ";
+      // query += "from gwcusg usg, gwcusgentry usge, gwcuser u, gwcclicksource
+      // cs ";
+      // query += "where usg.name = 'Member' ";
+      // query += "and usge.usg_id = usg.usg_id ";
+      // query += "and u.user_id = usge.user_id ";
+      // query += "and cs.clicksource_id = u.clicksource_id ";
+      // query += "and cs.name = 'cliterati' ";
+      // query += "group by 1 ";
+      // query += "order by 2 desc ";
+      //
+      // query += "select 1 as sort, 'credits' as type, sum(value) as value ";
+      // query += "from gwccredit ";
+      // query += "union ";
+      // query += "select 2 as sort, 'debits' as type, sum(value) as value ";
+      // query += "from gwcdebit ";
+      // query += "union ";
+      // query += "select 3 as sort, 'unspent vouchers' as type, sum(value) as
+      // value ";
+      // query += "from gwcvoucher ";
+      // query += "where debit_id is null ";
+      // query += "union ";
+      // query += "select 4 as sort, 'account balances' as type, sum(balance) as
+      // value ";
+      // query += "from gwcaccount ";
+      // query += "order by 1 ";
+      // query += "; ";
 
-		return rs;
-	}
+      sql = query.toString();
+    }
 
-	// Display an SQLException which has occured in this application.
-	private void showSQLException(java.sql.SQLException e) {
-		// Notice that a SQLException is actually a chain of SQLExceptions,
-		// let's not forget to print all of them...
-		java.sql.SQLException next = e;
-		while (next != null) {
-			System.out.println(next.getMessage());
-			System.out.println("Error Code: " + next.getErrorCode());
-			System.out.println("SQL State: " + next.getSQLState());
-			next = next.getNextException();
-		}
-	}
+    ResultSet rs = stmt.executeQuery(sql);
+
+    return rs;
+  }
+
+  // Display an SQLException which has occured in this application.
+  private void showSQLException(java.sql.SQLException e)
+  {
+    // Notice that a SQLException is actually a chain of SQLExceptions,
+    // let's not forget to print all of them...
+    java.sql.SQLException next = e;
+    while (next != null)
+    {
+      System.out.println(next.getMessage());
+      System.out.println("Error Code: " + next.getErrorCode());
+      System.out.println("SQL State: " + next.getSQLState());
+      logger.debug(next.getMessage());
+      logger.debug("Error Code: " + next.getErrorCode());
+      logger.debug("SQL State: " + next.getSQLState());
+      next = next.getNextException();
+    }
+  }
 
 }
