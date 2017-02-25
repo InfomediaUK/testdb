@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 import org.apache.struts.action.ActionMessage;
@@ -75,7 +77,9 @@ public class NhsBookingApplicantNotify extends AgyAction
         int status = multipartEmailer.sendEmail();
         if (status == 0)
         {
-          nhsBookingUser.setApplicantNotificationSent(new Timestamp(new java.util.Date().getTime()));
+          DateTimeZone applicationTimeZone = DateTimeZone.forID("Europe/London");
+          DateTime applicationNow = DateTime.now(applicationTimeZone);
+          nhsBookingUser.setApplicantNotificationSent(new Timestamp(applicationNow.getMillis()));
           agyService.updateNhsBookingApplicantNotificationSent(nhsBookingUser, consultantLoggedIn.getConsultantId());
         }
         else

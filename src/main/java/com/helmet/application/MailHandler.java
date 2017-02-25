@@ -346,8 +346,8 @@ public class MailHandler {
   				mimeMessage.setContent(content, contentType);
   			}
   			DateTimeZone applicationTimeZone = DateTimeZone.forID("Europe/London");
-  			DateTime nowLondon = DateTime.now(applicationTimeZone);
-  			mimeMessage.setSentDate(nowLondon.toDate());
+  			DateTime applicationNow = DateTime.now(applicationTimeZone);
+  			mimeMessage.setSentDate(applicationNow.toDate());
         transport.connect();
   			// Send the mail.
         transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
