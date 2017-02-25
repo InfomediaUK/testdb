@@ -1,5 +1,6 @@
 package com.helmet.application;
 
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Properties;
@@ -19,6 +20,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import com.sun.mail.imap.protocol.FLAGS;
 
@@ -342,10 +345,9 @@ public class MailHandler {
   			{
   				mimeMessage.setContent(content, contentType);
   			}
-  			TimeZone tz = TimeZone.getTimeZone("GMT");
-  			Calendar calendar = Calendar.getInstance();
-  			calendar.setTimeZone(tz);
-  			mimeMessage.setSentDate(calendar.getTime());
+  			DateTimeZone applicationTimeZone = DateTimeZone.forID("Europe/London");
+  			DateTime nowLondon = DateTime.now(applicationTimeZone);
+  			mimeMessage.setSentDate(nowLondon.toDate());
         transport.connect();
   			// Send the mail.
         transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
