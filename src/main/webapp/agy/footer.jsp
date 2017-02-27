@@ -17,5 +17,5 @@ DateTime applicationNow = DateTime.now();
 <%= applicationNow.toDate().toString() %>
 <br/>
 <br/>
-<html:link page="/../agy"><bean:message key="link.mmjHome"/></html:link>
+<html:link page="/home.do"><bean:message key="link.mmjHome"/></html:link>
 <jsp:include flush="true" page="/sessionStuff.jsp"/>
