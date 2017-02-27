@@ -10,16 +10,18 @@
 <%
 String serverNamePrefix = null;
 String mmjLogo = null;
-if (request.getServerName().startsWith("local"))
+if (request.getServerName().contains("matchmyjob.co.uk"))
 {
-  serverNamePrefix = request.getServerName(); 
-  mmjLogo = request.getContextPath() + "/images/localmaster-logo.jpg";
-}
-else
-{
+  // Could be www or test or local.
   serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
   serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
   mmjLogo = request.getContextPath() + "/images/" + serverNamePrefix + "master-logo.jpg";
+}
+else
+{
+  // Could be localhost or www.befriened.co.uk.
+  serverNamePrefix = request.getServerName();
+  mmjLogo = request.getContextPath() + "/images/localmaster-logo.jpg";
 }
 DateTime applicationNow = DateTime.now();
 %>
