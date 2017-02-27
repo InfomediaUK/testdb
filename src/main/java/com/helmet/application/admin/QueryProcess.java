@@ -39,8 +39,10 @@ public class QueryProcess extends AdminAction
 
     ResultSetData resultSetData = xmlGenerator.getResultSetData(id, paramValues);
 
-    String fileName = xmlGenerator.getFileName();
-    dynaForm.set("fileName", fileName);
+    String xmlFileName = xmlGenerator.getXmlFileName();
+    String xsltFileName = xmlGenerator.getXsltFileName();
+    dynaForm.set("xmlFileName", xmlFileName);
+    dynaForm.set("xsltFileName", xsltFileName);
     dynaForm.set("resultSetData", resultSetData);
 
     logger.exit("Out going !!!");

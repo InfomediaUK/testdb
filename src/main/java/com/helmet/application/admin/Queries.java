@@ -24,8 +24,10 @@ public class Queries extends AdminAction
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
     XMLGenerator xmlGenerator = XMLGenerator.getInstance();
-    String fileName = xmlGenerator.getFileName();
-    dynaForm.set("fileName", fileName);
+    String xmlFileName = xmlGenerator.getXmlFileName();
+    String xsltFileName = xmlGenerator.getXsltFileName();
+    dynaForm.set("xmlFileName", xmlFileName);
+    dynaForm.set("xsltFileName", xsltFileName);
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }

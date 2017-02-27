@@ -41,18 +41,29 @@ public class XMLGenerator extends JdbcDaoSupport
 
   HashMap queries;
 
-  String fileName;
+  String xmlFileName;
+  String xsltFileName;
 
   protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-  public String getFileName()
+  public String getXmlFileName()
   {
-    return fileName;
+    return xmlFileName;
   }
 
-  public void setFileName(String fileName)
+  public void setXmlFileName(String xmlFileName)
   {
-    this.fileName = fileName;
+    this.xmlFileName = xmlFileName;
+  }
+
+  public String getXsltFileName()
+  {
+    return xsltFileName;
+  }
+
+  public void setXsltFileName(String xsltFileName)
+  {
+    this.xsltFileName = xsltFileName;
   }
 
   /**
@@ -87,13 +98,13 @@ public class XMLGenerator extends JdbcDaoSupport
   public void init()
   {
     queries.clear();
-    loadQueries(fileName);
+    loadQueries(xmlFileName);
   }
 
   public void reloadXml()
   {
     queries.clear();
-    loadQueries(fileName);
+    loadQueries(xmlFileName);
   }
 
   private void loadQueries(String fileName)
@@ -192,7 +203,7 @@ public class XMLGenerator extends JdbcDaoSupport
     else
     {
       logger.debug("Queries xml file NOT FOUND - {}", fileName);
-      setFileName(fileName + " ***** NOT FOUND *****");
+      setXmlFileName(fileName + " ***** NOT FOUND *****");
     }
 
   }

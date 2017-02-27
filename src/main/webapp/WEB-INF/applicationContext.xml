@@ -459,7 +459,8 @@
 	      factory-method="getInstance"
 		  init-method="init" >
 		<property name="dataSource" ref="dataSource" />
-		<property name="fileName" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}/documents/xml/queries.xml" />
+		<property name="xmlFileName" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}/documents/xml/queries.xml" />
+		<property name="xsltFileName" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}/documents/xml/queries.xsl" />
 	</bean>
 
   <!-- Data Access Objects -->
