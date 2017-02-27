@@ -3,7 +3,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ page import="org.joda.time.DateTime" %>
-<%@ page import="org.joda.time.DateTimeZone" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -13,8 +12,7 @@
 <br/>
 <br/>
 <%
-DateTimeZone applicationTimeZone = DateTimeZone.forID("Europe/London");
-DateTime applicationNow = DateTime.now(applicationTimeZone);
+DateTime applicationNow = DateTime.now();
 %>
 <%= applicationNow.toDate().toString() %>
 <br/>
