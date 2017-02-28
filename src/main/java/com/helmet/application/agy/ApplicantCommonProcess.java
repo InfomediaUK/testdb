@@ -217,6 +217,11 @@ public abstract class ApplicantCommonProcess extends AgyAction
       applicant.setEnglishTestCertificateFilename("englishtestcertificate" + getFileExtension(uploadFilename));
     }
     // <-- NEW
+    if (applicant.getDisciplineCategoryId().equals(0))
+    {
+      // Discipline Category Required.
+      errors.add("applicant", new ActionMessage("error.disciplineCategory.required"));
+    }
     if (applicant.getRequiresVisa())
     {
       // Visa Required.
