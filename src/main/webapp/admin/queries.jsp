@@ -15,8 +15,8 @@
 <bean:define id="xmlFileName" name="QueryFormAdmin" property="xmlFileName" />
 <bean:define id="xsltFileName" name="QueryFormAdmin" property="xsltFileName" />
 <%
-String xmlFileUrl  = "file://" + xmlFileName;
-String xsltFileUrl = "file://" + xsltFileName;
+String xmlFileUrl  = "file:" + xmlFileName;
+String xsltFileUrl = "file:" + xsltFileName;
 %>
 <c:url value="http://${pageContext.request.serverName}${pageContext.request.contextPath}/admin/queryProcess.do" var="submitURL"/>
 
