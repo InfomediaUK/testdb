@@ -14,7 +14,7 @@
 String major = "1";
 String minor = "7";
 String revision = "02";
-String build = "505"; // DO NOT EDIT BUILD. IT'S CHANGED BY ANT.
+String build = "506"; // DO NOT EDIT BUILD. IT'S CHANGED BY ANT.
 String time = "17 11 2016 19:19:22"; // DO NOT EDIT TIME. IT'S CHANGED BY ANT.
 String user = "infomedia"; // DO NOT EDIT USER. IT'S CHANGED BY ANT.
 %>    

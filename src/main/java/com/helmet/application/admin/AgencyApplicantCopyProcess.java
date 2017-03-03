@@ -96,14 +96,6 @@ public class AgencyApplicantCopyProcess extends AdminAction
       {
         rowCount = adminService.insertApplicant(applicant, consultant.getConsultantId());
         copyApplicantsFilesForward(sourceApplicantId, applicant);
-        if (!StringUtils.isEmpty(applicant.getPhotoFilename()))
-        {
-          copyPhotosFilesForward(sourceApplicantId, applicant);
-        }
-        if (!StringUtils.isEmpty(applicant.getCvFilename()))
-        {
-          copyCvsFilesForward(sourceApplicantId, applicant);
-        }
       }
       catch (DuplicateDataException e)
       {
@@ -156,78 +148,6 @@ public class AgencyApplicantCopyProcess extends AdminAction
             targetChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
             System.out.println(sourceFile.getName());
           }
-        }
-      }      
-    }
-    catch (Exception e)
-    {
-      // TODO: handle exception
-    }    
-  }
-  
-  private void copyPhotosFilesForward(Integer sourceApplicantId, Applicant targetApplicant)
-  {
-    String photoFolder = FileHandler.getInstance().getPhotoFileLocation() + FileHandler.getInstance().getPhotoFileFolder();
-    String sourceFolderPath = photoFolder + "/" + sourceApplicantId;
-    String targetFolderPath = photoFolder + "/" + targetApplicant.getApplicantId();
-    File sourceFolder = new File(sourceFolderPath);
-    File targetFolder = new File(targetFolderPath);
-    String targetFileName = null;
-    File targetFile = null;
-    try
-    {
-      if (sourceFolder.exists())
-      {
-        // It should exist but on test systems it may not.
-        if (!targetFolder.exists())
-        {
-          targetFolder.mkdirs();
-        }
-        File[] files = sourceFolder.listFiles();
-        for (File sourceFile : files)
-        {
-          targetFileName = targetFolderPath + "/" + sourceFile.getName();
-          targetFile = new File(targetFileName);
-          FileChannel sourceChannel = new FileInputStream(sourceFile).getChannel();
-          FileChannel targetChannel = new FileOutputStream(targetFile).getChannel();
-          targetChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-          System.out.println(sourceFile.getName());
-        }
-      }      
-    }
-    catch (Exception e)
-    {
-      // TODO: handle exception
-    }    
-  }
-  
-  private void copyCvsFilesForward(Integer sourceApplicantId, Applicant targetApplicant)
-  {
-    String cvFolder = FileHandler.getInstance().getCvFileLocation() + FileHandler.getInstance().getCvFileFolder();
-    String sourceFolderPath = cvFolder + "/" + sourceApplicantId;
-    String targetFolderPath = cvFolder + "/" + targetApplicant.getApplicantId();
-    File sourceFolder = new File(sourceFolderPath);
-    File targetFolder = new File(targetFolderPath);
-    String targetFileName = null;
-    File targetFile = null;
-    try
-    {
-      if (sourceFolder.exists())
-      {
-        // It should exist but on test systems it may not.
-        if (!targetFolder.exists())
-        {
-          targetFolder.mkdirs();
-        }
-        File[] files = sourceFolder.listFiles();
-        for (File sourceFile : files)
-        {
-          targetFileName = targetFolderPath + "/" + sourceFile.getName();
-          targetFile = new File(targetFileName);
-          FileChannel sourceChannel = new FileInputStream(sourceFile).getChannel();
-          FileChannel targetChannel = new FileOutputStream(targetFile).getChannel();
-          targetChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-          System.out.println(sourceFile.getName());
         }
       }      
     }

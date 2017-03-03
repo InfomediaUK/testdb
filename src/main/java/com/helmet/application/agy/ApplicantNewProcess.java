@@ -1,9 +1,5 @@
 package com.helmet.application.agy;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,7 +41,7 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     applicant.setAgencyId(getConsultantLoggedIn().getAgencyId());
     // Get the set of new Unavailable dates from the form.
     String unavailableDates = (String)dynaForm.get("unavailableDates");
-    FormFile photoFile = (FormFile) dynaForm.get("document");
+    FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");
     String contentType = photoFile.getContentType();
     String photoFilename = photoFile.getFileName();
     int fileSize = photoFile.getFileSize();
@@ -87,18 +83,6 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     {
       rowCount += updateUnavailablesForApplicant(agyService, applicant, unavailableDates);
     }
-    if (StringUtils.isNotEmpty(photoFilename))
-    {
-      // Upload the Photo file
-      uploadPhotoFile(applicant, photoFile);
-    }
-    // CVFILE -->
-    if (StringUtils.isNotEmpty(cvFilename))
-    {
-      // now upload the CV file
-      uploadCvFile(applicant, cvFile);
-    }
-    // <-- CVFILE
     upoadApplicantFiles(applicant, dynaForm);
     // NEW -->
     saveApplicantNotes(applicant, notesStringBuffer.toString());

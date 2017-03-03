@@ -27,17 +27,17 @@ public class FileHandler {
 
 	private String fileFolder;
 
-	private String photoFileLocation;
-
-	private String photoFileFolder;
+//	private String photoFileLocation;
+//
+//	private String photoFileFolder;
 
 	private String logoFileLocation;
 
 	private String logoFileFolder;
 
-	private String cvFileLocation;
-
-	private String cvFileFolder;
+//	private String cvFileLocation;
+//
+//	private String cvFileFolder;
 
 	private String receiptFileLocation;
 
@@ -126,22 +126,6 @@ public class FileHandler {
 		this.tempFileFolder = tempFileFolder;
 	}
 
-	public String getPhotoFileFolder() {
-		return photoFileFolder;
-	}
-
-	public void setPhotoFileFolder(String photoFileFolder) {
-		this.photoFileFolder = photoFileFolder;
-	}
-
-	public String getPhotoFileLocation() {
-		return photoFileLocation;
-	}
-
-	public void setPhotoFileLocation(String photoFileLocation) {
-		this.photoFileLocation = photoFileLocation;
-	}
-
 	public String getLogoFileFolder() {
 		return logoFileFolder;
 	}
@@ -156,22 +140,6 @@ public class FileHandler {
 
 	public void setLogoFileLocation(String logoFileLocation) {
 		this.logoFileLocation = logoFileLocation;
-	}
-
-	public String getCvFileFolder() {
-		return cvFileFolder;
-	}
-
-	public void setCvFileFolder(String cvFileFolder) {
-		this.cvFileFolder = cvFileFolder;
-	}
-
-	public String getCvFileLocation() {
-		return cvFileLocation;
-	}
-
-	public void setCvFileLocation(String cvFileLocation) {
-		this.cvFileLocation = cvFileLocation;
 	}
 
 	public String getReceiptFileFolder() {

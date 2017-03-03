@@ -184,7 +184,7 @@ public class ProspectResource
   private boolean saveCvFile(Applicant applicant, InputStream inputStream)
   {
     boolean isProcessed = false;;
-    String filePath = FileHandler.getInstance().getCvFileLocation() + applicant.getCvFileUrl();
+    String filePath = FileHandler.getInstance().getApplicantFileLocation() + applicant.getCvFileUrl();
     File folder = new File(filePath).getParentFile();
     if (!folder.exists())
     {

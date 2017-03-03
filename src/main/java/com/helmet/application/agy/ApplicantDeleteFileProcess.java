@@ -116,22 +116,9 @@ public class ApplicantDeleteFileProcess extends AgyAction
 
   private String getFileUrl(String fileProperty, Applicant applicant)
   {
-    String fileLocation = null;
     String fileUrl = null;
     Class applicantClass = applicant.getClass();
-    // It would have been really nice if ALL the files were in the same damn place!
-    if (fileProperty.equals("photoFilename"))
-    {
-      fileLocation = FileHandler.getInstance().getPhotoFileLocation(); 
-    }
-    else if (fileProperty.equals("cvFilename"))
-    {
-      fileLocation = FileHandler.getInstance().getCvFileLocation(); 
-    }
-    else
-    {
-      fileLocation = FileHandler.getInstance().getApplicantFileLocation(); 
-    }
+    String fileLocation = FileHandler.getInstance().getApplicantFileLocation(); 
     String methodName    = "get" + StringUtils.capitalize(fileProperty) + "FileUrl";
     try
     {

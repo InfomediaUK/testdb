@@ -71,12 +71,8 @@
 		<property name="tempFileFolder" value="/temp" />
 		<property name="fileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
 		<property name="fileFolder" value="/documents" />
-		<property name="photoFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
-		<property name="photoFileFolder" value="/documents/photos" />
 		<property name="logoFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
 		<property name="logoFileFolder" value="/documents/logos" />
-		<property name="cvFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
-		<property name="cvFileFolder" value="/documents/cvs" />
 		<property name="receiptFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />
 		<property name="receiptFileFolder" value="/documents/receipts" />
 		<property name="invoiceFileLocation" value="#{systemEnvironment['OPENSHIFT_DATA_DIR']}" />

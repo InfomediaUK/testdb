@@ -357,7 +357,7 @@ public class BookingDateUserApplicant extends BookingDateUserLong
 
   public String getApplicantPhotoFileUrl()
   {
-    return FileHandler.getInstance().getPhotoFileFolder() + "/" + getApplicantId() + "/" + applicantPhotoFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + getApplicantId() + "/" + applicantPhotoFilename;
   }
 
   public String getBookingGradeApplicantDateStatusDescriptionKey()

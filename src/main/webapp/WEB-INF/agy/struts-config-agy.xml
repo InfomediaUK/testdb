@@ -338,6 +338,7 @@
       <form-property name="arrivalInCountryDateStr" type="java.lang.String" />
       <form-property name="visaExpiryDateStr" type="java.lang.String" />
       <form-property name="drivingLicenseExpiryDateStr" type="java.lang.String" />
+      <form-property name="photoFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="varicellaFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="hepbFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="tbFormFile" type="org.apache.struts.upload.FormFile"/>
@@ -360,8 +361,6 @@
       <form-property name="englishTestCertificateFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="paediatricLifeSupportFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="confirmPwd" type="java.lang.String" />
-      <!-- Applicant Photo -->
-      <form-property name="document" type="org.apache.struts.upload.FormFile"/>
       <form-property name="list" type="java.util.List" />
       <form-property name="agencyWorkerChecklists" type="java.util.List" />
       <form-property name="showWeekly" type="java.lang.Boolean" initial="true" />

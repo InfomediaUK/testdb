@@ -332,7 +332,7 @@ public class BookingGradeApplicant extends Base
 
   public String getDocumentUrl()
   {
-    return FileHandler.getInstance().getCvFileFolder() + "/" + bookingGradeApplicantId + "/" + filename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + bookingGradeApplicantId + "/" + filename;
   }
 
   public String getLogin()

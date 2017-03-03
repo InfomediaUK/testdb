@@ -47,7 +47,7 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     // Get the set of new Unavailable dates from the form.
     String unavailableDates = (String)dynaForm.get("unavailableDates");
-    FormFile photoFile = (FormFile) dynaForm.get("document");
+    FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");
     String contentType = photoFile.getContentType();
     String photoFilename = photoFile.getFileName();
     int fileSize = photoFile.getFileSize();
@@ -108,18 +108,6 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     }
     rowCount += updateUnavailablesForApplicant(agyService, applicant, unavailableDates);
 
-    if (StringUtils.isNotEmpty(photoFilename))
-    {
-      // Upload the Photo file
-      uploadPhotoFile(applicant, photoFile);
-    }
-    // CVFILE -->
-    if (StringUtils.isNotEmpty(cvFilename))
-    {
-      // now upload the CV file
-      uploadCvFile(applicant, cvFile);
-    }
-    // <-- CVFILE
     upoadApplicantFiles(applicant, dynaForm);
     // NEW -->
     saveApplicantNotes(applicant, notesStringBuffer.toString());

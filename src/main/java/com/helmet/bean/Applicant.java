@@ -337,12 +337,12 @@ public class Applicant extends Base
    */
   public String getPhotoDocumentUrl()
   {
-    return FileHandler.getInstance().getPhotoFileFolder() + "/" + applicantId + "/" + photoFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + photoFilename;
   }
 
   public String getPhotoFileUrl()
   {
-    return FileHandler.getInstance().getPhotoFileFolder() + "/" + applicantId + "/" + photoFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + photoFilename;
   }
 
   public Address getAddress()
@@ -467,8 +467,7 @@ public class Applicant extends Base
 
   public String getCvFileUrl()
   {
-    return FileHandler.getInstance().getCvFileFolder() + "/" + applicantId + "/" + cvFilename;
-//    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + cvFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + cvFilename;
   }
 
   public Boolean getDegree()

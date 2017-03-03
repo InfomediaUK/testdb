@@ -411,7 +411,7 @@ public class BookingGradeApplicantUser extends BookingGradeApplicant
 
   public String getApplicantPhotoFileUrl()
   {
-    return FileHandler.getInstance().getPhotoFileFolder() + "/" + getApplicantId() + "/" + applicantPhotoFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + getApplicantId() + "/" + applicantPhotoFilename;
   }
 
   public String getChecklistFileUrl()

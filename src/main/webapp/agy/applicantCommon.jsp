@@ -300,7 +300,7 @@
 					<table class="simple" width="100%">
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.photoFile"/></th>
-					    <td align="left"><html:file property="document" size="30" tabindex="44" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.photoFilename"/></td>
+					    <td align="left"><html:file property="photoFormFile" size="30" tabindex="44" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.photoFilename"/></td>
 					  </tr>
 					  <tr>
 					    <th align="left" class="label"><bean:message key="label.requiresVisa"/></th>

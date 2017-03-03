@@ -137,12 +137,12 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       applicant.setReference1Filename("reference1" + getFileExtension(uploadFilename));
     }
-//    uploadFormFile = (FormFile)dynaForm.get("cvFormFile");
-//    uploadFilename = uploadFormFile.getFileName();
-//    if (StringUtils.isNotEmpty(uploadFilename))
-//    {
-//      applicant.setCvFilename("cv" + getFileExtension(uploadFilename));
-//    }
+    uploadFormFile = (FormFile)dynaForm.get("cvFormFile");
+    uploadFilename = uploadFormFile.getFileName();
+    if (StringUtils.isNotEmpty(uploadFilename))
+    {
+      applicant.setCvFilename("cv" + getFileExtension(uploadFilename));
+    }
     uploadFormFile = (FormFile)dynaForm.get("birthCertificateFormFile");
     uploadFilename = uploadFormFile.getFileName();
     if (StringUtils.isNotEmpty(uploadFilename))
@@ -242,80 +242,6 @@ public abstract class ApplicantCommonProcess extends AgyAction
     }
   }
 
-  protected void uploadPhotoFile(Applicant applicant, FormFile photoFile)
-  {
-    int indexOfLastDot = photoFile.getFileName().lastIndexOf(".");
-
-    String fileExtension = "";
-
-    if (indexOfLastDot > -1)
-    {
-      fileExtension = photoFile.getFileName().substring(indexOfLastDot);
-    }
-
-    String filePath = FileHandler.getInstance().getPhotoFileLocation() + applicant.getPhotoFileUrl();
-
-    // Read the InputStream and store it in a 'byteArrayOutputStream'.
-    try
-    {
-      byte[] fileData = photoFile.getFileData();
-
-      File folder = new File(filePath).getParentFile();
-      if (!folder.exists())
-      {
-        // Create any required directories.
-        folder.mkdirs();
-      }
-      FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-      fileOutputStream.write(fileData);
-      fileOutputStream.close();
-
-    }
-    catch (IOException e)
-    {
-      // TODO
-      System.out.println("IOException - uploading " + photoFile.getFileName());
-    }
-    
-  }
-  
-  protected void uploadCvFile(Applicant applicant, FormFile cvFile)
-  {
-    int indexOfLastDot = cvFile.getFileName().lastIndexOf(".");
-
-    String fileExtension = "";
-
-    if (indexOfLastDot > -1)
-    {
-      fileExtension = cvFile.getFileName().substring(indexOfLastDot);
-    }
-
-    String filePath = FileHandler.getInstance().getCvFileLocation() + applicant.getCvFileUrl();
-
-    // Read the InputStream and store it in a 'byteArrayOutputStream'.
-    try
-    {
-      byte[] fileData = cvFile.getFileData();
-
-      File folder = new File(filePath).getParentFile();
-      if (!folder.exists())
-      {
-        // Create any required directories.
-        folder.mkdirs();
-      }
-      FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-      fileOutputStream.write(fileData);
-      fileOutputStream.close();
-
-    }
-    catch (IOException e)
-    {
-      // TODO
-      System.out.println("IOException - uploading " + cvFile.getFileName());
-    }
-    
-  }
-  
   protected void upoadApplicantFiles(Applicant applicant, DynaValidatorForm dynaForm)
   {
     controlUploadFile(dynaForm, "varicellaFormFile", applicant.getVaricellaFileUrl());
@@ -325,7 +251,8 @@ public abstract class ApplicantCommonProcess extends AgyAction
     controlUploadFile(dynaForm, "mmrFormFile", applicant.getMmrFileUrl());
     controlUploadFile(dynaForm, "reference2FormFile", applicant.getReference2FileUrl());
     controlUploadFile(dynaForm, "reference1FormFile", applicant.getReference1FileUrl());
-//    controlUploadFile(dynaForm, "cvFormFile", applicant.getCvFileUrl());
+    controlUploadFile(dynaForm, "photoFormFile", applicant.getPhotoFileUrl());
+    controlUploadFile(dynaForm, "cvFormFile", applicant.getCvFileUrl());
     controlUploadFile(dynaForm, "birthCertificateFormFile", applicant.getBirthCertificateFileUrl());
     controlUploadFile(dynaForm, "proofOfAddress1FormFile", applicant.getProofOfAddress1FileUrl());
     controlUploadFile(dynaForm, "proofOfAddress2FormFile", applicant.getProofOfAddress2FileUrl());
@@ -339,6 +266,7 @@ public abstract class ApplicantCommonProcess extends AgyAction
     controlUploadFile(dynaForm, "paediatricLifeSupportFormFile", applicant.getPaediatricLifeSupportFileUrl());
     controlUploadFile(dynaForm, "englishTestCertificateFormFile", applicant.getEnglishTestCertificateFileUrl());
   }
+ 
   private void controlUploadFile(DynaValidatorForm dynaForm, String formFile, String fileUrl)
   {
     FormFile uploadFormFile = null;
@@ -348,6 +276,7 @@ public abstract class ApplicantCommonProcess extends AgyAction
       uploadFile(uploadFormFile, fileUrl);
     }
   }
+  
   private void uploadFile(FormFile formFile, String fileUrl)
   {
     String filePath = FileHandler.getInstance().getApplicantFileLocation() + fileUrl;

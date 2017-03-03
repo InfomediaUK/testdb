@@ -550,7 +550,7 @@ public class BookingGradeApplicantDateUser extends BookingGradeApplicantDate
 
   public String getApplicantPhotoFileUrl()
   {
-    return FileHandler.getInstance().getPhotoFileFolder() + "/" + getApplicantId() + "/" + applicantPhotoFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + getApplicantId() + "/" + applicantPhotoFilename;
   }
 
   public String getJobProfileCode()

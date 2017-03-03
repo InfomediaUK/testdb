@@ -157,8 +157,8 @@ public class BookingGradeApplicantNewFinish extends AgyAction {
 
         	String tempFilePath = (String)dynaForm.get("tempFilePath");
 
-            String documentLocation = FileHandler.getInstance().getCvFileLocation() +
-              FileHandler.getInstance().getCvFileFolder() + 
+            String documentLocation = FileHandler.getInstance().getApplicantFileLocation() +
+              FileHandler.getInstance().getApplicantFileFolder() + 
               "/" + bookingGradeApplicant.getBookingGradeApplicantId() + 
               "/" + filename;
 
