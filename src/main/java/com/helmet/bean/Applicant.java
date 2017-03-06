@@ -1721,6 +1721,42 @@ public class Applicant extends Base
     return "Not Required";
   }
   
+  public Boolean getHasVaricellaImmunisation()
+  {
+    // True: Must have varicellaFilename entered.
+    return StringUtils.isNotEmpty(varicellaFilename);
+  }
+  
+  public Boolean getHasHepBImmunisation()
+  {
+    // True: Must have hepbFilename entered.
+    return StringUtils.isNotEmpty(hepbFilename);
+  }
+  
+  public Boolean getHasTbImmunisation()
+  {
+    // True: Must have tbFilename entered.
+    return StringUtils.isNotEmpty(tbFilename);
+  }
+  
+  public Boolean getHasMmrImmunisation()
+  {
+    // True: Must have mmrFilename entered.
+    return StringUtils.isNotEmpty(mmrFilename);
+  }
+  
+  public Boolean getHasMmrx2Immunisation()
+  {
+    // True: Must have mmrx2Filename entered.
+    return StringUtils.isNotEmpty(mmrx2Filename);
+  }
+  
+  public Boolean getHasIvsEppImmunisation()
+  {
+    // True: Must have mmrx2Filename entered.
+    return StringUtils.isNotEmpty(ivsEppFilename);
+  }
+  
   public Boolean getHasDegree()
   {
     // True: Must have degree flag set. ***** Maybe needs degreeDetail entered too. *****

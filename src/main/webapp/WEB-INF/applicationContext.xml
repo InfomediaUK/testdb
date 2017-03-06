@@ -130,6 +130,12 @@
     <property name="metaData">
       <map>
         <entry key="applicant.hpcNumber" value="NOT EMPTY"/>
+        <entry key="applicant.hasVaricellaImmunisation" value="TRUE"/>
+        <entry key="applicant.hasHepBImmunisation" value="TRUE"/>
+        <entry key="applicant.hasTbImmunisation" value="TRUE"/>
+        <entry key="applicant.hasMmrImmunisation" value="TRUE"/>
+        <entry key="applicant.hasMmrx2Immunisation" value="TRUE"/>
+        <entry key="applicant.hasIvsEppImmunisation" value="TRUE"/>
         <entry key="applicant.hasCurrentDisclosure" value="TRUE"/>
         <entry key="applicant.hasCurrentFitToWork" value="TRUE"/>
         <entry key="applicant.hasValidProfessionalRegistration" value="TRUE"/>
