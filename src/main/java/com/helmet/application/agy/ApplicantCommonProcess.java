@@ -182,7 +182,7 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       appendFileName(uploadFileNames, messageResources.getMessage("label.hpc"));
     }
-    if (errors.isEmpty())
+    if (!errors.isEmpty())
     {
       // Validation has failed. Warn user if any files are being uploaded...
       if (uploadFileNames.length() > 0)
