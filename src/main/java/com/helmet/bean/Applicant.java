@@ -1756,6 +1756,30 @@ public class Applicant extends Base
     // True: Must have mmrx2Filename entered.
     return StringUtils.isNotEmpty(ivsEppFilename);
   }
+
+  public Boolean getHasReference1()
+  {
+    // True: Must have reference1Filename entered and have status of Received.
+    return StringUtils.isNotEmpty(reference1Filename);
+  }
+  
+  public Boolean getHasReference1Received()
+  {
+    // True: Must have reference1Status of Received.
+    return getHasReference1() && reference1Status == AgyConstants.APPLICANT_REFERENCE_RECEIVED;
+  }
+  
+  public Boolean getHasReference2()
+  {
+    // True: Must have reference2Filename entered and have status of Received.
+    return StringUtils.isNotEmpty(reference2Filename);
+  }
+  
+  public Boolean getHasReference2Received()
+  {
+    // True: Must have reference2Status of Received.
+    return getHasReference2() && reference2Status == AgyConstants.APPLICANT_REFERENCE_RECEIVED;
+  }
   
   public Boolean getHasDegree()
   {

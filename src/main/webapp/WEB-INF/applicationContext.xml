@@ -136,6 +136,8 @@
         <entry key="applicant.hasMmrImmunisation" value="TRUE"/>
         <entry key="applicant.hasMmrx2Immunisation" value="TRUE"/>
         <entry key="applicant.hasIvsEppImmunisation" value="TRUE"/>
+        <entry key="applicant.hasReference1Received" value="TRUE"/>
+        <entry key="applicant.hasReference2Received" value="TRUE"/>
         <entry key="applicant.hasCurrentDisclosure" value="TRUE"/>
         <entry key="applicant.hasCurrentFitToWork" value="TRUE"/>
         <entry key="applicant.hasValidProfessionalRegistration" value="TRUE"/>

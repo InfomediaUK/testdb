@@ -32,4 +32,9 @@ public final class AgyConstants {
   public static final String NO_FILTER = "ALL";
 
   public static final Integer BRITISH_ID_DOCUMENT = 1;
+
+  public static final Integer APPLICANT_REFERENCE_APPLIED_FOR = 1;
+  public static final Integer APPLICANT_REFERENCE_PENDING     = 2;
+  public static final Integer APPLICANT_REFERENCE_RECEIVED    = 3;
+  public static final Integer APPLICANT_REFERENCE_TEMPORARY   = 4;
 }
