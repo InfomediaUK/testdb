@@ -122,12 +122,10 @@
 					<var-value>100</var-value>
 				</var>
 			</field>
--->
 			<field property="applicant.reference"
 				depends="required">
-				<arg0 key="label.discipline" /> <!-- Agency Paperwork -->
+				<arg0 key="label.discipline" />
 			</field>
-<!--      
 			<field property="applicant.mobileNumber"
 				depends="required">
 				<arg0 key="label.mobileNumber" />

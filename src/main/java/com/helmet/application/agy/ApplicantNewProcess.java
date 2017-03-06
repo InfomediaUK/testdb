@@ -32,7 +32,11 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
     Applicant applicant = (Applicant) dynaForm.get("applicant");
-    loadApplicant(applicant, dynaForm, errors, messageResources);
+    validateApplicant(applicant, dynaForm, errors, messageResources);
+    if (errors.isEmpty()) 
+    {
+      loadApplicant(applicant, dynaForm, errors, messageResources);
+    }
     if (!errors.isEmpty())
     {
       saveErrors(request, errors);

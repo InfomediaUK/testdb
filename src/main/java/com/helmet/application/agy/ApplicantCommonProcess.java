@@ -47,6 +47,157 @@ public abstract class ApplicantCommonProcess extends AgyAction
     }
     return fileExtension;
   }
+  
+  protected void validateApplicant(Applicant applicant, 
+      DynaValidatorForm dynaForm, 
+      ActionMessages errors,
+      MessageResources messageResources)
+  {
+    if (applicant.getDisciplineCategoryId().equals(0))
+    {
+      // Discipline Category Required.
+      errors.add("applicant", new ActionMessage("error.disciplineCategory.required"));
+    }
+    if (applicant.getRequiresVisa())
+    {
+      // Visa Required.
+      if (applicant.getVisaType().equals(0))
+      {
+        // Error, Visa Type NOT selected.
+        errors.add("applicant", new ActionMessage("error.visaType.required"));
+      }
+    }
+    else
+    {
+      // Visa NOT Required.
+      if (applicant.getVisaType() > 0)
+      {
+        // Error, Visa Type selected.
+        errors.add("applicant", new ActionMessage("error.visaType.notRequired"));
+      }
+    }
+    StringBuffer uploadFileNames = new StringBuffer();
+    FormFile uploadFormFile = (FormFile)dynaForm.get("cvFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.cv"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("crbFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.disclosure"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("dbsFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.dbs"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("reference1FormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.reference1"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("reference2FormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.reference2"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("photoFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.photo"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("birthCertificateFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.birthCertificate"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("proofOfAddress1FormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.proofOfAddress1"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("proofOfAddress2FormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.proofOfAddress2"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("idDocumentFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.idDocument"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("varicellaFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.varicella"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("hepbFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.hepb"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("tbFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.tb"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("mmrx2FormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.mmrx2"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("mmrFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.mmr"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("ivsEppFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.ivsEpp"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("fitToWorkFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.fitToWork"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("englishTestCertificateFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.englishTestCertificate"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("trainingFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.training"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("paediatricLifeSupportFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.paediatricLifeSupport"));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("hpcFormFile");
+    if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
+    {
+      appendFileName(uploadFileNames, messageResources.getMessage("label.hpc"));
+    }
+    if (uploadFileNames.length() > 0)
+    {
+      // Upload files are lost during request/response and have to be chosen from the file system again. Warn user to do this...
+      errors.add("applicant", new ActionMessage("error.uploadFiles.mustBeRechosen", uploadFileNames.toString()));
+    }
+  }
+
+  private void appendFileName(StringBuffer sb, String fileName)
+  {
+    if (sb.length() > 0)
+    {
+      sb.append(", ");
+    }
+    sb.append(fileName);
+  }
+  
   protected void loadApplicant(Applicant applicant, 
                                DynaValidatorForm dynaForm, 
                                ActionMessages errors,
@@ -215,30 +366,6 @@ public abstract class ApplicantCommonProcess extends AgyAction
     if (StringUtils.isNotEmpty(uploadFilename))
     {
       applicant.setEnglishTestCertificateFilename("englishtestcertificate" + getFileExtension(uploadFilename));
-    }
-    // <-- NEW
-    if (applicant.getDisciplineCategoryId().equals(0))
-    {
-      // Discipline Category Required.
-      errors.add("applicant", new ActionMessage("error.disciplineCategory.required"));
-    }
-    if (applicant.getRequiresVisa())
-    {
-      // Visa Required.
-      if (applicant.getVisaType().equals(0))
-      {
-        // Error, Visa Type NOT selected.
-        errors.add("applicant", new ActionMessage("error.visaType.required"));
-      }
-    }
-    else
-    {
-      // Visa NOT Required.
-      if (applicant.getVisaType() > 0)
-      {
-        // Error, Visa Type selected.
-        errors.add("applicant", new ActionMessage("error.visaType.notRequired"));
-      }
     }
   }
 
