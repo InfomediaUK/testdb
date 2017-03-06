@@ -182,10 +182,14 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       appendFileName(uploadFileNames, messageResources.getMessage("label.hpc"));
     }
-    if (uploadFileNames.length() > 0)
+    if (errors.isEmpty())
     {
-      // Upload files are lost during request/response and have to be chosen from the file system again. Warn user to do this...
-      errors.add("applicant", new ActionMessage("error.uploadFiles.mustBeRechosen", uploadFileNames.toString()));
+      // Validation has failed. Warn user if any files are being uploaded...
+      if (uploadFileNames.length() > 0)
+      {
+        // Upload files are lost during request/response and have to be chosen from the file system again. Warn user to do this...
+        errors.add("applicant", new ActionMessage("error.uploadFiles.mustBeRechosen", uploadFileNames.toString()));
+      }
     }
   }
 
