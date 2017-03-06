@@ -1766,7 +1766,7 @@ public class Applicant extends Base
   public Boolean getHasReference1Received()
   {
     // True: Must have reference1Status of Received.
-    return getHasReference1() && reference1Status == AgyConstants.APPLICANT_REFERENCE_RECEIVED;
+    return getHasReference1() && reference1Status.equals(AgyConstants.APPLICANT_REFERENCE_RECEIVED);
   }
   
   public Boolean getHasReference2()
@@ -1778,7 +1778,7 @@ public class Applicant extends Base
   public Boolean getHasReference2Received()
   {
     // True: Must have reference2Status of Received.
-    return getHasReference2() && reference2Status == AgyConstants.APPLICANT_REFERENCE_RECEIVED;
+    return getHasReference2() && reference2Status.equals(AgyConstants.APPLICANT_REFERENCE_RECEIVED);
   }
   
   public Boolean getHasDegree()
