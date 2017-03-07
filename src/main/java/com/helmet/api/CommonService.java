@@ -303,6 +303,7 @@ public interface CommonService {
   public List<AreaOfSpeciality> getAreaOfSpecialities(boolean showOnlyActive);
   public List<ClientUser> getClientUsers(boolean showOnlyActive);
   public List<Country> getCountries(boolean showOnlyActive);
+  public DisciplineCategory getDisciplineCategory(Integer disciplineCategoryId);
   public List<DisciplineCategory> getDisciplineCategories(boolean showOnlyActive);
   public List<EmailAction> getEmailActions(boolean showOnlyActive);
   public List<GeographicalRegion> getGeographicalRegions(boolean showOnlyActive);

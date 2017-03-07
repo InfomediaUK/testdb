@@ -110,9 +110,13 @@ public class ApplicantCompliancyTest
         {
           // Boolean type.
           Boolean value = (Boolean)method.invoke(sourceObject, new Object[0]);
-          if (!compliantBooleanProperty(reason, propertyName, propertyValue, value))
+          if (value != null)
           {
-            applicant.setCompliant(false);
+            // Value is applicable...
+            if (!compliantBooleanProperty(reason, propertyName, propertyValue, value))
+            {
+              applicant.setCompliant(false);
+            } 
           }
         }
         else if (method.getReturnType() == Date.class)

@@ -516,7 +516,7 @@
 		    </tr>
       		<tr>
 			  <th width="25%"  align="left" class="label"><bean:message key="label.hpc"/></th>
-			  <th  align="left" class="label">(HCPC/NMC/HCA)</th>
+			  <th  align="left" class="label">(HCPC/NMC)</th>
 			</tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
@@ -524,7 +524,6 @@
                 <html:select name="ApplicantFormAgy" property="applicant.ahpRegistrationType" tabindex="66">
                   <html:option value="0"><bean:message key="label.hcpc"/></html:option>
                   <html:option value="1"><bean:message key="label.nmc"/></html:option>
-                  <html:option value="2"><bean:message key="label.hca"/></html:option>
                 </html:select>
               </td>
 					  </tr>

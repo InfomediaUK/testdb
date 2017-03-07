@@ -25,6 +25,7 @@ import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.DisciplineCategory;
 
 public class ApplicantEditProcess extends ApplicantCommonProcess
 {
@@ -37,10 +38,13 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     logger.entry("In coming !!!");
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
+    AgyService agyService = ServiceFactory.getInstance().getAgyService();
     Applicant applicant = (Applicant)dynaForm.get("applicant");    
     validateApplicant(applicant, dynaForm, errors, messageResources);
     if (errors.isEmpty()) 
     {
+      DisciplineCategory disciplineCategory = agyService.getDisciplineCategory(applicant.getDisciplineCategoryId());
+      applicant.setMustRegisterWithHPC(disciplineCategory.getRegistersWithHPC());
       loadApplicant(applicant, dynaForm, errors, messageResources);
     }
     if (!errors.isEmpty()) 
@@ -48,7 +52,6 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
       saveErrors(request, errors);
       return mapping.getInputForward();
     }
-    AgyService agyService = ServiceFactory.getInstance().getAgyService();
     // Get the set of new Unavailable dates from the form.
     String unavailableDates = (String)dynaForm.get("unavailableDates");
     FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");

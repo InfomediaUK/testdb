@@ -3072,6 +3072,13 @@ public abstract class DefaultCommonService implements CommonService {
     return geographicalRegions;
   }
 
+  public DisciplineCategory getDisciplineCategory(Integer disciplineCategoryId) 
+  {
+    DisciplineCategory disciplineCategory = null;
+    disciplineCategory = getDisciplineCategoryDAO().getDisciplineCategory(disciplineCategoryId);
+    return disciplineCategory;
+  }
+  
   public List<DisciplineCategory> getDisciplineCategories(boolean showOnlyActive) 
   {
     List<DisciplineCategory> disciplineCategories = null;

@@ -95,7 +95,6 @@ public interface AdminService extends CommonService {
 
   public List<com.helmet.xml.jaxb.model.DisciplineCategory> getJerseyDisciplineCategories(boolean showOnlyActive); 
   public com.helmet.xml.jaxb.model.DisciplineCategory getJerseyDisciplineCategory(Integer disciplineCategoryId);
-  public DisciplineCategory getDisciplineCategory(Integer disciplineCategoryId);
   public DisciplineCategory getDisciplineCategoryForCode(String code);
   public DisciplineCategory getDisciplineCategoryForName(String name);
   public int insertDisciplineCategory(DisciplineCategory disciplineCategory, Integer auditorId);

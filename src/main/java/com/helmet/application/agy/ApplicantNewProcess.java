@@ -19,6 +19,7 @@ import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.DisciplineCategory;
 
 public class ApplicantNewProcess extends ApplicantCommonProcess
 {
@@ -31,10 +32,13 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     logger.entry("In coming !!!");
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
+    AgyService agyService = ServiceFactory.getInstance().getAgyService();
     Applicant applicant = (Applicant) dynaForm.get("applicant");
     validateApplicant(applicant, dynaForm, errors, messageResources);
     if (errors.isEmpty()) 
     {
+      DisciplineCategory disciplineCategory = agyService.getDisciplineCategory(applicant.getDisciplineCategoryId());
+      applicant.setMustRegisterWithHPC(disciplineCategory.getRegistersWithHPC());
       loadApplicant(applicant, dynaForm, errors, messageResources);
     }
     if (!errors.isEmpty())
@@ -69,8 +73,6 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     applicant.getUser().setLogin(temp);
     applicant.getUser().setPwd(temp);
     applicant.getUser().setPwdHint(temp);
-
-    AgyService agyService = ServiceFactory.getInstance().getAgyService();
 
     int rowCount = 0;
     try

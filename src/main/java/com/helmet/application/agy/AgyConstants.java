@@ -37,4 +37,8 @@ public final class AgyConstants {
   public static final Integer APPLICANT_REFERENCE_PENDING     = 2;
   public static final Integer APPLICANT_REFERENCE_RECEIVED    = 3;
   public static final Integer APPLICANT_REFERENCE_TEMPORARY   = 4;
+  
+  public static final Integer AHP_REGISTRATION_TYPE_HCPC = 0;
+  public static final Integer AHP_REGISTRATION_TYPE_NMC  = 1;
+
 }

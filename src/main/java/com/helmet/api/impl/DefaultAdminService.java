@@ -553,12 +553,6 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     jerseyDisciplineCategory.setDisplayOrder(disciplineCategory.getDisplayOrder());
     return jerseyDisciplineCategory;
   }
-  public DisciplineCategory getDisciplineCategory(Integer disciplineCategoryId) 
-  {
-    DisciplineCategory disciplineCategory = null;
-    disciplineCategory = getDisciplineCategoryDAO().getDisciplineCategory(disciplineCategoryId);
-    return disciplineCategory;
-  }
   public DisciplineCategory getDisciplineCategoryForCode(String code) 
   {
     DisciplineCategory disciplineCategory = null;

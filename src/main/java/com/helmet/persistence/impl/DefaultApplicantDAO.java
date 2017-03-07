@@ -677,6 +677,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       AOS2.NAME AS AREAOFSPECIALITYNAME2, ");
     selectApplicantsSQL.append("       GR.NAME AS GEOGRAPHICALREGIONNAME, ");
     selectApplicantsSQL.append("       DC.NAME AS DISCIPLINECATEGORYNAME, ");
+    selectApplicantsSQL.append("       DC.REGISTERSWITHHPC AS MUSTREGISTERWITHHPC, ");
     selectApplicantsSQL.append("       ID.NAME AS IDDOCUMENTNAME, ");
     selectApplicantsSQL.append("       VT.NAME AS VISATYPENAME, ");
 		selectApplicantsSQL.append("       C.NAME AS COUNTRYNAME ");

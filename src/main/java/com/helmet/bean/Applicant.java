@@ -155,6 +155,7 @@ public class Applicant extends Base
   private Integer disciplineCategoryId;
 
   private String disciplineCategoryName;
+  private Boolean mustRegisterWithHPC = false;
   private String visaTypeName;
   private String idDocumentName;
   private Integer fitToWorkStatus;
@@ -613,6 +614,16 @@ public class Applicant extends Base
   public void setDisciplineCategoryName(String disciplineCategoryName)
   {
     this.disciplineCategoryName = disciplineCategoryName;
+  }
+
+  public Boolean getMustRegisterWithHPC()
+  {
+    return mustRegisterWithHPC;
+  }
+
+  public void setMustRegisterWithHPC(Boolean mustRegisterWithHPC)
+  {
+    this.mustRegisterWithHPC = mustRegisterWithHPC;
   }
 
   public String getIdDocumentName()
@@ -1501,6 +1512,7 @@ public class Applicant extends Base
     setGeographicalRegionName(rs.getString("GEOGRAPHICALREGIONNAME"));
     setDisciplineCategoryId(rs.getInt("DISCIPLINECATEGORYID"));
     setDisciplineCategoryName(rs.getString("DISCIPLINECATEGORYNAME"));
+    setMustRegisterWithHPC(rs.getBoolean("MUSTREGISTERWITHHPC"));
     setIdDocumentName(rs.getString("IDDOCUMENTNAME"));
     setVisaTypeName(rs.getString("VISATYPENAME"));
     setClientGroup(rs.getInt("CLIENTGROUP"));
@@ -1575,25 +1587,25 @@ public class Applicant extends Base
   
   public Boolean getHasValidProfessionalRegistration()
   {
-    if (ahpRegistrationType == 2)
+    if (mustRegisterWithHPC)
     {
-      // HCA, no need to validate registration file or expiry date...
-      return true;
+      // Must register with HPC, IE. NOT HCA...
+      return getHasCurrentProfessionalRegistration();
     }
-    // NOT HCA...
-    return getHasCurrentProfessionalRegistration();
-  }
+    // HCA, no need to validate registration file or expiry date...
+    return null;
+ }
   
   public Boolean getHasCurrentProfessionalRegistration()
   {
     // True: Must have hpcExpiryDate set AND hpcExpiryDate must not be before today AND hpcFilename entered.
-    return hpcExpiryDate == null ? false : dateInFuture(hpcExpiryDate) && (hpcFilename != null);
+    return hpcExpiryDate == null ? false : dateInFuture(hpcExpiryDate) && (StringUtils.isNotEmpty(hpcFilename));
   }
   
   public Boolean getHasCurrentDBS()
   {
     // True: Must have dbsRenewalDate set AND dbsRenewalDate must not be before today AND dbsFilename entered.
-    return dbsRenewalDate == null ? false : dateInFuture(dbsRenewalDate) && (dbsFilename != null);
+    return dbsRenewalDate == null ? false : dateInFuture(dbsRenewalDate) && (StringUtils.isNotEmpty(dbsFilename));
   }
   
   public Boolean getHasCurrentIdDocument()
