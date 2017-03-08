@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.helmet.bean.DisciplineCategory;
+import com.helmet.bean.DisciplineCategoryUser;
 import com.helmet.persistence.DisciplineCategoryDAO;
 import com.helmet.persistence.RecordFactory;
 import com.helmet.persistence.RecordListFactory;
@@ -23,13 +24,19 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 
 	private static StringBuffer deleteDisciplineCategorySQL;
 
-	private static StringBuffer selectDisciplineCategorySQL;
+  private static StringBuffer selectDisciplineCategorySQL;
 
 	private static StringBuffer selectDisciplineCategoryForNameSQL;
 
 	private static StringBuffer selectDisciplineCategoryForCodeSQL;
 
-	private static StringBuffer selectDisciplineCategoriesSQL;
+  private static StringBuffer selectDisciplineCategoryUserSQL;
+
+  private static StringBuffer selectDisciplineCategoriesSQL;
+
+  private static StringBuffer selectDisciplineCategoryUsersSQL;
+
+  private static StringBuffer selectActiveDisciplineCategoryUsersSQL;
 
 	private static StringBuffer selectActiveDisciplineCategoriesSQL;
 
@@ -103,9 +110,34 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
     selectDisciplineCategoriesSQL.append("       ACTIVE, ");
 		selectDisciplineCategoriesSQL.append("       NOOFCHANGES ");
 		selectDisciplineCategoriesSQL.append("FROM DISCIPLINECATEGORY ");
-		// Get select DisciplineCategory SQL.
-		selectDisciplineCategorySQL = new StringBuffer(selectDisciplineCategoriesSQL);
-		selectDisciplineCategorySQL.append("WHERE DISCIPLINECATEGORYID = ^ ");
+
+    // Get select DisciplineCategoryUsers SQL.
+    selectDisciplineCategoryUsersSQL = new StringBuffer();
+    selectDisciplineCategoryUsersSQL.append("SELECT DC.DISCIPLINECATEGORYID, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.CODE, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.NAME, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.REGULATORID, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.DISPLAYORDER, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.CREATIONTIMESTAMP, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.AUDITORID, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.AUDITTIMESTAMP, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.ACTIVE, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.NOOFCHANGES, ");
+    selectDisciplineCategoryUsersSQL.append("       R.NAME AS REGULATORNAME, ");
+    selectDisciplineCategoryUsersSQL.append("       R.CODE AS REGULATORCODE ");
+    selectDisciplineCategoryUsersSQL.append("FROM DISCIPLINECATEGORY DC ");
+    selectDisciplineCategoryUsersSQL.append("     LEFT OUTER JOIN REGULATOR R ");
+    selectDisciplineCategoryUsersSQL.append("     ON  DC.REGULATORID = R.REGULATORID ");
+    // Get select ActiveDisciplineCategoryUsers SQL.
+    selectActiveDisciplineCategoryUsersSQL = new StringBuffer(selectDisciplineCategoryUsersSQL);
+    selectActiveDisciplineCategoryUsersSQL.append("WHERE DC.ACTIVE = TRUE ");
+    selectActiveDisciplineCategoryUsersSQL.append("ORDER BY DC.DISPLAYORDER, DC.NAME ");
+    // Get select DisciplineCategory SQL.
+    selectDisciplineCategorySQL = new StringBuffer(selectDisciplineCategoriesSQL);
+    selectDisciplineCategorySQL.append("WHERE DISCIPLINECATEGORYID = ^ ");
+		// Get select DisciplineCategoryUser SQL.
+		selectDisciplineCategoryUserSQL = new StringBuffer(selectDisciplineCategoryUsersSQL);
+		selectDisciplineCategoryUserSQL.append("WHERE DC.DISCIPLINECATEGORYID = ^ ");
     // Get select DisciplineCategory for Name SQL.
     selectDisciplineCategoryForNameSQL = new StringBuffer(selectDisciplineCategoriesSQL);
     selectDisciplineCategoryForNameSQL.append("WHERE NAME = ^ ");
@@ -118,6 +150,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
     selectActiveDisciplineCategoriesSQL.append("ORDER BY DISPLAYORDER, NAME ");
     // Put order by on now...
     selectDisciplineCategoriesSQL.append("ORDER BY DISPLAYORDER, NAME ");
+    selectDisciplineCategoryUsersSQL.append("ORDER BY DC.DISPLAYORDER, DC.NAME ");
 
 	}
 
@@ -210,6 +243,15 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		return (DisciplineCategory) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategory.class.getName());
 	}
 
+  public DisciplineCategoryUser getDisciplineCategoryUser(Integer disciplineCategoryId) 
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectDisciplineCategoryUserSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, disciplineCategoryId);
+    return (DisciplineCategoryUser) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryUser.class.getName());
+  }
+
 	public List<DisciplineCategory> getDisciplineCategories() 
   {
 		return getDisciplineCategories(false);
@@ -236,5 +278,19 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		return RecordListFactory.getInstance().get(getJdbcTemplate(),	sql.toString(), DisciplineCategory.class.getName());
 
 	}
+
+  public List<DisciplineCategoryUser> getDisciplineCategoryUsers(boolean showOnlyActive) 
+  {
+    StringBuffer sql = null;
+    if (showOnlyActive) 
+    {
+      sql = new StringBuffer(selectActiveDisciplineCategoryUsersSQL.toString());
+    }
+    else 
+    {
+      sql = new StringBuffer(selectDisciplineCategoryUsersSQL.toString()); 
+    }
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryUser.class.getName());
+  }
 
 }

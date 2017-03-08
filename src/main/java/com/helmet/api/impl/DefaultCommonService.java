@@ -35,6 +35,7 @@ import com.helmet.bean.ClientAgencyUserEntity;
 import com.helmet.bean.ClientUser;
 import com.helmet.bean.Country;
 import com.helmet.bean.DisciplineCategory;
+import com.helmet.bean.DisciplineCategoryUser;
 import com.helmet.bean.DressCode;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.Expense;
@@ -3093,11 +3094,25 @@ public abstract class DefaultCommonService implements CommonService {
     return disciplineCategory;
   }
   
+  public DisciplineCategoryUser getDisciplineCategoryUser(Integer disciplineCategoryId) 
+  {
+    DisciplineCategoryUser disciplineCategoryUser = null;
+    disciplineCategoryUser = getDisciplineCategoryDAO().getDisciplineCategoryUser(disciplineCategoryId);
+    return disciplineCategoryUser;
+  }
+  
   public List<DisciplineCategory> getDisciplineCategories(boolean showOnlyActive) 
   {
     List<DisciplineCategory> disciplineCategories = null;
     disciplineCategories = disciplineCategoryDAO.getDisciplineCategories(showOnlyActive);
     return disciplineCategories;
+  }
+
+  public List<DisciplineCategoryUser> getDisciplineCategoryUsers(boolean showOnlyActive) 
+  {
+    List<DisciplineCategoryUser> disciplineCategoryUsers = null;
+    disciplineCategoryUsers = disciplineCategoryDAO.getDisciplineCategoryUsers(showOnlyActive);
+    return disciplineCategoryUsers;
   }
 
   public List<IdDocument> getIdDocuments(boolean showOnlyActive) 

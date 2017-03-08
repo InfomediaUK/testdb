@@ -20,8 +20,8 @@ public class DisciplineCategoryNew extends AdminAction
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }

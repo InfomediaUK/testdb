@@ -5,6 +5,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="/mmj" prefix="mmj" %>
 <%@ taglib uri="/mmj-admin" prefix="mmj-admin" %>
 
 <bean:message key="title.disciplineCategoryEdit"/>
@@ -26,12 +27,11 @@
 	  <tr>
 	    <td align="left"><bean:message key="label.regulator"/></td>
 	    <td align="left">
-          <html:select name="DisciplineCategoryFormAdmin" property="disciplineCategory.regulatorId">
-            <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
-            <html:option value="1"><bean:message key="label.hcpc"/></html:option>
-            <html:option value="2"><bean:message key="label.nmc"/></html:option>
-            <html:option value="3">GPhC</html:option>
-          </html:select>
+	      <mmj:regulatorList var="regulatorList" />
+	      <html:select property="disciplineCategory.regulatorId" tabindex="14">
+		      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
+	        <html:options collection="regulatorList" labelProperty="nameWithCode" property="regulatorId" />
+	      </html:select>
 	    </td>
 	  </tr>
 	  <tr>

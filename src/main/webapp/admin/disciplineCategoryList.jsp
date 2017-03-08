@@ -28,7 +28,7 @@
     <th align="left"><bean:message key="label.order" /></th>
   </tr>
   </thead>
-  <logic:iterate id="disciplineCategory" name="ListFormAdmin" property="list">
+  <logic:iterate id="disciplineCategory" name="ListFormAdmin" property="list" type="com.helmet.bean.DisciplineCategoryUser">
 	<bean:define id="trClass" value="disciplineCategory"/>
 	<logic:notEqual name="disciplineCategory" property="active" value="true">
 	  <bean:define id="trClass" value="inactive"/>
@@ -46,7 +46,7 @@
       <bean:write name="disciplineCategory" property="code"/>
     </td>
     <td align="left">
-      <bean:write name="disciplineCategory" property="regulatorId"/>
+      <bean:write name="disciplineCategory" property="regulatorCode"/>
     </td>
     <td align="left">
       <bean:write name="disciplineCategory" property="active"/>

@@ -21,6 +21,7 @@ import com.helmet.bean.ClientAgencyUserEntity;
 import com.helmet.bean.ClientUser;
 import com.helmet.bean.Country;
 import com.helmet.bean.DisciplineCategory;
+import com.helmet.bean.DisciplineCategoryUser;
 import com.helmet.bean.DressCode;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.Expense;
@@ -305,7 +306,9 @@ public interface CommonService {
   public List<ClientUser> getClientUsers(boolean showOnlyActive);
   public List<Country> getCountries(boolean showOnlyActive);
   public DisciplineCategory getDisciplineCategory(Integer disciplineCategoryId);
+  public DisciplineCategoryUser getDisciplineCategoryUser(Integer disciplineCategoryId);
   public List<DisciplineCategory> getDisciplineCategories(boolean showOnlyActive);
+  public List<DisciplineCategoryUser> getDisciplineCategoryUsers(boolean showOnlyActive);
   public List<EmailAction> getEmailActions(boolean showOnlyActive);
   public List<GeographicalRegion> getGeographicalRegions(boolean showOnlyActive);
   public List<IdDocument> getIdDocuments(boolean showOnlyActive);

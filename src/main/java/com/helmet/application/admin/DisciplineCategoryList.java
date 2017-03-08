@@ -15,7 +15,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AdminService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.admin.abztract.AdminAction;
-import com.helmet.bean.DisciplineCategory;
+import com.helmet.bean.DisciplineCategoryUser;
 
 
 public class DisciplineCategoryList extends AdminAction
@@ -25,10 +25,10 @@ public class DisciplineCategoryList extends AdminAction
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    List<DisciplineCategory> list = adminService.getDisciplineCategories(false);
+    List<DisciplineCategoryUser> list = adminService.getDisciplineCategoryUsers(false);
     dynaForm.set("list", list);
     logger.exit("Out going !!!");
     return mapping.findForward("success");

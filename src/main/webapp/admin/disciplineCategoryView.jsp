@@ -23,7 +23,7 @@
   </tr>
   <tr>
     <td align="left"><bean:message key="label.regulator"/></td>
-    <td align="left"><bean:write name="DisciplineCategoryFormAdmin" property="disciplineCategory.regulatorId"/></td>
+    <td align="left"><bean:write name="DisciplineCategoryFormAdmin" property="disciplineCategory.regulatorCode"/></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.displayOrder"/></td>

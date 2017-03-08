@@ -107,7 +107,7 @@
 					      <mmj:disciplineCategoryList var="disciplineCategoryList" />
 					      <html:select property="applicant.disciplineCategoryId" tabindex="14">
 						      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
-					        <html:options collection="disciplineCategoryList" labelProperty="nameWithCode" property="disciplineCategoryId" />
+					        <html:options collection="disciplineCategoryList" labelProperty="nameWithCodeAndRegulator" property="disciplineCategoryId" />
 					      </html:select>
 					    </td>
 					  </tr>

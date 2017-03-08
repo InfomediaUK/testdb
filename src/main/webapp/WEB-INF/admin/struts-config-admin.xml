@@ -44,7 +44,7 @@
       <form-property name="html" type="java.lang.String" />
     </form-bean>
     <form-bean name="DisciplineCategoryFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
-      <form-property name="disciplineCategory" type="com.helmet.bean.DisciplineCategory" />
+      <form-property name="disciplineCategory" type="com.helmet.bean.DisciplineCategoryUser" />
     </form-bean>
     <form-bean name="IdDocumentFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="idDocument" type="com.helmet.bean.IdDocument" />
