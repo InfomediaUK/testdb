@@ -7,7 +7,7 @@ public class DisciplineCategory extends Base
   private Integer disciplineCategoryId;
   private String code;
   private String name;  
-  private Boolean registersWithHPC = false;
+  private Integer regulatorId;
   private Integer displayOrder;
 
   public Integer getDisciplineCategoryId()
@@ -40,14 +40,14 @@ public class DisciplineCategory extends Base
     this.name = name;
   }
 
-  public Boolean getRegistersWithHPC()
+  public Integer getRegulatorId()
   {
-    return registersWithHPC;
+    return regulatorId;
   }
 
-  public void setRegistersWithHPC(Boolean registersWithHPC)
+  public void setRegulatorId(Integer regulatorId)
   {
-    this.registersWithHPC = registersWithHPC;
+    this.regulatorId = regulatorId;
   }
 
   public String getNameWithCode()
@@ -76,7 +76,15 @@ public class DisciplineCategory extends Base
     setDisciplineCategoryId(rs.getInt("DISCIPLINECATEGORYID"));
     setCode(rs.getString("CODE"));
     setName(rs.getString("NAME"));
-    setRegistersWithHPC(rs.getBoolean("REGISTERSWITHHPC"));
+    int regulatorId = rs.getInt("REGULATORID");
+    if (rs.wasNull())
+    {
+      setRegulatorId(null);
+    }
+    else
+    {
+      setRegulatorId(regulatorId);
+    }
     setDisplayOrder(rs.getInt("DISPLAYORDER"));
   }
 

@@ -38,7 +38,7 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     if (errors.isEmpty()) 
     {
       DisciplineCategory disciplineCategory = agyService.getDisciplineCategory(applicant.getDisciplineCategoryId());
-      applicant.setMustRegisterWithHPC(disciplineCategory.getRegistersWithHPC());
+      applicant.setRegulatorId(disciplineCategory.getRegulatorId());
       loadApplicant(applicant, dynaForm, errors, messageResources);
     }
     if (!errors.isEmpty())

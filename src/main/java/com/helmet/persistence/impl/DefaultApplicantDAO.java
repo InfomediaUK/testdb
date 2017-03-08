@@ -677,7 +677,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       AOS2.NAME AS AREAOFSPECIALITYNAME2, ");
     selectApplicantsSQL.append("       GR.NAME AS GEOGRAPHICALREGIONNAME, ");
     selectApplicantsSQL.append("       DC.NAME AS DISCIPLINECATEGORYNAME, ");
-    selectApplicantsSQL.append("       DC.REGISTERSWITHHPC AS MUSTREGISTERWITHHPC, ");
+    selectApplicantsSQL.append("       DC.REGULATORID, ");
     selectApplicantsSQL.append("       ID.NAME AS IDDOCUMENTNAME, ");
     selectApplicantsSQL.append("       VT.NAME AS VISATYPENAME, ");
 		selectApplicantsSQL.append("       C.NAME AS COUNTRYNAME ");
@@ -1572,7 +1572,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getElearningTraining());
     Utilities.replace(sql, applicant.getPovaTraining());
     Utilities.replace(sql, applicant.getNeonatalLifeSupportTraining());
-    Utilities.replace(sql, applicant.getAhpRegistrationType());
+    Utilities.replaceZeroWithNull(sql, applicant.getAhpRegistrationType());
     Utilities.replaceAndQuoteNullable(sql, applicant.getHpcLastCheckedDate());
     Utilities.replace(sql, applicant.getHpcAlertNotification());
     Utilities.replaceAndQuoteNullable(sql, applicant.getPaediatricLifeSupportFilename());
@@ -1694,7 +1694,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getElearningTraining());
     Utilities.replace(sql, applicant.getPovaTraining());
     Utilities.replace(sql, applicant.getNeonatalLifeSupportTraining());
-    Utilities.replace(sql, applicant.getAhpRegistrationType());
+    Utilities.replaceZeroWithNull(sql, applicant.getAhpRegistrationType());
     Utilities.replaceAndQuoteNullable(sql, applicant.getHpcLastCheckedDate());
     Utilities.replace(sql, applicant.getHpcAlertNotification());
     Utilities.replaceAndQuoteNullable(sql, applicant.getPaediatricLifeSupportFilename());

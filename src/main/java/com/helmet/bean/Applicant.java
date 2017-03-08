@@ -155,7 +155,7 @@ public class Applicant extends Base
   private Integer disciplineCategoryId;
 
   private String disciplineCategoryName;
-  private Boolean mustRegisterWithHPC = false;
+  private Integer regulatorId;
   private String visaTypeName;
   private String idDocumentName;
   private Integer fitToWorkStatus;
@@ -616,14 +616,14 @@ public class Applicant extends Base
     this.disciplineCategoryName = disciplineCategoryName;
   }
 
-  public Boolean getMustRegisterWithHPC()
+  public Integer getRegulatorId()
   {
-    return mustRegisterWithHPC;
+    return regulatorId;
   }
 
-  public void setMustRegisterWithHPC(Boolean mustRegisterWithHPC)
+  public void setRegulatorId(Integer regulatorId)
   {
-    this.mustRegisterWithHPC = mustRegisterWithHPC;
+    this.regulatorId = regulatorId;
   }
 
   public String getIdDocumentName()
@@ -1512,8 +1512,16 @@ public class Applicant extends Base
     setGeographicalRegionName(rs.getString("GEOGRAPHICALREGIONNAME"));
     setDisciplineCategoryId(rs.getInt("DISCIPLINECATEGORYID"));
     setDisciplineCategoryName(rs.getString("DISCIPLINECATEGORYNAME"));
-    setMustRegisterWithHPC(rs.getBoolean("MUSTREGISTERWITHHPC"));
-    setIdDocumentName(rs.getString("IDDOCUMENTNAME"));
+    int regulatorId = rs.getInt("REGULATORID");
+    if (rs.wasNull())
+    {
+      setRegulatorId(null);
+    }
+    else
+    {
+      setRegulatorId(regulatorId);
+    }
+   setIdDocumentName(rs.getString("IDDOCUMENTNAME"));
     setVisaTypeName(rs.getString("VISATYPENAME"));
     setClientGroup(rs.getInt("CLIENTGROUP"));
     setDrivingLicense(rs.getBoolean("DRIVINGLICENSE"));
@@ -1537,7 +1545,15 @@ public class Applicant extends Base
     setElearningTraining(rs.getBoolean("ELEARNINGTRAINING"));
     setPovaTraining(rs.getBoolean("POVATRAINING"));
     setNeonatalLifeSupportTraining(rs.getBoolean("NEONATALLIFESUPPORTTRAINING"));
-    setAhpRegistrationType(rs.getInt("AHPREGISTRATIONTYPE"));
+    int ahpRegistrationType = rs.getInt("AHPREGISTRATIONTYPE");
+    if (rs.wasNull())
+    {
+      setAhpRegistrationType(null);
+    }
+    else
+    {
+      setAhpRegistrationType(ahpRegistrationType);
+    }
     setHpcLastCheckedDate(rs.getDate("HPCLASTCHECKEDDATE"));
     setHpcAlertNotification(rs.getInt("HPCALERTNOTIFICATION"));
     setPaediatricLifeSupportFilename(rs.getString("PAEDIATRICLIFESUPPORTFILENAME"));
@@ -1587,7 +1603,7 @@ public class Applicant extends Base
   
   public Boolean getHasValidProfessionalRegistration()
   {
-    if (mustRegisterWithHPC)
+    if (regulatorId != null)
     {
       // Must register with HPC, IE. NOT HCA...
       return getHasCurrentProfessionalRegistration();

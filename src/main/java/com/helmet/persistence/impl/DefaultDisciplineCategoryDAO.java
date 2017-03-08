@@ -42,7 +42,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		insertDisciplineCategorySQL.append("  DISCIPLINECATEGORYID, ");
 		insertDisciplineCategorySQL.append("  CODE, ");
     insertDisciplineCategorySQL.append("  NAME, ");
-    insertDisciplineCategorySQL.append("  REGISTERSWITHHPC, ");
+    insertDisciplineCategorySQL.append("  REGULATORID, ");
     insertDisciplineCategorySQL.append("  DISPLAYORDER, ");
     insertDisciplineCategorySQL.append("  CREATIONTIMESTAMP, ");
     insertDisciplineCategorySQL.append("  AUDITORID, ");
@@ -66,7 +66,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		updateDisciplineCategorySQL.append("SET  NOOFCHANGES = NOOFCHANGES + 1, ");
 		updateDisciplineCategorySQL.append("     CODE = ^, ");
     updateDisciplineCategorySQL.append("     NAME = ^, ");
-    updateDisciplineCategorySQL.append("     REGISTERSWITHHPC = ^, ");
+    updateDisciplineCategorySQL.append("     REGULATORID = ^, ");
     updateDisciplineCategorySQL.append("     DISPLAYORDER = ^, ");
     updateDisciplineCategorySQL.append("     AUDITORID = ^, ");
     updateDisciplineCategorySQL.append("     AUDITTIMESTAMP = ^ ");
@@ -95,7 +95,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		selectDisciplineCategoriesSQL.append("SELECT DISCIPLINECATEGORYID, ");
 		selectDisciplineCategoriesSQL.append("       CODE, ");
     selectDisciplineCategoriesSQL.append("       NAME, ");
-    selectDisciplineCategoriesSQL.append("       REGISTERSWITHHPC, ");
+    selectDisciplineCategoriesSQL.append("       REGULATORID, ");
     selectDisciplineCategoriesSQL.append("       DISPLAYORDER, ");
     selectDisciplineCategoriesSQL.append("       CREATIONTIMESTAMP, ");
     selectDisciplineCategoriesSQL.append("       AUDITORID, ");
@@ -130,7 +130,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		Utilities.replace(sql, disciplineCategory.getDisciplineCategoryId());
 		Utilities.replaceAndQuote(sql, disciplineCategory.getCode());
     Utilities.replaceAndQuote(sql, disciplineCategory.getName());
-    Utilities.replace(sql, disciplineCategory.getRegistersWithHPC());
+    Utilities.replace(sql, disciplineCategory.getRegulatorId());
     Utilities.replace(sql, disciplineCategory.getDisplayOrder());
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     Utilities.replace(sql, auditorId);
@@ -145,7 +145,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		// Replace the parameters with supplied values.
 		Utilities.replaceAndQuote(sql, disciplineCategory.getCode());
     Utilities.replaceAndQuote(sql, disciplineCategory.getName());
-    Utilities.replace(sql, disciplineCategory.getRegistersWithHPC());
+    Utilities.replace(sql, disciplineCategory.getRegulatorId());
     Utilities.replace(sql, disciplineCategory.getDisplayOrder());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
