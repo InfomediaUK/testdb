@@ -130,7 +130,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		Utilities.replace(sql, disciplineCategory.getDisciplineCategoryId());
 		Utilities.replaceAndQuote(sql, disciplineCategory.getCode());
     Utilities.replaceAndQuote(sql, disciplineCategory.getName());
-    Utilities.replace(sql, disciplineCategory.getRegulatorId());
+    Utilities.replaceZeroWithNull(sql, disciplineCategory.getRegulatorId());
     Utilities.replace(sql, disciplineCategory.getDisplayOrder());
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     Utilities.replace(sql, auditorId);
@@ -145,7 +145,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		// Replace the parameters with supplied values.
 		Utilities.replaceAndQuote(sql, disciplineCategory.getCode());
     Utilities.replaceAndQuote(sql, disciplineCategory.getName());
-    Utilities.replace(sql, disciplineCategory.getRegulatorId());
+    Utilities.replaceZeroWithNull(sql, disciplineCategory.getRegulatorId());
     Utilities.replace(sql, disciplineCategory.getDisplayOrder());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());

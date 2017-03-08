@@ -27,8 +27,9 @@
 	    <td align="left"><bean:message key="label.regulator"/></td>
 	    <td align="left">
           <html:select name="DisciplineCategoryFormAdmin" property="disciplineCategory.regulatorId">
-            <html:option value="0"><bean:message key="label.hcpc"/></html:option>
-            <html:option value="1"><bean:message key="label.nmc"/></html:option>
+            <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
+            <html:option value="1"><bean:message key="label.hcpc"/></html:option>
+            <html:option value="2"><bean:message key="label.nmc"/></html:option>
           </html:select>
 	    </td>
 	  </tr>
