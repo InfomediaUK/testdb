@@ -60,6 +60,7 @@ import com.helmet.bean.JobSubFamilyEntity;
 import com.helmet.bean.LocationJobProfile;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.ReEnterPwd;
+import com.helmet.bean.Regulator;
 import com.helmet.persistence.AdminAccessDAO;
 import com.helmet.persistence.AdminAccessGroupDAO;
 import com.helmet.persistence.AdminAccessGroupItemDAO;
@@ -691,6 +692,70 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     int rc = getVisaTypeDAO().deleteVisaType(visaTypeId, noOfChanges, auditorId);
     return rc;
   }
+  
+  
+  public Regulator getRegulator(Integer regulatorId) 
+  {
+    Regulator regulator = null;
+    regulator = getRegulatorDAO().getRegulator(regulatorId);
+    return regulator;
+  }
+  public Regulator getRegulatorForCode(String code) 
+  {
+    
+    Regulator regulator = null;
+    regulator = getRegulatorDAO().getRegulatorForCode(code);
+    return regulator;
+    
+  }
+  public Regulator getRegulatorForName(String name) 
+  {
+    
+    Regulator regulator = null;
+    regulator = getRegulatorDAO().getRegulatorForCode(name);
+    return regulator;
+    
+  }
+  public int insertRegulator(Regulator regulator, Integer regulatorId) 
+  {
+    Regulator duplicateRegulator = getRegulatorDAO().getRegulatorForName(regulator.getName());
+    if (duplicateRegulator != null) {
+      throw new DuplicateDataException("name");
+    }
+    duplicateRegulator = getRegulatorDAO().getRegulatorForCode(regulator.getCode());
+    if (duplicateRegulator != null) {
+      throw new DuplicateDataException("code");
+    }
+    int rc = getRegulatorDAO().insertRegulator(regulator, regulatorId);
+    return rc;
+  }
+  public int updateRegulator(Regulator regulator, Integer auditorId) 
+  {
+    Regulator duplicateRegulator = getRegulatorDAO().getRegulatorForName(regulator.getName());
+    if (duplicateRegulator != null && 
+      !duplicateRegulator.getRegulatorId().equals(regulator.getRegulatorId())) {
+      throw new DuplicateDataException("name");
+    }
+    duplicateRegulator = getRegulatorDAO().getRegulatorForCode(regulator.getCode());
+    if (duplicateRegulator != null && 
+      !duplicateRegulator.getRegulatorId().equals(regulator.getRegulatorId())) {
+      throw new DuplicateDataException("code");
+    }
+    int rc = getRegulatorDAO().updateRegulator(regulator, auditorId);
+    return rc;
+  }
+  public int updateRegulatorDisplayOrder(Regulator regulator, Integer auditorId) 
+  {
+    int rc = getRegulatorDAO().updateRegulator(regulator, auditorId);
+    return rc;
+  }
+  public int deleteRegulator(Integer regulatorId, Integer noOfChanges, Integer auditorId){
+    int rc = getRegulatorDAO().deleteRegulator(regulatorId, noOfChanges, auditorId);
+    return rc;
+  }
+  
+  
+  
   public List<com.helmet.xml.jaxb.model.IdDocument> getJerseyIdDocuments(boolean showOnlyActive) 
   {
     List<IdDocument> idDocuments = null;

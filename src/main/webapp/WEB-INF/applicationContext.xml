@@ -245,6 +245,7 @@
 		<property name="emailActionDAO" ref="emailActionDAO" />
 		<property name="idDocumentDAO" ref="idDocumentDAO" />
 		<property name="visaTypeDAO" ref="visaTypeDAO" />
+		<property name="regulatorDAO" ref="regulatorDAO" />
 		<!-- specific DAOs -->
 		<property name="administratorDAO" ref="administratorDAO" />
 		<property name="adminAccessDAO" ref="adminAccessDAO" />
@@ -390,6 +391,7 @@
 		<property name="emailActionDAO" ref="emailActionDAO" />
 		<property name="idDocumentDAO" ref="idDocumentDAO" />
 		<property name="visaTypeDAO" ref="visaTypeDAO" />
+		<property name="regulatorDAO" ref="regulatorDAO" />
 		<!-- specific DAOs -->
 		<property name="agyAccessDAO" ref="agyAccessDAO" />
 		<property name="applicantDAO" ref="applicantDAO" />
@@ -516,6 +518,11 @@
 	</bean>
 	<bean id="visaTypeDAO" 
 	      class="com.helmet.persistence.impl.DefaultVisaTypeDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<bean id="regulatorDAO" 
+	      class="com.helmet.persistence.impl.DefaultRegulatorDAO" 
 	      init-method="init" >
 			<property name="dataSource" ref="dataSource"/>
 	</bean>

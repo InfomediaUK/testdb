@@ -52,6 +52,7 @@ import com.helmet.bean.JobSubFamily;
 import com.helmet.bean.JobSubFamilyEntity;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.ReEnterPwd;
+import com.helmet.bean.Regulator;
 
 public interface AdminService extends CommonService {
 
@@ -260,5 +261,14 @@ public interface AdminService extends CommonService {
 
 	public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAdmin(Date fromDate, Date toDate);
   
-  public IntValue getActiveBookingGradeApplicantsCountForClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId);	
+  public IntValue getActiveBookingGradeApplicantsCountForClientAgencyJobProfileGrade(Integer clientAgencyJobProfileGradeId);
+  
+  public Regulator getRegulator(Integer regulatorId);
+  public Regulator getRegulatorForCode(String code);
+  public Regulator getRegulatorForName(String name);
+  public int insertRegulator(Regulator regulator, Integer auditorId);
+  public int updateRegulator(Regulator regulator, Integer auditorId);
+  public int updateRegulatorDisplayOrder(Regulator regulator, Integer auditorId);
+  public int deleteRegulator(Integer regulatorId, Integer noOfChanges, Integer auditorId);
+
 }

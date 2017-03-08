@@ -51,6 +51,7 @@ import com.helmet.bean.IdDocument;
 import com.helmet.bean.PublicHoliday;
 import com.helmet.bean.ReasonForRequest;
 import com.helmet.bean.RecordCount;
+import com.helmet.bean.Regulator;
 import com.helmet.bean.Shift;
 import com.helmet.bean.Site;
 import com.helmet.bean.SiteUser;
@@ -309,5 +310,6 @@ public interface CommonService {
   public List<GeographicalRegion> getGeographicalRegions(boolean showOnlyActive);
   public List<IdDocument> getIdDocuments(boolean showOnlyActive);
   public List<VisaType> getVisaTypes(boolean showOnlyActive);
+  public List<Regulator> getRegulators(boolean showOnlyActive);
 
 }

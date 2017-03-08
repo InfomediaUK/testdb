@@ -68,6 +68,7 @@ import com.helmet.bean.IdDocument;
 import com.helmet.bean.PublicHoliday;
 import com.helmet.bean.ReasonForRequest;
 import com.helmet.bean.RecordCount;
+import com.helmet.bean.Regulator;
 import com.helmet.bean.Shift;
 import com.helmet.bean.Site;
 import com.helmet.bean.SiteUser;
@@ -116,6 +117,7 @@ import com.helmet.persistence.NhsBookingDAO;
 import com.helmet.persistence.IdDocumentDAO;
 import com.helmet.persistence.PublicHolidayDAO;
 import com.helmet.persistence.ReasonForRequestDAO;
+import com.helmet.persistence.RegulatorDAO;
 import com.helmet.persistence.ShiftDAO;
 import com.helmet.persistence.SiteDAO;
 import com.helmet.persistence.UpliftDAO;
@@ -135,6 +137,8 @@ public abstract class DefaultCommonService implements CommonService {
   private IdDocumentDAO idDocumentDAO;
 
   private VisaTypeDAO visaTypeDAO;
+
+  private RegulatorDAO regulatorDAO;
 
 	private BookingDAO bookingDAO;
 	
@@ -264,6 +268,16 @@ public abstract class DefaultCommonService implements CommonService {
   public void setVisaTypeDAO(VisaTypeDAO visaTypeDAO) 
   {
     this.visaTypeDAO = visaTypeDAO;
+  }
+
+  public RegulatorDAO getRegulatorDAO()
+  {
+    return regulatorDAO;
+  }
+
+  public void setRegulatorDAO(RegulatorDAO regulatorDAO)
+  {
+    this.regulatorDAO = regulatorDAO;
   }
 
   public NhsBookingDAO getNhsBookingDAO()
@@ -3099,4 +3113,12 @@ public abstract class DefaultCommonService implements CommonService {
     visaTypes = visaTypeDAO.getVisaTypes(showOnlyActive);
     return visaTypes;
   }
+  
+  public List<Regulator> getRegulators(boolean showOnlyActive) 
+  {
+    List<Regulator> regulators = null;
+    regulators = regulatorDAO.getRegulators(showOnlyActive);
+    return regulators;
+  }
+
 }

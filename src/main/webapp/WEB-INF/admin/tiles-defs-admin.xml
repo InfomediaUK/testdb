@@ -218,6 +218,27 @@
         <put name="titleKey" value="title.visaTypeDelete" type="string"/>
         <put name="body"   value="/admin/visaTypeDelete.jsp"/>
   </definition>
+  <!-- Regulator -->
+  <definition name="regulatorList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.regulatorList" type="string"/>
+        <put name="body"   value="/admin/regulatorList.jsp"/>
+  </definition>
+  <definition name="regulatorNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.regulatorNew" type="string"/>
+        <put name="body"   value="/admin/regulatorNew.jsp"/>
+  </definition>
+  <definition name="regulatorView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.regulatorView" type="string"/>
+        <put name="body"   value="/admin/regulatorView.jsp"/>
+  </definition>
+  <definition name="regulatorEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.regulatorEdit" type="string"/>
+        <put name="body"   value="/admin/regulatorEdit.jsp"/>
+  </definition>
+  <definition name="regulatorDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.regulatorDelete" type="string"/>
+        <put name="body"   value="/admin/regulatorDelete.jsp"/>
+  </definition>
   <!-- SiteUnavailable -->
   <definition name="siteUnavailableView.page" extends="layoutAdmin.main">
         <put name="titleKey" value="title.siteUnavailableView" type="string"/>

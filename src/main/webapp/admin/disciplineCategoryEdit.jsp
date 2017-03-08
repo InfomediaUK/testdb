@@ -30,6 +30,7 @@
             <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
             <html:option value="1"><bean:message key="label.hcpc"/></html:option>
             <html:option value="2"><bean:message key="label.nmc"/></html:option>
+            <html:option value="3">GPhC</html:option>
           </html:select>
 	    </td>
 	  </tr>

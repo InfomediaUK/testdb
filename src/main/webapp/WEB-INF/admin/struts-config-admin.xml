@@ -52,6 +52,9 @@
     <form-bean name="VisaTypeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="visaType" type="com.helmet.bean.VisaType" />
     </form-bean>
+    <form-bean name="RegulatorFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="regulator" type="com.helmet.bean.Regulator" />
+    </form-bean>
 
     <form-bean name="QueriesFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="queriesXml" type="java.lang.String" />
@@ -494,6 +497,12 @@
     <forward name="visaTypeNew"  path="/visaTypeNew.do" />
     <forward name="visaTypeEdit" path="/visaTypeEdit.do" />
     <forward name="visaTypeDelete" path="/visaTypeDelete.do" />
+
+    <forward name="regulatorList" path="/regulatorList.do" />
+    <forward name="regulatorView" path="/regulatorView.do" />
+    <forward name="regulatorNew"  path="/regulatorNew.do" />
+    <forward name="regulatorEdit" path="/regulatorEdit.do" />
+    <forward name="regulatorDelete" path="/regulatorDelete.do" />
 
     <forward name="siteUnavailableView" path="/siteUnavailableView.do" />
     <forward name="siteUnavailableEdit" path="/siteUnavailableEdit.do" />
@@ -1430,6 +1439,78 @@
             input="visaTypeDelete.page"
             validate="false">
         <forward name="success" path="/visaTypeList.do" redirect="true" />
+    </action>
+
+    <action path="/regulatorList"
+            type="com.helmet.application.admin.RegulatorList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="regulatorList.page" />
+    </action>
+
+    <action path="/regulatorNew"
+            type="com.helmet.application.admin.RegulatorNew"
+            name="RegulatorFormAdmin"
+            scope="request"
+            input="/regulatorList.do"
+            validate="false">
+        <forward name="success" path="regulatorNew.page" />
+    </action>
+
+    <action path="/regulatorNewProcess"
+            type="com.helmet.application.admin.RegulatorNewProcess"
+            name="RegulatorFormAdmin"
+            scope="request"
+            input="regulatorNew.page"
+            validate="true">
+        <forward name="success" path="/regulatorList.do" redirect="true" />
+    </action>
+
+    <action path="/regulatorView"
+            type="com.helmet.application.admin.RegulatorView"
+            name="RegulatorFormAdmin"
+            scope="request"
+            input="/regulatorList.do"
+            validate="false">
+        <forward name="success" path="regulatorView.page" />
+    </action>
+
+    <action path="/regulatorEdit"
+            type="com.helmet.application.admin.RegulatorEdit"
+            name="RegulatorFormAdmin"
+            scope="request"
+            input="/regulatorList.do"
+            validate="false">
+        <forward name="success" path="regulatorEdit.page" />
+    </action>
+
+    <action path="/regulatorEditProcess"
+            type="com.helmet.application.admin.RegulatorEditProcess"
+            name="RegulatorFormAdmin"
+            scope="request"
+            input="regulatorEdit.page"
+            validate="true">
+        <forward name="success" path="/regulatorList.do" redirect="true" />
+    </action>
+
+    <action path="/regulatorDelete"
+            type="com.helmet.application.admin.RegulatorDelete"
+            name="RegulatorFormAdmin"
+            scope="request"
+            input="/regulatorList.do"
+            validate="false">
+        <forward name="success" path="regulatorDelete.page" />
+    </action>
+
+    <action path="/regulatorDeleteProcess"
+            type="com.helmet.application.admin.RegulatorDeleteProcess"
+            name="RegulatorFormAdmin"
+            scope="request"
+            input="regulatorDelete.page"
+            validate="false">
+        <forward name="success" path="/regulatorList.do" redirect="true" />
     </action>
 
     <action path="/siteUnavailableView"
