@@ -190,9 +190,9 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    <th align="left" class="label"><bean:message key="label.disciplineCategory"/></th>
 					    <td align="left" colspan="3">
 					      <bean:write name="ApplicantFormAgy" property="applicant.disciplineCategoryName"/>&nbsp;
-<logic:equal name="ApplicantFormAgy" property="applicant.mustRegisterWithHPC" value="true">
-                          (<bean:message key="label.mustRegisterWithHPC"/>)
-</logic:equal>
+<logic:present name="ApplicantFormAgy" property="applicant.regulatorId">
+                          (<bean:message key="label.mustRegisterWithRegulator"/>)
+</logic:present>
 					    </td>
 					  </tr>
             <tr>
@@ -1099,15 +1099,12 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					  <tr>
 					    <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
 					    <td align="left">
-                <logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="0">
-                  <bean:message key="label.hcpc"/>
-                </logic:equal>
-                <logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="1">
-                  <bean:message key="label.nmc"/>
-                </logic:equal>
-                <logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="2">
-                  NO LONGER USED - PLEASE CHANGE
-                </logic:equal>
+<logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="1">
+                          <bean:message key="label.hcpc"/>
+</logic:equal>
+<logic:equal name="ApplicantFormAgy" property="applicant.ahpRegistrationType" value="2">
+                          <bean:message key="label.nmc"/>
+</logic:equal>
 					    </td>
 					  </tr>
 					  <tr>

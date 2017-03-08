@@ -522,27 +522,28 @@
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
               <td align="left">
                 <html:select name="ApplicantFormAgy" property="applicant.ahpRegistrationType" tabindex="66">
-                  <html:option value="0"><bean:message key="label.hcpc"/></html:option>
-                  <html:option value="1"><bean:message key="label.nmc"/></html:option>
+                  <html:option value="">-----</html:option>
+                  <html:option value="1"><bean:message key="label.hcpc"/></html:option>
+                  <html:option value="2"><bean:message key="label.nmc"/></html:option>
                 </html:select>
               </td>
-					  </tr>
-					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpcFile"/></th>
-					    <td align="left"><html:file property="hpcFormFile" size="30" tabindex="67" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.hpcFilename"/></td>
-					  </tr>
-					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpcExpiryDate"/></th>
-					    <td align="left"><html:text property="hpcExpiryDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
-					  </tr>
-					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.professionalReference"/></th>
-					    <td align="left"><html:text property="applicant.hpcNumber" size="30" maxlength="50" tabindex="69" /></td>
-					  </tr>
-					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpcLastCheckedDate"/></th>
-					    <td align="left"><html:text property="hpcLastCheckedDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
-					  </tr>
+			  </tr>
+			  <tr>
+			    <th width="25%"  align="left" class="label"><bean:message key="label.hpcFile"/></th>
+			    <td align="left"><html:file property="hpcFormFile" size="30" tabindex="67" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.hpcFilename"/></td>
+			  </tr>
+			  <tr>
+			    <th width="25%"  align="left" class="label"><bean:message key="label.hpcExpiryDate"/></th>
+			    <td align="left"><html:text property="hpcExpiryDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
+			  </tr>
+			  <tr>
+			    <th width="25%"  align="left" class="label"><bean:message key="label.professionalReference"/></th>
+			    <td align="left"><html:text property="applicant.hpcNumber" size="30" maxlength="50" tabindex="69" /></td>
+			  </tr>
+			  <tr>
+			    <th width="25%"  align="left" class="label"><bean:message key="label.hpcLastCheckedDate"/></th>
+			    <td align="left"><html:text property="hpcLastCheckedDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
+			  </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.hpcAlertNotification"/></th>
               <td align="left">

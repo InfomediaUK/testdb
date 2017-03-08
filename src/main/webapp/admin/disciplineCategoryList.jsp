@@ -23,7 +23,7 @@
   <tr>
     <th align="left"><bean:message key="label.name" /></th>
     <th align="left"><bean:message key="label.code" /></th>
-    <th align="left"><bean:message key="label.registersWithHPC" /></th>
+    <th align="left"><bean:message key="label.regulator" /></th>
     <th align="left"><bean:message key="label.active" /></th>
     <th align="left"><bean:message key="label.order" /></th>
   </tr>
@@ -46,7 +46,7 @@
       <bean:write name="disciplineCategory" property="code"/>
     </td>
     <td align="left">
-      <bean:write name="disciplineCategory" property="registersWithHPC"/>
+      <bean:write name="disciplineCategory" property="regulatorId"/>
     </td>
     <td align="left">
       <bean:write name="disciplineCategory" property="active"/>

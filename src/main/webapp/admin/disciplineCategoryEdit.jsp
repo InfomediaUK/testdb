@@ -24,8 +24,13 @@
 	    <td align="left"><html:text name="DisciplineCategoryFormAdmin" property="disciplineCategory.code" size="60" /></td>
 	  </tr>
 	  <tr>
-	    <td align="left"><bean:message key="label.registersWithHPC"/></td>
-	    <td align="left"><html:checkbox property="disciplineCategory.registersWithHPC"/></td>
+	    <td align="left"><bean:message key="label.regulator"/></td>
+	    <td align="left">
+          <html:select name="DisciplineCategoryFormAdmin" property="disciplineCategory.regulatorId">
+            <html:option value="0"><bean:message key="label.hcpc"/></html:option>
+            <html:option value="1"><bean:message key="label.nmc"/></html:option>
+          </html:select>
+	    </td>
 	  </tr>
 	  <tr>
 	    <td align="left"><bean:message key="label.displayOrder"/></td>

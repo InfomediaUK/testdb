@@ -25,8 +25,8 @@
     <td align="left"><html:text name="DisciplineCategoryFormAdmin" property="disciplineCategory.code" size="60" /></td>
   </tr>
   <tr>
-    <td align="left"><bean:message key="label.registersWithHPC"/></td>
-    <td align="left"><html:checkbox property="disciplineCategory.registersWithHPC"/></td>
+    <td align="left"><bean:message key="label.regulator"/></td>
+    <td align="left"><html:checkbox property="disciplineCategory.regulatorId"/></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.displayOrder"/></td>
