@@ -155,7 +155,8 @@ public class Applicant extends Base
   private Integer disciplineCategoryId;
 
   private String disciplineCategoryName;
-  private Integer regulatorId;
+  private String regulatorName;
+  private String regulatorCode;
   private String visaTypeName;
   private String idDocumentName;
   private Integer fitToWorkStatus;
@@ -616,14 +617,24 @@ public class Applicant extends Base
     this.disciplineCategoryName = disciplineCategoryName;
   }
 
-  public Integer getRegulatorId()
+  public String getRegulatorName()
   {
-    return regulatorId;
+    return regulatorName;
   }
 
-  public void setRegulatorId(Integer regulatorId)
+  public void setRegulatorName(String regulatorName)
   {
-    this.regulatorId = regulatorId;
+    this.regulatorName = regulatorName;
+  }
+
+  public String getRegulatorCode()
+  {
+    return regulatorCode;
+  }
+
+  public void setRegulatorCode(String regulatorCode)
+  {
+    this.regulatorCode = regulatorCode;
   }
 
   public String getIdDocumentName()
@@ -1512,16 +1523,9 @@ public class Applicant extends Base
     setGeographicalRegionName(rs.getString("GEOGRAPHICALREGIONNAME"));
     setDisciplineCategoryId(rs.getInt("DISCIPLINECATEGORYID"));
     setDisciplineCategoryName(rs.getString("DISCIPLINECATEGORYNAME"));
-    int regulatorId = rs.getInt("REGULATORID");
-    if (rs.wasNull())
-    {
-      setRegulatorId(null);
-    }
-    else
-    {
-      setRegulatorId(regulatorId);
-    }
-   setIdDocumentName(rs.getString("IDDOCUMENTNAME"));
+    setRegulatorName(rs.getString("REGULATORNAME"));
+    setRegulatorCode(rs.getString("REGULATORCODE"));
+    setIdDocumentName(rs.getString("IDDOCUMENTNAME"));
     setVisaTypeName(rs.getString("VISATYPENAME"));
     setClientGroup(rs.getInt("CLIENTGROUP"));
     setDrivingLicense(rs.getBoolean("DRIVINGLICENSE"));
@@ -1603,7 +1607,7 @@ public class Applicant extends Base
   
   public Boolean getHasValidProfessionalRegistration()
   {
-    if (regulatorId != null)
+    if (StringUtils.isNotEmpty(regulatorName))
     {
       // Must register with HPC, IE. NOT HCA...
       return getHasCurrentProfessionalRegistration();

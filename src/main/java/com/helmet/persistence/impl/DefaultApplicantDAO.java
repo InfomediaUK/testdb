@@ -677,7 +677,8 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       AOS2.NAME AS AREAOFSPECIALITYNAME2, ");
     selectApplicantsSQL.append("       GR.NAME AS GEOGRAPHICALREGIONNAME, ");
     selectApplicantsSQL.append("       DC.NAME AS DISCIPLINECATEGORYNAME, ");
-    selectApplicantsSQL.append("       DC.REGULATORID, ");
+    selectApplicantsSQL.append("       R.NAME AS REGULATORNAME, ");
+    selectApplicantsSQL.append("       R.CODE AS REGULATORCODE, ");
     selectApplicantsSQL.append("       ID.NAME AS IDDOCUMENTNAME, ");
     selectApplicantsSQL.append("       VT.NAME AS VISATYPENAME, ");
 		selectApplicantsSQL.append("       C.NAME AS COUNTRYNAME ");
@@ -687,6 +688,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("LEFT OUTER JOIN AREAOFSPECIALITY AOS2 ON (AOS2.AREAOFSPECIALITYID = A.AREAOFSPECIALITYID2) ");
     selectApplicantsSQL.append("LEFT OUTER JOIN GEOGRAPHICALREGION GR ON (GR.GEOGRAPHICALREGIONID = A.GEOGRAPHICALREGIONID) ");
     selectApplicantsSQL.append("LEFT OUTER JOIN DISCIPLINECATEGORY DC ON (DC.DISCIPLINECATEGORYID = A.DISCIPLINECATEGORYID) ");
+    selectApplicantsSQL.append("LEFT OUTER JOIN REGULATOR R ON (DC.REGULATORID = R.REGULATORID) ");
     // NEW -->     ************** Colums do NOT have ID suffix ********************
     selectApplicantsSQL.append("LEFT OUTER JOIN IDDOCUMENT ID ON (ID.IDDOCUMENTID = A.IDDOCUMENT) ");
     selectApplicantsSQL.append("LEFT OUTER JOIN VISATYPE VT ON (VT.VISATYPEID = A.VISATYPE) ");

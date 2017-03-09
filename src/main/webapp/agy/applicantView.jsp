@@ -190,8 +190,8 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    <th align="left" class="label"><bean:message key="label.disciplineCategory"/></th>
 					    <td align="left" colspan="3">
 					      <bean:write name="ApplicantFormAgy" property="applicant.disciplineCategoryName"/>&nbsp;
-<logic:present name="ApplicantFormAgy" property="applicant.regulatorId">
-                          (<bean:message key="label.mustRegisterWithRegulator"/>)
+<logic:present name="ApplicantFormAgy" property="applicant.regulatorName">
+                          (<bean:message key="label.mustRegisterWith"/>&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.regulatorName"/>)
 </logic:present>
 					    </td>
 					  </tr>
