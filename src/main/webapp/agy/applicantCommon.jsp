@@ -5,12 +5,20 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="/mmj" prefix="mmj" %>
 <%@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
 <bean:parameter id="applicantAction" name="applicantAction" value="new"/>
 <bean:define id="unavailableDates" name="ApplicantFormAgy" property="unavailableDates" type="java.lang.String" />
 <bean:define id="checklistFileUrl" name="ApplicantFormAgy" property="applicant.checklistFileUrl"/>
 <html:hidden property="unavailableDates" styleId="datesId" />
+<mmj:countryList var="countryList" />
+<mmj:geographicalRegionList var="geographicalRegionList" />
+<mmj:disciplineCategoryList var="disciplineCategoryList" />
+<mmj:areaOfSpecialityList var="areaOfSpecialityList" />
+<mmj:visaTypeList var="visaTypeList" />
+<mmj:idDocumentList var="idDocumentList" />
+<mmj:regulatorList var="regulatorList" />
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
   <tr>
     <td align="left" valign="top" width="75%">
@@ -53,7 +61,6 @@
 					    <td align="left"><html:text property="dateOfBirthStr" tabindex="5" />&nbsp;<bean:message key="text.dateFormat"/></td>
 					    <th align="left"><bean:message key="label.country"/></th>
 					    <td align="left">
-					      <mmj:countryList var="countryList" />
 					      <html:select property="applicant.address.countryId" tabindex="25" >
 					      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
 					        <html:options collection="countryList" labelProperty="name" property="countryId" />
@@ -94,7 +101,6 @@
 					  <tr>
 					    <th align="left" class="label"><bean:message key="label.preferredLocation"/></th>
 					    <td align="left" colspan="3">
-					      <mmj:geographicalRegionList var="geographicalRegionList" />
 					      <html:select property="applicant.geographicalRegionId" tabindex="13">
 						      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
 					        <html:options collection="geographicalRegionList" labelProperty="name" property="geographicalRegionId" />
@@ -104,7 +110,6 @@
 					  <tr>
 					    <th align="left" class="label"><bean:message key="label.disciplineCategory"/></th>
 					    <td align="left" colspan="3">
-					      <mmj:disciplineCategoryList var="disciplineCategoryList" />
 					      <html:select property="applicant.disciplineCategoryId" tabindex="14">
 						      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
 					        <html:options collection="disciplineCategoryList" labelProperty="nameWithCodeAndRegulator" property="disciplineCategoryId" />
@@ -124,7 +129,6 @@
 					  <tr>
 					    <th align="left" class="label"><bean:message key="label.areaOfSpeciality"/></th>
 					    <td align="left">
-					      <mmj:areaOfSpecialityList var="areaOfSpecialityList" />
 					      <html:select property="applicant.areaOfSpecialityId" tabindex="12">
 						      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
 					        <html:options collection="areaOfSpecialityList" labelProperty="name" property="areaOfSpecialityId" />
@@ -136,7 +140,6 @@
 					  <tr>
 					    <th align="left" class="label"><bean:message key="label.areaOfSpeciality"/>&nbsp;2</th>
 					    <td align="left">
-					      <mmj:areaOfSpecialityList var="areaOfSpecialityList" />
 					      <html:select property="applicant.areaOfSpecialityId2" tabindex="13">
 						      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
 					        <html:options collection="areaOfSpecialityList" labelProperty="name" property="areaOfSpecialityId" />
@@ -311,7 +314,6 @@
 					  <tr>
 					    <th align="left" class="label"><bean:message key="label.visaType"/></th>
 					    <td align="left">
-                <mmj:visaTypeList var="visaTypeList" />
                 <html:select property="applicant.visaType" tabindex="44">
                   <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
                   <html:options collection="visaTypeList" labelProperty="name" property="visaTypeId" />
@@ -363,7 +365,6 @@
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.idDocument"/></th>
 					    <td align="left">
-                <mmj:idDocumentList var="idDocumentList" />
                 <html:select property="applicant.idDocument" tabindex="51">
                   <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
                   <html:options collection="idDocumentList" labelProperty="name" property="idDocumentId" />
@@ -521,7 +522,6 @@
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
               <td align="left">
-		        <mmj:regulatorList var="regulatorList" />
 	            <html:select name="ApplicantFormAgy" property="applicant.ahpRegistrationType" tabindex="66">
 			      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
 		          <html:options collection="regulatorList" labelProperty="nameWithCode" property="regulatorId" />

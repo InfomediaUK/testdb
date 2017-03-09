@@ -38,7 +38,5 @@ public final class AgyConstants {
   public static final Integer APPLICANT_REFERENCE_RECEIVED    = 3;
   public static final Integer APPLICANT_REFERENCE_TEMPORARY   = 4;
   
-  public static final Integer AHP_REGISTRATION_TYPE_HCPC = 0;
-  public static final Integer AHP_REGISTRATION_TYPE_NMC  = 1;
-
+  public static final Integer ID_DOCUMENT_BRITISH_PASSPORT = 1;
 }

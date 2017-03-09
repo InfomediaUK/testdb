@@ -1655,8 +1655,12 @@ public class Applicant extends Base
     }
     if (!validIdDocument)
     {
-      // Has NO valid ID Document. A Birth Certificate will do (apparently)...
-      validIdDocument = getHasBirthCertificate();
+      // Has NO valid ID Document.
+      if (idDocument.equals(AgyConstants.ID_DOCUMENT_BRITISH_PASSPORT))
+      {
+        // A British Birth Certificate will do (apparently)...
+        validIdDocument = getHasBirthCertificate();
+      }
     }
     return validIdDocument;
   }
@@ -1822,7 +1826,7 @@ public class Applicant extends Base
   public Boolean getHasBirthCertificate()
   {
     // True: Must have birthCertificate flag set AND birthCertificateFilename entered.
-    return birthCertificate;
+    return birthCertificate && StringUtils.isNotEmpty(birthCertificateFilename);
   }
   
   public Boolean getHasProofOfAddress1()
