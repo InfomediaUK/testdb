@@ -35,6 +35,17 @@
     </td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.requiresVisa"/></td>
+    <td align="left">
+<logic:equal name="IdDocumentFormAdmin" property="idDocument.requiresVisa" value="true">
+      <bean:message key="label.yes"/>
+</logic:equal>
+<logic:notEqual name="IdDocumentFormAdmin" property="idDocument.requiresVisa" value="true">
+      <bean:message key="label.no"/>
+</logic:notEqual>
+    </td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.displayOrder"/></td>
     <td align="left"><bean:write name="IdDocumentFormAdmin" property="idDocument.displayOrder"/></td>
   </tr>

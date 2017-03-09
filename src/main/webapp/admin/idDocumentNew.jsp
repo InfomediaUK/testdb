@@ -34,6 +34,19 @@
     </td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.requiresVisa"/></td>
+    <td align="left">
+      <html:radio name="IdDocumentFormAdmin" property="idDocument.requiresVisa" value="true" styleId="requiresVisa" />
+      <label for="requiresVisa">
+        <bean:message key="label.yes" />
+      </label>
+      <html:radio name="IdDocumentFormAdmin" property="idDocument.requiresVisa" value="false" styleId="requiresVisa" />
+      <label for="requiresVisa">
+        <bean:message key="label.no" />
+      </label>
+    </td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.displayOrder"/></td>
      <td align="left"><html:text name="IdDocumentFormAdmin" property="idDocument.displayOrder" size="10" /></td>
    </tr>

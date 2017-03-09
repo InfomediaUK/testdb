@@ -24,6 +24,7 @@
     <th align="left"><bean:message key="label.name" /></th>
     <th align="left"><bean:message key="label.code" /></th>
     <th align="left"><bean:message key="label.idDocumentType" /></th>
+    <th align="left"><bean:message key="label.requiresVisa" /></th>
     <th align="left"><bean:message key="label.active" /></th>
     <th align="left"><bean:message key="label.order" /></th>
   </tr>
@@ -51,6 +52,14 @@
 </logic:equal>
 <logic:equal name="idDocument" property="idDocumentType" value="1">
        <bean:message key="label.idCard"/>
+</logic:equal>
+    </td>
+    <td align="left">
+<logic:equal name="idDocument" property="requiresVisa" value="true">
+       <bean:message key="label.yes"/>
+</logic:equal>
+<logic:equal name="idDocument" property="requiresVisa" value="false">
+       <bean:message key="label.no"/>
 </logic:equal>
     </td>
     <td align="left">
