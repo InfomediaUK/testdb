@@ -521,11 +521,11 @@
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
               <td align="left">
-                <html:select name="ApplicantFormAgy" property="applicant.ahpRegistrationType" tabindex="66">
-                  <html:option value="">-----</html:option>
-                  <html:option value="1"><bean:message key="label.hcpc"/></html:option>
-                  <html:option value="2"><bean:message key="label.nmc"/></html:option>
-                </html:select>
+		        <mmj:regulatorList var="regulatorList" />
+	            <html:select name="ApplicantFormAgy" property="applicant.ahpRegistrationType" tabindex="66">
+			      <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
+		          <html:options collection="regulatorList" labelProperty="nameWithCode" property="regulatorId" />
+		        </html:select>
               </td>
 			  </tr>
 			  <tr>
