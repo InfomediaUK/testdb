@@ -34,12 +34,10 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     Applicant applicant = (Applicant) dynaForm.get("applicant");
+    prepareApplicant(applicant, agyService);
     validateApplicant(applicant, dynaForm, errors, messageResources);
     if (errors.isEmpty()) 
     {
-      DisciplineCategoryUser disciplineCategory = agyService.getDisciplineCategoryUser(applicant.getDisciplineCategoryId());
-      applicant.setRegulatorName(disciplineCategory.getRegulatorName());
-      applicant.setRegulatorCode(disciplineCategory.getRegulatorCode());
       loadApplicant(applicant, dynaForm, errors, messageResources);
     }
     if (!errors.isEmpty())
@@ -50,22 +48,22 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     applicant.setAgencyId(getConsultantLoggedIn().getAgencyId());
     // Get the set of new Unavailable dates from the form.
     String unavailableDates = (String)dynaForm.get("unavailableDates");
-    FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");
-    String contentType = photoFile.getContentType();
-    String photoFilename = photoFile.getFileName();
-    int fileSize = photoFile.getFileSize();
-    if (StringUtils.isNotEmpty(photoFilename))
-    {
-      applicant.setPhotoFilename(photoFilename);
-    }
-    // CVFILE -->
-    FormFile cvFile = (FormFile) dynaForm.get("cvFormFile");
-    String cvFilename = cvFile.getFileName();
-    if (StringUtils.isNotEmpty(cvFilename))
-    {
-      applicant.setCvFilename(cvFilename);
-    }
-    // <-- CVFILE
+//    FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");
+//    String contentType = photoFile.getContentType();
+//    String photoFilename = photoFile.getFileName();
+//    int fileSize = photoFile.getFileSize();
+//    if (StringUtils.isNotEmpty(photoFilename))
+//    {
+//      applicant.setPhotoFilename(photoFilename);
+//    }
+//    // CVFILE -->
+//    FormFile cvFile = (FormFile) dynaForm.get("cvFormFile");
+//    String cvFilename = cvFile.getFileName();
+//    if (StringUtils.isNotEmpty(cvFilename))
+//    {
+//      applicant.setCvFilename(cvFilename);
+//    }
+//    // <-- CVFILE
     // Remove all \r characters but leave the \n characters.
     String notes = ((String)dynaForm.get("notes")).replaceAll("\r", "");
     StringBuffer notesStringBuffer = new StringBuffer(notes);

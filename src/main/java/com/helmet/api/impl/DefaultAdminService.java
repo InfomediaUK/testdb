@@ -786,12 +786,6 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     jerseyIdDocument.setDisplayOrder(idDocument.getDisplayOrder());
     return jerseyIdDocument;
   }
-  public IdDocument getIdDocument(Integer idDocumentId) 
-  {
-    IdDocument idDocument = null;
-    idDocument = getIdDocumentDAO().getIdDocument(idDocumentId);
-    return idDocument;
-  }
   public IdDocument getIdDocumentForCode(String code) 
   {
     

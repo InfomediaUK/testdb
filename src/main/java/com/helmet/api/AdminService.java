@@ -115,7 +115,6 @@ public interface AdminService extends CommonService {
 
   public List<com.helmet.xml.jaxb.model.IdDocument> getJerseyIdDocuments(boolean showOnlyActive); 
   public com.helmet.xml.jaxb.model.IdDocument getJerseyIdDocument(Integer idDocumentId);
-  public IdDocument getIdDocument(Integer idDocumentId);
   public IdDocument getIdDocumentForCode(String code);
   public IdDocument getIdDocumentForName(String name);
   public int insertIdDocument(IdDocument idDocument, Integer auditorId);

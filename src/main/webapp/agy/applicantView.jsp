@@ -544,17 +544,6 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%" align="left"class="label"><bean:message key="label.requiresVisa"/></th>
-					    <td align="left">
-					      <logic:equal name="ApplicantFormAgy" property="applicant.requiresVisa" value="true">
-							    <bean:message key="label.yes"/>
-					      </logic:equal>
-					      <logic:notEqual name="ApplicantFormAgy" property="applicant.requiresVisa" value="true">
-							    <bean:message key="label.no"/>
-					      </logic:notEqual>
-					    </td>
-					  </tr>
-					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.visaType"/></th>
 					    <td align="left"><bean:write name="ApplicantFormAgy" property="applicant.visaTypeName"/></td>
 					  </tr>
@@ -695,7 +684,12 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					  </tr>
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.idDocumentType"/></th>
-					    <td align="left"><bean:write name="ApplicantFormAgy" property="applicant.idDocumentName"/></td>
+					    <td align="left">
+					      <bean:write name="ApplicantFormAgy" property="applicant.idDocumentName"/>&nbsp;
+					      <logic:equal name="ApplicantFormAgy" property="applicant.requiresVisa" value="true">
+							**** Requires Visa ****
+					      </logic:equal>
+					    </td>
 					  </tr>
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.niNumberStatus"/></th>

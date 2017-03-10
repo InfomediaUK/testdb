@@ -312,6 +312,7 @@ public interface CommonService {
   public List<EmailAction> getEmailActions(boolean showOnlyActive);
   public List<GeographicalRegion> getGeographicalRegions(boolean showOnlyActive);
   public List<IdDocument> getIdDocuments(boolean showOnlyActive);
+  public IdDocument getIdDocument(Integer idDocumentId);
   public List<VisaType> getVisaTypes(boolean showOnlyActive);
   public List<Regulator> getRegulators(boolean showOnlyActive);
 

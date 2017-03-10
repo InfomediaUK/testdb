@@ -3122,6 +3122,13 @@ public abstract class DefaultCommonService implements CommonService {
     return idDocuments;
   }
 
+  public IdDocument getIdDocument(Integer idDocumentId) 
+  {
+    IdDocument idDocument = null;
+    idDocument = getIdDocumentDAO().getIdDocument(idDocumentId);
+    return idDocument;
+  }
+
   public List<VisaType> getVisaTypes(boolean showOnlyActive) 
   {
     List<VisaType> visaTypes = null;

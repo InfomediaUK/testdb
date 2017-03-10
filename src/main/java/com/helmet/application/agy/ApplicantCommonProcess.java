@@ -25,6 +25,8 @@ import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.DisciplineCategoryUser;
+import com.helmet.bean.IdDocument;
 import com.helmet.bean.Unavailable;
 
 public abstract class ApplicantCommonProcess extends AgyAction
@@ -46,6 +48,21 @@ public abstract class ApplicantCommonProcess extends AgyAction
       fileExtension = filename.substring(indexOfLastDot);
     }
     return fileExtension;
+  }
+  
+  protected void prepareApplicant(Applicant applicant, AgyService agyService)
+  {
+    if (applicant.getIdDocument() != null)
+    {
+      IdDocument idDocument = agyService.getIdDocument(applicant.getIdDocument());
+      applicant.setRequiresVisa(idDocument.getRequiresVisa());
+    }
+    if (applicant.getDisciplineCategoryId() != null)
+    {
+      DisciplineCategoryUser disciplineCategory = agyService.getDisciplineCategoryUser(applicant.getDisciplineCategoryId());
+      applicant.setRegulatorName(disciplineCategory.getRegulatorName());
+      applicant.setRegulatorCode(disciplineCategory.getRegulatorCode());
+    }
   }
   
   protected void validateApplicant(Applicant applicant, 
@@ -184,7 +201,7 @@ public abstract class ApplicantCommonProcess extends AgyAction
     }
     if (!errors.isEmpty())
     {
-      // Validation has failed! Warn user if any files are being uploaded...
+      // Validation has failed. Warn user if any files are being uploaded...
       if (uploadFileNames.length() > 0)
       {
         // Upload files are lost during request/response and have to be chosen from the file system again. Warn user to do this...
@@ -291,6 +308,12 @@ public abstract class ApplicantCommonProcess extends AgyAction
     if (StringUtils.isNotEmpty(uploadFilename))
     {
       applicant.setReference1Filename("reference1" + getFileExtension(uploadFilename));
+    }
+    uploadFormFile = (FormFile)dynaForm.get("photoFormFile");
+    uploadFilename = uploadFormFile.getFileName();
+    if (StringUtils.isNotEmpty(uploadFilename))
+    {
+      applicant.setPhotoFilename("photo" + getFileExtension(uploadFilename));
     }
     uploadFormFile = (FormFile)dynaForm.get("cvFormFile");
     uploadFilename = uploadFormFile.getFileName();

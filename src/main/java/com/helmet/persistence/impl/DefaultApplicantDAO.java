@@ -190,7 +190,6 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     insertApplicantSQL.append("  DRIVINGLICENSEEXPIRYDATE, ");
     insertApplicantSQL.append("  FITTOWORKSTATUS, ");
     insertApplicantSQL.append("  AREAOFSPECIALITYID2, ");
-    insertApplicantSQL.append("  REQUIRESVISA, ");
     insertApplicantSQL.append("  CURRENTLYWORKING, ");
     insertApplicantSQL.append("  VATCHARGEABLE, ");
     insertApplicantSQL.append("  BANKNAME, ");
@@ -231,7 +230,6 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
     insertApplicantSQL.append("  ^, ");
-		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
 		insertApplicantSQL.append("  ^, ");
@@ -426,7 +424,6 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     updateApplicantSQL.append("     DRIVINGLICENSEEXPIRYDATE = ^, ");
     updateApplicantSQL.append("     FITTOWORKSTATUS = ^, ");
     updateApplicantSQL.append("     AREAOFSPECIALITYID2 = ^, ");
-    updateApplicantSQL.append("     REQUIRESVISA = ^, ");
     updateApplicantSQL.append("     RECENTLYCOMPLIANT = ^, ");
     updateApplicantSQL.append("     CURRENTLYWORKING = ^, ");
     updateApplicantSQL.append("     VATCHARGEABLE = ^, ");
@@ -640,7 +637,6 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       A.DRIVINGLICENSEEXPIRYDATE, ");
     selectApplicantsSQL.append("       A.FITTOWORKSTATUS, ");
     selectApplicantsSQL.append("       A.HASBEENUNARCHIVED, ");
-    selectApplicantsSQL.append("       A.REQUIRESVISA, ");
     selectApplicantsSQL.append("       A.RECENTLYCOMPLIANT, ");
     selectApplicantsSQL.append("       A.CURRENTLYWORKING, ");
     selectApplicantsSQL.append("       A.VATCHARGEABLE, ");
@@ -680,6 +676,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       R.NAME AS REGULATORNAME, ");
     selectApplicantsSQL.append("       R.CODE AS REGULATORCODE, ");
     selectApplicantsSQL.append("       ID.NAME AS IDDOCUMENTNAME, ");
+    selectApplicantsSQL.append("       ID.REQUIRESVISA, ");
     selectApplicantsSQL.append("       VT.NAME AS VISATYPENAME, ");
 		selectApplicantsSQL.append("       C.NAME AS COUNTRYNAME ");
 		selectApplicantsSQL.append("FROM APPLICANT A ");
@@ -1558,7 +1555,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getDrivingLicenseExpiryDate());
     Utilities.replace(sql, applicant.getFitToWorkStatus());
     Utilities.replace(sql, applicant.getAreaOfSpecialityId2());
-    Utilities.replace(sql, applicant.getRequiresVisa());
+//    Utilities.replace(sql, applicant.getRequiresVisa());
     Utilities.replace(sql, applicant.getCurrentlyWorking());
     Utilities.replace(sql, applicant.getVatChargeable());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankName());
@@ -1679,7 +1676,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getDrivingLicenseExpiryDate());
     Utilities.replace(sql, applicant.getFitToWorkStatus());
     Utilities.replace(sql, applicant.getAreaOfSpecialityId2());
-    Utilities.replace(sql, applicant.getRequiresVisa());
+//    Utilities.replace(sql, applicant.getRequiresVisa());
     Utilities.replace(sql, applicant.getRecentlyCompliant());
     Utilities.replace(sql, applicant.getCurrentlyWorking());
     Utilities.replace(sql, applicant.getVatChargeable());

@@ -306,18 +306,12 @@
 					    <td align="left"><html:file property="photoFormFile" size="30" tabindex="44" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.photoFilename"/></td>
 					  </tr>
 					  <tr>
-					    <th align="left" class="label"><bean:message key="label.requiresVisa"/></th>
-					    <td align="left">
-					      <html:checkbox property="applicant.requiresVisa" tabindex="44" />
-					    </td>
-					  </tr>
-					  <tr>
 					    <th align="left" class="label"><bean:message key="label.visaType"/></th>
 					    <td align="left">
-                <html:select property="applicant.visaType" tabindex="44">
-                  <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
-                  <html:options collection="visaTypeList" labelProperty="name" property="visaTypeId" />
-                </html:select>
+			              <html:select property="applicant.visaType" tabindex="44">
+			                <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
+			                <html:options collection="visaTypeList" labelProperty="name" property="visaTypeId" />
+			              </html:select>
 					    </td>
 					  </tr>
 					  <tr>
@@ -367,7 +361,7 @@
 					    <td align="left">
                 <html:select property="applicant.idDocument" tabindex="51">
                   <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
-                  <html:options collection="idDocumentList" labelProperty="name" property="idDocumentId" />
+                  <html:options collection="idDocumentList" labelProperty="nameWithCodeAndRequiresVisa" property="idDocumentId" />
                 </html:select>
 					    </td>
 					  </tr>

@@ -1,9 +1,5 @@
 package com.helmet.application.agy;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,7 +21,6 @@ import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.bean.Applicant;
-import com.helmet.bean.DisciplineCategoryUser;
 
 public class ApplicantEditProcess extends ApplicantCommonProcess
 {
@@ -39,13 +34,11 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-    Applicant applicant = (Applicant)dynaForm.get("applicant");    
+    Applicant applicant = (Applicant)dynaForm.get("applicant"); 
+    prepareApplicant(applicant, agyService);
     validateApplicant(applicant, dynaForm, errors, messageResources);
     if (errors.isEmpty()) 
     {
-      DisciplineCategoryUser disciplineCategory = agyService.getDisciplineCategoryUser(applicant.getDisciplineCategoryId());
-      applicant.setRegulatorName(disciplineCategory.getRegulatorName());
-      applicant.setRegulatorCode(disciplineCategory.getRegulatorCode());
       loadApplicant(applicant, dynaForm, errors, messageResources);
     }
     if (!errors.isEmpty()) 
@@ -55,22 +48,22 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     }
     // Get the set of new Unavailable dates from the form.
     String unavailableDates = (String)dynaForm.get("unavailableDates");
-    FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");
-    String contentType = photoFile.getContentType();
-    String photoFilename = photoFile.getFileName();
-    int fileSize = photoFile.getFileSize();
-    if (StringUtils.isNotEmpty(photoFilename))
-    {
-      applicant.setPhotoFilename(photoFilename);
-    }
-    // CVFILE -->
-    FormFile cvFile = (FormFile) dynaForm.get("cvFormFile");
-    String cvFilename = cvFile.getFileName();
-    if (StringUtils.isNotEmpty(cvFilename))
-    {
-      applicant.setCvFilename(cvFilename);
-    }
-    // <-- CVFILE
+//    FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");
+//    String contentType = photoFile.getContentType();
+//    String photoFilename = photoFile.getFileName();
+//    int fileSize = photoFile.getFileSize();
+//    if (StringUtils.isNotEmpty(photoFilename))
+//    {
+//      applicant.setPhotoFilename(photoFilename);
+//    }
+//    // CVFILE -->
+//    FormFile cvFile = (FormFile) dynaForm.get("cvFormFile");
+//    String cvFilename = cvFile.getFileName();
+//    if (StringUtils.isNotEmpty(cvFilename))
+//    {
+//      applicant.setCvFilename(cvFilename);
+//    }
+//    // <-- CVFILE
     // Test for Compliancy just before SAVE...
     ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
     String existingNotes = getApplicantNotes(applicant);
