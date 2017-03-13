@@ -65,7 +65,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 
   private static StringBuffer selectActiveApplicantsForAgencyFitToWorkAboutToExpireSQL;
 
-  private static StringBuffer selectActiveApplicantsForAgencyHpcAboutToExpireSQL;
+  private static StringBuffer selectActiveApplicantsForAgencyRegistrationAboutToExpireSQL;
 
   private static StringBuffer selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL;
 
@@ -175,9 +175,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		insertApplicantSQL.append("  CRBFILENAME, ");
 		insertApplicantSQL.append("  CRBEXPIRYDATE, ");
 		insertApplicantSQL.append("  CRBISSUEDATE, ");
-		insertApplicantSQL.append("  HPCFILENAME, ");
-		insertApplicantSQL.append("  HPCEXPIRYDATE, ");
-		insertApplicantSQL.append("  HPCNUMBER, ");
+		insertApplicantSQL.append("  REGISTRATIONFILENAME, ");
+		insertApplicantSQL.append("  REGISTRATIONEXPIRYDATE, ");
+		insertApplicantSQL.append("  REGISTRATIONNUMBER, ");
 		insertApplicantSQL.append("  INTERVIEWDATE, ");
     insertApplicantSQL.append("  ASSESSMENT12WEEK, ");
     insertApplicantSQL.append("  ASSESSMENT12WEEKDATE, ");
@@ -208,8 +208,8 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     insertApplicantSQL.append("  POVATRAINING, ");
     insertApplicantSQL.append("  NEONATALLIFESUPPORTTRAINING, ");
     insertApplicantSQL.append("  AHPREGISTRATIONTYPE, ");
-    insertApplicantSQL.append("  HPCLASTCHECKEDDATE, ");
-    insertApplicantSQL.append("  HPCALERTNOTIFICATION, ");
+    insertApplicantSQL.append("  REGISTRATIONLASTCHECKEDDATE, ");
+    insertApplicantSQL.append("  REGISTRATIONALERTNOTIFICATION, ");
     insertApplicantSQL.append("  PAEDIATRICLIFESUPPORTFILENAME, ");
     insertApplicantSQL.append("  PAEDIATRICLIFESUPPORTISSUEDDATE, ");
     insertApplicantSQL.append("  VISATYPE, ");
@@ -409,9 +409,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		updateApplicantSQL.append("     CRBFILENAME = ^, ");
 		updateApplicantSQL.append("     CRBEXPIRYDATE = ^, ");
 		updateApplicantSQL.append("     CRBISSUEDATE = ^, ");
-		updateApplicantSQL.append("     HPCFILENAME = ^, ");
-		updateApplicantSQL.append("     HPCEXPIRYDATE = ^, ");
-		updateApplicantSQL.append("     HPCNUMBER = ^, ");
+		updateApplicantSQL.append("     REGISTRATIONFILENAME = ^, ");
+		updateApplicantSQL.append("     REGISTRATIONEXPIRYDATE = ^, ");
+		updateApplicantSQL.append("     REGISTRATIONNUMBER = ^, ");
 		updateApplicantSQL.append("     INTERVIEWDATE = ^, ");
     updateApplicantSQL.append("     ASSESSMENT12WEEK = ^, ");
     updateApplicantSQL.append("     ASSESSMENT12WEEKDATE = ^, ");
@@ -443,8 +443,8 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     updateApplicantSQL.append("     POVATRAINING = ^, ");
     updateApplicantSQL.append("     NEONATALLIFESUPPORTTRAINING = ^, ");
     updateApplicantSQL.append("     AHPREGISTRATIONTYPE = ^, ");
-    updateApplicantSQL.append("     HPCLASTCHECKEDDATE = ^, ");
-    updateApplicantSQL.append("     HPCALERTNOTIFICATION = ^, ");
+    updateApplicantSQL.append("     REGISTRATIONLASTCHECKEDDATE = ^, ");
+    updateApplicantSQL.append("     REGISTRATIONALERTNOTIFICATION = ^, ");
     updateApplicantSQL.append("     PAEDIATRICLIFESUPPORTFILENAME = ^, ");
     updateApplicantSQL.append("     PAEDIATRICLIFESUPPORTISSUEDDATE = ^, ");
     updateApplicantSQL.append("     VISATYPE = ^, ");
@@ -621,9 +621,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		selectApplicantsSQL.append("       A.CRBFILENAME, ");
 		selectApplicantsSQL.append("       A.CRBEXPIRYDATE, ");
 		selectApplicantsSQL.append("       A.CRBISSUEDATE, ");
-		selectApplicantsSQL.append("       A.HPCFILENAME, ");
-		selectApplicantsSQL.append("       A.HPCEXPIRYDATE, ");
-		selectApplicantsSQL.append("       A.HPCNUMBER, ");
+		selectApplicantsSQL.append("       A.REGISTRATIONFILENAME, ");
+		selectApplicantsSQL.append("       A.REGISTRATIONEXPIRYDATE, ");
+		selectApplicantsSQL.append("       A.REGISTRATIONNUMBER, ");
 		selectApplicantsSQL.append("       A.INTERVIEWDATE, ");
     selectApplicantsSQL.append("       A.ASSESSMENT12WEEK, ");
     selectApplicantsSQL.append("       A.ASSESSMENT12WEEKDATE, ");
@@ -656,8 +656,8 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       A.POVATRAINING, ");
     selectApplicantsSQL.append("       A.NEONATALLIFESUPPORTTRAINING, ");
     selectApplicantsSQL.append("       A.AHPREGISTRATIONTYPE, ");
-    selectApplicantsSQL.append("       A.HPCLASTCHECKEDDATE, ");
-    selectApplicantsSQL.append("       A.HPCALERTNOTIFICATION, ");
+    selectApplicantsSQL.append("       A.REGISTRATIONLASTCHECKEDDATE, ");
+    selectApplicantsSQL.append("       A.REGISTRATIONALERTNOTIFICATION, ");
     selectApplicantsSQL.append("       A.PAEDIATRICLIFESUPPORTFILENAME, ");
     selectApplicantsSQL.append("       A.PAEDIATRICLIFESUPPORTISSUEDDATE, ");
     selectApplicantsSQL.append("       A.VISATYPE, ");
@@ -755,11 +755,11 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectActiveApplicantsForAgencyFitToWorkAboutToExpireSQL.append("AND A.FITTOWORKEXPIRYDATE IS NOT NULL ");
     selectActiveApplicantsForAgencyFitToWorkAboutToExpireSQL.append("AND A.FITTOWORKEXPIRYDATE < ^ ");
     selectActiveApplicantsForAgencyFitToWorkAboutToExpireSQL.append("ORDER BY A.FITTOWORKEXPIRYDATE DESC ");
-    // Get select Active Applicants for Agency with Hpc about to expire.
-    selectActiveApplicantsForAgencyHpcAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
-    selectActiveApplicantsForAgencyHpcAboutToExpireSQL.append("AND A.HPCEXPIRYDATE IS NOT NULL ");
-    selectActiveApplicantsForAgencyHpcAboutToExpireSQL.append("AND A.HPCEXPIRYDATE < ^ ");
-    selectActiveApplicantsForAgencyHpcAboutToExpireSQL.append("ORDER BY A.HPCEXPIRYDATE DESC ");
+    // Get select Active Applicants for Agency with Registration about to expire.
+    selectActiveApplicantsForAgencyRegistrationAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
+    selectActiveApplicantsForAgencyRegistrationAboutToExpireSQL.append("AND A.REGISTRATIONEXPIRYDATE IS NOT NULL ");
+    selectActiveApplicantsForAgencyRegistrationAboutToExpireSQL.append("AND A.REGISTRATIONEXPIRYDATE < ^ ");
+    selectActiveApplicantsForAgencyRegistrationAboutToExpireSQL.append("ORDER BY A.REGISTRATIONEXPIRYDATE DESC ");
     // Get select Active Applicants for Agency with IdDocument about to expire.
     selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
     selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.append("AND A.IDDOCUMENTEXPIRYDATE IS NOT NULL ");
@@ -1017,12 +1017,12 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
           applicantSearchParameters.getHasCRBDocument(), 
           "A.CRBFILENAME");
     }
-    if (applicantSearchParameters.getHasHPCDocument() != null)
+    if (applicantSearchParameters.getHasRegistrationDocument() != null)
     {
-      nullableColumn(applicantSearchParameters.getHasHPCDocumentOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
-          applicantSearchParameters.getHasHPCDocumentOperator(), 
-          applicantSearchParameters.getHasHPCDocument(), 
-          "A.HPCFILENAME");
+      nullableColumn(applicantSearchParameters.getHasRegistrationDocumentOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
+          applicantSearchParameters.getHasRegistrationDocumentOperator(), 
+          applicantSearchParameters.getHasRegistrationDocument(), 
+          "A.REGISTRATIONFILENAME");
     }
     if (applicantSearchParameters.getHasTrainingCertificate() != null)
     {
@@ -1169,12 +1169,12 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
           applicantSearchParameters.getCrbExpiryDate(), 
           "A.CRBEXPIRYDATE");
     }
-    if (applicantSearchParameters.getHpcExpiryDate() != null)
+    if (applicantSearchParameters.getRegistrationExpiryDate() != null)
     {
-      dateColumn(applicantSearchParameters.getHpcExpiryDateOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
-          applicantSearchParameters.getHpcExpiryDateOperator(), 
-          applicantSearchParameters.getHpcExpiryDate(), 
-          "A.HPCEXPIRYDATE");
+      dateColumn(applicantSearchParameters.getRegistrationExpiryDateOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
+          applicantSearchParameters.getRegistrationExpiryDateOperator(), 
+          applicantSearchParameters.getRegistrationExpiryDate(), 
+          "A.REGISTRATIONEXPIRYDATE");
     }
     if (applicantSearchParameters.getTrainingExpiryDate() != null)
     {
@@ -1370,9 +1370,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Applicant.class.getName());
   }
 
-  public List<Applicant> getApplicantsForAgencyHpcAboutToExpire(Integer agencyId, Date dateToCheck)
+  public List<Applicant> getApplicantsForAgencyRegistrationAboutToExpire(Integer agencyId, Date dateToCheck)
   {
-    StringBuffer sql = new StringBuffer(selectActiveApplicantsForAgencyHpcAboutToExpireSQL.toString());
+    StringBuffer sql = new StringBuffer(selectActiveApplicantsForAgencyRegistrationAboutToExpireSQL.toString());
     // Replace the parameters with supplied values.
     Utilities.replace(sql, agencyId);
     Utilities.replaceAndQuote(sql, dateToCheck);
@@ -1562,9 +1562,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getCrbFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getCrbExpiryDate());
     Utilities.replaceAndQuoteNullable(sql, applicant.getCrbIssueDate());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getHpcFilename());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getHpcExpiryDate());
-    Utilities.replaceAndQuote(sql, applicant.getHpcNumber());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getRegistrationFilename());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getRegistrationExpiryDate());
+    Utilities.replaceAndQuote(sql, applicant.getRegistrationNumber());
     Utilities.replaceAndQuoteNullable(sql, applicant.getInterviewDate());
     Utilities.replace(sql, applicant.getAssessment12Week());
     Utilities.replaceAndQuoteNullable(sql, applicant.getAssessment12WeekDate());
@@ -1595,8 +1595,8 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getPovaTraining());
     Utilities.replace(sql, applicant.getNeonatalLifeSupportTraining());
     Utilities.replaceZeroWithNull(sql, applicant.getAhpRegistrationType());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getHpcLastCheckedDate());
-    Utilities.replace(sql, applicant.getHpcAlertNotification());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getRegistrationLastCheckedDate());
+    Utilities.replace(sql, applicant.getRegistrationAlertNotification());
     Utilities.replaceAndQuoteNullable(sql, applicant.getPaediatricLifeSupportFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getPaediatricLifeSupportIssuedDate());
     Utilities.replace(sql, applicant.getVisaType());
@@ -1682,9 +1682,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getCrbFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getCrbExpiryDate());
     Utilities.replaceAndQuoteNullable(sql, applicant.getCrbIssueDate());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getHpcFilename());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getHpcExpiryDate());
-    Utilities.replaceAndQuote(sql, applicant.getHpcNumber());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getRegistrationFilename());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getRegistrationExpiryDate());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getRegistrationNumber());
     Utilities.replaceAndQuoteNullable(sql, applicant.getInterviewDate());
     Utilities.replace(sql, applicant.getAssessment12Week());
     Utilities.replaceAndQuoteNullable(sql, applicant.getAssessment12WeekDate());
@@ -1716,8 +1716,8 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replace(sql, applicant.getPovaTraining());
     Utilities.replace(sql, applicant.getNeonatalLifeSupportTraining());
     Utilities.replaceZeroWithNull(sql, applicant.getAhpRegistrationType());
-    Utilities.replaceAndQuoteNullable(sql, applicant.getHpcLastCheckedDate());
-    Utilities.replace(sql, applicant.getHpcAlertNotification());
+    Utilities.replaceAndQuoteNullable(sql, applicant.getRegistrationLastCheckedDate());
+    Utilities.replace(sql, applicant.getRegistrationAlertNotification());
     Utilities.replaceAndQuoteNullable(sql, applicant.getPaediatricLifeSupportFilename());
     Utilities.replaceAndQuoteNullable(sql, applicant.getPaediatricLifeSupportIssuedDate());
     Utilities.replace(sql, applicant.getVisaType());

@@ -139,9 +139,9 @@ public class ProspectResource
     applicant.setReference("Prospect from PJ Locums.");
     // Can NOT be null. >>>>>
     applicant.setNiNumber("");
-    applicant.setHpcNumber("");
+    applicant.setRegistrationNumber("");
     applicant.setAhpRegistrationType(0);
-    applicant.setHpcAlertNotification(0);
+    applicant.setRegistrationAlertNotification(0);
     // <<<<< Can NOT be null.
     applicant.setDisciplineCategoryId(prospect.getDisciplineId());
     applicant.setIdDocumentId(prospect.getIdDocumentId());

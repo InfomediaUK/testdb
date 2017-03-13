@@ -77,7 +77,7 @@ function checkedAll(frmname)
     </logic:equal>
     </td>
     <td>
-      <bean:write name="applicant" property="hpcNumber" />
+      <bean:write name="applicant" property="registrationNumber" />
     </td>
     <td>
       <bean:write name="applicant" property="niNumber" />

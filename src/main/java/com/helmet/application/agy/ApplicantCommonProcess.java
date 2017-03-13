@@ -194,10 +194,10 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       appendFileName(uploadFileNames, messageResources.getMessage("label.paediatricLifeSupport"));
     }
-    uploadFormFile = (FormFile)dynaForm.get("hpcFormFile");
+    uploadFormFile = (FormFile)dynaForm.get("registrationFormFile");
     if (StringUtils.isNotEmpty(uploadFormFile.getFileName()))
     {
-      appendFileName(uploadFileNames, messageResources.getMessage("label.hpc"));
+      appendFileName(uploadFileNames, messageResources.getMessage("label.registration"));
     }
     if (!errors.isEmpty())
     {
@@ -249,10 +249,10 @@ public abstract class ApplicantCommonProcess extends AgyAction
     applicant.setRegisteredWithDbsDate(convertDate(dateStr, sdf, errors, messageResources, "label.registeredWithDbsDateStr"));
     dateStr = (String) dynaForm.get("dbsRenewalDateStr");
     applicant.setDbsRenewalDate(convertDate(dateStr, sdf, errors, messageResources, "label.dbsRenewalDate"));    
-    dateStr = (String) dynaForm.get("hpcExpiryDateStr");
-    applicant.setHpcExpiryDate(convertDate(dateStr, sdf, errors, messageResources, "label.hpcExpiryDate"));
-    dateStr = (String) dynaForm.get("hpcLastCheckedDateStr");
-    applicant.setHpcLastCheckedDate(convertDate(dateStr, sdf, errors, messageResources, "label.hpcLastCheckedDate"));
+    dateStr = (String) dynaForm.get("registrationExpiryDateStr");
+    applicant.setRegistrationExpiryDate(convertDate(dateStr, sdf, errors, messageResources, "label.registrationExpiryDate"));
+    dateStr = (String) dynaForm.get("registrationLastCheckedDateStr");
+    applicant.setRegistrationLastCheckedDate(convertDate(dateStr, sdf, errors, messageResources, "label.registrationLastCheckedDate"));
     dateStr = (String) dynaForm.get("interviewDateStr");
     applicant.setInterviewDate(convertDate(dateStr, sdf, errors, messageResources, "label.interviewDate"));
     dateStr = (String) dynaForm.get("assessment12WeekDateStr");
@@ -363,11 +363,11 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       applicant.setCrbFilename("crb" + getFileExtension(uploadFilename));
     }
-    uploadFormFile = (FormFile)dynaForm.get("hpcFormFile");
+    uploadFormFile = (FormFile)dynaForm.get("registrationFormFile");
     uploadFilename = uploadFormFile.getFileName();
     if (StringUtils.isNotEmpty(uploadFilename))
     {
-      applicant.setHpcFilename("hpc" + getFileExtension(uploadFilename));
+      applicant.setRegistrationFilename("registration" + getFileExtension(uploadFilename));
     }
     uploadFormFile = (FormFile)dynaForm.get("dbsFormFile");
     uploadFilename = uploadFormFile.getFileName();
@@ -414,7 +414,7 @@ public abstract class ApplicantCommonProcess extends AgyAction
     controlUploadFile(dynaForm, "idDocumentFormFile", applicant.getIdDocumentFileUrl());
     controlUploadFile(dynaForm, "trainingFormFile", applicant.getTrainingFileUrl());
     controlUploadFile(dynaForm, "crbFormFile", applicant.getCrbFileUrl());
-    controlUploadFile(dynaForm, "hpcFormFile", applicant.getHpcFileUrl());
+    controlUploadFile(dynaForm, "registrationFormFile", applicant.getRegistrationFileUrl());
     controlUploadFile(dynaForm, "dbsFormFile", applicant.getDbsFileUrl());
     controlUploadFile(dynaForm, "ivsEppFormFile", applicant.getIvsEppFileUrl());
     controlUploadFile(dynaForm, "paediatricLifeSupportFormFile", applicant.getPaediatricLifeSupportFileUrl());

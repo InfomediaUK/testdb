@@ -175,10 +175,10 @@ function checkedAll(frmname)
 				        </tr>
 				        <tr>
 				          <th>
-				            HPC
+				            Registration
 				          </th>
 				          <td>
-  				          <bean:write name="applicant" property="hpcExpiryDate" formatKey="format.mediumDateFormat"/>&nbsp; 
+  				          <bean:write name="applicant" property="registrationExpiryDate" formatKey="format.mediumDateFormat"/>&nbsp; 
 				          </td>
 				        </tr>
 				        <tr>
@@ -341,18 +341,18 @@ function checkedAll(frmname)
 				        </tr>
 				        <tr>
 				          <th  width="30%">
-				            HPC
+				            Registration
 				          </th>
 				          <td  width="70%">
-      				      <bean:write name="applicant" property="hpcFilename"/>&nbsp;
+      				      <bean:write name="applicant" property="registrationFilename"/>&nbsp;
 				          </td>
 				        </tr>
 				        <tr>
 				          <th  width="30%">
-				            <bean:message key="label.hpcNumber"/>
+				            <bean:message key="label.registrationNumber"/>
 				          </th>
 				          <td  width="70%">
-      				      <bean:write name="applicant" property="hpcNumber"/>&nbsp;
+      				      <bean:write name="applicant" property="registrationNumber"/>&nbsp;
 				          </td>
 				        </tr>
 				      </table>

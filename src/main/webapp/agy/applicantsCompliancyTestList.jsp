@@ -57,7 +57,7 @@
           <bean:message key="label.paeds"/>
     </logic:equal>
         </td>   
-		    <td align="left"><bean:write name="applicant" property="hpcNumber"/></td>   
+		    <td align="left"><bean:write name="applicant" property="registrationNumber"/></td>   
 		    <td align="center">
 					<logic:equal name="applicant" property="hasCurrentFitToWork" value="true">
 				    <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />

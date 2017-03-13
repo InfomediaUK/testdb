@@ -77,8 +77,8 @@ public class ApplicantSearchProcess extends AgyAction
     String hasFitToWorkDocument = (String)dynaForm.get("hasFitToWorkDocument");
     String hasCRBDocumentOperator = (String)dynaForm.get("hasCRBDocumentOperator");
     String hasCRBDocument = (String)dynaForm.get("hasCRBDocument");
-    String hasHPCDocumentOperator = (String)dynaForm.get("hasHPCDocumentOperator");
-    String hasHPCDocument = (String)dynaForm.get("hasHPCDocument");
+    String hasRegistrationDocumentOperator = (String)dynaForm.get("hasRegistrationDocumentOperator");
+    String hasRegistrationDocument = (String)dynaForm.get("hasRegistrationDocument");
     String hasTrainingCertificateOperator = (String)dynaForm.get("hasTrainingCertificateOperator");
     String hasTrainingCertificate = (String)dynaForm.get("hasTrainingCertificate");
     String hasIdDocumentOperator = (String)dynaForm.get("hasIdDocumentOperator");
@@ -143,16 +143,16 @@ public class ApplicantSearchProcess extends AgyAction
       session.setAttribute("crbExpiryDateOperator", crbExpiryDateOperator);      
       applicantSearchParameters.setCrbExpiryDateLabel(messageResources.getMessage("label.crbExpiresOnOrBefore"));
     }
-    String hpcExpiryDateStr = (String)dynaForm.get("hpcExpiryDate");
-    Date hpcExpiryDate = null;
-    if (StringUtils.isNotEmpty(hpcExpiryDateStr))
+    String registrationExpiryDateStr = (String)dynaForm.get("registrationExpiryDate");
+    Date registrationExpiryDate = null;
+    if (StringUtils.isNotEmpty(registrationExpiryDateStr))
     {
-      String hpcExpiryDateOperator = (String)dynaForm.get("hpcExpiryDateOperator");
-      hpcExpiryDate = getDate(sdf, hpcExpiryDateStr, errors, messageResources, "label.hpcExpiresOnOrBefore");
-      applicantSearchParameters.setHpcExpiryDate(hpcExpiryDate);
-      applicantSearchParameters.setHpcExpiryDateOperator(hpcExpiryDateOperator);
-      session.setAttribute("hpcExpiryDateOperator", hpcExpiryDateOperator);      
-      applicantSearchParameters.setHpcExpiryDateLabel(messageResources.getMessage("label.hpcExpiresOnOrBefore"));
+      String registrationExpiryDateOperator = (String)dynaForm.get("registrationExpiryDateOperator");
+      registrationExpiryDate = getDate(sdf, registrationExpiryDateStr, errors, messageResources, "label.registrationExpiresOnOrBefore");
+      applicantSearchParameters.setRegistrationExpiryDate(registrationExpiryDate);
+      applicantSearchParameters.setRegistrationExpiryDateOperator(registrationExpiryDateOperator);
+      session.setAttribute("registrationExpiryDateOperator", registrationExpiryDateOperator);      
+      applicantSearchParameters.setRegistrationExpiryDateLabel(messageResources.getMessage("label.registrationExpiresOnOrBefore"));
     }
     String trainingExpiryDateStr = (String)dynaForm.get("trainingExpiryDate");
     Date trainingExpiryDate = null;
@@ -234,9 +234,9 @@ public class ApplicantSearchProcess extends AgyAction
     applicantSearchParameters.setHasCRBDocumentOperator("".equals(hasCRBDocument) ? null : hasCRBDocumentOperator);
     session.setAttribute("hasCRBDocumentOperator", hasCRBDocumentOperator);
     applicantSearchParameters.setHasCRBDocument("".equals(hasCRBDocument) ? null : "true".equals(hasCRBDocument));
-    applicantSearchParameters.setHasHPCDocumentOperator("".equals(hasHPCDocument) ? null : hasHPCDocumentOperator);
-    session.setAttribute("hasHPCDocumentOperator", hasHPCDocumentOperator);
-    applicantSearchParameters.setHasHPCDocument("".equals(hasHPCDocument) ? null : "true".equals(hasHPCDocument));
+    applicantSearchParameters.setHasRegistrationDocumentOperator("".equals(hasRegistrationDocument) ? null : hasRegistrationDocumentOperator);
+    session.setAttribute("hasRegistrationDocumentOperator", hasRegistrationDocumentOperator);
+    applicantSearchParameters.setHasRegistrationDocument("".equals(hasRegistrationDocument) ? null : "true".equals(hasRegistrationDocument));
     applicantSearchParameters.setHasTrainingCertificateOperator("".equals(hasTrainingCertificate) ? null : hasTrainingCertificateOperator);
     session.setAttribute("hasTrainingCertificateOperator", hasTrainingCertificateOperator);
     applicantSearchParameters.setHasTrainingCertificate("".equals(hasTrainingCertificate) ? null : "true".equals(hasTrainingCertificate));

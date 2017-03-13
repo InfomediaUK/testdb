@@ -87,9 +87,9 @@ public class ApplicantDeleteFileProcess extends AgyAction
       {
         clearTrainingAssociatedFields(applicant);
       }
-      if (fileProperty.equals("hpc"))
+      if (fileProperty.equals("registration"))
       {
-        clearHpcAssociatedFields(applicant);
+        clearRegistrationAssociatedFields(applicant);
       }
       // Test for Compliancy just before SAVE...
       ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
@@ -242,10 +242,10 @@ public class ApplicantDeleteFileProcess extends AgyAction
     applicant.setFitToWorkStatus(null);
   }
 
-  private void clearHpcAssociatedFields(Applicant applicant)
+  private void clearRegistrationAssociatedFields(Applicant applicant)
   {
-    applicant.setHpcExpiryDate(null);
-    applicant.setHpcNumber(null);
+    applicant.setRegistrationExpiryDate(null);
+    applicant.setRegistrationNumber(null);
   }
 
   protected String getApplicantNotes(Applicant applicant)

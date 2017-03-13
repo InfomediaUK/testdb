@@ -246,15 +246,15 @@
 		    </td>
 		  </tr>
 		  <tr>
-		    <th align="left" class="label"><bean:message key="label.hpcExpiresOnOrBefore"/></th>
+		    <th align="left" class="label"><bean:message key="label.registrationExpiresOnOrBefore"/></th>
 		    <td>
-		      <html:radio property="hpcExpiryDateOperator" value="<%= Constants.AND %>"/>
+		      <html:radio property="registrationExpiryDateOperator" value="<%= Constants.AND %>"/>
 		    </td>
 		    <td>
-		      <html:radio property="hpcExpiryDateOperator" value="<%= Constants.OR %>"/>
+		      <html:radio property="registrationExpiryDateOperator" value="<%= Constants.OR %>"/>
 		    </td>
 		    <td align="left">
-		      <html:text property="hpcExpiryDate"/>&nbsp;<bean:message key="text.dateFormat"/>
+		      <html:text property="registrationExpiryDate"/>&nbsp;<bean:message key="text.dateFormat"/>
 		    </td>
 		  </tr>
 		  <tr>
@@ -394,15 +394,15 @@
         </td>
       </tr>
       <tr>
-        <th align="left" class="label"><bean:message key="label.hasHPCDocument"/></th>
+        <th align="left" class="label"><bean:message key="label.hasRegistrationDocument"/></th>
 		    <td>
-		      <html:radio property="hasHPCDocumentOperator" value="<%= Constants.AND %>"/>
+		      <html:radio property="hasRegistrationDocumentOperator" value="<%= Constants.AND %>"/>
 		    </td>
 		    <td>
-		      <html:radio property="hasHPCDocumentOperator" value="<%= Constants.OR %>"/>
+		      <html:radio property="hasRegistrationDocumentOperator" value="<%= Constants.OR %>"/>
 		    </td>
         <td align="left">
-          <html:select property="hasHPCDocument" tabindex="1">
+          <html:select property="hasRegistrationDocument" tabindex="1">
             <html:option value=""><bean:message key="label.pleaseSelect"/></html:option>
             <html:option value="true"><bean:message key="label.yes"/></html:option>
             <html:option value="false"><bean:message key="label.no"/></html:option>

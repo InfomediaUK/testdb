@@ -329,8 +329,8 @@
       <form-property name="crbExpiryDateStr" type="java.lang.String" />
       <form-property name="crbIssueDateStr" type="java.lang.String" />
       <form-property name="registeredWithDbsDateStr" type="java.lang.String" />
-      <form-property name="hpcExpiryDateStr" type="java.lang.String" />
-      <form-property name="hpcLastCheckedDateStr" type="java.lang.String" />
+      <form-property name="registrationExpiryDateStr" type="java.lang.String" />
+      <form-property name="registrationLastCheckedDateStr" type="java.lang.String" />
       <form-property name="interviewDateStr" type="java.lang.String" />
       <form-property name="paediatricLifeSupportIssuedDateStr" type="java.lang.String" />
       <form-property name="assessment12WeekDateStr" type="java.lang.String" />
@@ -354,7 +354,7 @@
       <form-property name="idDocumentFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="trainingFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="crbFormFile" type="org.apache.struts.upload.FormFile"/>
-      <form-property name="hpcFormFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="registrationFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="dbsFormFile" type="org.apache.struts.upload.FormFile"/>
       <form-property name="dbsRenewalDateStr" type="java.lang.String" />
       <form-property name="ivsEppFormFile" type="org.apache.struts.upload.FormFile"/>
@@ -433,7 +433,7 @@
       <form-property name="crbList" type="java.util.List" />
       <form-property name="dbsList" type="java.util.List" />
       <form-property name="fitToWorkList" type="java.util.List" />
-      <form-property name="hpcList" type="java.util.List" />
+      <form-property name="registrationList" type="java.util.List" />
       <form-property name="idDocumentList" type="java.util.List" />
       <form-property name="trainingList" type="java.util.List" />
       <form-property name="visaList" type="java.util.List" />
@@ -460,8 +460,8 @@
       <form-property name="idDocumentExpiryDateOperator" type="java.lang.String" />
       <form-property name="crbExpiryDate" type="java.lang.String" />
       <form-property name="crbExpiryDateOperator" type="java.lang.String" />
-      <form-property name="hpcExpiryDate" type="java.lang.String" />
-      <form-property name="hpcExpiryDateOperator" type="java.lang.String" />
+      <form-property name="registrationExpiryDate" type="java.lang.String" />
+      <form-property name="registrationExpiryDateOperator" type="java.lang.String" />
       <form-property name="trainingExpiryDate" type="java.lang.String" />
       <form-property name="trainingExpiryDateOperator" type="java.lang.String" />
       <form-property name="fitToWorkExpiryDate" type="java.lang.String" />
@@ -484,8 +484,8 @@
       <form-property name="hasFitToWorkDocumentOperator" type="java.lang.String" />
       <form-property name="hasCRBDocument" type="java.lang.String" />
       <form-property name="hasCRBDocumentOperator" type="java.lang.String" />
-      <form-property name="hasHPCDocument" type="java.lang.String" />
-      <form-property name="hasHPCDocumentOperator" type="java.lang.String" />
+      <form-property name="hasRegistrationDocument" type="java.lang.String" />
+      <form-property name="hasRegistrationDocumentOperator" type="java.lang.String" />
       <form-property name="hasTrainingCertificate" type="java.lang.String" />
       <form-property name="hasTrainingCertificateOperator" type="java.lang.String" />
       <form-property name="hasIdDocument" type="java.lang.String" />

@@ -43,8 +43,8 @@ public class ApplicantNew extends AgyAction {
       dynaForm.set("trainingExpiryDateStr", "");
       dynaForm.set("crbExpiryDateStr", "");
       dynaForm.set("crbIssueDateStr", "");
-      dynaForm.set("hpcExpiryDateStr", "");
-      dynaForm.set("hpcLastCheckedDateStr", "");
+      dynaForm.set("registrationExpiryDateStr", "");
+      dynaForm.set("registrationLastCheckedDateStr", "");
       dynaForm.set("interviewDateStr", "");
       // NEW -->
       dynaForm.set("paediatricLifeSupportIssuedDateStr", "");

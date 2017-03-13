@@ -11,7 +11,7 @@
 <%@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
 <bean:define id="applicantId" name="ApplicantFormAgy" property="applicant.applicantId"/>
 <bean:define id="weekToShow" name="ApplicantFormAgy" property="weekToShow"/>
-<bean:define id="hpcAlertNotification" name="ApplicantFormAgy" property="applicant.hpcAlertNotification"/>
+<bean:define id="registrationAlertNotification" name="ApplicantFormAgy" property="applicant.registrationAlertNotification"/>
 <bean:define id="fitToWorkIssuedBy" name="ApplicantFormAgy" property="applicant.fitToWorkIssuedBy"/>
 <bean:define id="checklistFileUrl" name="ApplicantFormAgy" property="applicant.checklistFileUrl"/>
 <bean:define id="dates" name="ApplicantFormAgy" property="unavailableDates" type="java.lang.String" />
@@ -20,7 +20,7 @@ String fileUrl = null;
 String deleteFileUrl = request.getContextPath() + "/agy/applicantDeleteFile.do?applicantId=" + applicantId;
 String createAgencyWorkerChecklistFileUrl = request.getContextPath() + "/agy/applicantChecklist.do?applicant.applicantId=" + applicantId + "&weekToShow=" + weekToShow;
 String deleteAgencyWorkerChecklistFileUrl = request.getContextPath() + "/agy/applicantDeleteAgencyWorkerChecklistFile.do?applicantId=" + applicantId;
-String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertNotification;
+String registrationAlertNotificationMessageKey = "label.registrationAlertNotification" + registrationAlertNotification;
 String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssuedBy;
 %>
 <mmj-agy:consultant var="consultant"/>
@@ -1087,8 +1087,8 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpc"/></th>
-					    <th  align="left" class="label">(HCPC/NMC)</th>
+					    <th width="25%"  align="left" class="label"><bean:message key="label.registration"/></th>
+					    <th  align="left" class="label">&nbsp;</th>
 					  </tr>
 					  <tr>
 					    <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
@@ -1102,48 +1102,48 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpcFilename"/></th>
+					    <th width="25%"  align="left" class="label"><bean:message key="label.registrationFilename"/></th>
 					    <td align="left">
-					      <bean:define id="hpcFileUrl" name="ApplicantFormAgy" property="applicant.hpcFileUrl" type="java.lang.String" />
+					      <bean:define id="registrationFileUrl" name="ApplicantFormAgy" property="applicant.registrationFileUrl" type="java.lang.String" />
 					      <% 
-					      fileUrl = request.getContextPath() + hpcFileUrl;
+					      fileUrl = request.getContextPath() + registrationFileUrl;
 					      %>
 <logic:equal name="consultant" property="canViewDocuments" value="true">
-                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="ApplicantFormAgy" property="applicant.hpcFilename"/></html:link>
+                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="ApplicantFormAgy" property="applicant.registrationFilename"/></html:link>
 </logic:equal>
 <logic:notEqual name="consultant" property="canViewDocuments" value="true">
-                <bean:write name="ApplicantFormAgy" property="applicant.hpcFilename"/>
+                <bean:write name="ApplicantFormAgy" property="applicant.registrationFilename"/>
 </logic:notEqual>
 <mmj-agy:hasAccess forward="applicantEdit">
-  <logic:present name="ApplicantFormAgy" property="applicant.hpcFilename">
+  <logic:present name="ApplicantFormAgy" property="applicant.registrationFilename">
 	              &nbsp;
-	              <a href="<%= deleteFileUrl %>&filename=<bean:write name="ApplicantFormAgy" property="applicant.hpcFilename"/>&fileProperty=hpc"><bean:message key="link.delete"/></a>
+	              <a href="<%= deleteFileUrl %>&filename=<bean:write name="ApplicantFormAgy" property="applicant.registrationFilename"/>&fileProperty=registration"><bean:message key="link.delete"/></a>
 	</logic:present>
 </mmj-agy:hasAccess>
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpcExpiryDate"/></th>
+					    <th width="25%"  align="left" class="label"><bean:message key="label.registrationExpiryDate"/></th>
 					    <td align="left">
-						    <bean:write name="ApplicantFormAgy" property="applicant.hpcExpiryDate" formatKey="format.mediumDateFormat"/>
+						    <bean:write name="ApplicantFormAgy" property="applicant.registrationExpiryDate" formatKey="format.mediumDateFormat"/>
 					    </td>
 					  </tr>
 					  <tr>
 					    <th width="25%"  align="left" class="label"><bean:message key="label.professionalReference"/></th>
 					    <td align="left">
-						    <bean:write name="ApplicantFormAgy" property="applicant.hpcNumber"/>
+						    <bean:write name="ApplicantFormAgy" property="applicant.registrationNumber"/>
 				      </td>
 					  </tr>
 					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpcLastCheckedDate"/></th>
+					    <th width="25%"  align="left" class="label"><bean:message key="label.registrationLastCheckedDate"/></th>
 					    <td align="left">
-						    <bean:write name="ApplicantFormAgy" property="applicant.hpcLastCheckedDate" formatKey="format.mediumDateFormat"/>
+						    <bean:write name="ApplicantFormAgy" property="applicant.registrationLastCheckedDate" formatKey="format.mediumDateFormat"/>
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.hpcAlertNotification"/></th>
+					    <th width="25%"  align="left" class="label"><bean:message key="label.registrationAlertNotification"/></th>
 					    <td align="left">
-                <bean:message key="<%= hpcAlertNotificationMessageKey %>"/>
+                <bean:message key="<%= registrationAlertNotificationMessageKey %>"/>
 					    </td>
 					  </tr>
 			  	</table>

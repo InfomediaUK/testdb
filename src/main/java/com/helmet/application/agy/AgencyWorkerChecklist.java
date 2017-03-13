@@ -792,14 +792,14 @@ public abstract class AgencyWorkerChecklist extends AgyAction
   {
     logger.debug("AgencyWorkerChecklist.createFourthTable - Starts...");
     String crbIssueDate = applicant.getCrbIssueDate() == null ? "" : mdf.format(applicant.getCrbIssueDate());
-    String hpcLastCheckedDate = applicant.getHpcLastCheckedDate() == null ? "" : mdf.format(applicant.getHpcLastCheckedDate());
+    String registrationLastCheckedDate = applicant.getRegistrationLastCheckedDate() == null ? "" : mdf.format(applicant.getRegistrationLastCheckedDate());
     // First Row.
     float[] columnWidths = {30, 20, 25, 25}; // percentage
     PdfPTable table = new PdfPTable(columnWidths);
     table.setSpacingAfter(10);
     table.setWidthPercentage(90);
     PdfPCell cell;
-    // HPC/GDC/RPSGB Registration
+    // Professional Registration
     cell = new PdfPCell(new Paragraph(messageResources.getMessage("label.applicantChecklist.professionalRegistration"), TD_FONTBOLD));
     cell.setFixedHeight(20);
     table.addCell(cell);
@@ -818,11 +818,11 @@ public abstract class AgencyWorkerChecklist extends AgyAction
       cell = new PdfPCell(new Paragraph(applicant.getCrbDisclosureNumber(), TD_FONT));
     }
     table.addCell(cell);
-    // Second Row. HPC/GDC/RPSGB Registration No.
+    // Second Row. Professional Registration No.
     cell = new PdfPCell(new Paragraph(messageResources.getMessage("label.applicantChecklist.professionalRegistrationNo"), TD_FONTBOLD));
     cell.setFixedHeight(20);
     table.addCell(cell);
-    cell = new PdfPCell(createMandatoryParagraph(applicant.getHpcNumber(), messageResources));
+    cell = new PdfPCell(createMandatoryParagraph(applicant.getRegistrationNumber(), messageResources));
     table.addCell(cell);
     // Date of CRB Issue
     cell = new PdfPCell(new Paragraph(messageResources.getMessage("label.applicantChecklist.dateOfCrbIssue"), TD_FONTBOLD));
@@ -830,17 +830,17 @@ public abstract class AgencyWorkerChecklist extends AgyAction
     table.addCell(cell);
     cell = new PdfPCell(createMandatoryParagraph(crbIssueDate, messageResources));
     table.addCell(cell);
-    // Third Row. HPC/GDC/RPSGB Registration Last Checked
+    // Third Row. Professional Registration Last Checked
     cell = new PdfPCell(new Paragraph(messageResources.getMessage("label.applicantChecklist.professionalRegistrationLastChecked"), TD_FONTBOLD));
     cell.setFixedHeight(20);
     table.addCell(cell);
-    cell = new PdfPCell(createMandatoryParagraph(hpcLastCheckedDate, messageResources));
+    cell = new PdfPCell(createMandatoryParagraph(registrationLastCheckedDate, messageResources));
     table.addCell(cell);
     // Alert Notification?
     cell = new PdfPCell(new Paragraph(messageResources.getMessage("label.applicantChecklist.alertNotification"), TD_FONTBOLD));
     cell.setFixedHeight(20);
     table.addCell(cell);
-    String messageKey = "label.hpcAlertNotification" + applicant.getHpcAlertNotification();
+    String messageKey = "label.registrationAlertNotification" + applicant.getRegistrationAlertNotification();
     cell = new PdfPCell(new Paragraph(messageResources.getMessage(messageKey), TD_FONT));
     table.addCell(cell);
     logger.debug("AgencyWorkerChecklist.createFourthTable - Ends...");

@@ -510,8 +510,8 @@
 			  <td align="left"><html:text property="paediatricLifeSupportIssuedDateStr" tabindex="66"/>&nbsp;<bean:message key="text.dateFormat"/></td>
 		    </tr>
       		<tr>
-			  <th width="25%"  align="left" class="label"><bean:message key="label.hpc"/></th>
-			  <th  align="left" class="label">(HCPC/NMC)</th>
+			  <th width="25%"  align="left" class="label"><bean:message key="label.registration"/></th>
+			  <th  align="left" class="label">&nbsp;</th>
 			</tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.ahpRegistrationType"/></th>
@@ -523,34 +523,34 @@
               </td>
 			  </tr>
 			  <tr>
-			    <th width="25%"  align="left" class="label"><bean:message key="label.hpcFile"/></th>
-			    <td align="left"><html:file property="hpcFormFile" size="30" tabindex="67" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.hpcFilename"/></td>
+			    <th width="25%"  align="left" class="label"><bean:message key="label.registrationFile"/></th>
+			    <td align="left"><html:file property="registrationFormFile" size="30" tabindex="67" />&nbsp;<bean:write name="ApplicantFormAgy" property="applicant.registrationFilename"/></td>
 			  </tr>
 			  <tr>
-			    <th width="25%"  align="left" class="label"><bean:message key="label.hpcExpiryDate"/></th>
-			    <td align="left"><html:text property="hpcExpiryDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
+			    <th width="25%"  align="left" class="label"><bean:message key="label.registrationExpiryDate"/></th>
+			    <td align="left"><html:text property="registrationExpiryDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
 			  </tr>
 			  <tr>
 			    <th width="25%"  align="left" class="label"><bean:message key="label.professionalReference"/></th>
-			    <td align="left"><html:text property="applicant.hpcNumber" size="30" maxlength="50" tabindex="69" /></td>
+			    <td align="left"><html:text property="applicant.registrationNumber" size="30" maxlength="50" tabindex="69" /></td>
 			  </tr>
 			  <tr>
-			    <th width="25%"  align="left" class="label"><bean:message key="label.hpcLastCheckedDate"/></th>
-			    <td align="left"><html:text property="hpcLastCheckedDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
+			    <th width="25%"  align="left" class="label"><bean:message key="label.registrationLastCheckedDate"/></th>
+			    <td align="left"><html:text property="registrationLastCheckedDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
 			  </tr>
             <tr>
-              <th width="25%"  align="left" class="label"><bean:message key="label.hpcAlertNotification"/></th>
+              <th width="25%"  align="left" class="label"><bean:message key="label.registrationAlertNotification"/></th>
               <td align="left">
-                <html:select name="ApplicantFormAgy" property="applicant.hpcAlertNotification" tabindex="69">
-                  <html:option value="0"><bean:message key="label.hpcAlertNotification0"/></html:option>
-                  <html:option value="1"><bean:message key="label.hpcAlertNotification1"/></html:option>
-                  <html:option value="2"><bean:message key="label.hpcAlertNotification2"/></html:option>
-                  <html:option value="3"><bean:message key="label.hpcAlertNotification3"/></html:option>
-                  <html:option value="4"><bean:message key="label.hpcAlertNotification4"/></html:option>
-                  <html:option value="5"><bean:message key="label.hpcAlertNotification5"/></html:option>
-                  <html:option value="6"><bean:message key="label.hpcAlertNotification6"/></html:option>
-                  <html:option value="7"><bean:message key="label.hpcAlertNotification7"/></html:option>
-                  <html:option value="8"><bean:message key="label.hpcAlertNotification8"/></html:option>
+                <html:select name="ApplicantFormAgy" property="applicant.registrationAlertNotification" tabindex="69">
+                  <html:option value="0"><bean:message key="label.registrationAlertNotification0"/></html:option>
+                  <html:option value="1"><bean:message key="label.registrationAlertNotification1"/></html:option>
+                  <html:option value="2"><bean:message key="label.registrationAlertNotification2"/></html:option>
+                  <html:option value="3"><bean:message key="label.registrationAlertNotification3"/></html:option>
+                  <html:option value="4"><bean:message key="label.registrationAlertNotification4"/></html:option>
+                  <html:option value="5"><bean:message key="label.registrationAlertNotification5"/></html:option>
+                  <html:option value="6"><bean:message key="label.registrationAlertNotification6"/></html:option>
+                  <html:option value="7"><bean:message key="label.registrationAlertNotification7"/></html:option>
+                  <html:option value="8"><bean:message key="label.registrationAlertNotification8"/></html:option>
                 </html:select>
               </td>
 					  </tr>
@@ -680,7 +680,7 @@
 <html:hidden property="applicant.idDocumentFilename" />
 <html:hidden property="applicant.trainingFilename" />
 <html:hidden property="applicant.crbFilename" />
-<html:hidden property="applicant.hpcFilename" />
+<html:hidden property="applicant.registrationFilename" />
 <html:hidden property="applicant.dbsFilename" />
 <html:hidden property="applicant.hasBeenUnarchived" />
 <html:hidden property="applicant.compliant" />

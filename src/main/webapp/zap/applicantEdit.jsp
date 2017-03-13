@@ -6,12 +6,12 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="/mmj" prefix="mmj" %>
-<bean:define id="hpcAlertNotification" name="applicant" property="hpcAlertNotification"/>
+<bean:define id="registrationAlertNotification" name="applicant" property="registrationAlertNotification"/>
 <bean:define id="fitToWorkIssuedBy" name="applicant" property="fitToWorkIssuedBy"/>
 <%
 String fileUrl = null;
 String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssuedBy;
-String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertNotification;
+String registrationAlertNotificationMessageKey = "label.registrationAlertNotification" + registrationAlertNotification;
 %>
 <html:form action="/applicantEditProcess.do" focus="user.firstName" enctype="multipart/form-data" onsubmit="return singleSubmit();">
 	<html:hidden property="applicant.noOfChanges" />
@@ -616,33 +616,33 @@ String hpcAlertNotificationMessageKey = "label.hpcAlertNotification" + hpcAlertN
               </td>
             </tr>
             <tr>
-              <th width="25%"  align="left" class="label"><bean:message key="label.hpcFilename"/></th>
+              <th width="25%"  align="left" class="label"><bean:message key="label.registrationFilename"/></th>
               <td align="left">
-                <bean:write name="applicant" property="hpcFilename"/>
+                <bean:write name="applicant" property="registrationFilename"/>
               </td>
             </tr>
             <tr>
-              <th width="25%"  align="left" class="label"><bean:message key="label.hpcExpiryDate"/></th>
+              <th width="25%"  align="left" class="label"><bean:message key="label.registrationExpiryDate"/></th>
               <td align="left">
-                <bean:write name="applicant" property="hpcExpiryDate" formatKey="format.mediumDateFormat"/>
+                <bean:write name="applicant" property="registrationExpiryDate" formatKey="format.mediumDateFormat"/>
               </td>
             </tr>
             <tr>
               <th width="25%"  align="left" class="label"><bean:message key="label.professionalReference"/></th>
               <td align="left">
-                <bean:write name="applicant" property="hpcNumber"/>
+                <bean:write name="applicant" property="registrationNumber"/>
               </td>
             </tr>
             <tr>
-              <th width="25%"  align="left" class="label"><bean:message key="label.hpcLastCheckedDate"/></th>
+              <th width="25%"  align="left" class="label"><bean:message key="label.registrationLastCheckedDate"/></th>
               <td align="left">
-                <bean:write name="applicant" property="hpcLastCheckedDate" formatKey="format.mediumDateFormat"/>
+                <bean:write name="applicant" property="registrationLastCheckedDate" formatKey="format.mediumDateFormat"/>
               </td>
             </tr>
             <tr>
-              <th width="25%"  align="left" class="label"><bean:message key="label.hpcAlertNotification"/></th>
+              <th width="25%"  align="left" class="label"><bean:message key="label.registrationAlertNotification"/></th>
               <td align="left">
-                <bean:message key="<%= hpcAlertNotificationMessageKey %>"/>
+                <bean:message key="<%= registrationAlertNotificationMessageKey %>"/>
               </td>
             </tr>
           </table>

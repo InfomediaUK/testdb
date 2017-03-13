@@ -26,8 +26,8 @@ public class ApplicantSearchParameters
   private Boolean hasFitToWorkDocument;
   private String hasCRBDocumentOperator;
   private Boolean hasCRBDocument;
-  private String hasHPCDocumentOperator;
-  private Boolean hasHPCDocument;
+  private String hasRegistrationDocumentOperator;
+  private Boolean hasRegistrationDocument;
   private String hasTrainingCertificateOperator;
   private Boolean hasTrainingCertificate;
   private String hasIdDocumentOperator;
@@ -72,9 +72,9 @@ public class ApplicantSearchParameters
   private String crbExpiryDateOperator;
   private String crbExpiryDateLabel;
   private Date crbExpiryDate;
-  private String hpcExpiryDateOperator;
-  private String hpcExpiryDateLabel;
-  private Date hpcExpiryDate;
+  private String registrationExpiryDateOperator;
+  private String registrationExpiryDateLabel;
+  private Date registrationExpiryDate;
   private String trainingExpiryDateOperator;
   private String trainingExpiryDateLabel;
   private Date trainingExpiryDate;
@@ -409,37 +409,37 @@ public class ApplicantSearchParameters
   {
     this.crbExpiryDate = crbExpiryDate;
   }
-  public String getHasHPCDocumentOperator()
+  public String getHasRegistrationDocumentOperator()
   {
-    return hasHPCDocumentOperator;
+    return hasRegistrationDocumentOperator;
   }
-  public void setHasHPCDocumentOperator(String hasHPCDocumentOperator)
+  public void setHasRegistrationDocumentOperator(String hasRegistrationDocumentOperator)
   {
-    this.hasHPCDocumentOperator = hasHPCDocumentOperator;
+    this.hasRegistrationDocumentOperator = hasRegistrationDocumentOperator;
   }
-  public String getHpcExpiryDateOperator()
+  public String getRegistrationExpiryDateOperator()
   {
-    return hpcExpiryDateOperator;
+    return registrationExpiryDateOperator;
   }
-  public void setHpcExpiryDateOperator(String hpcExpiryDateOperator)
+  public void setRegistrationExpiryDateOperator(String registrationExpiryDateOperator)
   {
-    this.hpcExpiryDateOperator = hpcExpiryDateOperator;
+    this.registrationExpiryDateOperator = registrationExpiryDateOperator;
   }
-  public String getHpcExpiryDateLabel()
+  public String getRegistrationExpiryDateLabel()
   {
-    return hpcExpiryDateLabel;
+    return registrationExpiryDateLabel;
   }
-  public void setHpcExpiryDateLabel(String hpcExpiryDateLabel)
+  public void setRegistrationExpiryDateLabel(String registrationExpiryDateLabel)
   {
-    this.hpcExpiryDateLabel = hpcExpiryDateLabel;
+    this.registrationExpiryDateLabel = registrationExpiryDateLabel;
   }
-  public Date getHpcExpiryDate()
+  public Date getRegistrationExpiryDate()
   {
-    return hpcExpiryDate;
+    return registrationExpiryDate;
   }
-  public void setHpcExpiryDate(Date hpcExpiryDate)
+  public void setRegistrationExpiryDate(Date registrationExpiryDate)
   {
-    this.hpcExpiryDate = hpcExpiryDate;
+    this.registrationExpiryDate = registrationExpiryDate;
   }
   public String getIdDocumentExpiryDateOperator()
   {
@@ -545,13 +545,13 @@ public class ApplicantSearchParameters
   {
     this.hasCRBDocument = hasCRBDocument;
   }
-  public Boolean getHasHPCDocument()
+  public Boolean getHasRegistrationDocument()
   {
-    return hasHPCDocument;
+    return hasRegistrationDocument;
   }
-  public void setHasHPCDocument(Boolean hasHPCDocument)
+  public void setHasRegistrationDocument(Boolean hasRegistrationDocument)
   {
-    this.hasHPCDocument = hasHPCDocument;
+    this.hasRegistrationDocument = hasRegistrationDocument;
   }
   public String getHasIdDocumentOperator()
   {

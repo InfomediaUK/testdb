@@ -223,7 +223,7 @@ function checkedAll(frmname)
         </div>
         <div class="tabbertab">
           <h2><bean:message key="label.professionalRegistration"/></h2>
-          <html:form action="/applicantEmailProcess.do" styleId="ApplicantHpcExpiry" onsubmit="return singleSubmit();">
+          <html:form action="/applicantEmailProcess.do" styleId="ApplicantRegistrationExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
             <html:submit styleClass="titleButton"><bean:message key="button.send"/></html:submit>
 </mmj-agy:hasAccess>
@@ -231,22 +231,22 @@ function checkedAll(frmname)
               <thead>
                 <tr>
                   <th align="center" width="2%">
-                    <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantHpcExpiry');"/>
+                    <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantRegistrationExpiry');"/>
                   </th>
-                  <th align="left" width="18%"><bean:message key="label.hpcExpiryDate"/></th>
+                  <th align="left" width="18%"><bean:message key="label.registrationExpiryDate"/></th>
                   <th align="left" width="20%"><bean:message key="label.name"/></th>
                   <th align="left" width="20%"><bean:message key="label.emailAddress"/></th>
                   <th align="left" width="20%"><bean:message key="label.telephoneNumber"/></th>
                   <th align="left" width="20%"><bean:message key="label.mobile"/></th>
                 </tr>
               </thead>
-              <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="hpcList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
-              <% String applicantHpcExpiryCheckBox = "applicantId"; %>
+              <logic:iterate id="applicant" name="ApplicantNotificationsFormAgy" property="registrationList" indexId="applicantIndex" type="com.helmet.bean.Applicant">
+              <% String applicantRegistrationExpiryCheckBox = "applicantId"; %>
               <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
                 <td align="left" valign="top">
-                  <input type="checkbox" name="<%= applicantHpcExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
+                  <input type="checkbox" name="<%= applicantRegistrationExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
                 </td>
-                <td align="left"><bean:write name="applicant" property="hpcExpiryDate" formatKey="format.mediumDateFormat" /></td>
+                <td align="left"><bean:write name="applicant" property="registrationExpiryDate" formatKey="format.mediumDateFormat" /></td>
                 <td align="left">    
                 <mmj-agy:hasAccess forward="applicantView">
                   <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
@@ -589,7 +589,7 @@ function checkedAll(frmname)
                   <bean:message key="label.paeds"/>
               </logic:equal>
               </td>   
-              <td align="left"><bean:write name="applicant" property="hpcNumber"/></td>   
+              <td align="left"><bean:write name="applicant" property="registrationNumber"/></td>   
               <td align="center">
                 <logic:equal name="applicant" property="hasCurrentFitToWork" value="true">
                   <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />
@@ -711,7 +711,7 @@ function checkedAll(frmname)
 					        <bean:message key="label.paeds"/>
 					    </logic:equal>
 					    </td>   
-					    <td align="left"><bean:write name="applicant" property="hpcNumber"/></td>   
+					    <td align="left"><bean:write name="applicant" property="registrationNumber"/></td>   
 					    <td align="center">
 								<logic:equal name="applicant" property="hasCurrentFitToWork" value="true">
 							    <html:img src="images/checkboxdisabledon.bmp" width="13" height="13" />

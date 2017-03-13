@@ -122,11 +122,11 @@ public class Applicant extends Base
 
   private Date crbIssueDate;
 
-  private String hpcFilename;
+  private String registrationFilename;
 
-  private Date hpcExpiryDate;
+  private Date registrationExpiryDate;
 
-  private String hpcNumber;
+  private String registrationNumber;
 
   private Date interviewDate;
 
@@ -182,8 +182,8 @@ public class Applicant extends Base
   private Boolean povaTraining = false;
   private Boolean neonatalLifeSupportTraining = false;
   private Integer ahpRegistrationType;
-  private Date hpcLastCheckedDate;
-  private Integer hpcAlertNotification;
+  private Date registrationLastCheckedDate;
+  private Integer registrationAlertNotification;
   private String paediatricLifeSupportFilename;
   private Date paediatricLifeSupportIssuedDate;
   private Integer visaType;
@@ -532,39 +532,39 @@ public class Applicant extends Base
     return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + hepbFilename;
   }
 
-  public Date getHpcExpiryDate()
+  public Date getRegistrationExpiryDate()
   {
-    return hpcExpiryDate;
+    return registrationExpiryDate;
   }
 
-  public void setHpcExpiryDate(Date hpcExpiryDate)
+  public void setRegistrationExpiryDate(Date registrationExpiryDate)
   {
-    this.hpcExpiryDate = hpcExpiryDate;
+    this.registrationExpiryDate = registrationExpiryDate;
   }
 
-  public String getHpcFilename()
+  public String getRegistrationFilename()
   {
-    return hpcFilename;
+    return registrationFilename;
   }
 
-  public void setHpcFilename(String hpcFilename)
+  public void setRegistrationFilename(String registrationFilename)
   {
-    this.hpcFilename = hpcFilename;
+    this.registrationFilename = registrationFilename;
   }
 
-  public String getHpcFileUrl()
+  public String getRegistrationFileUrl()
   {
-    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + hpcFilename;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + registrationFilename;
   }
 
-  public String getHpcNumber()
+  public String getRegistrationNumber()
   {
-    return hpcNumber;
+    return registrationNumber;
   }
 
-  public void setHpcNumber(String hpcNumber)
+  public void setRegistrationNumber(String registrationNumber)
   {
-    this.hpcNumber = hpcNumber;
+    this.registrationNumber = registrationNumber;
   }
 
   public Date getInterviewDate()
@@ -1282,24 +1282,24 @@ public class Applicant extends Base
     this.ahpRegistrationType = ahpRegistrationType;
   }
 
-  public Integer getHpcAlertNotification()
+  public Integer getRegistrationAlertNotification()
   {
-    return hpcAlertNotification;
+    return registrationAlertNotification;
   }
 
-  public void setHpcAlertNotification(Integer hpcAlertNotification)
+  public void setRegistrationAlertNotification(Integer registrationAlertNotification)
   {
-    this.hpcAlertNotification = hpcAlertNotification;
+    this.registrationAlertNotification = registrationAlertNotification;
   }
 
-  public Date getHpcLastCheckedDate()
+  public Date getRegistrationLastCheckedDate()
   {
-    return hpcLastCheckedDate;
+    return registrationLastCheckedDate;
   }
 
-  public void setHpcLastCheckedDate(Date hpcLastCheckedDate)
+  public void setRegistrationLastCheckedDate(Date registrationLastCheckedDate)
   {
-    this.hpcLastCheckedDate = hpcLastCheckedDate;
+    this.registrationLastCheckedDate = registrationLastCheckedDate;
   }
 
   public String getPaediatricLifeSupportFilename()
@@ -1481,9 +1481,9 @@ public class Applicant extends Base
     setFitToWorkExpiryDate(rs.getDate("FITTOWORKEXPIRYDATE"));
     setFitToWorkFilename(rs.getString("FITTOWORKFILENAME"));
     setHepbFilename(rs.getString("HEPBFILENAME"));
-    setHpcExpiryDate(rs.getDate("HPCEXPIRYDATE"));
-    setHpcFilename(rs.getString("HPCFILENAME"));
-    setHpcNumber(rs.getString("HPCNUMBER"));
+    setRegistrationExpiryDate(rs.getDate("REGISTRATIONEXPIRYDATE"));
+    setRegistrationFilename(rs.getString("REGISTRATIONFILENAME"));
+    setRegistrationNumber(rs.getString("REGISTRATIONNUMBER"));
     setInterviewDate(rs.getDate("INTERVIEWDATE"));
     setMmrFilename(rs.getString("MMRFILENAME"));
     setMmrx2Filename(rs.getString("MMRX2FILENAME"));
@@ -1558,8 +1558,8 @@ public class Applicant extends Base
     {
       setAhpRegistrationType(ahpRegistrationType);
     }
-    setHpcLastCheckedDate(rs.getDate("HPCLASTCHECKEDDATE"));
-    setHpcAlertNotification(rs.getInt("HPCALERTNOTIFICATION"));
+    setRegistrationLastCheckedDate(rs.getDate("REGISTRATIONLASTCHECKEDDATE"));
+    setRegistrationAlertNotification(rs.getInt("REGISTRATIONALERTNOTIFICATION"));
     setPaediatricLifeSupportFilename(rs.getString("PAEDIATRICLIFESUPPORTFILENAME"));
     setPaediatricLifeSupportIssuedDate(rs.getDate("PAEDIATRICLIFESUPPORTISSUEDDATE"));
     setVisaType(rs.getInt("VISATYPE"));
@@ -1609,7 +1609,7 @@ public class Applicant extends Base
   {
     if (StringUtils.isNotEmpty(regulatorName))
     {
-      // Must register with HPC, IE. NOT HCA...
+      // Must register with REGISTRATION, IE. NOT HCA...
       return getHasCurrentProfessionalRegistration();
     }
     // HCA, no need to validate registration file or expiry date...
@@ -1618,8 +1618,8 @@ public class Applicant extends Base
   
   public Boolean getHasCurrentProfessionalRegistration()
   {
-    // True: Must have hpcExpiryDate set AND hpcExpiryDate must not be before today AND hpcFilename entered.
-    return hpcExpiryDate == null ? false : dateInFuture(hpcExpiryDate) && (StringUtils.isNotEmpty(hpcFilename));
+    // True: Must have registrationExpiryDate set AND registrationExpiryDate must not be before today AND registrationFilename entered.
+    return registrationExpiryDate == null ? false : dateInFuture(registrationExpiryDate) && (StringUtils.isNotEmpty(registrationFilename));
   }
   
   public Boolean getHasCurrentDBS()

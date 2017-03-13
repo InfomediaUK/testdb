@@ -52,7 +52,7 @@
 			  <tr>
 			    <th align="left" class="label"><bean:message key="label.professionalReference"/></th>
 			    <td align="left">
-  		      <bean:write name="ApplicantFormAgy" property="applicant.hpcNumber"/>
+  		      <bean:write name="ApplicantFormAgy" property="applicant.registrationNumber"/>
 			    </td>
 			  </tr>
 			  <tr>

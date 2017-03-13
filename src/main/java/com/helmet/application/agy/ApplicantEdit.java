@@ -50,8 +50,8 @@ public class ApplicantEdit extends ApplicantCommon
     String crbExpiryDateStr = applicant.getCrbExpiryDate() == null ? "" : sdf.format(applicant.getCrbExpiryDate());
     String crbIssueDateStr = applicant.getCrbIssueDate() == null ? "" : sdf.format(applicant.getCrbIssueDate());
     String registeredWithDbsDateStr = applicant.getRegisteredWithDbsDate() == null ? "" : sdf.format(applicant.getRegisteredWithDbsDate());
-    String hpcExpiryDateStr = applicant.getHpcExpiryDate() == null ? "" : sdf.format(applicant.getHpcExpiryDate());
-    String hpcLastCheckedDateStr = applicant.getHpcLastCheckedDate() == null ? "" : sdf.format(applicant.getHpcLastCheckedDate());
+    String registrationExpiryDateStr = applicant.getRegistrationExpiryDate() == null ? "" : sdf.format(applicant.getRegistrationExpiryDate());
+    String registrationLastCheckedDateStr = applicant.getRegistrationLastCheckedDate() == null ? "" : sdf.format(applicant.getRegistrationLastCheckedDate());
     String dbsRenewalDateStr = applicant.getDbsRenewalDate() == null ? "" : sdf.format(applicant.getDbsRenewalDate());
     String interviewDateStr = applicant.getInterviewDate() == null ? "" : sdf.format(applicant.getInterviewDate());
     String assessment12WeekDateStr = applicant.getAssessment12WeekDate() == null ? "" : sdf.format(applicant.getAssessment12WeekDate());
@@ -76,8 +76,8 @@ public class ApplicantEdit extends ApplicantCommon
     dynaForm.set("crbExpiryDateStr", crbExpiryDateStr);
     dynaForm.set("crbIssueDateStr", crbIssueDateStr);
     dynaForm.set("registeredWithDbsDateStr", registeredWithDbsDateStr);
-    dynaForm.set("hpcExpiryDateStr", hpcExpiryDateStr);
-    dynaForm.set("hpcLastCheckedDateStr", hpcLastCheckedDateStr);
+    dynaForm.set("registrationExpiryDateStr", registrationExpiryDateStr);
+    dynaForm.set("registrationLastCheckedDateStr", registrationLastCheckedDateStr);
     dynaForm.set("dbsRenewalDateStr", dbsRenewalDateStr);
     dynaForm.set("interviewDateStr", interviewDateStr);
     dynaForm.set("assessment12WeekDateStr", assessment12WeekDateStr);
