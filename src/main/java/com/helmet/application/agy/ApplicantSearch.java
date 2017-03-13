@@ -46,6 +46,8 @@ public class ApplicantSearch extends AgyAction {
       dynaForm.set("areaOfSpecialityId2Operator", (String)session.getAttribute("areaOfSpecialityId2Operator"));
       session.setAttribute("geographicalRegionIdOperator", session.getAttribute("geographicalRegionIdOperator") == null ? Constants.AND : (String)session.getAttribute("geographicalRegionIdOperator"));      
       dynaForm.set("geographicalRegionIdOperator", (String)session.getAttribute("geographicalRegionIdOperator"));
+      session.setAttribute("idDocumentIdOperator", session.getAttribute("idDocumentIdOperator") == null ? Constants.AND : (String)session.getAttribute("idDocumentIdOperator"));      
+      dynaForm.set("idDocumentIdOperator", (String)session.getAttribute("idDocumentIdOperator"));
       session.setAttribute("disciplineCategoryIdOperator", session.getAttribute("disciplineCategoryIdOperator") == null ? Constants.AND : (String)session.getAttribute("disciplineCategoryIdOperator"));      
       dynaForm.set("disciplineCategoryIdOperator", (String)session.getAttribute("disciplineCategoryIdOperator"));
       session.setAttribute("clientGroupOperator", session.getAttribute("clientGroupOperator") == null ? Constants.AND : (String)session.getAttribute("clientGroupOperator"));      

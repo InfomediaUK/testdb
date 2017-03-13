@@ -55,6 +55,8 @@ public class ApplicantSearchProcess extends AgyAction
     String areaOfSpecialityId2 = (String)dynaForm.get("areaOfSpecialityId2");
     String geographicalRegionIdOperator = (String)dynaForm.get("geographicalRegionIdOperator");
     String geographicalRegionId = (String)dynaForm.get("geographicalRegionId");
+    String idDocumentIdOperator = (String)dynaForm.get("idDocumentIdOperator");
+    String idDocumentId = (String)dynaForm.get("idDocumentId");
     String disciplineCategoryIdOperator = (String)dynaForm.get("disciplineCategoryIdOperator");
     String disciplineCategoryId = (String)dynaForm.get("disciplineCategoryId");
     String clientGroupOperator = (String)dynaForm.get("clientGroupOperator");
@@ -197,6 +199,11 @@ public class ApplicantSearchProcess extends AgyAction
     applicantSearchParameters.setGeographicalRegionIdOperator("".equals(geographicalRegionId) ? null : geographicalRegionIdOperator);
     session.setAttribute("geographicalRegionIdOperator", geographicalRegionIdOperator);
     applicantSearchParameters.setGeographicalRegionId("".equals(geographicalRegionId) ? null : Integer.parseInt(geographicalRegionId));
+
+    applicantSearchParameters.setIdDocumentIdOperator("".equals(idDocumentId) ? null : idDocumentIdOperator);
+    session.setAttribute("idDocumentIdOperator", idDocumentIdOperator);
+    applicantSearchParameters.setIdDocumentId("".equals(idDocumentId) ? null : Integer.parseInt(idDocumentId));
+
     applicantSearchParameters.setDisciplineCategoryIdOperator("".equals(disciplineCategoryId) ? null : disciplineCategoryIdOperator);
     session.setAttribute("disciplineCategoryIdOperator", disciplineCategoryIdOperator);
     applicantSearchParameters.setDisciplineCategoryId("".equals(disciplineCategoryId) ? null : Integer.parseInt(disciplineCategoryId));

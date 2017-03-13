@@ -172,7 +172,7 @@ public class Applicant extends Base
   private String bankSortCode;
   private String bankAccountName;
   private String bankAccountNumber;
-  private Integer idDocument;
+  private Integer idDocumentId;
   private Boolean languageCompetency = false;
   private Integer fitToWorkIssuedBy;
   private String ivsEppFilename;
@@ -1187,14 +1187,14 @@ public class Applicant extends Base
     this.languageCompetency = languageCompetency;
   }
 
-  public Integer getIdDocument()
+  public Integer getIdDocumentId()
   {
-    return idDocument;
+    return idDocumentId;
   }
 
-  public void setIdDocument(Integer idDocument)
+  public void setIdDocumentId(Integer idDocument)
   {
-    this.idDocument = idDocument;
+    this.idDocumentId = idDocument;
   }
 
   public Integer getFitToWorkIssuedBy()
@@ -1540,7 +1540,7 @@ public class Applicant extends Base
     setBankSortCode(rs.getString("BANKSORTCODE"));
     setBankAccountName(rs.getString("BANKACCOUNTNAME"));
     setBankAccountNumber(rs.getString("BANKACCOUNTNUMBER"));
-    setIdDocument(rs.getInt("IDDOCUMENT"));
+    setIdDocumentId(rs.getInt("IDDOCUMENTID"));
     setLanguageCompetency(rs.getBoolean("LANGUAGECOMPETENCY"));
     setFitToWorkIssuedBy(rs.getInt("FITTOWORKISSUEDBY"));
     setIvsEppFilename(rs.getString("IVSEPPFILENAME"));
@@ -1656,7 +1656,7 @@ public class Applicant extends Base
     if (!validIdDocument)
     {
       // Has NO valid ID Document.
-      if (idDocument.equals(AgyConstants.ID_DOCUMENT_BRITISH_PASSPORT))
+      if (idDocumentId.equals(AgyConstants.ID_DOCUMENT_BRITISH_PASSPORT))
       {
         // A British Birth Certificate will do (apparently)...
         validIdDocument = getHasBirthCertificate();
@@ -1668,7 +1668,7 @@ public class Applicant extends Base
   public Boolean getHasRightToWork()
   {
     Boolean rightToWork = getHasValidIdDocument();
-    if (getIdDocument().equals(AgyConstants.BRITISH_ID_DOCUMENT))
+    if (getIdDocumentId().equals(AgyConstants.BRITISH_ID_DOCUMENT))
     {
       // British person...
       if (rightToWork == false)

@@ -18,7 +18,6 @@ import org.slf4j.ext.XLoggerFactory;
 import org.apache.struts.util.MessageResources;
 
 import com.helmet.api.AdminService;
-import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.FileHandler;
 import com.helmet.application.agy.abztract.AgyAction;
@@ -723,10 +722,10 @@ public abstract class AgencyWorkerChecklist extends AgyAction
     {
       // Both IdDocument Filename and IdDocument Number have been entered.
       verifiedIdText = messageResources.getMessage("label.applicantChecklist.idDocument");
-      if (applicant.getIdDocument() != null && applicant.getIdDocument() > 0)
+      if (applicant.getIdDocumentId() != null && applicant.getIdDocumentId() > 0)
       {
         AdminService adminService = ServiceFactory.getInstance().getAdminService();
-        IdDocument idDocumentType = adminService.getIdDocument(applicant.getIdDocument());
+        IdDocument idDocumentType = adminService.getIdDocument(applicant.getIdDocumentId());
         idDocumentExpiryDate = applicant.getIdDocumentExpiryDate()== null ? messageResources.getMessage("label.applicantChecklist.notGiven") : mdf.format(applicant.getIdDocumentExpiryDate());
         verifiedIdText += " (" + idDocumentType.getName() + ") " + messageResources.getMessage("label.applicantChecklist.expires") + ": " + idDocumentExpiryDate;;
       }

@@ -52,6 +52,8 @@ public class ApplicantSearchParameters
   private Integer areaOfSpecialityId2; 
   private String geographicalRegionIdOperator; 
   private Integer geographicalRegionId; 
+  private String idDocumentIdOperator;
+  private Integer idDocumentId;
   private String disciplineCategoryIdOperator;
   private Integer disciplineCategoryId;
   private String clientGroupOperator;
@@ -238,6 +240,22 @@ public class ApplicantSearchParameters
   public void setHasTuberculosisDocument(Boolean hasTuberculosisDocument)
   {
     this.hasTuberculosisDocument = hasTuberculosisDocument;
+  }
+  public String getIdDocumentIdOperator()
+  {
+    return idDocumentIdOperator;
+  }
+  public void setIdDocumentIdOperator(String idDocumentIdOperator)
+  {
+    this.idDocumentIdOperator = idDocumentIdOperator;
+  }
+  public Integer getIdDocumentId()
+  {
+    return idDocumentId;
+  }
+  public void setIdDocumentId(Integer idDocumentId)
+  {
+    this.idDocumentId = idDocumentId;
   }
   public String getDisciplineCategoryIdOperator()
   {

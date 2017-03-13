@@ -514,6 +514,8 @@
       <form-property name="areaOfSpecialityId2Operator" type="java.lang.String" />
       <form-property name="geographicalRegionId" type="java.lang.String" />
       <form-property name="geographicalRegionIdOperator" type="java.lang.String" />
+      <form-property name="idDocumentId" type="java.lang.String" />
+      <form-property name="idDocumentIdOperator" type="java.lang.String" />
       <form-property name="disciplineCategoryId" type="java.lang.String" />
       <form-property name="disciplineCategoryIdOperator" type="java.lang.String" />
       <form-property name="clientGroup" type="java.lang.String" />

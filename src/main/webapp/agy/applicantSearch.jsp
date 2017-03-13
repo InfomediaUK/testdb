@@ -105,6 +105,24 @@
 		      </html:select>
 		    </td>
 		  </tr>
+
+		  <tr>
+		    <th align="left" class="label"><bean:message key="label.idDocument"/></th>
+		    <td>
+		      <html:radio property="idDocumentIdOperator" value="<%= Constants.AND %>"/>
+		    </td>
+		    <td>
+		      <html:radio property="idDocumentIdOperator" value="<%= Constants.OR %>"/>
+		    </td>
+		    <td align="left">
+		      <mmj:idDocumentList var="idDocumentList" />
+		      <html:select property="idDocumentId">
+			    <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
+		        <html:options collection="idDocumentList" labelProperty="nameWithCode" property="idDocumentId" />
+		      </html:select>
+		    </td>
+		  </tr>
+
 		  <tr>
 		    <th align="left" class="label"><bean:message key="label.disciplineCategory"/></th>
 		    <td>

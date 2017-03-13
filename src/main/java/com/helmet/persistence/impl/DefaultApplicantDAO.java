@@ -198,7 +198,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     insertApplicantSQL.append("  BANKSORTCODE, ");
     insertApplicantSQL.append("  BANKACCOUNTNAME, ");
     insertApplicantSQL.append("  BANKACCOUNTNUMBER, ");
-    insertApplicantSQL.append("  IDDOCUMENT, ");
+    insertApplicantSQL.append("  IDDOCUMENTID, ");
     insertApplicantSQL.append("  LANGUAGECOMPETENCY, ");
     insertApplicantSQL.append("  FITTOWORKISSUEDBY, ");
     insertApplicantSQL.append("  IVSEPPFILENAME, ");
@@ -433,7 +433,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     updateApplicantSQL.append("     BANKSORTCODE = ^, ");
     updateApplicantSQL.append("     BANKACCOUNTNAME = ^, ");
     updateApplicantSQL.append("     BANKACCOUNTNUMBER = ^, ");
-    updateApplicantSQL.append("     IDDOCUMENT = ^, ");
+    updateApplicantSQL.append("     IDDOCUMENTID = ^, ");
     updateApplicantSQL.append("     LANGUAGECOMPETENCY = ^, ");
     updateApplicantSQL.append("     FITTOWORKISSUEDBY = ^, ");
     updateApplicantSQL.append("     IVSEPPFILENAME = ^, ");
@@ -646,7 +646,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       A.BANKSORTCODE, ");
     selectApplicantsSQL.append("       A.BANKACCOUNTNAME, ");
     selectApplicantsSQL.append("       A.BANKACCOUNTNUMBER, ");
-    selectApplicantsSQL.append("       A.IDDOCUMENT, ");
+    selectApplicantsSQL.append("       A.IDDOCUMENTID, ");
     selectApplicantsSQL.append("       A.LANGUAGECOMPETENCY, ");
     selectApplicantsSQL.append("       A.FITTOWORKISSUEDBY, ");
     selectApplicantsSQL.append("       A.IVSEPPFILENAME, ");
@@ -689,7 +689,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("LEFT OUTER JOIN DISCIPLINECATEGORY DC ON (DC.DISCIPLINECATEGORYID = A.DISCIPLINECATEGORYID) ");
     selectApplicantsSQL.append("LEFT OUTER JOIN REGULATOR R ON (DC.REGULATORID = R.REGULATORID) ");
     // NEW -->     ************** Colums do NOT have ID suffix ********************
-    selectApplicantsSQL.append("LEFT OUTER JOIN IDDOCUMENT ID ON (ID.IDDOCUMENTID = A.IDDOCUMENT) ");
+    selectApplicantsSQL.append("LEFT OUTER JOIN IDDOCUMENT ID ON (ID.IDDOCUMENTID = A.IDDOCUMENTID) ");
     selectApplicantsSQL.append("LEFT OUTER JOIN VISATYPE VT ON (VT.VISATYPEID = A.VISATYPE) ");
     // <-- NEW
 		// Get select Applicant SQL.
@@ -717,7 +717,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsToCopySQL.append("ORDER BY A.LASTNAME, A.FIRSTNAME ");
     // Get select Applicants for ID Document SQL.
     selectApplicantsForIdDocumentSQL = new StringBuffer(selectApplicantsSQL);
-    selectApplicantsForIdDocumentSQL.append("WHERE A.IDDOCUMENT = ^ ");
+    selectApplicantsForIdDocumentSQL.append("WHERE A.IDDOCUMENTID = ^ ");
     selectApplicantsForIdDocumentSQL.append("AND A.ACTIVE = TRUE ");
     selectApplicantsForIdDocumentSQL.append("AND A.ARCHIVED = FALSE ");
     selectApplicantsForIdDocumentSQL.append("ORDER BY A.LASTNAME, A.FIRSTNAME ");
@@ -1112,6 +1112,13 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
           applicantSearchParameters.getGeographicalRegionIdOperator(), 
           applicantSearchParameters.getGeographicalRegionId(), 
           "A.GEOGRAPHICALREGIONID");
+    }
+    if (applicantSearchParameters.getIdDocumentId() != 0)
+    {
+      integerColumn(applicantSearchParameters.getIdDocumentIdOperator().equals(Constants.AND) ? searchCriteriaAND : searchCriteriaOR, 
+          applicantSearchParameters.getIdDocumentIdOperator(), 
+          applicantSearchParameters.getIdDocumentId(), 
+          "A.IDDOCUMENTID");
     }
     if (applicantSearchParameters.getDisciplineCategoryId() != 0)
     {
@@ -1572,14 +1579,13 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getDrivingLicenseExpiryDate());
     Utilities.replace(sql, applicant.getFitToWorkStatus());
     Utilities.replace(sql, applicant.getAreaOfSpecialityId2());
-//    Utilities.replace(sql, applicant.getRequiresVisa());
     Utilities.replace(sql, applicant.getCurrentlyWorking());
     Utilities.replace(sql, applicant.getVatChargeable());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankName());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankSortCode());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankAccountName());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankAccountNumber());
-    Utilities.replace(sql, applicant.getIdDocument());
+    Utilities.replace(sql, applicant.getIdDocumentId());
     Utilities.replace(sql, applicant.getLanguageCompetency());
     Utilities.replace(sql, applicant.getFitToWorkIssuedBy());
     Utilities.replaceAndQuoteNullable(sql, applicant.getIvsEppFilename());
@@ -1693,7 +1699,6 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getDrivingLicenseExpiryDate());
     Utilities.replace(sql, applicant.getFitToWorkStatus());
     Utilities.replace(sql, applicant.getAreaOfSpecialityId2());
-//    Utilities.replace(sql, applicant.getRequiresVisa());
     Utilities.replace(sql, applicant.getRecentlyCompliant());
     Utilities.replace(sql, applicant.getCurrentlyWorking());
     Utilities.replace(sql, applicant.getVatChargeable());
@@ -1701,7 +1706,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankSortCode());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankAccountName());
     Utilities.replaceAndQuoteNullable(sql, applicant.getBankAccountNumber());
-    Utilities.replace(sql, applicant.getIdDocument());
+    Utilities.replace(sql, applicant.getIdDocumentId());
     Utilities.replace(sql, applicant.getLanguageCompetency());
     Utilities.replace(sql, applicant.getFitToWorkIssuedBy());
     Utilities.replaceAndQuoteNullable(sql, applicant.getIvsEppFilename());

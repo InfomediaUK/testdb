@@ -359,7 +359,7 @@
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.idDocument"/></th>
 					    <td align="left">
-                <html:select property="applicant.idDocument" tabindex="51">
+                <html:select property="applicant.idDocumentId" tabindex="51">
                   <html:option value="0"><bean:message key="label.pleaseSelect"/></html:option>
                   <html:options collection="idDocumentList" labelProperty="nameWithCodeAndRequiresVisa" property="idDocumentId" />
                 </html:select>

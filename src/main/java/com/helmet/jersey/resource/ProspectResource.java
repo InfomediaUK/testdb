@@ -144,7 +144,7 @@ public class ProspectResource
     applicant.setHpcAlertNotification(0);
     // <<<<< Can NOT be null.
     applicant.setDisciplineCategoryId(prospect.getDisciplineId());
-    applicant.setIdDocument(prospect.getIdDocumentId());
+    applicant.setIdDocumentId(prospect.getIdDocumentId());
     applicant.setVisaType(prospect.getVisaId());
     applicant.setMobileNumber(prospect.getMobileTelephone());
     applicant.setTelephoneNumber(prospect.getMobileTelephone());
