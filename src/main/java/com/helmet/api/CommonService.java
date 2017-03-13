@@ -316,4 +316,6 @@ public interface CommonService {
   public List<VisaType> getVisaTypes(boolean showOnlyActive);
   public List<Regulator> getRegulators(boolean showOnlyActive);
 
+  public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant);
+
 }

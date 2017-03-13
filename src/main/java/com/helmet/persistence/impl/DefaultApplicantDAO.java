@@ -46,6 +46,8 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
   private static StringBuffer selectApplicantsForAgencySQL;
 
   private static StringBuffer selectApplicantsToCopySQL;
+  
+  private static StringBuffer selectApplicantsForIdDocumentSQL;
 
 	private static StringBuffer selectActiveApplicantsForAgencySQL;
 
@@ -713,6 +715,12 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsToCopySQL.append("   AND   B.AGENCYID = ^ ");
     selectApplicantsToCopySQL.append(") ");
     selectApplicantsToCopySQL.append("ORDER BY A.LASTNAME, A.FIRSTNAME ");
+    // Get select Applicants for ID Document SQL.
+    selectApplicantsForIdDocumentSQL = new StringBuffer(selectApplicantsSQL);
+    selectApplicantsForIdDocumentSQL.append("WHERE A.IDDOCUMENT = ^ ");
+    selectApplicantsForIdDocumentSQL.append("AND A.ACTIVE = TRUE ");
+    selectApplicantsForIdDocumentSQL.append("AND A.ARCHIVED = FALSE ");
+    selectApplicantsForIdDocumentSQL.append("ORDER BY A.LASTNAME, A.FIRSTNAME ");
     // Get select Applicants for NHS Staff Name SQL.
     selectApplicantsForNhsStaffNameSQL = new StringBuffer(selectApplicantsForAgencySQL);
     selectApplicantsForNhsStaffNameSQL.append("AND NHSSTAFFNAME = ^ ");
@@ -1441,6 +1449,15 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     // Replace the parameters with supplied values.
     Utilities.replace(sql, sourceAgencyId);
     Utilities.replace(sql, targetAgencyId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Applicant.class.getName());
+  }
+
+  public List<Applicant> getApplicantsForIdDocument(Integer idDocumentId)
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectApplicantsForIdDocumentSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, idDocumentId);
     return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Applicant.class.getName());
   }
 

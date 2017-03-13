@@ -12,6 +12,7 @@
 <br/>
 <html:errors/>
 <html:form action="idDocumentEditProcess.do" focus="idDocument.name">
+	<html:hidden name="IdDocumentFormAdmin" property="originalRequiresVisa"/>
 	<html:hidden name="IdDocumentFormAdmin" property="idDocument.idDocumentId"/>
 	<html:hidden name="IdDocumentFormAdmin" property="idDocument.noOfChanges"/>
 	<table>

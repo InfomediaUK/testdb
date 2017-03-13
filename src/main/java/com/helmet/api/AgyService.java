@@ -118,7 +118,6 @@ public interface AgyService extends CommonService {
 	public int updateApplicant(Applicant applicant, Integer auditorId);
   public int archiveApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId);
   public int unarchiveApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId);
-  public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant);
   public int deleteApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId);
 
   public BookingGradeApplicantUser getBookingGradeApplicantUser(Integer bookingGradeApplicantId);

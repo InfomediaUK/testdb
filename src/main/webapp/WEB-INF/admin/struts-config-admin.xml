@@ -48,6 +48,7 @@
     </form-bean>
     <form-bean name="IdDocumentFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="idDocument" type="com.helmet.bean.IdDocument" />
+      <form-property name="originalRequiresVisa" type="java.lang.Boolean" />
     </form-bean>
     <form-bean name="VisaTypeFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="visaType" type="com.helmet.bean.VisaType" />

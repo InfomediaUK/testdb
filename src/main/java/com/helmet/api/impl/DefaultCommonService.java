@@ -14,6 +14,7 @@ import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.bean.Agency;
 import com.helmet.bean.AgencyInvoice;
 import com.helmet.bean.AgencyUser;
+import com.helmet.bean.Applicant;
 import com.helmet.bean.AreaOfSpeciality;
 import com.helmet.bean.Booking;
 import com.helmet.bean.BookingDate;
@@ -81,6 +82,7 @@ import com.helmet.bean.VisaType;
 import com.helmet.persistence.AgencyDAO;
 import com.helmet.persistence.AgencyInvoiceCreditDAO;
 import com.helmet.persistence.AgencyInvoiceDAO;
+import com.helmet.persistence.ApplicantDAO;
 import com.helmet.persistence.AreaOfSpecialityDAO;
 import com.helmet.persistence.BookingDAO;
 import com.helmet.persistence.BookingDateDAO;
@@ -129,6 +131,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public abstract class DefaultCommonService implements CommonService {
 	
+  private ApplicantDAO applicantDAO;
+
   private AreaOfSpecialityDAO areaOfSpecialityDAO;
   
   private GeographicalRegionDAO geographicalRegionDAO;
@@ -221,6 +225,16 @@ public abstract class DefaultCommonService implements CommonService {
   
   private NhsBackingReportDAO nhsBackingReportDAO;
   
+  public ApplicantDAO getApplicantDAO()
+  {
+    return applicantDAO;
+  }
+
+  public void setApplicantDAO(ApplicantDAO applicantDAO)
+  {
+    this.applicantDAO = applicantDAO;
+  }
+
   public AreaOfSpecialityDAO getAreaOfSpecialityDAO()
   {
     return areaOfSpecialityDAO;
@@ -3142,5 +3156,12 @@ public abstract class DefaultCommonService implements CommonService {
     regulators = regulatorDAO.getRegulators(showOnlyActive);
     return regulators;
   }
+
+  public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant) 
+  {
+    int rc = applicantDAO.compliantApplicant(applicantId, noOfChanges, auditorId, compliant);
+    return rc;
+  }
+
 
 }

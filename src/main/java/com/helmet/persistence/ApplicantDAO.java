@@ -24,6 +24,7 @@ public interface ApplicantDAO
   public List<Applicant> getApplicantsForAgencyTrainingAboutToExpire(Integer agencyId, Date dateToCheck);
   public List<Applicant> getApplicantsForAgencyVisaAboutToExpire(Integer agencyId, Date dateToCheck);
   public List<Applicant> getApplicantsToCopy(Integer sourceAgencyId, Integer targetAgencyId);
+  public List<Applicant> getApplicantsForIdDocument(Integer idDocumentId);
   
   public List<Applicant> getApplicantsForAgencyReference1NotSatisfied(Integer agencyId, Date dateToday);
   public List<Applicant> getApplicantsForAgencyReference2NotSatisfied(Integer agencyId, Date dateToday);

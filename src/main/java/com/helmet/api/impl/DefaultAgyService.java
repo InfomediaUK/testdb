@@ -67,7 +67,6 @@ import com.helmet.bean.SubcontractInvoiceItemUser;
 import com.helmet.bean.SubcontractInvoiceUser;
 import com.helmet.bean.Unavailable;
 import com.helmet.persistence.AgyAccessDAO;
-import com.helmet.persistence.ApplicantDAO;
 import com.helmet.persistence.BookingDateExpenseDAO;
 import com.helmet.persistence.BookingDateHourDAO;
 import com.helmet.persistence.ConsultantDAO;
@@ -81,8 +80,6 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 	private ConsultantDAO consultantDAO;
 
 	private AgyAccessDAO agyAccessDAO;
-
-	private ApplicantDAO applicantDAO;
 
 	private BookingDateExpenseDAO bookingDateExpenseDAO;
 
@@ -100,10 +97,6 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 
 	public void setAgyAccessDAO(AgyAccessDAO agyAccessDAO) {
 		this.agyAccessDAO = agyAccessDAO;
-	}
-
-	public void setApplicantDAO(ApplicantDAO applicantDAO) {
-		this.applicantDAO = applicantDAO;
 	}
 
 	public void setBookingDateExpenseDAO(BookingDateExpenseDAO bookingDateExpenseDAO) {
@@ -217,143 +210,143 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
   public List<Applicant> getApplicantsForAgency(Integer agencyId) {
 
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgency(agencyId, true);
+    applicants = getApplicantDAO().getApplicantsForAgency(agencyId, true);
     return applicants;
   }
 
   public List<Applicant> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive) 
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencySearch(agencyId, applicantSearchParameters, showOnlyActive);
+    applicants = getApplicantDAO().getApplicantsForAgencySearch(agencyId, applicantSearchParameters, showOnlyActive);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId) {
 
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyInLastNameGroup(agencyId, "A", true);
+    applicants = getApplicantDAO().getApplicantsForAgencyInLastNameGroup(agencyId, "A", true);
     return applicants;
   }
   public List<Applicant> getApplicantsForNhsStaffName(Integer agencyId, String nhsStaffName) 
   {
 
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForNhsStaffName(agencyId, nhsStaffName);
+    applicants = getApplicantDAO().getApplicantsForNhsStaffName(agencyId, nhsStaffName);
     return applicants;
   }
 //NEW -->
   public List<Applicant> getWorkingApplicantsForAgency(Integer agencyId) 
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgency(agencyId, false);
+    applicants = getApplicantDAO().getApplicantsForAgency(agencyId, false);
     return applicants;
   }
 //<-- NEW  
   public List<Applicant> getApplicantsForAgencyNew(Integer agencyId, Date dateToday)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyNew(agencyId, dateToday);
+    applicants = getApplicantDAO().getApplicantsForAgencyNew(agencyId, dateToday);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyCrbAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyCrbAboutToExpire(agencyId, dateToCheck);
+    applicants = getApplicantDAO().getApplicantsForAgencyCrbAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyDbsAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyDbsAboutToExpire(agencyId, dateToCheck);
+    applicants = getApplicantDAO().getApplicantsForAgencyDbsAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyFitToWorkAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyFitToWorkAboutToExpire(agencyId, dateToCheck);
+    applicants = getApplicantDAO().getApplicantsForAgencyFitToWorkAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyHpcAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyHpcAboutToExpire(agencyId, dateToCheck);
+    applicants = getApplicantDAO().getApplicantsForAgencyHpcAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyIdDocumentAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyIdDocumentAboutToExpire(agencyId, dateToCheck);
+    applicants = getApplicantDAO().getApplicantsForAgencyIdDocumentAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyTrainingAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyTrainingAboutToExpire(agencyId, dateToCheck);
+    applicants = getApplicantDAO().getApplicantsForAgencyTrainingAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyVisaAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyVisaAboutToExpire(agencyId, dateToCheck);
+    applicants = getApplicantDAO().getApplicantsForAgencyVisaAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyReference1NotSatisfied(Integer agencyId, Date dateToday)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyReference1NotSatisfied(agencyId, dateToday);
+    applicants = getApplicantDAO().getApplicantsForAgencyReference1NotSatisfied(agencyId, dateToday);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyReference2NotSatisfied(Integer agencyId, Date dateToday)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyReference2NotSatisfied(agencyId, dateToday);
+    applicants = getApplicantDAO().getApplicantsForAgencyReference2NotSatisfied(agencyId, dateToday);
     return applicants;
   }
   public List<Applicant> getApplicantsForAgencyDrivingLicenseAboutToExpire(Integer agencyId, Date dateToCheck)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyDrivingLicenseAboutToExpire(agencyId, dateToCheck);
+    applicants = getApplicantDAO().getApplicantsForAgencyDrivingLicenseAboutToExpire(agencyId, dateToCheck);
     return applicants;
   }
 
   public List<Applicant> getApplicantsForAgencyUnarchived(Integer agencyId)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyUnarchived(agencyId);
+    applicants = getApplicantDAO().getApplicantsForAgencyUnarchived(agencyId);
     return applicants;
   }
   
   public List<Applicant> getApplicantsForAgencyRecentlyCompliant(Integer agencyId)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyRecentlyCompliant(agencyId);
+    applicants = getApplicantDAO().getApplicantsForAgencyRecentlyCompliant(agencyId);
     return applicants;
   }
   
   public List<Applicant> getApplicantsForAgencyRecentProspect(Integer agencyId)
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyRecentProspect(agencyId);
+    applicants = getApplicantDAO().getApplicantsForAgencyRecentProspect(agencyId);
     return applicants;
   }
   
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId, String indexLetter) {
 
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyInLastNameGroup(agencyId, indexLetter, true);
+    applicants = getApplicantDAO().getApplicantsForAgencyInLastNameGroup(agencyId, indexLetter, true);
     return applicants;
   }
 
   public List<Applicant> getWorkingApplicantsForAgency(Integer agencyId, String indexLetter) 
   {
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgency(agencyId, false);
+    applicants = getApplicantDAO().getApplicantsForAgency(agencyId, false);
     return applicants;
   }
 
   public List<Applicant> getApplicantsForAgencyAndNotForBookingGrade(Integer agencyId, Integer bookingGradeId) {
 
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyAndNotForBookingGrade(agencyId, bookingGradeId);
+    applicants = getApplicantDAO().getApplicantsForAgencyAndNotForBookingGrade(agencyId, bookingGradeId);
     return applicants;
 
   }
@@ -362,7 +355,7 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
   {
 
     List<Applicant> applicants = null;
-    applicants = applicantDAO.getApplicantsForAgencyAndNotForBookingGradeInLastNameGroup(agencyId, bookingGradeId, indexLetter);
+    applicants = getApplicantDAO().getApplicantsForAgencyAndNotForBookingGradeInLastNameGroup(agencyId, bookingGradeId, indexLetter);
     return applicants;
 
   }
@@ -370,7 +363,7 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 	public Applicant getApplicant(Integer applicantId) {
 		
 		Applicant applicant = null;
-    	applicant = applicantDAO.getApplicant(applicantId);
+    	applicant = getApplicantDAO().getApplicant(applicantId);
 		return applicant;
 		
 	}
@@ -378,54 +371,48 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
   public List<ApplicantClientBooking> getApplicantClientBookings(Integer applicantId, Integer clientId, Integer agencyId, Date searchDate) 
   {
     List<ApplicantClientBooking> applicantClientBookings = null;
-    applicantClientBookings = applicantDAO.getApplicantClientBookings(applicantId, clientId, agencyId, searchDate);
+    applicantClientBookings = getApplicantDAO().getApplicantClientBookings(applicantId, clientId, agencyId, searchDate);
     return applicantClientBookings;
   }
 
 	public int insertApplicant(Applicant applicant, Integer auditorId) {
 
-		Applicant duplicateApplicant = applicantDAO.getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
+		Applicant duplicateApplicant = getApplicantDAO().getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
 		if (duplicateApplicant != null) {
 			throw new DuplicateDataException("login");
 		}
-        int rc = applicantDAO.insertApplicant(applicant, auditorId);
+        int rc = getApplicantDAO().insertApplicant(applicant, auditorId);
 		return rc;
 
 	}
 
 	public int updateApplicant(Applicant applicant, Integer auditorId) {
 
-		Applicant duplicateApplicant = applicantDAO.getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
+		Applicant duplicateApplicant = getApplicantDAO().getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
 		if (duplicateApplicant != null &&
 			!duplicateApplicant.getApplicantId().equals(applicant.getApplicantId())) {
 			throw new DuplicateDataException("login");
 		}
-        int rc = applicantDAO.updateApplicant(applicant, auditorId);
+        int rc = getApplicantDAO().updateApplicant(applicant, auditorId);
 		return rc;
 
 	}
 
   public int archiveApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId) 
   {
-    int rc = applicantDAO.archiveApplicant(applicantId, noOfChanges, auditorId);
+    int rc = getApplicantDAO().archiveApplicant(applicantId, noOfChanges, auditorId);
     return rc;
   }
 
   public int unarchiveApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId) 
   {
-    int rc = applicantDAO.unarchiveApplicant(applicantId, noOfChanges, auditorId);
-    return rc;
-  }
-
-  public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant) 
-  {
-    int rc = applicantDAO.compliantApplicant(applicantId, noOfChanges, auditorId, compliant);
+    int rc = getApplicantDAO().unarchiveApplicant(applicantId, noOfChanges, auditorId);
     return rc;
   }
 
   public int deleteApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId) 
   {
-    int rc = applicantDAO.deleteApplicant(applicantId, noOfChanges, auditorId);
+    int rc = getApplicantDAO().deleteApplicant(applicantId, noOfChanges, auditorId);
     return rc;
   }
 
@@ -1670,20 +1657,20 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 
     public int updateApplicantChecklistCreatedTime(Integer applicantId, Integer noOfChanges, Integer auditorId, Date checklistCreatedTime) 
     {
-      int rc = applicantDAO.updateApplicantChecklistCreatedTime(applicantId, noOfChanges, auditorId, checklistCreatedTime);
+      int rc = getApplicantDAO().updateApplicantChecklistCreatedTime(applicantId, noOfChanges, auditorId, checklistCreatedTime);
       return rc;
     }
       
     public int updateApplicantSecretWord(Integer applicantId, String newSecretWord, Integer noOfChanges, Integer auditorId) {
 
-      int rc = applicantDAO.updateApplicantSecretWord(applicantId, newSecretWord, noOfChanges, auditorId);
+      int rc = getApplicantDAO().updateApplicantSecretWord(applicantId, newSecretWord, noOfChanges, auditorId);
       return rc;
     
     }
       
   public int updateApplicantPassword(Integer applicantId, String newPwd, String pwdHint, Integer noOfChanges, Integer auditorId)
   {
-    int rc = applicantDAO.updateApplicantPwd(applicantId, newPwd, pwdHint, noOfChanges, auditorId);
+    int rc = getApplicantDAO().updateApplicantPwd(applicantId, newPwd, pwdHint, noOfChanges, auditorId);
     return rc;
   }
   

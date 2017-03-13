@@ -82,6 +82,7 @@ public interface AdminService extends CommonService {
   // <-- NEW
   // NEW -->
   public List<Applicant> getApplicantsToCopy(Integer sourceAgencyId, Integer targetAgencyId);
+  public List<Applicant> getApplicantsForIdDocument(Integer idDocumentId); 
   public Applicant getApplicant(Integer applicantId);
   public int insertApplicant(Applicant applicant, Integer auditorId);
   public NhsBackingReport getNhsBackingReport(Integer nhsBackingReportId);

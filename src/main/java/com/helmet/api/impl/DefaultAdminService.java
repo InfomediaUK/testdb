@@ -121,20 +121,8 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
 	
 	private BudgetTransactionDAO budgetTransactionDAO;
 	
-  private ApplicantDAO applicantDAO;
-
   private BookingGradeApplicantDAO bookingGradeApplicantDAO;
   
-  public ApplicantDAO getApplicantDAO()
-  {
-    return applicantDAO;
-  }
-
-  public void setApplicantDAO(ApplicantDAO applicantDAO)
-  {
-    this.applicantDAO = applicantDAO;
-  }
-
 	public void setAdministratorDAO(AdministratorDAO administratorDAO) {
 		this.administratorDAO = administratorDAO;
 	}
@@ -417,7 +405,7 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
   public Applicant getApplicant(Integer applicantId) 
   {
     Applicant applicant = null;
-    applicant = applicantDAO.getApplicant(applicantId);
+    applicant = getApplicantDAO().getApplicant(applicantId);
     return applicant;
   }
 
@@ -428,14 +416,21 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     return applicantsToCopy;
   }
 
+  public List<Applicant> getApplicantsForIdDocument(Integer idDocumentId) 
+  {
+    List<Applicant> applicants = null;
+    applicants = getApplicantDAO().getApplicantsForIdDocument(idDocumentId);
+    return applicants;
+  }
+
   public int insertApplicant(Applicant applicant, Integer auditorId) 
   {
-    Applicant duplicateApplicant = applicantDAO.getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
+    Applicant duplicateApplicant = getApplicantDAO().getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
     if (duplicateApplicant != null) 
     {
       throw new DuplicateDataException("login");
     }
-    int rc = applicantDAO.insertApplicant(applicant, auditorId);
+    int rc = getApplicantDAO().insertApplicant(applicant, auditorId);
     return rc;
   }
   

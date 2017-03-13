@@ -29,6 +29,7 @@ public class IdDocumentEdit extends AdminAction
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
     idDocument = adminService.getIdDocument(idDocument.getIdDocumentId());
     dynaForm.set("idDocument", idDocument);
+    dynaForm.set("originalRequiresVisa", idDocument.getRequiresVisa());
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }
