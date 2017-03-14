@@ -187,7 +187,7 @@ public abstract class AgencyWorkerChecklist extends AgyAction
       {
         agencyInvoiceLogo = Image.getInstance(fileName);
       }
-      fileName = FileHandler.getInstance().getFileLocation() + applicant.getPhotoDocumentUrl();
+      fileName = FileHandler.getInstance().getFileLocation() + applicant.getPhotoFileUrl();
       File applicantPhotoFile = new File(fileName);
       if (applicantPhotoFile.exists())
       {

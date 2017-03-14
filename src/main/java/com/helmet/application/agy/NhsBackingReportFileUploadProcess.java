@@ -723,6 +723,12 @@ public class NhsBackingReportFileUploadProcess extends NhsFileUploadCommon
       errorMessage = messageResources.getMessage("error.nhsBackingReport.nhsBookingHasSubcontractInvoice", nhsBooking.getBankReqNum(), nhsBooking.getSubcontractInvoiceNumber());
       backingReportLine.alreadyInvoiced(new BackingReportLineError(errorMessage));
     }
+    if (nhsBooking.getValue().equals(BigDecimal.ZERO))
+    {
+      // NHS Booking has Zero Value.
+      errorMessage = messageResources.getMessage("error.nhsBackingReport.nhsBookingHasZeroValue", nhsBooking.getBankReqNum());
+      backingReportLine.setBookingInvalid(new BackingReportLineError(errorMessage));
+    }
     if (!backingReportLine.getDate().equals(nhsBooking.getDate()))
     {
       // Date on Backing Report is NOT the same as the Date on the NHS Booking.

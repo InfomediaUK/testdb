@@ -142,6 +142,7 @@
         <entry key="applicant.hasCurrentFitToWork" value="TRUE"/>
         <entry key="applicant.hasValidProfessionalRegistration" value="TRUE"/>
         <entry key="applicant.hasValidIdDocument" value="TRUE"/>
+        <entry key="applicant.hasPhoto" value="TRUE"/>
         <entry key="applicant.hasCurrentTraining" value="TRUE"/>
         <entry key="applicant.hasCurrentVisa" value="TRUE"/>
         <entry key="applicant.hasProofOfAddress1" value="TRUE"/>

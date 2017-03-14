@@ -333,15 +333,6 @@ public class Applicant extends Base
     return gender == 'M' ? "label.male" : "label.female";
   }
 
-  /**
-   * Deprcated. Use getPhotoFileUrl() instead.
-   * @return
-   */
-  public String getPhotoDocumentUrl()
-  {
-    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + photoFilename;
-  }
-
   public String getPhotoFileUrl()
   {
     return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + photoFilename;
@@ -1587,7 +1578,7 @@ public class Applicant extends Base
     today = calendar.getTime();
     if (dbsRenewalDate != null && dbsRenewalDate.before(today))
     {
-      // DBS overides CRB Expiry Date as it nolonger expires...
+      // DBS overrides CRB Expiry Date as it no longer expires...
       return false; 
     }
     if (crbIssueDate != null && crbExpiryDate != null)
@@ -1821,6 +1812,12 @@ public class Applicant extends Base
   {
     // True: Must have degree flag set. ***** Maybe needs degreeDetail entered too. *****
     return degree;
+  }
+  
+  public Boolean getHasPhoto()
+  {
+    // True: Must have photo file name entered.
+    return StringUtils.isNotEmpty(photoFilename);
   }
   
   public Boolean getHasBirthCertificate()
