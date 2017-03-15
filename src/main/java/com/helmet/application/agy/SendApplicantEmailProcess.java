@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -218,7 +219,6 @@ public class SendApplicantEmailProcess extends SendEmailProcess
       if (StringUtils.isNotEmpty(emailAction.getDependsOn()))
       {
         // Email Action depends on specific field being non-null on Applicant.
-        String dependsOn     = emailAction.getDependsOn();
         Class applicantClass = applicant.getClass();
         Class userClass      = applicant.getUser().getClass();
         Class addressClass   = applicant.getAddress().getClass();
@@ -226,89 +226,96 @@ public class SendApplicantEmailProcess extends SendEmailProcess
         Method method        = null;
         String methodName    = null;
         Object value         = null;
-        try
+        List<String> listDependsOn = Arrays.asList(emailAction.getDependsOn().split("\\s*,\\s*"));
+        for (String dependsOn : listDependsOn)
         {
-          // The matcher.group() will be something like %fullName% and the method will be: getFullName.
-          methodName = "get" + StringUtils.capitalize(dependsOn.substring(dependsOn.lastIndexOf(".") + 1));
-          logger.debug("methodName {}", methodName);
-          int dotCount = StringUtils.countMatches(dependsOn, ".");
-          if (dotCount == 1)
+          try
           {
-            // Eg. applicant.crbExpiryDate
-            method = applicantClass.getMethod(methodName, new Class[] {});
-            sourceObject = applicant;
-          }
-          else
-          {
-            // Has 2 dots. Eg. applicant.user.fullName or applicant.address.postalCode 
-            if (dependsOn.substring(dependsOn.indexOf(".") + 1, dependsOn.lastIndexOf(".")).equalsIgnoreCase("user"))
+            // The matcher.group() will be something like %fullName% and the method will be: getFullName.
+            methodName = "get" + StringUtils.capitalize(dependsOn.substring(dependsOn.lastIndexOf(".") + 1));
+            logger.debug("methodName {}", methodName);
+            int dotCount = StringUtils.countMatches(dependsOn, ".");
+            if (dotCount == 1)
             {
-              // User method.
-              method = userClass.getMethod(methodName, new Class[] {});
-              sourceObject = applicant.getUser();
+              // Eg. applicant.crbExpiryDate
+              method = applicantClass.getMethod(methodName, new Class[] {});
+              sourceObject = applicant;
             }
             else
             {
-              // Address method.
-              method = addressClass.getMethod(methodName, new Class[] {});
-              sourceObject = applicant.getAddress();
+              // Has 2 dots. Eg. applicant.user.fullName or applicant.address.postalCode 
+              if (dependsOn.substring(dependsOn.indexOf(".") + 1, dependsOn.lastIndexOf(".")).equalsIgnoreCase("user"))
+              {
+                // User method.
+                method = userClass.getMethod(methodName, new Class[] {});
+                sourceObject = applicant.getUser();
+              }
+              else
+              {
+                // Address method.
+                method = addressClass.getMethod(methodName, new Class[] {});
+                sourceObject = applicant.getAddress();
+              }
+            }
+            if (method.getReturnType() == String.class)
+            {
+              value = (String)method.invoke(sourceObject, new Object[0]);
+            }
+            else
+              if (method.getReturnType() == Integer.class)
+              {
+                value = (Integer)method.invoke(sourceObject, new Object[0]);
+              }
+              else
+                if (method.getReturnType() == Date.class)
+                {
+                  value = (Date)method.invoke(sourceObject, new Object[0]);
+                }
+            if (value == null)
+            {
+              String label = messageResources.getMessage("label." + dependsOn.substring(dependsOn.lastIndexOf(".") + 1));
+              emailActionResult.setMessage(messageResources.getMessage("errors.emailAction.DependsOn", label == null ? dependsOn : label));
+              status = false;
             }
           }
-          if (method.getReturnType() == String.class)
+          catch (SecurityException e)
           {
-            value = (String)method.invoke(sourceObject, new Object[0]);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
           }
-          else if (method.getReturnType() == Integer.class)
+          catch (NoSuchMethodException e)
           {
-            value = (Integer)method.invoke(sourceObject, new Object[0]);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
           }
-          else if (method.getReturnType() == Date.class)
+          catch (IllegalArgumentException e)
           {
-            value = (Date)method.invoke(sourceObject, new Object[0]);
+            // TODO Auto-generated catch block
+            e.printStackTrace();
           }
-          if (value == null)
+          catch (IllegalAccessException e)
           {
-            String label = messageResources.getMessage("label." + dependsOn.substring(dependsOn.lastIndexOf(".") + 1));
-            emailActionResult.setMessage(messageResources.getMessage("errors.emailAction.DependsOn", label == null ? dependsOn : label));
-            status = false;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
           }
-        }
-        catch (SecurityException e)
-        {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-        catch (NoSuchMethodException e)
-        {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-        catch (IllegalArgumentException e)
-        {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-        catch (IllegalAccessException e)
-        {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-        catch (InvocationTargetException e)
-        {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
+          catch (InvocationTargetException e)
+          {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          } 
         }
       }
-      if (emailAction.getEmailActionId().equals(AgyConstants.EMAIL_ACTION_ID_PROFESSIONAL_REGISTRATION_EXPIRY_DATE))
-      {
-        // Professional Registration Expiry Date...
-        if (StringUtils.isEmpty(applicant.getRegulatorName()))
-        {
-          // Applicant does NOT have Professional Registration.
-          emailActionResult.setMessage(messageResources.getMessage("errors.emailAction.noProfessionalRegistration"));
-          status = false;
-        }
-      }
+// NOW WE HAVE MULTIPLE DEPENDS ON. Eg. applicant.registrationExpiryDate applicant.regulatorName
+//      if (emailAction.getEmailActionId().equals(AgyConstants.EMAIL_ACTION_ID_PROFESSIONAL_REGISTRATION_EXPIRY_DATE))
+//      {
+//        // Professional Registration Expiry Date...
+//        if (StringUtils.isEmpty(applicant.getRegulatorName()))
+//        {
+//          // Applicant does NOT have Professional Registration.
+//          emailActionResult.setMessage(messageResources.getMessage("errors.emailAction.noProfessionalRegistration"));
+//          status = false;
+//        }
+//      }
     }
     return status;
   }
