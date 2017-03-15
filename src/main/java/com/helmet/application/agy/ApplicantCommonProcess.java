@@ -52,13 +52,15 @@ public abstract class ApplicantCommonProcess extends AgyAction
   
   protected void prepareApplicant(Applicant applicant, AgyService agyService)
   {
-    if (applicant.getIdDocumentId() != null)
+    if (!applicant.getIdDocumentId().equals(0))
     {
+      // Id Document NOT entered...
       IdDocument idDocument = agyService.getIdDocument(applicant.getIdDocumentId());
       applicant.setRequiresVisa(idDocument.getRequiresVisa());
     }
-    if (applicant.getDisciplineCategoryId() != null)
+    if (!applicant.getDisciplineCategoryId().equals(0))
     {
+      // Discipline Category NOT entered...
       DisciplineCategoryUser disciplineCategory = agyService.getDisciplineCategoryUser(applicant.getDisciplineCategoryId());
       applicant.setRegulatorName(disciplineCategory.getRegulatorName());
       applicant.setRegulatorCode(disciplineCategory.getRegulatorCode());
