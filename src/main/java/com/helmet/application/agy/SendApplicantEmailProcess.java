@@ -43,8 +43,8 @@ public class SendApplicantEmailProcess extends SendEmailProcess
                                  HttpServletRequest request,
                                  HttpServletResponse response) 
   {
-    DynaValidatorForm dynaForm  = (DynaValidatorForm) form;
     logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm  = (DynaValidatorForm) form;
     EmailAction emailAction     = null;
     StringBuffer textTemplate   = new StringBuffer();
     StringBuffer htmlTemplate   = new StringBuffer();
@@ -172,6 +172,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
   
   protected MimeMultipart buildMimeMultipart(HttpServletRequest request, Applicant applicant, StringBuffer textTemplate, StringBuffer htmlTemplate, String attachment, MessageResources messageResources)
   {
+    logger.debug("buildMimeMultipart() {}", applicant.getFullName());
     StringBuffer content = new StringBuffer();
     StringBuffer htmlContent = new StringBuffer();
     emailTop(htmlContent, FileHandler.getInstance().getEmailTemplateRealPath("/agy/site.css"));
@@ -203,6 +204,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
   
   private boolean validateApplicant(Applicant applicant, EmailAction emailAction, EmailActionResult emailActionResult, MessageResources messageResources)
   {
+    logger.debug("validateApplicant() {}", applicant.getFullName());
     boolean status = true;
     if (StringUtils.isEmpty(applicant.getUser().getEmailAddress()))
     {
@@ -228,6 +230,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
         {
           // The matcher.group() will be something like %fullName% and the method will be: getFullName.
           methodName = "get" + StringUtils.capitalize(dependsOn.substring(dependsOn.lastIndexOf(".") + 1));
+          logger.debug("methodName {}", methodName);
           int dotCount = StringUtils.countMatches(dependsOn, ".");
           if (dotCount == 1)
           {
@@ -302,6 +305,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
   
   private StringBuffer processTagSubstitution(Agency agency, Applicant applicant, StringBuffer template, MessageResources messageResources)
   {
+    logger.debug("processTagSubstitution() {}", applicant.getFullName());
     StringBuffer content = new StringBuffer(template);
     Class agencyClass    = agency.getClass();
     Class applicantClass = applicant.getClass();
@@ -321,11 +325,13 @@ public class SendApplicantEmailProcess extends SendEmailProcess
       tag = matcher.group().substring(1, matcher.group().length() - 1);
       // Class Name will be agency or applicant.
       sourceName = tag.substring(0, tag.indexOf("."));
+      logger.debug("sourceName {}", sourceName);
       index = content.indexOf(matcher.group());
       try
       {
         // The matcher.group() will be something like %fullName% and the method will be: getFullName.
         methodName = "get" + StringUtils.capitalize(tag.substring(tag.lastIndexOf(".") + 1));
+        logger.debug("methodName {}", methodName);
         int dotCount = StringUtils.countMatches(tag, ".");
         if (dotCount == 1)
         {
@@ -371,7 +377,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
           String value = (String)method.invoke(sourceObject, new Object[0]);
           if (value == null)
           {
-            content.replace(index, index + matcher.group().length(), messageResources.getMessage("label.emailWarningNoData"));
+            content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
           }
           else
           {
@@ -383,7 +389,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
           Integer value = (Integer)method.invoke(sourceObject, new Object[0]);
           if (value == null)
           {
-            content.replace(index, index + matcher.group().length(), messageResources.getMessage("label.emailWarningNoData"));
+            content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
           }
           else
           {
@@ -395,7 +401,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
           Date value = (Date)method.invoke(sourceObject, new Object[0]);
           if (value == null)
           {
-            content.replace(index, index + matcher.group().length(), messageResources.getMessage("label.emailWarningNoData"));
+            content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
           }
           else
           {
