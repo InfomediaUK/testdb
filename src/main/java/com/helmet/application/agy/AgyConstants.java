@@ -21,6 +21,7 @@ public final class AgyConstants {
   public static final Integer BACKING_REPORT_NAME_MINIMUM_LENGTH = 5;
   public static final Integer BACKING_REPORT_NAME_MAXIMUM_LENGTH = 8;
   //
+  public static final Integer EMAIL_ACTION_ID_PROFESSIONAL_REGISTRATION_EXPIRY_DATE = 3;
   public static final Integer EMAIL_ACTION_ID_NHS_BOOKING_CLOSED_NOTIFICATION = 15;
   public static final Integer EMAIL_ACTION_ID_NEW_APPLICANT_INTERVIEW_NOTIFICATION = 16;
   public static final Integer EMAIL_ACTION_ID_DBS_EXPIRY_NOTIFICATION = 17;

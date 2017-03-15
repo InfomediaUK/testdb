@@ -299,6 +299,16 @@ public class SendApplicantEmailProcess extends SendEmailProcess
           e.printStackTrace();
         }
       }
+      if (emailAction.getEmailActionId().equals(AgyConstants.EMAIL_ACTION_ID_PROFESSIONAL_REGISTRATION_EXPIRY_DATE))
+      {
+        // Professional Registration Expiry Date...
+        if (StringUtils.isEmpty(applicant.getRegulatorName()))
+        {
+          // Applicant does NOT have Professional Registration.
+          emailActionResult.setMessage(messageResources.getMessage("errors.emailAction.noProfessionalRegistration"));
+          status = false;
+        }
+      }
     }
     return status;
   }
