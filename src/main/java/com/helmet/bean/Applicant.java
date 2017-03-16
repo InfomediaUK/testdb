@@ -1917,7 +1917,7 @@ public class Applicant extends Base
   
   public Boolean getNiNumberReceived()
   {
-    return niNumberStatus.equals(Constants.RECEIVED);
+    return StringUtils.isNotEmpty(niNumber) && niNumberStatus.equals(Constants.RECEIVED);
   }
   
   public String getEmailAddress()
