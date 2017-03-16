@@ -1673,7 +1673,7 @@ public class Applicant extends Base
 
   public Boolean getHasOverseasPoliceClearanceIfRequired()
   { 
-    Boolean cool = arrivalInCountryDate == null;
+    Boolean cool = getIdDocumentId().equals(AgyConstants.BRITISH_ID_DOCUMENT);
     if (!cool)
     {
       cool = getOverseasPoliceClearance();
