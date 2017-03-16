@@ -1829,13 +1829,13 @@ public class Applicant extends Base
   public Boolean getHasProofOfAddress1()
   {
     // True: Must have proofOfAddress1 flag set AND proofOfAddress1Filename entered.
-    return proofOfAddress1 == true && proofOfAddress1Filename != null;
+    return proofOfAddress1 == true && StringUtils.isNotEmpty(proofOfAddress1Filename);
   }
   
   public Boolean getHasProofOfAddress2()
   {
     // True: Must have proofOfAddress2 flag set AND proofOfAddress2Filename entered.
-    return proofOfAddress2 == true && proofOfAddress2Filename != null;
+    return proofOfAddress2 == true && StringUtils.isNotEmpty(proofOfAddress2Filename);
   }
   
   public Boolean getDocumentsRequired()
