@@ -19,6 +19,7 @@ import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.DisciplineCategoryUser;
 
 public class ApplicantEditProcess extends ApplicantCommonProcess
 {
@@ -33,8 +34,14 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     Applicant applicant = (Applicant)dynaForm.get("applicant"); 
-    prepareApplicant(applicant, agyService);
-    validateApplicant(applicant, dynaForm, errors, messageResources);
+    DisciplineCategoryUser disciplineCategory = null;
+    if (!applicant.getDisciplineCategoryId().equals(0))
+    {
+      // Discipline Category NOT entered...
+      disciplineCategory = agyService.getDisciplineCategoryUser(applicant.getDisciplineCategoryId());
+    }
+    prepareApplicant(applicant, disciplineCategory, agyService);
+    validateApplicant(applicant, disciplineCategory, dynaForm, errors, messageResources);
     if (errors.isEmpty()) 
     {
       loadApplicant(applicant, dynaForm, errors, messageResources);

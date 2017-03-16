@@ -50,7 +50,7 @@ public abstract class ApplicantCommonProcess extends AgyAction
     return fileExtension;
   }
   
-  protected void prepareApplicant(Applicant applicant, AgyService agyService)
+  protected void prepareApplicant(Applicant applicant, DisciplineCategoryUser disciplineCategory, AgyService agyService)
   {
     if (!applicant.getIdDocumentId().equals(0))
     {
@@ -61,13 +61,13 @@ public abstract class ApplicantCommonProcess extends AgyAction
     if (!applicant.getDisciplineCategoryId().equals(0))
     {
       // Discipline Category NOT entered...
-      DisciplineCategoryUser disciplineCategory = agyService.getDisciplineCategoryUser(applicant.getDisciplineCategoryId());
       applicant.setRegulatorName(disciplineCategory.getRegulatorName());
       applicant.setRegulatorCode(disciplineCategory.getRegulatorCode());
     }
   }
   
   protected void validateApplicant(Applicant applicant, 
+      DisciplineCategoryUser disciplineCategory,
       DynaValidatorForm dynaForm, 
       ActionMessages errors,
       MessageResources messageResources)
@@ -76,6 +76,13 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       // Discipline Category Required.
       errors.add("applicant", new ActionMessage("error.disciplineCategory.required"));
+    }
+    else
+    {
+      if (applicant.getAhpRegistrationType().compareTo(disciplineCategory.getRegulatorId()) != 0)
+      {
+        errors.add("applicant", new ActionMessage("error.ahpRegistrationType.mustMatchRegulator", applicant.getRegulatorName()));
+      }
     }
     if (applicant.getRequiresVisa())
     {
