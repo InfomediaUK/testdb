@@ -64,7 +64,7 @@
     </td>
   </tr>
   <tr>
-    <th align="left" class="label"><bean:message key="label.discipline"/></th>
+    <th align="left" class="label"><bean:message key="label.agencyPaperwork"/></th>
     <td align="left"><bean:write name="ApplicantFormAgy" property="applicant.reference"/></td>
   </tr>
   <tr>

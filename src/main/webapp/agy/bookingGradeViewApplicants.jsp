@@ -56,7 +56,7 @@
       <bean:message key="label.gender"/>
     </th>
     <th align="left" class="label">
-      <bean:message key="label.discipline"/>
+      <bean:message key="label.agencyPaperwork"/>
     </th>
     <th align="left" class="label">
       <bean:message key="label.professionalReference"/>

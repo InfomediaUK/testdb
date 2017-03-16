@@ -228,7 +228,7 @@
     <td align="left"><bean:message name="BookingGradeApplicantViewFormAgy" property="bookingGradeApplicant.applicantGenderDescriptionKey"/></td>
   </tr>
   <tr>
-    <th align="left" class="label"><bean:message key="label.discipline"/></th>
+    <th align="left" class="label"><bean:message key="label.agencyPaperwork"/></th>
     <td align="left"><bean:write name="BookingGradeApplicantViewFormAgy" property="bookingGradeApplicant.applicantReference"/></td>
   </tr>
   <tr>

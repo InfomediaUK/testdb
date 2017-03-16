@@ -164,11 +164,66 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					      <logic:notEqual name="ApplicantFormAgy" property="applicant.currentlyWorking" value="true">
 							    <bean:message key="label.no"/>
 					      </logic:notEqual>
-              </td>
+                        </td>
 					  </tr>
 					  <tr>
-					    <th align="left" class="label"><bean:message key="label.discipline"/></th>
+					    <th align="left" class="label"><bean:message key="label.agencyPaperwork"/></th>
 					    <td align="left" colspan="3"><bean:write name="ApplicantFormAgy" property="applicant.reference"/></td>
+					  </tr>
+					  <tr>
+					    <th align="left" class="label"><bean:message key="label.signedApplicationForm"/></th>
+					    <td align="left" colspan="3">
+					      <logic:equal name="ApplicantFormAgy" property="applicant.signedApplicationForm" value="true">
+							<bean:message key="label.yes"/>
+					      </logic:equal>
+					      <logic:notEqual name="ApplicantFormAgy" property="applicant.signedApplicationForm" value="true">
+							<bean:message key="label.no"/>
+					      </logic:notEqual>
+					    </td>
+					  </tr>
+					  <tr>
+					    <th align="left" class="label"><bean:message key="label.signedTermsAndConditions"/></th>
+					    <td align="left" colspan="3">
+					      <logic:equal name="ApplicantFormAgy" property="applicant.signedTermsAndConditions" value="true">
+							<bean:message key="label.yes"/>
+					      </logic:equal>
+					      <logic:notEqual name="ApplicantFormAgy" property="applicant.signedTermsAndConditions" value="true">
+							<bean:message key="label.no"/>
+					      </logic:notEqual>
+					    </td>
+					  </tr>
+					  <tr>
+					    <th align="left" class="label"><bean:message key="label.signedDataConsentForm"/></th>
+					    <td align="left" colspan="3">
+					      <logic:equal name="ApplicantFormAgy" property="applicant.signedDataConsentForm" value="true">
+							<bean:message key="label.yes"/>
+					      </logic:equal>
+					      <logic:notEqual name="ApplicantFormAgy" property="applicant.signedDataConsentForm" value="true">
+							<bean:message key="label.no"/>
+					      </logic:notEqual>
+					    </td>
+					  </tr>
+					  <tr>
+					    <th align="left" class="label"><bean:message key="label.completedCompetencyTest"/></th>
+					    <td align="left" colspan="3">
+					      <logic:equal name="ApplicantFormAgy" property="applicant.completedCompetencyTest" value="true">
+							<bean:message key="label.yes"/>
+					      </logic:equal>
+					      <logic:notEqual name="ApplicantFormAgy" property="applicant.completedCompetencyTest" value="true">
+							<bean:message key="label.no"/>
+					      </logic:notEqual>
+					    </td>
+					  </tr>
+					  <tr>
+					    <th align="left" class="label"><bean:message key="label.completedNurseInterview"/></th>
+					    <td align="left" colspan="3">
+					      <logic:equal name="ApplicantFormAgy" property="applicant.completedNurseInterview" value="true">
+							<bean:message key="label.yes"/>
+					      </logic:equal>
+					      <logic:notEqual name="ApplicantFormAgy" property="applicant.completedNurseInterview" value="true">
+							<bean:message key="label.no"/>
+					      </logic:notEqual>
+					    </td>
 					  </tr>
 					  <tr>
 					    <th align="left" class="label"><bean:message key="label.arrivalInUKDate"/></th>

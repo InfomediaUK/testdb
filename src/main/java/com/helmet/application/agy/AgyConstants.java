@@ -32,12 +32,14 @@ public final class AgyConstants {
   public static final String UNPAID_FILTER = "UNPAID";
   public static final String NO_FILTER = "ALL";
 
-  public static final Integer BRITISH_ID_DOCUMENT = 1;
-
   public static final Integer APPLICANT_REFERENCE_APPLIED_FOR = 1;
   public static final Integer APPLICANT_REFERENCE_PENDING     = 2;
   public static final Integer APPLICANT_REFERENCE_RECEIVED    = 3;
   public static final Integer APPLICANT_REFERENCE_TEMPORARY   = 4;
   
   public static final Integer ID_DOCUMENT_BRITISH_PASSPORT = 1;
+
+  public static final Integer REGULATOR_HEALTH_AND_CARE_PROFESSIONS_COUNCIL = 1;
+  public static final Integer REGULATOR_NURSE_AND_MIDWIFERY_COUNCIL = 2;
+  public static final Integer REGULATOR_GENERAL_PHARMACEUTICAL_COUNCIL = 3;
 }

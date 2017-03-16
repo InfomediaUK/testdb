@@ -87,9 +87,31 @@
 					    <td align="left" colspan="3"><html:checkbox property="applicant.currentlyWorking" tabindex="7"/></td>
 					  </tr>
 					  <tr>
-					    <th align="left" class="label"><bean:message key="label.discipline"/></th>
+					    <th align="left" class="label"><bean:message key="label.agencyPaperwork"/></th>
 					    <td align="left" colspan="3"><html:text property="applicant.reference" size="50" maxlength="50" tabindex="9"/></td>
 					  </tr>
+
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.signedApplicationForm"/></th>
+					    <td align="left" colspan="3"><html:checkbox property="applicant.signedApplicationForm" tabindex="9" /></td>
+					  </tr>
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.signedTermsAndConditions"/></th>
+					    <td align="left" colspan="3"><html:checkbox property="applicant.signedTermsAndConditions" tabindex="9" /></td>
+					  </tr>
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.signedDataConsentForm"/></th>
+					    <td align="left" colspan="3"><html:checkbox property="applicant.signedDataConsentForm" tabindex="9" /></td>
+					  </tr>
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.completedCompetencyTest"/></th>
+					    <td align="left" colspan="3"><html:checkbox property="applicant.completedCompetencyTest" tabindex="9" /></td>
+					  </tr>
+					  <tr>
+					    <th width="25%" align="left"class="label"><bean:message key="label.completedNurseInterview"/></th>
+					    <td align="left" colspan="3"><html:checkbox property="applicant.completedNurseInterview" tabindex="9" /></td>
+					  </tr>
+
 					  <tr>
 					    <th align="left" class="label"><bean:message key="label.arrivalInUKDate"/></th>
 					    <td align="left" colspan="3"><html:text property="arrivalInCountryDateStr" tabindex="10" />&nbsp;<bean:message key="text.dateFormat" /></td>

@@ -51,7 +51,7 @@ session.setAttribute("applicantIndexLetter", indexLetter);
     <th align="left"><bean:message key="label.emailAddress"/></th>
     <th align="left"><bean:message key="label.mobile"/></th>
     <th align="left"><bean:message key="label.availability"/></th>
-    <th align="left"><bean:message key="label.discipline"/></th>
+    <th align="left"><bean:message key="label.agencyPaperwork"/></th>
     <th align="left"><bean:message key="label.areaOfSpeciality"/></th>
     <th align="left"><bean:message key="label.professionalReference"/></th>
     <th align="center"><bean:message key="label.photo"/></th>

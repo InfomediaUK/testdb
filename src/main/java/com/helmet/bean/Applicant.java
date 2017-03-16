@@ -193,9 +193,14 @@ public class Applicant extends Base
   private List<String> agencyWorkerChecklists;
   private Integer originalAgencyId;
   private Date registeredWithDbsDate;
-  // NEW -->
   private Date dbsRenewalDate;
   private String dbsFilename;
+  // NEW -->
+  private Boolean signedApplicationForm = false;
+  private Boolean signedTermsAndConditions = false;
+  private Boolean signedDataConsentForm = false;
+  private Boolean completedCompetencyTest = false;
+  private Boolean completedNurseInterview = false;
   // <-- NEW
 
   public Integer getApplicantId()
@@ -1428,6 +1433,56 @@ public class Applicant extends Base
     return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/" + dbsFilename;
   }
 
+  public Boolean getSignedApplicationForm()
+  {
+    return signedApplicationForm;
+  }
+
+  public void setSignedApplicationForm(Boolean signedApplicationForm)
+  {
+    this.signedApplicationForm = signedApplicationForm;
+  }
+
+  public Boolean getSignedTermsAndConditions()
+  {
+    return signedTermsAndConditions;
+  }
+
+  public void setSignedTermsAndConditions(Boolean signedTermsAndConditions)
+  {
+    this.signedTermsAndConditions = signedTermsAndConditions;
+  }
+
+  public Boolean getSignedDataConsentForm()
+  {
+    return signedDataConsentForm;
+  }
+
+  public void setSignedDataConsentForm(Boolean signedDataConsentForm)
+  {
+    this.signedDataConsentForm = signedDataConsentForm;
+  }
+
+  public Boolean getCompletedCompetencyTest()
+  {
+    return completedCompetencyTest;
+  }
+
+  public void setCompletedCompetencyTest(Boolean completedCompetencyTest)
+  {
+    this.completedCompetencyTest = completedCompetencyTest;
+  }
+
+  public Boolean getCompletedNurseInterview()
+  {
+    return completedNurseInterview;
+  }
+
+  public void setCompletedNurseInterview(Boolean completedNurseInterview)
+  {
+    this.completedNurseInterview = completedNurseInterview;
+  }
+
   public void load(SqlRowSet rs)
   {
     super.load(rs);
@@ -1560,9 +1615,14 @@ public class Applicant extends Base
     getUser().setNhsStaffName(rs.getString("NHSSTAFFNAME"));
     setOriginalAgencyId(rs.getInt("ORIGINALAGENCYID"));
     setRegisteredWithDbsDate(rs.getDate("REGISTEREDWITHDBSDATE"));
-    // NEW -->
     setDbsRenewalDate(rs.getDate("DBSRENEWALDATE"));
     setDbsFilename(rs.getString("DBSFILENAME"));
+    // NEW -->
+    setSignedApplicationForm(rs.getBoolean("SIGNEDAPPLICATIONFORM"));
+    setSignedTermsAndConditions(rs.getBoolean("SIGNEDTERMSANDCONDITIONS"));
+    setSignedDataConsentForm(rs.getBoolean("SIGNEDDATACONSENTFORM"));
+    setCompletedCompetencyTest(rs.getBoolean("COMPLETEDCOMPETENCYTEST"));
+    setCompletedNurseInterview(rs.getBoolean("COMPLETEDNURSEINTERVIEW"));
     // <-- NEW
   }
 
@@ -1659,7 +1719,7 @@ public class Applicant extends Base
   public Boolean getHasRightToWork()
   {
     Boolean rightToWork = getHasValidIdDocument();
-    if (getIdDocumentId().equals(AgyConstants.BRITISH_ID_DOCUMENT))
+    if (getIdDocumentId().equals(AgyConstants.ID_DOCUMENT_BRITISH_PASSPORT))
     {
       // British person...
       if (rightToWork == false)
@@ -1673,12 +1733,27 @@ public class Applicant extends Base
 
   public Boolean getHasOverseasPoliceClearanceIfRequired()
   { 
-    Boolean cool = getIdDocumentId().equals(AgyConstants.BRITISH_ID_DOCUMENT);
+    Boolean cool = getIdDocumentId().equals(AgyConstants.ID_DOCUMENT_BRITISH_PASSPORT);
     if (!cool)
     {
       cool = getOverseasPoliceClearance();
     }
     return cool;
+  }
+  
+  public Boolean getHasCompletedNurseInterviewIfRequired()
+  { 
+    Boolean cool = getAhpRegistrationType().compareTo(AgyConstants.REGULATOR_NURSE_AND_MIDWIFERY_COUNCIL) != 0;
+    if (cool)
+    {
+      // Not a Nurse or Midwife...
+      return cool;
+    }
+    else
+    {
+      // Nurse or Midwife. Must be interviewed by a Nurse.
+      return getCompletedNurseInterview();
+    }
   }
   
   public Boolean getHasCurrentTraining()

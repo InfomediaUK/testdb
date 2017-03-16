@@ -113,7 +113,7 @@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
 	</tr>
   <tr>
     <th align="left">
-      <bean:message key="label.discipline"/>
+      <bean:message key="label.agencyPaperwork"/>
     </th>
     <td align="left">
 			<bean:write name="BookingGradeApplicantFormAgy" property="applicant.reference" />

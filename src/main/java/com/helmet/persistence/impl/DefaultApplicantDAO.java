@@ -218,9 +218,14 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     insertApplicantSQL.append("  NHSSTAFFNAME, ");
     insertApplicantSQL.append("  ORIGINALAGENCYID, ");
     insertApplicantSQL.append("  REGISTEREDWITHDBSDATE, ");
-    // NEW -->
     insertApplicantSQL.append("  DBSRENEWALDATE, ");
     insertApplicantSQL.append("  DBSFILENAME, ");
+    // NEW -->
+    insertApplicantSQL.append("  SIGNEDAPPLICATIONFORM, ");
+    insertApplicantSQL.append("  SIGNEDTERMSANDCONDITIONS, ");
+    insertApplicantSQL.append("  SIGNEDDATACONSENTFORM, ");
+    insertApplicantSQL.append("  COMPLETEDCOMPETENCYTEST, ");
+    insertApplicantSQL.append("  COMPLETEDNURSEINTERVIEW, ");
     // <-- NEW
 		insertApplicantSQL.append("  CREATIONTIMESTAMP, ");
 		insertApplicantSQL.append("  AUDITORID, ");
@@ -335,7 +340,12 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     insertApplicantSQL.append("  ^, ");
     insertApplicantSQL.append("  ^, ");
     insertApplicantSQL.append("  ^, ");
+    insertApplicantSQL.append("  ^, ");
     // NEW -->
+    insertApplicantSQL.append("  ^, ");
+    insertApplicantSQL.append("  ^, ");
+    insertApplicantSQL.append("  ^, ");
+    insertApplicantSQL.append("  ^, ");
     insertApplicantSQL.append("  ^, ");
     // <-- NEW
 		insertApplicantSQL.append("  ^, ");
@@ -452,9 +462,14 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     updateApplicantSQL.append("     ENGLISHTESTCERTIFICATEFILENAME = ^, ");
     updateApplicantSQL.append("     NHSSTAFFNAME = ^, ");
     updateApplicantSQL.append("     REGISTEREDWITHDBSDATE = ^, ");
-    // NEW -->
     updateApplicantSQL.append("     DBSRENEWALDATE = ^, ");
     updateApplicantSQL.append("     DBSFILENAME = ^, ");
+    // NEW -->
+    updateApplicantSQL.append("     SIGNEDAPPLICATIONFORM = ^, ");
+    updateApplicantSQL.append("     SIGNEDTERMSANDCONDITIONS = ^, ");
+    updateApplicantSQL.append("     SIGNEDDATACONSENTFORM = ^, ");
+    updateApplicantSQL.append("     COMPLETEDCOMPETENCYTEST = ^, ");
+    updateApplicantSQL.append("     COMPLETEDNURSEINTERVIEW = ^, ");
     // <-- NEW
 		updateApplicantSQL.append("     AUDITORID = ^, ");
 		updateApplicantSQL.append("     AUDITTIMESTAMP = ^ ");
@@ -667,9 +682,14 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectApplicantsSQL.append("       A.NHSSTAFFNAME, ");
     selectApplicantsSQL.append("       A.ORIGINALAGENCYID, ");
     selectApplicantsSQL.append("       A.REGISTEREDWITHDBSDATE, ");
-    // NEW -->
     selectApplicantsSQL.append("       A.DBSRENEWALDATE, ");
     selectApplicantsSQL.append("       A.DBSFILENAME, ");
+    // NEW -->
+    selectApplicantsSQL.append("       A.SIGNEDAPPLICATIONFORM, ");
+    selectApplicantsSQL.append("       A.SIGNEDTERMSANDCONDITIONS, ");
+    selectApplicantsSQL.append("       A.SIGNEDDATACONSENTFORM, ");
+    selectApplicantsSQL.append("       A.COMPLETEDCOMPETENCYTEST, ");
+    selectApplicantsSQL.append("       A.COMPLETEDNURSEINTERVIEW, ");
     // <-- NEW
     selectApplicantsSQL.append("       AOS.NAME AS AREAOFSPECIALITYNAME, ");
     selectApplicantsSQL.append("       AOS2.NAME AS AREAOFSPECIALITYNAME2, ");
@@ -1605,9 +1625,14 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, StringUtils.trim(applicant.getUser().getNhsStaffName()));
     Utilities.replace(sql, applicant.getOriginalAgencyId());
     Utilities.replaceAndQuoteNullable(sql, applicant.getRegisteredWithDbsDate());
-    // NEW -->
     Utilities.replaceAndQuoteNullable(sql, applicant.getDbsRenewalDate());
     Utilities.replaceAndQuoteNullable(sql, applicant.getDbsFilename());
+    // NEW -->
+    Utilities.replace(sql, applicant.getSignedApplicationForm());
+    Utilities.replace(sql, applicant.getSignedTermsAndConditions());
+    Utilities.replace(sql, applicant.getSignedDataConsentForm());
+    Utilities.replace(sql, applicant.getCompletedCompetencyTest());
+    Utilities.replace(sql, applicant.getCompletedNurseInterview());
 	  // <-- NEW
 		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
 		Utilities.replace(sql, auditorId);
@@ -1725,9 +1750,14 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     Utilities.replaceAndQuoteNullable(sql, applicant.getEnglishTestCertificateFilename());
     Utilities.replaceAndQuoteNullable(sql, StringUtils.trim(applicant.getUser().getNhsStaffName()));
     Utilities.replaceAndQuoteNullable(sql, applicant.getRegisteredWithDbsDate());
-    // NEW -->
     Utilities.replaceAndQuoteNullable(sql, applicant.getDbsRenewalDate());
     Utilities.replaceAndQuoteNullable(sql, applicant.getDbsFilename());
+    // NEW -->
+    Utilities.replace(sql, applicant.getSignedApplicationForm());
+    Utilities.replace(sql, applicant.getSignedTermsAndConditions());
+    Utilities.replace(sql, applicant.getSignedDataConsentForm());
+    Utilities.replace(sql, applicant.getCompletedCompetencyTest());
+    Utilities.replace(sql, applicant.getCompletedNurseInterview());
     // <-- NEW
 		Utilities.replace(sql, auditorId);
 		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());

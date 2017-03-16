@@ -149,6 +149,11 @@
         <entry key="applicant.hasProofOfAddress2" value="TRUE"/>
         <entry key="applicant.niNumberReceived" value="TRUE"/>
         <entry key="applicant.hasOverseasPoliceClearanceIfRequired" value="TRUE"/>
+        <entry key="applicant.signedApplicationForm" value="TRUE"/>
+        <entry key="applicant.signedTermsAndConditions" value="TRUE"/>
+        <entry key="applicant.signedDataConsentForm" value="TRUE"/>
+        <entry key="applicant.completedCompetencyTest" value="TRUE"/>
+        <entry key="applicant.hasCompletedNurseInterviewIfRequired" value="TRUE"/>
       </map>
     </property>
   </bean>

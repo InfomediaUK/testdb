@@ -3,7 +3,6 @@ package com.helmet.application.agy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
 import org.apache.struts.action.ActionMessage;
@@ -11,7 +10,6 @@ import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.upload.FormFile;
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.validator.DynaValidatorForm;
 
@@ -48,22 +46,6 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     }
     // Get the set of new Unavailable dates from the form.
     String unavailableDates = (String)dynaForm.get("unavailableDates");
-//    FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");
-//    String contentType = photoFile.getContentType();
-//    String photoFilename = photoFile.getFileName();
-//    int fileSize = photoFile.getFileSize();
-//    if (StringUtils.isNotEmpty(photoFilename))
-//    {
-//      applicant.setPhotoFilename(photoFilename);
-//    }
-//    // CVFILE -->
-//    FormFile cvFile = (FormFile) dynaForm.get("cvFormFile");
-//    String cvFilename = cvFile.getFileName();
-//    if (StringUtils.isNotEmpty(cvFilename))
-//    {
-//      applicant.setCvFilename(cvFilename);
-//    }
-//    // <-- CVFILE
     // Test for Compliancy just before SAVE...
     ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
     String existingNotes = getApplicantNotes(applicant);
