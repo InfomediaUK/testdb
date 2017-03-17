@@ -74,14 +74,26 @@ public abstract class ApplicantCommonProcess extends AgyAction
   {
     if (applicant.getDisciplineCategoryId().equals(0))
     {
-      // Discipline Category Required.
+      // Applicant must have a Discipline Category, it's required.
       errors.add("applicant", new ActionMessage("error.disciplineCategory.required"));
     }
     else
     {
-      if (applicant.getAhpRegistrationType().compareTo(disciplineCategory.getRegulatorId()) != 0)
+      if (disciplineCategory.getRegulatorId() == null)
       {
-        errors.add("applicant", new ActionMessage("error.ahpRegistrationType.mustMatchRegulator", applicant.getRegulatorName()));
+        if (!applicant.getAhpRegistrationType().equals(0))
+        {
+          // The Discipline Category does NOT have a Regulator that the Applicant must register with...
+          errors.add("applicant", new ActionMessage("error.ahpRegistrationType.notRequired", disciplineCategory.getName()));
+        }
+      }
+      else
+      {
+        // The Discipline Category has a Regulator that the Applicant must register with...
+        if (applicant.getAhpRegistrationType().compareTo(disciplineCategory.getRegulatorId()) != 0)
+        {
+          errors.add("applicant", new ActionMessage("error.ahpRegistrationType.mustMatchRegulator", applicant.getRegulatorName()));
+        } 
       }
     }
     if (applicant.getRequiresVisa())
