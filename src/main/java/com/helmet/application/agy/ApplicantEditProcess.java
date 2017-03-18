@@ -16,8 +16,6 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
-import com.helmet.application.FileHandler;
-import com.helmet.application.Utilities;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.DisciplineCategoryUser;
 
@@ -110,14 +108,4 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
 
   }
    
-  private String getApplicantNotes(Applicant applicant)
-  {
-    String notesFileName = FileHandler.getInstance().getApplicantFileLocation() +
-                           FileHandler.getInstance().getApplicantFileFolder() + 
-                           "/" + applicant.getApplicantId() + "/notes.txt";
-    StringBuffer notes   = new StringBuffer(); 
-    Utilities.suckInFile(notesFileName, notes);
-    return notes.toString();
-  }
-  
 }

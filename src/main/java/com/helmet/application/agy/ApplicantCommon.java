@@ -32,16 +32,6 @@ public class ApplicantCommon extends AgyAction
     return null;
   }
 
-  protected String getApplicantNotes(Applicant applicant)
-  {
-    String notesFileName = FileHandler.getInstance().getApplicantFileLocation() +
-                           FileHandler.getInstance().getApplicantFileFolder() + 
-                           "/" + applicant.getApplicantId() + "/notes.txt";
-    StringBuffer notes   = new StringBuffer(); 
-    Utilities.suckInFile(notesFileName, notes);
-    return notes.toString();
-  }
-  
   protected List<AgencyWorkerChecklistFile> loadAgencyWorkerChecklists(String checklistFilePath, int applicantId)
   {
     List<AgencyWorkerChecklistFile> agencyWorkerChecklists = new ArrayList<AgencyWorkerChecklistFile>();

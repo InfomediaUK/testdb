@@ -42,6 +42,10 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 	      <input type="hidden" name="applicant.applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
 	      <td align="right" valign="middle" width="80"><html:submit styleClass="titleButton"><bean:message key="button.edit"/></html:submit></td>
 	    </html:form>
+	    <html:form action="/applicantCompliancyTest.do" onsubmit="return singleSubmit();">
+	      <input type="hidden" name="applicant.applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
+	      <td align="right" valign="middle" width="80"><html:submit styleClass="titleButton"><bean:message key="button.compliancy"/></html:submit></td>
+	    </html:form>
   <logic:notEmpty name="ApplicantFormAgy" property="applicant.documentsRequired">
         <html:form action="/applicantEmailProcess.do" styleId="ApplicantNew" onsubmit="return singleSubmit();">
 	      <input type="hidden" name="applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>

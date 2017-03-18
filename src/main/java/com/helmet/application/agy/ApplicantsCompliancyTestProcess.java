@@ -1,7 +1,5 @@
 package com.helmet.application.agy;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
-import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -19,9 +16,6 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
-import com.helmet.application.FileHandler;
-import com.helmet.application.Utilities;
-import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Applicant;
 
 
@@ -79,28 +73,6 @@ public class ApplicantsCompliancyTestProcess extends ApplicantCommon
     logger.exit("Out going !!!");
     return mapping.findForward("success");
 
-  }
-
-  protected void saveApplicantNotes(Applicant applicant, String notes)
-  {
-    String notesFileName = FileHandler.getInstance().getApplicantFileLocation() +
-                           FileHandler.getInstance().getApplicantFileFolder() + 
-                           "/" + applicant.getApplicantId() + "/notes.txt";
-    File folder = new File(notesFileName).getParentFile();
-    if (!folder.exists())
-    {
-      // Create any required directories.
-      folder.mkdirs();
-    }
-    try
-    {
-      Utilities.saveFile(notesFileName, notes);
-    }
-    catch (IOException e)
-    {
-      // TODO 
-      System.out.println("IOException - uploading " + notesFileName);
-    }
   }
 
 }

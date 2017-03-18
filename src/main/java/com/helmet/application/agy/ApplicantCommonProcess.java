@@ -22,7 +22,6 @@ import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
 import com.helmet.application.FileHandler;
-import com.helmet.application.Utilities;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.DisciplineCategoryUser;
@@ -483,28 +482,6 @@ public abstract class ApplicantCommonProcess extends AgyAction
     }
   }
 
-  protected void saveApplicantNotes(Applicant applicant, String notes)
-  {
-    String notesFileName = FileHandler.getInstance().getApplicantFileLocation() +
-                           FileHandler.getInstance().getApplicantFileFolder() + 
-                           "/" + applicant.getApplicantId() + "/notes.txt";
-    File folder = new File(notesFileName).getParentFile();
-    if (!folder.exists())
-    {
-      // Create any required directories.
-      folder.mkdirs();
-    }
-    try
-    {
-      Utilities.saveFile(notesFileName, notes);
-    }
-    catch (IOException e)
-    {
-      // TODO 
-      System.out.println("IOException - uploading " + notesFileName);
-    }
-  }
-  
   protected List<Unavailable> getApplicantUnavailables(AgyService agyService, Applicant applicant, boolean showOnlyActive)
   {
     // Set Calendar to Start of Today one year ago.

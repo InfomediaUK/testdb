@@ -1,5 +1,7 @@
 package com.helmet.application.agy.abztract;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.ParseException;
@@ -23,9 +25,11 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.IllegalAccessException;
+import com.helmet.application.FileHandler;
+import com.helmet.application.Utilities;
 import com.helmet.application.agy.AgyUtilities;
 import com.helmet.bean.AgencyInvoiceUser;
-import com.helmet.bean.BookingDate;
+import com.helmet.bean.Applicant;
 import com.helmet.bean.BookingDateUserApplicant;
 import com.helmet.bean.Consultant;
 import com.helmet.bean.IntValue;
@@ -390,6 +394,38 @@ public abstract class AgyAction extends Action {
 		dynaForm.set("totalTotal", totalTotal);
 	    dynaForm.set("totalHours", totalHours);
 
+    }
+    
+    protected String getApplicantNotes(Applicant applicant)
+    {
+      String notesFileName = FileHandler.getInstance().getApplicantFileLocation() +
+                             FileHandler.getInstance().getApplicantFileFolder() + 
+                             "/" + applicant.getApplicantId() + "/notes.txt";
+      StringBuffer notes   = new StringBuffer(); 
+      Utilities.suckInFile(notesFileName, notes);
+      return notes.toString();
+    }
+    
+    protected void saveApplicantNotes(Applicant applicant, String notes)
+    {
+      String notesFileName = FileHandler.getInstance().getApplicantFileLocation() +
+                             FileHandler.getInstance().getApplicantFileFolder() + 
+                             "/" + applicant.getApplicantId() + "/notes.txt";
+      File folder = new File(notesFileName).getParentFile();
+      if (!folder.exists())
+      {
+        // Create any required directories.
+        folder.mkdirs();
+      }
+      try
+      {
+        Utilities.saveFile(notesFileName, notes);
+      }
+      catch (IOException e)
+      {
+        // TODO 
+        System.out.println("IOException - uploading " + notesFileName);
+      }
     }
     
 }

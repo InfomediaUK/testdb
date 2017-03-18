@@ -1302,6 +1302,7 @@
     <forward name="applicantNewMock" path="/applicantNewMock.do" />
     <forward name="applicantEdit" path="/applicantEdit.do" />
     <forward name="applicantEmailProcess" path="/applicantEmailProcess.do" />
+    <forward name="applicantCompliancyTestProcess" path="/applicantCompliancyTestProcess.do" />
     <forward name="applicantArchive" path="/applicantArchive.do" />
     <forward name="applicantUnarchive" path="/applicantUnarchive.do" />
     <forward name="applicantDelete" path="/applicantDelete.do" />
@@ -1680,6 +1681,15 @@
             scope="request"
             input="applicantEdit.page"
             validate="true">
+        <forward name="success" path="/applicantView.do" redirect="true" />
+    </action>
+
+    <action path="/applicantCompliancyTest"
+            type="com.helmet.application.agy.ApplicantCompliancyTestProcess"
+            name="ApplicantFormAgy"
+            scope="request"
+            input="/applicantView.do"
+            validate="false">
         <forward name="success" path="/applicantView.do" redirect="true" />
     </action>
 
