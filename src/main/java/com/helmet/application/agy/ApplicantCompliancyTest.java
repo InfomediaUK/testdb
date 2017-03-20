@@ -135,30 +135,37 @@ public class ApplicantCompliancyTest
       catch (SecurityException e)
       {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        reflectionProblem(methodName, sourceObject, e);
       }
       catch (NoSuchMethodException e)
       {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        reflectionProblem(methodName, sourceObject, e);
       }
       catch (IllegalArgumentException e)
       {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        reflectionProblem(methodName, sourceObject, e);
       }
       catch (IllegalAccessException e)
       {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        reflectionProblem(methodName, sourceObject, e);
       }
       catch (InvocationTargetException e)
       {
         // TODO Auto-generated catch block
-        e.printStackTrace();
+        reflectionProblem(methodName, sourceObject, e);
       }
     }
     return applicant.getCompliant();
+  }
+  
+  private void reflectionProblem(String methodName, Object sourceObject, Exception e)
+  {
+    System.out.println("Source Object: " + sourceObject.getClass().getName());
+    System.out.println("Method Name: " + methodName);
+    e.printStackTrace();
   }
 
   public void addCompliancyTestFailureReasonToNotes(StringBuffer reason, StringBuffer notes)
