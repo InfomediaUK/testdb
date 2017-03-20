@@ -154,6 +154,7 @@
         <entry key="applicant.signedDataConsentForm" value="TRUE"/>
         <entry key="applicant.completedCompetencyTest" value="TRUE"/>
         <entry key="applicant.hasCompletedNurseInterviewIfRequired" value="TRUE"/>
+        <entry key="applicant.hasQualificationIfRequired" value="TRUE"/>
       </map>
     </property>
   </bean>

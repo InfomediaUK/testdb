@@ -1743,7 +1743,7 @@ public class Applicant extends Base
   
   public Boolean getHasCompletedNurseInterviewIfRequired()
   { 
-    Boolean cool = getAhpRegistrationType().compareTo(AgyConstants.REGULATOR_NURSE_AND_MIDWIFERY_COUNCIL) != 0;
+    Boolean cool = getAhpRegistrationType() == null || getAhpRegistrationType().compareTo(AgyConstants.REGULATOR_NURSE_AND_MIDWIFERY_COUNCIL) != 0;
     if (cool)
     {
       // Not a Nurse or Midwife...
@@ -1887,6 +1887,20 @@ public class Applicant extends Base
   {
     // True: Must have degree flag set. ***** Maybe needs degreeDetail entered too. *****
     return degree;
+  }
+  
+  public Boolean getHasQualificationIfRequired()
+  {
+   if (ahpRegistrationType == null)
+   {
+     // Doesn't actually require a degree.
+     return true;
+   }
+   else
+   {
+     // Has Professional Registration. Must have qualification.
+     return getHasDegree();
+   }
   }
   
   public Boolean getHasPhoto()
