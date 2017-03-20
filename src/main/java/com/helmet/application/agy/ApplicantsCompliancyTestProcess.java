@@ -71,8 +71,14 @@ public class ApplicantsCompliancyTestProcess extends ApplicantCommon
     }
     dynaForm.set("applicantsCompliancyTestResultList", applicantChangedList);
     logger.exit("Out going !!!");
-    return mapping.findForward("success");
-
+    if (applicantChangedList.isEmpty())
+    {
+      return mapping.findForward("emptyList");      
+    }
+    else
+    {  
+      return mapping.findForward("success");
+    }
   }
 
 }

@@ -1799,6 +1799,7 @@
             input="homeAgy.page"
             validate="false">
         <forward name="success" path="applicantsCompliancyTestList.page" />
+        <forward name="emptyList" path="/applicantNotifications.do" redirect="true" />
     </action>
 
     <action path="/bookingGradeList"
