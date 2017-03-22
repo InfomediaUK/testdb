@@ -331,7 +331,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
       // The matcher.group() such as: %applicant.user.fullName% is the method getFullName on User object.
       tag = matcher.group().substring(1, matcher.group().length() - 1);
       index = content.indexOf(matcher.group());
-      if (tag.equals("REQUEST_DOCUMENTS"))
+      if (tag.equals("REQUIRED_COMPLIANCY_DOCUMENTS"))
       {
         content.replace(index, index + matcher.group().length(), requestDocumentsText(applicant, html));
       }
