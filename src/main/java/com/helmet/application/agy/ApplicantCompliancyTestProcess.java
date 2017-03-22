@@ -1,5 +1,7 @@
 package com.helmet.application.agy;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +16,7 @@ import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.CompliancyTest;
 
 
 public class ApplicantCompliancyTestProcess extends ApplicantCommon
@@ -27,6 +30,7 @@ public class ApplicantCompliancyTestProcess extends ApplicantCommon
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     Applicant applicant = (Applicant) dynaForm.get("applicant");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
     ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
     StringBuffer notesStringBuffer = null;
     StringBuffer reasonStringBuffer = null;
@@ -34,7 +38,7 @@ public class ApplicantCompliancyTestProcess extends ApplicantCommon
     Boolean applicantCompliant = null;
     applicantCompliant = applicant.getCompliant();
     reasonStringBuffer = new StringBuffer();
-    applicantCompliancyTest.isApplicantCompliant(applicant, reasonStringBuffer);
+    applicantCompliancyTest.isApplicantCompliant(listCompliancyTest, applicant, reasonStringBuffer);
     // Get the Notes for the Applicant from the file system.
     String existingNotes = getApplicantNotes(applicant);
     notesStringBuffer = new StringBuffer(existingNotes);

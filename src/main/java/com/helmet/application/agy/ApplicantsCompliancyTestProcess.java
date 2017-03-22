@@ -17,6 +17,7 @@ import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.CompliancyTest;
 
 
 public class ApplicantsCompliancyTestProcess extends ApplicantCommon
@@ -32,6 +33,7 @@ public class ApplicantsCompliancyTestProcess extends ApplicantCommon
     ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
     StringBuffer notesStringBuffer = null;
     StringBuffer reasonStringBuffer = null;
+    List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
     List<Applicant> applicantList = agyService.getApplicantsForAgency(getConsultantLoggedIn().getAgencyId());
     List<Applicant> applicantChangedList = new ArrayList<Applicant>();
     Boolean applicantCompliant = null;
@@ -40,7 +42,7 @@ public class ApplicantsCompliancyTestProcess extends ApplicantCommon
       // For each Applicant...
       applicantCompliant = applicant.getCompliant();
       reasonStringBuffer = new StringBuffer();
-      applicantCompliancyTest.isApplicantCompliant(applicant, reasonStringBuffer);
+      applicantCompliancyTest.isApplicantCompliant(listCompliancyTest, applicant, reasonStringBuffer);
       // Get the Notes for the Applicant from the file system.
       String existingNotes = getApplicantNotes(applicant);
       notesStringBuffer = new StringBuffer(existingNotes);

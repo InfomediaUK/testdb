@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.CompliancyTest;
 
 
 public class ApplicantDeleteFileProcess extends AgyAction
@@ -36,6 +38,7 @@ public class ApplicantDeleteFileProcess extends AgyAction
     Integer applicantId = (Integer)dynaForm.get("applicantId");
     String fileProperty = (String)dynaForm.get("fileProperty");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
     Applicant applicant = agyService.getApplicant(applicantId);
     String fileUrl = getFileUrl(fileProperty, applicant);
     String newFileUrl = null;
@@ -95,7 +98,7 @@ public class ApplicantDeleteFileProcess extends AgyAction
       ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
       StringBuffer notesStringBuffer = new StringBuffer(getApplicantNotes(applicant));
       StringBuffer reasonStringBuffer = new StringBuffer();
-      applicantCompliancyTest.isApplicantCompliant(applicant, reasonStringBuffer);
+      applicantCompliancyTest.isApplicantCompliant(listCompliancyTest, applicant, reasonStringBuffer);
       if (reasonStringBuffer.length() > 0)
       {
         // Applicant is NOT Compliant. Turn Off RecentlyCompliant flag.

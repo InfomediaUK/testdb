@@ -1,5 +1,7 @@
 package com.helmet.application.agy;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +19,7 @@ import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.DisciplineCategoryUser;
 
 public class ApplicantEditProcess extends ApplicantCommonProcess
@@ -31,6 +34,7 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
     Applicant applicant = (Applicant)dynaForm.get("applicant"); 
     DisciplineCategoryUser disciplineCategory = null;
     if (!applicant.getDisciplineCategoryId().equals(0))
@@ -64,7 +68,7 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     }
     StringBuffer reasonStringBuffer = new StringBuffer();
     Boolean compliant = applicant.getCompliant();
-    applicantCompliancyTest.isApplicantCompliant(applicant, reasonStringBuffer);
+    applicantCompliancyTest.isApplicantCompliant(listCompliancyTest, applicant, reasonStringBuffer);
     if (!compliant && applicant.getCompliant())
     {
       // Applicant has just become Compliant. Set RecentlyCompliant flag to TRUE.

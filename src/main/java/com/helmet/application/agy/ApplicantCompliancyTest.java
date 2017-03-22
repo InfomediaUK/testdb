@@ -4,21 +4,20 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.helmet.bean.Applicant;
+import com.helmet.bean.CompliancyTest;
 
 public class ApplicantCompliancyTest
 {
-  private Map<String, String> metaData;
-  private String startOfReasonMarker;
-  private String endOfReasonMarker;
+  private String startOfReasonMarker = "***** Start of Compliancy Test Failed *****";
+  private String endOfReasonMarker   = "****** End of Compliancy Test Failed ******";
 
   // Private empty constructor
-  public ApplicantCompliancyTest()
+  private ApplicantCompliancyTest()
   {
   }
 
@@ -32,11 +31,6 @@ public class ApplicantCompliancyTest
     return SingletonHolder.applicantCompliancyTest;
   }
   
-  public void setMetaData(Map<String, String> metaData)
-  {
-    this.metaData = metaData;
-  }
-
   public void setEndOfReasonMarker(String endOfReasonMarker)
   {
     this.endOfReasonMarker = endOfReasonMarker;
@@ -47,20 +41,21 @@ public class ApplicantCompliancyTest
     this.startOfReasonMarker = startOfReasonMarker;
   }
 
-  public Boolean isApplicantCompliant(Applicant applicant, StringBuffer reason)
+  public Boolean isApplicantCompliant(List<CompliancyTest> listCompliancyTest, Applicant applicant, StringBuffer reason)
   {
     applicant.setCompliant(true);
-    Set<String> keySet   = metaData.keySet();
     Class applicantClass = applicant.getClass();
     Class userClass      = applicant.getUser().getClass();
     Class addressClass   = applicant.getAddress().getClass();
     Object sourceObject  = null;
     Method method        = null;
     String methodName    = null;
+    String propertyName  = null;
     String propertyValue = null;
-    for (String propertyName : keySet)
+    for (CompliancyTest compliancyTest : listCompliancyTest)
     {
-      propertyValue = metaData.get(propertyName);
+      propertyName = compliancyTest.getProperty();
+      propertyValue = compliancyTest.getValue();
       try
       {
         // The matcher.group() will be something like %fullName% and the method will be: getFullName.

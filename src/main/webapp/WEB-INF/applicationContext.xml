@@ -122,43 +122,6 @@
 		    init-method="init" destroy-method="cancel">
 	</bean>
   
-  <bean id="applicantCompliancyTest" 
-        class="com.helmet.application.agy.ApplicantCompliancyTest"
-		    factory-method="getInstance">
-		<property name="startOfReasonMarker" value="***** Start of Compliancy Test Failed *****" />
-		<property name="endOfReasonMarker" value="****** End of Compliancy Test Failed ******" />
-    <property name="metaData">
-      <map>
-        <entry key="applicant.registrationNumber" value="NOT EMPTY"/>
-        <entry key="applicant.hasVaricellaImmunisation" value="TRUE"/>
-        <entry key="applicant.hasHepBImmunisation" value="TRUE"/>
-        <entry key="applicant.hasTbImmunisation" value="TRUE"/>
-        <entry key="applicant.hasMmrImmunisation" value="TRUE"/>
-        <entry key="applicant.hasMmrx2Immunisation" value="TRUE"/>
-        <entry key="applicant.hasIvsEppImmunisation" value="TRUE"/>
-        <entry key="applicant.hasReference1Received" value="TRUE"/>
-        <entry key="applicant.hasReference2Received" value="TRUE"/>
-        <entry key="applicant.hasCurrentDisclosure" value="TRUE"/>
-        <entry key="applicant.hasCurrentFitToWork" value="TRUE"/>
-        <entry key="applicant.hasValidProfessionalRegistration" value="TRUE"/>
-        <entry key="applicant.hasValidIdDocument" value="TRUE"/>
-        <entry key="applicant.hasPhoto" value="TRUE"/>
-        <entry key="applicant.hasCurrentTraining" value="TRUE"/>
-        <entry key="applicant.hasCurrentVisa" value="TRUE"/>
-        <entry key="applicant.hasProofOfAddress1" value="TRUE"/>
-        <entry key="applicant.hasProofOfAddress2" value="TRUE"/>
-        <entry key="applicant.niNumberReceived" value="TRUE"/>
-        <entry key="applicant.hasOverseasPoliceClearanceIfRequired" value="TRUE"/>
-        <entry key="applicant.signedApplicationForm" value="TRUE"/>
-        <entry key="applicant.signedTermsAndConditions" value="TRUE"/>
-        <entry key="applicant.signedDataConsentForm" value="TRUE"/>
-        <entry key="applicant.completedCompetencyTest" value="TRUE"/>
-        <entry key="applicant.hasCompletedNurseInterviewIfRequired" value="TRUE"/>
-        <entry key="applicant.hasQualificationIfRequired" value="TRUE"/>
-      </map>
-    </property>
-  </bean>
-  
   <!--  dataSource - connection to Tomcat database connection pool -->
   <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close" >
     <property name="driverClassName" value="org.postgresql.Driver" />
