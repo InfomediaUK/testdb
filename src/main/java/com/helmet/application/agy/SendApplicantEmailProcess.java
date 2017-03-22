@@ -32,6 +32,7 @@ import com.helmet.application.MailHandler;
 import com.helmet.application.Utilities;
 import com.helmet.bean.Agency;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.EmailActionResult;
 
@@ -181,14 +182,14 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     emailHeader(htmlContent, agency);
     emailTopDivider(htmlContent);
     // Process Text Content.
-    StringBuffer message = processTagSubstitution(agency, applicant, textTemplate, messageResources);
+    StringBuffer message = processTagSubstitution(agency, applicant, textTemplate, false, messageResources);
     content.append(cleanTextLine(message.toString()) + "\n");
     System.out.println(">>>>> TEXT OUTPUT >>>>>");
     System.out.println(content.toString());
     System.out.println("<<<<< TEXT OUTPUT <<<<<");
     System.out.println("");
     // Process HTML Content.
-    StringBuffer htmlMessage = processTagSubstitution(agency, applicant, htmlTemplate, messageResources);
+    StringBuffer htmlMessage = processTagSubstitution(agency, applicant, htmlTemplate, true, messageResources);
     htmlContent.append(cleanHtmlLine(htmlMessage.toString()) + "<br/>\n");
     emailBottomDivider(htmlContent);
     emailFooter(htmlContent, messageResources);
@@ -305,22 +306,11 @@ public class SendApplicantEmailProcess extends SendEmailProcess
           } 
         }
       }
-// NOW WE HAVE MULTIPLE DEPENDS ON. Eg. applicant.registrationExpiryDate applicant.regulatorName
-//      if (emailAction.getEmailActionId().equals(AgyConstants.EMAIL_ACTION_ID_PROFESSIONAL_REGISTRATION_EXPIRY_DATE))
-//      {
-//        // Professional Registration Expiry Date...
-//        if (StringUtils.isEmpty(applicant.getRegulatorName()))
-//        {
-//          // Applicant does NOT have Professional Registration.
-//          emailActionResult.setMessage(messageResources.getMessage("errors.emailAction.noProfessionalRegistration"));
-//          status = false;
-//        }
-//      }
     }
     return status;
   }
   
-  private StringBuffer processTagSubstitution(Agency agency, Applicant applicant, StringBuffer template, MessageResources messageResources)
+  private StringBuffer processTagSubstitution(Agency agency, Applicant applicant, StringBuffer template, Boolean html, MessageResources messageResources)
   {
     logger.debug("processTagSubstitution() {}", applicant.getFullName());
     StringBuffer content = new StringBuffer(template);
@@ -330,7 +320,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     Class addressClass   = applicant.getAddress().getClass();
     Object sourceObject  = null;
     Method method        = null;
-    Pattern pattern      = Pattern.compile("(%[a-zA-Z0-9.]+%)");
+    Pattern pattern      = Pattern.compile("(%[a-zA-Z0-9._]+%)");
     Matcher matcher      = pattern.matcher(content.toString());
     String tag           = null;
     String sourceName    = null;
@@ -340,136 +330,248 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     {
       // The matcher.group() such as: %applicant.user.fullName% is the method getFullName on User object.
       tag = matcher.group().substring(1, matcher.group().length() - 1);
-      // Class Name will be agency or applicant.
-      sourceName = tag.substring(0, tag.indexOf("."));
-      logger.debug("sourceName {}", sourceName);
       index = content.indexOf(matcher.group());
-      try
+      if (tag.equals("REQUEST_DOCUMENTS"))
       {
-        // The matcher.group() will be something like %fullName% and the method will be: getFullName.
-        methodName = "get" + StringUtils.capitalize(tag.substring(tag.lastIndexOf(".") + 1));
-        logger.debug("methodName {}", methodName);
-        int dotCount = StringUtils.countMatches(tag, ".");
-        if (dotCount == 1)
+        content.replace(index, index + matcher.group().length(), requestDocumentsText(applicant, html));
+      }
+      else
+      {
+        // Class Name will be agency or applicant.
+        sourceName = tag.substring(0, tag.indexOf("."));
+        logger.debug("sourceName {}", sourceName);
+        try
         {
-          if (sourceName.equals("applicant"))
+          // The matcher.group() will be something like %fullName% and the method will be: getFullName.
+          methodName = "get" + StringUtils.capitalize(tag.substring(tag.lastIndexOf(".") + 1));
+          logger.debug("methodName {}", methodName);
+          int dotCount = StringUtils.countMatches(tag, ".");
+          if (dotCount == 1)
           {
-            // Eg. applicant.crbExpiryDate
-            method = applicantClass.getMethod(methodName, new Class[] {});
-            sourceObject = applicant;
-          }
-          else
-          {
-            // Eg. agency.telephoneNumber
-            method = agencyClass.getMethod(methodName, new Class[] {});
-            sourceObject = agency;
-          }
-        }
-        else
-        {
-          // Has 2 dots. Eg. applicant.user.fullName or applicant.address.postalCode 
-          if (tag.substring(tag.indexOf(".") + 1, tag.lastIndexOf(".")).equalsIgnoreCase("user"))
-          {
-            // User method.
-            method = userClass.getMethod(methodName, new Class[] {});
-            sourceObject = applicant.getUser();
-          }
-          else
-          {
-            // Address method. Can be from Applicant or Agency.
             if (sourceName.equals("applicant"))
             {
-              method = addressClass.getMethod(methodName, new Class[] {});
-              sourceObject = applicant.getAddress();
+              // Eg. applicant.crbExpiryDate
+              method = applicantClass.getMethod(methodName, new Class[] {});
+              sourceObject = applicant;
             }
             else
             {
-              method = addressClass.getMethod(methodName, new Class[] {});
-              sourceObject = agency.getAddress();
+              // Eg. agency.telephoneNumber
+              method = agencyClass.getMethod(methodName, new Class[] {});
+              sourceObject = agency;
             }
           }
-        }
-        if (method.getReturnType() == String.class)
-        {
-          String value = (String)method.invoke(sourceObject, new Object[0]);
-          if (value == null)
-          {
-            content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
-          }
           else
           {
-            content.replace(index, index + matcher.group().length(), value);
+            // Has 2 dots. Eg. applicant.user.fullName or applicant.address.postalCode 
+            if (tag.substring(tag.indexOf(".") + 1, tag.lastIndexOf(".")).equalsIgnoreCase("user"))
+            {
+              // User method.
+              method = userClass.getMethod(methodName, new Class[] {});
+              sourceObject = applicant.getUser();
+            }
+            else
+            {
+              // Address method. Can be from Applicant or Agency.
+              if (sourceName.equals("applicant"))
+              {
+                method = addressClass.getMethod(methodName, new Class[] {});
+                sourceObject = applicant.getAddress();
+              }
+              else
+              {
+                method = addressClass.getMethod(methodName, new Class[] {});
+                sourceObject = agency.getAddress();
+              }
+            }
           }
-        }
-        else if (method.getReturnType() == Integer.class)
-        {
-          Integer value = (Integer)method.invoke(sourceObject, new Object[0]);
-          if (value == null)
+          if (method.getReturnType() == String.class)
           {
-            content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
+            String value = (String)method.invoke(sourceObject, new Object[0]);
+            if (value == null)
+            {
+              content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
+            }
+            else
+            {
+              content.replace(index, index + matcher.group().length(), value);
+            }
           }
           else
-          {
-            content.replace(index, index + matcher.group().length(), value.toString());
-          }
+            if (method.getReturnType() == Integer.class)
+            {
+              Integer value = (Integer)method.invoke(sourceObject, new Object[0]);
+              if (value == null)
+              {
+                content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
+              }
+              else
+              {
+                content.replace(index, index + matcher.group().length(), value.toString());
+              }
+            }
+            else
+              if (method.getReturnType() == Date.class)
+              {
+                Date value = (Date)method.invoke(sourceObject, new Object[0]);
+                if (value == null)
+                {
+                  content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
+                }
+                else
+                {
+                  SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+                  content.replace(index, index + matcher.group().length(), simpleDateFormat.format(value));
+                }
+              }
+              else
+                if (method.getReturnType() == Boolean.class)
+                {
+                  Boolean value = (Boolean)method.invoke(sourceObject, new Object[0]);
+                  if (value)
+                  {
+                    content.replace(index, index + matcher.group().length(), messageResources.getMessage("label.yes"));
+                  }
+                  else
+                  {
+                    content.replace(index, index + matcher.group().length(), messageResources.getMessage("label.no"));
+                  }
+                }
+                else
+                {
+                  Object value = method.invoke(sourceObject, new Object[0]);
+                  content.replace(index, index + matcher.group().length(), value.toString());
+                }
         }
-        else if (method.getReturnType() == Date.class)
+        catch (SecurityException e)
         {
-          Date value = (Date)method.invoke(sourceObject, new Object[0]);
-          if (value == null)
-          {
-            content.replace(index, index + matcher.group().length(), methodName + " " + messageResources.getMessage("label.emailWarningNoData"));
-          }
-          else
-          {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");
-            content.replace(index, index + matcher.group().length(), simpleDateFormat.format(value));
-          }
+          // TODO Auto-generated catch block
+          e.printStackTrace();
         }
-        else if (method.getReturnType() == Boolean.class)
-        { 
-          Boolean value = (Boolean)method.invoke(sourceObject, new Object[0]); 
-          if (value)
-          {
-            content.replace(index, index + matcher.group().length(), messageResources.getMessage("label.yes"));
-          }
-          else
-          {
-            content.replace(index, index + matcher.group().length(), messageResources.getMessage("label.no"));
-          }
-        }
-        else
+        catch (NoSuchMethodException e)
         {
-          Object value = method.invoke(sourceObject, new Object[0]);
-          content.replace(index, index + matcher.group().length(), value.toString());
+          // TODO Auto-generated catch block
+          e.printStackTrace();
         }
-      }
-      catch (SecurityException e)
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      catch (NoSuchMethodException e)
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      catch (IllegalArgumentException e)
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      catch (IllegalAccessException e)
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      catch (InvocationTargetException e)
-      {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+        catch (IllegalArgumentException e)
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        catch (IllegalAccessException e)
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        catch (InvocationTargetException e)
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } 
       }
     }
     return content;
+  }
+  
+  private String requestDocumentsText(Applicant applicant, Boolean html)
+  {
+    StringBuffer text = new StringBuffer();
+    AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
+    Class applicantClass = applicant.getClass();
+    String methodName    = null;
+    String property      = null;
+    for (CompliancyTest compliancyTest : listCompliancyTest)
+    {
+      property = compliancyTest.getProperty();
+      methodName = "get" + StringUtils.capitalize(property.substring(property.lastIndexOf(".") + 1));
+      try
+      {
+        Method method = applicantClass.getMethod(methodName, new Class[] {});
+        if (method.getReturnType() == String.class)
+        {
+          // Method returns a String.
+          String value = (String)method.invoke(applicant, new Object[0]);
+          if (compliancyTest.getValue().equals("NOT EMPTY"))
+          {
+            if (StringUtils.isNotEmpty(value))
+            {
+              // Compliant. Nothing to request.
+            }
+            else
+            {
+              // Request Documents...
+              writeLine(text, compliancyTest, html);
+            }
+          }
+          else if (compliancyTest.getValue().equals("EMPTY"))
+          {
+            if (StringUtils.isEmpty(value))
+            {
+              // Compliant. Nothing to request.
+            }
+            else
+            {
+              // Request Documents...
+              writeLine(text, compliancyTest, html);
+            }
+          }
+          else
+          {
+            // Test actual value.
+            if (compliancyTest.getValue().equals(value))
+            {
+              // Compliant. Nothing to request.
+            }
+            else
+            {
+              // Request Documents...
+              writeLine(text, compliancyTest, html);
+            }
+          }
+        }
+        else if (method.getReturnType() == Boolean.class)
+        {
+          Boolean value = (Boolean)method.invoke(applicant, new Object[0]);
+          Boolean compliancyTestValue = new Boolean(compliancyTest.getValue());
+          if (compliancyTestValue.equals(value))
+          {
+            // Compliant. Nothing to request.
+          }
+          else
+          {
+            // Request Documents...
+            writeLine(text, compliancyTest, html);
+          }
+        }
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+      }
+    }
+    return text.toString();
+  }
+  
+  private void writeLine(StringBuffer text, CompliancyTest compliancyTest, Boolean html)
+  {
+    if (html)
+    {
+      text.append("<p>");
+    }
+    else
+    {
+      // NOT html...
+      if (text.length() > 0)
+      {
+        // NOT first line. Add a new line.
+        text.append("\n");
+      }
+    }
+    text.append(compliancyTest.getRequiredDocumentText());
+    if (html)
+    {
+      text.append("</p>");
+    }
   }
 }

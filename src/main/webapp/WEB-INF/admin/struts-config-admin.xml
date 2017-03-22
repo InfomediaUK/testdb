@@ -57,6 +57,10 @@
       <form-property name="regulator" type="com.helmet.bean.Regulator" />
     </form-bean>
 
+    <form-bean name="CompliancyTestFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="compliancyTest" type="com.helmet.bean.CompliancyTest" />
+    </form-bean>
+
     <form-bean name="QueriesFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="queriesXml" type="java.lang.String" />
     </form-bean>
@@ -504,6 +508,12 @@
     <forward name="regulatorNew"  path="/regulatorNew.do" />
     <forward name="regulatorEdit" path="/regulatorEdit.do" />
     <forward name="regulatorDelete" path="/regulatorDelete.do" />
+
+    <forward name="compliancyTestList" path="/compliancyTestList.do" />
+    <forward name="compliancyTestView" path="/compliancyTestView.do" />
+    <forward name="compliancyTestNew"  path="/compliancyTestNew.do" />
+    <forward name="compliancyTestEdit" path="/compliancyTestEdit.do" />
+    <forward name="compliancyTestDelete" path="/compliancyTestDelete.do" />
 
     <forward name="siteUnavailableView" path="/siteUnavailableView.do" />
     <forward name="siteUnavailableEdit" path="/siteUnavailableEdit.do" />
@@ -1512,6 +1522,78 @@
             input="regulatorDelete.page"
             validate="false">
         <forward name="success" path="/regulatorList.do" redirect="true" />
+    </action>
+
+    <action path="/compliancyTestList"
+            type="com.helmet.application.admin.CompliancyTestList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="compliancyTestList.page" />
+    </action>
+
+    <action path="/compliancyTestNew"
+            type="com.helmet.application.admin.CompliancyTestNew"
+            name="CompliancyTestFormAdmin"
+            scope="request"
+            input="/compliancyTestList.do"
+            validate="false">
+        <forward name="success" path="compliancyTestNew.page" />
+    </action>
+
+    <action path="/compliancyTestNewProcess"
+            type="com.helmet.application.admin.CompliancyTestNewProcess"
+            name="CompliancyTestFormAdmin"
+            scope="request"
+            input="compliancyTestNew.page"
+            validate="true">
+        <forward name="success" path="/compliancyTestList.do" redirect="true" />
+    </action>
+
+    <action path="/compliancyTestView"
+            type="com.helmet.application.admin.CompliancyTestView"
+            name="CompliancyTestFormAdmin"
+            scope="request"
+            input="/compliancyTestList.do"
+            validate="false">
+        <forward name="success" path="compliancyTestView.page" />
+    </action>
+
+    <action path="/compliancyTestEdit"
+            type="com.helmet.application.admin.CompliancyTestEdit"
+            name="CompliancyTestFormAdmin"
+            scope="request"
+            input="/compliancyTestList.do"
+            validate="false">
+        <forward name="success" path="compliancyTestEdit.page" />
+    </action>
+
+    <action path="/compliancyTestEditProcess"
+            type="com.helmet.application.admin.CompliancyTestEditProcess"
+            name="CompliancyTestFormAdmin"
+            scope="request"
+            input="compliancyTestEdit.page"
+            validate="true">
+        <forward name="success" path="/compliancyTestList.do" redirect="true" />
+    </action>
+
+    <action path="/compliancyTestDelete"
+            type="com.helmet.application.admin.CompliancyTestDelete"
+            name="CompliancyTestFormAdmin"
+            scope="request"
+            input="/compliancyTestList.do"
+            validate="false">
+        <forward name="success" path="compliancyTestDelete.page" />
+    </action>
+
+    <action path="/compliancyTestDeleteProcess"
+            type="com.helmet.application.admin.CompliancyTestDeleteProcess"
+            name="CompliancyTestFormAdmin"
+            scope="request"
+            input="compliancyTestDelete.page"
+            validate="false">
+        <forward name="success" path="/compliancyTestList.do" redirect="true" />
     </action>
 
     <action path="/siteUnavailableView"

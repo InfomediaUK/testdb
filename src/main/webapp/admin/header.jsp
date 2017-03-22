@@ -184,6 +184,12 @@
 </li>
 </mmj-admin:hasAccess>
 
+<mmj-admin:hasAccess forward="compliancyTestList">
+<li class="navMain">
+  <html:link forward="compliancyTestList"><bean:message key="link.compliancyTestList"/></html:link>
+</li>
+</mmj-admin:hasAccess>
+
 <mmj-admin:hasAccess forward="siteUnavailableView">
 <li class="navMain">
   <html:link forward="siteUnavailableView"><bean:message key="link.siteUnavailableView"/></html:link>

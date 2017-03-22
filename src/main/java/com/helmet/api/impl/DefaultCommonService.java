@@ -34,6 +34,7 @@ import com.helmet.bean.ClientAgencyJobProfileGrade;
 import com.helmet.bean.ClientAgencyUser;
 import com.helmet.bean.ClientAgencyUserEntity;
 import com.helmet.bean.ClientUser;
+import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.Country;
 import com.helmet.bean.DisciplineCategory;
 import com.helmet.bean.DisciplineCategoryUser;
@@ -96,6 +97,7 @@ import com.helmet.persistence.ClientAgencyGradeDAO;
 import com.helmet.persistence.ClientAgencyJobProfileDAO;
 import com.helmet.persistence.ClientAgencyJobProfileGradeDAO;
 import com.helmet.persistence.ClientDAO;
+import com.helmet.persistence.CompliancyTestDAO;
 import com.helmet.persistence.CountryDAO;
 import com.helmet.persistence.DisciplineCategoryDAO;
 import com.helmet.persistence.DressCodeDAO;
@@ -149,6 +151,8 @@ public abstract class DefaultCommonService implements CommonService {
 	
 	private BookingDateDAO bookingDateDAO;
 	
+  private CompliancyTestDAO compliancyTestDAO;
+  
   private CountryDAO countryDAO;
   
   private EmailActionDAO emailActionDAO;
@@ -346,6 +350,16 @@ public abstract class DefaultCommonService implements CommonService {
 	public void setBudgetTransactionDAO(BudgetTransactionDAO budgetTransactionDAO) {
 		this.budgetTransactionDAO = budgetTransactionDAO;
 	}
+
+  public CompliancyTestDAO getCompliancyTestDAO()
+  {
+    return compliancyTestDAO;
+  }
+
+  public void setCompliancyTestDAO(CompliancyTestDAO compliancyTestDAO)
+  {
+    this.compliancyTestDAO = compliancyTestDAO;
+  }
 
   public CountryDAO getCountryDAO() 
   {
@@ -3155,6 +3169,13 @@ public abstract class DefaultCommonService implements CommonService {
     List<Regulator> regulators = null;
     regulators = regulatorDAO.getRegulators(showOnlyActive);
     return regulators;
+  }
+
+  public List<CompliancyTest> getCompliancyTests(boolean showOnlyActive) 
+  {
+    List<CompliancyTest> compliancyTests = null;
+    compliancyTests = compliancyTestDAO.getCompliancyTests(showOnlyActive);
+    return compliancyTests;
   }
 
   public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant) 

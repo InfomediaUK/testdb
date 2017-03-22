@@ -239,6 +239,27 @@
         <put name="titleKey" value="title.regulatorDelete" type="string"/>
         <put name="body"   value="/admin/regulatorDelete.jsp"/>
   </definition>
+  <!-- CompliancyTest -->
+  <definition name="compliancyTestList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.compliancyTestList" type="string"/>
+        <put name="body"   value="/admin/compliancyTestList.jsp"/>
+  </definition>
+  <definition name="compliancyTestNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.compliancyTestNew" type="string"/>
+        <put name="body"   value="/admin/compliancyTestNew.jsp"/>
+  </definition>
+  <definition name="compliancyTestView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.compliancyTestView" type="string"/>
+        <put name="body"   value="/admin/compliancyTestView.jsp"/>
+  </definition>
+  <definition name="compliancyTestEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.compliancyTestEdit" type="string"/>
+        <put name="body"   value="/admin/compliancyTestEdit.jsp"/>
+  </definition>
+  <definition name="compliancyTestDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.compliancyTestDelete" type="string"/>
+        <put name="body"   value="/admin/compliancyTestDelete.jsp"/>
+  </definition>
   <!-- SiteUnavailable -->
   <definition name="siteUnavailableView.page" extends="layoutAdmin.main">
         <put name="titleKey" value="title.siteUnavailableView" type="string"/>

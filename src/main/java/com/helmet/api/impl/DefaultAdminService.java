@@ -36,6 +36,7 @@ import com.helmet.bean.ClientAgencyJobProfileGrade;
 import com.helmet.bean.ClientAgencyJobProfileUserEntity;
 import com.helmet.bean.ClientReEnterPwd;
 import com.helmet.bean.ClientUserEntity;
+import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.Consultant;
 import com.helmet.bean.ConsultantAccess;
 import com.helmet.bean.ConsultantAccessGroup;
@@ -749,8 +750,57 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     return rc;
   }
   
+  public CompliancyTest getCompliancyTest(Integer compliancyTestId) 
+  {
+    CompliancyTest compliancyTest = null;
+    compliancyTest = getCompliancyTestDAO().getCompliancyTest(compliancyTestId);
+    return compliancyTest;
+  }
+
+  public CompliancyTest getCompliancyTestForProperty(String name) 
+  {
+    
+    CompliancyTest compliancyTest = null;
+    compliancyTest = getCompliancyTestDAO().getCompliancyTestForProperty(name);
+    return compliancyTest;
+    
+  }
   
+  public int insertCompliancyTest(CompliancyTest compliancyTest, Integer compliancyTestId) 
+  {
+    CompliancyTest duplicateCompliancyTest = getCompliancyTestDAO().getCompliancyTestForProperty(compliancyTest.getProperty());
+    if (duplicateCompliancyTest != null) 
+    {
+      throw new DuplicateDataException("name");
+    }
+    int rc = getCompliancyTestDAO().insertCompliancyTest(compliancyTest, compliancyTestId);
+    return rc;
+  }
   
+  public int updateCompliancyTest(CompliancyTest compliancyTest, Integer auditorId) 
+  {
+    CompliancyTest duplicateCompliancyTest = getCompliancyTestDAO().getCompliancyTestForProperty(compliancyTest.getProperty());
+    if (duplicateCompliancyTest != null && 
+      !duplicateCompliancyTest.getCompliancyTestId().equals(compliancyTest.getCompliancyTestId())) 
+    {
+      throw new DuplicateDataException("name");
+    }
+    int rc = getCompliancyTestDAO().updateCompliancyTest(compliancyTest, auditorId);
+    return rc;
+  }
+  
+  public int updateCompliancyTestDisplayOrder(CompliancyTest compliancyTest, Integer auditorId) 
+  {
+    int rc = getCompliancyTestDAO().updateCompliancyTest(compliancyTest, auditorId);
+    return rc;
+  }
+  
+  public int deleteCompliancyTest(Integer compliancyTestId, Integer noOfChanges, Integer auditorId)
+  {
+    int rc = getCompliancyTestDAO().deleteCompliancyTest(compliancyTestId, noOfChanges, auditorId);
+    return rc;
+  }
+
   public List<com.helmet.xml.jaxb.model.IdDocument> getJerseyIdDocuments(boolean showOnlyActive) 
   {
     List<IdDocument> idDocuments = null;

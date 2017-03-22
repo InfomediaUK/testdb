@@ -19,6 +19,7 @@ import com.helmet.bean.ClientAgencyJobProfileGrade;
 import com.helmet.bean.ClientAgencyUser;
 import com.helmet.bean.ClientAgencyUserEntity;
 import com.helmet.bean.ClientUser;
+import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.Country;
 import com.helmet.bean.DisciplineCategory;
 import com.helmet.bean.DisciplineCategoryUser;
@@ -315,6 +316,7 @@ public interface CommonService {
   public IdDocument getIdDocument(Integer idDocumentId);
   public List<VisaType> getVisaTypes(boolean showOnlyActive);
   public List<Regulator> getRegulators(boolean showOnlyActive);
+  public List<CompliancyTest> getCompliancyTests(boolean showOnlyActive);
 
   public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant);
 

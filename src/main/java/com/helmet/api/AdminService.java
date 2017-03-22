@@ -29,6 +29,7 @@ import com.helmet.bean.ClientAgencyJobProfileGrade;
 import com.helmet.bean.ClientAgencyJobProfileUserEntity;
 import com.helmet.bean.ClientReEnterPwd;
 import com.helmet.bean.ClientUserEntity;
+import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.Consultant;
 import com.helmet.bean.ConsultantAccess;
 import com.helmet.bean.ConsultantAccessGroup;
@@ -271,4 +272,10 @@ public interface AdminService extends CommonService {
   public int updateRegulatorDisplayOrder(Regulator regulator, Integer auditorId);
   public int deleteRegulator(Integer regulatorId, Integer noOfChanges, Integer auditorId);
 
+  public CompliancyTest getCompliancyTest(Integer regulatorId);
+  public CompliancyTest getCompliancyTestForProperty(String name);
+  public int insertCompliancyTest(CompliancyTest regulator, Integer auditorId);
+  public int updateCompliancyTest(CompliancyTest regulator, Integer auditorId);
+  public int updateCompliancyTestDisplayOrder(CompliancyTest regulator, Integer auditorId);
+  public int deleteCompliancyTest(Integer regulatorId, Integer noOfChanges, Integer auditorId);
 }
