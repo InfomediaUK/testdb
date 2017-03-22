@@ -42,17 +42,19 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 	      <input type="hidden" name="applicant.applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
 	      <td align="right" valign="middle" width="80"><html:submit styleClass="titleButton"><bean:message key="button.edit"/></html:submit></td>
 	    </html:form>
+	</mmj-agy:hasAccess>
+	<mmj-agy:hasAccess forward="applicantCompliancyTest">
 	    <html:form action="/applicantCompliancyTest.do" onsubmit="return singleSubmit();">
 	      <input type="hidden" name="applicant.applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
 	      <td align="right" valign="middle" width="80"><html:submit styleClass="titleButton"><bean:message key="button.compliancy"/></html:submit></td>
 	    </html:form>
-  <logic:notEmpty name="ApplicantFormAgy" property="applicant.documentsRequired">
+	<logic:equal name="ApplicantFormAgy" property="applicant.compliant" value="false">
         <html:form action="/applicantEmailProcess.do" styleId="ApplicantNew" onsubmit="return singleSubmit();">
 	      <input type="hidden" name="applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
           <input type="hidden" name="emailActionId" value="8">
           <td align="right" valign="middle" width="80"><html:submit styleClass="wideButton"><bean:message key="button.requestDocuments"/></html:submit></td>
         </html:form>
-  </logic:notEmpty>
+    </logic:equal>
 	</mmj-agy:hasAccess>
 	<logic:notEqual name="ApplicantFormAgy" property="applicant.archived" value="true">
 		<mmj-agy:hasAccess forward="applicantArchive">
