@@ -50,6 +50,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		insertDisciplineCategorySQL.append("  CODE, ");
     insertDisciplineCategorySQL.append("  NAME, ");
     insertDisciplineCategorySQL.append("  REGULATORID, ");
+    insertDisciplineCategorySQL.append("  UNDERTAKESEPP, ");
     insertDisciplineCategorySQL.append("  DISPLAYORDER, ");
     insertDisciplineCategorySQL.append("  CREATIONTIMESTAMP, ");
     insertDisciplineCategorySQL.append("  AUDITORID, ");
@@ -58,6 +59,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		insertDisciplineCategorySQL.append("VALUES  ");
 		insertDisciplineCategorySQL.append("(  ");
 		insertDisciplineCategorySQL.append("  ^, ");
+    insertDisciplineCategorySQL.append("  ^, ");
     insertDisciplineCategorySQL.append("  ^, ");
     insertDisciplineCategorySQL.append("  ^, ");
     insertDisciplineCategorySQL.append("  ^, ");
@@ -74,6 +76,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		updateDisciplineCategorySQL.append("     CODE = ^, ");
     updateDisciplineCategorySQL.append("     NAME = ^, ");
     updateDisciplineCategorySQL.append("     REGULATORID = ^, ");
+    updateDisciplineCategorySQL.append("     UNDERTAKESEPP = ^, ");
     updateDisciplineCategorySQL.append("     DISPLAYORDER = ^, ");
     updateDisciplineCategorySQL.append("     AUDITORID = ^, ");
     updateDisciplineCategorySQL.append("     AUDITTIMESTAMP = ^ ");
@@ -103,6 +106,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		selectDisciplineCategoriesSQL.append("       CODE, ");
     selectDisciplineCategoriesSQL.append("       NAME, ");
     selectDisciplineCategoriesSQL.append("       REGULATORID, ");
+    selectDisciplineCategoriesSQL.append("       UNDERTAKESEPP, ");
     selectDisciplineCategoriesSQL.append("       DISPLAYORDER, ");
     selectDisciplineCategoriesSQL.append("       CREATIONTIMESTAMP, ");
     selectDisciplineCategoriesSQL.append("       AUDITORID, ");
@@ -117,6 +121,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
     selectDisciplineCategoryUsersSQL.append("       DC.CODE, ");
     selectDisciplineCategoryUsersSQL.append("       DC.NAME, ");
     selectDisciplineCategoryUsersSQL.append("       DC.REGULATORID, ");
+    selectDisciplineCategoryUsersSQL.append("       DC.UNDERTAKESEPP, ");
     selectDisciplineCategoryUsersSQL.append("       DC.DISPLAYORDER, ");
     selectDisciplineCategoryUsersSQL.append("       DC.CREATIONTIMESTAMP, ");
     selectDisciplineCategoryUsersSQL.append("       DC.AUDITORID, ");
@@ -164,6 +169,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		Utilities.replaceAndQuote(sql, disciplineCategory.getCode());
     Utilities.replaceAndQuote(sql, disciplineCategory.getName());
     Utilities.replaceZeroWithNull(sql, disciplineCategory.getRegulatorId());
+    Utilities.replace(sql, disciplineCategory.getUndertakesEPP());
     Utilities.replace(sql, disciplineCategory.getDisplayOrder());
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     Utilities.replace(sql, auditorId);
@@ -179,6 +185,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		Utilities.replaceAndQuote(sql, disciplineCategory.getCode());
     Utilities.replaceAndQuote(sql, disciplineCategory.getName());
     Utilities.replaceZeroWithNull(sql, disciplineCategory.getRegulatorId());
+    Utilities.replace(sql, disciplineCategory.getUndertakesEPP());
     Utilities.replace(sql, disciplineCategory.getDisplayOrder());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());

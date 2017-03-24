@@ -8,6 +8,7 @@ public class DisciplineCategory extends Base
   private String code;
   private String name;  
   private Integer regulatorId;
+  private Boolean undertakesEPP;
   private Integer displayOrder;
 
   public Integer getDisciplineCategoryId()
@@ -50,6 +51,16 @@ public class DisciplineCategory extends Base
     this.regulatorId = regulatorId;
   }
 
+  public Boolean getUndertakesEPP()
+  {
+    return undertakesEPP;
+  }
+
+  public void setUndertakesEPP(Boolean undertakesEPP)
+  {
+    this.undertakesEPP = undertakesEPP;
+  }
+
   public String getNameWithCode()
   {
     return name + " (" + code + ")";
@@ -85,6 +96,7 @@ public class DisciplineCategory extends Base
     {
       setRegulatorId(regulatorId);
     }
+    setUndertakesEPP(rs.getBoolean("UNDERTAKESEPP"));
     setDisplayOrder(rs.getInt("DISPLAYORDER"));
   }
 

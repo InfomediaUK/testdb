@@ -26,6 +26,10 @@
     <td align="left"><bean:write name="DisciplineCategoryFormAdmin" property="disciplineCategory.regulatorCode"/></td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.undertakesEPP"/></td>
+    <td align="left"><bean:write name="DisciplineCategoryFormAdmin" property="disciplineCategory.undertakesEPP"/></td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.displayOrder"/></td>
     <td align="left"><bean:write name="DisciplineCategoryFormAdmin" property="disciplineCategory.displayOrder"/></td>
   </tr>

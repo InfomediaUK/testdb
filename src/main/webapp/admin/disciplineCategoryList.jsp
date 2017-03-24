@@ -24,6 +24,7 @@
     <th align="left"><bean:message key="label.name" /></th>
     <th align="left"><bean:message key="label.code" /></th>
     <th align="left"><bean:message key="label.regulator" /></th>
+    <th align="left"><bean:message key="label.undertakesEPP" /></th>
     <th align="left"><bean:message key="label.active" /></th>
     <th align="left"><bean:message key="label.order" /></th>
   </tr>
@@ -47,6 +48,9 @@
     </td>
     <td align="left">
       <bean:write name="disciplineCategory" property="regulatorCode"/>
+    </td>
+    <td align="left">
+      <bean:write name="disciplineCategory" property="undertakesEPP"/>
     </td>
     <td align="left">
       <bean:write name="disciplineCategory" property="active"/>

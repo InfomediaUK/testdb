@@ -153,8 +153,8 @@ public class Applicant extends Base
   private String geographicalRegionName;
 
   private Integer disciplineCategoryId;
-
   private String disciplineCategoryName;
+  private Boolean undertakesEPP = false;
   private String regulatorName;
   private String regulatorCode;
   private String visaTypeName;
@@ -611,6 +611,16 @@ public class Applicant extends Base
   public void setDisciplineCategoryName(String disciplineCategoryName)
   {
     this.disciplineCategoryName = disciplineCategoryName;
+  }
+
+  public Boolean getUndertakesEPP()
+  {
+    return undertakesEPP;
+  }
+
+  public void setUndertakesEPP(Boolean undertakesEPP)
+  {
+    this.undertakesEPP = undertakesEPP;
   }
 
   public String getRegulatorName()
@@ -1569,6 +1579,7 @@ public class Applicant extends Base
     setGeographicalRegionName(rs.getString("GEOGRAPHICALREGIONNAME"));
     setDisciplineCategoryId(rs.getInt("DISCIPLINECATEGORYID"));
     setDisciplineCategoryName(rs.getString("DISCIPLINECATEGORYNAME"));
+    setUndertakesEPP(rs.getBoolean("UNDERTAKESEPP"));
     setRegulatorName(rs.getString("REGULATORNAME"));
     setRegulatorCode(rs.getString("REGULATORCODE"));
     setIdDocumentName(rs.getString("IDDOCUMENTNAME"));
@@ -1853,9 +1864,19 @@ public class Applicant extends Base
     return StringUtils.isNotEmpty(mmrx2Filename);
   }
   
+  public Boolean getHasIvsEppImmunisationIfRequired()
+  {
+    if (undertakesEPP)
+    {
+      // True: Must have ivsEppFilename entered.
+      return getHasIvsEppImmunisation();
+    }
+    return true;
+  }
+
   public Boolean getHasIvsEppImmunisation()
   {
-    // True: Must have mmrx2Filename entered.
+    // True: Must have ivsEppFilename entered.
     return StringUtils.isNotEmpty(ivsEppFilename);
   }
 
