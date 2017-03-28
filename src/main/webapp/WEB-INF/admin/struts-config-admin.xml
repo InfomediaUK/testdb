@@ -62,6 +62,9 @@
     <form-bean name="RegulatorFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="regulator" type="com.helmet.bean.Regulator" />
     </form-bean>
+    <form-bean name="TrainingFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="training" type="com.helmet.bean.Training" />
+    </form-bean>
 
     <form-bean name="CompliancyTestFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="compliancyTest" type="com.helmet.bean.CompliancyTest" />
@@ -522,6 +525,12 @@
     <forward name="regulatorNew"  path="/regulatorNew.do" />
     <forward name="regulatorEdit" path="/regulatorEdit.do" />
     <forward name="regulatorDelete" path="/regulatorDelete.do" />
+
+    <forward name="trainingList" path="/trainingList.do" />
+    <forward name="trainingView" path="/trainingView.do" />
+    <forward name="trainingNew"  path="/trainingNew.do" />
+    <forward name="trainingEdit" path="/trainingEdit.do" />
+    <forward name="trainingDelete" path="/trainingDelete.do" />
 
     <forward name="compliancyTestList" path="/compliancyTestList.do" />
     <forward name="compliancyTestView" path="/compliancyTestView.do" />
@@ -1544,6 +1553,78 @@
             input="regulatorDelete.page"
             validate="false">
         <forward name="success" path="/regulatorList.do" redirect="true" />
+    </action>
+
+    <action path="/trainingList"
+            type="com.helmet.application.admin.TrainingList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="trainingList.page" />
+    </action>
+
+    <action path="/trainingNew"
+            type="com.helmet.application.admin.TrainingNew"
+            name="TrainingFormAdmin"
+            scope="request"
+            input="/trainingList.do"
+            validate="false">
+        <forward name="success" path="trainingNew.page" />
+    </action>
+
+    <action path="/trainingNewProcess"
+            type="com.helmet.application.admin.TrainingNewProcess"
+            name="TrainingFormAdmin"
+            scope="request"
+            input="trainingNew.page"
+            validate="true">
+        <forward name="success" path="/trainingList.do" redirect="true" />
+    </action>
+
+    <action path="/trainingView"
+            type="com.helmet.application.admin.TrainingView"
+            name="TrainingFormAdmin"
+            scope="request"
+            input="/trainingList.do"
+            validate="false">
+        <forward name="success" path="trainingView.page" />
+    </action>
+
+    <action path="/trainingEdit"
+            type="com.helmet.application.admin.TrainingEdit"
+            name="TrainingFormAdmin"
+            scope="request"
+            input="/trainingList.do"
+            validate="false">
+        <forward name="success" path="trainingEdit.page" />
+    </action>
+
+    <action path="/trainingEditProcess"
+            type="com.helmet.application.admin.TrainingEditProcess"
+            name="TrainingFormAdmin"
+            scope="request"
+            input="trainingEdit.page"
+            validate="true">
+        <forward name="success" path="/trainingList.do" redirect="true" />
+    </action>
+
+    <action path="/trainingDelete"
+            type="com.helmet.application.admin.TrainingDelete"
+            name="TrainingFormAdmin"
+            scope="request"
+            input="/trainingList.do"
+            validate="false">
+        <forward name="success" path="trainingDelete.page" />
+    </action>
+
+    <action path="/trainingDeleteProcess"
+            type="com.helmet.application.admin.TrainingDeleteProcess"
+            name="TrainingFormAdmin"
+            scope="request"
+            input="trainingDelete.page"
+            validate="false">
+        <forward name="success" path="/trainingList.do" redirect="true" />
     </action>
 
     <action path="/compliancyTestList"

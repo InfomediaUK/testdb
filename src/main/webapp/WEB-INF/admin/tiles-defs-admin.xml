@@ -239,6 +239,27 @@
         <put name="titleKey" value="title.regulatorDelete" type="string"/>
         <put name="body"   value="/admin/regulatorDelete.jsp"/>
   </definition>
+  <!-- Training -->
+  <definition name="trainingList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingList" type="string"/>
+        <put name="body"   value="/admin/trainingList.jsp"/>
+  </definition>
+  <definition name="trainingNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingNew" type="string"/>
+        <put name="body"   value="/admin/trainingNew.jsp"/>
+  </definition>
+  <definition name="trainingView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingView" type="string"/>
+        <put name="body"   value="/admin/trainingView.jsp"/>
+  </definition>
+  <definition name="trainingEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingEdit" type="string"/>
+        <put name="body"   value="/admin/trainingEdit.jsp"/>
+  </definition>
+  <definition name="trainingDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingDelete" type="string"/>
+        <put name="body"   value="/admin/trainingDelete.jsp"/>
+  </definition>
   <!-- CompliancyTest -->
   <definition name="compliancyTestList.page" extends="layoutAdmin.main">
         <put name="titleKey" value="title.compliancyTestList" type="string"/>

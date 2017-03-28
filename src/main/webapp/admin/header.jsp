@@ -196,6 +196,12 @@
 </li>
 </mmj-admin:hasAccess>
 
+<mmj-admin:hasAccess forward="trainingList">
+<li class="navMain">
+  <html:link forward="trainingList"><bean:message key="link.trainingList"/></html:link>
+</li>
+</mmj-admin:hasAccess>
+
 <mmj-admin:hasAccess forward="siteUnavailableView">
 <li class="navMain">
   <html:link forward="siteUnavailableView"><bean:message key="link.siteUnavailableView"/></html:link>

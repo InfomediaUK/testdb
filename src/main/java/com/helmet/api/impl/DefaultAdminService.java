@@ -62,6 +62,7 @@ import com.helmet.bean.LocationJobProfile;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.ReEnterPwd;
 import com.helmet.bean.Regulator;
+import com.helmet.bean.Training;
 import com.helmet.bean.TrainingCompany;
 import com.helmet.bean.TrainingCompanyUserEntity;
 import com.helmet.persistence.AdminAccessDAO;
@@ -2160,6 +2161,72 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
       rc += getTrainingCompanyDAO().updateTrainingCompanyDisplayOrder(trainingCompanyId, displayOrder, noOfChanges, auditorId);
     }
 
+    return rc;
+  }
+  
+  public Training getTraining(Integer trainingId) 
+  {
+    Training training = null;
+    training = getTrainingDAO().getTraining(trainingId);
+    return training;
+  }
+
+  public Training getTrainingForCode(String code) 
+  {
+    
+    Training training = null;
+    training = getTrainingDAO().getTrainingForCode(code);
+    return training;
+    
+  }
+
+  public Training getTrainingForName(String name) 
+  {
+    
+    Training training = null;
+    training = getTrainingDAO().getTrainingForCode(name);
+    return training;
+    
+  }
+
+  public int insertTraining(Training training, Integer trainingId) 
+  {
+    Training duplicateTraining = getTrainingDAO().getTrainingForName(training.getName());
+    if (duplicateTraining != null) {
+      throw new DuplicateDataException("name");
+    }
+    duplicateTraining = getTrainingDAO().getTrainingForCode(training.getCode());
+    if (duplicateTraining != null) {
+      throw new DuplicateDataException("code");
+    }
+    int rc = getTrainingDAO().insertTraining(training, trainingId);
+    return rc;
+  }
+
+  public int updateTraining(Training training, Integer auditorId) 
+  {
+    Training duplicateTraining = getTrainingDAO().getTrainingForName(training.getName());
+    if (duplicateTraining != null && 
+      !duplicateTraining.getTrainingId().equals(training.getTrainingId())) {
+      throw new DuplicateDataException("name");
+    }
+    duplicateTraining = getTrainingDAO().getTrainingForCode(training.getCode());
+    if (duplicateTraining != null && 
+      !duplicateTraining.getTrainingId().equals(training.getTrainingId())) {
+      throw new DuplicateDataException("code");
+    }
+    int rc = getTrainingDAO().updateTraining(training, auditorId);
+    return rc;
+  }
+
+  public int updateTrainingDisplayOrder(Training training, Integer auditorId) 
+  {
+    int rc = getTrainingDAO().updateTraining(training, auditorId);
+    return rc;
+  }
+
+  public int deleteTraining(Integer trainingId, Integer noOfChanges, Integer auditorId){
+    int rc = getTrainingDAO().deleteTraining(trainingId, noOfChanges, auditorId);
     return rc;
   }
   
