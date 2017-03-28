@@ -16,28 +16,20 @@ import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.Agency;
 
 
-public class AgencyDeleteProcess extends AdminAction {
+public class AgencyDeleteProcess extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
-    	logger.entry("In coming !!!");
-    	
-     	Agency agency = (Agency)dynaForm.get("agency");
-
-		AdminService adminService = ServiceFactory.getInstance().getAdminService();
-		
-		int rowCount = adminService.deleteAgency(agency.getAgencyId(), agency.getNoOfChanges(), getAdministratorLoggedIn().getAdministratorId());
-
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
-    }
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    Agency agency = (Agency)dynaForm.get("agency");
+    AdminService adminService = ServiceFactory.getInstance().getAdminService();
+    int rowCount = adminService.deleteAgency(agency.getAgencyId(), agency.getNoOfChanges(), getAdministratorLoggedIn().getAdministratorId());
+    logger.exit("Out going !!!");
+    return mapping.findForward("success");
+  }
 
 }

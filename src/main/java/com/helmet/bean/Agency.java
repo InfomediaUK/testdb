@@ -29,8 +29,6 @@ public class Agency extends BaseOwner
 
   public String payrollContactFaxNumber;
 
-  public String websiteAddress;
-
   public String clientConfirmationEmailFreeText;
 
   public String applicantConfirmationEmailFreeText;
@@ -166,16 +164,6 @@ public class Agency extends BaseOwner
     this.payrollContactTelephoneNumber = payrollContactTelephoneNumber;
   }
 
-  public String getWebsiteAddress()
-  {
-    return websiteAddress;
-  }
-
-  public void setWebsiteAddress(String websiteAddress)
-  {
-    this.websiteAddress = websiteAddress;
-  }
-
   public String getInvoiceCreditFooterFreeText()
   {
     return invoiceCreditFooterFreeText;
@@ -280,7 +268,6 @@ public class Agency extends BaseOwner
     setPayrollContactEmailAddress(rs.getString("PAYROLLCONTACTEMAILADDRESS"));
     setPayrollContactTelephoneNumber(rs.getString("PAYROLLCONTACTTELEPHONENUMBER"));
     setPayrollContactFaxNumber(rs.getString("PAYROLLCONTACTFAXNUMBER"));
-    setWebsiteAddress(rs.getString("WEBSITEADDRESS"));
     setClientConfirmationEmailFreeText(rs.getString("CLIENTCONFIRMATIONEMAILFREETEXT"));
     setApplicantConfirmationEmailFreeText(rs.getString("APPLICANTCONFIRMATIONEMAILFREETEXT"));
     setAgencyAdminEmailAddress(rs.getString("AGENCYADMINEMAILADDRESS"));

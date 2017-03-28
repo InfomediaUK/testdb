@@ -74,7 +74,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		insertAgencySQL.append("  PAYROLLCONTACTEMAILADDRESS, ");
 		insertAgencySQL.append("  PAYROLLCONTACTTELEPHONENUMBER, ");
 		insertAgencySQL.append("  PAYROLLCONTACTFAXNUMBER, ");
-		insertAgencySQL.append("  WEBSITEADDRESS, ");
+    insertAgencySQL.append("  EMAILADDRESS, ");
+    insertAgencySQL.append("  WEBSITEADDRESS, ");
 		insertAgencySQL.append("  CLIENTCONFIRMATIONEMAILFREETEXT, ");
     insertAgencySQL.append("  APPLICANTCONFIRMATIONEMAILFREETEXT, ");
     insertAgencySQL.append("  AGENCYADMINEMAILADDRESS, ");
@@ -91,7 +92,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		insertAgencySQL.append("(  ");
 		insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
-		insertAgencySQL.append("  ^, ");
+    insertAgencySQL.append("  ^, ");
+    insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
@@ -159,7 +161,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		updateAgencySQL.append("     PAYROLLCONTACTEMAILADDRESS = ^, ");
 		updateAgencySQL.append("     PAYROLLCONTACTTELEPHONENUMBER = ^, ");
 		updateAgencySQL.append("     PAYROLLCONTACTFAXNUMBER = ^, ");
-		updateAgencySQL.append("     WEBSITEADDRESS = ^, ");
+    updateAgencySQL.append("     EMAILADDRESS = ^, ");
+    updateAgencySQL.append("     WEBSITEADDRESS = ^, ");
 		updateAgencySQL.append("     CLIENTCONFIRMATIONEMAILFREETEXT = ^, ");
     updateAgencySQL.append("     APPLICANTCONFIRMATIONEMAILFREETEXT = ^, ");
     updateAgencySQL.append("     AGENCYADMINEMAILADDRESS = ^, ");
@@ -220,7 +223,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		selectAgenciesSQL.append("       PAYROLLCONTACTEMAILADDRESS, ");
 		selectAgenciesSQL.append("       PAYROLLCONTACTTELEPHONENUMBER, ");
 		selectAgenciesSQL.append("       PAYROLLCONTACTFAXNUMBER, ");
-		selectAgenciesSQL.append("       WEBSITEADDRESS, ");
+    selectAgenciesSQL.append("       EMAILADDRESS, ");
+    selectAgenciesSQL.append("       WEBSITEADDRESS, ");
 		selectAgenciesSQL.append("       CLIENTCONFIRMATIONEMAILFREETEXT, ");
     selectAgenciesSQL.append("       APPLICANTCONFIRMATIONEMAILFREETEXT, ");
     selectAgenciesSQL.append("       AGENCYADMINEMAILADDRESS, ");
@@ -277,7 +281,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		selectAgencyUsersSQL.append("    A.PAYROLLCONTACTEMAILADDRESS, ");
 		selectAgencyUsersSQL.append("    A.PAYROLLCONTACTTELEPHONENUMBER, ");
 		selectAgencyUsersSQL.append("    A.PAYROLLCONTACTFAXNUMBER, ");
-		selectAgencyUsersSQL.append("    A.WEBSITEADDRESS, ");
+    selectAgencyUsersSQL.append("    A.EMAILADDRESS, ");
+    selectAgencyUsersSQL.append("    A.WEBSITEADDRESS, ");
 		selectAgencyUsersSQL.append("    A.CLIENTCONFIRMATIONEMAILFREETEXT, ");
     selectAgencyUsersSQL.append("    A.APPLICANTCONFIRMATIONEMAILFREETEXT, ");
     selectAgencyUsersSQL.append("    A.AGENCYADMINEMAILADDRESS, ");
@@ -358,7 +363,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		Utilities.replaceAndQuoteNullable(sql, agency.getPayrollContactEmailAddress());
 		Utilities.replaceAndQuoteNullable(sql, agency.getPayrollContactTelephoneNumber());
 		Utilities.replaceAndQuoteNullable(sql, agency.getPayrollContactFaxNumber());
-		Utilities.replaceAndQuoteNullable(sql, agency.getWebsiteAddress());
+    Utilities.replaceAndQuoteNullable(sql, agency.getEmailAddress());
+    Utilities.replaceAndQuoteNullable(sql, agency.getWebsiteAddress());
 		Utilities.replaceAndQuoteNullable(sql, agency.getClientConfirmationEmailFreeText());
     Utilities.replaceAndQuoteNullable(sql, agency.getApplicantConfirmationEmailFreeText());
     Utilities.replaceAndQuoteNullable(sql, agency.getAgencyAdminEmailAddress());
@@ -408,6 +414,7 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		Utilities.replaceAndQuoteNullable(sql, agency.getPayrollContactEmailAddress());
 		Utilities.replaceAndQuoteNullable(sql, agency.getPayrollContactTelephoneNumber());
 		Utilities.replaceAndQuoteNullable(sql, agency.getPayrollContactFaxNumber());
+    Utilities.replaceAndQuoteNullable(sql, agency.getEmailAddress());
 		Utilities.replaceAndQuoteNullable(sql, agency.getWebsiteAddress());
 		Utilities.replaceAndQuoteNullable(sql, agency.getClientConfirmationEmailFreeText());
 		Utilities.replaceAndQuoteNullable(sql, agency.getApplicantConfirmationEmailFreeText());

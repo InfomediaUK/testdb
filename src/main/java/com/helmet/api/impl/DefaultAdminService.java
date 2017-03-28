@@ -62,6 +62,8 @@ import com.helmet.bean.LocationJobProfile;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.ReEnterPwd;
 import com.helmet.bean.Regulator;
+import com.helmet.bean.TrainingCompany;
+import com.helmet.bean.TrainingCompanyUserEntity;
 import com.helmet.persistence.AdminAccessDAO;
 import com.helmet.persistence.AdminAccessGroupDAO;
 import com.helmet.persistence.AdminAccessGroupItemDAO;
@@ -2078,4 +2080,87 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     return rc;
   }
 
+  public TrainingCompany getTrainingCompany(Integer trainingCompanyId) 
+  {
+    TrainingCompany trainingCompany = null;
+    trainingCompany = getTrainingCompanyDAO().getTrainingCompany(trainingCompanyId);
+    return trainingCompany;
+  }
+
+  public int insertTrainingCompany(TrainingCompany trainingCompany, Integer auditorId) {
+
+    TrainingCompany duplicateTrainingCompany = getTrainingCompanyDAO().getTrainingCompanyForName(trainingCompany.getName());
+    if (duplicateTrainingCompany != null) {
+      throw new DuplicateDataException("name");
+    }
+    duplicateTrainingCompany = getTrainingCompanyDAO().getTrainingCompanyForCode(trainingCompany.getCode());
+    if (duplicateTrainingCompany != null) {
+      throw new DuplicateDataException("code");
+    }
+    
+    int rc = getTrainingCompanyDAO().insertTrainingCompany(trainingCompany, auditorId);
+    return rc;
+  
+  }
+  
+  public int updateTrainingCompany(TrainingCompany trainingCompany, Integer auditorId) 
+  {
+
+    TrainingCompany duplicateTrainingCompany = getTrainingCompanyDAO().getTrainingCompanyForName(trainingCompany.getName());
+    if (duplicateTrainingCompany != null &&
+      !duplicateTrainingCompany.getTrainingCompanyId().equals(trainingCompany.getTrainingCompanyId())) {
+      throw new DuplicateDataException("name");
+    }
+    duplicateTrainingCompany = getTrainingCompanyDAO().getTrainingCompanyForCode(trainingCompany.getCode());
+    if (duplicateTrainingCompany != null &&
+      !duplicateTrainingCompany.getTrainingCompanyId().equals(trainingCompany.getTrainingCompanyId())) {
+      throw new DuplicateDataException("code");
+    }
+
+    int rc = getTrainingCompanyDAO().updateTrainingCompany(trainingCompany, auditorId);
+    return rc;
+  
+  }
+  
+  public int deleteTrainingCompany(Integer trainingCompanyId, Integer noOfChanges, Integer auditorId) {
+
+    int rc = getTrainingCompanyDAO().deleteTrainingCompany(trainingCompanyId, noOfChanges, auditorId);
+    return rc;
+  
+  }
+
+  public TrainingCompanyUserEntity getTrainingCompanyUserEntity(Integer trainingCompanyId, boolean showOnlyActive)
+  {
+    TrainingCompanyUserEntity trainingCompanyUserEntity = null;
+    trainingCompanyUserEntity = getTrainingCompanyDAO().getTrainingCompanyUserEntity(trainingCompanyId);
+//    trainingCompanyUserEntity.setConsultants(consultantDAO.getConsultantsForTrainingCompany(trainingCompanyId, showOnlyActive));
+//    trainingCompanyUserEntity.setAgyAccessGroups(agyAccessGroupDAO.getAgyAccessGroupsForTrainingCompany(trainingCompanyId, showOnlyActive));
+//    trainingCompanyUserEntity.setClientTrainingCompanyUsers(getClientTrainingCompanyDAO().getClientTrainingCompanyUsersForTrainingCompany(trainingCompanyId, showOnlyActive));
+    return trainingCompanyUserEntity;
+  }
+
+  public int updateTrainingCompanyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId)
+  {
+    int rc = 0;
+
+    StringTokenizer stringTokenizer = new StringTokenizer(order, "|");
+    String commaDelimitedKey = null;
+    int displayOrder = 0;
+    while (stringTokenizer.hasMoreTokens())
+    {
+      commaDelimitedKey = stringTokenizer.nextToken();
+      if (!zeroiseDisplayOrder)
+      {
+        // Increment the display order.
+        displayOrder++;
+      }
+      StringTokenizer st = new StringTokenizer(commaDelimitedKey, ",");
+      Integer trainingCompanyId = Integer.parseInt(st.nextToken());
+      Integer noOfChanges = Integer.parseInt(st.nextToken());
+      rc += getTrainingCompanyDAO().updateTrainingCompanyDisplayOrder(trainingCompanyId, displayOrder, noOfChanges, auditorId);
+    }
+
+    return rc;
+  }
+  
 }

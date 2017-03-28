@@ -58,6 +58,7 @@ import com.helmet.bean.Shift;
 import com.helmet.bean.Site;
 import com.helmet.bean.SiteUser;
 import com.helmet.bean.SiteUserEntity;
+import com.helmet.bean.TrainingCompanyUser;
 import com.helmet.bean.Uplift;
 import com.helmet.bean.UpliftMinute;
 import com.helmet.bean.UpliftMinuteUser;
@@ -319,5 +320,7 @@ public interface CommonService {
   public List<CompliancyTest> getCompliancyTests(boolean showOnlyActive);
 
   public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant);
+
+  public List<TrainingCompanyUser> getTrainingCompanyUsers(boolean showOnlyActive);
 
 }

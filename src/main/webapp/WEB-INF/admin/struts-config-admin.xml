@@ -21,6 +21,12 @@
       <form-property name="consultantId" type="java.lang.String" />
       <form-property name="list" type="java.util.List" />
     </form-bean>
+
+    <form-bean name="TrainingCompanyListFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="trainingCompany" type="com.helmet.bean.TrainingCompany" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+
     <form-bean name="ClientUploadFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="uploadFile" type="org.apache.struts.upload.FormFile"/>
     </form-bean>
@@ -243,6 +249,14 @@
     </form-bean>
     <form-bean name="AgencyViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="agency" type="com.helmet.bean.AgencyUserEntity" />
+    </form-bean>
+     <form-bean name="TrainingCompanyViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="trainingCompany" type="com.helmet.bean.TrainingCompanyUserEntity" />
+      <form-property name="logoFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="invoiceLogoFile" type="org.apache.struts.upload.FormFile"/>
+    </form-bean>
+     <form-bean name="TrainingCompanyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="trainingCompany" type="com.helmet.bean.TrainingCompany" />
     </form-bean>
     <form-bean name="ClientAgencyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="client" type="com.helmet.bean.Client" />
@@ -600,6 +614,14 @@
     <forward name="agencyEdit" path="/agencyEdit.do" />
     <forward name="agencyDelete" path="/agencyDelete.do" />
     <forward name="agencyOrder" path="/agencyOrder.do" />
+
+
+    <forward name="trainingCompanyList" path="/trainingCompanyList.do" />
+    <forward name="trainingCompanyView" path="/trainingCompanyView.do" />
+    <forward name="trainingCompanyNew" path="/trainingCompanyNew.do" />
+    <forward name="trainingCompanyEdit" path="/trainingCompanyEdit.do" />
+    <forward name="trainingCompanyDelete" path="/trainingCompanyDelete.do" />
+    <forward name="trainingCompanyOrder" path="/trainingCompanyOrder.do" />
 
     <forward name="clientAgencyView" path="/clientAgencyView.do" />
     <forward name="clientAgencyNew" path="/clientAgencyNew.do" />
@@ -2639,6 +2661,96 @@
             input="agencyOrder.page"
             validate="true">
         <forward name="success" path="/agencyList.do" redirect="true" />
+    </action>
+
+    <action path="/trainingCompanyList"
+            type="com.helmet.application.admin.TrainingCompanyList"
+            name="ListFormAdmin"
+            scope="request"
+            input="homeAdmin.page"
+            validate="false">
+        <forward name="success" path="trainingCompanyList.page" />
+    </action>
+
+    <action path="/trainingCompanyView"
+            type="com.helmet.application.admin.TrainingCompanyView"
+            name="TrainingCompanyViewFormAdmin"
+            scope="request"
+            input="/trainingCompanyList.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyView.page" />
+    </action>
+
+    <action path="/trainingCompanyNew"
+            type="com.helmet.application.admin.TrainingCompanyNew"
+            name="TrainingCompanyFormAdmin"
+            scope="request"
+            input="/trainingCompanyList.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyNew.page" />
+    </action>
+
+    <action path="/trainingCompanyNewProcess"
+            type="com.helmet.application.admin.TrainingCompanyNewProcess"
+            name="TrainingCompanyFormAdmin"
+            scope="request"
+            input="trainingCompanyNew.page"
+            validate="true">
+        <forward name="success" path="/trainingCompanyView.do" redirect="true" />
+    </action>
+
+    <action path="/trainingCompanyEdit"
+            type="com.helmet.application.admin.TrainingCompanyEdit"
+            name="TrainingCompanyFormAdmin"
+            scope="request"
+            input="/trainingCompanyList.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyEdit.page" />
+    </action>
+
+    <action path="/trainingCompanyEditProcess"
+            type="com.helmet.application.admin.TrainingCompanyEditProcess"
+            name="TrainingCompanyFormAdmin"
+            scope="request"
+            input="trainingCompanyEdit.page"
+            validate="true">
+        <forward name="success" path="/trainingCompanyView.do" redirect="true" />
+    </action>
+
+    <action path="/trainingCompanyDelete"
+            type="com.helmet.application.admin.TrainingCompanyView"
+            name="TrainingCompanyViewFormAdmin"
+            scope="request"
+            input="/trainingCompanyList.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyDelete.page" />
+    </action>
+
+    <action path="/trainingCompanyDeleteProcess"
+            type="com.helmet.application.admin.TrainingCompanyDeleteProcess"
+            name="TrainingCompanyViewFormAdmin"
+            scope="request"
+            input="trainingCompanyDelete.page"
+            validate="false">
+        <forward name="success" path="/trainingCompanyList.do" redirect="true" />
+    </action>
+
+    <action path="/trainingCompanyOrder"
+            type="com.helmet.application.admin.TrainingCompanyOrder"
+            name="DisplayOrderFormAdmin"
+            scope="request"
+            input="/trainingCompanyList.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyOrder.page" />
+    </action>
+
+    <action path="/trainingCompanyOrderProcess"
+            type="com.helmet.application.admin.TrainingCompanyOrderProcess"
+            name="DisplayOrderFormAdmin"
+            scope="request"
+            input="trainingCompanyOrder.page"
+            validate="true">
+        <forward name="success" path="/trainingCompanyList.do" redirect="true" />
     </action>
 
     <action path="/clientAgencyNew"

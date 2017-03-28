@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
-import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -28,7 +27,6 @@ import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.Agency;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.Consultant;
-import com.helmet.persistence.Utilities;
 
 public class AgencyApplicantCopyProcess extends AdminAction
 {
@@ -47,7 +45,7 @@ public class AgencyApplicantCopyProcess extends AdminAction
     sourceAgency = adminService.getAgency(sourceAgency.getAgencyId());
     targetAgency = adminService.getAgency(targetAgency.getAgencyId());
     List<Applicant> agencyApplicantCopyList = new ArrayList<Applicant>();
-    Enumeration paramNames = request.getParameterNames();
+    Enumeration<String> paramNames = request.getParameterNames();
     int rowCount = 0;
     Integer sourceApplicantId = null;
     while(paramNames.hasMoreElements()) 

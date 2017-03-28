@@ -54,6 +54,8 @@ import com.helmet.bean.JobSubFamilyEntity;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.ReEnterPwd;
 import com.helmet.bean.Regulator;
+import com.helmet.bean.TrainingCompany;
+import com.helmet.bean.TrainingCompanyUserEntity;
 
 public interface AdminService extends CommonService {
 
@@ -278,4 +280,13 @@ public interface AdminService extends CommonService {
   public int updateCompliancyTest(CompliancyTest regulator, Integer auditorId);
   public int updateCompliancyTestDisplayOrder(CompliancyTest regulator, Integer auditorId);
   public int deleteCompliancyTest(Integer regulatorId, Integer noOfChanges, Integer auditorId);
+  
+  public TrainingCompany getTrainingCompany(Integer trainingCompanyId);
+  public TrainingCompanyUserEntity getTrainingCompanyUserEntity(Integer agencyId, boolean showOnlyActive);
+  public int insertTrainingCompany(TrainingCompany trainingCompany, Integer auditorId);
+  public int updateTrainingCompany(TrainingCompany trainingCompany, Integer auditorId);
+  public int deleteTrainingCompany(Integer trainingCompanyId, Integer noOfChanges, Integer auditorId);
+  public int updateTrainingCompanyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId);
+
+
 }

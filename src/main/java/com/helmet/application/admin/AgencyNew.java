@@ -13,23 +13,17 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.application.admin.abztract.AdminAction;
 
 
-public class AgencyNew extends AdminAction {
+public class AgencyNew extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
-    	logger.entry("In coming !!!");
-    	
-
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
-    }
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    logger.exit("Out going !!!");
+    return mapping.findForward("success");
+  }
 
 }

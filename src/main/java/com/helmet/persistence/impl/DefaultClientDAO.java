@@ -65,7 +65,9 @@ public class DefaultClientDAO extends JdbcDaoSupport implements ClientDAO {
 		insertClientSQL.append("  COUNTRYID, ");
 		insertClientSQL.append("  CODE, ");
 		insertClientSQL.append("  TELEPHONENUMBER, ");
-		insertClientSQL.append("  FAXNUMBER, ");
+    insertClientSQL.append("  FAXNUMBER, ");
+    insertClientSQL.append("  EMAILADDRESS, ");
+    insertClientSQL.append("  WEBSITEADDRESS, ");
 		insertClientSQL.append("  LOGOFILENAME, ");
 		insertClientSQL.append("  LOGOWIDTH, ");
 		insertClientSQL.append("  LOGOHEIGHT, ");
@@ -103,6 +105,8 @@ public class DefaultClientDAO extends JdbcDaoSupport implements ClientDAO {
 		insertClientSQL.append("  ^, ");
 		insertClientSQL.append("  ^, ");
 		insertClientSQL.append("  ^, ");
+    insertClientSQL.append("  ^, ");
+    insertClientSQL.append("  ^, ");
 		insertClientSQL.append("  ^, ");
 		insertClientSQL.append("  ^, ");
 		insertClientSQL.append("  ^, ");
@@ -150,7 +154,9 @@ public class DefaultClientDAO extends JdbcDaoSupport implements ClientDAO {
 		updateClientSQL.append("     COUNTRYID = ^, ");
 		updateClientSQL.append("     CODE = ^, ");
 		updateClientSQL.append("     TELEPHONENUMBER = ^, ");
-		updateClientSQL.append("     FAXNUMBER = ^, ");
+    updateClientSQL.append("     FAXNUMBER = ^, ");
+    updateClientSQL.append("     EMAILADDRESS = ^, ");
+    updateClientSQL.append("     WEBSITEADDRESS = ^, ");
 		updateClientSQL.append("     LOGOFILENAME = ^, ");
 		updateClientSQL.append("     LOGOWIDTH = ^, ");
 		updateClientSQL.append("     LOGOHEIGHT = ^, ");
@@ -221,7 +227,9 @@ public class DefaultClientDAO extends JdbcDaoSupport implements ClientDAO {
 		selectClientsSQL.append("       CODE, ");
 		selectClientsSQL.append("       DISPLAYORDER, ");
 		selectClientsSQL.append("       TELEPHONENUMBER, ");
-		selectClientsSQL.append("       FAXNUMBER, ");
+    selectClientsSQL.append("       FAXNUMBER, ");
+    selectClientsSQL.append("       EMAILADDRESS, ");
+    selectClientsSQL.append("       WEBSITEADDRESS, ");
 		selectClientsSQL.append("       LOGOFILENAME, ");
 		selectClientsSQL.append("       LOGOWIDTH, ");
 		selectClientsSQL.append("       LOGOHEIGHT, ");
@@ -306,7 +314,9 @@ public class DefaultClientDAO extends JdbcDaoSupport implements ClientDAO {
 		selectClientUsersSQL.append("	   C.CODE, ");
 		selectClientUsersSQL.append("	   C.DISPLAYORDER, ");
 		selectClientUsersSQL.append("    C.TELEPHONENUMBER, ");
-		selectClientUsersSQL.append("    C.FAXNUMBER, ");
+    selectClientUsersSQL.append("    C.FAXNUMBER, ");
+    selectClientUsersSQL.append("    C.EMAILADDRESS, ");
+    selectClientUsersSQL.append("    C.WEBSITEADDRESS, ");
 		selectClientUsersSQL.append("    C.LOGOFILENAME, ");
 		selectClientUsersSQL.append("    C.LOGOWIDTH, ");
 		selectClientUsersSQL.append("    C.LOGOHEIGHT, ");
@@ -390,7 +400,9 @@ public class DefaultClientDAO extends JdbcDaoSupport implements ClientDAO {
 		Utilities.replace(sql, client.getAddress().getCountryId());
 		Utilities.replaceAndQuoteNullable(sql, client.getCode());
 		Utilities.replaceAndQuoteNullable(sql, client.getTelephoneNumber());
-		Utilities.replaceAndQuoteNullable(sql, client.getFaxNumber());
+    Utilities.replaceAndQuoteNullable(sql, client.getFaxNumber());
+    Utilities.replaceAndQuoteNullable(sql, client.getEmailAddress());
+    Utilities.replaceAndQuoteNullable(sql, client.getWebsiteAddress());
 		Utilities.replaceAndQuoteNullable(sql, client.getLogoFilename());
 		Utilities.replaceZeroWithNull(sql, client.getLogoWidth());
 		Utilities.replaceZeroWithNull(sql, client.getLogoHeight());
@@ -437,6 +449,8 @@ public class DefaultClientDAO extends JdbcDaoSupport implements ClientDAO {
 		Utilities.replaceAndQuoteNullable(sql, client.getCode());
 		Utilities.replaceAndQuoteNullable(sql, client.getTelephoneNumber());
 		Utilities.replaceAndQuoteNullable(sql, client.getFaxNumber());
+    Utilities.replaceAndQuoteNullable(sql, client.getEmailAddress());
+    Utilities.replaceAndQuoteNullable(sql, client.getWebsiteAddress());
 		Utilities.replaceAndQuoteNullable(sql, client.getLogoFilename());
 		Utilities.replaceZeroWithNull(sql, client.getLogoWidth());
 		Utilities.replaceZeroWithNull(sql, client.getLogoHeight());

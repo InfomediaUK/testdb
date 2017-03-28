@@ -18,28 +18,20 @@ import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.AgencyUser;
 
 
-public class AgencyOrder extends AdminAction {
+public class AgencyOrder extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
-    	logger.entry("In coming !!!");
-    	
-    	AdminService adminService = ServiceFactory.getInstance().getAdminService();
-		
-		List<AgencyUser> list = adminService.getAgencyUsers(getShowOnlyActive());
-     	
-     	dynaForm.set("list", list);
-
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
-    }
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    AdminService adminService = ServiceFactory.getInstance().getAdminService();
+    List<AgencyUser> list = adminService.getAgencyUsers(getShowOnlyActive());
+    dynaForm.set("list", list);
+    logger.exit("Out going !!!");
+    return mapping.findForward("success");
+  }
 
 }

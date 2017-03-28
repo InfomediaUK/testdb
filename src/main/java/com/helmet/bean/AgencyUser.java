@@ -16,7 +16,7 @@ public class AgencyUser extends Agency {
 
     public void load(SqlRowSet rs)
 	{
-	    super.load(rs);
+	  super.load(rs);
 		setCountryName(rs.getString("COUNTRYNAME"));		
 	}
 	

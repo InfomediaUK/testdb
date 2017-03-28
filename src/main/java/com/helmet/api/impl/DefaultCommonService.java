@@ -76,6 +76,7 @@ import com.helmet.bean.Shift;
 import com.helmet.bean.Site;
 import com.helmet.bean.SiteUser;
 import com.helmet.bean.SiteUserEntity;
+import com.helmet.bean.TrainingCompanyUser;
 import com.helmet.bean.Uplift;
 import com.helmet.bean.UpliftMinute;
 import com.helmet.bean.UpliftMinuteUser;
@@ -125,6 +126,7 @@ import com.helmet.persistence.ReasonForRequestDAO;
 import com.helmet.persistence.RegulatorDAO;
 import com.helmet.persistence.ShiftDAO;
 import com.helmet.persistence.SiteDAO;
+import com.helmet.persistence.TrainingCompanyDAO;
 import com.helmet.persistence.UpliftDAO;
 import com.helmet.persistence.UpliftMinuteDAO;
 import com.helmet.persistence.VisaTypeDAO;
@@ -221,7 +223,9 @@ public abstract class DefaultCommonService implements CommonService {
 	
 	private BookingGradeApplicantDAO bookingGradeApplicantDAO;
 	
-	private AgencyDAO agencyDAO;
+  private AgencyDAO agencyDAO;
+
+  private TrainingCompanyDAO trainingCompanyDAO;
 
 	private AgencyInvoiceCreditDAO agencyInvoiceCreditDAO;
   
@@ -551,7 +555,17 @@ public abstract class DefaultCommonService implements CommonService {
 		this.clientAgencyDAO = clientAgencyDAO;
 	}
 
-	public BookingExpenseDAO getBookingExpenseDAO() {
+	public TrainingCompanyDAO getTrainingCompanyDAO()
+  {
+    return trainingCompanyDAO;
+  }
+
+  public void setTrainingCompanyDAO(TrainingCompanyDAO trainingCompanyDAO)
+  {
+    this.trainingCompanyDAO = trainingCompanyDAO;
+  }
+
+  public BookingExpenseDAO getBookingExpenseDAO() {
 		return bookingExpenseDAO;
 	}
 
@@ -3182,6 +3196,13 @@ public abstract class DefaultCommonService implements CommonService {
   {
     int rc = applicantDAO.compliantApplicant(applicantId, noOfChanges, auditorId, compliant);
     return rc;
+  }
+
+  public List<TrainingCompanyUser> getTrainingCompanyUsers(boolean showOnlyActive)
+  {
+    List<TrainingCompanyUser> trainingCompanyUsers = null;
+    trainingCompanyUsers = trainingCompanyDAO.getTrainingCompanyUsers(showOnlyActive);
+    return trainingCompanyUsers;
   }
 
 

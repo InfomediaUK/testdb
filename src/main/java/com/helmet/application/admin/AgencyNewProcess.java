@@ -20,44 +20,32 @@ import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.Agency;
 
 
-public class AgencyNewProcess extends AdminAction {
+public class AgencyNewProcess extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
-    	logger.entry("In coming !!!");
-    	
-     	Agency agency = (Agency)dynaForm.get("agency");
-
-		ActionMessages errors = new ActionMessages();
-
-		MessageResources messageResources = getResources(request);
-		
-     	AdminService adminService = ServiceFactory.getInstance().getAdminService();
-		
-    	try {
-    		int rowCount = adminService.insertAgency(agency, getAdministratorLoggedIn().getAdministratorId());
-    	}
-    	catch (DuplicateDataException e) {
-            errors.add("agency", new ActionMessage("errors.duplicate", messageResources.getMessage("label." + e.getField())));
-            saveErrors(request, errors);
-    		return mapping.getInputForward();
-    	}
-		  
-    	logger.exit("Out going !!!");
-    	
-    	ActionForward actionForward = mapping.findForward("success");
-    	
-    	return new ActionForward(actionForward.getName(),
-    							 actionForward.getPath() + "?agency.agencyId=" + agency.getAgencyId(),
-    	                         actionForward.getRedirect());
-
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    Agency agency = (Agency)dynaForm.get("agency");
+    ActionMessages errors = new ActionMessages();
+    MessageResources messageResources = getResources(request);
+    AdminService adminService = ServiceFactory.getInstance().getAdminService();
+    try
+    {
+      int rowCount = adminService.insertAgency(agency, getAdministratorLoggedIn().getAdministratorId());
     }
+    catch (DuplicateDataException e)
+    {
+      errors.add("agency", new ActionMessage("errors.duplicate", messageResources.getMessage("label." + e.getField())));
+      saveErrors(request, errors);
+      return mapping.getInputForward();
+    }
+    ActionForward actionForward = mapping.findForward("success");
+    logger.exit("Out going !!!");
+    return new ActionForward(actionForward.getName(), actionForward.getPath() + "?agency.agencyId=" + agency.getAgencyId(), actionForward.getRedirect());
+  }
 
 }

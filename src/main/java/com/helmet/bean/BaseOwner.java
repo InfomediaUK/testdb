@@ -2,140 +2,186 @@ package com.helmet.bean;
 
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-import com.helmet.application.FileHandler;
+public class BaseOwner extends BaseDisplayOrder
+{
 
-public class BaseOwner extends BaseDisplayOrder {
+  private String name;
 
-	private String name;
+  private String code;
 
-	private String code;
-	
-	private Address address = new Address();
+  private Address address = new Address();
 
-	private String telephoneNumber;
-	
-	private String faxNumber;
-	
-	private String logoFilename;
-	
-	private Integer logoWidth;
-	
-	private Integer logoHeight;
-	
-	private String vatNumber;
-	
-	private String reference;
-	
-	private String freeText;
-	
-	public String getName() {
-		return name;
-	}
+  private String telephoneNumber;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  private String faxNumber;
 
-    public Address getAddress() {
-		return address;
-	}
+  private String emailAddress;
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+  public String websiteAddress;
 
-	public String getCode() {
-		return code;
-	}
+  private String logoFilename;
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+  private Integer logoWidth;
 
-	
-	public String getFaxNumber() {
-		return faxNumber;
-	}
+  private Integer logoHeight;
 
-	public void setFaxNumber(String faxNumber) {
-		this.faxNumber = faxNumber;
-	}
+  private String vatNumber;
 
-	public String getFreeText() {
-		return freeText;
-	}
+  private String reference;
 
-	public void setFreeText(String freeText) {
-		this.freeText = freeText;
-	}
+  private String freeText;
 
-	public String getLogoFilename() {
-		return logoFilename;
-	}
+  public String getName()
+  {
+    return name;
+  }
 
-	public void setLogoFilename(String logoFilename) {
-		this.logoFilename = logoFilename;
-	}
+  public void setName(String name)
+  {
+    this.name = name;
+  }
 
-	public Integer getLogoHeight() {
-		return logoHeight;
-	}
+  public Address getAddress()
+  {
+    return address;
+  }
 
-	public void setLogoHeight(Integer logoHeight) {
-		this.logoHeight = logoHeight;
-	}
+  public void setAddress(Address address)
+  {
+    this.address = address;
+  }
 
-	public Integer getLogoWidth() {
-		return logoWidth;
-	}
+  public String getCode()
+  {
+    return code;
+  }
 
-	public void setLogoWidth(Integer logoWidth) {
-		this.logoWidth = logoWidth;
-	}
+  public void setCode(String code)
+  {
+    this.code = code;
+  }
 
-	public String getReference() {
-		return reference;
-	}
+  public String getFaxNumber()
+  {
+    return faxNumber;
+  }
 
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
+  public void setFaxNumber(String faxNumber)
+  {
+    this.faxNumber = faxNumber;
+  }
 
-	public String getTelephoneNumber() {
-		return telephoneNumber;
-	}
+  public String getEmailAddress()
+  {
+    return emailAddress;
+  }
 
-	public void setTelephoneNumber(String telephoneNumber) {
-		this.telephoneNumber = telephoneNumber;
-	}
+  public void setEmailAddress(String emailAddress)
+  {
+    this.emailAddress = emailAddress;
+  }
 
-	public String getVatNumber() {
-		return vatNumber;
-	}
+  public String getWebsiteAddress()
+  {
+    return websiteAddress;
+  }
 
-	public void setVatNumber(String vatNumber) {
-		this.vatNumber = vatNumber;
-	}
+  public void setWebsiteAddress(String websiteAddress)
+  {
+    this.websiteAddress = websiteAddress;
+  }
 
-	public void load(SqlRowSet rs)
-    {
-	    super.load(rs);
-        setName(rs.getString("NAME"));		
-        getAddress().setAddress1(rs.getString("ADDRESS1"));		
-        getAddress().setAddress2(rs.getString("ADDRESS2"));		
-        getAddress().setAddress3(rs.getString("ADDRESS3"));		
-        getAddress().setAddress4(rs.getString("ADDRESS4"));		
-        getAddress().setPostalCode(rs.getString("POSTALCODE"));		
-        getAddress().setCountryId(rs.getInt("COUNTRYID"));		
-        setCode(rs.getString("CODE"));
-        setTelephoneNumber(rs.getString("TELEPHONENUMBER"));
-        setFaxNumber(rs.getString("FAXNUMBER"));
-        setLogoFilename(rs.getString("LOGOFILENAME"));
-        setLogoWidth(rs.getInt("LOGOWIDTH"));
-        setLogoHeight(rs.getInt("LOGOHEIGHT"));
-        setVatNumber(rs.getString("VATNUMBER"));
-        setReference(rs.getString("REFERENCE"));
-        setFreeText(rs.getString("FREETEXT"));
-	}
-	
+  public String getFreeText()
+  {
+    return freeText;
+  }
+
+  public void setFreeText(String freeText)
+  {
+    this.freeText = freeText;
+  }
+
+  public String getLogoFilename()
+  {
+    return logoFilename;
+  }
+
+  public void setLogoFilename(String logoFilename)
+  {
+    this.logoFilename = logoFilename;
+  }
+
+  public Integer getLogoHeight()
+  {
+    return logoHeight;
+  }
+
+  public void setLogoHeight(Integer logoHeight)
+  {
+    this.logoHeight = logoHeight;
+  }
+
+  public Integer getLogoWidth()
+  {
+    return logoWidth;
+  }
+
+  public void setLogoWidth(Integer logoWidth)
+  {
+    this.logoWidth = logoWidth;
+  }
+
+  public String getReference()
+  {
+    return reference;
+  }
+
+  public void setReference(String reference)
+  {
+    this.reference = reference;
+  }
+
+  public String getTelephoneNumber()
+  {
+    return telephoneNumber;
+  }
+
+  public void setTelephoneNumber(String telephoneNumber)
+  {
+    this.telephoneNumber = telephoneNumber;
+  }
+
+  public String getVatNumber()
+  {
+    return vatNumber;
+  }
+
+  public void setVatNumber(String vatNumber)
+  {
+    this.vatNumber = vatNumber;
+  }
+
+  public void load(SqlRowSet rs)
+  {
+    super.load(rs);
+    setName(rs.getString("NAME"));
+    getAddress().setAddress1(rs.getString("ADDRESS1"));
+    getAddress().setAddress2(rs.getString("ADDRESS2"));
+    getAddress().setAddress3(rs.getString("ADDRESS3"));
+    getAddress().setAddress4(rs.getString("ADDRESS4"));
+    getAddress().setPostalCode(rs.getString("POSTALCODE"));
+    getAddress().setCountryId(rs.getInt("COUNTRYID"));
+    setCode(rs.getString("CODE"));
+    setTelephoneNumber(rs.getString("TELEPHONENUMBER"));
+    setFaxNumber(rs.getString("FAXNUMBER"));
+    setEmailAddress(rs.getString("EMAILADDRESS"));
+    setWebsiteAddress(rs.getString("WEBSITEADDRESS"));
+    setLogoFilename(rs.getString("LOGOFILENAME"));
+    setLogoWidth(rs.getInt("LOGOWIDTH"));
+    setLogoHeight(rs.getInt("LOGOHEIGHT"));
+    setVatNumber(rs.getString("VATNUMBER"));
+    setReference(rs.getString("REFERENCE"));
+    setFreeText(rs.getString("FREETEXT"));
+  }
+
 }

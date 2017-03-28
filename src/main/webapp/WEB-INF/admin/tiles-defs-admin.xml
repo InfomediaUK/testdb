@@ -520,6 +520,31 @@
         <put name="titleKey" value="title.agencyOrder" type="string"/>
         <put name="body"   value="/admin/agencyOrder.jsp"/>
   </definition>
+ <!-- TrainingCompany -->
+  <definition name="trainingCompanyList.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyList" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyList.jsp"/>
+  </definition>
+  <definition name="trainingCompanyNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyNew" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyNew.jsp"/>
+  </definition>
+  <definition name="trainingCompanyView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyView" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyView.jsp"/>
+  </definition>
+  <definition name="trainingCompanyEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyEdit" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyEdit.jsp"/>
+  </definition>
+  <definition name="trainingCompanyDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyDelete" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyDelete.jsp"/>
+  </definition>
+  <definition name="trainingCompanyOrder.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyOrder" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyOrder.jsp"/>
+  </definition>
   <definition name="clientAgencyJobProfileView.page" extends="layoutAdmin.main">
         <put name="titleKey" value="title.clientAgencyJobProfileView" type="string"/>
         <put name="body"   value="/admin/clientAgencyJobProfileView.jsp"/>

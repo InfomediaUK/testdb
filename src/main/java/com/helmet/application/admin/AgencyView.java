@@ -16,32 +16,21 @@ import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.AgencyUserEntity;
 
 
-public class AgencyView extends AdminAction {
+public class AgencyView extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
-    	logger.entry("In coming !!!");
-    	
-     	AgencyUserEntity agency = (AgencyUserEntity)dynaForm.get("agency");
-
-		AdminService adminService = ServiceFactory.getInstance().getAdminService();
-
-		agency = adminService.getAgencyUserEntity(agency.getAgencyId(), getShowOnlyActive());
-    	
-		// TODO check not null, maybe service should throw a known exception
-        
-		dynaForm.set("agency", agency); 
-		
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
-    }
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    AgencyUserEntity agency = (AgencyUserEntity)dynaForm.get("agency");
+    AdminService adminService = ServiceFactory.getInstance().getAdminService();
+    agency = adminService.getAgencyUserEntity(agency.getAgencyId(), getShowOnlyActive());
+    dynaForm.set("agency", agency);
+    logger.exit("Out going !!!");
+    return mapping.findForward("success");
+  }
 
 }
