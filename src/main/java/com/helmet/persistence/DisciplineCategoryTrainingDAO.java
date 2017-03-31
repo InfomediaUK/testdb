@@ -1,0 +1,23 @@
+package com.helmet.persistence;
+
+import java.util.List;
+
+import com.helmet.bean.DisciplineCategoryTraining;
+import com.helmet.bean.DisciplineCategoryTrainingUser;
+
+public interface DisciplineCategoryTrainingDAO 
+{
+	public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId, boolean showOnlyActive);
+	public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId);
+	public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTraining(Integer trainingId, boolean showOnlyActive);
+	public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTraining(Integer trainingId);
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter, boolean showOnlyActive);
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter);
+//public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersNotForJobProfile(Integer disciplineCategoryId, Integer jobProfileId);
+  public DisciplineCategoryTraining getDisciplineCategoryTraining(Integer disciplineCategoryTrainingId);
+  public DisciplineCategoryTrainingUser getDisciplineCategoryTrainingUser(Integer disciplineCategoryTrainingId);
+	public DisciplineCategoryTraining getDisciplineCategoryTrainingForDisciplineCategoryAndTraining(Integer disciplineCategoryId, Integer trainingId);
+	public int insertDisciplineCategoryTraining(DisciplineCategoryTraining disciplineCategoryTraining, Integer auditorId);
+	public int deleteDisciplineCategoryTraining(Integer disciplineCategoryTrainingId, Integer noOfChanges, Integer auditorId);
+	public int updateDisciplineCategoryTraining(DisciplineCategoryTraining disciplineCategoryTraining, Integer auditorId);
+}
