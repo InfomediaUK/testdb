@@ -37,7 +37,10 @@ import com.helmet.bean.ClientUser;
 import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.Country;
 import com.helmet.bean.DisciplineCategory;
+import com.helmet.bean.DisciplineCategoryTraining;
+import com.helmet.bean.DisciplineCategoryTrainingUser;
 import com.helmet.bean.DisciplineCategoryUser;
+import com.helmet.bean.DisciplineCategoryUserEntity;
 import com.helmet.bean.DressCode;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.Expense;
@@ -76,7 +79,7 @@ import com.helmet.bean.Shift;
 import com.helmet.bean.Site;
 import com.helmet.bean.SiteUser;
 import com.helmet.bean.SiteUserEntity;
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 import com.helmet.bean.TrainingCompanyUser;
 import com.helmet.bean.Uplift;
 import com.helmet.bean.UpliftMinute;
@@ -102,6 +105,7 @@ import com.helmet.persistence.ClientDAO;
 import com.helmet.persistence.CompliancyTestDAO;
 import com.helmet.persistence.CountryDAO;
 import com.helmet.persistence.DisciplineCategoryDAO;
+import com.helmet.persistence.DisciplineCategoryTrainingDAO;
 import com.helmet.persistence.DressCodeDAO;
 import com.helmet.persistence.EmailActionDAO;
 import com.helmet.persistence.ExpenseDAO;
@@ -228,6 +232,8 @@ public abstract class DefaultCommonService implements CommonService {
 	private BookingGradeApplicantDAO bookingGradeApplicantDAO;
 	
   private AgencyDAO agencyDAO;
+
+  private DisciplineCategoryTrainingDAO disciplineCategoryTrainingDAO;
 
   private TrainingCompanyDAO trainingCompanyDAO;
 
@@ -577,6 +583,16 @@ public abstract class DefaultCommonService implements CommonService {
   public void setTrainingCompanyDAO(TrainingCompanyDAO trainingCompanyDAO)
   {
     this.trainingCompanyDAO = trainingCompanyDAO;
+  }
+
+  public DisciplineCategoryTrainingDAO getDisciplineCategoryTrainingDAO()
+  {
+    return disciplineCategoryTrainingDAO;
+  }
+
+  public void setDisciplineCategoryTrainingDAO(DisciplineCategoryTrainingDAO disciplineCategoryTrainingDAO)
+  {
+    this.disciplineCategoryTrainingDAO = disciplineCategoryTrainingDAO;
   }
 
   public BookingExpenseDAO getBookingExpenseDAO() {
@@ -3171,6 +3187,17 @@ public abstract class DefaultCommonService implements CommonService {
     return disciplineCategoryUsers;
   }
 
+  public List<DisciplineCategoryUserEntity> getDisciplineCategoryUserEntities(boolean showOnlyActive) 
+  {
+    List<DisciplineCategoryUserEntity> disciplineCategoryUserEntities = null;
+    disciplineCategoryUserEntities = disciplineCategoryDAO.getDisciplineCategoryUserEntities(showOnlyActive);
+    for (DisciplineCategoryUserEntity disciplineCategoryUserEntity : disciplineCategoryUserEntities)
+    {
+      disciplineCategoryUserEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(disciplineCategoryUserEntity.getDisciplineCategoryId(), showOnlyActive));
+    }
+    return disciplineCategoryUserEntities;
+  }
+
   public List<IdDocument> getIdDocuments(boolean showOnlyActive) 
   {
     List<IdDocument> idDocuments = null;
@@ -3212,11 +3239,11 @@ public abstract class DefaultCommonService implements CommonService {
     return rc;
   }
 
-  public List<Training> getTrainings(boolean showOnlyActive) 
+  public List<TrainingCourse> getTrainingCourses(boolean showOnlyActive) 
   {
-    List<Training> trainings = null;
-    trainings = trainingDAO.getTrainings(showOnlyActive);
-    return trainings;
+    List<TrainingCourse> trainingCourses = null;
+    trainingCourses = trainingDAO.getTrainingCourses(showOnlyActive);
+    return trainingCourses;
   }
 
   public List<TrainingCompanyUser> getTrainingCompanyUsers(boolean showOnlyActive)
@@ -3226,5 +3253,90 @@ public abstract class DefaultCommonService implements CommonService {
     return trainingCompanyUsers;
   }
 
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId) 
+  {
+    return getDisciplineCategoryTrainingUsersForDisciplineCategory(disciplineCategoryId, true);
+  }
+  
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId, boolean showOnlyActive) 
+  {
+    List<DisciplineCategoryTrainingUser> disciplineCategoryTrainingUsers = null;
+    disciplineCategoryTrainingUsers = disciplineCategoryTrainingDAO.getDisciplineCategoryTrainingUsersForDisciplineCategory(disciplineCategoryId, showOnlyActive);
+    return disciplineCategoryTrainingUsers;
+  }
+  
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTraining(Integer trainingId) 
+  {
+    return getDisciplineCategoryTrainingUsersForTraining(trainingId, true);
+  }
+  
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTraining(Integer trainingId, boolean showOnlyActive) 
+  {
+    List<DisciplineCategoryTrainingUser> disciplineCategoryTrainingUsers = null;
+    disciplineCategoryTrainingUsers = disciplineCategoryTrainingDAO.getDisciplineCategoryTrainingUsersForTraining(trainingId, showOnlyActive);
+    return disciplineCategoryTrainingUsers;
+  }
+  
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter) 
+  {
+    return getDisciplineCategoryTrainingUsersForTrainingInNameGroup(trainingId, indexLetter, true);
+  }
+
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter, boolean showOnlyActive) 
+  {
+    List<DisciplineCategoryTrainingUser> disciplineCategoryTrainingUsers = null;
+    disciplineCategoryTrainingUsers = disciplineCategoryTrainingDAO.getDisciplineCategoryTrainingUsersForTrainingInNameGroup(trainingId, indexLetter, showOnlyActive);
+    return disciplineCategoryTrainingUsers;
+  }
+  
+  public DisciplineCategoryTrainingUser getDisciplineCategoryTrainingUser(Integer disciplineCategoryTrainingId) 
+  {
+    DisciplineCategoryTrainingUser disciplineCategoryTrainingUser = null;
+    disciplineCategoryTrainingUser = disciplineCategoryTrainingDAO.getDisciplineCategoryTrainingUser(disciplineCategoryTrainingId);
+    return disciplineCategoryTrainingUser;
+  }
+
+  public DisciplineCategoryTraining getDisciplineCategoryTraining(Integer disciplineCategoryTrainingId) 
+  {
+    DisciplineCategoryTraining disciplineCategoryTraining = null;
+    disciplineCategoryTraining = disciplineCategoryTrainingDAO.getDisciplineCategoryTraining(disciplineCategoryTrainingId);
+    return disciplineCategoryTraining;
+  }
+
+  public DisciplineCategoryTraining getDisciplineCategoryTrainingForDisciplineCategoryAndTraining(Integer disciplineCategoryId, Integer trainingId) 
+  {
+    DisciplineCategoryTraining disciplineCategoryTraining = null;
+    disciplineCategoryTraining = disciplineCategoryTrainingDAO.getDisciplineCategoryTrainingForDisciplineCategoryAndTraining(disciplineCategoryId, trainingId);
+    return disciplineCategoryTraining;
+  }
+
+//  public DisciplineCategoryTrainingUserEntity getDisciplineCategoryTrainingUserEntity(Integer disciplineCategoryTrainingId, boolean showOnlyActive) 
+//  {
+//    DisciplineCategoryTrainingUserEntity disciplineCategoryTrainingUserEntity = null;
+//    disciplineCategoryTrainingUserEntity = disciplineCategoryTrainingDAO.getDisciplineCategoryTrainingUserEntity(disciplineCategoryTrainingId);
+//    disciplineCategoryTrainingUserEntity.setDisciplineCategoryTrainingGradeUsers(disciplineCategoryTrainingGradeDAO.getDisciplineCategoryTrainingGradeUsersForDisciplineCategoryTraining(disciplineCategoryTrainingId));
+//    disciplineCategoryTrainingUserEntity.setGrades(getGradeDAO().getGradesNotForDisciplineCategoryTraining(disciplineCategoryTrainingUserEntity.getDisciplineCategoryId(), disciplineCategoryTrainingId));
+//    return disciplineCategoryTrainingUserEntity;
+//  }
+
+  public int insertDisciplineCategoryTraining(DisciplineCategoryTraining disciplineCategoryTraining, Integer auditorId)
+   {
+        int rc = disciplineCategoryTrainingDAO.insertDisciplineCategoryTraining(disciplineCategoryTraining, auditorId);
+    return rc;
+  }
+
+  public int deleteDisciplineCategoryTraining(Integer disciplineCategoryTrainingId, Integer noOfChanges, Integer auditorId) 
+  {
+    int rc = disciplineCategoryTrainingDAO.deleteDisciplineCategoryTraining(disciplineCategoryTrainingId, noOfChanges, auditorId);
+    return rc;
+  }
+
+  
+  public int updateDisciplineCategoryTraining(DisciplineCategoryTraining disciplineCategoryTraining, Integer auditorId) 
+  {
+      int rc = disciplineCategoryTrainingDAO.updateDisciplineCategoryTraining(disciplineCategoryTraining, auditorId);
+    return rc;
+  }
+  
 
 }

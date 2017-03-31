@@ -17,7 +17,7 @@ import com.helmet.api.AdminService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.application.admin.abztract.AdminAction;
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 
 
 public class TrainingEditProcess extends AdminAction
@@ -29,17 +29,17 @@ public class TrainingEditProcess extends AdminAction
   {
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-    Training training = (Training)dynaForm.get("training");
+    TrainingCourse trainingCourse = (TrainingCourse)dynaForm.get("trainingCourse");
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
     try
     {
-      int rowCount = adminService.updateTraining(training, getAdministratorLoggedIn().getAdministratorId());
+      int rowCount = adminService.updateTrainingCourse(trainingCourse, getAdministratorLoggedIn().getAdministratorId());
     }
     catch (DuplicateDataException e)
     {
-      errors.add("training", new ActionMessage("errors.duplicate", messageResources.getMessage("label." + e.getField())));
+      errors.add("trainingCourse", new ActionMessage("errors.duplicate", messageResources.getMessage("label." + e.getField())));
       saveErrors(request, errors);
       return mapping.getInputForward();
     }

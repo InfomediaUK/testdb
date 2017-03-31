@@ -41,6 +41,8 @@ import com.helmet.bean.IntValue;
 import com.helmet.bean.VisaType;
 import com.helmet.bean.IdDocument;
 import com.helmet.bean.DisciplineCategory;
+import com.helmet.bean.DisciplineCategoryUserEntity;
+import com.helmet.bean.DisciplineCategoryUserEntityAdmin;
 import com.helmet.bean.AreaOfSpeciality;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.GeographicalRegion;
@@ -54,7 +56,7 @@ import com.helmet.bean.JobSubFamilyEntity;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.ReEnterPwd;
 import com.helmet.bean.Regulator;
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 import com.helmet.bean.TrainingCompany;
 import com.helmet.bean.TrainingCompanyUserEntity;
 
@@ -101,6 +103,8 @@ public interface AdminService extends CommonService {
 
   public List<com.helmet.xml.jaxb.model.DisciplineCategory> getJerseyDisciplineCategories(boolean showOnlyActive); 
   public com.helmet.xml.jaxb.model.DisciplineCategory getJerseyDisciplineCategory(Integer disciplineCategoryId);
+  public DisciplineCategoryUserEntity getDisciplineCategoryUserEntity(Integer disciplineCategoryId, boolean showOnlyActive);
+  public DisciplineCategoryUserEntityAdmin getDisciplineCategoryUserEntityAdmin(Integer disciplineCategoryId, boolean showOnlyActive);
   public DisciplineCategory getDisciplineCategoryForCode(String code);
   public DisciplineCategory getDisciplineCategoryForName(String name);
   public int insertDisciplineCategory(DisciplineCategory disciplineCategory, Integer auditorId);
@@ -289,13 +293,13 @@ public interface AdminService extends CommonService {
   public int deleteTrainingCompany(Integer trainingCompanyId, Integer noOfChanges, Integer auditorId);
   public int updateTrainingCompanyDisplayOrder(String order, boolean zeroiseDisplayOrder, Integer auditorId);
 
-  public Training getTraining(Integer trainingId);
-  public Training getTrainingForCode(String code);
-  public Training getTrainingForName(String name);
-  public int insertTraining(Training training, Integer auditorId);
-  public int updateTraining(Training training, Integer auditorId);
-  public int updateTrainingDisplayOrder(Training training, Integer auditorId);
-  public int deleteTraining(Integer trainingId, Integer noOfChanges, Integer auditorId);
+  public TrainingCourse getTrainingCourse(Integer trainingCourseId);
+  public TrainingCourse getTrainingCourseForCode(String code);
+  public TrainingCourse getTrainingCourseForName(String name);
+  public int insertTrainingCourse(TrainingCourse trainingCourse, Integer auditorId);
+  public int updateTrainingCourse(TrainingCourse trainingCourse, Integer auditorId);
+  public int updateTrainingCourseDisplayOrder(TrainingCourse trainingCourse, Integer auditorId);
+  public int deleteTrainingCourse(Integer trainingCourseId, Integer noOfChanges, Integer auditorId);
 
 
 }

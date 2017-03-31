@@ -196,9 +196,9 @@
 </li>
 </mmj-admin:hasAccess>
 
-<mmj-admin:hasAccess forward="trainingList">
+<mmj-admin:hasAccess forward="trainingCourseList">
 <li class="navMain">
-  <html:link forward="trainingList"><bean:message key="link.trainingList"/></html:link>
+  <html:link forward="trainingCourseList"><bean:message key="link.trainingCourseList"/></html:link>
 </li>
 </mmj-admin:hasAccess>
 

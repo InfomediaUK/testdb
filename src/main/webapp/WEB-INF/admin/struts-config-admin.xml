@@ -50,6 +50,19 @@
       <form-property name="html" type="java.lang.String" />
     </form-bean>
     <form-bean name="DisciplineCategoryFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="selectedItems" type="java.lang.String[]" />
+      <form-property name="disciplineCategory" type="com.helmet.bean.DisciplineCategoryUser" />
+    </form-bean>
+    <form-bean name="DisciplineCategoryViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="selectedItems" type="java.lang.String[]" />
+      <form-property name="disciplineCategory" type="com.helmet.bean.DisciplineCategoryUserEntityAdmin" />
+    </form-bean>
+      <form-bean name="DisciplineCategoryTrainingEditFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="selectedItems" type="java.lang.String[]" />
+      <form-property name="disciplineCategoryTraining" type="com.helmet.bean.DisciplineCategoryTraining" />
+    </form-bean>
+    <form-bean name="DisciplineCategoryTrainingViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="disciplineCategoryTraining" type="com.helmet.bean.DisciplineCategoryTrainingUser" />
       <form-property name="disciplineCategory" type="com.helmet.bean.DisciplineCategoryUser" />
     </form-bean>
     <form-bean name="IdDocumentFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
@@ -62,8 +75,8 @@
     <form-bean name="RegulatorFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="regulator" type="com.helmet.bean.Regulator" />
     </form-bean>
-    <form-bean name="TrainingFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
-      <form-property name="training" type="com.helmet.bean.Training" />
+    <form-bean name="TrainingCourseFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="trainingCourse" type="com.helmet.bean.TrainingCourse" />
     </form-bean>
 
     <form-bean name="CompliancyTestFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
@@ -508,6 +521,11 @@
     <forward name="disciplineCategoryEdit" path="/disciplineCategoryEdit.do" />
     <forward name="disciplineCategoryDelete" path="/disciplineCategoryDelete.do" />
 
+    <forward name="disciplineCategoryTrainingView" path="/disciplineCategoryTrainingView.do" />
+    <forward name="disciplineCategoryTrainingNew" path="/disciplineCategoryTrainingNew.do" />
+    <forward name="disciplineCategoryTrainingEdit" path="/disciplineCategoryTrainingEdit.do" />
+    <forward name="disciplineCategoryTrainingDelete" path="/disciplineCategoryTrainingDelete.do" />
+
     <forward name="idDocumentList" path="/idDocumentList.do" />
     <forward name="idDocumentView" path="/idDocumentView.do" />
     <forward name="idDocumentNew"  path="/idDocumentNew.do" />
@@ -526,11 +544,11 @@
     <forward name="regulatorEdit" path="/regulatorEdit.do" />
     <forward name="regulatorDelete" path="/regulatorDelete.do" />
 
-    <forward name="trainingList" path="/trainingList.do" />
-    <forward name="trainingView" path="/trainingView.do" />
-    <forward name="trainingNew"  path="/trainingNew.do" />
-    <forward name="trainingEdit" path="/trainingEdit.do" />
-    <forward name="trainingDelete" path="/trainingDelete.do" />
+    <forward name="trainingCourseList" path="/trainingCourseList.do" />
+    <forward name="trainingCourseView" path="/trainingCourseView.do" />
+    <forward name="trainingCourseNew"  path="/trainingCourseNew.do" />
+    <forward name="trainingCourseEdit" path="/trainingCourseEdit.do" />
+    <forward name="trainingCourseDelete" path="/trainingCourseDelete.do" />
 
     <forward name="compliancyTestList" path="/compliancyTestList.do" />
     <forward name="compliancyTestView" path="/compliancyTestView.do" />
@@ -1296,7 +1314,7 @@
 
     <action path="/disciplineCategoryView"
             type="com.helmet.application.admin.DisciplineCategoryView"
-            name="DisciplineCategoryFormAdmin"
+            name="DisciplineCategoryViewFormAdmin"
             scope="request"
             input="/disciplineCategoryList.do"
             validate="false">
@@ -1337,6 +1355,51 @@
             input="disciplineCategoryDelete.page"
             validate="false">
         <forward name="success" path="/disciplineCategoryList.do" redirect="true" />
+    </action>
+
+    <action path="/disciplineCategoryTrainingView"
+            type="com.helmet.application.admin.DisciplineCategoryTrainingView"
+            name="DisciplineCategoryTrainingViewFormAdmin"
+            scope="request"
+            input="disciplineCategoryView.page"
+            validate="false">
+        <forward name="success" path="disciplineCategoryTrainingView.page" redirect="true" />
+    </action>
+
+    <action path="/disciplineCategoryTrainingNew"
+            type="com.helmet.application.admin.DisciplineCategoryTrainingNew"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="disciplineCategoryView.page"
+            validate="false">
+        <forward name="success" path="/disciplineCategoryView.do" redirect="true" />
+    </action>
+
+    <action path="/disciplineCategoryTrainingDelete"
+            type="com.helmet.application.admin.DisciplineCategoryTrainingDelete"
+            name="DisciplineCategoryFormAdmin"
+            scope="request"
+            input="disciplineCategoryView.page"
+            validate="false">
+        <forward name="success" path="/disciplineCategoryView.do" redirect="true" />
+    </action>
+
+    <action path="/disciplineCategoryTrainingEdit"
+            type="com.helmet.application.admin.DisciplineCategoryTrainingEdit"
+            name="DisciplineCategoryTrainingEditFormAdmin"
+            scope="request"
+            input="/disciplineCategoryTrainingView.page"
+            validate="false">
+        <forward name="success" path="disciplineCategoryTrainingEdit.page" />
+    </action>
+
+    <action path="/disciplineCategoryTrainingEditProcess"
+            type="com.helmet.application.admin.DisciplineCategoryTrainingEditProcess"
+            name="DisciplineCategoryTrainingEditFormAdmin"
+            scope="request"
+            input="disciplineCategoryTrainingEdit.page"
+            validate="true">
+        <forward name="success" path="/disciplineCategoryTrainingView.do" redirect="true" />
     </action>
 
     <action path="/idDocumentList"
@@ -1555,76 +1618,76 @@
         <forward name="success" path="/regulatorList.do" redirect="true" />
     </action>
 
-    <action path="/trainingList"
+    <action path="/trainingCourseList"
             type="com.helmet.application.admin.TrainingList"
             name="ListFormAdmin"
             scope="request"
             input="homeAdmin.page"
             validate="false">
-        <forward name="success" path="trainingList.page" />
+        <forward name="success" path="trainingCourseList.page" />
     </action>
 
-    <action path="/trainingNew"
+    <action path="/trainingCourseNew"
             type="com.helmet.application.admin.TrainingNew"
-            name="TrainingFormAdmin"
+            name="TrainingCourseFormAdmin"
             scope="request"
-            input="/trainingList.do"
+            input="/trainingCourseList.do"
             validate="false">
-        <forward name="success" path="trainingNew.page" />
+        <forward name="success" path="trainingCourseNew.page" />
     </action>
 
-    <action path="/trainingNewProcess"
+    <action path="/trainingCourseNewProcess"
             type="com.helmet.application.admin.TrainingNewProcess"
-            name="TrainingFormAdmin"
+            name="TrainingCourseFormAdmin"
             scope="request"
-            input="trainingNew.page"
+            input="trainingCourseNew.page"
             validate="true">
-        <forward name="success" path="/trainingList.do" redirect="true" />
+        <forward name="success" path="/trainingCourseList.do" redirect="true" />
     </action>
 
-    <action path="/trainingView"
+    <action path="/trainingCourseView"
             type="com.helmet.application.admin.TrainingView"
-            name="TrainingFormAdmin"
+            name="TrainingCourseFormAdmin"
             scope="request"
-            input="/trainingList.do"
+            input="/trainingCourseList.do"
             validate="false">
-        <forward name="success" path="trainingView.page" />
+        <forward name="success" path="trainingCourseView.page" />
     </action>
 
-    <action path="/trainingEdit"
+    <action path="/trainingCourseEdit"
             type="com.helmet.application.admin.TrainingEdit"
-            name="TrainingFormAdmin"
+            name="TrainingCourseFormAdmin"
             scope="request"
-            input="/trainingList.do"
+            input="/trainingCourseList.do"
             validate="false">
-        <forward name="success" path="trainingEdit.page" />
+        <forward name="success" path="trainingCourseEdit.page" />
     </action>
 
-    <action path="/trainingEditProcess"
+    <action path="/trainingCourseEditProcess"
             type="com.helmet.application.admin.TrainingEditProcess"
-            name="TrainingFormAdmin"
+            name="TrainingCourseFormAdmin"
             scope="request"
-            input="trainingEdit.page"
+            input="trainingCourseEdit.page"
             validate="true">
-        <forward name="success" path="/trainingList.do" redirect="true" />
+        <forward name="success" path="/trainingCourseList.do" redirect="true" />
     </action>
 
-    <action path="/trainingDelete"
+    <action path="/trainingCourseDelete"
             type="com.helmet.application.admin.TrainingDelete"
-            name="TrainingFormAdmin"
+            name="TrainingCourseFormAdmin"
             scope="request"
-            input="/trainingList.do"
+            input="/trainingCourseList.do"
             validate="false">
-        <forward name="success" path="trainingDelete.page" />
+        <forward name="success" path="trainingCourseDelete.page" />
     </action>
 
-    <action path="/trainingDeleteProcess"
+    <action path="/trainingCourseDeleteProcess"
             type="com.helmet.application.admin.TrainingDeleteProcess"
-            name="TrainingFormAdmin"
+            name="TrainingCourseFormAdmin"
             scope="request"
-            input="trainingDelete.page"
+            input="trainingCourseDelete.page"
             validate="false">
-        <forward name="success" path="/trainingList.do" redirect="true" />
+        <forward name="success" path="/trainingCourseList.do" redirect="true" />
     </action>
 
     <action path="/compliancyTestList"

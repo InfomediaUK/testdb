@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 import com.helmet.persistence.TrainingDAO;
 import com.helmet.persistence.RecordFactory;
 import com.helmet.persistence.RecordListFactory;
@@ -15,220 +15,242 @@ import com.helmet.persistence.Utilities;
 public class DefaultTrainingDAO extends JdbcDaoSupport implements TrainingDAO 
 {
 
-	private static StringBuffer insertTrainingSQL;
+	private static StringBuffer insertTrainingCourseSQL;
 
-	private static StringBuffer updateTrainingSQL;
+	private static StringBuffer updateTrainingCourseSQL;
 
-  private static StringBuffer updateTrainingDisplayOrderSQL;
+  private static StringBuffer updateTrainingCourseDisplayOrderSQL;
 
-	private static StringBuffer deleteTrainingSQL;
+	private static StringBuffer deleteTrainingCourseSQL;
 
-	private static StringBuffer selectTrainingSQL;
+	private static StringBuffer selectTrainingCourseSQL;
 
-	private static StringBuffer selectTrainingForNameSQL;
+	private static StringBuffer selectTrainingCourseForNameSQL;
 
-	private static StringBuffer selectTrainingForCodeSQL;
+	private static StringBuffer selectTrainingCourseForCodeSQL;
 
-	private static StringBuffer selectTrainingsSQL;
+	private static StringBuffer selectTrainingCoursesSQL;
 
-	private static StringBuffer selectActiveTrainingsSQL;
+	private static StringBuffer selectActiveTrainingCoursesSQL;
+
+  private static StringBuffer selectTrainingCoursesNotForDisciplineCategorySQL;
 
 	public static void init() 
   {
-		// Get insert Training SQL.
-		insertTrainingSQL = new StringBuffer();
-		insertTrainingSQL.append("INSERT INTO TRAINING ");
-		insertTrainingSQL.append("(  ");
-		insertTrainingSQL.append("  TRAININGID, ");
-		insertTrainingSQL.append("  CODE, ");
-    insertTrainingSQL.append("  NAME, ");
-    insertTrainingSQL.append("  DISPLAYORDER, ");
-    insertTrainingSQL.append("  CREATIONTIMESTAMP, ");
-    insertTrainingSQL.append("  AUDITORID, ");
-    insertTrainingSQL.append("  AUDITTIMESTAMP ");
-		insertTrainingSQL.append(")  ");
-		insertTrainingSQL.append("VALUES  ");
-		insertTrainingSQL.append("(  ");
-		insertTrainingSQL.append("  ^, ");
-    insertTrainingSQL.append("  ^, ");
-    insertTrainingSQL.append("  ^, ");
-    insertTrainingSQL.append("  ^, ");
-    insertTrainingSQL.append("  ^, ");
-    insertTrainingSQL.append("  ^, ");
-		insertTrainingSQL.append("  ^ ");
-		insertTrainingSQL.append(")  ");
-		// Get update Training SQL.
+		// Get insert TrainingCourse SQL.
+		insertTrainingCourseSQL = new StringBuffer();
+		insertTrainingCourseSQL.append("INSERT INTO TRAININGCOURSE ");
+		insertTrainingCourseSQL.append("(  ");
+		insertTrainingCourseSQL.append("  TRAININGCOURSEID, ");
+		insertTrainingCourseSQL.append("  CODE, ");
+    insertTrainingCourseSQL.append("  NAME, ");
+    insertTrainingCourseSQL.append("  DISPLAYORDER, ");
+    insertTrainingCourseSQL.append("  CREATIONTIMESTAMP, ");
+    insertTrainingCourseSQL.append("  AUDITORID, ");
+    insertTrainingCourseSQL.append("  AUDITTIMESTAMP ");
+		insertTrainingCourseSQL.append(")  ");
+		insertTrainingCourseSQL.append("VALUES  ");
+		insertTrainingCourseSQL.append("(  ");
+		insertTrainingCourseSQL.append("  ^, ");
+    insertTrainingCourseSQL.append("  ^, ");
+    insertTrainingCourseSQL.append("  ^, ");
+    insertTrainingCourseSQL.append("  ^, ");
+    insertTrainingCourseSQL.append("  ^, ");
+    insertTrainingCourseSQL.append("  ^, ");
+		insertTrainingCourseSQL.append("  ^ ");
+		insertTrainingCourseSQL.append(")  ");
+		// Get update TrainingCourseCourse SQL.
     // NOTE. Updates DisplayOrder too...
-		updateTrainingSQL = new StringBuffer();
-		updateTrainingSQL.append("UPDATE TRAINING ");
-		updateTrainingSQL.append("SET  NOOFCHANGES = NOOFCHANGES + 1, ");
-		updateTrainingSQL.append("     CODE = ^, ");
-    updateTrainingSQL.append("     NAME = ^, ");
-    updateTrainingSQL.append("     DISPLAYORDER = ^, ");
-    updateTrainingSQL.append("     AUDITORID = ^, ");
-    updateTrainingSQL.append("     AUDITTIMESTAMP = ^ ");
-		updateTrainingSQL.append("WHERE TRAININGID = ^ ");
-		updateTrainingSQL.append("AND   NOOFCHANGES = ^ ");
-    // Get updateTrainingDisplayOrder SQL.
-    updateTrainingDisplayOrderSQL = new StringBuffer();
-    updateTrainingDisplayOrderSQL.append("UPDATE TRAINING ");
-    updateTrainingDisplayOrderSQL.append("SET DISPLAYORDER = ^, ");
-    updateTrainingDisplayOrderSQL.append("    AUDITORID = ^, ");
-    updateTrainingDisplayOrderSQL.append("    AUDITTIMESTAMP = ^, ");
-    updateTrainingDisplayOrderSQL.append("    NOOFCHANGES = NOOFCHANGES + 1 ");
-    updateTrainingDisplayOrderSQL.append("WHERE TRAININGID = ^ ");
-    updateTrainingDisplayOrderSQL.append("AND   NOOFCHANGES = ^ ");
-		// Get delete Training SQL.
-		deleteTrainingSQL = new StringBuffer();
-		deleteTrainingSQL.append("UPDATE TRAINING ");
-		deleteTrainingSQL.append("SET ACTIVE = FALSE, ");
-    deleteTrainingSQL.append("    AUDITORID = ^, ");
-    deleteTrainingSQL.append("    AUDITTIMESTAMP = ^, ");
-    deleteTrainingSQL.append("    NOOFCHANGES = NOOFCHANGES + 1 ");
-		deleteTrainingSQL.append("WHERE TRAININGID = ^ ");
-		deleteTrainingSQL.append("AND   NOOFCHANGES = ^ ");
-		// Get select Trainings SQL.
-		selectTrainingsSQL = new StringBuffer();
-		selectTrainingsSQL.append("SELECT TRAININGID, ");
-		selectTrainingsSQL.append("       CODE, ");
-    selectTrainingsSQL.append("       NAME, ");
-    selectTrainingsSQL.append("       DISPLAYORDER, ");
-    selectTrainingsSQL.append("       CREATIONTIMESTAMP, ");
-    selectTrainingsSQL.append("       AUDITORID, ");
-    selectTrainingsSQL.append("       AUDITTIMESTAMP, ");
-    selectTrainingsSQL.append("       ACTIVE, ");
-		selectTrainingsSQL.append("       NOOFCHANGES ");
-		selectTrainingsSQL.append("FROM TRAINING ");
-		// Get select Training SQL.
-		selectTrainingSQL = new StringBuffer(selectTrainingsSQL);
-		selectTrainingSQL.append("WHERE TRAININGID = ^ ");
-    // Get select Training for Name SQL.
-    selectTrainingForNameSQL = new StringBuffer(selectTrainingsSQL);
-    selectTrainingForNameSQL.append("WHERE NAME = ^ ");
-    // Get select Training for Iso Code SQL.
-    selectTrainingForCodeSQL = new StringBuffer(selectTrainingsSQL);
-    selectTrainingForCodeSQL.append("WHERE CODE = ^ ");
-		// Get select Active Trainings SQL.
-		selectActiveTrainingsSQL = new StringBuffer(selectTrainingsSQL);
-    selectActiveTrainingsSQL.append("WHERE ACTIVE = TRUE ");
-    selectActiveTrainingsSQL.append("ORDER BY DISPLAYORDER, NAME ");
+		updateTrainingCourseSQL = new StringBuffer();
+		updateTrainingCourseSQL.append("UPDATE TRAININGCOURSE ");
+		updateTrainingCourseSQL.append("SET  NOOFCHANGES = NOOFCHANGES + 1, ");
+		updateTrainingCourseSQL.append("     CODE = ^, ");
+    updateTrainingCourseSQL.append("     NAME = ^, ");
+    updateTrainingCourseSQL.append("     DISPLAYORDER = ^, ");
+    updateTrainingCourseSQL.append("     AUDITORID = ^, ");
+    updateTrainingCourseSQL.append("     AUDITTIMESTAMP = ^ ");
+		updateTrainingCourseSQL.append("WHERE TRAININGCOURSEID = ^ ");
+		updateTrainingCourseSQL.append("AND   NOOFCHANGES = ^ ");
+    // Get updateTrainingCourseDisplayOrder SQL.
+    updateTrainingCourseDisplayOrderSQL = new StringBuffer();
+    updateTrainingCourseDisplayOrderSQL.append("UPDATE TRAININGCOURSE ");
+    updateTrainingCourseDisplayOrderSQL.append("SET DISPLAYORDER = ^, ");
+    updateTrainingCourseDisplayOrderSQL.append("    AUDITORID = ^, ");
+    updateTrainingCourseDisplayOrderSQL.append("    AUDITTIMESTAMP = ^, ");
+    updateTrainingCourseDisplayOrderSQL.append("    NOOFCHANGES = NOOFCHANGES + 1 ");
+    updateTrainingCourseDisplayOrderSQL.append("WHERE TRAININGCOURSEID = ^ ");
+    updateTrainingCourseDisplayOrderSQL.append("AND   NOOFCHANGES = ^ ");
+		// Get delete TrainingCourseCourse SQL.
+		deleteTrainingCourseSQL = new StringBuffer();
+		deleteTrainingCourseSQL.append("UPDATE TRAININGCOURSE ");
+		deleteTrainingCourseSQL.append("SET ACTIVE = FALSE, ");
+    deleteTrainingCourseSQL.append("    AUDITORID = ^, ");
+    deleteTrainingCourseSQL.append("    AUDITTIMESTAMP = ^, ");
+    deleteTrainingCourseSQL.append("    NOOFCHANGES = NOOFCHANGES + 1 ");
+		deleteTrainingCourseSQL.append("WHERE TRAININGCOURSEID = ^ ");
+		deleteTrainingCourseSQL.append("AND   NOOFCHANGES = ^ ");
+		// Get select TrainingCourses SQL.
+		selectTrainingCoursesSQL = new StringBuffer();
+		selectTrainingCoursesSQL.append("SELECT T.TRAININGCOURSEID, ");
+		selectTrainingCoursesSQL.append("       T.CODE, ");
+    selectTrainingCoursesSQL.append("       T.NAME, ");
+    selectTrainingCoursesSQL.append("       T.DISPLAYORDER, ");
+    selectTrainingCoursesSQL.append("       T.CREATIONTIMESTAMP, ");
+    selectTrainingCoursesSQL.append("       T.AUDITORID, ");
+    selectTrainingCoursesSQL.append("       T.AUDITTIMESTAMP, ");
+    selectTrainingCoursesSQL.append("       T.ACTIVE, ");
+		selectTrainingCoursesSQL.append("       T.NOOFCHANGES ");
+		selectTrainingCoursesSQL.append("FROM TRAININGCOURSE T ");
+    // Get select TrainingCourses not for DisciplineCategory SQL.
+    selectTrainingCoursesNotForDisciplineCategorySQL = new StringBuffer(selectTrainingCoursesSQL);
+    selectTrainingCoursesNotForDisciplineCategorySQL.append("WHERE T.ACTIVE = TRUE ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append("AND NOT EXISTS ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append("( ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append(" SELECT NULL ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append(" FROM DISCIPLINECATEGORYTRAINING DCT ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append(" WHERE DCT.DISCIPLINECATEGORYID = ^ ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append(" AND DCT.ACTIVE = TRUE ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append(" AND DCT.TRAININGCOURSEID = T.TRAININGCOURSEID ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append(") ");
+		// Get select TrainingCourse SQL.
+		selectTrainingCourseSQL = new StringBuffer(selectTrainingCoursesSQL);
+		selectTrainingCourseSQL.append("WHERE TRAININGCOURSEID = ^ ");
+    // Get select TrainingCourse for Name SQL.
+    selectTrainingCourseForNameSQL = new StringBuffer(selectTrainingCoursesSQL);
+    selectTrainingCourseForNameSQL.append("WHERE NAME = ^ ");
+    // Get select TrainingCourse for Iso Code SQL.
+    selectTrainingCourseForCodeSQL = new StringBuffer(selectTrainingCoursesSQL);
+    selectTrainingCourseForCodeSQL.append("WHERE CODE = ^ ");
+		// Get select Active TrainingCourses SQL.
+		selectActiveTrainingCoursesSQL = new StringBuffer(selectTrainingCoursesSQL);
+    selectActiveTrainingCoursesSQL.append("WHERE ACTIVE = TRUE ");
+    selectActiveTrainingCoursesSQL.append("ORDER BY DISPLAYORDER, NAME ");
     // Put order by on now...
-    selectTrainingsSQL.append("ORDER BY DISPLAYORDER, NAME ");
+    selectTrainingCoursesSQL.append("ORDER BY DISPLAYORDER, NAME ");
 
 	}
 
-	public int insertTraining(Training training, Integer auditorId) 
+	public int insertTrainingCourse(TrainingCourse trainingCourse, Integer auditorId) 
   {
 		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(insertTrainingSQL.toString());
+		StringBuffer sql = new StringBuffer(insertTrainingCourseSQL.toString());
 		// Replace the parameters with supplied values.
-		training.setTrainingId(UpdateHandler.getInstance().getId(getJdbcTemplate(), "training"));
-		Utilities.replace(sql, training.getTrainingId());
-		Utilities.replaceAndQuote(sql, training.getCode());
-    Utilities.replaceAndQuote(sql, training.getName());
-    Utilities.replace(sql, training.getDisplayOrder());
+		trainingCourse.setTrainingCourseId(UpdateHandler.getInstance().getId(getJdbcTemplate(), "trainingCourse"));
+		Utilities.replace(sql, trainingCourse.getTrainingCourseId());
+		Utilities.replaceAndQuote(sql, trainingCourse.getCode());
+    Utilities.replaceAndQuote(sql, trainingCourse.getName());
+    Utilities.replace(sql, trainingCourse.getDisplayOrder());
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
 		return UpdateHandler.getInstance().update(getJdbcTemplate(), sql.toString());
 	}
 
-	public int updateTraining(Training training, Integer auditorId) 
+	public int updateTrainingCourse(TrainingCourse trainingCourse, Integer auditorId) 
   {
 		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(updateTrainingSQL.toString());
+		StringBuffer sql = new StringBuffer(updateTrainingCourseSQL.toString());
 		// Replace the parameters with supplied values.
-		Utilities.replaceAndQuote(sql, training.getCode());
-    Utilities.replaceAndQuote(sql, training.getName());
-    Utilities.replace(sql, training.getDisplayOrder());
+		Utilities.replaceAndQuote(sql, trainingCourse.getCode());
+    Utilities.replaceAndQuote(sql, trainingCourse.getName());
+    Utilities.replace(sql, trainingCourse.getDisplayOrder());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     // Start of Where clause.
-    Utilities.replace(sql, training.getTrainingId());
-		Utilities.replace(sql, training.getNoOfChanges());
+    Utilities.replace(sql, trainingCourse.getTrainingCourseId());
+		Utilities.replace(sql, trainingCourse.getNoOfChanges());
 		return UpdateHandler.getInstance().update(getJdbcTemplate(), sql.toString());
 	}
 
-  public int updateTrainingDisplayOrder(Training training, Integer auditorId) 
+  public int updateTrainingCourseDisplayOrder(TrainingCourse trainingCourse, Integer auditorId) 
   {
     // Create a new local StringBuffer containing the parameterised SQL.
-    StringBuffer sql = new StringBuffer(updateTrainingDisplayOrderSQL.toString());
+    StringBuffer sql = new StringBuffer(updateTrainingCourseDisplayOrderSQL.toString());
     // Replace the parameters with supplied values.
-    Utilities.replace(sql, training.getDisplayOrder());
+    Utilities.replace(sql, trainingCourse.getDisplayOrder());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     // Start of Where clause.
-    Utilities.replace(sql, training.getTrainingId());
-    Utilities.replace(sql, training.getNoOfChanges());
+    Utilities.replace(sql, trainingCourse.getTrainingCourseId());
+    Utilities.replace(sql, trainingCourse.getNoOfChanges());
     return UpdateHandler.getInstance().update(getJdbcTemplate(), sql.toString());
   }
 
-	public int deleteTraining(Integer trainingId, Integer noOfChanges, Integer auditorId) 
+	public int deleteTrainingCourse(Integer trainingCourseId, Integer noOfChanges, Integer auditorId) 
   {
 		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(deleteTrainingSQL.toString());
+		StringBuffer sql = new StringBuffer(deleteTrainingCourseSQL.toString());
 		// Replace the parameters with supplied values.
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     // Start of Where clause.
-    Utilities.replace(sql, trainingId);
+    Utilities.replace(sql, trainingCourseId);
     Utilities.replace(sql, noOfChanges);
 		return UpdateHandler.getInstance().update(getJdbcTemplate(), sql.toString());
 	}
 
-	public Training getTraining(Integer trainingId) 
+	public TrainingCourse getTrainingCourse(Integer trainingCourseId) 
   {
 		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(selectTrainingSQL.toString());
+		StringBuffer sql = new StringBuffer(selectTrainingCourseSQL.toString());
 		// Replace the parameters with supplied values.
-		Utilities.replace(sql, trainingId);
-		return (Training) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Training.class.getName());
+		Utilities.replace(sql, trainingCourseId);
+		return (TrainingCourse) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCourse.class.getName());
 	}
 
-	public Training getTrainingForName(String name) 
+	public TrainingCourse getTrainingCourseForName(String name) 
   {
 		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(selectTrainingForNameSQL.toString());
+		StringBuffer sql = new StringBuffer(selectTrainingCourseForNameSQL.toString());
 		// Replace the parameters with supplied values.
 		Utilities.replaceAndQuote(sql, name);
-		return (Training) RecordFactory.getInstance().get(getJdbcTemplate(),
-				sql.toString(), Training.class.getName());
+		return (TrainingCourse) RecordFactory.getInstance().get(getJdbcTemplate(),
+				sql.toString(), TrainingCourse.class.getName());
 	}
 
-	public Training getTrainingForCode(String code) 
+	public TrainingCourse getTrainingCourseForCode(String code) 
   {
 		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(selectTrainingForCodeSQL.toString());
+		StringBuffer sql = new StringBuffer(selectTrainingCourseForCodeSQL.toString());
 		// Replace the parameters with supplied values.
 		Utilities.replaceAndQuote(sql, code);
-		return (Training) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Training.class.getName());
+		return (TrainingCourse) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCourse.class.getName());
 	}
 
-	public List<Training> getTrainings() 
+	public List<TrainingCourse> getTrainingCourses() 
   {
-		return getTrainings(false);
+		return getTrainingCourses(false);
 	}
 
-	public List<Training> getTrainings(boolean showOnlyActive) 
+	public List<TrainingCourse> getTrainingCourses(boolean showOnlyActive) 
   {
 		StringBuffer sql = null;
 		if (showOnlyActive) 
     {
-			sql = new StringBuffer(selectActiveTrainingsSQL.toString());
+			sql = new StringBuffer(selectActiveTrainingCoursesSQL.toString());
 		}
 		else 
     {
-			sql = new StringBuffer(selectTrainingsSQL.toString()); 
+			sql = new StringBuffer(selectTrainingCoursesSQL.toString()); 
 		}
-		return RecordListFactory.getInstance().get(getJdbcTemplate(),	sql.toString(), Training.class.getName());
+		return RecordListFactory.getInstance().get(getJdbcTemplate(),	sql.toString(), TrainingCourse.class.getName());
 	}
 
-	public List<Training> getActiveTrainings() 
+	public List<TrainingCourse> getActiveTrainingCourses() 
   {
 		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(selectActiveTrainingsSQL.toString());
-		return RecordListFactory.getInstance().get(getJdbcTemplate(),	sql.toString(), Training.class.getName());
+		StringBuffer sql = new StringBuffer(selectActiveTrainingCoursesSQL.toString());
+		return RecordListFactory.getInstance().get(getJdbcTemplate(),	sql.toString(), TrainingCourse.class.getName());
 
 	}
+
+  public List<TrainingCourse> getTrainingCoursesNotForDisciplineCategory(Integer disciplineCategoryId)
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectTrainingCoursesNotForDisciplineCategorySQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, disciplineCategoryId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCourse.class.getName());
+  }
 
 }

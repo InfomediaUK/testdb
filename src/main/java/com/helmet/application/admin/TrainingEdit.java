@@ -13,7 +13,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AdminService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.admin.abztract.AdminAction;
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 
 
 public class TrainingEdit extends AdminAction
@@ -25,10 +25,10 @@ public class TrainingEdit extends AdminAction
   {
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-    Training training = (Training)dynaForm.get("training");
+    TrainingCourse trainingCourse = (TrainingCourse)dynaForm.get("trainingCourse");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    training = adminService.getTraining(training.getTrainingId());
-    dynaForm.set("training", training);
+    trainingCourse = adminService.getTrainingCourse(trainingCourse.getTrainingCourseId());
+    dynaForm.set("trainingCourse", trainingCourse);
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }

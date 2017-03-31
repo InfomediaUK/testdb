@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
+import com.helmet.bean.AgencyUserEntity;
 import com.helmet.bean.DisciplineCategory;
 import com.helmet.bean.DisciplineCategoryUser;
+import com.helmet.bean.DisciplineCategoryUserEntity;
+import com.helmet.bean.DisciplineCategoryUserEntityAdmin;
 import com.helmet.persistence.DisciplineCategoryDAO;
 import com.helmet.persistence.RecordFactory;
 import com.helmet.persistence.RecordListFactory;
@@ -259,6 +262,24 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
     return (DisciplineCategoryUser) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryUser.class.getName());
   }
 
+  public DisciplineCategoryUserEntity getDisciplineCategoryUserEntity(Integer disciplineCategoryId)
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectDisciplineCategoryUserSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, disciplineCategoryId);
+    return (DisciplineCategoryUserEntity)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryUserEntity.class.getName());
+  }
+
+  public DisciplineCategoryUserEntityAdmin getDisciplineCategoryUserEntityAdmin(Integer disciplineCategoryId)
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectDisciplineCategoryUserSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, disciplineCategoryId);
+    return (DisciplineCategoryUserEntityAdmin)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryUserEntityAdmin.class.getName());
+  }
+
 	public List<DisciplineCategory> getDisciplineCategories() 
   {
 		return getDisciplineCategories(false);
@@ -298,6 +319,20 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
       sql = new StringBuffer(selectDisciplineCategoryUsersSQL.toString()); 
     }
     return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryUser.class.getName());
+  }
+
+  public List<DisciplineCategoryUserEntity> getDisciplineCategoryUserEntities(boolean showOnlyActive) 
+  {
+    StringBuffer sql = null;
+    if (showOnlyActive) 
+    {
+      sql = new StringBuffer(selectActiveDisciplineCategoryUsersSQL.toString());
+    }
+    else 
+    {
+      sql = new StringBuffer(selectDisciplineCategoryUsersSQL.toString()); 
+    }
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryUserEntity.class.getName());
   }
 
 }

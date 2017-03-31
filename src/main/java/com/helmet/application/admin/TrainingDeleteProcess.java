@@ -13,7 +13,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AdminService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.admin.abztract.AdminAction;
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 
 
 public class TrainingDeleteProcess extends AdminAction
@@ -25,9 +25,9 @@ public class TrainingDeleteProcess extends AdminAction
   {
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
-    Training training = (Training) dynaForm.get("training");
+    TrainingCourse trainingCourse = (TrainingCourse) dynaForm.get("trainingCourse");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    int rowCount = adminService.deleteTraining(training.getTrainingId(), training.getNoOfChanges(), getAdministratorLoggedIn().getAdministratorId());
+    int rowCount = adminService.deleteTrainingCourse(trainingCourse.getTrainingCourseId(), trainingCourse.getNoOfChanges(), getAdministratorLoggedIn().getAdministratorId());
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }

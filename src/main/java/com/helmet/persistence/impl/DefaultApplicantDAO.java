@@ -786,7 +786,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.append("AND A.IDDOCUMENTEXPIRYDATE IS NOT NULL ");
     selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.append("AND A.IDDOCUMENTEXPIRYDATE < ^ ");
     selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.append("ORDER BY A.IDDOCUMENTEXPIRYDATE DESC ");
-    // Get select Active Applicants for Agency with Training about to expire.
+    // Get select Active Applicants for Agency with TrainingCourse about to expire.
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE IS NOT NULL ");
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE < ^ ");

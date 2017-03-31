@@ -29,11 +29,11 @@
     <th align="left"><bean:message key="label.order" /></th>
   </tr>
   </thead>
-  <logic:iterate id="disciplineCategory" name="ListFormAdmin" property="list" type="com.helmet.bean.DisciplineCategoryUser">
+<logic:iterate id="disciplineCategory" name="ListFormAdmin" property="list" type="com.helmet.bean.DisciplineCategoryUserEntity">
 	<bean:define id="trClass" value="disciplineCategory"/>
-	<logic:notEqual name="disciplineCategory" property="active" value="true">
-	  <bean:define id="trClass" value="inactive"/>
-	</logic:notEqual>
+  <logic:notEqual name="disciplineCategory" property="active" value="true">
+	<bean:define id="trClass" value="inactive"/>
+  </logic:notEqual>
   <tr class="<bean:write name="trClass"/>">
     <td align="left">
     <mmj-admin:hasAccess forward="disciplineCategoryView" >
@@ -59,7 +59,30 @@
       <bean:write name="disciplineCategory" property="displayOrder"/>
     </td>    
   </tr>
+  <logic:equal name="disciplineCategory" property="hasActiveDisciplineCategoryTrainings" value="true">
+  <logic:iterate id="disciplineCategoryTraining" name="disciplineCategory" property="disciplineCategoryTrainingUsers" type="com.helmet.bean.DisciplineCategoryTrainingUser">
+  <tr>
+    <td colspan="6">
+      <table class="simple">
+        <tr>
+          <td>
+            &nbsp;
+          </td>
+          <td>
+		    <mmj-admin:hasAccess forward="disciplineCategoryTrainingView">
+		      <html:link forward="disciplineCategoryTrainingView" paramId="disciplineCategoryTraining.disciplineCategoryTrainingId" paramName="disciplineCategoryTraining" paramProperty="disciplineCategoryTrainingId"><bean:write name="disciplineCategoryTraining" property="trainingNameWithMandatory"/></html:link>
+		    </mmj-admin:hasAccess>
+		    <mmj-admin:hasNoAccess forward="disciplineCategoryTrainingView">
+ 			  <bean:write name="disciplineCategoryTraining" property="trainingNameWithMandatory"/>
+		    </mmj-admin:hasNoAccess>   
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
   </logic:iterate>
+  </logic:equal>
+</logic:iterate>
 </table>
 </logic:present>
 

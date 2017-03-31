@@ -15,7 +15,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AdminService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.admin.abztract.AdminAction;
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 
 
 public class TrainingList extends AdminAction
@@ -28,7 +28,7 @@ public class TrainingList extends AdminAction
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     logger.entry("In coming !!!");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    List<Training> list = adminService.getTrainings(false);
+    List<TrainingCourse> list = adminService.getTrainingCourses(false);
     dynaForm.set("list", list);
     logger.exit("Out going !!!");
     return mapping.findForward("success");

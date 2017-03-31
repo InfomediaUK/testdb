@@ -22,7 +22,10 @@ import com.helmet.bean.ClientUser;
 import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.Country;
 import com.helmet.bean.DisciplineCategory;
+import com.helmet.bean.DisciplineCategoryTraining;
+import com.helmet.bean.DisciplineCategoryTrainingUser;
 import com.helmet.bean.DisciplineCategoryUser;
+import com.helmet.bean.DisciplineCategoryUserEntity;
 import com.helmet.bean.DressCode;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.Expense;
@@ -58,7 +61,7 @@ import com.helmet.bean.Shift;
 import com.helmet.bean.Site;
 import com.helmet.bean.SiteUser;
 import com.helmet.bean.SiteUserEntity;
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 import com.helmet.bean.TrainingCompanyUser;
 import com.helmet.bean.Uplift;
 import com.helmet.bean.UpliftMinute;
@@ -312,6 +315,7 @@ public interface CommonService {
   public DisciplineCategoryUser getDisciplineCategoryUser(Integer disciplineCategoryId);
   public List<DisciplineCategory> getDisciplineCategories(boolean showOnlyActive);
   public List<DisciplineCategoryUser> getDisciplineCategoryUsers(boolean showOnlyActive);
+  public List<DisciplineCategoryUserEntity> getDisciplineCategoryUserEntities(boolean showOnlyActive);
   public List<EmailAction> getEmailActions(boolean showOnlyActive);
   public List<GeographicalRegion> getGeographicalRegions(boolean showOnlyActive);
   public List<IdDocument> getIdDocuments(boolean showOnlyActive);
@@ -319,10 +323,23 @@ public interface CommonService {
   public List<VisaType> getVisaTypes(boolean showOnlyActive);
   public List<Regulator> getRegulators(boolean showOnlyActive);
   public List<CompliancyTest> getCompliancyTests(boolean showOnlyActive);
-  public List<Training> getTrainings(boolean showOnlyActive);
+  public List<TrainingCourse> getTrainingCourses(boolean showOnlyActive);
 
   public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant);
 
   public List<TrainingCompanyUser> getTrainingCompanyUsers(boolean showOnlyActive);
+
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId, boolean showOnlyActive);
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId);
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTraining(Integer trainingId);
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTraining(Integer trainingId, boolean showOnlyActive);
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter);
+  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter, boolean showOnlyActive);
+  public DisciplineCategoryTraining getDisciplineCategoryTraining(Integer disciplineCategoryTrainingId);
+  public DisciplineCategoryTrainingUser getDisciplineCategoryTrainingUser(Integer disciplineCategoryTrainingId);
+  public DisciplineCategoryTraining getDisciplineCategoryTrainingForDisciplineCategoryAndTraining(Integer disciplineCategoryId, Integer  trainingId);
+  public int insertDisciplineCategoryTraining(DisciplineCategoryTraining disciplineCategoryTraining, Integer auditorId);
+  public int deleteDisciplineCategoryTraining(Integer disciplineCategoryTrainingId, Integer noOfChanges, Integer auditorId);
+  public int updateDisciplineCategoryTraining(DisciplineCategoryTraining disciplineCategoryTraining, Integer auditorId);
 
 }

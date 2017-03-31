@@ -45,6 +45,8 @@ import com.helmet.bean.ConsultantAccessUser;
 import com.helmet.bean.ConsultantEntity;
 import com.helmet.bean.Country;
 import com.helmet.bean.DisciplineCategory;
+import com.helmet.bean.DisciplineCategoryUserEntity;
+import com.helmet.bean.DisciplineCategoryUserEntityAdmin;
 import com.helmet.bean.IntValue;
 import com.helmet.bean.IdDocument;
 import com.helmet.bean.VisaType;
@@ -62,7 +64,7 @@ import com.helmet.bean.LocationJobProfile;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.ReEnterPwd;
 import com.helmet.bean.Regulator;
-import com.helmet.bean.Training;
+import com.helmet.bean.TrainingCourse;
 import com.helmet.bean.TrainingCompany;
 import com.helmet.bean.TrainingCompanyUserEntity;
 import com.helmet.persistence.AdminAccessDAO;
@@ -564,6 +566,22 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     DisciplineCategory disciplineCategory = null;
     disciplineCategory = getDisciplineCategoryDAO().getDisciplineCategoryForCode(name);
     return disciplineCategory;
+  }
+  public DisciplineCategoryUserEntity getDisciplineCategoryUserEntity(Integer disciplineCategoryId, boolean showOnlyActive)
+  {
+    DisciplineCategoryUserEntity disciplineCategoryUserEntity = null;
+    disciplineCategoryUserEntity = getDisciplineCategoryDAO().getDisciplineCategoryUserEntity(disciplineCategoryId);
+    disciplineCategoryUserEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(disciplineCategoryId, showOnlyActive));
+//    disciplineCategoryUserEntity.setTrainings(getTrainingDAO().getTrainingCoursesNotForDisciplineCategory(disciplineCategoryId));
+    return disciplineCategoryUserEntity;
+  }
+  public DisciplineCategoryUserEntityAdmin getDisciplineCategoryUserEntityAdmin(Integer disciplineCategoryId, boolean showOnlyActive)
+  {
+    DisciplineCategoryUserEntityAdmin disciplineCategoryUserEntityAdmin = null;
+    disciplineCategoryUserEntityAdmin = getDisciplineCategoryDAO().getDisciplineCategoryUserEntityAdmin(disciplineCategoryId);
+    disciplineCategoryUserEntityAdmin.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(disciplineCategoryId, showOnlyActive));
+    disciplineCategoryUserEntityAdmin.setTrainingCourses(getTrainingDAO().getTrainingCoursesNotForDisciplineCategory(disciplineCategoryId));
+    return disciplineCategoryUserEntityAdmin;
   }
   public int insertDisciplineCategory(DisciplineCategory disciplineCategory, Integer disciplineCategoryId) 
   {
@@ -2164,69 +2182,69 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     return rc;
   }
   
-  public Training getTraining(Integer trainingId) 
+  public TrainingCourse getTrainingCourse(Integer trainingCourseId) 
   {
-    Training training = null;
-    training = getTrainingDAO().getTraining(trainingId);
-    return training;
+    TrainingCourse trainingCourse = null;
+    trainingCourse = getTrainingDAO().getTrainingCourse(trainingCourseId);
+    return trainingCourse;
   }
 
-  public Training getTrainingForCode(String code) 
+  public TrainingCourse getTrainingCourseForCode(String code) 
   {
     
-    Training training = null;
-    training = getTrainingDAO().getTrainingForCode(code);
-    return training;
-    
-  }
-
-  public Training getTrainingForName(String name) 
-  {
-    
-    Training training = null;
-    training = getTrainingDAO().getTrainingForCode(name);
-    return training;
+    TrainingCourse trainingCourse = null;
+    trainingCourse = getTrainingDAO().getTrainingCourseForCode(code);
+    return trainingCourse;
     
   }
 
-  public int insertTraining(Training training, Integer trainingId) 
+  public TrainingCourse getTrainingCourseForName(String name) 
   {
-    Training duplicateTraining = getTrainingDAO().getTrainingForName(training.getName());
-    if (duplicateTraining != null) {
+    
+    TrainingCourse trainingCourse = null;
+    trainingCourse = getTrainingDAO().getTrainingCourseForCode(name);
+    return trainingCourse;
+    
+  }
+
+  public int insertTrainingCourse(TrainingCourse trainingCourse, Integer trainingCourseId) 
+  {
+    TrainingCourse duplicateTrainingCourse = getTrainingDAO().getTrainingCourseForName(trainingCourse.getName());
+    if (duplicateTrainingCourse != null) {
       throw new DuplicateDataException("name");
     }
-    duplicateTraining = getTrainingDAO().getTrainingForCode(training.getCode());
-    if (duplicateTraining != null) {
+    duplicateTrainingCourse = getTrainingDAO().getTrainingCourseForCode(trainingCourse.getCode());
+    if (duplicateTrainingCourse != null) {
       throw new DuplicateDataException("code");
     }
-    int rc = getTrainingDAO().insertTraining(training, trainingId);
+    int rc = getTrainingDAO().insertTrainingCourse(trainingCourse, trainingCourseId);
     return rc;
   }
 
-  public int updateTraining(Training training, Integer auditorId) 
+  public int updateTrainingCourse(TrainingCourse trainingCourse, Integer auditorId) 
   {
-    Training duplicateTraining = getTrainingDAO().getTrainingForName(training.getName());
-    if (duplicateTraining != null && 
-      !duplicateTraining.getTrainingId().equals(training.getTrainingId())) {
+    TrainingCourse duplicateTrainingCourse = getTrainingDAO().getTrainingCourseForName(trainingCourse.getName());
+    if (duplicateTrainingCourse != null && 
+      !duplicateTrainingCourse.getTrainingCourseId().equals(trainingCourse.getTrainingCourseId())) {
       throw new DuplicateDataException("name");
     }
-    duplicateTraining = getTrainingDAO().getTrainingForCode(training.getCode());
-    if (duplicateTraining != null && 
-      !duplicateTraining.getTrainingId().equals(training.getTrainingId())) {
+    duplicateTrainingCourse = getTrainingDAO().getTrainingCourseForCode(trainingCourse.getCode());
+    if (duplicateTrainingCourse != null && 
+      !duplicateTrainingCourse.getTrainingCourseId().equals(trainingCourse.getTrainingCourseId())) {
       throw new DuplicateDataException("code");
     }
-    int rc = getTrainingDAO().updateTraining(training, auditorId);
+    int rc = getTrainingDAO().updateTrainingCourse(trainingCourse, auditorId);
     return rc;
   }
 
-  public int updateTrainingDisplayOrder(Training training, Integer auditorId) 
+  public int updateTrainingCourseDisplayOrder(TrainingCourse trainingCourse, Integer auditorId) 
   {
-    int rc = getTrainingDAO().updateTraining(training, auditorId);
+    int rc = getTrainingDAO().updateTrainingCourse(trainingCourse, auditorId);
     return rc;
   }
 
-  public int deleteTraining(Integer trainingId, Integer noOfChanges, Integer auditorId){
-    int rc = getTrainingDAO().deleteTraining(trainingId, noOfChanges, auditorId);
+  public int deleteTrainingCourse(Integer trainingCourseId, Integer noOfChanges, Integer auditorId){
+    int rc = getTrainingDAO().deleteTrainingCourse(trainingCourseId, noOfChanges, auditorId);
     return rc;
   }
   
