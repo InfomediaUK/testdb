@@ -2,21 +2,21 @@ package com.helmet.bean;
 
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-public class Training extends Base
+public class TrainingCourse extends Base
 {
-  private Integer trainingId;
+  private Integer trainingCourseId;
   private String code;
   private String name;  
   private Integer displayOrder;
 
-  public Integer getTrainingId()
+  public Integer getTrainingCourseId()
   {
-    return trainingId;
+    return trainingCourseId;
   }
 
-  public void setTrainingId(Integer trainingId)
+  public void setTrainingCourseId(Integer trainingId)
   {
-    this.trainingId = trainingId;
+    this.trainingCourseId = trainingId;
   }
 
   public String getCode()
@@ -62,7 +62,7 @@ public class Training extends Base
   public void load(SqlRowSet rs)
   {
     super.load(rs);
-    setTrainingId(rs.getInt("TRAININGID"));
+    setTrainingCourseId(rs.getInt("TRAININGCOURSEID"));
     setCode(rs.getString("CODE"));
     setName(rs.getString("NAME"));
     setDisplayOrder(rs.getInt("DISPLAYORDER"));
