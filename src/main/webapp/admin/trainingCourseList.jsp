@@ -7,13 +7,13 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="/mmj-admin" prefix="mmj-admin" %>
 
-<bean:message key="title.trainingList"/>
+<bean:message key="title.trainingCourseList"/>
 
 <br/>
 <br/>
 <%-- --%>
-<mmj-admin:hasAccess forward="trainingNew" >
-<html:link forward="trainingNew"><bean:message key="link.new"/></html:link>
+<mmj-admin:hasAccess forward="trainingCourseNew" >
+<html:link forward="trainingCourseNew"><bean:message key="link.new"/></html:link>
 <br/>
 <br/>
 </mmj-admin:hasAccess>
@@ -27,28 +27,28 @@
     <th align="left"><bean:message key="label.order" /></th>
   </tr>
   </thead>
-  <logic:iterate id="training" name="ListFormAdmin" property="list">
-	<bean:define id="trClass" value="training"/>
-	<logic:notEqual name="training" property="active" value="true">
+  <logic:iterate id="trainingCourse" name="ListFormAdmin" property="list">
+	<bean:define id="trClass" value="trainingCourse"/>
+	<logic:notEqual name="trainingCourse" property="active" value="true">
 	  <bean:define id="trClass" value="inactive"/>
 	</logic:notEqual>
   <tr class="<bean:write name="trClass"/>">
     <td align="left">
-    <mmj-admin:hasAccess forward="trainingView" >
-      <html:link forward="trainingView" paramId="training.trainingId" paramName="training" paramProperty="trainingId"><bean:write name="training" property="name"/></html:link>
+    <mmj-admin:hasAccess forward="trainingCourseView" >
+      <html:link forward="trainingCourseView" paramId="trainingCourse.trainingCourseId" paramName="trainingCourse" paramProperty="trainingCourseId"><bean:write name="trainingCourse" property="name"/></html:link>
     </mmj-admin:hasAccess>
-    <mmj-admin:hasNoAccess forward="trainingView" >
-      <bean:write name="training" property="name"/>
+    <mmj-admin:hasNoAccess forward="trainingCourseView" >
+      <bean:write name="trainingCourse" property="name"/>
     </mmj-admin:hasNoAccess>
     </td>
     <td align="left">
-      <bean:write name="training" property="code"/>
+      <bean:write name="trainingCourse" property="code"/>
     </td>
     <td align="left">
-      <bean:write name="training" property="active"/>
+      <bean:write name="trainingCourse" property="active"/>
     </td>    
     <td align="left">
-      <bean:write name="training" property="displayOrder"/>
+      <bean:write name="trainingCourse" property="displayOrder"/>
     </td>    
   </tr>
   </logic:iterate>

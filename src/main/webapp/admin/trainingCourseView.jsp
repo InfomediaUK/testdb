@@ -7,7 +7,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="/mmj-admin" prefix="mmj-admin" %>
 
-<bean:message key="title.trainingView"/>
+<bean:message key="title.trainingCourseView"/>
 
 <br/>
 <br/>
@@ -15,21 +15,21 @@
 <table>
   <tr>
     <td align="left"><bean:message key="label.name"/></td>
-    <td align="left"><bean:write name="TrainingFormAdmin" property="training.name"/></td>
+    <td align="left"><bean:write name="TrainingCourseFormAdmin" property="trainingCourse.name"/></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.code"/></td>
-    <td align="left"><bean:write name="TrainingFormAdmin" property="training.code"/></td>
+    <td align="left"><bean:write name="TrainingCourseFormAdmin" property="trainingCourse.code"/></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.displayOrder"/></td>
-    <td align="left"><bean:write name="TrainingFormAdmin" property="training.displayOrder"/></td>
+    <td align="left"><bean:write name="TrainingCourseFormAdmin" property="trainingCourse.displayOrder"/></td>
   </tr>
 </table>
 
-<mmj-admin:hasAccess forward="trainingEdit" >
-  <html:link forward="trainingEdit" paramId="training.trainingId" paramName="TrainingFormAdmin" paramProperty="training.trainingId"><bean:message key="link.edit"/></html:link>&nbsp;
+<mmj-admin:hasAccess forward="trainingCourseEdit" >
+  <html:link forward="trainingCourseEdit" paramId="trainingCourse.trainingCourseId" paramName="TrainingCourseFormAdmin" paramProperty="trainingCourse.trainingCourseId"><bean:message key="link.edit"/></html:link>&nbsp;
 </mmj-admin:hasAccess>
-<mmj-admin:hasAccess forward="trainingDelete" >
-  <html:link forward="trainingDelete" paramId="training.trainingId" paramName="TrainingFormAdmin" paramProperty="training.trainingId"><bean:message key="link.delete"/></html:link>
+<mmj-admin:hasAccess forward="trainingCourseDelete" >
+  <html:link forward="trainingCourseDelete" paramId="trainingCourse.trainingCourseId" paramName="TrainingCourseFormAdmin" paramProperty="trainingCourse.trainingCourseId"><bean:message key="link.delete"/></html:link>
 </mmj-admin:hasAccess>

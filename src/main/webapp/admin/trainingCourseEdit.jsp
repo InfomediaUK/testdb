@@ -7,25 +7,25 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="/mmj-admin" prefix="mmj-admin" %>
 
-<bean:message key="title.trainingEdit"/>
+<bean:message key="title.trainingCourseEdit"/>
 <br/>
 <br/>
 <html:errors/>
-<html:form action="trainingEditProcess.do" focus="training.name">
-	<html:hidden name="TrainingFormAdmin" property="training.trainingId"/>
-	<html:hidden name="TrainingFormAdmin" property="training.noOfChanges"/>
+<html:form action="trainingCourseEditProcess.do" focus="trainingCourse.name">
+	<html:hidden name="TrainingCourseFormAdmin" property="trainingCourse.trainingCourseId"/>
+	<html:hidden name="TrainingCourseFormAdmin" property="trainingCourse.noOfChanges"/>
 	<table>
 	  <tr>
 	    <td align="left"><bean:message key="label.name"/></td>
-	    <td align="left"><html:text name="TrainingFormAdmin" property="training.name" size="60" /></td>
+	    <td align="left"><html:text name="TrainingCourseFormAdmin" property="trainingCourse.name" size="60" /></td>
 	  </tr>
 	  <tr>
 	    <td align="left"><bean:message key="label.code"/></td>
-	    <td align="left"><html:text name="TrainingFormAdmin" property="training.code" size="60" /></td>
+	    <td align="left"><html:text name="TrainingCourseFormAdmin" property="trainingCourse.code" size="60" /></td>
 	  </tr>
 	  <tr>
 	    <td align="left"><bean:message key="label.displayOrder"/></td>
-	     <td align="left"><html:text name="TrainingFormAdmin" property="training.displayOrder" size="10" /></td>
+	     <td align="left"><html:text name="TrainingCourseFormAdmin" property="trainingCourse.displayOrder" size="10" /></td>
 	   </tr>
 	  <tr>
 	    <td colspan="2" align="center"><html:submit><bean:message key="button.save"/></html:submit></td>
