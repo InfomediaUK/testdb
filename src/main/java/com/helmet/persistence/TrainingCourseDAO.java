@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.helmet.bean.TrainingCourse;
 
-public interface TrainingDAO 
+public interface TrainingCourseDAO 
 {
   public List<TrainingCourse> getTrainingCourses(boolean showOnlyActive);
   public List<TrainingCourse> getTrainingCoursesNotForDisciplineCategory(Integer disciplineCategoryId);

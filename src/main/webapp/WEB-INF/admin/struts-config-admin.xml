@@ -1619,7 +1619,7 @@
     </action>
 
     <action path="/trainingCourseList"
-            type="com.helmet.application.admin.TrainingList"
+            type="com.helmet.application.admin.TrainingCourseList"
             name="ListFormAdmin"
             scope="request"
             input="homeAdmin.page"
@@ -1628,7 +1628,7 @@
     </action>
 
     <action path="/trainingCourseNew"
-            type="com.helmet.application.admin.TrainingNew"
+            type="com.helmet.application.admin.TrainingCourseNew"
             name="TrainingCourseFormAdmin"
             scope="request"
             input="/trainingCourseList.do"
@@ -1637,7 +1637,7 @@
     </action>
 
     <action path="/trainingCourseNewProcess"
-            type="com.helmet.application.admin.TrainingNewProcess"
+            type="com.helmet.application.admin.TrainingCourseNewProcess"
             name="TrainingCourseFormAdmin"
             scope="request"
             input="trainingCourseNew.page"
@@ -1655,7 +1655,7 @@
     </action>
 
     <action path="/trainingCourseEdit"
-            type="com.helmet.application.admin.TrainingEdit"
+            type="com.helmet.application.admin.TrainingCourseEdit"
             name="TrainingCourseFormAdmin"
             scope="request"
             input="/trainingCourseList.do"
@@ -1664,7 +1664,7 @@
     </action>
 
     <action path="/trainingCourseEditProcess"
-            type="com.helmet.application.admin.TrainingEditProcess"
+            type="com.helmet.application.admin.TrainingCourseEditProcess"
             name="TrainingCourseFormAdmin"
             scope="request"
             input="trainingCourseEdit.page"
@@ -1673,7 +1673,7 @@
     </action>
 
     <action path="/trainingCourseDelete"
-            type="com.helmet.application.admin.TrainingDelete"
+            type="com.helmet.application.admin.TrainingCourseDelete"
             name="TrainingCourseFormAdmin"
             scope="request"
             input="/trainingCourseList.do"
@@ -1682,7 +1682,7 @@
     </action>
 
     <action path="/trainingCourseDeleteProcess"
-            type="com.helmet.application.admin.TrainingDeleteProcess"
+            type="com.helmet.application.admin.TrainingCourseDeleteProcess"
             name="TrainingCourseFormAdmin"
             scope="request"
             input="trainingCourseDelete.page"

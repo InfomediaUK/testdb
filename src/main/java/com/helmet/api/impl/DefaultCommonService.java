@@ -132,7 +132,7 @@ import com.helmet.persistence.RegulatorDAO;
 import com.helmet.persistence.ShiftDAO;
 import com.helmet.persistence.SiteDAO;
 import com.helmet.persistence.TrainingCompanyDAO;
-import com.helmet.persistence.TrainingDAO;
+import com.helmet.persistence.TrainingCourseDAO;
 import com.helmet.persistence.UpliftDAO;
 import com.helmet.persistence.UpliftMinuteDAO;
 import com.helmet.persistence.VisaTypeDAO;
@@ -155,7 +155,7 @@ public abstract class DefaultCommonService implements CommonService {
 
   private RegulatorDAO regulatorDAO;
 
-  private TrainingDAO trainingDAO;
+  private TrainingCourseDAO trainingCourseDAO;
 
 	private BookingDAO bookingDAO;
 	
@@ -313,14 +313,14 @@ public abstract class DefaultCommonService implements CommonService {
     this.regulatorDAO = regulatorDAO;
   }
 
-  public TrainingDAO getTrainingDAO()
+  public TrainingCourseDAO getTrainingCourseDAO()
   {
-    return trainingDAO;
+    return trainingCourseDAO;
   }
 
-  public void setTrainingDAO(TrainingDAO trainingDAO)
+  public void setTrainingCourseDAO(TrainingCourseDAO trainingCourseDAO)
   {
-    this.trainingDAO = trainingDAO;
+    this.trainingCourseDAO = trainingCourseDAO;
   }
 
   public NhsBookingDAO getNhsBookingDAO()
@@ -3242,7 +3242,7 @@ public abstract class DefaultCommonService implements CommonService {
   public List<TrainingCourse> getTrainingCourses(boolean showOnlyActive) 
   {
     List<TrainingCourse> trainingCourses = null;
-    trainingCourses = trainingDAO.getTrainingCourses(showOnlyActive);
+    trainingCourses = trainingCourseDAO.getTrainingCourses(showOnlyActive);
     return trainingCourses;
   }
 

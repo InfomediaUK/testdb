@@ -13,7 +13,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.application.admin.abztract.AdminAction;
 
 
-public class TrainingNew extends AdminAction
+public class TrainingCourseNew extends AdminAction
 {
 
   protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());

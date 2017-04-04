@@ -1,5 +1,7 @@
 package com.helmet.application.admin;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,19 +18,18 @@ import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.TrainingCourse;
 
 
-public class TrainingDelete extends AdminAction
+public class TrainingCourseList extends AdminAction
 {
 
   protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-    logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
-    TrainingCourse trainingCourse = (TrainingCourse) dynaForm.get("trainingCourse");
+    logger.entry("In coming !!!");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    trainingCourse = adminService.getTrainingCourse(trainingCourse.getTrainingCourseId());
-    dynaForm.set("trainingCourse", trainingCourse);
+    List<TrainingCourse> list = adminService.getTrainingCourses(false);
+    dynaForm.set("list", list);
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }

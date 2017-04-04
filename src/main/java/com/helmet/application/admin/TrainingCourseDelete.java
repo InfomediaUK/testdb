@@ -16,7 +16,7 @@ import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.TrainingCourse;
 
 
-public class TrainingDeleteProcess extends AdminAction
+public class TrainingCourseDelete extends AdminAction
 {
 
   protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
@@ -27,7 +27,8 @@ public class TrainingDeleteProcess extends AdminAction
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     TrainingCourse trainingCourse = (TrainingCourse) dynaForm.get("trainingCourse");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    int rowCount = adminService.deleteTrainingCourse(trainingCourse.getTrainingCourseId(), trainingCourse.getNoOfChanges(), getAdministratorLoggedIn().getAdministratorId());
+    trainingCourse = adminService.getTrainingCourse(trainingCourse.getTrainingCourseId());
+    dynaForm.set("trainingCourse", trainingCourse);
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }

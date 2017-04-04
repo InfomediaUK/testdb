@@ -5,18 +5,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.util.MessageResources;
 import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AdminService;
 import com.helmet.api.ServiceFactory;
+import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.TrainingCourse;
 
 
-public class TrainingEdit extends AdminAction
+public class TrainingCourseNewProcess extends AdminAction
 {
 
   protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
@@ -25,10 +29,20 @@ public class TrainingEdit extends AdminAction
   {
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-    TrainingCourse trainingCourse = (TrainingCourse)dynaForm.get("trainingCourse");
+    TrainingCourse trainingCourse = (TrainingCourse) dynaForm.get("trainingCourse");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    trainingCourse = adminService.getTrainingCourse(trainingCourse.getTrainingCourseId());
-    dynaForm.set("trainingCourse", trainingCourse);
+    ActionMessages errors = new ActionMessages();
+    MessageResources messageResources = getResources(request);
+    try
+    {
+      int rowCount = adminService.insertTrainingCourse(trainingCourse, getAdministratorLoggedIn().getAdministratorId());
+    }
+    catch (DuplicateDataException e)
+    {
+      errors.add("trainingCourse", new ActionMessage("errors.duplicate", messageResources.getMessage("label." + e.getField())));
+      saveErrors(request, errors);
+      return mapping.getInputForward();
+    }
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }

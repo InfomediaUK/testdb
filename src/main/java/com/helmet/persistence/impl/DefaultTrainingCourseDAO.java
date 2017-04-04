@@ -6,13 +6,13 @@ import java.util.List;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.helmet.bean.TrainingCourse;
-import com.helmet.persistence.TrainingDAO;
+import com.helmet.persistence.TrainingCourseDAO;
 import com.helmet.persistence.RecordFactory;
 import com.helmet.persistence.RecordListFactory;
 import com.helmet.persistence.UpdateHandler;
 import com.helmet.persistence.Utilities;
 
-public class DefaultTrainingDAO extends JdbcDaoSupport implements TrainingDAO 
+public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements TrainingCourseDAO 
 {
 
 	private static StringBuffer insertTrainingCourseSQL;
