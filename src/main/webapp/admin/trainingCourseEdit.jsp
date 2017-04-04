@@ -17,11 +17,11 @@
 	<table>
 	  <tr>
 	    <td align="left"><bean:message key="label.name"/></td>
-	    <td align="left"><html:text name="TrainingCourseFormAdmin" property="trainingCourse.name" size="60" /></td>
+	    <td align="left"><html:text name="TrainingCourseFormAdmin" property="trainingCourse.name" size="60" maxlength="80" /></td>
 	  </tr>
 	  <tr>
 	    <td align="left"><bean:message key="label.code"/></td>
-	    <td align="left"><html:text name="TrainingCourseFormAdmin" property="trainingCourse.code" size="60" /></td>
+	    <td align="left"><html:text name="TrainingCourseFormAdmin" property="trainingCourse.code" size="10" maxlength="10" /></td>
 	  </tr>
 	  <tr>
 	    <td align="left"><bean:message key="label.displayOrder"/></td>

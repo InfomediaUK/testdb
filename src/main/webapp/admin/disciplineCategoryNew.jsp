@@ -19,11 +19,11 @@
 <table>
   <tr>
     <td align="left"><bean:message key="label.name"/></td>
-    <td align="left"><html:text name="DisciplineCategoryFormAdmin" property="disciplineCategory.name" size="60" /></td>
+    <td align="left"><html:text name="DisciplineCategoryFormAdmin" property="disciplineCategory.name" size="60" maxlength="80" /></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.code"/></td>
-    <td align="left"><html:text name="DisciplineCategoryFormAdmin" property="disciplineCategory.code" size="60" /></td>
+    <td align="left"><html:text name="DisciplineCategoryFormAdmin" property="disciplineCategory.code" size="10" maxlength="4" /></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.regulator"/></td>

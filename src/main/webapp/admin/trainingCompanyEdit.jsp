@@ -22,7 +22,7 @@
 <table>
   <tr>
     <td align="left"><bean:message key="label.name"/></td>
-    <td align="left"><html:text property="trainingCompany.name"/></td>
+    <td align="left"><html:text property="trainingCompany.name" size="60" maxlength="80" /></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.address"/></td>
@@ -55,7 +55,7 @@
   </tr>
   <tr>
     <td align="left"><bean:message key="label.code"/></td>
-    <td align="left"><html:text property="trainingCompany.code"/></td>
+    <td align="left"><html:text property="trainingCompany.code" size="10" maxlength="10" /></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.telephoneNumber"/></td>
