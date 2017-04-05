@@ -1338,7 +1338,239 @@
 					<var-value>20</var-value>
 				</var>
 			</field>
-    </form>
+        </form>
+
+		<form name="CompliancyTestFormAdmin">
+			<field property="compliancyTest.property"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.property" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>50</var-value>
+				</var>
+			</field>
+			<field property="compliancyTest.value"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.value" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>30</var-value>
+				</var>
+			</field>
+			<field property="compliancyTest.requiredDocumentText"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.requiredDocumentText" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+        </form>
+
+		<form name="DisciplineCategoryFormAdmin">
+			<field property="disciplineCategory.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>80</var-value>
+				</var>
+			</field>
+			<field property="disciplineCategory.code"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.code" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>4</var-value>
+				</var>
+			</field>
+        </form>
+
+		<form name="RegulatorFormAdmin">
+			<field property="regulator.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>80</var-value>
+				</var>
+			</field>
+			<field property="regulator.code"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.code" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>4</var-value>
+				</var>
+			</field>
+        </form>
+
+		<form name="TrainingCompanyFormAdmin">
+			<field property="trainingCompany.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>80</var-value>
+				</var>
+			</field>
+			<field property="trainingCompany.address.address1"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.address" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>200</var-value>
+				</var>
+			</field>
+			<field property="trainingCompany.address.postalCode"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.postalCode" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>20</var-value>
+				</var>
+			</field>
+			<field property="trainingCompany.address.countryId"
+				depends="required,mask">
+				<arg0 key="label.country" />
+				<msg name="mask" key="errors.required" />
+				<var>
+					<var-name>mask</var-name>
+					<var-value>${greaterThanZero}</var-value>
+				</var>
+			</field>
+			<field property="trainingCompany.code"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.code" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+			</field>
+        </form>
+
+		<form name="TrainingCourseFormAdmin">
+			<field property="trainingCourse.name"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.name" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>80</var-value>
+				</var>
+			</field>
+			<field property="trainingCourse.code"
+				depends="required,minlength,maxlength">
+				<arg0 key="label.code" />
+				<arg1 name="minlength" key="${var:minlength}"
+					resource="false" />
+				<arg1 name="maxlength" key="${var:maxlength}"
+					resource="false" />
+				<var>
+					<var-name>minlength</var-name>
+					<var-value>1</var-value>
+				</var>
+				<var>
+					<var-name>maxlength</var-name>
+					<var-value>10</var-value>
+				</var>
+			</field>
+        </form>
 
 	</formset>
 </form-validation>

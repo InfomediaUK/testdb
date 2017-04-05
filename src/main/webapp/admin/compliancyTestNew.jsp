@@ -18,16 +18,16 @@
 <table>
   <tr>
     <td align="left"><bean:message key="label.property"/></td>
-    <td align="left"><html:text name="CompliancyTestFormAdmin" property="compliancyTest.property" size="60" /></td>
+    <td align="left"><html:text name="CompliancyTestFormAdmin" property="compliancyTest.property" size="60" maxSize="50" /></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.value"/></td>
-    <td align="left"><html:text name="CompliancyTestFormAdmin" property="compliancyTest.value" size="60" /></td>
+    <td align="left"><html:text name="CompliancyTestFormAdmin" property="compliancyTest.value" size="60" maxSize="30" /></td>
   </tr>
-	  <tr>
-	    <td align="left"><bean:message key="label.requiredDocumentText"/></td>
-	    <td align="left"><html:text name="CompliancyTestFormAdmin" property="compliancyTest.requiredDocumentText" size="60" /></td>
-	  </tr>
+  <tr>
+    <td align="left"><bean:message key="label.requiredDocumentText"/></td>
+    <td align="left"><html:text name="CompliancyTestFormAdmin" property="compliancyTest.requiredDocumentText" size="60" maxSize="200"/></td>
+  </tr>
   <tr>
     <td align="left"><bean:message key="label.displayOrder"/></td>
      <td align="left"><html:text name="CompliancyTestFormAdmin" property="compliancyTest.displayOrder" size="10" /></td>
