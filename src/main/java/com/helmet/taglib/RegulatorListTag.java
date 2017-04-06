@@ -6,7 +6,8 @@ import com.helmet.taglib.abztract.AbstractTagSupport;
 
 public class RegulatorListTag extends AbstractTagSupport 
 {
-  protected Object getObject() {
+  protected Object getObject() 
+  {
 		AgyService agyService = ServiceFactory.getInstance().getAgyService();
 		return agyService.getRegulators(true);
 	}

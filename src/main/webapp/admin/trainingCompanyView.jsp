@@ -66,4 +66,61 @@
   <html:link forward="trainingCompanyDelete" paramId="trainingCompany.trainingCompanyId" paramName="TrainingCompanyViewFormAdmin" paramProperty="trainingCompany.trainingCompanyId"><bean:message key="link.delete"/></html:link>&nbsp;
 </mmj-admin:hasAccess>
 </logic:equal>
+<br/>
+<br/>
+<bean:message key="title.trainingCompanyCourseList"/>
+<br/>
+<br/>
+<mmj-admin:hasAccess forward="trainingCompanyCourseNew" >
+  <html:link forward="trainingCompanyCourseNew" paramId="trainingCompanyCourseUser.trainingCompanyId" paramName="TrainingCompanyViewFormAdmin" paramProperty="trainingCompany.trainingCompanyId"><bean:message key="link.new"/></html:link>
+<br/>
+<br/>
+</mmj-admin:hasAccess>
+<logic:present name="TrainingCompanyViewFormAdmin" property="listTrainingCompanyCourseUser">
+<table class="simple">
+  <thead>
+  <tr>
+    <th align="left"><bean:message key="label.trainingCompanyCourse" /></th>
+    <th align="left"><bean:message key="label.trainingCourse" /></th>
+    <th align="left"><bean:message key="label.online" /></th>
+    <th align="left"><bean:message key="label.active" /></th>
+    <th align="left"><bean:message key="label.order" /></th>
+  </tr>
+  </thead>
+  <logic:iterate id="trainingCompanyCourse" name="TrainingCompanyViewFormAdmin" property="listTrainingCompanyCourseUser">
+	<bean:define id="trClass" value="trainingCompanyCourse"/>
+	<logic:notEqual name="trainingCompanyCourse" property="active" value="true">
+	  <bean:define id="trClass" value="inactive"/>
+	</logic:notEqual>
+  <tr class="<bean:write name="trClass"/>">
+    <td align="left">
+    <mmj-admin:hasAccess forward="trainingCompanyCourseView" >
+      <html:link forward="trainingCompanyCourseView" paramId="trainingCompanyCourseUser.trainingCompanyCourseId" paramName="trainingCompanyCourse" paramProperty="trainingCompanyCourseId"><bean:write name="trainingCompanyCourse" property="name"/></html:link>
+    </mmj-admin:hasAccess>
+    <mmj-admin:hasNoAccess forward="trainingCompanyCourseView" >
+      <bean:write name="trainingCompanyCourse" property="name"/>
+    </mmj-admin:hasNoAccess>
+    </td>
+    <td align="left">
+      <bean:write name="trainingCompanyCourse" property="trainingCourseName"/>
+    </td>    
+    <td align="left">
+<logic:equal name="trainingCompanyCourse" property="online" value="true">
+      <bean:message key="label.yes" />
+</logic:equal>
+<logic:notEqual name="trainingCompanyCourse" property="online" value="true">
+      <bean:message key="label.no" />
+</logic:notEqual>
+    </td>    
+    <td align="left">
+      <bean:write name="trainingCompanyCourse" property="active"/>
+    </td>    
+    <td align="left">
+      <bean:write name="trainingCompanyCourse" property="displayOrder"/>
+    </td>    
+  </tr>
+  </logic:iterate>
+</table>
+</logic:present>
+
 

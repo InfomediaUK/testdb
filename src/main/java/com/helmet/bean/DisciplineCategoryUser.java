@@ -12,9 +12,9 @@ public class DisciplineCategoryUser extends DisciplineCategory
     return regulatorName;
   }
 
-  public void setRegulatorName(String clientName)
+  public void setRegulatorName(String regulatorName)
   {
-    this.regulatorName = clientName;
+    this.regulatorName = regulatorName;
   }
 
   public String getRegulatorCode()

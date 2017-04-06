@@ -208,6 +208,7 @@
 		<property name="upliftMinuteDAO" ref="upliftMinuteDAO" />
 		<property name="agencyDAO" ref="agencyDAO" />
 		<property name="trainingCompanyDAO" ref="trainingCompanyDAO" />
+		<property name="trainingCompanyCourseDAO" ref="trainingCompanyCourseDAO" />
 		<property name="nhsBackingReportDAO" ref="nhsBackingReportDAO" />
         <property name="nhsBookingDAO" ref="nhsBookingDAO" />
 		<property name="areaOfSpecialityDAO" ref="areaOfSpecialityDAO" />
@@ -355,6 +356,7 @@
 		<property name="upliftMinuteDAO" ref="upliftMinuteDAO" />
 		<property name="agencyDAO" ref="agencyDAO" />
 		<property name="trainingCompanyDAO" ref="trainingCompanyDAO" />
+		<property name="trainingCompanyCourseDAO" ref="trainingCompanyCourseDAO" />
 		<property name="unavailableDAO" ref="unavailableDAO" />
         <property name="nhsBookingDAO" ref="nhsBookingDAO" />
 		<property name="nhsBackingReportDAO" ref="nhsBackingReportDAO" />
@@ -545,6 +547,12 @@
 
 	<bean id="trainingCompanyDAO" 
 	      class="com.helmet.persistence.impl.DefaultTrainingCompanyDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="trainingCompanyCourseDAO" 
+	      class="com.helmet.persistence.impl.DefaultTrainingCompanyCourseDAO" 
 	      init-method="init" >
 			<property name="dataSource" ref="dataSource"/>
 	</bean>

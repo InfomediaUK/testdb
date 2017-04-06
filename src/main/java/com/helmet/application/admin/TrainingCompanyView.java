@@ -1,5 +1,7 @@
 package com.helmet.application.admin;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +15,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AdminService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.admin.abztract.AdminAction;
+import com.helmet.bean.TrainingCompanyCourseUser;
 import com.helmet.bean.TrainingCompanyUserEntity;
 
 
@@ -28,7 +31,9 @@ public class TrainingCompanyView extends AdminAction
     TrainingCompanyUserEntity trainingCompany = (TrainingCompanyUserEntity)dynaForm.get("trainingCompany");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
     trainingCompany = adminService.getTrainingCompanyUserEntity(trainingCompany.getTrainingCompanyId(), getShowOnlyActive());
+    List<TrainingCompanyCourseUser> listTrainingCompanyCourseUser = adminService.getTrainingCompanyCourseUsersForTrainingCompany(trainingCompany.getTrainingCompanyId(), false);
     dynaForm.set("trainingCompany", trainingCompany);
+    dynaForm.set("listTrainingCompanyCourseUser", listTrainingCompanyCourseUser);
     logger.exit("Out going !!!");
     return mapping.findForward("success");
   }

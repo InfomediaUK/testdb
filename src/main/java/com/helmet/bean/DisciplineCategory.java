@@ -2,15 +2,14 @@ package com.helmet.bean;
 
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-public class DisciplineCategory extends Base
+public class DisciplineCategory extends BaseDisplayOrder
 {
   private Integer disciplineCategoryId;
   private String code;
   private String name;  
   private Integer regulatorId;
   private Boolean undertakesEPP;
-  private Integer displayOrder;
-
+  
   public Integer getDisciplineCategoryId()
   {
     return disciplineCategoryId;
@@ -71,16 +70,6 @@ public class DisciplineCategory extends Base
     return code + " - " + name;
   }
 
-  public Integer getDisplayOrder()
-  {
-    return displayOrder;
-  }
-
-  public void setDisplayOrder(Integer displayOrder)
-  {
-    this.displayOrder = displayOrder;
-  }
-
   public void load(SqlRowSet rs)
   {
     super.load(rs);
@@ -97,7 +86,6 @@ public class DisciplineCategory extends Base
       setRegulatorId(regulatorId);
     }
     setUndertakesEPP(rs.getBoolean("UNDERTAKESEPP"));
-    setDisplayOrder(rs.getInt("DISPLAYORDER"));
   }
 
 }

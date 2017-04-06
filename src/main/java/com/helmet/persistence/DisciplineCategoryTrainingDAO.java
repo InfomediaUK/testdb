@@ -11,9 +11,8 @@ public interface DisciplineCategoryTrainingDAO
 	public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId);
 	public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTraining(Integer trainingId, boolean showOnlyActive);
 	public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTraining(Integer trainingId);
-  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter, boolean showOnlyActive);
-  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter);
-//public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersNotForJobProfile(Integer disciplineCategoryId, Integer jobProfileId);
+//  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter, boolean showOnlyActive);
+//  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter);
   public DisciplineCategoryTraining getDisciplineCategoryTraining(Integer disciplineCategoryTrainingId);
   public DisciplineCategoryTrainingUser getDisciplineCategoryTrainingUser(Integer disciplineCategoryTrainingId);
 	public DisciplineCategoryTraining getDisciplineCategoryTrainingForDisciplineCategoryAndTraining(Integer disciplineCategoryId, Integer trainingId);

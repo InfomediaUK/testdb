@@ -162,6 +162,25 @@
   </tag>
   
   <tag>
+    <name>trainingCourseList</name>
+    <tag-class>com.helmet.taglib.TrainingCourseListTag</tag-class>
+    <body-content>JSP</body-content>
+    <description>
+      Sets the trainingCourseList in a 'scope'
+    </description>
+    <attribute>
+        <name>var</name>
+        <required>true</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+        <name>scope</name>
+        <required>false</required>
+        <rtexprvalue>false</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
     <name>clientList</name>
     <tag-class>com.helmet.taglib.ClientListTag</tag-class>
     <body-content>JSP</body-content>

@@ -268,11 +268,13 @@
     </form-bean>
      <form-bean name="TrainingCompanyViewFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="trainingCompany" type="com.helmet.bean.TrainingCompanyUserEntity" />
-      <form-property name="logoFile" type="org.apache.struts.upload.FormFile"/>
-      <form-property name="invoiceLogoFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="listTrainingCompanyCourseUser" type="java.util.List" />
     </form-bean>
      <form-bean name="TrainingCompanyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="trainingCompany" type="com.helmet.bean.TrainingCompany" />
+    </form-bean>
+     <form-bean name="TrainingCompanyCourseFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="trainingCompanyCourseUser" type="com.helmet.bean.TrainingCompanyCourseUser" />
     </form-bean>
     <form-bean name="ClientAgencyFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="client" type="com.helmet.bean.Client" />
@@ -649,6 +651,11 @@
     <forward name="trainingCompanyEdit" path="/trainingCompanyEdit.do" />
     <forward name="trainingCompanyDelete" path="/trainingCompanyDelete.do" />
     <forward name="trainingCompanyOrder" path="/trainingCompanyOrder.do" />
+
+    <forward name="trainingCompanyCourseNew" path="/trainingCompanyCourseNew.do" />
+    <forward name="trainingCompanyCourseView" path="/trainingCompanyCourseView.do" />
+    <forward name="trainingCompanyCourseEdit" path="/trainingCompanyCourseEdit.do" />
+    <forward name="trainingCompanyCourseDelete" path="/trainingCompanyCourseDelete.do" />
 
     <forward name="clientAgencyView" path="/clientAgencyView.do" />
     <forward name="clientAgencyNew" path="/clientAgencyNew.do" />
@@ -1646,7 +1653,7 @@
     </action>
 
     <action path="/trainingCourseView"
-            type="com.helmet.application.admin.TrainingView"
+            type="com.helmet.application.admin.TrainingCourseView"
             name="TrainingCourseFormAdmin"
             scope="request"
             input="/trainingCourseList.do"
@@ -2887,6 +2894,78 @@
             validate="false">
         <forward name="success" path="trainingCompanyOrder.page" />
     </action>
+
+
+
+
+    <action path="/trainingCompanyCourseNew"
+            type="com.helmet.application.admin.TrainingCompanyCourseNew"
+            name="TrainingCompanyCourseFormAdmin"
+            scope="request"
+            input="/trainingCompanyView.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyCourseNew.page" />
+    </action>
+
+    <action path="/trainingCompanyCourseNewProcess"
+            type="com.helmet.application.admin.TrainingCompanyCourseNewProcess"
+            name="TrainingCompanyCourseFormAdmin"
+            scope="request"
+            input="trainingCompanyCourseNew.page"
+            validate="true">
+        <forward name="success" path="/trainingCompanyView.do" redirect="true" />
+    </action>
+
+    <action path="/trainingCompanyCourseView"
+            type="com.helmet.application.admin.TrainingCompanyCourseView"
+            name="TrainingCompanyCourseFormAdmin"
+            scope="request"
+            input="/trainingCompanyView.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyCourseView.page" />
+    </action>
+
+    <action path="/trainingCompanyCourseEdit"
+            type="com.helmet.application.admin.TrainingCompanyCourseEdit"
+            name="TrainingCompanyCourseFormAdmin"
+            scope="request"
+            input="/trainingCompanyCourseView.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyCourseEdit.page" />
+    </action>
+
+    <action path="/trainingCompanyCourseEditProcess"
+            type="com.helmet.application.admin.TrainingCompanyCourseEditProcess"
+            name="TrainingCompanyCourseFormAdmin"
+            scope="request"
+            input="trainingCompanyCourseEdit.page"
+            validate="true">
+        <forward name="success" path="/trainingCompanyCourseView.do" redirect="true" />
+    </action>
+
+    <action path="/trainingCompanyCourseDelete"
+            type="com.helmet.application.admin.TrainingCompanyCourseView"
+            name="TrainingCompanyCourseFormAdmin"
+            scope="request"
+            input="/trainingCompanyCourseView.do"
+            validate="false">
+        <forward name="success" path="trainingCompanyCourseDelete.page" />
+    </action>
+
+    <action path="/trainingCompanyCourseDeleteProcess"
+            type="com.helmet.application.admin.TrainingCompanyCourseDeleteProcess"
+            name="TrainingCompanyCourseFormAdmin"
+            scope="request"
+            input="trainingCompanyCourseDelete.page"
+            validate="false">
+        <forward name="success" path="/trainingCompanyView.do" redirect="true" />
+    </action>
+
+
+
+
+
+
 
     <action path="/trainingCompanyOrderProcess"
             type="com.helmet.application.admin.TrainingCompanyOrderProcess"

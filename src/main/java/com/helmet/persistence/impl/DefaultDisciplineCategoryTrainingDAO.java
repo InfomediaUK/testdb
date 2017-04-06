@@ -13,7 +13,8 @@ import com.helmet.persistence.RecordListFactory;
 import com.helmet.persistence.UpdateHandler;
 import com.helmet.persistence.Utilities;
 
-public class DefaultDisciplineCategoryTrainingDAO extends JdbcDaoSupport implements DisciplineCategoryTrainingDAO {
+public class DefaultDisciplineCategoryTrainingDAO extends JdbcDaoSupport implements DisciplineCategoryTrainingDAO 
+{
 
 	private static StringBuffer insertDisciplineCategoryTrainingSQL;
 
@@ -21,7 +22,7 @@ public class DefaultDisciplineCategoryTrainingDAO extends JdbcDaoSupport impleme
 
 	private static StringBuffer updateDisciplineCategoryTrainingSQL;
 
-	private static StringBuffer selectDisciplineCategoryAgenciesSQL;
+	private static StringBuffer selectDisciplineCategoryTrainingsSQL;
 
 	private static StringBuffer selectDisciplineCategoryTrainingSQL;
 
@@ -39,11 +40,9 @@ public class DefaultDisciplineCategoryTrainingDAO extends JdbcDaoSupport impleme
 
   private static StringBuffer selectActiveDisciplineCategoryTrainingUsersForTrainingSQL;
 
-  private static StringBuffer selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL;
-
-  private static StringBuffer selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL;
-
-//	private static StringBuffer selectDisciplineCategoryTrainingUsersNotForJobProfileSQL;
+//  private static StringBuffer selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL;
+//
+//  private static StringBuffer selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL;
 
 	public static void init() {
 		// Get insert DisciplineCategoryTraining SQL.
@@ -84,23 +83,23 @@ public class DefaultDisciplineCategoryTrainingDAO extends JdbcDaoSupport impleme
 		updateDisciplineCategoryTrainingSQL.append("    NOOFCHANGES = NOOFCHANGES + 1 ");
 		updateDisciplineCategoryTrainingSQL.append("WHERE DISCIPLINECATEGORYTRAININGID = ^ ");
 		updateDisciplineCategoryTrainingSQL.append("AND   NOOFCHANGES = ^ ");
-		// Get select DisciplineCategoryAgencies SQL.
-		selectDisciplineCategoryAgenciesSQL = new StringBuffer();
-		selectDisciplineCategoryAgenciesSQL.append("SELECT DISCIPLINECATEGORYTRAININGID, ");
-		selectDisciplineCategoryAgenciesSQL.append("       DISCIPLINECATEGORYID, ");
-		selectDisciplineCategoryAgenciesSQL.append("       TRAININGCOURSEID, ");
-		selectDisciplineCategoryAgenciesSQL.append("       MANDATORY, ");
-		selectDisciplineCategoryAgenciesSQL.append("       CREATIONTIMESTAMP, ");
-		selectDisciplineCategoryAgenciesSQL.append("       AUDITORID, ");
-		selectDisciplineCategoryAgenciesSQL.append("       AUDITTIMESTAMP, ");
-		selectDisciplineCategoryAgenciesSQL.append("       ACTIVE, ");
-		selectDisciplineCategoryAgenciesSQL.append("       NOOFCHANGES ");
-		selectDisciplineCategoryAgenciesSQL.append("FROM DISCIPLINECATEGORYTRAINING ");
+		// Get select DisciplineCategoryTrainings SQL.
+		selectDisciplineCategoryTrainingsSQL = new StringBuffer();
+		selectDisciplineCategoryTrainingsSQL.append("SELECT DISCIPLINECATEGORYTRAININGID, ");
+		selectDisciplineCategoryTrainingsSQL.append("       DISCIPLINECATEGORYID, ");
+		selectDisciplineCategoryTrainingsSQL.append("       TRAININGCOURSEID, ");
+		selectDisciplineCategoryTrainingsSQL.append("       MANDATORY, ");
+		selectDisciplineCategoryTrainingsSQL.append("       CREATIONTIMESTAMP, ");
+		selectDisciplineCategoryTrainingsSQL.append("       AUDITORID, ");
+		selectDisciplineCategoryTrainingsSQL.append("       AUDITTIMESTAMP, ");
+		selectDisciplineCategoryTrainingsSQL.append("       ACTIVE, ");
+		selectDisciplineCategoryTrainingsSQL.append("       NOOFCHANGES ");
+		selectDisciplineCategoryTrainingsSQL.append("FROM DISCIPLINECATEGORYTRAINING ");
 		// Get select DisciplineCategoryTraining SQL.
-		selectDisciplineCategoryTrainingSQL = new StringBuffer(selectDisciplineCategoryAgenciesSQL);
+		selectDisciplineCategoryTrainingSQL = new StringBuffer(selectDisciplineCategoryTrainingsSQL);
 		selectDisciplineCategoryTrainingSQL.append("WHERE DISCIPLINECATEGORYTRAININGID = ^ ");
 		// Get select DisciplineCategoryTraining for DisciplineCategory and TrainingCourse SQL.
-		selectDisciplineCategoryTrainingForDisciplineCategoryAndTrainingSQL = new StringBuffer(selectDisciplineCategoryAgenciesSQL);
+		selectDisciplineCategoryTrainingForDisciplineCategoryAndTrainingSQL = new StringBuffer(selectDisciplineCategoryTrainingsSQL);
 		selectDisciplineCategoryTrainingForDisciplineCategoryAndTrainingSQL.append("WHERE DISCIPLINECATEGORYID = ^ ");
 		selectDisciplineCategoryTrainingForDisciplineCategoryAndTrainingSQL.append("AND   TRAININGCOURSEID = ^ ");
 		selectDisciplineCategoryTrainingForDisciplineCategoryAndTrainingSQL.append("AND   ACTIVE = TRUE ");
@@ -142,18 +141,18 @@ public class DefaultDisciplineCategoryTrainingDAO extends JdbcDaoSupport impleme
 		selectActiveDisciplineCategoryTrainingUsersForTrainingSQL = new StringBuffer(selectDisciplineCategoryTrainingUsersForTrainingSQL);
 		selectActiveDisciplineCategoryTrainingUsersForTrainingSQL.append("AND DCT.ACTIVE = TRUE ");
     // Get select DisciplineCategoryTrainingUsers for TrainingCourse for Name starting with letters in supplied list SQL.
-    selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL = addInNameGroupSQL(selectDisciplineCategoryTrainingUsersForTrainingSQL);
-    // Get select Active DisciplineCategoryTrainingUsers for TrainingCourse for Name starting with letters in supplied list SQL.
-    selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL = new StringBuffer(selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL);
-    selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.append("AND A.ACTIVE = TRUE ");
+//    selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL = addInNameGroupSQL(selectDisciplineCategoryTrainingUsersForTrainingSQL);
+//    // Get select Active DisciplineCategoryTrainingUsers for TrainingCourse for Name starting with letters in supplied list SQL.
+//    selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL = new StringBuffer(selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL);
+//    selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.append("AND A.ACTIVE = TRUE ");
 
 		// ORDER BY clauses
 		selectDisciplineCategoryTrainingUsersForDisciplineCategorySQL.append("ORDER BY T.DISPLAYORDER, T.NAME ");
 		selectActiveDisciplineCategoryTrainingUsersForDisciplineCategorySQL.append("ORDER BY T.DISPLAYORDER, T.NAME ");
     selectDisciplineCategoryTrainingUsersForTrainingSQL.append("ORDER BY DC.DISPLAYORDER, DC.NAME ");
     selectActiveDisciplineCategoryTrainingUsersForTrainingSQL.append("ORDER BY DC.DISPLAYORDER, DC.NAME ");
-    selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.append("ORDER BY DC.DISPLAYORDER, DC.NAME ");
-    selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.append("ORDER BY DC.DISPLAYORDER, DC.NAME ");
+//    selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.append("ORDER BY DC.DISPLAYORDER, DC.NAME ");
+//    selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.append("ORDER BY DC.DISPLAYORDER, DC.NAME ");
 
 	}
 
@@ -255,39 +254,28 @@ public class DefaultDisciplineCategoryTrainingDAO extends JdbcDaoSupport impleme
 
 	}
 
-  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter) 
-  {
-    return getDisciplineCategoryTrainingUsersForTraining(trainingId, true);
-  }
-
-  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter, boolean showOnlyActive) 
-  {
-    // Create a new local StringBuffer containing the parameterised SQL.
-    StringBuffer sql = null;
-    if (showOnlyActive) 
-    {
-      sql = new StringBuffer(selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.toString());
-    }
-    else 
-    {
-      sql = new StringBuffer(selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.toString()); 
-    }
-    // Replace the parameters with supplied values.
-    Utilities.replace(sql, trainingId);
-    Utilities.replaceAndQuote(sql, indexLetter);
-    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryTrainingUser.class.getName());
-  }
-
-//  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersNotForJobProfile(Integer disciplineCategoryId, Integer jobProfileId) 
+//  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter) 
 //  {
-//		// Create a new local StringBuffer containing the parameterised SQL.
-//		StringBuffer sql = new StringBuffer(selectDisciplineCategoryTrainingUsersNotForJobProfileSQL.toString());
-//		// Replace the parameters with supplied values.
-//		Utilities.replace(sql, disciplineCategoryId);
-//		Utilities.replace(sql, jobProfileId);
-//		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryTrainingUser.class.getName());
+//    return getDisciplineCategoryTrainingUsersForTraining(trainingId, true);
+//  }
 //
-//	}
+//  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter, boolean showOnlyActive) 
+//  {
+//    // Create a new local StringBuffer containing the parameterised SQL.
+//    StringBuffer sql = null;
+//    if (showOnlyActive) 
+//    {
+//      sql = new StringBuffer(selectActiveDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.toString());
+//    }
+//    else 
+//    {
+//      sql = new StringBuffer(selectDisciplineCategoryTrainingUsersForTrainingInNameGroupSQL.toString()); 
+//    }
+//    // Replace the parameters with supplied values.
+//    Utilities.replace(sql, trainingId);
+//    Utilities.replaceAndQuote(sql, indexLetter);
+//    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryTrainingUser.class.getName());
+//  }
 //
 	public DisciplineCategoryTraining getDisciplineCategoryTraining(Integer disciplineCategoryTrainingId) 
 	{
@@ -319,17 +307,5 @@ public class DefaultDisciplineCategoryTrainingDAO extends JdbcDaoSupport impleme
     DisciplineCategoryTrainingUser disciplineCategoryTrainingUser = (DisciplineCategoryTrainingUser)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), DisciplineCategoryTrainingUser.class.getName());
     return disciplineCategoryTrainingUser;
   }
-	
-//public DisciplineCategoryTrainingUserEntity getDisciplineCategoryTrainingUserEntity(Integer disciplineCategoryTrainingId) {
-//// Create a new local StringBuffer containing the parameterised SQL.
-//StringBuffer sql = new StringBuffer(selectDisciplineCategoryTrainingUserSQL.toString());
-//// Replace the parameters with supplied values.
-//Utilities.replace(sql, disciplineCategoryTrainingId);
-//DisciplineCategoryTrainingUserEntity disciplineCategoryTrainingUserEntity = (DisciplineCategoryTrainingUserEntity) RecordFactory
-//    .getInstance().get(getJdbcTemplate(), sql.toString(),
-//        DisciplineCategoryTrainingUserEntity.class.getName());
-//return disciplineCategoryTrainingUserEntity;
-//}
-
-	
+		
 }

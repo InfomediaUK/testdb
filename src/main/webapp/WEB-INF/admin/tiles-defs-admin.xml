@@ -570,6 +570,23 @@
         <put name="titleKey" value="title.trainingCompanyDelete" type="string"/>
         <put name="body"   value="/admin/trainingCompanyDelete.jsp"/>
   </definition>
+ <!-- TrainingCompanyCourse -->
+  <definition name="trainingCompanyCourseNew.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyCourseNew" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyCourseNew.jsp"/>
+  </definition>
+  <definition name="trainingCompanyCourseView.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyCourseView" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyCourseView.jsp"/>
+  </definition>
+  <definition name="trainingCompanyCourseEdit.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyCourseEdit" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyCourseEdit.jsp"/>
+  </definition>
+  <definition name="trainingCompanyCourseDelete.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.trainingCompanyCourseDelete" type="string"/>
+        <put name="body"   value="/admin/trainingCompanyCourseDelete.jsp"/>
+  </definition>
   <definition name="trainingCompanyOrder.page" extends="layoutAdmin.main">
         <put name="titleKey" value="title.trainingCompanyOrder" type="string"/>
         <put name="body"   value="/admin/trainingCompanyOrder.jsp"/>
