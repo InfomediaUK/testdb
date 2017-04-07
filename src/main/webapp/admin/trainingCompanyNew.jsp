@@ -22,6 +22,10 @@
     <td align="left"><html:text property="trainingCompany.name" size="60" maxlength="80" /></td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.code"/></td>
+    <td align="left"><html:text property="trainingCompany.code" size="10" maxlength="10" /></td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.address"/></td>
     <td align="left"><html:text property="trainingCompany.address.address1"/></td>
   </tr>
@@ -50,10 +54,6 @@
         <html:options collection="countryList" labelProperty="name" property="countryId" />
       </html:select>
     </td>
-  </tr>
-  <tr>
-    <td align="left"><bean:message key="label.code"/></td>
-    <td align="left"><html:text property="trainingCompany.code" size="10" maxlength="10" /></td>
   </tr>
   <tr>
     <td colspan="2" align="center"><html:submit><bean:message key="button.save"/></html:submit></td>

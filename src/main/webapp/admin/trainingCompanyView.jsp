@@ -49,6 +49,22 @@
     <td align="left"><bean:write name="TrainingCompanyViewFormAdmin" property="trainingCompany.websiteAddress"/></td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.vatNumber"/></td>
+    <td align="left"><bean:write name="TrainingCompanyViewFormAdmin" property="trainingCompany.vatNumber"/></td>
+  </tr>
+  <tr>
+    <td align="left"><bean:message key="label.reference"/></td>
+    <td align="left"><bean:write name="TrainingCompanyViewFormAdmin" property="trainingCompany.reference"/></td>
+  </tr>
+  <tr>
+    <td align="left"><bean:message key="label.trainingCompanyFreeText"/></td>
+    <td align="left"><bean:write name="TrainingCompanyViewFormAdmin" property="trainingCompany.freeText"/></td>
+  </tr>
+  <tr>
+    <td align="left"><bean:message key="label.displayOrder"/></td>
+    <td align="left"><bean:write name="TrainingCompanyViewFormAdmin" property="trainingCompany.displayOrder"/></td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.created"/></td>
     <td align="left"><bean:write name="TrainingCompanyViewFormAdmin" property="trainingCompany.creationTimestamp"/></td>
   </tr>
@@ -58,10 +74,10 @@
   </tr>
 </table>
 
-<logic:equal name="TrainingCompanyViewFormAdmin" property="trainingCompany.active" value="true">
 <mmj-admin:hasAccess forward="trainingCompanyEdit">
   <html:link forward="trainingCompanyEdit" paramId="trainingCompany.trainingCompanyId" paramName="TrainingCompanyViewFormAdmin" paramProperty="trainingCompany.trainingCompanyId"><bean:message key="link.edit"/></html:link>&nbsp;
 </mmj-admin:hasAccess>
+<logic:equal name="TrainingCompanyViewFormAdmin" property="trainingCompany.active" value="true">
 <mmj-admin:hasAccess forward="trainingCompanyDelete">
   <html:link forward="trainingCompanyDelete" paramId="trainingCompany.trainingCompanyId" paramName="TrainingCompanyViewFormAdmin" paramProperty="trainingCompany.trainingCompanyId"><bean:message key="link.delete"/></html:link>&nbsp;
 </mmj-admin:hasAccess>

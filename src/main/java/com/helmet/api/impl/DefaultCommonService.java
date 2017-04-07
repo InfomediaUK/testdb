@@ -83,6 +83,7 @@ import com.helmet.bean.TrainingCompanyCourse;
 import com.helmet.bean.TrainingCompanyCourseUser;
 import com.helmet.bean.TrainingCourse;
 import com.helmet.bean.TrainingCompanyUser;
+import com.helmet.bean.TrainingCompanyUserEntity;
 import com.helmet.bean.Uplift;
 import com.helmet.bean.UpliftMinute;
 import com.helmet.bean.UpliftMinuteUser;
@@ -3268,6 +3269,17 @@ public abstract class DefaultCommonService implements CommonService {
     return trainingCompanyUsers;
   }
 
+  public List<TrainingCompanyUserEntity> getTrainingCompanyUserEntities(boolean showOnlyActive) 
+  {
+    List<TrainingCompanyUserEntity> trainingCompanyUserEntities = null;
+    trainingCompanyUserEntities = trainingCompanyDAO.getTrainingCompanyUserEntities(showOnlyActive);
+    for (TrainingCompanyUserEntity trainingCompanyUserEntity : trainingCompanyUserEntities)
+    {
+      trainingCompanyUserEntity.setTrainingCompanyCourseUsers(getTrainingCompanyCourseDAO().getTrainingCompanyCourseUsersForTrainingCompany(trainingCompanyUserEntity.getTrainingCompanyId(), showOnlyActive));
+    }
+    return trainingCompanyUserEntities;
+  }
+
   public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId) 
   {
     return getDisciplineCategoryTrainingUsersForDisciplineCategory(disciplineCategoryId, true);
@@ -3292,18 +3304,6 @@ public abstract class DefaultCommonService implements CommonService {
     return disciplineCategoryTrainingUsers;
   }
   
-//  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter) 
-//  {
-//    return getDisciplineCategoryTrainingUsersForTrainingInNameGroup(trainingId, indexLetter, true);
-//  }
-//
-//  public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForTrainingInNameGroup(Integer trainingId, String indexLetter, boolean showOnlyActive) 
-//  {
-//    List<DisciplineCategoryTrainingUser> disciplineCategoryTrainingUsers = null;
-//    disciplineCategoryTrainingUsers = disciplineCategoryTrainingDAO.getDisciplineCategoryTrainingUsersForTrainingInNameGroup(trainingId, indexLetter, showOnlyActive);
-//    return disciplineCategoryTrainingUsers;
-//  }
-//  
   public DisciplineCategoryTrainingUser getDisciplineCategoryTrainingUser(Integer disciplineCategoryTrainingId) 
   {
     DisciplineCategoryTrainingUser disciplineCategoryTrainingUser = null;

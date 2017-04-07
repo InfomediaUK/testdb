@@ -116,6 +116,7 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		updateTrainingCompanySQL.append("     VATNUMBER = ^, ");
 		updateTrainingCompanySQL.append("     REFERENCE = ^, ");
 		updateTrainingCompanySQL.append("     FREETEXT = ^, ");
+    updateTrainingCompanySQL.append("     DISPLAYORDER = ^, ");
     updateTrainingCompanySQL.append("     AUDITORID = ^, ");
 		updateTrainingCompanySQL.append("     AUDITTIMESTAMP = ^ ");
 		updateTrainingCompanySQL.append("WHERE TRAININGCOMPANYID = ^ ");
@@ -149,7 +150,6 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		selectTrainingCompaniesSQL.append("       POSTALCODE, ");
 		selectTrainingCompaniesSQL.append("       COUNTRYID, ");
 		selectTrainingCompaniesSQL.append("       CODE, ");
-		selectTrainingCompaniesSQL.append("       DISPLAYORDER, ");
 		selectTrainingCompaniesSQL.append("       TELEPHONENUMBER, ");
     selectTrainingCompaniesSQL.append("       FAXNUMBER, ");
     selectTrainingCompaniesSQL.append("       EMAILADDRESS, ");
@@ -160,6 +160,7 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		selectTrainingCompaniesSQL.append("       VATNUMBER, ");
 		selectTrainingCompaniesSQL.append("       REFERENCE, ");
 		selectTrainingCompaniesSQL.append("       FREETEXT, ");
+    selectTrainingCompaniesSQL.append("       DISPLAYORDER, ");
 		selectTrainingCompaniesSQL.append("       CREATIONTIMESTAMP, ");
 		selectTrainingCompaniesSQL.append("       AUDITORID, ");
 		selectTrainingCompaniesSQL.append("       AUDITTIMESTAMP, ");
@@ -188,7 +189,6 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		selectTrainingCompanyUsersSQL.append("	   TC.POSTALCODE, ");
 		selectTrainingCompanyUsersSQL.append("	   TC.COUNTRYID, ");
 		selectTrainingCompanyUsersSQL.append("	   TC.CODE, ");
-		selectTrainingCompanyUsersSQL.append("	   TC.DISPLAYORDER, ");
 		selectTrainingCompanyUsersSQL.append("     TC.TELEPHONENUMBER, ");
     selectTrainingCompanyUsersSQL.append("     TC.FAXNUMBER, ");
     selectTrainingCompanyUsersSQL.append("     TC.EMAILADDRESS, ");
@@ -199,6 +199,7 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		selectTrainingCompanyUsersSQL.append("     TC.VATNUMBER, ");
 		selectTrainingCompanyUsersSQL.append("     TC.REFERENCE, ");
 		selectTrainingCompanyUsersSQL.append("     TC.FREETEXT, ");
+    selectTrainingCompanyUsersSQL.append("     TC.DISPLAYORDER, ");
     selectTrainingCompanyUsersSQL.append("	   TC.CREATIONTIMESTAMP, ");
 		selectTrainingCompanyUsersSQL.append("	   TC.AUDITORID, ");
 		selectTrainingCompanyUsersSQL.append("	   TC.AUDITTIMESTAMP, ");
@@ -276,7 +277,8 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		Utilities.replaceZeroWithNull(sql, trainingCompany.getLogoHeight());
 		Utilities.replaceAndQuoteNullable(sql, trainingCompany.getVatNumber());
 		Utilities.replaceAndQuoteNullable(sql, trainingCompany.getReference());
-		Utilities.replaceAndQuoteNullable(sql, trainingCompany.getFreeText());
+    Utilities.replaceAndQuoteNullable(sql, trainingCompany.getFreeText());
+    Utilities.replace(sql, trainingCompany.getDisplayOrder());
 		Utilities.replace(sql, auditorId);
 		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
 		Utilities.replace(sql, trainingCompany.getTrainingCompanyId());
@@ -388,5 +390,18 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		return UpdateHandler.getInstance().update(getJdbcTemplate(), sql.toString());
 	}
 	
-	
+  public List<TrainingCompanyUserEntity> getTrainingCompanyUserEntities(boolean showOnlyActive) 
+  {
+    StringBuffer sql = null;
+    if (showOnlyActive) 
+    {
+      sql = new StringBuffer(selectActiveTrainingCompanyUsersSQL.toString());
+    }
+    else 
+    {
+      sql = new StringBuffer(selectTrainingCompanyUsersSQL.toString()); 
+    }
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCompanyUserEntity.class.getName());
+  }
+
 }

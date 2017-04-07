@@ -27,14 +27,14 @@
   <thead>
   <tr>
     <th align="left"><bean:message key="label.name" /></th>
+    <th align="left"><bean:message key="label.code" /></th>
     <th align="left"><bean:message key="label.address" /></th>
     <th align="left"><bean:message key="label.country" /></th>
-    <th align="left"><bean:message key="label.code" /></th>
     <th align="left"><bean:message key="label.active" /></th>
     <th align="left"><bean:message key="label.order" /></th>
   </tr>
   </thead>
-  <logic:iterate id="trainingCompany" name="ListFormAdmin" property="list">
+  <logic:iterate id="trainingCompany" name="ListFormAdmin" property="list" type="com.helmet.bean.TrainingCompanyUserEntity">
 	<bean:define id="trClass" value="trainingCompany"/>
 	<logic:notEqual name="trainingCompany" property="active" value="true">
 	  <bean:define id="trClass" value="inactive"/>
@@ -49,13 +49,13 @@
     </mmj-admin:hasNoAccess>
     </td>
     <td align="left">
+      <bean:write name="trainingCompany" property="code"/>
+    </td>
+    <td align="left">
       <bean:write name="trainingCompany" property="address.fullAddress"/>
     </td>
     <td align="left">
       <bean:write name="trainingCompany" property="countryName"/>
-    </td>
-    <td align="left">
-      <bean:write name="trainingCompany" property="code"/>
     </td>
     <td align="left">
       <bean:write name="trainingCompany" property="active"/>
@@ -64,6 +64,29 @@
       <bean:write name="trainingCompany" property="displayOrder"/>
     </td>    
   </tr>
+  <logic:equal name="trainingCompany" property="hasActiveTrainingCompanyCourses" value="true">
+  <logic:iterate id="trainingCompanyCourse" name="trainingCompany" property="trainingCompanyCourseUsers" type="com.helmet.bean.TrainingCompanyCourseUser">
+  <tr>
+    <td colspan="6">
+      <table class="simple">
+        <tr>
+          <td>
+            &nbsp;
+          </td>
+          <td>
+		    <mmj-admin:hasAccess forward="trainingCompanyCourseView">
+		      <html:link forward="trainingCompanyCourseView" paramId="trainingCompanyCourseUser.trainingCompanyCourseId" paramName="trainingCompanyCourse" paramProperty="trainingCompanyCourseId"><bean:write name="trainingCompanyCourse" property="nameWithOnline"/></html:link>
+		    </mmj-admin:hasAccess>
+		    <mmj-admin:hasNoAccess forward="trainingCompanyCourseView">
+ 			  <bean:write name="trainingCompanyCourse" property="nameWithOnline"/>
+		    </mmj-admin:hasNoAccess>   
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </logic:iterate>
+  </logic:equal>
   </logic:iterate>
 </table>
 </logic:present>

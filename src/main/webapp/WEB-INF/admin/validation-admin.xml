@@ -1478,38 +1478,6 @@
 					<var-value>80</var-value>
 				</var>
 			</field>
-			<field property="trainingCompany.address.address1"
-				depends="required,minlength,maxlength">
-				<arg0 key="label.address" />
-				<arg1 name="minlength" key="${var:minlength}"
-					resource="false" />
-				<arg1 name="maxlength" key="${var:maxlength}"
-					resource="false" />
-				<var>
-					<var-name>minlength</var-name>
-					<var-value>1</var-value>
-				</var>
-				<var>
-					<var-name>maxlength</var-name>
-					<var-value>200</var-value>
-				</var>
-			</field>
-			<field property="trainingCompany.address.postalCode"
-				depends="required,minlength,maxlength">
-				<arg0 key="label.postalCode" />
-				<arg1 name="minlength" key="${var:minlength}"
-					resource="false" />
-				<arg1 name="maxlength" key="${var:maxlength}"
-					resource="false" />
-				<var>
-					<var-name>minlength</var-name>
-					<var-value>1</var-value>
-				</var>
-				<var>
-					<var-name>maxlength</var-name>
-					<var-value>20</var-value>
-				</var>
-			</field>
 			<field property="trainingCompany.address.countryId"
 				depends="required,mask">
 				<arg0 key="label.country" />
@@ -1517,22 +1485,6 @@
 				<var>
 					<var-name>mask</var-name>
 					<var-value>${greaterThanZero}</var-value>
-				</var>
-			</field>
-			<field property="trainingCompany.code"
-				depends="required,minlength,maxlength">
-				<arg0 key="label.code" />
-				<arg1 name="minlength" key="${var:minlength}"
-					resource="false" />
-				<arg1 name="maxlength" key="${var:maxlength}"
-					resource="false" />
-				<var>
-					<var-name>minlength</var-name>
-					<var-value>1</var-value>
-				</var>
-				<var>
-					<var-name>maxlength</var-name>
-					<var-value>10</var-value>
 				</var>
 			</field>
         </form>

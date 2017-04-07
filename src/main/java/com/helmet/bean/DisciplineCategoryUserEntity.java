@@ -5,6 +5,7 @@ import java.util.List;
 public class DisciplineCategoryUserEntity extends DisciplineCategoryUser
 {
   private List<DisciplineCategoryTrainingUser> disciplineCategoryTrainingUsers;
+  
   public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsers()
   {
     return disciplineCategoryTrainingUsers;

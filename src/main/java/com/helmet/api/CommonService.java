@@ -65,6 +65,7 @@ import com.helmet.bean.TrainingCompanyCourse;
 import com.helmet.bean.TrainingCompanyCourseUser;
 import com.helmet.bean.TrainingCourse;
 import com.helmet.bean.TrainingCompanyUser;
+import com.helmet.bean.TrainingCompanyUserEntity;
 import com.helmet.bean.Uplift;
 import com.helmet.bean.UpliftMinute;
 import com.helmet.bean.UpliftMinuteUser;
@@ -330,6 +331,7 @@ public interface CommonService {
   public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant);
 
   public List<TrainingCompanyUser> getTrainingCompanyUsers(boolean showOnlyActive);
+  public List<TrainingCompanyUserEntity> getTrainingCompanyUserEntities(boolean showOnlyActive); 
 
   public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId, boolean showOnlyActive);
   public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsersForDisciplineCategory(Integer disciplineCategoryId);
