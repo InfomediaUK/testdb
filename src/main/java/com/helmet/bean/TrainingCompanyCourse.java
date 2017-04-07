@@ -60,6 +60,18 @@ public class TrainingCompanyCourse extends BaseDisplayOrder
     this.online = online;
   }
 
+  public String getNameWithOnline()
+  {
+    if (online)
+    {
+      return name + " (Online)";
+    }
+    else
+    {
+      return name;
+    }
+  }
+  
   public void load(SqlRowSet rs)
   {
     super.load(rs);
