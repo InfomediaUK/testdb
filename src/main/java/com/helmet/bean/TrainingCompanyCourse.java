@@ -8,7 +8,7 @@ public class TrainingCompanyCourse extends BaseDisplayOrder
   private Integer trainingCompanyId;
   private Integer trainingCourseId;
   private String name;
-  private Boolean online;
+  private Boolean online = false;
 
   public Integer getTrainingCompanyCourseId()
   {
