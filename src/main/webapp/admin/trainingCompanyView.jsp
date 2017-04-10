@@ -87,11 +87,13 @@
 <bean:message key="title.trainingCompanyCourseList"/>
 <br/>
 <br/>
-<mmj-admin:hasAccess forward="trainingCompanyCourseNew" >
-  <html:link forward="trainingCompanyCourseNew" paramId="trainingCompanyCourseUser.trainingCompanyId" paramName="TrainingCompanyViewFormAdmin" paramProperty="trainingCompany.trainingCompanyId"><bean:message key="link.new"/></html:link>
-<br/>
-<br/>
-</mmj-admin:hasAccess>
+<logic:equal name="TrainingCompanyViewFormAdmin" property="trainingCompany.active" value="true">
+  <mmj-admin:hasAccess forward="trainingCompanyCourseNew" >
+    <html:link forward="trainingCompanyCourseNew" paramId="trainingCompanyCourseUser.trainingCompanyId" paramName="TrainingCompanyViewFormAdmin" paramProperty="trainingCompany.trainingCompanyId"><bean:message key="link.new"/></html:link>
+    <br/>
+    <br/>
+  </mmj-admin:hasAccess>
+</logic:equal>
 <logic:present name="TrainingCompanyViewFormAdmin" property="listTrainingCompanyCourseUser">
 <table class="simple">
   <thead>
