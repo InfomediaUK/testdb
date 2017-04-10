@@ -36,7 +36,7 @@
     <td align="left"><bean:write name="DisciplineCategoryTrainingViewFormAdmin" property="disciplineCategory.active"/></td>
   </tr>
   <tr>
-    <th align="left" colspan="2"><bean:message key="label.training"/></th>
+    <th align="left" colspan="2"><bean:message key="label.trainingCourse"/></th>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.name"/></td>
