@@ -16,65 +16,71 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.application.admin.abztract.AdminAction;
 
 
-public class SecretWord extends AdminAction {
+public class SecretWord extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-      	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
 
-        Integer secretWordKey1 = (Integer)dynaForm.get("secretWordKey1");
-        Integer secretWordKey2 = (Integer)dynaForm.get("secretWordKey2");
-        Integer secretWordKey3 = (Integer)dynaForm.get("secretWordKey3");
-      	
-        if (secretWordKey1 == 0) {
-        	// first time through 
-        	
-          	int secretWordLength = getAdministratorLoggedIn().getUser().getSecretWord().length();
-          	
-          	int key1 = 0;
-          	int key2 = 0;
-          	int key3 = 0;
-            
-            Random generator = new Random(new Date().getTime());
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
 
-            while (key1 == 0 || key2 == 0 || key3 == 0) {
-            	if (key1 == 0) {
-            		key1 = generator.nextInt(secretWordLength) + 1;
-            		if (key1 == key2 || key1 == key3) {
-            			key1 = 0;
-            		}
-            	}
-            	if (key2 == 0) {
-            		key2 = generator.nextInt(secretWordLength - 1) + 1;
-            		if (key2 == key1 || key2 == key3) {
-            			key2 = 0;
-            		}
-            	}
-            	if (key3 == 0) {
-            		key3 = generator.nextInt(secretWordLength - 1) + 1;
-            		if (key3 == key1 || key3 == key2) {
-            			key3 = 0;
-            		}
-            	}
-            }
+    Integer secretWordKey1 = (Integer)dynaForm.get("secretWordKey1");
+    Integer secretWordKey2 = (Integer)dynaForm.get("secretWordKey2");
+    Integer secretWordKey3 = (Integer)dynaForm.get("secretWordKey3");
 
-            secretWordKey1 = Math.min(Math.min(key1, key2), key3);
-            secretWordKey3 = Math.max(Math.max(key1, key2), key3);
-            secretWordKey2 = secretWordKey1 != key1 && secretWordKey3 != key1 ? key1 :
-            					secretWordKey1 != key2 && secretWordKey3 != key2 ? key2 : key3;
-            	
-          	dynaForm.set("secretWordKey1", secretWordKey1);
-          	dynaForm.set("secretWordKey2", secretWordKey2);
-          	dynaForm.set("secretWordKey3", secretWordKey3);
-        	
+    if (secretWordKey1 == 0)
+    {
+      // first time through
+
+      int secretWordLength = getAdministratorLoggedIn().getUser().getSecretWord().length();
+
+      int key1 = 0;
+      int key2 = 0;
+      int key3 = 0;
+
+      Random generator = new Random(new Date().getTime());
+
+      while (key1 == 0 || key2 == 0 || key3 == 0)
+      {
+        if (key1 == 0)
+        {
+          key1 = generator.nextInt(secretWordLength) + 1;
+          if (key1 == key2 || key1 == key3)
+          {
+            key1 = 0;
+          }
         }
+        if (key2 == 0)
+        {
+          key2 = generator.nextInt(secretWordLength - 1) + 1;
+          if (key2 == key1 || key2 == key3)
+          {
+            key2 = 0;
+          }
+        }
+        if (key3 == 0)
+        {
+          key3 = generator.nextInt(secretWordLength - 1) + 1;
+          if (key3 == key1 || key3 == key2)
+          {
+            key3 = 0;
+          }
+        }
+      }
 
-      	return mapping.findForward("success");
+      secretWordKey1 = Math.min(Math.min(key1, key2), key3);
+      secretWordKey3 = Math.max(Math.max(key1, key2), key3);
+      secretWordKey2 = secretWordKey1 != key1 && secretWordKey3 != key1 ? key1 : secretWordKey1 != key2 && secretWordKey3 != key2 ? key2 : key3;
+
+      dynaForm.set("secretWordKey1", secretWordKey1);
+      dynaForm.set("secretWordKey2", secretWordKey2);
+      dynaForm.set("secretWordKey3", secretWordKey3);
+
     }
+
+    return mapping.findForward("success");
+  }
 
 }

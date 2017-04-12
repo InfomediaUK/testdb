@@ -29,6 +29,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.util.MessageResources;
 
 import com.helmet.api.AgyService;
+import com.helmet.api.MgrService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.bean.AgencyInvoiceCredit;
 import com.helmet.bean.AgencyInvoiceUserEntity;
@@ -1364,6 +1365,1086 @@ public class Utilities
   public static void generateInvoiceCreditPDF(HttpServletRequest request, MessageResources messageResources, AgencyInvoiceCredit agencyInvoiceCredit, AgencyInvoiceUserEntity agencyInvoice)
       throws Exception
   {
+
+    AgyService agyService = ServiceFactory.getInstance().getAgyService();
+
+    AgencyUser agency = agyService.getAgencyUser(agencyInvoice.getAgencyId());
+    ClientUser client = agyService.getClientUser(agencyInvoice.getClientId());
+
+    SimpleDateFormat mdf = new SimpleDateFormat(messageResources.getMessage("format.mediumDateFormat"));
+    SimpleDateFormat ldf = new SimpleDateFormat(messageResources.getMessage("format.longDateFormat"));
+    SimpleDateFormat tdf = new SimpleDateFormat("HH:mm");
+    DecimalFormat df = new DecimalFormat("#0.00"); 
+    DecimalFormat df3 = new DecimalFormat("0000"); // Was: "#000"
+    DecimalFormat dfFactor = new DecimalFormat("#0.00"); // Was: "#0.##"
+
+    String currencySymbol = messageResources.getMessage("label.currencySymbolActual");
+
+    PdfPCell blankCell = new PdfPCell();
+
+    PdfPCell blankCell2 = new PdfPCell();
+    blankCell2.setColspan(2);
+
+    PdfPCell blankCell3 = new PdfPCell();
+    blankCell3.setColspan(3);
+
+    PdfPCell blankCell6 = new PdfPCell();
+    blankCell6.setColspan(6);
+
+    PdfPCell blankCell9 = new PdfPCell();
+    blankCell9.setColspan(9);
+
+    //Document doc = new Document(PageSize.A4, 35, 35, 25, 20);
+    Document doc = new Document(PageSize.A4, 35, 35, 25, 35);
+
+    String fileName = "ai" + agencyInvoice.getAgencyInvoiceId() + ".pdf";
+    if (agencyInvoiceCredit != null)
+    {
+      // changed for agencyInvoiceCredit    	
+      fileName = "aic" + agencyInvoiceCredit.getAgencyInvoiceCreditId() + ".pdf";
+    }
+
+    String tempFilePath = FileHandler.getInstance().getTempFileLocation() + FileHandler.getInstance().getTempFileFolder() + "/" + fileName;
+
+    PdfWriter pdfWriter = PdfWriter.getInstance(doc, new FileOutputStream(tempFilePath));
+
+//    HeaderFooter foot = new HeaderFooter(new Paragraph(agency.getFreeText2(), FOOTER_FONT), false);
+//    if (agencyInvoiceCredit != null)
+//    {
+//      // changed for agencyInvoiceCredit    	
+//      foot = new HeaderFooter(new Paragraph(agency.getInvoiceCreditFooterFreeText(), FOOTER_FONT), false);
+//    }
+//
+//    foot.setBorder(Rectangle.NO_BORDER);
+//    foot.setAlignment(Element.ALIGN_CENTER);
+//    doc.setFooter(foot);
+    pdfWriter.setBoxSize("art", new Rectangle(35, 25, 100, 788));
+    PdfPageEvent invoiceCreditPageEvent = new PdfPageEvent();
+    invoiceCreditPageEvent.setFreeText(agency.getFreeText2());
+    invoiceCreditPageEvent.setFreeTextFont(FOOTER_FONT);
+    if (agencyInvoiceCredit != null)
+    {
+      // changed for agencyInvoiceCredit      
+      invoiceCreditPageEvent.setFreeText(agency.getInvoiceCreditFooterFreeText());
+    }
+    pdfWriter.setPageEvent(invoiceCreditPageEvent);
+
+    doc.open();
+
+    if (agencyInvoice.getAllTheSameBookingAndApplicant() && agencyInvoice.getBookingDateUserApplicants().size() != 0)
+    {
+
+      float[] headerColumnWidths = { 40, 60 }; // percentage
+
+      PdfPTable headerTable = new PdfPTable(headerColumnWidths);
+      headerTable.setWidthPercentage(100);
+
+      Image agencyInvoiceLogo = null;
+
+      if (agency.getInvoiceLogoFilename() != null && !"".equals(agency.getInvoiceLogoFilename()))
+      {
+        try
+        {
+          agencyInvoiceLogo = Image.getInstance(FileHandler.getInstance().getFileLocation() + agency.getInvoiceLogoUrl());
+        }
+        catch (MalformedURLException e)
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+
+      // TODO - currently using the first one !!!
+      BookingDateUserApplicant xxx = agencyInvoice.getBookingDateUserApplicants().get(0);
+
+      PdfPCell logoCell = new PdfPCell(new Paragraph(agency.getName()));
+
+      if (agencyInvoiceLogo != null)
+      {
+
+        //         scale to be 40 pixels high        	
+        //                	Float imageHeight = 40F;
+        //                	mmjLogo.scaleAbsoluteHeight(imageHeight);
+        //                	mmjLogo.scaleAbsoluteWidth(mmjLogo.getWidth()() * (mmjLogo.getScaledHeight() / mmjLogo.getHeight()));
+
+        //         scale to be 100%        	
+        //                    mmjLogo.scalePercent(100);
+
+        logoCell = new PdfPCell(agencyInvoiceLogo);
+      }
+
+      logoCell.setVerticalAlignment(Element.ALIGN_TOP);
+      logoCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+      logoCell.setBorder(Rectangle.NO_BORDER);
+
+      headerTable.addCell(logoCell);
+
+      PdfPTable agencyAddressTable = new PdfPTable(1);
+
+      agencyAddressTable.addCell(getCellBold(messageResources.getMessage("label.vatRegNo") + " " + agency.getVatNumber(), Element.ALIGN_RIGHT));
+      agencyAddressTable.addCell(getCell(agency.getName(), Element.ALIGN_RIGHT));
+      //        		agencyAddressTable.addCell(getCell(agency.getAddress().getFullAddress(), Element.ALIGN_RIGHT));
+      if (agency.getAddress().getAddress1() != null && !"".equals(agency.getAddress().getAddress1()))
+      {
+        agencyAddressTable.addCell(getCell(agency.getAddress().getAddress1(), Element.ALIGN_RIGHT));
+      }
+      if (agency.getAddress().getAddress2() != null && !"".equals(agency.getAddress().getAddress2()))
+      {
+        agencyAddressTable.addCell(getCell(agency.getAddress().getAddress2(), Element.ALIGN_RIGHT));
+      }
+      if (agency.getAddress().getAddress3() != null && !"".equals(agency.getAddress().getAddress3()))
+      {
+        agencyAddressTable.addCell(getCell(agency.getAddress().getAddress3(), Element.ALIGN_RIGHT));
+      }
+      if (agency.getAddress().getAddress4() != null && !"".equals(agency.getAddress().getAddress4()))
+      {
+        agencyAddressTable.addCell(getCell(agency.getAddress().getAddress4(), Element.ALIGN_RIGHT));
+      }
+      if (agency.getAddress().getPostalCode() != null && !"".equals(agency.getAddress().getPostalCode()))
+      {
+        agencyAddressTable.addCell(getCell(agency.getAddress().getPostalCode(), Element.ALIGN_RIGHT));
+      }
+      //        		agencyAddressTable.addCell(getCell(agency.getCountryName(), Element.ALIGN_RIGHT));
+
+      if (agency.getTelephoneNumber() != null && !"".equals(agency.getTelephoneNumber()))
+      {
+        agencyAddressTable.addCell(getCell(messageResources.getMessage("label.tel") + " " + agency.getTelephoneNumber(), Element.ALIGN_RIGHT));
+      }
+      if (agency.getFaxNumber() != null && !"".equals(agency.getFaxNumber()))
+      {
+        agencyAddressTable.addCell(getCell(messageResources.getMessage("label.fax") + " " + agency.getFaxNumber(), Element.ALIGN_RIGHT));
+      }
+
+      PdfPCell agencyAddressCell = new PdfPCell(agencyAddressTable);
+      agencyAddressCell.setBorder(Rectangle.NO_BORDER);
+
+      headerTable.addCell(agencyAddressCell);
+
+      headerTable.setSpacingAfter(10);
+      doc.add(headerTable);
+
+      float[] clientColumnWidths = { 60, 40 }; // percentage
+
+      PdfPTable clientTable = new PdfPTable(clientColumnWidths);
+      clientTable.setWidthPercentage(100);
+
+      PdfPTable clientAddressTable = new PdfPTable(1);
+
+      // TODO xxx !!!
+      MgrService mgrService = ServiceFactory.getInstance().getMgrService();
+
+      BookingUser booking = mgrService.getBookingUser(xxx.getBookingId());
+
+      if (booking.getAccountContactName() == null || "".equals(booking.getAccountContactName()))
+      {
+
+        if (client.getAccountContactName() == null || "".equals(client.getAccountContactName()))
+        {
+          clientAddressTable.addCell(getCell(client.getName()));
+        }
+        else
+        {
+          clientAddressTable.addCell(getCell(client.getAccountContactName()));
+        }
+
+      }
+      else
+      {
+        clientAddressTable.addCell(getCell(booking.getAccountContactName()));
+      }
+
+      if (booking.getAccountContactAddress().getAddress1() == null || "".equals(booking.getAccountContactAddress().getAddress1()))
+      {
+
+        if (client.getAccountContactAddress().getAddress1() == null || "".equals(client.getAccountContactAddress().getAddress1()))
+        {
+          //    		    		clientAddressTable.addCell(getCell(client.getAddress().getFullAddress()));
+
+          if (client.getAddress().getAddress1() != null && !"".equals(client.getAddress().getAddress1()))
+          {
+            clientAddressTable.addCell(getCell(client.getAddress().getAddress1()));
+          }
+          if (client.getAddress().getAddress2() != null && !"".equals(client.getAddress().getAddress2()))
+          {
+            clientAddressTable.addCell(getCell(client.getAddress().getAddress2()));
+          }
+          if (client.getAddress().getAddress3() != null && !"".equals(client.getAddress().getAddress3()))
+          {
+            clientAddressTable.addCell(getCell(client.getAddress().getAddress3()));
+          }
+          if (client.getAddress().getAddress4() != null && !"".equals(client.getAddress().getAddress4()))
+          {
+            clientAddressTable.addCell(getCell(client.getAddress().getAddress4()));
+          }
+          if (client.getAddress().getPostalCode() != null && !"".equals(client.getAddress().getPostalCode()))
+          {
+            clientAddressTable.addCell(getCell(client.getAddress().getPostalCode()));
+          }
+
+          //    		    		clientAddressTable.addCell(getCell(client.getCountryName()));
+        }
+        else
+        {
+          //    		    		clientAddressTable.addCell(getCell(client.getAccountContactAddress().getFullAddress()));
+
+          if (client.getAccountContactAddress().getAddress1() != null && !"".equals(client.getAccountContactAddress().getAddress1()))
+          {
+            clientAddressTable.addCell(getCell(client.getAccountContactAddress().getAddress1()));
+          }
+          if (client.getAccountContactAddress().getAddress2() != null && !"".equals(client.getAccountContactAddress().getAddress2()))
+          {
+            clientAddressTable.addCell(getCell(client.getAccountContactAddress().getAddress2()));
+          }
+          if (client.getAccountContactAddress().getAddress3() != null && !"".equals(client.getAccountContactAddress().getAddress3()))
+          {
+            clientAddressTable.addCell(getCell(client.getAccountContactAddress().getAddress3()));
+          }
+          if (client.getAccountContactAddress().getAddress4() != null && !"".equals(client.getAccountContactAddress().getAddress4()))
+          {
+            clientAddressTable.addCell(getCell(client.getAccountContactAddress().getAddress4()));
+          }
+          if (client.getAccountContactAddress().getPostalCode() != null && !"".equals(client.getAccountContactAddress().getPostalCode()))
+          {
+            clientAddressTable.addCell(getCell(client.getAccountContactAddress().getPostalCode()));
+          }
+
+          //    		    		clientAddressTable.addCell(getCell(client.getAccountContactCountryName()));
+        }
+
+      }
+      else
+      {
+        //    	    		clientAddressTable.addCell(getCell(booking.getAccountContactAddress().getFullAddress()));
+
+        if (booking.getAccountContactAddress().getAddress1() != null && !"".equals(booking.getAccountContactAddress().getAddress1()))
+        {
+          clientAddressTable.addCell(getCell(booking.getAccountContactAddress().getAddress1()));
+        }
+        if (booking.getAccountContactAddress().getAddress2() != null && !"".equals(booking.getAccountContactAddress().getAddress2()))
+        {
+          clientAddressTable.addCell(getCell(booking.getAccountContactAddress().getAddress2()));
+        }
+        if (booking.getAccountContactAddress().getAddress3() != null && !"".equals(booking.getAccountContactAddress().getAddress3()))
+        {
+          clientAddressTable.addCell(getCell(booking.getAccountContactAddress().getAddress3()));
+        }
+        if (booking.getAccountContactAddress().getAddress4() != null && !"".equals(booking.getAccountContactAddress().getAddress4()))
+        {
+          clientAddressTable.addCell(getCell(booking.getAccountContactAddress().getAddress4()));
+        }
+        if (booking.getAccountContactAddress().getPostalCode() != null && !"".equals(booking.getAccountContactAddress().getPostalCode()))
+        {
+          clientAddressTable.addCell(getCell(booking.getAccountContactAddress().getPostalCode()));
+        }
+
+        //    	    		clientAddressTable.addCell(getCell(booking.getAccountContactCountryName()));
+      }
+
+      PdfPCell clientAddressCell = new PdfPCell(clientAddressTable);
+      clientAddressCell.setBorder(Rectangle.NO_BORDER);
+
+      clientTable.addCell(clientAddressCell);
+
+      PdfPTable invoiceDetailTable = new PdfPTable(1);
+
+      if (agencyInvoiceCredit == null)
+      {
+
+        invoiceDetailTable.addCell(getCellBold(messageResources.getMessage("label.invoiceUppercase"), Element.ALIGN_RIGHT));
+
+        // TODO - invoice should REALLY be payment batch
+        // for now if invoiceAgency.reference exists use that as invoice number - otherwise use current invoiceno
+        if (agencyInvoice.getReference() == null || "".equals(agencyInvoice.getReference()))
+        {
+          invoiceDetailTable.addCell(getCellBold(messageResources.getMessage("label.invoiceNo") + " " + agencyInvoice.getAgencyInvoiceId(), Element.ALIGN_RIGHT));
+        }
+        else
+        {
+          if ("40".equals(agencyInvoice.getReference()))
+          {
+            // agencyInvoice reference = "40" so don't separate with a hyphen - this is temporary to prefix numbers with 40
+            invoiceDetailTable.addCell(getCellBold(messageResources.getMessage("label.invoiceNo") + " " + agencyInvoice.getReference() + agencyInvoice.getAgencyInvoiceId(), Element.ALIGN_RIGHT));
+          }
+          else
+          {
+            // agencyInvoice reference (agency invoice number)
+            invoiceDetailTable
+                .addCell(getCellBold(messageResources.getMessage("label.invoiceNo") + " " + agencyInvoice.getReference() + "-" + agencyInvoice.getAgencyInvoiceId(), Element.ALIGN_RIGHT));
+          }
+        }
+
+        String creationTimestamp = mdf.format(agencyInvoice.getCreationTimestamp());
+        invoiceDetailTable.addCell(getCell(messageResources.getMessage("label.invoiceDate") + " " + creationTimestamp, Element.ALIGN_RIGHT));
+        //            		invoiceDetailTable.addCell(getCell(client.getReference(), Element.ALIGN_RIGHT));
+
+      }
+      else
+      {
+
+        invoiceDetailTable.addCell(getCellBold(messageResources.getMessage("label.creditUppercase"), Element.ALIGN_RIGHT));
+
+        invoiceDetailTable.addCell(getCellBold(messageResources.getMessage("label.creditNo") + " " + agencyInvoiceCredit.getAgencyInvoiceCreditId(), Element.ALIGN_RIGHT));
+
+        String creationTimestamp = mdf.format(agencyInvoiceCredit.getCreationTimestamp());
+        invoiceDetailTable.addCell(getCell(messageResources.getMessage("label.creditDate") + " " + creationTimestamp, Element.ALIGN_RIGHT));
+        // invoiceDetailTable.addCell(getCell(client.getReference(), Element.ALIGN_RIGHT));
+
+        // TODO - invoice should REALLY be payment batch
+        // for now if invoiceAgency.reference exists use that as invoice number - otherwise use current invoiceno
+        if (agencyInvoice.getReference() == null || "".equals(agencyInvoice.getReference()))
+        {
+          invoiceDetailTable.addCell(getCell(messageResources.getMessage("label.relatedInvoiceNo") + " " + agencyInvoice.getAgencyInvoiceId(), Element.ALIGN_RIGHT));
+        }
+        else
+        {
+          if ("40".equals(agencyInvoice.getReference()))
+          {
+            // agencyInvoice reference = "40" so don't separate with a hyphen - this is temporary to prefix numbers with 40
+            invoiceDetailTable.addCell(getCell(messageResources.getMessage("label.relatedInvoiceNo") + " " + agencyInvoice.getReference() + agencyInvoice.getAgencyInvoiceId(), Element.ALIGN_RIGHT));
+          }
+          else
+          {
+            // agencyInvoice reference (agency invoice number)
+            invoiceDetailTable.addCell(getCell(messageResources.getMessage("label.relatedInvoiceNo") + " " + agencyInvoice.getReference() + "-" + agencyInvoice.getAgencyInvoiceId(),
+                Element.ALIGN_RIGHT));
+          }
+        }
+
+        String invoiceCreationTimestamp = mdf.format(agencyInvoice.getCreationTimestamp());
+        invoiceDetailTable.addCell(getCell(messageResources.getMessage("label.relatedInvoiceDate") + " " + invoiceCreationTimestamp, Element.ALIGN_RIGHT));
+        // invoiceDetailTable.addCell(getCell(client.getReference(), Element.ALIGN_RIGHT));
+
+      }
+
+      PdfPCell invoiceDetailCell = new PdfPCell(invoiceDetailTable);
+      invoiceDetailCell.setBorder(Rectangle.NO_BORDER);
+
+      clientTable.addCell(invoiceDetailCell);
+
+      clientTable.setSpacingAfter(10);
+      doc.add(clientTable);
+
+      PdfPTable bookingTable = new PdfPTable(1);
+      bookingTable.setWidthPercentage(100);
+
+      if (xxx.getBookingReference() == null || "".equals(xxx.getBookingReference()))
+      {
+        bookingTable.addCell(getCellBold(messageResources.getMessage("label.bookingNo") + " " + df3.format(xxx.getBookingId())));
+      }
+      else
+      {
+        // bookingReference (client PO Number)
+        bookingTable.addCell(getCellBold(messageResources.getMessage("label.bookingReference") + " " + xxx.getBookingReference() + "-" + df3.format(xxx.getBookingId())));
+      }
+
+      //        		bookingTable.addCell(getCell(xxx.getApplicantFirstName() + " " + xxx.getApplicantLastName()));
+      String jobProfileDetail = xxx.getJobProfileName();
+
+      JobProfileUser jobProfile = agyService.getJobProfileUser(xxx.getJobProfileId());
+
+      if (jobProfile.getJobFamilyCode() != null && !"".equals(jobProfile.getJobFamilyCode()) && jobProfile.getJobSubFamilyCode() != null && !"".equals(jobProfile.getJobSubFamilyCode())
+          && jobProfile.getCode() != null && !"".equals(jobProfile.getCode()))
+      {
+        // BTT Code
+        jobProfileDetail += " - " + jobProfile.getJobFamilyCode() + "." + jobProfile.getJobSubFamilyCode() + "." + jobProfile.getCode();
+      }
+
+      jobProfileDetail += " - " + xxx.getGradeName();
+      bookingTable.addCell(getCell(xxx.getApplicantFirstName() + " " + xxx.getApplicantLastName() + " - " + jobProfileDetail));
+      bookingTable.addCell(getCell(xxx.getLocationName() + ", " + xxx.getSiteName() + ", " + client.getName()));
+
+      bookingTable.setSpacingAfter(10);
+      doc.add(bookingTable);
+
+      // float[] detailColumnWidths = {8,14,15,6,27,7,8,6,9}; // percentage
+      //float[] detailColumnWidths = { 10, 14, 15, 6, (n x uplifts width) 15, 8, 10, 6, 8 }; // percentage
+
+      float[] detailColumnWidths = new float[9 + agencyInvoice.getUpliftFactors().size()];
+
+      detailColumnWidths[0] = 10;
+      detailColumnWidths[1] = 14;
+      detailColumnWidths[2] = 15;
+      detailColumnWidths[3] = 6;
+      int i = 3;
+      for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+      {
+        i++;
+        detailColumnWidths[i] = 5;
+      }
+      detailColumnWidths[4 + agencyInvoice.getUpliftFactors().size()] = 15;
+      detailColumnWidths[5 + agencyInvoice.getUpliftFactors().size()] = 8;
+      detailColumnWidths[6 + agencyInvoice.getUpliftFactors().size()] = 10;
+      detailColumnWidths[7 + agencyInvoice.getUpliftFactors().size()] = 6;
+      detailColumnWidths[8 + agencyInvoice.getUpliftFactors().size()] = 8;
+
+      PdfPTable detailTable = new PdfPTable(detailColumnWidths);
+      detailTable.setWidthPercentage(100);
+
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.shiftNo")));
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.date")));
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.times")));
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.qty")));
+
+      for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+      {
+        detailTable.addCell(getTHCellRight("x" + dfFactor.format(upliftFactor)));
+      }
+
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.details")));
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.unitPriceShort")));
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.net")));
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.vatRateShort")));
+      detailTable.addCell(getTHCell(messageResources.getMessage("label.vat")));
+
+      for (BookingDateUserApplicantEntity bookingDate : agencyInvoice.getBookingDateUserApplicants())
+      {
+
+        detailTable.addCell(getTHCell(df3.format(bookingDate.getBookingId()) + "." + df3.format(bookingDate.getBookingDateId())));
+
+        detailTable.addCell(getTHCell(ldf.format(bookingDate.getBookingDate())));
+
+        if (bookingDate.getWorkedNoOfHours().compareTo(new BigDecimal(0)) == 0)
+        {
+
+          // no worked hours so - output the reason (text)
+          detailTable.addCell(blankCell);
+          detailTable.addCell(getTDCellRight(df.format(bookingDate.getWorkedNoOfHours())));
+
+          for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+          {
+            detailTable.addCell(blankCell);
+          }
+
+          PdfPCell bookingDateCommentCell = getTDCell(bookingDate.getComment());
+          bookingDateCommentCell.setColspan(5);
+          detailTable.addCell(bookingDateCommentCell);
+
+        }
+        else
+        {
+
+          String times = tdf.format(bookingDate.getWorkedStartTime()) + " - " + tdf.format(bookingDate.getWorkedEndTime());
+          if (bookingDate.getWorkedBreakNoOfHours().compareTo(new BigDecimal(0)) > 0)
+          {
+            times += " (" + df.format(bookingDate.getWorkedBreakNoOfHours()) + ")";
+          }
+          //                    if (bookingDate.getHasUplift()) {
+          //                    	times += " *";
+          //                    }
+          detailTable.addCell(getTDCell(times));
+
+          detailTable.addCell(getTDCellRight(df.format(bookingDate.getWorkedNoOfHours())));
+
+          for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+          {
+            BigDecimal upliftHours = new BigDecimal(0);
+            for (BookingDateHour bookingDateHour : bookingDate.getBookingDateHours())
+            {
+              if (bookingDateHour.getUpliftFactor().compareTo(upliftFactor) == 0)
+              {
+                BigDecimal portionOfHour = bookingDateHour.getChargeRateValue().compareTo(new BigDecimal(0)) < 0 ? bookingDateHour.getPortionOfHour().multiply(new BigDecimal(-1)) : bookingDateHour
+                    .getPortionOfHour();
+                upliftHours = upliftHours.add(portionOfHour);
+              }
+            }
+            detailTable.addCell(getTDCellRight(df.format(upliftHours)));
+          }
+
+          if (bookingDate.getChargeRateVatRate().compareTo(new BigDecimal(0)) == 0)
+          {
+
+            detailTable.addCell(getTDCell(messageResources.getMessage("label.commission")));
+            detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getCommissionRate())));
+            detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedCommissionValue())));
+            if (bookingDate.getCommissionVatRate().compareTo(new BigDecimal(0)) > 0)
+            {
+              detailTable.addCell(getTDCellRight(df.format(bookingDate.getCommissionVatRate())));
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedCommissionVatValue())));
+            }
+            else
+            {
+              detailTable.addCell(blankCell);
+              detailTable.addCell(blankCell);
+            }
+
+            //
+
+            detailTable.addCell(blankCell3);
+            detailTable.addCell(blankCell);
+
+            for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+            {
+              detailTable.addCell(blankCell);
+            }
+
+            detailTable.addCell(getTDCell(messageResources.getMessage("label.payRate")));
+            detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getPayRate())));
+            detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedPayRateValue())));
+            if (bookingDate.getPayRateVatRate().compareTo(new BigDecimal(0)) > 0)
+            {
+              detailTable.addCell(getTDCellRight(df.format(bookingDate.getPayRateVatRate())));
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedPayRateVatValue())));
+            }
+            else
+            {
+              detailTable.addCell(blankCell);
+              detailTable.addCell(blankCell);
+            }
+
+            // wtd
+
+            if (bookingDate.getWorkedWtdValue().compareTo(new BigDecimal(0)) > 0)
+            {
+
+              detailTable.addCell(blankCell3);
+              detailTable.addCell(blankCell);
+
+              for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+              {
+                detailTable.addCell(blankCell);
+              }
+
+              detailTable.addCell(getTDCell(messageResources.getMessage("label.wtd") + " @ " + df.format(bookingDate.getWtdPercentage())));
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWtdRate())));
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedWtdValue())));
+              if (bookingDate.getWtdVatRate().compareTo(new BigDecimal(0)) > 0)
+              {
+                detailTable.addCell(getTDCellRight(df.format(bookingDate.getWtdVatRate())));
+                detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedWtdVatValue())));
+              }
+              else
+              {
+                detailTable.addCell(blankCell);
+                detailTable.addCell(blankCell);
+              }
+
+            }
+
+            // ni
+
+            if (bookingDate.getWorkedNiValue().compareTo(new BigDecimal(0)) > 0)
+            {
+
+              detailTable.addCell(blankCell3);
+              detailTable.addCell(blankCell);
+
+              for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+              {
+                detailTable.addCell(blankCell);
+              }
+
+              detailTable.addCell(getTDCell(messageResources.getMessage("label.ni") + " @ " + df.format(bookingDate.getNiPercentage())));
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getNiRate())));
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedNiValue())));
+              if (bookingDate.getNiVatRate().compareTo(new BigDecimal(0)) > 0)
+              {
+                detailTable.addCell(getTDCellRight(df.format(bookingDate.getNiVatRate())));
+                detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedNiVatValue())));
+              }
+              else
+              {
+                detailTable.addCell(blankCell);
+                detailTable.addCell(blankCell);
+              }
+
+            }
+
+          }
+          else
+          {
+
+            detailTable.addCell(getTDCell(messageResources.getMessage("label.chargeRate")));
+            detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getChargeRate())));
+            detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedChargeRateValue())));
+            if (bookingDate.getChargeRateVatRate().compareTo(new BigDecimal(0)) > 0)
+            {
+              detailTable.addCell(getTDCellRight(df.format(bookingDate.getChargeRateVatRate())));
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDate.getWorkedChargeRateVatValue())));
+            }
+            else
+            {
+              detailTable.addCell(blankCell);
+              detailTable.addCell(blankCell);
+            }
+
+          }
+
+          if (bookingDate.getComment() != null && !"".equals(bookingDate.getComment()))
+          {
+
+            detailTable.addCell(blankCell3);
+            detailTable.addCell(blankCell);
+
+            for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+            {
+              detailTable.addCell(blankCell);
+            }
+
+            PdfPCell bookingDateCommentCell = getTDCell(bookingDate.getComment());
+            bookingDateCommentCell.setColspan(5);
+            detailTable.addCell(bookingDateCommentCell);
+
+          }
+
+        }
+
+        if (bookingDate.getBookingDateExpenses() != null)
+        {
+
+          for (BookingDateExpenseUser bookingDateExpense : bookingDate.getBookingDateExpenses())
+          {
+
+            detailTable.addCell(blankCell3);
+
+            if (bookingDateExpense.getIsMultiplier())
+            {
+              detailTable.addCell(getTDCellRight(df.format(bookingDateExpense.getQty())));
+            }
+            else
+            {
+              detailTable.addCell(getTDCellRight("1.00"));
+            }
+
+            for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+            {
+              detailTable.addCell(blankCell);
+            }
+
+            detailTable.addCell(getTDCell(bookingDateExpense.getExpenseName()));
+
+            if (bookingDateExpense.getIsMultiplier())
+            {
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDateExpense.getExpenseMultiplier())));
+            }
+            else
+            {
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDateExpense.getQty())));
+            }
+
+            detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDateExpense.getValue())));
+
+            if (bookingDateExpense.getExpenseVatRate().compareTo(new BigDecimal(0)) > 0)
+            {
+              detailTable.addCell(getTDCellRight(df.format(bookingDateExpense.getExpenseVatRate())));
+              detailTable.addCell(getTDCellRight(currencySymbol + df.format(bookingDateExpense.getVatValue())));
+            }
+            else
+            {
+              detailTable.addCell(blankCell);
+              detailTable.addCell(blankCell);
+            }
+
+            if (bookingDateExpense.getText() != null && !"".equals(bookingDateExpense.getText()))
+            {
+              detailTable.addCell(blankCell3);
+              detailTable.addCell(blankCell);
+
+              for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+              {
+                detailTable.addCell(blankCell);
+              }
+
+              PdfPCell expenseTextCell = getTDCell(bookingDateExpense.getText());
+              expenseTextCell.setColspan(5);
+              detailTable.addCell(expenseTextCell);
+            }
+
+          }
+        }
+
+      }
+
+      if (agencyInvoice.getDiscountValue().compareTo(new BigDecimal(0)) > 0)
+      {
+
+        //
+
+        PdfPCell blankLine = new PdfPCell();
+        blankLine.setColspan(9 + agencyInvoice.getUpliftFactors().size());
+        detailTable.addCell(blankLine);
+
+        PdfPCell discountCell = getTHCell(messageResources.getMessage("label.discount"));
+        discountCell.setColspan(2);
+        detailTable.addCell(discountCell);
+
+        PdfPCell discountTextCell = getTDCell(agencyInvoice.getDiscountText());
+        discountTextCell.setColspan(4 + agencyInvoice.getUpliftFactors().size());
+        detailTable.addCell(discountTextCell);
+
+        detailTable.addCell(getTDCellRight(currencySymbol + "-" + df.format(agencyInvoice.getDiscountValue())));
+
+        if (agencyInvoice.getDiscountVatRate().compareTo(new BigDecimal(0)) > 0)
+        {
+
+          detailTable.addCell(getTDCellRight(df.format(agencyInvoice.getDiscountVatRate())));
+          detailTable.addCell(getTDCellRight(currencySymbol + "-" + df.format(agencyInvoice.getDiscountVatValue())));
+
+        }
+        else
+        {
+
+          detailTable.addCell(blankCell);
+          detailTable.addCell(blankCell);
+
+        }
+
+      }
+
+      //
+
+      PdfPCell blankLine = new PdfPCell();
+      blankLine.setColspan(9 + agencyInvoice.getUpliftFactors().size());
+      detailTable.addCell(blankLine);
+
+      //
+
+      PdfPCell subTotalCell = getTHCell(messageResources.getMessage("label.subTotal"));
+      subTotalCell.setColspan(6 + agencyInvoice.getUpliftFactors().size());
+      subTotalCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+      detailTable.addCell(subTotalCell);
+
+      detailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getTotalNetValue())));
+
+      detailTable.addCell(blankCell);
+
+      detailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getVatValue())));
+
+      //
+
+      detailTable.addCell(blankLine);
+
+      //
+
+      PdfPCell totalLabelCell = getTHCellBig(messageResources.getMessage("label.totalUppercase"));
+      totalLabelCell.setColspan(6 + agencyInvoice.getUpliftFactors().size());
+      totalLabelCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+      detailTable.addCell(totalLabelCell);
+
+      PdfPCell totalCell = getTDCellBigRightBold(currencySymbol + df.format(agencyInvoice.getTotalValue()));
+      totalCell.setColspan(3);
+      detailTable.addCell(totalCell);
+
+      //
+
+      detailTable.setSpacingAfter(10);
+      doc.add(detailTable);
+
+      float[] summaryColumnWidths = { 70, 30 }; // percentage
+      PdfPTable summaryTable = new PdfPTable(summaryColumnWidths);
+      summaryTable.setWidthPercentage(100);
+      summaryTable.setSpacingBefore(10);
+      summaryTable.setSpacingAfter(10);
+
+      PdfPCell summaryLeftCell = getCell(agency.getFreeText(), Element.ALIGN_LEFT, Rectangle.NO_BORDER, SUMMARY_FONT);
+
+      if (agencyInvoiceCredit != null)
+      {
+        // changed for agencyInvoiceCredit    	
+        summaryLeftCell = getCell(agency.getInvoiceCreditFreeText(), Element.ALIGN_LEFT, Rectangle.NO_BORDER, SUMMARY_FONT);
+      }
+
+      summaryLeftCell.setVerticalAlignment(Element.ALIGN_TOP);
+
+      summaryTable.addCell(summaryLeftCell);
+
+      float[] summaryDetailColumnWidths = { 50, 50 }; // percentage
+      PdfPTable summaryDetailTable = new PdfPTable(summaryDetailColumnWidths);
+
+      PdfPCell summaryLabelCell = getTHCell(messageResources.getMessage("label.summaryUppercase"));
+      summaryLabelCell.setColspan(2);
+      summaryLabelCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+      summaryDetailTable.addCell(summaryLabelCell);
+
+      summaryDetailTable.addCell(blankCell2);
+
+      if (agencyInvoice.getNoOfHours().compareTo(new BigDecimal(0)) > 0)
+      {
+        summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.noOfHours")));
+        summaryDetailTable.addCell(getTDCellRight(df.format(agencyInvoice.getNoOfHours())));
+
+        // if there is any uplifted hours - show the break down
+
+        for (BigDecimal upliftFactor : agencyInvoice.getUpliftFactors())
+        {
+          summaryDetailTable.addCell(getTHCell("x" + dfFactor.format(upliftFactor)));
+
+          // TODO - not efficient!
+          BigDecimal upliftHours = new BigDecimal(0);
+          for (BookingDateUserApplicantEntity bookingDate : agencyInvoice.getBookingDateUserApplicants())
+          {
+            if (bookingDate.getBookingDateHours() != null)
+            {
+              for (BookingDateHour bookingDateHour : bookingDate.getBookingDateHours())
+              {
+                if (bookingDateHour.getUpliftFactor().compareTo(upliftFactor) == 0)
+                {
+                  BigDecimal portionOfHour = bookingDateHour.getChargeRateValue().compareTo(new BigDecimal(0)) < 0 ? bookingDateHour.getPortionOfHour().multiply(new BigDecimal(-1)) : bookingDateHour
+                      .getPortionOfHour();
+                  upliftHours = upliftHours.add(portionOfHour);
+                }
+              }
+            }
+          }
+          summaryDetailTable.addCell(getTDCellRight(df.format(upliftHours)));
+
+        }
+
+        // blank line
+        summaryDetailTable.addCell(blankCell2);
+      }
+
+      // TODO - currently using the first one !!!
+
+      if (xxx.getChargeRateVatRate().compareTo(new BigDecimal(0)) == 0)
+      {
+
+        if (agencyInvoice.getCommissionValue().compareTo(new BigDecimal(0)) > 0)
+        {
+          summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.commission")));
+          summaryDetailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getCommissionValue())));
+        }
+
+        if (agencyInvoice.getPayRateValue().compareTo(new BigDecimal(0)) > 0)
+        {
+          summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.payRate")));
+          summaryDetailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getPayRateValue())));
+        }
+
+        if (agencyInvoice.getWtdValue().compareTo(new BigDecimal(0)) > 0)
+        {
+          summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.wtd")));
+          summaryDetailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getWtdValue())));
+        }
+
+        if (agencyInvoice.getNiValue().compareTo(new BigDecimal(0)) > 0)
+        {
+          summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.ni")));
+          summaryDetailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getNiValue())));
+        }
+
+      }
+      else
+      {
+
+        if (agencyInvoice.getChargeRateValue().compareTo(new BigDecimal(0)) > 0)
+        {
+          summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.chargeRate")));
+          summaryDetailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getChargeRateValue())));
+        }
+
+      }
+
+      if (agencyInvoice.getExpenseValue().compareTo(new BigDecimal(0)) > 0)
+      {
+        summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.expenses")));
+        summaryDetailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getExpenseValue())));
+      }
+
+      if (agencyInvoice.getDiscountValue().compareTo(new BigDecimal(0)) > 0)
+      {
+        summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.discount")));
+        summaryDetailTable.addCell(getTDCellRight(currencySymbol + "-" + df.format(agencyInvoice.getDiscountValue())));
+      }
+
+      summaryDetailTable.addCell(getTHCell(messageResources.getMessage("label.vat")));
+      summaryDetailTable.addCell(getTDCellRight(currencySymbol + df.format(agencyInvoice.getVatValue())));
+
+      summaryDetailTable.addCell(blankCell2);
+
+      summaryDetailTable.addCell(getTHCellBig(messageResources.getMessage("label.totalUppercase")));
+      summaryDetailTable.addCell(getTDCellBigRightBold(currencySymbol + df.format(agencyInvoice.getTotalValue())));
+
+      PdfPCell summaryRightCell = new PdfPCell(summaryDetailTable);
+      summaryRightCell.setBorder(Rectangle.NO_BORDER);
+      summaryRightCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+      summaryRightCell.setVerticalAlignment(Element.ALIGN_TOP);
+
+      summaryTable.addCell(summaryRightCell);
+
+      doc.add(summaryTable);
+
+      if (agencyInvoiceCredit != null)
+      {
+
+        PdfPTable reasonTable = new PdfPTable(1);
+        reasonTable.setWidthPercentage(100);
+
+        reasonTable.addCell(getCellBold(messageResources.getMessage("label.reasonText")));
+        reasonTable.addCell(getCell(agencyInvoiceCredit.getReasonText()));
+
+        reasonTable.setSpacingAfter(10);
+        doc.add(reasonTable);
+
+      }
+
+      float[] footerColumnWidths = { 85, 15 }; // percentage
+
+      PdfPTable footerTable = new PdfPTable(footerColumnWidths);
+      footerTable.setWidthPercentage(100);
+      footerTable.setExtendLastRow(true);
+
+      Image mmjLogo = null;
+
+      String serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
+      serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
+      String mmjLogoFilename = "/images/" + serverNamePrefix + "master-logo.jpg";
+
+      try
+      {
+        mmjLogo = Image.getInstance(FileHandler.getInstance().getFileLocation() + mmjLogoFilename);
+        //    				mmjLogo = Image.getInstance(request.getSession().getServletContext().getRealPath(mmjLogoFilename));
+      }
+      catch (MalformedURLException e)
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      catch (IOException e)
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+
+      if (mmjLogo == null)
+      {
+
+        PdfPCell footerCell = new PdfPCell(new Phrase("Produced by Match My Job", FOOTER_FONT));
+        footerCell.setBorder(Rectangle.NO_BORDER);
+        footerCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+        footerCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        footerCell.setColspan(2);
+        footerTable.addCell(footerCell);
+
+      }
+      else
+      {
+
+        PdfPCell footerTextCell = getCell("Produced by", Element.ALIGN_RIGHT, Rectangle.NO_BORDER, FOOTER_FONT);
+        footerTextCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+        footerTextCell.setPaddingBottom(0);
+        footerTable.addCell(footerTextCell);
+
+        //         scale to be 30 pixels high        	
+        Float imageHeight = 30F;
+        mmjLogo.scaleAbsoluteHeight(imageHeight);
+        mmjLogo.scaleAbsoluteWidth(mmjLogo.getWidth() * (mmjLogo.getScaledHeight() / mmjLogo.getHeight()));
+
+        //         scale to be 100%        	
+        //                    mmjLogo.scalePercent(100);
+
+        PdfPCell footerLogoCell = new PdfPCell(mmjLogo);
+        footerLogoCell.setBorder(Rectangle.NO_BORDER);
+        footerLogoCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
+        footerLogoCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        footerTable.addCell(footerLogoCell);
+
+      }
+
+      doc.add(footerTable);
+
+    }
+    else
+    {
+
+      doc.add(new Paragraph(messageResources.getMessage("error.noCanDo")));
+
+    }
+
+    doc.newPage();
+
+    doc.close();
+
+    //        if (agencyInvoice.getTimesheetFilename() != null) {
+
+    //          concatenate pdfs
+
+    // tempFilePath is the current invoice file
+
+    String tsFilePath = FileHandler.getInstance().getInvoiceFileLocation() + agencyInvoice.getTimesheetPath() + agencyInvoice.getTimesheetFilename();
+
+    String bothTempFilePath = tempFilePath.substring(0, tempFilePath.length() - 4) + "ts.pdf";
+
+    String args[] = { tempFilePath, tsFilePath, bothTempFilePath };
+
+    try
+    {
+      int pageOffset = 0;
+      ArrayList master = new ArrayList();
+      int f = 0;
+      String outFile = args[args.length - 1];
+      Document document = null;
+      PdfCopy writer = null;
+      while (f < args.length - 1)
+      {
+
+        File theFile = new File(args[f]);
+
+        if (theFile.exists())
+        {
+
+          // we create a reader for a certain document
+          PdfReader reader = new PdfReader(args[f]);
+          reader.consolidateNamedDestinations();
+          // we retrieve the total number of pages
+          int n = reader.getNumberOfPages();
+          List bookmarks = SimpleBookmark.getBookmark(reader);
+          if (bookmarks != null)
+          {
+            if (pageOffset != 0) SimpleBookmark.shiftPageNumbers(bookmarks, pageOffset, null);
+            master.addAll(bookmarks);
+          }
+          pageOffset += n;
+
+          if (f == 0)
+          {
+            // step 1: creation of a document-object
+            document = new Document(reader.getPageSizeWithRotation(1));
+            // step 2: we create a writer that listens to the document
+            writer = new PdfCopy(document, new FileOutputStream(outFile));
+            writer.setMergeFields();
+            // step 3: we open the document
+            document.open();
+          }
+          // step 4: we add content
+          writer.addDocument(reader);
+// Changed for upgrade of itext to use above two lines rather than those commented out below. Lyndon 19/01/2015.          
+//          PdfImportedPage page;
+//          for (int i = 0; i < n;)
+//          {
+//            ++i;
+//            page = writer.getImportedPage(reader, i);
+//            writer.addPage(page);
+//          }
+//          PRAcroForm acroForm = reader.getAcroForm();
+//          if (acroForm != null) writer.copyAcroForm(reader);
+        }
+        else
+        {
+
+          // physical file doesn't exists
+
+        }
+
+        f++;
+
+      }
+      if (!master.isEmpty()) writer.setOutlines(master);
+      // step 5: we close the document
+      document.close();
+
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+
+    //        }
 
   }
 

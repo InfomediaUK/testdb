@@ -17,68 +17,67 @@ import com.helmet.application.Utilities;
 import com.helmet.application.admin.abztract.AdminAction;
 
 
-public class SecretWordProcess extends AdminAction {
+public class SecretWordProcess extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-		if (isCancelled(request)){
-			return mapping.findForward("cancel");
-		}		
-		
-        ActionForward af = validateSecretWord(mapping, form, request);
-		
-        if (af != null) {
-        	return af;
-        }
-        
-        return Utilities.whereToNow(mapping, request);
-        
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+
+    if (isCancelled(request))
+    {
+      return mapping.findForward("cancel");
     }
-    
-    public ActionForward validateSecretWord(ActionMapping mapping,
-            ActionForm form,
-            HttpServletRequest request) {
-    	
-		DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-      	
-      	Integer secretWordKey1 = (Integer)dynaForm.get("secretWordKey1");
-      	Integer secretWordKey2 = (Integer)dynaForm.get("secretWordKey2");
-      	Integer secretWordKey3 = (Integer)dynaForm.get("secretWordKey3");
 
-      	String secretWordValue1 = (String)dynaForm.get("secretWordValue1");
-      	String secretWordValue2 = (String)dynaForm.get("secretWordValue2");
-      	String secretWordValue3 = (String)dynaForm.get("secretWordValue3");
+    ActionForward af = validateSecretWord(mapping, form, request);
 
-      	String secretWord = getAdministratorLoggedIn().getUser().getSecretWord();
-      	
-        String value1 = secretWord.substring(secretWordKey1 - 1, secretWordKey1);	
-        String value2 = secretWord.substring(secretWordKey2 - 1, secretWordKey2);	
-        String value3 = secretWord.substring(secretWordKey3 - 1, secretWordKey3);	
-      	
-      	if (!secretWordValue1.equalsIgnoreCase(value1) || !secretWordValue2.equalsIgnoreCase(value2) || !secretWordValue3.equalsIgnoreCase(value3)) {
-    		logger.debug("Incorrect secret word attempt - " + getAdministratorLoggedIn().getUser().getLogin() + " " + 
-				       secretWordKey1 + "=" + secretWordValue1 + " " +
-				       secretWordKey2 + "=" + secretWordValue2 + " " +
-				       secretWordKey3 + "=" + secretWordValue3);
-      		ActionMessages errors = new ActionMessages();
-			MessageResources messageResources = getResources(request);
-            errors.add("login", new ActionMessage("errors.invalidDetails"));
-            saveErrors(request, errors);
-  	     	return mapping.getInputForward();
-      	}
-
-      	AdminUtilities.setLevel2Login(request);
-
-     	// re-initialize the form
-    	dynaForm.initialize(mapping);
-
-      	return null;
-
+    if (af != null)
+    {
+      return af;
     }
+
+    return Utilities.whereToNow(mapping, request);
+
+  }
+
+  public ActionForward validateSecretWord(ActionMapping mapping, ActionForm form, HttpServletRequest request)
+  {
+
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+
+    Integer secretWordKey1 = (Integer)dynaForm.get("secretWordKey1");
+    Integer secretWordKey2 = (Integer)dynaForm.get("secretWordKey2");
+    Integer secretWordKey3 = (Integer)dynaForm.get("secretWordKey3");
+
+    String secretWordValue1 = (String)dynaForm.get("secretWordValue1");
+    String secretWordValue2 = (String)dynaForm.get("secretWordValue2");
+    String secretWordValue3 = (String)dynaForm.get("secretWordValue3");
+
+    String secretWord = getAdministratorLoggedIn().getUser().getSecretWord();
+
+    String value1 = secretWord.substring(secretWordKey1 - 1, secretWordKey1);
+    String value2 = secretWord.substring(secretWordKey2 - 1, secretWordKey2);
+    String value3 = secretWord.substring(secretWordKey3 - 1, secretWordKey3);
+
+    if (!secretWordValue1.equalsIgnoreCase(value1) || !secretWordValue2.equalsIgnoreCase(value2) || !secretWordValue3.equalsIgnoreCase(value3))
+    {
+      logger.debug("Incorrect secret word attempt - " + getAdministratorLoggedIn().getUser().getLogin() + " " + secretWordKey1 + "=" + secretWordValue1 + " " + secretWordKey2 + "=" + secretWordValue2
+          + " " + secretWordKey3 + "=" + secretWordValue3);
+      ActionMessages errors = new ActionMessages();
+      MessageResources messageResources = getResources(request);
+      errors.add("login", new ActionMessage("errors.invalidDetails"));
+      saveErrors(request, errors);
+      return mapping.getInputForward();
+    }
+
+    AdminUtilities.setLevel2Login(request);
+
+    // re-initialize the form
+    dynaForm.initialize(mapping);
+
+    return null;
+
+  }
 
 }
