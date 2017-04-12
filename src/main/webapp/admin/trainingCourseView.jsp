@@ -25,11 +25,17 @@
     <td align="left"><bean:message key="label.displayOrder"/></td>
     <td align="left"><bean:write name="TrainingCourseFormAdmin" property="trainingCourse.displayOrder"/></td>
   </tr>
+  <tr>
+    <td align="left"><bean:message key="label.active"/></td>
+    <td align="left"><bean:write name="TrainingCourseFormAdmin" property="trainingCourse.active"/></td>
+  </tr>
 </table>
 
 <mmj-admin:hasAccess forward="trainingCourseEdit" >
   <html:link forward="trainingCourseEdit" paramId="trainingCourse.trainingCourseId" paramName="TrainingCourseFormAdmin" paramProperty="trainingCourse.trainingCourseId"><bean:message key="link.edit"/></html:link>&nbsp;
 </mmj-admin:hasAccess>
+<logic:equal name="TrainingCourseFormAdmin" property="trainingCourse.active" value="true">
 <mmj-admin:hasAccess forward="trainingCourseDelete" >
   <html:link forward="trainingCourseDelete" paramId="trainingCourse.trainingCourseId" paramName="TrainingCourseFormAdmin" paramProperty="trainingCourse.trainingCourseId"><bean:message key="link.delete"/></html:link>
 </mmj-admin:hasAccess>
+</logic:equal>
