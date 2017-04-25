@@ -11,6 +11,7 @@ public interface TrainingCompanyDAO
   public List<TrainingCompany> getTrainingCompanies(boolean showOnlyActive);
   public List<TrainingCompanyUser> getTrainingCompanyUsers(boolean showOnlyActive);
   public List<TrainingCompanyUserEntity> getTrainingCompanyUserEntities(boolean showOnlyActive);
+  public List<TrainingCompany> getTrainingCompaniesForTrainingCourse(Integer trainingCourseId);
 	public TrainingCompany getTrainingCompany(Integer trainingCompanyId);
 	public TrainingCompany getTrainingCompanyForName(String name);
 	public TrainingCompany getTrainingCompanyForCode(String code);

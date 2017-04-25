@@ -27,7 +27,7 @@ public class TrainingCompanyList extends AdminAction
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    List<TrainingCompanyUserEntity> list = adminService.getTrainingCompanyUserEntities(false);
+    List<TrainingCompanyUserEntity> list = adminService.getTrainingCompanyUserEntities(true);
     dynaForm.set("list", list);
     logger.exit("Out going !!!");
     return mapping.findForward("success");

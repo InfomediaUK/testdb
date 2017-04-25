@@ -22,4 +22,10 @@ public class TrainingCompany extends BaseOwner
     setTrainingCompanyId(rs.getInt("TRAININGCOMPANYID"));
   }
 
+  @Override
+  public String toString()
+  {
+    return "TrainingCompany [trainingCompanyId=" + trainingCompanyId + "]";
+  }
+
 }

@@ -68,4 +68,10 @@ public class TrainingCourse extends Base
     setDisplayOrder(rs.getInt("DISPLAYORDER"));
   }
 
+  @Override
+  public String toString()
+  {
+    return "TrainingCourse [trainingCourseId=" + trainingCourseId + ", code=" + code + ", name=" + name + ", displayOrder=" + displayOrder + "]";
+  }
+
 }

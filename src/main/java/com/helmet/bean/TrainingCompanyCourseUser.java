@@ -49,6 +49,11 @@ public class TrainingCompanyCourseUser extends TrainingCompanyCourse
     this.trainingCourseCode = trainingCourseCode;
   }
 
+  public String getNameWithOnlineAndTrainingCompanyName()
+  {
+    return getNameWithOnline() + " (" + trainingCompanyName + ")";
+  }
+  
   public void load(SqlRowSet rs)
   {
     super.load(rs);
@@ -56,6 +61,14 @@ public class TrainingCompanyCourseUser extends TrainingCompanyCourse
     setTrainingCompanyCode(rs.getString("TRAININGCOMPANYCODE"));
     setTrainingCourseName(rs.getString("TRAININGCOURSENAME"));
     setTrainingCourseCode(rs.getString("TRAININGCOURSECODE"));
+  }
+
+  @Override
+  public String toString()
+  {
+    super.toString();
+    return "TrainingCompanyCourseUser [trainingCompanyName=" + trainingCompanyName + ", trainingCompanyCode=" + trainingCompanyCode + ", trainingCourseName=" + trainingCourseName
+        + ", trainingCourseCode=" + trainingCourseCode + "]";
   }
 
 }

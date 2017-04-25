@@ -82,4 +82,11 @@ public class TrainingCompanyCourse extends BaseDisplayOrder
     setOnline(rs.getBoolean("ONLINE"));
   }
 
+  @Override
+  public String toString()
+  {
+    return "TrainingCompanyCourse [trainingCompanyCourseId=" + trainingCompanyCourseId + ", trainingCompanyId=" + trainingCompanyId + ", trainingCourseId=" + trainingCourseId + ", name=" + name
+        + ", online=" + online + "]";
+  }
+
 }

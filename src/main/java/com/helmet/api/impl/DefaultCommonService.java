@@ -92,6 +92,7 @@ import com.helmet.persistence.AgencyDAO;
 import com.helmet.persistence.AgencyInvoiceCreditDAO;
 import com.helmet.persistence.AgencyInvoiceDAO;
 import com.helmet.persistence.ApplicantDAO;
+import com.helmet.persistence.ApplicantTrainingCourseDAO;
 import com.helmet.persistence.AreaOfSpecialityDAO;
 import com.helmet.persistence.BookingDAO;
 import com.helmet.persistence.BookingDateDAO;
@@ -146,6 +147,8 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class DefaultCommonService implements CommonService {
 	
   private ApplicantDAO applicantDAO;
+
+  private ApplicantTrainingCourseDAO applicantTrainingCourseDAO;
 
   private AreaOfSpecialityDAO areaOfSpecialityDAO;
   
@@ -257,6 +260,16 @@ public abstract class DefaultCommonService implements CommonService {
   public void setApplicantDAO(ApplicantDAO applicantDAO)
   {
     this.applicantDAO = applicantDAO;
+  }
+
+  public ApplicantTrainingCourseDAO getApplicantTrainingCourseDAO()
+  {
+    return applicantTrainingCourseDAO;
+  }
+
+  public void setApplicantTrainingCourseDAO(ApplicantTrainingCourseDAO applicantTrainingCourseDAO)
+  {
+    this.applicantTrainingCourseDAO = applicantTrainingCourseDAO;
   }
 
   public AreaOfSpecialityDAO getAreaOfSpecialityDAO()
@@ -3262,6 +3275,13 @@ public abstract class DefaultCommonService implements CommonService {
     return trainingCourses;
   }
 
+  public TrainingCourse getTrainingCourse(Integer trainingCourseId) 
+  {
+    TrainingCourse trainingCourse = null;
+    trainingCourse = getTrainingCourseDAO().getTrainingCourse(trainingCourseId);
+    return trainingCourse;
+  }
+
   public List<TrainingCompanyUser> getTrainingCompanyUsers(boolean showOnlyActive)
   {
     List<TrainingCompanyUser> trainingCompanyUsers = null;
@@ -3337,15 +3357,11 @@ public abstract class DefaultCommonService implements CommonService {
     return rc;
   }
 
-  
   public int updateDisciplineCategoryTraining(DisciplineCategoryTraining disciplineCategoryTraining, Integer auditorId) 
   {
       int rc = disciplineCategoryTrainingDAO.updateDisciplineCategoryTraining(disciplineCategoryTraining, auditorId);
     return rc;
   }
-  
-
-  
   
   public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCompany(Integer trainingCompanyId) 
   {
@@ -3359,15 +3375,15 @@ public abstract class DefaultCommonService implements CommonService {
     return trainingCompanyCourseUsers;
   }
   
-  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTraining(Integer trainingId) 
+  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCourse(Integer trainingCourseId) 
   {
-    return getTrainingCompanyCourseUsersForTraining(trainingId, true);
+    return getTrainingCompanyCourseUsersForTrainingCourse(trainingCourseId, true);
   }
   
-  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTraining(Integer trainingId, boolean showOnlyActive) 
+  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCourse(Integer trainingCourseId, boolean showOnlyActive) 
   {
     List<TrainingCompanyCourseUser> trainingCompanyCourseUsers = null;
-    trainingCompanyCourseUsers = trainingCompanyCourseDAO.getTrainingCompanyCourseUsersForTraining(trainingId, showOnlyActive);
+    trainingCompanyCourseUsers = trainingCompanyCourseDAO.getTrainingCompanyCourseUsersForTrainingCourse(trainingCourseId, showOnlyActive);
     return trainingCompanyCourseUsers;
   }
   
@@ -3385,10 +3401,10 @@ public abstract class DefaultCommonService implements CommonService {
     return trainingCompanyCourse;
   }
 
-  public TrainingCompanyCourse getTrainingCompanyCourseForTrainingCompanyAndTraining(Integer trainingCompanyId, Integer trainingId) 
+  public TrainingCompanyCourse getTrainingCompanyCourseForTrainingCompanyAndTrainingCourse(Integer trainingCompanyId, Integer trainingCourseId) 
   {
     TrainingCompanyCourse trainingCompanyCourse = null;
-    trainingCompanyCourse = trainingCompanyCourseDAO.getTrainingCompanyCourseForTrainingCompanyAndTraining(trainingCompanyId, trainingId);
+    trainingCompanyCourse = trainingCompanyCourseDAO.getTrainingCompanyCourseForTrainingCompanyAndTrainingCourse(trainingCompanyId, trainingCourseId);
     return trainingCompanyCourse;
   }
 

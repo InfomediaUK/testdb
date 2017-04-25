@@ -13,6 +13,8 @@ import com.helmet.bean.AgencyInvoiceUserEntity;
 import com.helmet.bean.AgyAccess;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.ApplicantClientBooking;
+import com.helmet.bean.ApplicantTrainingCourse;
+import com.helmet.bean.ApplicantTrainingCourseUser;
 import com.helmet.bean.BookingDate;
 import com.helmet.bean.BookingDateUser;
 import com.helmet.bean.BookingDateUserApplicant;
@@ -53,6 +55,8 @@ import com.helmet.bean.SubcontractInvoiceItem;
 import com.helmet.bean.SubcontractInvoiceItemHistory;
 import com.helmet.bean.SubcontractInvoiceItemUser;
 import com.helmet.bean.SubcontractInvoiceUser;
+import com.helmet.bean.TrainingCompany;
+import com.helmet.bean.TrainingCourseUser;
 import com.helmet.bean.Unavailable;
 
 public interface AgyService extends CommonService {
@@ -348,5 +352,14 @@ public interface AgyService extends CommonService {
   public Integer getBookingDatePagingGroupSize();
 
   public EmailAction getEmailAction(Integer emailActionId);
+
+  public Integer getApplicantTrainingCourseId(); 
+  public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId);
+  public List<TrainingCourseUser> getTrainingCourseUsersForDisciplineCategory(Integer disciplineCategoryId); 
+  public List<TrainingCourseUser> getTrainingCoursesForApplicantSelect(Integer disciplineCategoryId); 
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive);
+  public int insertApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId);
+  public int updateApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId);
+  public List<TrainingCompany> getTrainingCompaniesForTrainingCourse(Integer trainingCourseId);
 
 }

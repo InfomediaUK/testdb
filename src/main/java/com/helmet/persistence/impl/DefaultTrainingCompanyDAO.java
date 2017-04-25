@@ -35,6 +35,10 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 
   private static StringBuffer selectActiveTrainingCompaniesSQL;
 
+//  private static StringBuffer selectTrainingCompaniesForTrainingCourseSQL;
+
+  private static StringBuffer selectActiveTrainingCompaniesForTrainingCourseSQL;
+
 	private static StringBuffer selectTrainingCompanyUserSQL;
 
 	private static StringBuffer selectTrainingCompanyUsersSQL;
@@ -141,43 +145,57 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		deleteTrainingCompanySQL.append("AND   NOOFCHANGES = ^ ");
 		// Get select TrainingCompanies SQL.
 		selectTrainingCompaniesSQL = new StringBuffer();
-		selectTrainingCompaniesSQL.append("SELECT TRAININGCOMPANYID, ");
-		selectTrainingCompaniesSQL.append("       NAME, ");
-		selectTrainingCompaniesSQL.append("       ADDRESS1, ");
-		selectTrainingCompaniesSQL.append("       ADDRESS2, ");
-		selectTrainingCompaniesSQL.append("       ADDRESS3, ");
-		selectTrainingCompaniesSQL.append("       ADDRESS4, ");
-		selectTrainingCompaniesSQL.append("       POSTALCODE, ");
-		selectTrainingCompaniesSQL.append("       COUNTRYID, ");
-		selectTrainingCompaniesSQL.append("       CODE, ");
-		selectTrainingCompaniesSQL.append("       TELEPHONENUMBER, ");
-    selectTrainingCompaniesSQL.append("       FAXNUMBER, ");
-    selectTrainingCompaniesSQL.append("       EMAILADDRESS, ");
-    selectTrainingCompaniesSQL.append("       WEBSITEADDRESS, ");
-		selectTrainingCompaniesSQL.append("       LOGOFILENAME, ");
-		selectTrainingCompaniesSQL.append("       LOGOWIDTH, ");
-		selectTrainingCompaniesSQL.append("       LOGOHEIGHT, ");
-		selectTrainingCompaniesSQL.append("       VATNUMBER, ");
-		selectTrainingCompaniesSQL.append("       REFERENCE, ");
-		selectTrainingCompaniesSQL.append("       FREETEXT, ");
-    selectTrainingCompaniesSQL.append("       DISPLAYORDER, ");
-		selectTrainingCompaniesSQL.append("       CREATIONTIMESTAMP, ");
-		selectTrainingCompaniesSQL.append("       AUDITORID, ");
-		selectTrainingCompaniesSQL.append("       AUDITTIMESTAMP, ");
-		selectTrainingCompaniesSQL.append("       ACTIVE, ");
-		selectTrainingCompaniesSQL.append("       NOOFCHANGES ");
-		selectTrainingCompaniesSQL.append("FROM TRAININGCOMPANY ");
+		selectTrainingCompaniesSQL.append("SELECT TC.TRAININGCOMPANYID, ");
+		selectTrainingCompaniesSQL.append("       TC.NAME, ");
+		selectTrainingCompaniesSQL.append("       TC.ADDRESS1, ");
+		selectTrainingCompaniesSQL.append("       TC.ADDRESS2, ");
+		selectTrainingCompaniesSQL.append("       TC.ADDRESS3, ");
+		selectTrainingCompaniesSQL.append("       TC.ADDRESS4, ");
+		selectTrainingCompaniesSQL.append("       TC.POSTALCODE, ");
+		selectTrainingCompaniesSQL.append("       TC.COUNTRYID, ");
+		selectTrainingCompaniesSQL.append("       TC.CODE, ");
+		selectTrainingCompaniesSQL.append("       TC.TELEPHONENUMBER, ");
+    selectTrainingCompaniesSQL.append("       TC.FAXNUMBER, ");
+    selectTrainingCompaniesSQL.append("       TC.EMAILADDRESS, ");
+    selectTrainingCompaniesSQL.append("       TC.WEBSITEADDRESS, ");
+		selectTrainingCompaniesSQL.append("       TC.LOGOFILENAME, ");
+		selectTrainingCompaniesSQL.append("       TC.LOGOWIDTH, ");
+		selectTrainingCompaniesSQL.append("       TC.LOGOHEIGHT, ");
+		selectTrainingCompaniesSQL.append("       TC.VATNUMBER, ");
+		selectTrainingCompaniesSQL.append("       TC.REFERENCE, ");
+		selectTrainingCompaniesSQL.append("       TC.FREETEXT, ");
+    selectTrainingCompaniesSQL.append("       TC.DISPLAYORDER, ");
+		selectTrainingCompaniesSQL.append("       TC.CREATIONTIMESTAMP, ");
+		selectTrainingCompaniesSQL.append("       TC.AUDITORID, ");
+		selectTrainingCompaniesSQL.append("       TC.AUDITTIMESTAMP, ");
+		selectTrainingCompaniesSQL.append("       TC.ACTIVE, ");
+		selectTrainingCompaniesSQL.append("       TC.NOOFCHANGES ");
+		selectTrainingCompaniesSQL.append("FROM TRAININGCOMPANY TC ");
+    // Get select TrainingCompanies for TrainingCourse SQL.
+//    selectTrainingCompaniesForTrainingCourseSQL = new StringBuffer(selectTrainingCompaniesSQL);
+//    selectTrainingCompaniesForTrainingCourseSQL.append("WHERE TRAININGCOURSEID = ^ ");
+    // Get select Active TrainingCompanies for TrainingCourse SQL.
+    selectActiveTrainingCompaniesForTrainingCourseSQL = new StringBuffer(selectTrainingCompaniesSQL);
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append("WHERE TC.ACTIVE = TRUE ");
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append("AND EXISTS ");
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append("( ");
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append(" SELECT NULL ");
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append(" FROM TRAININGCOMPANYCOURSE TCC ");
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append(" WHERE TCC.TRAININGCOMPANYID = TC.TRAININGCOMPANYID ");
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append(" AND TCC.TRAININGCOURSEID = ^ ");
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append(" AND TCC.ACTIVE = TRUE ");
+    selectActiveTrainingCompaniesForTrainingCourseSQL.append(") ");
 		// Get select TrainingCompany SQL.
 		selectTrainingCompanySQL = new StringBuffer(selectTrainingCompaniesSQL);
-		selectTrainingCompanySQL.append("WHERE TRAININGCOMPANYID = ^ ");
+		selectTrainingCompanySQL.append("WHERE TC.TRAININGCOMPANYID = ^ ");
 		// Get select TrainingCompany for Name SQL.
 		selectTrainingCompanyForNameSQL = new StringBuffer(selectTrainingCompaniesSQL);
-		selectTrainingCompanyForNameSQL.append("WHERE NAME = ^ ");
-		selectTrainingCompanyForNameSQL.append("AND ACTIVE = TRUE ");
+		selectTrainingCompanyForNameSQL.append("WHERE TC.NAME = ^ ");
+		selectTrainingCompanyForNameSQL.append("AND TC.ACTIVE = TRUE ");
 		// Get select TrainingCompany for Code SQL.
 		selectTrainingCompanyForCodeSQL = new StringBuffer(selectTrainingCompaniesSQL);
-		selectTrainingCompanyForCodeSQL.append("WHERE CODE = ^ ");
-		selectTrainingCompanyForCodeSQL.append("AND ACTIVE = TRUE ");
+		selectTrainingCompanyForCodeSQL.append("WHERE TC.CODE = ^ ");
+		selectTrainingCompanyForCodeSQL.append("AND TC.ACTIVE = TRUE ");
 		// Get select TrainingCompanyUsers SQL.
 		selectTrainingCompanyUsersSQL = new StringBuffer();
 		selectTrainingCompanyUsersSQL.append("SELECT TC.TRAININGCOMPANYID, ");
@@ -373,9 +391,15 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		{
 			sql = new StringBuffer(selectTrainingCompanyUsersSQL.toString());	
 		}
-		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(),
-				TrainingCompanyUser.class.getName());
+		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCompanyUser.class.getName());
 	}
+
+  public List<TrainingCompany> getTrainingCompaniesForTrainingCourse(Integer trianingCourseId) 
+  {
+    StringBuffer sql = new StringBuffer(selectActiveTrainingCompaniesForTrainingCourseSQL.toString());
+    Utilities.replace(sql, trianingCourseId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCompany.class.getName());
+  }
 
 	public int updateTrainingCompanyDisplayOrder(Integer trainingCompanyId, Integer displayOrder, Integer noOfChanges, Integer auditorId) 
 	{

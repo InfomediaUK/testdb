@@ -22,6 +22,8 @@ import com.helmet.bean.AgencyInvoiceUserEntity;
 import com.helmet.bean.AgyAccess;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.ApplicantClientBooking;
+import com.helmet.bean.ApplicantTrainingCourse;
+import com.helmet.bean.ApplicantTrainingCourseUser;
 import com.helmet.bean.Booking;
 import com.helmet.bean.BookingDate;
 import com.helmet.bean.BookingDateUser;
@@ -65,6 +67,8 @@ import com.helmet.bean.SubcontractInvoiceItem;
 import com.helmet.bean.SubcontractInvoiceItemHistory;
 import com.helmet.bean.SubcontractInvoiceItemUser;
 import com.helmet.bean.SubcontractInvoiceUser;
+import com.helmet.bean.TrainingCompany;
+import com.helmet.bean.TrainingCourseUser;
 import com.helmet.bean.Unavailable;
 import com.helmet.persistence.AgyAccessDAO;
 import com.helmet.persistence.BookingDateExpenseDAO;
@@ -77,7 +81,7 @@ import com.helmet.persistence.Utilities;
 
 public class DefaultAgyService extends DefaultCommonService implements AgyService {
 
-	private ConsultantDAO consultantDAO;
+  private ConsultantDAO consultantDAO;
 
 	private AgyAccessDAO agyAccessDAO;
 
@@ -91,7 +95,7 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
   
   private SubcontractInvoiceItemDAO subcontractInvoiceItemDAO;
   
-	public void setConsultantDAO(ConsultantDAO consultantDAO) {
+  public void setConsultantDAO(ConsultantDAO consultantDAO) {
 		this.consultantDAO = consultantDAO;
 	}
 
@@ -2035,6 +2039,58 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     EmailAction emailAction = null;
     emailAction = getEmailActionDAO().getEmailAction(emailActionId);
     return emailAction;
+  }
+
+  public List<TrainingCourseUser> getTrainingCourseUsersForDisciplineCategory(Integer disciplineCategoryId) 
+  {
+    List<TrainingCourseUser> trainingCourses = null;
+    trainingCourses = getTrainingCourseDAO().getTrainingCourseUsersForDisciplineCategory(disciplineCategoryId);
+    return trainingCourses;
+  }
+  
+  public List<TrainingCourseUser> getTrainingCoursesForApplicantSelect(Integer disciplineCategoryId) 
+  {
+    List<TrainingCourseUser> trainingCourses = null;
+    trainingCourses = getTrainingCourseDAO().getTrainingCoursesForApplicantSelect(disciplineCategoryId);
+    return trainingCourses;
+  }
+  
+  public Integer getApplicantTrainingCourseId()
+  {
+    return getApplicantTrainingCourseDAO().getApplicantTrainingCourseId();
+  }
+
+  public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId)
+  {
+    ApplicantTrainingCourse applicantTrainingCourse = null;
+    applicantTrainingCourse = getApplicantTrainingCourseDAO().getApplicantTrainingCourse(applicantTrainingCourseId);
+    return applicantTrainingCourse;
+  }
+  
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive)
+  {
+    List<ApplicantTrainingCourseUser> listApplicantTrainingCourseUser = null;
+    listApplicantTrainingCourseUser = getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantId, showOnlyActive);
+    return listApplicantTrainingCourseUser;
+  }
+
+  public int insertApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId)
+  {
+    int rc = getApplicantTrainingCourseDAO().insertApplicantTrainingCourse(applicantTrainingCourse, auditorId);
+    return rc;
+  }
+
+  public int updateApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId)
+  {
+    int rc = getApplicantTrainingCourseDAO().updateApplicantTrainingCourse(applicantTrainingCourse, auditorId);
+    return rc;
+  }
+
+  public List<TrainingCompany> getTrainingCompaniesForTrainingCourse(Integer trainingCourseId)
+  {
+    List<TrainingCompany> trainingCompanies = null;
+    trainingCompanies = getTrainingCompanyDAO().getTrainingCompaniesForTrainingCourse(trainingCourseId);
+    return trainingCompanies;
   }
 
 }

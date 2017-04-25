@@ -355,7 +355,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					</table>  
 			  </div>
 			  <div class="tabbertab">
-				  <h2>Current Documents</h2>
+				  <h2>Current Docs</h2>
 					<table class="simple" width="100%">
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.cvFilename"/></th>
@@ -586,7 +586,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					</table>
 			  </div>
 			  <div class="tabbertab">
-				  <h2>ID Documents</h2>
+				  <h2>ID Docs</h2>
 					<table class="simple" width="100%">
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.photoFilename"/></th>
@@ -784,7 +784,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					</table>
 				  </div>
 				  <div class="tabbertab">
-					  <h2>Health Documents</h2>
+					  <h2>Health Docs</h2>
 						<table class="simple" width="100%">
 					  <tr>
 					    <th width="25%" align="left"class="label"><bean:message key="label.varicellaFilename"/></th>
@@ -1292,7 +1292,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
   </logic:notEmpty>
 </logic:present>
 			  </div>		
-		    <div class="tabbertab">
+		      <div class="tabbertab">
 				  <h2>Unavailable</h2>
 					<table width="100%">
 					  <tr>
@@ -1315,7 +1315,82 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 	  </td>
   </tr>
 </table>
-
+<table cellpadding="0" cellspacing="0" width="100%" border="0">
+  <tr>
+    <td>
+	  <div class="tabber">
+		<div class="tabbertab">
+		  <h2>Training</h2>
+		  <table class="simple" width="100%">
+<mmj-agy:hasAccess forward="applicantTrainingCourseNew">
+		    <tr>
+		      <td colspan="6">
+				<html:link forward="applicantTrainingCourseNew" paramId="applicant.applicantId" paramName="ApplicantFormAgy" paramProperty="applicant.applicantId"><bean:message key="link.new"/></html:link>
+		      </td>
+		    </tr>
+</mmj-agy:hasAccess>
+		    <tr>
+		      <th>
+		        Course
+		      </th>
+		      <th>
+		        Company
+		      </th>
+		      <th>
+		        Start
+		      </th>
+          <th>
+            End
+          </th>
+          <th>
+            Documentation
+          </th>
+          <th>
+            Comment
+          </th>
+		    </tr>
+    <logic:iterate id="applicantTrainingCourse" name="ApplicantFormAgy" property="listApplicantTrainingCourse" type="com.helmet.bean.ApplicantTrainingCourseUser">
+		    <tr>
+		      <td>
+<mmj-agy:hasAccess forward="applicantTrainingCourseNew">
+          <html:link forward="applicantTrainingCourseEdit" paramId="applicantTrainingCourse.applicantTrainingCourseId" paramName="applicantTrainingCourse" paramProperty="applicantTrainingCourseId"><bean:write name="applicantTrainingCourse" property="trainingCompanyCourseName" filter="false"/></html:link>
+</mmj-agy:hasAccess>
+<mmj-agy:hasNoAccess forward="applicantTrainingCourseNew">
+		        <bean:write name="applicantTrainingCourse" property="trainingCompanyCourseName" filter="false"/>
+</mmj-agy:hasNoAccess>
+		      </td>
+		      <td>
+            <bean:write name="applicantTrainingCourse" property="trainingCompanyName" filter="false"/>
+		      </td>
+		      <td>
+            <bean:write name="applicantTrainingCourse" property="startDate" formatKey="format.mediumDateFormat"/>
+		      </td>
+          <td>
+            <bean:write name="applicantTrainingCourse" property="endDate" formatKey="format.mediumDateFormat"/>
+          </td>
+          <td>
+            <bean:define id="documentationFileUrl" name="applicantTrainingCourse" property="documentationFileUrl" type="java.lang.String" />
+                <% 
+                fileUrl = request.getContextPath() + documentationFileUrl;
+                %>
+<logic:equal name="consultant" property="canViewDocuments" value="true">
+                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="applicantTrainingCourse" property="documentationFileName"/></html:link>
+</logic:equal>
+<logic:notEqual name="consultant" property="canViewDocuments" value="true">
+                <bean:write name="applicantTrainingCourse" property="documentationFileName"/>
+</logic:notEqual>
+          </td>
+          <td>
+            <bean:write name="applicantTrainingCourse" property="comment" filter="false"/>
+          </td>
+		    </tr>
+		 </logic:iterate>
+		  </table>
+		</div>
+	  </div>
+    </td>
+  </tr>
+</table>
 <br/>
 <bean:define id="tab" value="weekly"/>
 

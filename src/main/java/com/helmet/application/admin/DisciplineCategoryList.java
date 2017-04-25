@@ -28,7 +28,7 @@ public class DisciplineCategoryList extends AdminAction
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
-    List<DisciplineCategoryUserEntity> list = adminService.getDisciplineCategoryUserEntities(false);
+    List<DisciplineCategoryUserEntity> list = adminService.getDisciplineCategoryUserEntities(true);
     dynaForm.set("list", list);
     logger.exit("Out going !!!");
     return mapping.findForward("success");

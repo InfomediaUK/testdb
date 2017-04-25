@@ -8,10 +8,9 @@
 <%@ taglib uri="/mmj-admin" prefix="mmj-admin" %>
 
 <bean:message key="title.disciplineCategoryView"/>
-
 <br/>
 <br/>
-
+<html:errors/>
 <table>
   <tr>
     <td align="left"><bean:message key="label.name"/></td>

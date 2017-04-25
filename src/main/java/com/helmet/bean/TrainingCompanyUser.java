@@ -23,4 +23,11 @@ public class TrainingCompanyUser extends TrainingCompany
     setCountryName(rs.getString("COUNTRYNAME"));
   }
 
+  @Override
+  public String toString()
+  {
+    super.toString();
+    return "TrainingCompanyUser [countryName=" + countryName + "]";
+  }
+
 }

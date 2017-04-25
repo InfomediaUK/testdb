@@ -1384,7 +1384,7 @@
 
     <action path="/disciplineCategoryTrainingDelete"
             type="com.helmet.application.admin.DisciplineCategoryTrainingDelete"
-            name="DisciplineCategoryFormAdmin"
+            name="DisciplineCategoryViewFormAdmin"
             scope="request"
             input="disciplineCategoryView.page"
             validate="false">

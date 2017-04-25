@@ -1,8 +1,6 @@
 package com.helmet.application.agy;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,8 +20,8 @@ import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.application.comparator.AgencyWorkerChecklistFileComparator;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantTrainingCourseUser;
 import com.helmet.bean.BookingDateUserApplicant;
-import com.helmet.bean.Unavailable;
 
 
 public class ApplicantView extends ApplicantCommon
@@ -76,12 +74,17 @@ public class ApplicantView extends ApplicantCommon
     List <BookingBookingDateUserApplicant> listBookingBookingDateUserApplicant = loadBookingBookingDateUserApplicantList(applicant.getApplicantId(), list, weekToShow);
     
     List<AgencyWorkerChecklistFile> agencyWorkerChecklists = loadAgencyWorkerChecklists(FileHandler.getInstance().getApplicantFileLocation() + FileHandler.getInstance().getApplicantFileFolder() + "/" + applicant.getApplicantId(), applicant.getApplicantId());
+    
+    List<ApplicantTrainingCourseUser> listApplicantTrainingCourse = agyService.getApplicantTrainingCourseUsersForApplicant(applicant.getApplicantId(), true);
+    
     Collections.sort(agencyWorkerChecklists, new AgencyWorkerChecklistFileComparator());
+    
     dynaForm.set("applicant", applicant);
     String notes = getApplicantNotes(applicant).toString();
     dynaForm.set("notes", notes.replaceAll("\n", "<br />"));
     dynaForm.set("list", listBookingBookingDateUserApplicant);
     dynaForm.set("agencyWorkerChecklists", agencyWorkerChecklists);
+    dynaForm.set("listApplicantTrainingCourse", listApplicantTrainingCourse);
     dynaForm.set("unavailableDates", unavailableDates);
 
     logger.exit("Out going !!!");

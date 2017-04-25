@@ -219,6 +219,7 @@
 		<property name="visaTypeDAO" ref="visaTypeDAO" />
 		<property name="regulatorDAO" ref="regulatorDAO" />
 		<property name="trainingCourseDAO" ref="trainingCourseDAO" />
+        <property name="applicantTrainingCourseDAO" ref="applicantTrainingCourseDAO" />
 		<property name="disciplineCategoryTrainingDAO" ref="disciplineCategoryTrainingDAO" />
 		<property name="compliancyTestDAO" ref="compliancyTestDAO" />
 		<!-- specific DAOs -->
@@ -375,6 +376,7 @@
 		<!-- specific DAOs -->
 		<property name="agyAccessDAO" ref="agyAccessDAO" />
 		<property name="applicantDAO" ref="applicantDAO" />
+        <property name="applicantTrainingCourseDAO" ref="applicantTrainingCourseDAO" />
 		<property name="bookingDateExpenseDAO" ref="bookingDateExpenseDAO" />
 		<property name="bookingDateHourDAO" ref="bookingDateHourDAO" />
 		<property name="consultantDAO" ref="consultantDAO" />
@@ -825,6 +827,12 @@
 
 	<bean id="applicantDAO" 
 	      class="com.helmet.persistence.impl.DefaultApplicantDAO" 
+	      init-method="init" >
+			<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<bean id="applicantTrainingCourseDAO" 
+	      class="com.helmet.persistence.impl.DefaultApplicantTrainingCourseDAO" 
 	      init-method="init" >
 			<property name="dataSource" ref="dataSource"/>
 	</bean>

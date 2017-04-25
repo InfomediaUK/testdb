@@ -9,11 +9,11 @@ public interface TrainingCompanyCourseDAO
 {
 	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCompany(Integer trainingCompanyId, boolean showOnlyActive);
 	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCompany(Integer trainingCompanyId);
-	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTraining(Integer trainingId, boolean showOnlyActive);
-	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTraining(Integer trainingId);
+	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCourse(Integer trainingCourseId, boolean showOnlyActive);
+	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCourse(Integer trainingCourseId);
   public TrainingCompanyCourse getTrainingCompanyCourse(Integer trainingCompanyCourseId);
   public TrainingCompanyCourseUser getTrainingCompanyCourseUser(Integer trainingCompanyCourseId);
-	public TrainingCompanyCourse getTrainingCompanyCourseForTrainingCompanyAndTraining(Integer trainingCompanyId, Integer trainingId);
+	public TrainingCompanyCourse getTrainingCompanyCourseForTrainingCompanyAndTrainingCourse(Integer trainingCompanyId, Integer trainingCourseId);
 	public int insertTrainingCompanyCourse(TrainingCompanyCourse trainingCompanyCourse, Integer auditorId);
 	public int deleteTrainingCompanyCourse(Integer trainingCompanyCourseId, Integer noOfChanges, Integer auditorId);
 	public int updateTrainingCompanyCourse(TrainingCompanyCourse trainingCompanyCourse, Integer auditorId);

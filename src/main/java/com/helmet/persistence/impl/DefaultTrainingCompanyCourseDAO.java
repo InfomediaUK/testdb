@@ -26,7 +26,7 @@ public class DefaultTrainingCompanyCourseDAO extends JdbcDaoSupport implements T
 
 	private static StringBuffer selectTrainingCompanyCourseSQL;
 
-	private static StringBuffer selectTrainingCompanyCourseForTrainingCompanyAndTrainingSQL;
+	private static StringBuffer selectTrainingCompanyCourseForTrainingCompanyAndTrainingCourseSQL;
 
 	private static StringBuffer selectTrainingCompanyCourseUsersSQL;
 
@@ -36,9 +36,9 @@ public class DefaultTrainingCompanyCourseDAO extends JdbcDaoSupport implements T
 
 	private static StringBuffer selectActiveTrainingCompanyCourseUsersForTrainingCompanySQL;
 
-  private static StringBuffer selectTrainingCompanyCourseUsersForTrainingSQL;
+  private static StringBuffer selectTrainingCompanyCourseUsersForTrainingCourseSQL;
 
-  private static StringBuffer selectActiveTrainingCompanyCourseUsersForTrainingSQL;
+  private static StringBuffer selectActiveTrainingCompanyCourseUsersForTrainingCourseSQL;
 
 	public static void init() {
 		// Get insert TrainingCompanyCourse SQL.
@@ -103,10 +103,10 @@ public class DefaultTrainingCompanyCourseDAO extends JdbcDaoSupport implements T
 		selectTrainingCompanyCourseSQL = new StringBuffer(selectTrainingCompanyCoursesSQL);
 		selectTrainingCompanyCourseSQL.append("WHERE TRAININGCOMPANYCOURSEID = ^ ");
 		// Get select TrainingCompanyCourse for TrainingCompany and TrainingCourse SQL.
-		selectTrainingCompanyCourseForTrainingCompanyAndTrainingSQL = new StringBuffer(selectTrainingCompanyCoursesSQL);
-		selectTrainingCompanyCourseForTrainingCompanyAndTrainingSQL.append("WHERE TRAININGCOMPANYID = ^ ");
-		selectTrainingCompanyCourseForTrainingCompanyAndTrainingSQL.append("AND   TRAININGCOURSEID = ^ ");
-		selectTrainingCompanyCourseForTrainingCompanyAndTrainingSQL.append("AND   ACTIVE = TRUE ");
+		selectTrainingCompanyCourseForTrainingCompanyAndTrainingCourseSQL = new StringBuffer(selectTrainingCompanyCoursesSQL);
+		selectTrainingCompanyCourseForTrainingCompanyAndTrainingCourseSQL.append("WHERE TRAININGCOMPANYID = ^ ");
+		selectTrainingCompanyCourseForTrainingCompanyAndTrainingCourseSQL.append("AND   TRAININGCOURSEID = ^ ");
+		selectTrainingCompanyCourseForTrainingCompanyAndTrainingCourseSQL.append("AND   ACTIVE = TRUE ");
 		// Get select TrainingCompanyCourseUsers SQL.
 		selectTrainingCompanyCourseUsersSQL = new StringBuffer();
 		selectTrainingCompanyCourseUsersSQL.append("SELECT TCC.TRAININGCOMPANYCOURSEID, ");
@@ -141,33 +141,20 @@ public class DefaultTrainingCompanyCourseDAO extends JdbcDaoSupport implements T
 		selectActiveTrainingCompanyCourseUsersForTrainingCompanySQL = new StringBuffer(selectTrainingCompanyCourseUsersForTrainingCompanySQL);
 		selectActiveTrainingCompanyCourseUsersForTrainingCompanySQL.append("AND TCC.ACTIVE = TRUE ");
 		// Get select TrainingCompanyCourseUsers for TrainingCourse SQL.
-		selectTrainingCompanyCourseUsersForTrainingSQL = new StringBuffer(selectTrainingCompanyCourseUsersSQL);
-		selectTrainingCompanyCourseUsersForTrainingSQL.append("AND TCC.TRAININGCOURSEID = ^ ");
+		selectTrainingCompanyCourseUsersForTrainingCourseSQL = new StringBuffer(selectTrainingCompanyCourseUsersSQL);
+		selectTrainingCompanyCourseUsersForTrainingCourseSQL.append("AND C.TRAININGCOURSEID = ^ ");
 		// Active ONLY
-		selectActiveTrainingCompanyCourseUsersForTrainingSQL = new StringBuffer(selectTrainingCompanyCourseUsersForTrainingSQL);
-		selectActiveTrainingCompanyCourseUsersForTrainingSQL.append("AND TCC.ACTIVE = TRUE ");
+		selectActiveTrainingCompanyCourseUsersForTrainingCourseSQL = new StringBuffer(selectTrainingCompanyCourseUsersForTrainingCourseSQL);
+		selectActiveTrainingCompanyCourseUsersForTrainingCourseSQL.append("AND TCC.ACTIVE = TRUE ");
 
 		// ORDER BY clauses
 		selectTrainingCompanyCourseUsersForTrainingCompanySQL.append("ORDER BY TCC.DISPLAYORDER, TCC.NAME ");
 		selectActiveTrainingCompanyCourseUsersForTrainingCompanySQL.append("ORDER BY TCC.DISPLAYORDER, TCC.NAME ");
-    selectTrainingCompanyCourseUsersForTrainingSQL.append("ORDER BY TC.DISPLAYORDER, TC.NAME ");
-    selectActiveTrainingCompanyCourseUsersForTrainingSQL.append("ORDER BY TC.DISPLAYORDER, TC.NAME ");
+    selectTrainingCompanyCourseUsersForTrainingCourseSQL.append("ORDER BY TCC.DISPLAYORDER, TCC.NAME ");
+    selectActiveTrainingCompanyCourseUsersForTrainingCourseSQL.append("ORDER BY TCC.DISPLAYORDER, TCC.NAME ");
 
 	}
 
-  /**
-   * Adds the SQL for the InNameGroup part of the full statement.
-   * Eg. Adds to selectTrainingCompanyCourseUsersForTrainingSQL to become selectTrainingCompanyCourseUsersForTrainingInNameGroupSQL.
-   *  
-   * @param sourceSQL The original SQL to be added to.
-   */
-  private static StringBuffer addInNameGroupSQL(StringBuffer sourceSQL)
-  {
-    StringBuffer targetSQL = new StringBuffer(sourceSQL);
-    targetSQL.append("AND SUBSTRING(UPPER(TC.NAME), 1, 1) IN (^) ");
-    return targetSQL;
-  }
-  
 	public int insertTrainingCompanyCourse(TrainingCompanyCourse trainingCompanyCourse, Integer auditorId) 
 	{
 		// Create a new local StringBuffer containing the parameterised SQL.
@@ -234,33 +221,28 @@ public class DefaultTrainingCompanyCourseDAO extends JdbcDaoSupport implements T
 		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCompanyCourseUser.class.getName());
 	}
 
-	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTraining(Integer trainingId) 
+	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCourse(Integer trainingCourseId) 
 	{
-		return getTrainingCompanyCourseUsersForTraining(trainingId, true);
+		return getTrainingCompanyCourseUsersForTrainingCourse(trainingCourseId, true);
 	}
 
-	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTraining(Integer trainingId, boolean showOnlyActive) 
+	public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCourse(Integer trainingCourseId, boolean showOnlyActive) 
 	{
 		// Create a new local StringBuffer containing the parameterised SQL.
 		StringBuffer sql = null;
 		if (showOnlyActive) 
 		{
-			sql = new StringBuffer(selectActiveTrainingCompanyCourseUsersForTrainingSQL.toString());
+			sql = new StringBuffer(selectActiveTrainingCompanyCourseUsersForTrainingCourseSQL.toString());
 		}
 		else 
 		{
-			sql = new StringBuffer(selectTrainingCompanyCourseUsersForTrainingSQL.toString()); 
+			sql = new StringBuffer(selectTrainingCompanyCourseUsersForTrainingCourseSQL.toString()); 
 		}
 		// Replace the parameters with supplied values.
-		Utilities.replace(sql, trainingId);
+		Utilities.replace(sql, trainingCourseId);
 		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCompanyCourseUser.class.getName());
 
 	}
-
-  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingInNameGroup(Integer trainingId, String indexLetter) 
-  {
-    return getTrainingCompanyCourseUsersForTraining(trainingId, true);
-  }
 
 	public TrainingCompanyCourse getTrainingCompanyCourse(Integer trainingCompanyCourseId) 
 	{
@@ -272,10 +254,10 @@ public class DefaultTrainingCompanyCourseDAO extends JdbcDaoSupport implements T
 		return trainingCompanyCourse;
 	}
 
-	public TrainingCompanyCourse getTrainingCompanyCourseForTrainingCompanyAndTraining(Integer trainingCompanyId, Integer trainingId) 
+	public TrainingCompanyCourse getTrainingCompanyCourseForTrainingCompanyAndTrainingCourse(Integer trainingCompanyId, Integer trainingId) 
 	{
 		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(selectTrainingCompanyCourseForTrainingCompanyAndTrainingSQL.toString());
+		StringBuffer sql = new StringBuffer(selectTrainingCompanyCourseForTrainingCompanyAndTrainingCourseSQL.toString());
 		// Replace the parameters with supplied values.
 		Utilities.replace(sql, trainingCompanyId);
 		Utilities.replace(sql, trainingId);

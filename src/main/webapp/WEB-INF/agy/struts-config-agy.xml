@@ -363,6 +363,7 @@
       <form-property name="confirmPwd" type="java.lang.String" />
       <form-property name="list" type="java.util.List" />
       <form-property name="agencyWorkerChecklists" type="java.util.List" />
+      <form-property name="listApplicantTrainingCourse" type="java.util.List" />
       <form-property name="showWeekly" type="java.lang.Boolean" initial="true" />
       <form-property name="weekToShow" type="java.lang.Integer" initial="0" />
       <form-property name="startDate" type="java.sql.Date" />
@@ -380,7 +381,7 @@
       <form-property name="totalExpenseVatValue" type="java.math.BigDecimal" />
       <form-property name="totalTotalVatValue" type="java.math.BigDecimal" />
       <form-property name="totalActualTotalValue" type="java.math.BigDecimal" />
-	    <form-property name="totalNetValue" type="java.math.BigDecimal" />
+	  <form-property name="totalNetValue" type="java.math.BigDecimal" />
   	  <form-property name="totalVatValue" type="java.math.BigDecimal" />
       <form-property name="totalValue" type="java.math.BigDecimal" />
     </form-bean>
@@ -534,6 +535,17 @@
       <form-property name="applicantsCompliancyTestResultList" type="java.util.List" />
     </form-bean>
 
+    <form-bean name="ApplicantTrainingCourseFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="applicant" type="com.helmet.bean.Applicant" />
+      <form-property name="applicantTrainingCourse" type="com.helmet.bean.ApplicantTrainingCourse" />
+      <form-property name="startDateStr" type="java.lang.String" />
+      <form-property name="endDateStr" type="java.lang.String" />
+      <form-property name="trainingCourseId" type="java.lang.String" />
+      <form-property name="trainingCompanyId" type="java.lang.String" />
+      <form-property name="documentationFormFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="trainingCompanyCourseList" type="java.util.List" />
+    </form-bean>
+    
     <form-bean name="BookingGradeViewFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingGrade" type="com.helmet.bean.BookingGradeAgyEntity" />
       <form-property name="chargeRateValue" type="java.math.BigDecimal" initial="0"/>
@@ -1312,6 +1324,10 @@
     <forward name="applicantBookingDatesAuthorize" path="/applicantBookingDatesAuthorize.do" />
     <forward name="applicantBookingDatesInvoice" path="/applicantBookingDatesInvoice.do" />
     <forward name="applicantChecklist" path="/applicantChecklist.do" />
+    <forward name="applicantTrainingCourseNew" path="/applicantTrainingCourseNew.do" />
+    <forward name="applicantTrainingCourseEdit" path="/applicantTrainingCourseEdit.do" />
+    <forward name="applicantTrainingCourse" path="/applicantTrainingCourse.do" />
+    <forward name="applicantTrainingCourseXML" path="/applicantTrainingCourseXML.do" />
     <forward name="applicantNotifications" path="/applicantNotifications.do" />
     <forward name="applicantWorkingList" path="/applicantWorkingList.do" />
 
@@ -1802,6 +1818,51 @@
         <forward name="emptyList" path="/applicantNotifications.do" redirect="true" />
     </action>
 
+    <action path="/applicantTrainingCourseNew"
+            type="com.helmet.application.agy.ApplicantTrainingCourseNew"
+            name="ApplicantTrainingCourseFormAgy"
+            scope="request"
+            input="/applicantView.page"
+            validate="false">
+        <forward name="success" path="applicantTrainingCourseNew.page" />
+    </action>
+
+    <action path="/applicantTrainingCourseNewProcess"
+            type="com.helmet.application.agy.ApplicantTrainingCourseNewProcess"
+            name="ApplicantTrainingCourseFormAgy"
+            scope="request"
+            input="/applicantTrainingCourseNew.page"
+            validate="true">
+        <forward name="success" path="/applicantView.do" />
+    </action>
+
+    <action path="/applicantTrainingCourseEdit"
+            type="com.helmet.application.agy.ApplicantTrainingCourseEdit"
+            name="ApplicantTrainingCourseFormAgy"
+            scope="request"
+            input="/applicantView.page"
+            validate="false">
+        <forward name="success" path="applicantTrainingCourseEdit.page" />
+    </action>
+
+    <action path="/applicantTrainingCourseEditProcess"
+            type="com.helmet.application.agy.ApplicantTrainingCourseEditProcess"
+            name="ApplicantTrainingCourseFormAgy"
+            scope="request"
+            input="/applicantTrainingCourseEdit.page"
+            validate="true">
+        <forward name="success" path="/applicantView.do" />
+    </action>
+
+    <action path="/applicantTrainingCourseXML"
+            type="com.helmet.application.agy.ApplicantTrainingCourseXML"
+            name="ApplicantTrainingCourseFormAgy"
+            scope="request"
+            input="/applicantView.page"
+            validate="false">
+        <forward name="failure" path="/home.do" />
+    </action>
+    
     <action path="/bookingGradeList"
             type="com.helmet.application.agy.BookingGradeList"
             name="BookingGradeListFormAgy"

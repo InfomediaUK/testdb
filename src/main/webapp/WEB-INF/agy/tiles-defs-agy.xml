@@ -121,6 +121,18 @@
         <put name="pageHelpKey" value="pageHelp.applicantsCompliancyTestResults" type="string"/>
         <put name="body"   value="/agy/applicantsCompliancyTestList.jsp"/>
   </definition>
+  <definition name="applicantTrainingCourseNew.page" extends="layoutAgy.main">
+        <put name="titleKey" value="title.applicantTrainingCourseNew" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.applicantTrainingCourseNew" type="string"/>
+        <put name="body"   value="/agy/applicantTrainingCourseNew.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
+  <definition name="applicantTrainingCourseEdit.page" extends="layoutAgy.main">
+        <put name="titleKey" value="title.applicantTrainingCourseEdit" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.applicantTrainingCourseEdit" type="string"/>
+        <put name="body"   value="/agy/applicantTrainingCourseEdit.jsp"/>
+        <put name="includeZapatec" value="true" type="string"/>
+  </definition>
   <!-- BookingGrade -->
   <definition name="bookingGradeList.page" extends="layoutAgy.main">
         <put name="titleKey" value="title.bookingGradeList" type="string"/>

@@ -63,6 +63,7 @@ import com.helmet.bean.JobSubFamilyEntity;
 import com.helmet.bean.LocationJobProfile;
 import com.helmet.bean.NhsBackingReport;
 import com.helmet.bean.ReEnterPwd;
+import com.helmet.bean.RecordCount;
 import com.helmet.bean.Regulator;
 import com.helmet.bean.TrainingCourse;
 import com.helmet.bean.TrainingCompany;
@@ -2247,5 +2248,11 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     int rc = getTrainingCourseDAO().deleteTrainingCourse(trainingCourseId, noOfChanges, auditorId);
     return rc;
   }
-  
+ 
+  public RecordCount getActiveApplicantTrainingCourseCountForTrainingCourse(Integer trainingCourseId) 
+  {
+    RecordCount applicantTrainingCourseCount = null;
+    applicantTrainingCourseCount = getApplicantTrainingCourseDAO().getActiveApplicantTrainingCourseCountForTrainingCourse(trainingCourseId);
+    return applicantTrainingCourseCount;
+  }
 }

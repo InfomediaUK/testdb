@@ -327,6 +327,7 @@ public interface CommonService {
   public List<Regulator> getRegulators(boolean showOnlyActive);
   public List<CompliancyTest> getCompliancyTests(boolean showOnlyActive);
   public List<TrainingCourse> getTrainingCourses(boolean showOnlyActive);
+  public TrainingCourse getTrainingCourse(Integer trainingCourseId);
 
   public int compliantApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId, Boolean compliant);
 
@@ -348,11 +349,11 @@ public interface CommonService {
 
   public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCompany(Integer disciplineCategoryId, boolean showOnlyActive);
   public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCompany(Integer disciplineCategoryId);
-  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTraining(Integer trainingId);
-  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTraining(Integer trainingId, boolean showOnlyActive);
+  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCourse(Integer trainingCourseId);
+  public List<TrainingCompanyCourseUser> getTrainingCompanyCourseUsersForTrainingCourse(Integer trainingCourseId, boolean showOnlyActive);
   public TrainingCompanyCourse getTrainingCompanyCourse(Integer disciplineCategoryTrainingId);
   public TrainingCompanyCourseUser getTrainingCompanyCourseUser(Integer disciplineCategoryTrainingId);
-  public TrainingCompanyCourse getTrainingCompanyCourseForTrainingCompanyAndTraining(Integer disciplineCategoryId, Integer  trainingId);
+  public TrainingCompanyCourse getTrainingCompanyCourseForTrainingCompanyAndTrainingCourse(Integer trainingCompanyId, Integer  trainingCourseId);
   public int insertTrainingCompanyCourse(TrainingCompanyCourse disciplineCategoryTraining, Integer auditorId);
   public int deleteTrainingCompanyCourse(Integer disciplineCategoryTrainingId, Integer noOfChanges, Integer auditorId);
   public int updateTrainingCompanyCourse(TrainingCompanyCourse disciplineCategoryTraining, Integer auditorId);

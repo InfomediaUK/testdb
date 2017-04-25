@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.helmet.bean.TrainingCourse;
+import com.helmet.bean.TrainingCourseUser;
 import com.helmet.persistence.TrainingCourseDAO;
 import com.helmet.persistence.RecordFactory;
 import com.helmet.persistence.RecordListFactory;
@@ -29,11 +30,19 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
 
 	private static StringBuffer selectTrainingCourseForCodeSQL;
 
-	private static StringBuffer selectTrainingCoursesSQL;
+  private static StringBuffer selectTrainingCoursesSQL;
+
+  private static StringBuffer selectTrainingCourseUsersSQL;
 
 	private static StringBuffer selectActiveTrainingCoursesSQL;
 
   private static StringBuffer selectTrainingCoursesNotForDisciplineCategorySQL;
+
+  private static StringBuffer selectTrainingCourseUsersForDisciplineCategorySQL;
+
+  private static StringBuffer selectTrainingCourseUsersNotForDisciplineCategorySQL;
+
+  private static StringBuffer selectTrainingCoursesForApplicantSelectSQL;
 
 	public static void init() 
   {
@@ -100,7 +109,7 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
     selectTrainingCoursesSQL.append("       T.AUDITTIMESTAMP, ");
     selectTrainingCoursesSQL.append("       T.ACTIVE, ");
 		selectTrainingCoursesSQL.append("       T.NOOFCHANGES ");
-		selectTrainingCoursesSQL.append("FROM TRAININGCOURSE T ");
+    selectTrainingCoursesSQL.append("FROM TRAININGCOURSE T ");
     // Get select TrainingCourses not for DisciplineCategory SQL.
     selectTrainingCoursesNotForDisciplineCategorySQL = new StringBuffer(selectTrainingCoursesSQL);
     selectTrainingCoursesNotForDisciplineCategorySQL.append("WHERE T.ACTIVE = TRUE ");
@@ -112,7 +121,53 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
     selectTrainingCoursesNotForDisciplineCategorySQL.append(" AND DCT.ACTIVE = TRUE ");
     selectTrainingCoursesNotForDisciplineCategorySQL.append(" AND DCT.TRAININGCOURSEID = T.TRAININGCOURSEID ");
     selectTrainingCoursesNotForDisciplineCategorySQL.append(") ");
-		// Get select TrainingCourse SQL.
+    // Get select TrainingCourses SQL.
+    selectTrainingCourseUsersSQL = new StringBuffer();
+    selectTrainingCourseUsersSQL.append("SELECT T.TRAININGCOURSEID, ");
+    selectTrainingCourseUsersSQL.append("       T.CODE, ");
+    selectTrainingCourseUsersSQL.append("       T.NAME, ");
+    selectTrainingCourseUsersSQL.append("       T.DISPLAYORDER, ");
+    selectTrainingCourseUsersSQL.append("       T.CREATIONTIMESTAMP, ");
+    selectTrainingCourseUsersSQL.append("       T.AUDITORID, ");
+    selectTrainingCourseUsersSQL.append("       T.AUDITTIMESTAMP, ");
+    selectTrainingCourseUsersSQL.append("       T.ACTIVE, ");
+    selectTrainingCourseUsersSQL.append("       T.NOOFCHANGES, ");
+    selectTrainingCourseUsersSQL.append("       DCT.MANDATORY ");
+    selectTrainingCourseUsersSQL.append("FROM TRAININGCOURSE T ");
+    selectTrainingCourseUsersSQL.append("    JOIN DISCIPLINECATEGORYTRAINING DCT ");
+    selectTrainingCourseUsersSQL.append("    ON  DCT.TRAININGCOURSEID = T.TRAININGCOURSEID ");
+    // Get select TrainingCourseUsers for DisciplineCategory SQL.
+    selectTrainingCourseUsersForDisciplineCategorySQL = new StringBuffer(selectTrainingCourseUsersSQL);
+    selectTrainingCourseUsersForDisciplineCategorySQL.append("WHERE T.ACTIVE = TRUE ");
+    selectTrainingCourseUsersForDisciplineCategorySQL.append("AND DCT.ACTIVE = TRUE ");
+    selectTrainingCourseUsersForDisciplineCategorySQL.append("AND DCT.DISCIPLINECATEGORYID = ^ ");
+    // Get select TrainingCourseUsers not for DisciplineCategory SQL.
+    selectTrainingCourseUsersNotForDisciplineCategorySQL = new StringBuffer();
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("SELECT T.TRAININGCOURSEID, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.CODE, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.NAME, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.DISPLAYORDER, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.CREATIONTIMESTAMP, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.AUDITORID, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.AUDITTIMESTAMP, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.ACTIVE, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.NOOFCHANGES, ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       NULL AS MANDATORY ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("FROM TRAININGCOURSE T ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("WHERE T.ACTIVE = TRUE ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("AND NOT EXISTS ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("( ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append(" SELECT NULL ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append(" FROM DISCIPLINECATEGORYTRAINING DCT ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append(" WHERE DCT.DISCIPLINECATEGORYID = ^ ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append(" AND DCT.ACTIVE = TRUE ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append(" AND DCT.TRAININGCOURSEID = T.TRAININGCOURSEID ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append(") ");
+    // Get select TrainingCourse for Applicant Select SQL.
+    selectTrainingCoursesForApplicantSelectSQL = new StringBuffer(selectTrainingCourseUsersForDisciplineCategorySQL);
+    selectTrainingCoursesForApplicantSelectSQL.append(" UNION ");
+    selectTrainingCoursesForApplicantSelectSQL.append(selectTrainingCourseUsersNotForDisciplineCategorySQL);
+    // Get select TrainingCourse SQL.
 		selectTrainingCourseSQL = new StringBuffer(selectTrainingCoursesSQL);
 		selectTrainingCourseSQL.append("WHERE TRAININGCOURSEID = ^ ");
     // Get select TrainingCourse for Name SQL.
@@ -127,7 +182,11 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
     selectActiveTrainingCoursesSQL.append("ORDER BY DISPLAYORDER, NAME ");
     // Put order by on now...
     selectTrainingCoursesSQL.append("ORDER BY DISPLAYORDER, NAME ");
-
+    selectTrainingCourseUsersForDisciplineCategorySQL.append("ORDER BY T.DISPLAYORDER, T.NAME ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("ORDER BY T.DISPLAYORDER, T.NAME ");
+    selectTrainingCoursesNotForDisciplineCategorySQL.append("ORDER BY T.DISPLAYORDER, T.NAME ");
+    // Use 3,2 if you must but DON'T use 'T.' in the orderby...
+    selectTrainingCoursesForApplicantSelectSQL.append("ORDER BY DISPLAYORDER, NAME ");
 	}
 
 	public int insertTrainingCourse(TrainingCourse trainingCourse, Integer auditorId) 
@@ -243,6 +302,34 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
 		return RecordListFactory.getInstance().get(getJdbcTemplate(),	sql.toString(), TrainingCourse.class.getName());
 
 	}
+
+  public List<TrainingCourseUser> getTrainingCourseUsersForDisciplineCategory(Integer disciplineCategoryId)
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectTrainingCourseUsersForDisciplineCategorySQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, disciplineCategoryId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCourseUser.class.getName());
+  }
+
+  public List<TrainingCourseUser> getTrainingCoursesForApplicantSelect(Integer disciplineCategoryId)
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectTrainingCoursesForApplicantSelectSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, disciplineCategoryId);
+    Utilities.replace(sql, disciplineCategoryId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCourseUser.class.getName());
+  }
+
+  public List<TrainingCourseUser> getTrainingCourseUsersNotForDisciplineCategory(Integer disciplineCategoryId)
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectTrainingCourseUsersNotForDisciplineCategorySQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, disciplineCategoryId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCourseUser.class.getName());
+  }
 
   public List<TrainingCourse> getTrainingCoursesNotForDisciplineCategory(Integer disciplineCategoryId)
   {
