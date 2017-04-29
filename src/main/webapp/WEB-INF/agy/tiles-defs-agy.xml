@@ -133,6 +133,11 @@
         <put name="body"   value="/agy/applicantTrainingCourseEdit.jsp"/>
         <put name="includeZapatec" value="true" type="string"/>
   </definition>
+  <definition name="applicantTrainingCourseDelete.page" extends="layoutAgy.main">
+        <put name="titleKey" value="title.applicantTrainingCourseDelete" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.applicantTrainingCourseDelete" type="string"/>
+        <put name="body"   value="/agy/applicantTrainingCourseDelete.jsp"/>
+  </definition>
   <!-- BookingGrade -->
   <definition name="bookingGradeList.page" extends="layoutAgy.main">
         <put name="titleKey" value="title.bookingGradeList" type="string"/>

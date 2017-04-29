@@ -18,16 +18,22 @@ String urlTrainingCourseXML = request.getContextPath() + "/agy/applicantTraining
 String urlTrainingCompanyXML = request.getContextPath() + "/agy/applicantTrainingCourseXML.do?disciplineCategoryId=" + disciplineCategoryId + "&type=trainingCompany&trainingCourseId=";
 %>
 
+<html:form action="/applicantTrainingCourseNewProcess.do" enctype="multipart/form-data" focus="trainingCourseId" onreset="clearForm()" onsubmit="return singleSubmit();">
+  <html:hidden name="ApplicantTrainingCourseFormAgy" property="applicantTrainingCourse.applicantId" />
 <table cellpadding="0" cellspacing="0" width="100%" height="30" border="0">
   <tr>
 	<td align="left" valign="middle" class="title">
       <bean:message key="title.applicantTrainingCourseNew"/>
     </td>
+    <td align="right" valign="middle" width="80">
+      <html:submit styleClass="titleButton" tabindex="2"><bean:message key="button.save"/></html:submit>
+    </td>
+    <td align="right" valign="middle" width="80">
+      <html:reset styleClass="titleButton" tabindex="2" onclick="javascript:clearForm();return false;"><bean:message key="button.reset"/></html:reset>
+    </td>
   </tr>
 </table>
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
-<html:form action="/applicantTrainingCourseNewProcess.do" enctype="multipart/form-data" focus="trainingCourseId" onreset="clearForm()" onsubmit="return singleSubmit();">
-  <html:hidden name="ApplicantTrainingCourseFormAgy" property="applicantTrainingCourse.applicantId" />
   <tr>
     <td width="75%">
   		<table class="simple" width="100%">
@@ -166,8 +172,6 @@ function doSearchAndSubmit(formName, actionName) {
 </script>
 
     <td width="25%" valign="top" align="center">
-      <html:submit styleClass="titleButton" tabindex="2"><bean:message key="button.save"/></html:submit>&nbsp;
-      <html:reset styleClass="titleButton" tabindex="2" onclick="javascript:clearForm();return false;"><bean:message key="button.reset"/></html:reset>
 <logic:empty name="ApplicantTrainingCourseFormAgy" property="applicant.photoFilename" >
 	  <bean:message key="text.noPhotoAvailable"/>
 </logic:empty>
@@ -177,8 +181,8 @@ function doSearchAndSubmit(formName, actionName) {
 </logic:notEmpty>
     </td>
   </tr>
-</html:form>
 </table>
+</html:form>
 
 <script type="text/javascript">
 <!--  to hide script contents from old browsers

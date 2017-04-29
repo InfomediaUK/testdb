@@ -1324,7 +1324,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 		  <table class="simple" width="100%">
 <mmj-agy:hasAccess forward="applicantTrainingCourseNew">
 		    <tr>
-		      <td colspan="6">
+		      <td colspan="7">
 				<html:link forward="applicantTrainingCourseNew" paramId="applicant.applicantId" paramName="ApplicantFormAgy" paramProperty="applicant.applicantId"><bean:message key="link.new"/></html:link>
 		      </td>
 		    </tr>
@@ -1347,6 +1347,9 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
           </th>
           <th>
             Comment
+          </th>
+          <th>
+            *
           </th>
 		    </tr>
     <logic:iterate id="applicantTrainingCourse" name="ApplicantFormAgy" property="listApplicantTrainingCourse" type="com.helmet.bean.ApplicantTrainingCourseUser">
@@ -1382,6 +1385,19 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
           </td>
           <td>
             <bean:write name="applicantTrainingCourse" property="comment" filter="false"/>
+          </td>
+          <td>
+        <mmj-agy:hasAccess forward="applicantTrainingCourseDelete">
+          <logic:equal name="applicantTrainingCourse" property="active" value="true">
+              <html:link forward="applicantTrainingCourseDelete" paramId="applicantTrainingCourseUser.applicantTrainingCourseId" paramName="applicantTrainingCourse" paramProperty="applicantTrainingCourseId" titleKey="title.applicantTrainingCourseDelete">x</html:link>
+          </logic:equal>
+          <logic:equal name="applicantTrainingCourse" property="active" value="false">
+              &nbsp;
+          </logic:equal>
+        </mmj-agy:hasAccess>
+        <mmj-agy:hasNoAccess forward="applicantTrainingCourseDelete">
+              &nbsp;
+        </mmj-agy:hasNoAccess>
           </td>
 		    </tr>
 		 </logic:iterate>

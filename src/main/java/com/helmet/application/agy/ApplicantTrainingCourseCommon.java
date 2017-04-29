@@ -4,13 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.*;
+
 import java.text.SimpleDateFormat;
 
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.upload.FormFile;
 
-import com.helmet.application.FileHandler;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.TrainingCourse;
@@ -26,14 +30,38 @@ public abstract class ApplicantTrainingCourseCommon extends AgyAction
     throws FileNotFoundException, IOException
   {
     // File name should be in format "Training" + filename + .pdf.
-    String fileUrl = FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantTrainingCourse.getApplicantId() + "/training/" + applicantTrainingCourse.getDocumentationFileName();
-    String filePath = FileHandler.getInstance().getApplicantFileLocation() + fileUrl;
-
+    String filePath = applicantTrainingCourse.getDocumentationFilePath();
+    Path path = Paths.get(filePath);
     // Read the InputStream and store it in a 'byteArrayOutputStream'.
     byte[] fileData = applicantTrainingCourseFormFile.getFileData();
 
     File folder = new File(filePath).getParentFile();
-    if (!folder.exists())
+    if (folder.exists())
+    {
+      // Folder exists and so will file. Rename the existing one with a .bak extension...
+      String backupFileUrl = null;
+      if (path.toFile().exists())
+      {
+        // A file with the same name already exists. Change it to a .bak extension with a number.
+        backupFileUrl = filePath + ".bak";
+        Path backupPath = Paths.get(backupFileUrl);
+        for (int i = 1; backupPath.toFile().exists(); i++)
+        {
+          backupFileUrl = filePath + ".bak" + i;
+          backupPath = Paths.get(backupFileUrl);
+        }
+        try
+        {
+          Files.move(path, backupPath, REPLACE_EXISTING);
+        }
+        catch (IOException e)
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+    }
+    else
     {
       // Create any required directories.
       folder.mkdirs();

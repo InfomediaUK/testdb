@@ -2067,6 +2067,19 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return applicantTrainingCourse;
   }
   
+  public ApplicantTrainingCourseUser getApplicantTrainingCourseUser(Integer applicantTrainingCourseId)
+  {
+    ApplicantTrainingCourseUser applicantTrainingCourseUser = null;
+    applicantTrainingCourseUser = getApplicantTrainingCourseDAO().getApplicantTrainingCourseUser(applicantTrainingCourseId);
+    return applicantTrainingCourseUser;
+  }
+  
+  public int deleteApplicantTrainingCourse(Integer applicantTrainingCourseId, Integer noOfChanges, Integer auditorId)
+  {
+    int rc = getApplicantTrainingCourseDAO().deleteApplicantTrainingCourse(applicantTrainingCourseId, noOfChanges, auditorId);
+    return rc;
+  }
+
   public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive)
   {
     List<ApplicantTrainingCourseUser> listApplicantTrainingCourseUser = null;

@@ -355,6 +355,8 @@ public interface AgyService extends CommonService {
 
   public Integer getApplicantTrainingCourseId(); 
   public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId);
+  public ApplicantTrainingCourseUser getApplicantTrainingCourseUser(Integer applicantTrainingCourseId);
+  public int deleteApplicantTrainingCourse(Integer applicantTrainingCourseId, Integer noOfChanges, Integer auditorId);
   public List<TrainingCourseUser> getTrainingCourseUsersForDisciplineCategory(Integer disciplineCategoryId); 
   public List<TrainingCourseUser> getTrainingCoursesForApplicantSelect(Integer disciplineCategoryId); 
   public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive);

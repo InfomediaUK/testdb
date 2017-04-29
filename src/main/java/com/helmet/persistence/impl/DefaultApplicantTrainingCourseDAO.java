@@ -123,12 +123,17 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		selectApplicantTrainingCourseUsersSQL.append("       ATC.NOOFCHANGES, ");
 		selectApplicantTrainingCourseUsersSQL.append("       A.FIRSTNAME AS APPLICANTFIRSTNAME, ");
     selectApplicantTrainingCourseUsersSQL.append("       A.LASTNAME AS APPLICANTLASTNAME, ");
+    selectApplicantTrainingCourseUsersSQL.append("       A.NHSSTAFFNAME AS APPLICANTNHSSTAFFNAME, ");
+    selectApplicantTrainingCourseUsersSQL.append("       A.EMAILADDRESS AS APPLICANTEMAILADDRESS, ");
+    selectApplicantTrainingCourseUsersSQL.append("       DC.NAME AS DISCIPLINECATEGORYNAME, ");
 		selectApplicantTrainingCourseUsersSQL.append("       TCC.NAME AS TRAININGCOMPANYCOURSENAME, ");
 		selectApplicantTrainingCourseUsersSQL.append("       TCC.ONLINE, ");
     selectApplicantTrainingCourseUsersSQL.append("       TC.NAME AS TRAININGCOMPANYNAME ");
 		selectApplicantTrainingCourseUsersSQL.append("FROM APPLICANTTRAININGCOURSE ATC ");
     selectApplicantTrainingCourseUsersSQL.append("    JOIN APPLICANT A ON ");
     selectApplicantTrainingCourseUsersSQL.append("        A.APPLICANTID = ATC.APPLICANTID ");
+    selectApplicantTrainingCourseUsersSQL.append("    JOIN DISCIPLINECATEGORY DC ON ");
+    selectApplicantTrainingCourseUsersSQL.append("        DC.DISCIPLINECATEGORYID = A.DISCIPLINECATEGORYID ");
     selectApplicantTrainingCourseUsersSQL.append("    JOIN TRAININGCOMPANYCOURSE TCC ON ");
     selectApplicantTrainingCourseUsersSQL.append("        TCC.TRAININGCOMPANYCOURSEID = ATC.TRAININGCOMPANYCOURSEID ");
     selectApplicantTrainingCourseUsersSQL.append("    JOIN TRAININGCOMPANY TC ON ");

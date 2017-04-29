@@ -86,11 +86,26 @@ public class ApplicantTrainingCourse extends Base
     this.documentationFileName = documentationFileName;
   }
 
-  public String getDocumentationFileUrl()
+  public String getDocumentationFileFolder()
   {
-    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/training/" + documentationFileName;
+    return FileHandler.getInstance().getApplicantFileFolder() + "/" + applicantId + "/training";
   }
 
+  public String getDocumentationFileFolderPath()
+  {
+    return FileHandler.getInstance().getApplicantFileLocation() + getDocumentationFileFolder();
+  }
+  
+  public String getDocumentationFileUrl()
+  {
+    return getDocumentationFileFolder() + "/" + documentationFileName;
+  }
+
+  public String getDocumentationFilePath()
+  {
+    return FileHandler.getInstance().getApplicantFileLocation() + getDocumentationFileUrl();
+  }
+  
   public void load(SqlRowSet rs)
   {
     super.load(rs);

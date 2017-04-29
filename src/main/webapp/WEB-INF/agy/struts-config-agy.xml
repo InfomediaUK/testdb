@@ -546,6 +546,10 @@
       <form-property name="trainingCompanyCourseList" type="java.util.List" />
     </form-bean>
     
+    <form-bean name="ApplicantTrainingCourseViewFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="applicantTrainingCourseUser" type="com.helmet.bean.ApplicantTrainingCourseUser" />
+    </form-bean>
+    
     <form-bean name="BookingGradeViewFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="bookingGrade" type="com.helmet.bean.BookingGradeAgyEntity" />
       <form-property name="chargeRateValue" type="java.math.BigDecimal" initial="0"/>
@@ -1326,6 +1330,7 @@
     <forward name="applicantChecklist" path="/applicantChecklist.do" />
     <forward name="applicantTrainingCourseNew" path="/applicantTrainingCourseNew.do" />
     <forward name="applicantTrainingCourseEdit" path="/applicantTrainingCourseEdit.do" />
+    <forward name="applicantTrainingCourseDelete" path="/applicantTrainingCourseDelete.do" />
     <forward name="applicantTrainingCourse" path="/applicantTrainingCourse.do" />
     <forward name="applicantTrainingCourseXML" path="/applicantTrainingCourseXML.do" />
     <forward name="applicantNotifications" path="/applicantNotifications.do" />
@@ -1851,6 +1856,26 @@
             scope="request"
             input="/applicantTrainingCourseEdit.page"
             validate="true">
+        <forward name="success" path="/applicantView.do" />
+    </action>
+
+    <action path="/applicantTrainingCourseDelete"
+            type="com.helmet.application.agy.ApplicantTrainingCourseView"
+            name="ApplicantTrainingCourseViewFormAgy"
+            scope="request"
+            input="/applicantView.page"
+            validate="false">
+        <forward name="success" path="applicantTrainingCourseDelete.page" />
+    </action>
+
+    <action path="/applicantTrainingCourseDeleteProcess"
+            type="com.helmet.application.agy.ApplicantTrainingCourseDeleteProcess"
+            name="ApplicantTrainingCourseViewFormAgy"
+            scope="request"
+            input="/applicantTrainingCourseDelete.page"
+            cancellable="true"
+            validate="true">
+        <forward name="cancel" path="/applicantView.do" />
         <forward name="success" path="/applicantView.do" />
     </action>
 
