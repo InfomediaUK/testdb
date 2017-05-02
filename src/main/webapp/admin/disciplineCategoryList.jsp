@@ -70,10 +70,10 @@
           </td>
           <td>
 		    <mmj-admin:hasAccess forward="disciplineCategoryTrainingView">
-		      <html:link forward="disciplineCategoryTrainingView" paramId="disciplineCategoryTraining.disciplineCategoryTrainingId" paramName="disciplineCategoryTraining" paramProperty="disciplineCategoryTrainingId"><bean:write name="disciplineCategoryTraining" property="trainingNameWithMandatory"/></html:link>
+		      <html:link forward="disciplineCategoryTrainingView" paramId="disciplineCategoryTraining.disciplineCategoryTrainingId" paramName="disciplineCategoryTraining" paramProperty="disciplineCategoryTrainingId"><bean:write name="disciplineCategoryTraining" property="trainingName"/></html:link>
 		    </mmj-admin:hasAccess>
 		    <mmj-admin:hasNoAccess forward="disciplineCategoryTrainingView">
- 			  <bean:write name="disciplineCategoryTraining" property="trainingNameWithMandatory"/>
+ 			  <bean:write name="disciplineCategoryTraining" property="trainingName"/>
 		    </mmj-admin:hasNoAccess>   
           </td>
         </tr>

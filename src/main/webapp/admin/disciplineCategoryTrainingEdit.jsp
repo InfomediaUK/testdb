@@ -21,16 +21,8 @@
 
 <table>
   <tr>
-    <td align="left"><bean:message key="label.mandatory"/></td>
+    <td align="left"></td>
     <td align="left">
-      <html:radio property="disciplineCategoryTraining.mandatory" value="true" styleId="mandatory" />
-      <label for="mandatory">
-        <bean:message key="label.yes" />
-      </label>
-      <html:radio property="disciplineCategoryTraining.mandatory" value="false" styleId="mandatory" />
-      <label for="mandatory">
-        <bean:message key="label.no" />
-      </label>
     </td>
   </tr>
   <tr>

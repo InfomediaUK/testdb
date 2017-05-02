@@ -7,7 +7,6 @@ public class DisciplineCategoryTraining extends Base
   private Integer disciplineCategoryTrainingId;
   private Integer disciplineCategoryId;
   private Integer trainingCourseId;
-  private Boolean mandatory;
 
   public Integer getDisciplineCategoryTrainingId()
   {
@@ -39,23 +38,12 @@ public class DisciplineCategoryTraining extends Base
     this.trainingCourseId = trainingId;
   }
 
-  public Boolean getMandatory()
-  {
-    return mandatory;
-  }
-
-  public void setMandatory(Boolean mandatory)
-  {
-    this.mandatory = mandatory;
-  }
-
   public void load(SqlRowSet rs)
   {
     super.load(rs);
     setDisciplineCategoryTrainingId(rs.getInt("DISCIPLINECATEGORYTRAININGID"));
     setDisciplineCategoryId(rs.getInt("DISCIPLINECATEGORYID"));
     setTrainingCourseId(rs.getInt("TRAININGCOURSEID"));
-    setMandatory(rs.getBoolean("MANDATORY"));
   }
 
 }

@@ -50,17 +50,6 @@
     </td>
   </tr>
   <tr>
-    <td align="left"><bean:message key="label.mandatory"/></td>
-    <td align="left">
-<logic:equal name="DisciplineCategoryTrainingViewFormAdmin" property="disciplineCategoryTraining.mandatory" value="true">
-      <bean:message key="label.yes" />
-</logic:equal>
-<logic:notEqual name="DisciplineCategoryTrainingViewFormAdmin" property="disciplineCategoryTraining.mandatory" value="true">
-      <bean:message key="label.no" />
-</logic:notEqual>
-    </td>
-  </tr>
-  <tr>
     <td align="left"><bean:message key="label.created"/></td>
     <td align="left"><bean:write name="DisciplineCategoryTrainingViewFormAdmin" property="disciplineCategoryTraining.creationTimestamp"/></td>
   </tr>

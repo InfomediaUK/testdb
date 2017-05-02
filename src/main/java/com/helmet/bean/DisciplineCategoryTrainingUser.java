@@ -49,15 +49,6 @@ public class DisciplineCategoryTrainingUser extends DisciplineCategoryTraining
     this.trainingCode = trainingCode;
   }
 
-  public String getTrainingNameWithMandatory()
-  {
-    if (getMandatory())
-    {
-      return trainingName + " (Mandatory)";    
-    }
-    return trainingName;
-  }
-
   public void load(SqlRowSet rs)
   {
     super.load(rs);
