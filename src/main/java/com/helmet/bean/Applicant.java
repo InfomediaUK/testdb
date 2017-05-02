@@ -1772,22 +1772,22 @@ public class Applicant extends Base
     Boolean hasCurrentTraining = false;
     if (StringUtils.isNotEmpty(trainingFilename))
     {
-      // Applicant has a Training document.
+      // Applicant has a TrainingCourse document.
       if (trainingExpiryDate != null)
       {
-        // Applicant has a Training Expiry Date entered.
+        // Applicant has a TrainingCourse Expiry Date entered.
         if (dateInFuture(trainingExpiryDate))
         {
-          // Applicant has a Training Expiry Date that is in the future.
+          // Applicant has a TrainingCourse Expiry Date that is in the future.
           if (manualHandlingTraining)
           {
-            // Applicant has a Manual Handling Training.
+            // Applicant has a Manual Handling TrainingCourse.
             if (basicLifeSupportTraining)
             {
-              // Applicant has a Basic Life Support Training.
+              // Applicant has a Basic Life Support TrainingCourse.
               if (elearningTraining || povaTraining)
               {
-                // Applicant has either E Learning Training OR POVA Training.
+                // Applicant has either E Learning TrainingCourse OR POVA TrainingCourse.
                 hasCurrentTraining = true;
               }
             }
@@ -1832,6 +1832,12 @@ public class Applicant extends Base
     }
     // Visa NOT required. The implicit visa is always 'current'.
     return "Not Required";
+  }
+  
+  public Boolean getHasCv()
+  {
+    // True: Must have cvFilename entered.
+    return StringUtils.isNotEmpty(cvFilename);
   }
   
   public Boolean getHasVaricellaImmunisation()

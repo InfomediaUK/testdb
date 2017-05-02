@@ -132,7 +132,7 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
     selectTrainingCourseUsersSQL.append("       T.AUDITTIMESTAMP, ");
     selectTrainingCourseUsersSQL.append("       T.ACTIVE, ");
     selectTrainingCourseUsersSQL.append("       T.NOOFCHANGES, ");
-    selectTrainingCourseUsersSQL.append("       DCT.MANDATORY ");
+    selectTrainingCourseUsersSQL.append("       TRUE AS MANDATORY ");
     selectTrainingCourseUsersSQL.append("FROM TRAININGCOURSE T ");
     selectTrainingCourseUsersSQL.append("    JOIN DISCIPLINECATEGORYTRAINING DCT ");
     selectTrainingCourseUsersSQL.append("    ON  DCT.TRAININGCOURSEID = T.TRAININGCOURSEID ");
@@ -152,7 +152,7 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
     selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.AUDITTIMESTAMP, ");
     selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.ACTIVE, ");
     selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       T.NOOFCHANGES, ");
-    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       NULL AS MANDATORY ");
+    selectTrainingCourseUsersNotForDisciplineCategorySQL.append("       FALSE AS MANDATORY ");
     selectTrainingCourseUsersNotForDisciplineCategorySQL.append("FROM TRAININGCOURSE T ");
     selectTrainingCourseUsersNotForDisciplineCategorySQL.append("WHERE T.ACTIVE = TRUE ");
     selectTrainingCourseUsersNotForDisciplineCategorySQL.append("AND NOT EXISTS ");
