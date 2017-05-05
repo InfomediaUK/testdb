@@ -519,8 +519,8 @@ public class BookingGradeApplicantView extends AppAction
 
     float[] detailColumnWidths = new float[6 + bookingGradeApplicant.getUpliftFactors().size()];
 
-    detailColumnWidths[0] = 10;
-    detailColumnWidths[1] = 18;
+    detailColumnWidths[0] = 12;
+    detailColumnWidths[1] = 16;
     detailColumnWidths[2] = 18;
     detailColumnWidths[3] = 12;
     detailColumnWidths[4] = 6;
