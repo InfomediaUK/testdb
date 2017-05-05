@@ -35,6 +35,10 @@ public class DisciplineCategoryNewProcess extends AdminAction
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
+    if (disciplineCategory.getUndertakesEPP() == null)
+    {
+      disciplineCategory.setUndertakesEPP(false);
+    }
     try
     {
       int rowCount = adminService.insertDisciplineCategory(disciplineCategory, getAdministratorLoggedIn().getAdministratorId());
