@@ -11,14 +11,13 @@ import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.upload.FormFile;
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.DisciplineCategoryUser;
 
 public class ApplicantNewProcess extends ApplicantCommonProcess
@@ -33,7 +32,7 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-    Applicant applicant = (Applicant) dynaForm.get("applicant");
+    ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
     DisciplineCategoryUser disciplineCategory = null;
     if (!applicant.getDisciplineCategoryId().equals(0))
     {

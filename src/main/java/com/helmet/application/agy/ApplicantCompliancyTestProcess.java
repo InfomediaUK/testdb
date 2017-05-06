@@ -16,6 +16,7 @@ import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.CompliancyTest;
 
 
@@ -34,21 +35,21 @@ public class ApplicantCompliancyTestProcess extends ApplicantCommon
     ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
     StringBuffer notesStringBuffer = null;
     StringBuffer reasonStringBuffer = null;
-    applicant = agyService.getApplicant(applicant.getApplicantId());
+    ApplicantEntity applicantEntity = agyService.getApplicantEntity(applicant.getApplicantId());
     Boolean applicantCompliant = null;
-    applicantCompliant = applicant.getCompliant();
+    applicantCompliant = applicantEntity.getCompliant();
     reasonStringBuffer = new StringBuffer();
-    applicantCompliancyTest.isApplicantCompliant(listCompliancyTest, applicant, reasonStringBuffer);
+    applicantCompliancyTest.isApplicantCompliant(listCompliancyTest, applicantEntity, reasonStringBuffer);
     // Get the Notes for the Applicant from the file system.
-    String existingNotes = getApplicantNotes(applicant);
+    String existingNotes = getApplicantNotes(applicantEntity);
     notesStringBuffer = new StringBuffer(existingNotes);
-    if (!applicantCompliant.equals(applicant.getCompliant()))
+    if (!applicantCompliant.equals(applicantEntity.getCompliant()))
     {
       // Applicant Compliant value has changed.
       try
       {
         // Set the Compliant and Recently Compliant flags to the same value, true or false.
-        int rowCount = agyService.compliantApplicant(applicant.getApplicantId(), applicant.getNoOfChanges(), getConsultantLoggedIn().getConsultantId(), applicant.getCompliant());
+        int rowCount = agyService.compliantApplicant(applicantEntity.getApplicantId(), applicantEntity.getNoOfChanges(), getConsultantLoggedIn().getConsultantId(), applicantEntity.getCompliant());
       }
       catch (DuplicateDataException e)
       {
@@ -64,10 +65,10 @@ public class ApplicantCompliancyTestProcess extends ApplicantCommon
     {
       applicantCompliancyTest.removeCompliancyTestFailureReasonFromNotes(notesStringBuffer);
     }
-    saveApplicantNotes(applicant, notesStringBuffer.toString());
+    saveApplicantNotes(applicantEntity, notesStringBuffer.toString());
     logger.exit("Out going !!!");
     ActionForward actionForward = mapping.findForward("success");
-    return new ActionForward(actionForward.getName(), actionForward.getPath() + "?applicant.applicantId=" + applicant.getApplicantId(), actionForward.getRedirect());
+    return new ActionForward(actionForward.getName(), actionForward.getPath() + "?applicant.applicantId=" + applicantEntity.getApplicantId(), actionForward.getRedirect());
   }
 
 }

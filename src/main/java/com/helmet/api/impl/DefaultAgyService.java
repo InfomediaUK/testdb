@@ -22,6 +22,7 @@ import com.helmet.bean.AgencyInvoiceUserEntity;
 import com.helmet.bean.AgyAccess;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.ApplicantClientBooking;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.ApplicantTrainingCourseUser;
 import com.helmet.bean.Booking;
@@ -218,6 +219,21 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return applicants;
   }
 
+  public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId) 
+  {
+    List<ApplicantEntity> applicantEntities = null;
+    applicantEntities = getApplicantDAO().getApplicantEntitiesForAgency(agencyId, true);
+    for (ApplicantEntity applicantEntity : applicantEntities)
+    {
+      if (applicantEntity.getDisciplineCategoryId() != null)
+      {
+        applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+        applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId()));
+      }
+    }
+    return applicantEntities;
+  }
+
   public List<Applicant> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive) 
   {
     List<Applicant> applicants = null;
@@ -364,13 +380,21 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 
   }
   
-	public Applicant getApplicant(Integer applicantId) {
-		
+	public Applicant getApplicant(Integer applicantId) 
+	{
 		Applicant applicant = null;
     	applicant = getApplicantDAO().getApplicant(applicantId);
 		return applicant;
-		
 	}
+
+  public ApplicantEntity getApplicantEntity(Integer applicantId)
+  {
+    ApplicantEntity applicantEntity = null;
+    applicantEntity = getApplicantDAO().getApplicantEntity(applicantId);
+    applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+    applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantId));
+    return applicantEntity;
+  }
 
   public List<ApplicantClientBooking> getApplicantClientBookings(Integer applicantId, Integer clientId, Integer agencyId, Date searchDate) 
   {

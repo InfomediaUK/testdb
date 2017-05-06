@@ -13,7 +13,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.agy.abztract.AgyAction;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourse;
 
 public class ApplicantTrainingCourseNew extends AgyAction
@@ -24,10 +24,10 @@ public class ApplicantTrainingCourseNew extends AgyAction
   {
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
-    Applicant applicant = (Applicant) dynaForm.get("applicant");
+    ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
     ApplicantTrainingCourse applicantTrainingCourse = new ApplicantTrainingCourse();
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-    applicant = agyService.getApplicant(applicant.getApplicantId());
+    applicant = agyService.getApplicantEntity(applicant.getApplicantId());
     if (applicant == null) 
     { 
       return mapping.findForward("illegalaccess"); 

@@ -19,7 +19,7 @@ import com.helmet.api.ServiceFactory;
 import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.application.comparator.AgencyWorkerChecklistFileComparator;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourseUser;
 import com.helmet.bean.BookingDateUserApplicant;
 
@@ -31,16 +31,13 @@ public class ApplicantView extends ApplicantCommon
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
-
     logger.entry("In coming !!!");
-
-    Applicant applicant = (Applicant) dynaForm.get("applicant");
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
+    ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
 
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
 
-    applicant = agyService.getApplicant(applicant.getApplicantId());
+    applicant = agyService.getApplicantEntity(applicant.getApplicantId());
 
     if (applicant == null) { return mapping.findForward("illegalaccess"); }
 
@@ -75,8 +72,6 @@ public class ApplicantView extends ApplicantCommon
     
     List<AgencyWorkerChecklistFile> agencyWorkerChecklists = loadAgencyWorkerChecklists(FileHandler.getInstance().getApplicantFileLocation() + FileHandler.getInstance().getApplicantFileFolder() + "/" + applicant.getApplicantId(), applicant.getApplicantId());
     
-    List<ApplicantTrainingCourseUser> listApplicantTrainingCourse = agyService.getApplicantTrainingCourseUsersForApplicant(applicant.getApplicantId(), true);
-    
     Collections.sort(agencyWorkerChecklists, new AgencyWorkerChecklistFileComparator());
     
     dynaForm.set("applicant", applicant);
@@ -84,7 +79,6 @@ public class ApplicantView extends ApplicantCommon
     dynaForm.set("notes", notes.replaceAll("\n", "<br />"));
     dynaForm.set("list", listBookingBookingDateUserApplicant);
     dynaForm.set("agencyWorkerChecklists", agencyWorkerChecklists);
-    dynaForm.set("listApplicantTrainingCourse", listApplicantTrainingCourse);
     dynaForm.set("unavailableDates", unavailableDates);
 
     logger.exit("Out going !!!");

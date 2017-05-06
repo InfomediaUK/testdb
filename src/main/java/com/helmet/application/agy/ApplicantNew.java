@@ -11,53 +11,52 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.application.agy.abztract.AgyAction;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 
 
-public class ApplicantNew extends AgyAction {
+public class ApplicantNew extends AgyAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
 
-    	logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
 
-     	Applicant applicant = (Applicant)dynaForm.get("applicant");
-     	
-     	// set defaults
-     	applicant.setHideMoney(false);
-     	applicant.setCanToggleHideMoney(true);
-      applicant.setApplicantId(0);
-     	dynaForm.set("applicant", applicant);
-      dynaForm.set("dateOfBirthStr", "");
-      dynaForm.set("performanceEvaluationDateStr", "");
-      dynaForm.set("reference2DateStr", "");
-      dynaForm.set("reference1DateStr", "");
-      dynaForm.set("fitToWorkExpiryDateStr", "");
-      dynaForm.set("idDocumentExpiryDateStr", "");
-      dynaForm.set("trainingExpiryDateStr", "");
-      dynaForm.set("crbExpiryDateStr", "");
-      dynaForm.set("crbIssueDateStr", "");
-      dynaForm.set("registrationExpiryDateStr", "");
-      dynaForm.set("registrationLastCheckedDateStr", "");
-      dynaForm.set("interviewDateStr", "");
-      // NEW -->
-      dynaForm.set("paediatricLifeSupportIssuedDateStr", "");
-      dynaForm.set("assessment12WeekDateStr", "");
-      dynaForm.set("availabilityDateStr", "");
-      dynaForm.set("arrivalInCountryDateStr", "");
-      dynaForm.set("visaExpiryDateStr", "");
-      dynaForm.set("drivingLicenseExpiryDateStr", "");
-      // <-- NEW
-     	
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
-    }
+    logger.entry("In coming !!!");
+
+    ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
+
+    // set defaults
+    applicant.setHideMoney(false);
+    applicant.setCanToggleHideMoney(true);
+    applicant.setApplicantId(0);
+    dynaForm.set("applicant", applicant);
+    dynaForm.set("dateOfBirthStr", "");
+    dynaForm.set("performanceEvaluationDateStr", "");
+    dynaForm.set("reference2DateStr", "");
+    dynaForm.set("reference1DateStr", "");
+    dynaForm.set("fitToWorkExpiryDateStr", "");
+    dynaForm.set("idDocumentExpiryDateStr", "");
+    dynaForm.set("trainingExpiryDateStr", "");
+    dynaForm.set("crbExpiryDateStr", "");
+    dynaForm.set("crbIssueDateStr", "");
+    dynaForm.set("registrationExpiryDateStr", "");
+    dynaForm.set("registrationLastCheckedDateStr", "");
+    dynaForm.set("interviewDateStr", "");
+    // NEW -->
+    dynaForm.set("paediatricLifeSupportIssuedDateStr", "");
+    dynaForm.set("assessment12WeekDateStr", "");
+    dynaForm.set("availabilityDateStr", "");
+    dynaForm.set("arrivalInCountryDateStr", "");
+    dynaForm.set("visaExpiryDateStr", "");
+    dynaForm.set("drivingLicenseExpiryDateStr", "");
+    // <-- NEW
+
+    logger.exit("Out going !!!");
+
+    return mapping.findForward("success");
+  }
 
 }

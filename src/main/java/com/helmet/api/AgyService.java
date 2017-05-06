@@ -13,6 +13,7 @@ import com.helmet.bean.AgencyInvoiceUserEntity;
 import com.helmet.bean.AgyAccess;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.ApplicantClientBooking;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.ApplicantTrainingCourseUser;
 import com.helmet.bean.BookingDate;
@@ -92,6 +93,7 @@ public interface AgyService extends CommonService {
 	public Agency getAgencyForCode(String agencyCode);
 
   public List<Applicant> getApplicantsForAgency(Integer agencyId);
+  public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId);
   public List<Applicant> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive);
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId);
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId, String indexLetter);
@@ -116,6 +118,7 @@ public interface AgyService extends CommonService {
   public List<Applicant> getApplicantsForAgencyAndNotForBookingGrade(Integer agencyId, Integer bookingGradeId);
   public List<Applicant> getApplicantsForAgencyAndNotForBookingGradeInLastNameGroup(Integer agencyId, Integer bookingGradeId, String indexLetter);
 	public Applicant getApplicant(Integer applicantId);
+  public ApplicantEntity getApplicantEntity(Integer applicantId);
   public List<ApplicantClientBooking> getApplicantClientBookings(Integer applicantId, Integer clientId, Integer agencyId, Date searchDate); 
   
 	public int insertApplicant(Applicant applicant, Integer auditorId);

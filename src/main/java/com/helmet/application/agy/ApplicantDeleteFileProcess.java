@@ -23,6 +23,7 @@ import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.CompliancyTest;
 
 
@@ -39,7 +40,7 @@ public class ApplicantDeleteFileProcess extends AgyAction
     String fileProperty = (String)dynaForm.get("fileProperty");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
-    Applicant applicant = agyService.getApplicant(applicantId);
+    ApplicantEntity applicant = agyService.getApplicantEntity(applicantId);
     String fileUrl = getFileUrl(fileProperty, applicant);
     String newFileUrl = null;
     File oldFile = new File(fileUrl);

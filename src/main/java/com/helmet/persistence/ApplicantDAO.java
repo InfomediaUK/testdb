@@ -6,10 +6,12 @@ import java.util.List;
 import com.helmet.application.agy.ApplicantSearchParameters;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.ApplicantClientBooking;
+import com.helmet.bean.ApplicantEntity;
 
 public interface ApplicantDAO 
 {
   public List<Applicant> getApplicantsForAgency(Integer agencyId, boolean showOnlyActive);
+  public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId, boolean showOnlyActive);
   public List<Applicant> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive);
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId, String lastNameGroup, boolean showOnlyActive);
   public List<Applicant> getApplicantsForNhsStaffName(Integer agencyId, String nhsStaffName);
@@ -25,6 +27,7 @@ public interface ApplicantDAO
   public List<Applicant> getApplicantsForAgencyVisaAboutToExpire(Integer agencyId, Date dateToCheck);
   public List<Applicant> getApplicantsToCopy(Integer sourceAgencyId, Integer targetAgencyId);
   public List<Applicant> getApplicantsForIdDocument(Integer idDocumentId);
+  public List<ApplicantEntity> getApplicantEntitiesForIdDocument(Integer idDocumentId);
   
   public List<Applicant> getApplicantsForAgencyReference1NotSatisfied(Integer agencyId, Date dateToday);
   public List<Applicant> getApplicantsForAgencyReference2NotSatisfied(Integer agencyId, Date dateToday);
@@ -34,7 +37,8 @@ public interface ApplicantDAO
   public List<Applicant> getApplicantsForAgencyRecentProspect(Integer agencyId);
 
   public Applicant getApplicantForLogin(Integer agencyId, String login);
-	public Applicant getApplicant(Integer applicantId);
+  public Applicant getApplicant(Integer applicantId);
+  public ApplicantEntity getApplicantEntity(Integer applicantId);
 	public int insertApplicant(Applicant applicant, Integer auditorId);
 	public int updateApplicant(Applicant applicant, Integer auditorId);
   public int archiveApplicant(Integer applicantId, Integer noOfChanges, Integer auditorId);

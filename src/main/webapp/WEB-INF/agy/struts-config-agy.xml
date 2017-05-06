@@ -316,7 +316,7 @@
       <form-property name="cvFormFile" type="org.apache.struts.upload.FormFile"/>
     </form-bean>
     <form-bean name="ApplicantFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
-      <form-property name="applicant" type="com.helmet.bean.Applicant" />
+      <form-property name="applicant" type="com.helmet.bean.ApplicantEntity" />
       <form-property name="notes" type="java.lang.String" />
       <!-- Note. Any Date Strings here have to be initialised in Applicant New -->
       <form-property name="dateOfBirthStr" type="java.lang.String" />
@@ -363,7 +363,6 @@
       <form-property name="confirmPwd" type="java.lang.String" />
       <form-property name="list" type="java.util.List" />
       <form-property name="agencyWorkerChecklists" type="java.util.List" />
-      <form-property name="listApplicantTrainingCourse" type="java.util.List" />
       <form-property name="showWeekly" type="java.lang.Boolean" initial="true" />
       <form-property name="weekToShow" type="java.lang.Integer" initial="0" />
       <form-property name="startDate" type="java.sql.Date" />
@@ -422,7 +421,7 @@
       <form-property name="applicantId" type="java.lang.Integer" />
       <form-property name="filename" type="java.lang.String" />
       <form-property name="fileProperty" type="java.lang.String" />
-      <form-property name="applicant" type="com.helmet.bean.Applicant" />
+      <form-property name="applicant" type="com.helmet.bean.ApplicantEntity" />
     </form-bean>
     <form-bean name="ApplicantDeleteAgencyWorkerChecklistFileFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="applicantId" type="java.lang.Integer" />
@@ -536,7 +535,7 @@
     </form-bean>
 
     <form-bean name="ApplicantTrainingCourseFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
-      <form-property name="applicant" type="com.helmet.bean.Applicant" />
+      <form-property name="applicant" type="com.helmet.bean.ApplicantEntity" />
       <form-property name="applicantTrainingCourse" type="com.helmet.bean.ApplicantTrainingCourse" />
       <form-property name="startDateStr" type="java.lang.String" />
       <form-property name="endDateStr" type="java.lang.String" />
@@ -1297,7 +1296,7 @@
     </form-bean>
 
     <form-bean name="ApplicantResetPasswordFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
-      <form-property name="applicant" type="com.helmet.bean.Applicant" />
+      <form-property name="applicant" type="com.helmet.bean.ApplicantEntity" />
       <form-property name="emailActionId" type="java.lang.String" />
     </form-bean>
 

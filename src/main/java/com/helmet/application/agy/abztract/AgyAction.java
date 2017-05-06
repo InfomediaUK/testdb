@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -428,4 +429,17 @@ public abstract class AgyAction extends Action {
       }
     }
     
+    protected void signAndDateNotes(StringBuffer notesStringBuffer)
+    {
+      if (notesStringBuffer.length() > 0)
+      {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        notesStringBuffer.append("\n[");
+        notesStringBuffer.append(sdf.format(new Date(calendar.getTimeInMillis())));
+        notesStringBuffer.append(" ");
+        notesStringBuffer.append(getConsultantLoggedIn().getUser().getFullName());
+        notesStringBuffer.append("]\n");
+      }
+    }
 }

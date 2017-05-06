@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -31,8 +32,10 @@ import com.helmet.application.FileHandler;
 import com.helmet.application.MailHandler;
 import com.helmet.application.Utilities;
 import com.helmet.bean.Agency;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
+import com.helmet.bean.ApplicantTrainingCourseUser;
 import com.helmet.bean.CompliancyTest;
+import com.helmet.bean.DisciplineCategoryTrainingUser;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.EmailActionResult;
 
@@ -99,7 +102,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
         {
           // For each Applicant to be emailed...
           applicantId = Integer.parseInt(paramValues[i]);
-          Applicant applicant = agyService.getApplicant(applicantId);
+          ApplicantEntity applicant = agyService.getApplicantEntity(applicantId);
           if (applicant == null)
           {
             // Applicant NOT found is a disaster...
@@ -172,7 +175,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     }
   }
   
-  protected MimeMultipart buildMimeMultipart(HttpServletRequest request, Applicant applicant, StringBuffer textTemplate, StringBuffer htmlTemplate, String attachment, MessageResources messageResources)
+  protected MimeMultipart buildMimeMultipart(HttpServletRequest request, ApplicantEntity applicant, StringBuffer textTemplate, StringBuffer htmlTemplate, String attachment, MessageResources messageResources)
   {
     logger.debug("buildMimeMultipart() {}", applicant.getFullName());
     StringBuffer content = new StringBuffer();
@@ -204,7 +207,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     return multipartRoot;
   }
   
-  private boolean validateApplicant(Applicant applicant, EmailAction emailAction, EmailActionResult emailActionResult, MessageResources messageResources)
+  private boolean validateApplicant(ApplicantEntity applicant, EmailAction emailAction, EmailActionResult emailActionResult, MessageResources messageResources)
   {
     logger.debug("validateApplicant() {}", applicant.getFullName());
     boolean status = true;
@@ -310,7 +313,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     return status;
   }
   
-  private StringBuffer processTagSubstitution(Agency agency, Applicant applicant, StringBuffer template, Boolean html, MessageResources messageResources)
+  private StringBuffer processTagSubstitution(Agency agency, ApplicantEntity applicant, StringBuffer template, Boolean html, MessageResources messageResources)
   {
     logger.debug("processTagSubstitution() {}", applicant.getFullName());
     StringBuffer content = new StringBuffer(template);
@@ -473,7 +476,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
     return content;
   }
   
-  private String requestDocumentsText(Applicant applicant, Boolean html)
+  private String requestDocumentsText(ApplicantEntity applicant, Boolean html)
   {
     StringBuffer text = new StringBuffer();
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
@@ -550,6 +553,7 @@ public class SendApplicantEmailProcess extends SendEmailProcess
         e.printStackTrace();
       }
     }
+    writeRequiredTrainingDocumentLines(text, applicant, html);
     return text.toString();
   }
   
@@ -574,4 +578,55 @@ public class SendApplicantEmailProcess extends SendEmailProcess
       text.append("</p>");
     }
   }
+  
+  public void writeRequiredTrainingDocumentLines(StringBuffer text, ApplicantEntity applicant, Boolean html)
+  {
+    Calendar calendar = Calendar.getInstance();
+    Date todaysDate = new Date(calendar.getTimeInMillis());
+    Boolean trainingCourseFound = false;
+    if (applicant.getHasDisciplineCategoryTrainings())
+    {
+      for (DisciplineCategoryTrainingUser disciplineCategoryTrainingUser : applicant.getDisciplineCategoryTrainingUsers())
+      {
+        // For each mandatory Training for the Applicant's Discipline Category...
+        trainingCourseFound = false;
+        for (ApplicantTrainingCourseUser applicantTrainingCourseUser : applicant.getApplicantTrainingCourseUsers())
+        {
+          // For each Training Course that the Applicant has taken...
+          if (disciplineCategoryTrainingUser.getTrainingCourseId().equals(applicantTrainingCourseUser.getTrainingCourseId()))
+          {
+            if (todaysDate.after(applicantTrainingCourseUser.getStartDate()) && todaysDate.before(applicantTrainingCourseUser.getEndDate()))
+            {
+              // Applicant has this Training Course current.
+              trainingCourseFound = true;
+              break;
+            }
+          }
+        }
+        if (!trainingCourseFound)
+        {
+          // Applicant has NOT done this mandatory training.
+          if (html)
+          {
+            text.append("<p>");
+          }
+          else
+          {
+            // NOT html...
+            if (text.length() > 0)
+            {
+              // NOT first line. Add a new line.
+              text.append("\n");
+            }
+          }
+          text.append("We need proof of current " + disciplineCategoryTrainingUser.getTrainingName() + " training.");
+          if (html)
+          {
+            text.append("</p>");
+          }
+        }
+      } 
+    }
+  }
+
 }

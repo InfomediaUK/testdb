@@ -11,6 +11,7 @@ import com.helmet.application.Constants;
 import com.helmet.application.agy.ApplicantSearchParameters;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.ApplicantClientBooking;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.persistence.ApplicantDAO;
 import com.helmet.persistence.RecordFactory;
 import com.helmet.persistence.RecordListFactory;
@@ -900,21 +901,36 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     return targetSQL;
   }
   
-	public List<Applicant> getApplicantsForAgency(Integer clientId, boolean showOnlyActive) {
-		StringBuffer sql = null;
-		if (showOnlyActive) {
-			sql = new StringBuffer(selectActiveApplicantsForAgencySQL.toString());
-		}
-		else 
+  public List<Applicant> getApplicantsForAgency(Integer agencyId, boolean showOnlyActive) {
+    StringBuffer sql = null;
+    if (showOnlyActive) {
+      sql = new StringBuffer(selectActiveApplicantsForAgencySQL.toString());
+    }
+    else 
     {
-			sql = new StringBuffer(selectApplicantsForAgencySQL.toString());
-		}
-		// Replace the parameters with supplied values.
-		Utilities.replace(sql, clientId);
-		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(),
-				Applicant.class.getName());
-		
-	}
+      sql = new StringBuffer(selectApplicantsForAgencySQL.toString());
+    }
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, agencyId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(),
+        Applicant.class.getName());
+    
+  }
+
+  public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId, boolean showOnlyActive) {
+    StringBuffer sql = null;
+    if (showOnlyActive) {
+      sql = new StringBuffer(selectActiveApplicantsForAgencySQL.toString());
+    }
+    else 
+    {
+      sql = new StringBuffer(selectApplicantsForAgencySQL.toString());
+    }
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, agencyId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantEntity.class.getName());
+    
+  }
 
   public List<Applicant> getApplicantsForNhsStaffName(Integer agencyId, String nhsStaffName) 
   {
@@ -926,7 +942,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
   }
 
   // NEW -->
-  public List<Applicant> getApplicantsForAgencySearch(Integer clientId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive) 
+  public List<Applicant> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive) 
   {
     StringBuffer sql = null;
     StringBuffer searchCriteriaOR = new StringBuffer();
@@ -943,7 +959,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
       sql.append("WHERE A.AGENCYID = ^ ");
     }
     // Replace the parameters with supplied values.
-    Utilities.replace(sql, clientId);
+    Utilities.replace(sql, agencyId);
     if (applicantSearchParameters.getLastName() != null)
     {
       if (applicantSearchParameters.getLastName().contains("%"))
@@ -1489,19 +1505,36 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Applicant.class.getName());
   }
 
+  public List<ApplicantEntity> getApplicantEntitiesForIdDocument(Integer idDocumentId)
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectApplicantsForIdDocumentSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, idDocumentId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantEntity.class.getName());
+  }
+
   public Applicant getApplicant(Integer applicantId) {
-		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(selectApplicantSQL.toString());
-		// Replace the parameters with supplied values.
-		Utilities.replace(sql, applicantId);
-		return (Applicant) RecordFactory.getInstance().get(getJdbcTemplate(),
-				sql.toString(), Applicant.class.getName());
-	}
-	public Applicant getApplicantForLogin(Integer clientId, String login) {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectApplicantSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, applicantId);
+    return (Applicant)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Applicant.class.getName());
+  }
+  
+  public ApplicantEntity getApplicantEntity(Integer applicantId) {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectApplicantSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, applicantId);
+    return (ApplicantEntity)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantEntity.class.getName());
+  }
+  
+	public Applicant getApplicantForLogin(Integer agencyId, String login) {
 		// Create a new local StringBuffer containing the parameterised SQL.
 		StringBuffer sql = new StringBuffer(selectApplicantForLoginSQL.toString());
 		// Replace the parameters with supplied values.
-		Utilities.replace(sql, clientId);
+		Utilities.replace(sql, agencyId);
 		Utilities.replaceAndQuote(sql, login);
 		return (Applicant) RecordFactory.getInstance().get(getJdbcTemplate(),
 				sql.toString(), Applicant.class.getName());

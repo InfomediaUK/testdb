@@ -13,7 +13,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.agy.abztract.AgyAction;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 
 
 public class ApplicantDeleteFile extends AgyAction
@@ -30,7 +30,7 @@ public class ApplicantDeleteFile extends AgyAction
 
     Integer applicantId = (Integer)dynaForm.get("applicantId");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-    Applicant applicant = agyService.getApplicant(applicantId);
+    ApplicantEntity applicant = agyService.getApplicantEntity(applicantId);
     // could check agency is the same agency as the consultant logged in
     if (applicant == null || !applicant.getAgencyId().equals(getConsultantLoggedIn().getAgencyId()))
     {

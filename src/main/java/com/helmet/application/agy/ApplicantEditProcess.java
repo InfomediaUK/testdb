@@ -18,7 +18,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.DisciplineCategoryUser;
 
@@ -35,7 +35,7 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
-    Applicant applicant = (Applicant)dynaForm.get("applicant"); 
+    ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant"); 
     DisciplineCategoryUser disciplineCategory = null;
     if (!applicant.getDisciplineCategoryId().equals(0))
     {

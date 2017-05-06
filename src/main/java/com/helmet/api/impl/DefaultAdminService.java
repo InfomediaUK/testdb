@@ -27,6 +27,7 @@ import com.helmet.bean.AgyAccessGroup;
 import com.helmet.bean.AgyAccessGroupEntity;
 import com.helmet.bean.AgyAccessGroupItem;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.BookingDateUserApplicant;
 import com.helmet.bean.BudgetTransaction;
 import com.helmet.bean.BudgetTransactionUser;
@@ -430,6 +431,21 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     return applicants;
   }
 
+  public List<ApplicantEntity> getApplicantEntitiesForIdDocument(Integer idDocumentId) 
+  {
+    List<ApplicantEntity> applicantEntities = null;
+    applicantEntities = getApplicantDAO().getApplicantEntitiesForIdDocument(idDocumentId);
+    for (ApplicantEntity applicantEntity : applicantEntities)
+    {
+      if (applicantEntity.getDisciplineCategoryId() != null)
+      {
+        applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+        applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId()));
+      }
+    }
+    return applicantEntities;
+  }
+
   public int insertApplicant(Applicant applicant, Integer auditorId) 
   {
     Applicant duplicateApplicant = getApplicantDAO().getApplicantForLogin(applicant.getAgencyId(), applicant.getUser().getLogin());
@@ -573,7 +589,6 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     DisciplineCategoryUserEntity disciplineCategoryUserEntity = null;
     disciplineCategoryUserEntity = getDisciplineCategoryDAO().getDisciplineCategoryUserEntity(disciplineCategoryId);
     disciplineCategoryUserEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(disciplineCategoryId, showOnlyActive));
-//    disciplineCategoryUserEntity.setTrainings(getTrainingCourseDAO().getTrainingCoursesNotForDisciplineCategory(disciplineCategoryId));
     return disciplineCategoryUserEntity;
   }
   public DisciplineCategoryUserEntityAdmin getDisciplineCategoryUserEntityAdmin(Integer disciplineCategoryId, boolean showOnlyActive)

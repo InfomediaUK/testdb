@@ -1352,7 +1352,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
             *
           </th>
 		    </tr>
-    <logic:iterate id="applicantTrainingCourse" name="ApplicantFormAgy" property="listApplicantTrainingCourse" type="com.helmet.bean.ApplicantTrainingCourseUser">
+    <logic:iterate id="applicantTrainingCourse" name="ApplicantFormAgy" property="applicant.applicantTrainingCourseUsers" type="com.helmet.bean.ApplicantTrainingCourseUser">
 		    <tr>
 		      <td>
 <mmj-agy:hasAccess forward="applicantTrainingCourseNew">

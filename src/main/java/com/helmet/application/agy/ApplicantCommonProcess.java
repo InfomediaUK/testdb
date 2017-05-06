@@ -24,6 +24,7 @@ import com.helmet.api.AgyService;
 import com.helmet.application.FileHandler;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.DisciplineCategoryUser;
 import com.helmet.bean.IdDocument;
 import com.helmet.bean.Unavailable;
@@ -49,19 +50,21 @@ public abstract class ApplicantCommonProcess extends AgyAction
     return fileExtension;
   }
   
-  protected void prepareApplicant(Applicant applicant, DisciplineCategoryUser disciplineCategory, AgyService agyService)
+  protected void prepareApplicant(ApplicantEntity applicantEntity, DisciplineCategoryUser disciplineCategory, AgyService agyService)
   {
-    if (!applicant.getIdDocumentId().equals(0))
+    if (!applicantEntity.getIdDocumentId().equals(0))
     {
-      // Id Document NOT entered...
-      IdDocument idDocument = agyService.getIdDocument(applicant.getIdDocumentId());
-      applicant.setRequiresVisa(idDocument.getRequiresVisa());
+      // Id Document entered...
+      IdDocument idDocument = agyService.getIdDocument(applicantEntity.getIdDocumentId());
+      applicantEntity.setRequiresVisa(idDocument.getRequiresVisa());
     }
-    if (!applicant.getDisciplineCategoryId().equals(0))
+    if (!applicantEntity.getDisciplineCategoryId().equals(0))
     {
-      // Discipline Category NOT entered...
-      applicant.setRegulatorName(disciplineCategory.getRegulatorName());
-      applicant.setRegulatorCode(disciplineCategory.getRegulatorCode());
+      // Discipline Category entered...
+      applicantEntity.setRegulatorName(disciplineCategory.getRegulatorName());
+      applicantEntity.setRegulatorCode(disciplineCategory.getRegulatorCode());
+      applicantEntity.setDisciplineCategoryTrainingUsers(agyService.getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+      applicantEntity.setApplicantTrainingCourseUsers(agyService.getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId(), true));
     }
   }
   
@@ -564,18 +567,4 @@ public abstract class ApplicantCommonProcess extends AgyAction
     return rowCount;
   }
   
-  protected void signAndDateNotes(StringBuffer notesStringBuffer)
-  {
-    if (notesStringBuffer.length() > 0)
-    {
-      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-      Calendar calendar = Calendar.getInstance();
-      notesStringBuffer.append("\n[");
-      notesStringBuffer.append(sdf.format(new Date(calendar.getTimeInMillis())));
-      notesStringBuffer.append(" ");
-      notesStringBuffer.append(getConsultantLoggedIn().getUser().getFullName());
-      notesStringBuffer.append("]\n");
-    }
-
-  }
 }

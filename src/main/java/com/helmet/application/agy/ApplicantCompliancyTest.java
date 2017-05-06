@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.CompliancyTest;
 
 public class ApplicantCompliancyTest
@@ -41,7 +41,7 @@ public class ApplicantCompliancyTest
     this.startOfReasonMarker = startOfReasonMarker;
   }
 
-  public Boolean isApplicantCompliant(List<CompliancyTest> listCompliancyTest, Applicant applicant, StringBuffer reason)
+  public Boolean isApplicantCompliant(List<CompliancyTest> listCompliancyTest, ApplicantEntity applicant, StringBuffer reason)
   {
     applicant.setCompliant(true);
     Class applicantClass = applicant.getClass();
@@ -153,6 +153,8 @@ public class ApplicantCompliancyTest
         reflectionProblem(methodName, sourceObject, e);
       }
     }
+    // Check that Applicant has done mandatory training.
+    applicant.hasRequiredTraining(reason);
     return applicant.getCompliant();
   }
   

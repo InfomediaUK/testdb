@@ -16,7 +16,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.agy.abztract.AgyAction;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.TrainingCompanyCourse;
 import com.helmet.bean.TrainingCompanyCourseUser;
@@ -33,7 +33,7 @@ public class ApplicantTrainingCourseEdit extends AgyAction
     ApplicantTrainingCourse applicantTrainingCourse = (ApplicantTrainingCourse)dynaForm.get("applicantTrainingCourse");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     applicantTrainingCourse = agyService.getApplicantTrainingCourse(applicantTrainingCourse.getApplicantTrainingCourseId());
-    Applicant applicant = agyService.getApplicant(applicantTrainingCourse.getApplicantId());
+    ApplicantEntity applicant = agyService.getApplicantEntity(applicantTrainingCourse.getApplicantId());
     if (applicant == null) 
     { 
       return mapping.findForward("illegalaccess"); 

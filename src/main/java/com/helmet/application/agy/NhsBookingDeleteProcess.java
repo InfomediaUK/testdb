@@ -21,7 +21,7 @@ import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.MailHandler;
 import com.helmet.application.Utilities;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.EmailAction;
 import com.helmet.bean.NhsBookingUser;
 
@@ -52,7 +52,7 @@ public class NhsBookingDeleteProcess extends SendApplicantEmailProcess
       StringBuffer textTemplate   = new StringBuffer();
       StringBuffer htmlTemplate   = new StringBuffer();
       nhsBookingUser = agyService.getNhsBookingUser(nhsBookingUser.getNhsBookingId());
-      Applicant applicant = agyService.getApplicant(nhsBookingUser.getApplicantId());
+      ApplicantEntity applicant = agyService.getApplicantEntity(nhsBookingUser.getApplicantId());
       EmailAction emailAction = agyService.getEmailAction(AgyConstants.EMAIL_ACTION_ID_NHS_BOOKING_CLOSED_NOTIFICATION);
       String subject = emailAction.getSubject();
       validateEmailAction(request, emailAction, textTemplate, htmlTemplate, errors);

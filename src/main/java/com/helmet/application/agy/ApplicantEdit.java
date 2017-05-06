@@ -17,9 +17,8 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.FileHandler;
-import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.application.comparator.AgencyWorkerChecklistFileComparator;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 
 public class ApplicantEdit extends ApplicantCommon
 {
@@ -33,11 +32,11 @@ public class ApplicantEdit extends ApplicantCommon
 
     logger.entry("In coming !!!");
 
-    Applicant applicant = (Applicant) dynaForm.get("applicant");
+    ApplicantEntity applicant = (ApplicantEntity) dynaForm.get("applicant");
 
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
 
-    applicant = agyService.getApplicant(applicant.getApplicantId());
+    applicant = agyService.getApplicantEntity(applicant.getApplicantId());
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     String dateOfBirthStr = applicant.getDateOfBirth() == null ? "" : sdf.format(applicant.getDateOfBirth());

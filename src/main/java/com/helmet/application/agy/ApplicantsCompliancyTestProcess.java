@@ -17,6 +17,7 @@ import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.CompliancyTest;
 
 
@@ -27,17 +28,17 @@ public class ApplicantsCompliancyTestProcess extends ApplicantCommon
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
     StringBuffer notesStringBuffer = null;
     StringBuffer reasonStringBuffer = null;
     List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
-    List<Applicant> applicantList = agyService.getApplicantsForAgency(getConsultantLoggedIn().getAgencyId());
-    List<Applicant> applicantChangedList = new ArrayList<Applicant>();
+    List<ApplicantEntity> applicantList = agyService.getApplicantEntitiesForAgency(getConsultantLoggedIn().getAgencyId());
+    List<ApplicantEntity> applicantChangedList = new ArrayList<ApplicantEntity>();
     Boolean applicantCompliant = null;
-    for (Applicant applicant : applicantList)
+    for (ApplicantEntity applicant : applicantList)
     {
       // For each Applicant...
       applicantCompliant = applicant.getCompliant();

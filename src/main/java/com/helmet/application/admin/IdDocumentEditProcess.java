@@ -26,6 +26,7 @@ import com.helmet.application.Utilities;
 import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.application.agy.ApplicantCompliancyTest;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.IdDocument;
 
@@ -65,10 +66,10 @@ public class IdDocumentEditProcess extends AdminAction
         StringBuffer notesStringBuffer = null;
         StringBuffer reasonStringBuffer = null;
         List<CompliancyTest> listCompliancyTest = adminService.getCompliancyTests(true);
-        List<Applicant> applicantList = adminService.getApplicantsForIdDocument(idDocument.getIdDocumentId());
-        List<Applicant> applicantChangedList = new ArrayList<Applicant>();
+        List<ApplicantEntity> applicantList = adminService.getApplicantEntitiesForIdDocument(idDocument.getIdDocumentId());
+        List<ApplicantEntity> applicantChangedList = new ArrayList<ApplicantEntity>();
         Boolean applicantCompliant = null;
-        for (Applicant applicant : applicantList)
+        for (ApplicantEntity applicant : applicantList)
         {
           // For each Applicant...
           applicantCompliant = applicant.getCompliant();

@@ -16,11 +16,13 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.util.MessageResources;
 import org.apache.struts.validator.DynaValidatorForm;
 
+import com.helmet.api.AdminService;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
+import com.helmet.application.FileHandler;
 import com.helmet.application.MailHandler;
 import com.helmet.application.Utilities;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.EmailAction;
 
 import static com.helmet.application.agy.AgyConstants.RESETPWDHINT;
@@ -40,10 +42,10 @@ public class ApplicantResetPasswordProcess extends SendApplicantEmailProcess
     String subject              = null;
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
-    Applicant applicant = (Applicant) dynaForm.get("applicant");
+    ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
     String emailActionIdSTR = (String)dynaForm.get("emailActionId");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-    applicant = agyService.getApplicant(applicant.getApplicantId());
+    applicant = agyService.getApplicantEntity(applicant.getApplicantId());
     Integer emailActionId = Integer.parseInt(emailActionIdSTR);
     if (emailActionId.intValue() == 0)
     {
@@ -120,7 +122,7 @@ public class ApplicantResetPasswordProcess extends SendApplicantEmailProcess
     return new ActionForward(actionForward.getName(), actionForward.getPath() + "?applicant.applicantId=" + applicant.getApplicantId(), actionForward.getRedirect());
   }
   
-  private String createNewPassword(Applicant applicant)
+  private String createNewPassword(ApplicantEntity applicant)
   {
     StringBuffer sb = new StringBuffer();
     StringBuffer randomString = new StringBuffer(RandomStringUtils.randomAlphabetic(8));

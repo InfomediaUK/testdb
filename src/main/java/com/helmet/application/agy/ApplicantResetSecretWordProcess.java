@@ -13,32 +13,23 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.agy.abztract.AgyAction;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 
 
-public class ApplicantResetSecretWordProcess extends AgyAction {
+public class ApplicantResetSecretWordProcess extends AgyAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
-    	logger.entry("In coming !!!");
-    	
-    	Applicant applicant = (Applicant)dynaForm.get("applicant");
-
-		AgyService agyService = ServiceFactory.getInstance().getAgyService();
-		
-		int rowCount = agyService.updateApplicantSecretWord(applicant.getApplicantId(), applicant.getUser().getLogin(), applicant.getNoOfChanges(), getConsultantLoggedIn().getConsultantId());
-
-    	logger.exit("Out going !!!");
-    	
-    	return mapping.findForward("success");
-    	
-    }
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
+    AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    int rowCount = agyService.updateApplicantSecretWord(applicant.getApplicantId(), applicant.getUser().getLogin(), applicant.getNoOfChanges(), getConsultantLoggedIn().getConsultantId());
+    logger.exit("Out going !!!");
+    return mapping.findForward("success");
+  }
 
 }

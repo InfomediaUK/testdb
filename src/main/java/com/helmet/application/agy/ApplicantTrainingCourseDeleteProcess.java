@@ -6,6 +6,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,9 @@ import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourseUser;
+import com.helmet.bean.CompliancyTest;
 
 public class ApplicantTrainingCourseDeleteProcess extends ApplicantTrainingCourseCommon
 {
@@ -38,6 +41,7 @@ public class ApplicantTrainingCourseDeleteProcess extends ApplicantTrainingCours
       return new ActionForward(actionForward.getName(), actionForward.getPath() + "?applicant.applicantId=" + applicantTrainingCourseUser.getApplicantId(), true);
     }    
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
     File fileApplicantTrainingCourseDocumentation = null;
     if (StringUtils.isNotEmpty(applicantTrainingCourseUser.getDocumentationFileName()))
     {
@@ -70,6 +74,25 @@ public class ApplicantTrainingCourseDeleteProcess extends ApplicantTrainingCours
         }
       } 
     }
+
+    ApplicantEntity applicant = agyService.getApplicantEntity(applicantTrainingCourseUser.getApplicantId());
+    ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
+    StringBuffer notesStringBuffer = new StringBuffer(getApplicantNotes(applicant));
+    StringBuffer reasonStringBuffer = new StringBuffer();
+    applicantCompliancyTest.isApplicantCompliant(listCompliancyTest, applicant, reasonStringBuffer);
+    if (reasonStringBuffer.length() > 0)
+    {
+      // Applicant is NOT Compliant. Turn Off RecentlyCompliant flag.
+      applicant.setRecentlyCompliant(false);
+      applicantCompliancyTest.addCompliancyTestFailureReasonToNotes(reasonStringBuffer, notesStringBuffer);
+    }
+    rowCount = agyService.updateApplicant(applicant, getConsultantLoggedIn().getConsultantId());
+    if (reasonStringBuffer.length() > 0)
+    {
+      // Applicant is NOT Compliant.
+      saveApplicantNotes(applicant, notesStringBuffer.toString());
+    }
+    
     ActionForward actionForward = mapping.findForward("success");
     logger.exit("Out going !!!");
     return new ActionForward(actionForward.getName(), actionForward.getPath() + "?applicant.applicantId=" + applicantTrainingCourseUser.getApplicantId(), true);

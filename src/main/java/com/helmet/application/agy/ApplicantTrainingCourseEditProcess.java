@@ -2,6 +2,7 @@ package com.helmet.application.agy;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,10 @@ import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
+import com.helmet.api.exceptions.DuplicateDataException;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourse;
+import com.helmet.bean.CompliancyTest;
 import com.helmet.bean.TrainingCompanyCourse;
 import com.helmet.bean.TrainingCourse;
 
@@ -53,6 +57,7 @@ public class ApplicantTrainingCourseEditProcess extends ApplicantTrainingCourseC
     validateDates(errors, applicantTrainingCourse);
 
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    List<CompliancyTest> listCompliancyTest = agyService.getCompliancyTests(true);
     if (!errors.isEmpty()) 
     {
       saveErrors(request, errors);
@@ -81,7 +86,49 @@ public class ApplicantTrainingCourseEditProcess extends ApplicantTrainingCourseC
         return mapping.getInputForward();
       }
     }
-    
+    // Amending the ApplicantTrainingCourse may affect Compliancy...
+    ApplicantEntity applicant = agyService.getApplicantEntity(applicantTrainingCourse.getApplicantId());
+    ApplicantCompliancyTest applicantCompliancyTest = ApplicantCompliancyTest.getInstance();
+    String existingNotes = getApplicantNotes(applicant);
+    StringBuffer notesStringBuffer = new StringBuffer(existingNotes);
+    StringBuffer reasonStringBuffer = new StringBuffer();
+    Boolean compliant = applicant.getCompliant();
+    applicantCompliancyTest.isApplicantCompliant(listCompliancyTest, applicant, reasonStringBuffer);
+    if (!compliant && applicant.getCompliant())
+    {
+      // Applicant has just become Compliant. Set RecentlyCompliant flag to TRUE.
+      applicant.setRecentlyCompliant(true);
+    }
+    else
+    {
+      applicant.setRecentlyCompliant(false);
+    }
+    if (reasonStringBuffer.length() > 0)
+    {
+      // Applicant is NOT Compliant.
+      applicantCompliancyTest.addCompliancyTestFailureReasonToNotes(reasonStringBuffer, notesStringBuffer);
+    }
+    else
+    {
+      applicantCompliancyTest.removeCompliancyTestFailureReasonFromNotes(notesStringBuffer);
+    }
+    rowCount = 0;
+    try
+    {
+      rowCount = agyService.updateApplicant(applicant, getConsultantLoggedIn().getConsultantId());
+    }
+    catch (DuplicateDataException e)
+    {
+      errors.add("applicant", new ActionMessage("errors.duplicate", messageResources.getMessage("label." + e.getField())));
+      saveErrors(request, errors);
+      return mapping.getInputForward();
+    }
+    if (reasonStringBuffer.length() > 0)
+    {
+      // Applicant is NOT Compliant.
+      saveApplicantNotes(applicant, notesStringBuffer.toString());
+    }
+
     ActionForward actionForward = mapping.findForward("success");
     logger.exit("Out going !!!");
     return new ActionForward(actionForward.getName(), actionForward.getPath() + "?applicant.applicantId=" + applicantTrainingCourse.getApplicantId(), true);

@@ -20,6 +20,7 @@ import com.helmet.bean.AgyAccessGroup;
 import com.helmet.bean.AgyAccessGroupEntity;
 import com.helmet.bean.AgyAccessGroupItem;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.BookingDateUserApplicant;
 import com.helmet.bean.BudgetTransaction;
 import com.helmet.bean.BudgetTransactionUser;
@@ -90,6 +91,7 @@ public interface AdminService extends CommonService {
   // NEW -->
   public List<Applicant> getApplicantsToCopy(Integer sourceAgencyId, Integer targetAgencyId);
   public List<Applicant> getApplicantsForIdDocument(Integer idDocumentId); 
+  public List<ApplicantEntity> getApplicantEntitiesForIdDocument(Integer idDocumentId); 
   public Applicant getApplicant(Integer applicantId);
   public int insertApplicant(Applicant applicant, Integer auditorId);
   public NhsBackingReport getNhsBackingReport(Integer nhsBackingReportId);

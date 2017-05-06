@@ -18,7 +18,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.bean.Agency;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 
 public class ApplicantChecklist extends AgencyWorkerChecklist
 {
@@ -34,13 +34,13 @@ public class ApplicantChecklist extends AgencyWorkerChecklist
 
     boolean checklistCreated = false;
     ActionMessages errors = new ActionMessages();
-    Applicant applicant = (Applicant) dynaForm.get("applicant");
+    ApplicantEntity applicant = (ApplicantEntity) dynaForm.get("applicant");
 //    Integer applicantId  = (Integer)dynaForm.get("applicantId");
     Integer weekToShow  = (Integer)dynaForm.get("weekToShow");
 
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
 
-    applicant = agyService.getApplicant(applicant.getApplicantId());
+    applicant = agyService.getApplicantEntity(applicant.getApplicantId());
     Agency agency = agyService.getAgencyUser(getConsultantLoggedIn().getAgencyId());
 
     if (applicant == null) { return mapping.findForward("illegalaccess"); }

@@ -13,7 +13,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.agy.abztract.AgyAction;
-import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 
 
 public class ApplicantArchiveProcess extends AgyAction
@@ -23,19 +23,12 @@ public class ApplicantArchiveProcess extends AgyAction
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
-
     logger.entry("In coming !!!");
-
-    Applicant applicant = (Applicant) dynaForm.get("applicant");
-
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
+    ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-
     int rowCount = agyService.archiveApplicant(applicant.getApplicantId(), applicant.getNoOfChanges(), getConsultantLoggedIn().getConsultantId());
-
     logger.exit("Out going !!!");
-
     return mapping.findForward("success");
 
   }

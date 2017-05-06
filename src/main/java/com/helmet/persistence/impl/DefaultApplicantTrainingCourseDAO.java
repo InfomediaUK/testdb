@@ -121,7 +121,9 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		selectApplicantTrainingCourseUsersSQL.append("       ATC.AUDITTIMESTAMP, ");
 		selectApplicantTrainingCourseUsersSQL.append("       ATC.ACTIVE, ");
 		selectApplicantTrainingCourseUsersSQL.append("       ATC.NOOFCHANGES, ");
-		selectApplicantTrainingCourseUsersSQL.append("       A.FIRSTNAME AS APPLICANTFIRSTNAME, ");
+    selectApplicantTrainingCourseUsersSQL.append("       TCC.TRAININGCOMPANYID, ");
+    selectApplicantTrainingCourseUsersSQL.append("       TCC.TRAININGCOURSEID, ");
+    selectApplicantTrainingCourseUsersSQL.append("       A.FIRSTNAME AS APPLICANTFIRSTNAME, ");
     selectApplicantTrainingCourseUsersSQL.append("       A.LASTNAME AS APPLICANTLASTNAME, ");
     selectApplicantTrainingCourseUsersSQL.append("       A.NHSSTAFFNAME AS APPLICANTNHSSTAFFNAME, ");
     selectApplicantTrainingCourseUsersSQL.append("       A.EMAILADDRESS AS APPLICANTEMAILADDRESS, ");

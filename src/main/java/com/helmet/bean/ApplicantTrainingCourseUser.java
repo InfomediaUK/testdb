@@ -4,6 +4,8 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 public class ApplicantTrainingCourseUser extends ApplicantTrainingCourse
 {
+  private Integer trainingCompanyId;
+  private Integer trainingCourseId;
   private String applicantFirstName;
   private String applicantLastName;
   private String applicantNhsStaffName;
@@ -12,6 +14,26 @@ public class ApplicantTrainingCourseUser extends ApplicantTrainingCourse
   private String trainingCompanyName;
   private String trainingCompanyCourseName;
   private Boolean online = false;
+
+  public Integer getTrainingCompanyId()
+  {
+    return trainingCompanyId;
+  }
+
+  public void setTrainingCompanyId(Integer trainingCompanyId)
+  {
+    this.trainingCompanyId = trainingCompanyId;
+  }
+
+  public Integer getTrainingCourseId()
+  {
+    return trainingCourseId;
+  }
+
+  public void setTrainingCourseId(Integer trainingCourseId)
+  {
+    this.trainingCourseId = trainingCourseId;
+  }
 
   public String getApplicantFirstName()
   {
@@ -101,6 +123,8 @@ public class ApplicantTrainingCourseUser extends ApplicantTrainingCourse
   public void load(SqlRowSet rs)
   {
     super.load(rs);
+    setTrainingCompanyId(rs.getInt("TRAININGCOMPANYID"));
+    setTrainingCourseId(rs.getInt("TRAININGCOURSEID"));
     setApplicantFirstName(rs.getString("APPLICANTFIRSTNAME"));
     setApplicantLastName(rs.getString("APPLICANTLASTNAME"));
     setApplicantNhsStaffName(rs.getString("APPLICANTNHSSTAFFNAME"));
@@ -114,9 +138,10 @@ public class ApplicantTrainingCourseUser extends ApplicantTrainingCourse
   @Override
   public String toString()
   {
-    return "ApplicantTrainingCourseUser [applicantFirstName=" + applicantFirstName + ", applicantLastName=" + applicantLastName + ", applicantNhsStaffName=" + applicantNhsStaffName
-        + ", applicantEmailAddress=" + applicantEmailAddress + ", disciplineCategoryName=" + disciplineCategoryName + ", trainingCompanyName=" + trainingCompanyName + ", trainingCompanyCourseName="
-        + trainingCompanyCourseName + ", online=" + online + "] " + super.toString();
+    return "ApplicantTrainingCourseUser [trainingCompanyId=" + trainingCompanyId + ", trainingCourseId=" + trainingCourseId + ", applicantFirstName=" + applicantFirstName + ", applicantLastName="
+        + applicantLastName + ", applicantNhsStaffName=" + applicantNhsStaffName + ", applicantEmailAddress=" + applicantEmailAddress + ", disciplineCategoryName=" + disciplineCategoryName
+        + ", trainingCompanyName=" + trainingCompanyName + ", trainingCompanyCourseName=" + trainingCompanyCourseName + ", online=" + online + "] " + super.toString();
   }
+
 
 }
