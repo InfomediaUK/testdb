@@ -134,7 +134,7 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		selectApplicantTrainingCourseUsersSQL.append("FROM APPLICANTTRAININGCOURSE ATC ");
     selectApplicantTrainingCourseUsersSQL.append("    JOIN APPLICANT A ON ");
     selectApplicantTrainingCourseUsersSQL.append("        A.APPLICANTID = ATC.APPLICANTID ");
-    selectApplicantTrainingCourseUsersSQL.append("    JOIN DISCIPLINECATEGORY DC ON ");
+    selectApplicantTrainingCourseUsersSQL.append("    LEFT OUTER JOIN DISCIPLINECATEGORY DC ON ");
     selectApplicantTrainingCourseUsersSQL.append("        DC.DISCIPLINECATEGORYID = A.DISCIPLINECATEGORYID ");
     selectApplicantTrainingCourseUsersSQL.append("    JOIN TRAININGCOMPANYCOURSE TCC ON ");
     selectApplicantTrainingCourseUsersSQL.append("        TCC.TRAININGCOMPANYCOURSEID = ATC.TRAININGCOMPANYCOURSEID ");
