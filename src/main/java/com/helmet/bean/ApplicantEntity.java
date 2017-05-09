@@ -88,7 +88,7 @@ public class ApplicantEntity extends Applicant
     }
     return hasRequiredTraining;
   }
- 
+  
   public String getTrainingAboutToExpire()
   {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");

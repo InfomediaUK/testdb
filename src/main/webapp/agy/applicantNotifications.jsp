@@ -558,7 +558,7 @@ function checkedAll(frmname)
                 <th align="left"><bean:message key="label.availability"/></th>
                 <th align="left"><bean:message key="label.disciplineCategory"/></th>
                 <th align="left"><bean:message key="label.clientGroup"/></th>
-                <th align="left"><bean:message key="label.professionalReference"/></th>
+                <th align="left"><bean:message key="label.registrationNumber"/></th>
                 <th align="center"><bean:message key="label.ftw"/></th>
                 <th align="center"><bean:message key="label.crb"/></th>
                 <th align="center"><bean:message key="label.mt"/></th>
@@ -680,7 +680,7 @@ function checkedAll(frmname)
 						    <th align="left"><bean:message key="label.availability"/></th>
 						    <th align="left"><bean:message key="label.disciplineCategory"/></th>
 						    <th align="left"><bean:message key="label.clientGroup"/></th>
-						    <th align="left"><bean:message key="label.professionalReference"/></th>
+						    <th align="left"><bean:message key="label.registrationNumber"/></th>
 						    <th align="center"><bean:message key="label.ftw"/></th>
 						    <th align="center"><bean:message key="label.crb"/></th>
 						    <th align="center"><bean:message key="label.mt"/></th>

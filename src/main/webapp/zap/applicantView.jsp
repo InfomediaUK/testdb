@@ -622,7 +622,7 @@ String registrationAlertNotificationMessageKey = "label.registrationAlertNotific
               </td>
             </tr>
             <tr>
-              <th width="25%"  align="left" class="label"><bean:message key="label.professionalReference"/></th>
+              <th width="25%"  align="left" class="label"><bean:message key="label.registrationNumber"/></th>
               <td align="left">
                 <bean:write name="applicant" property="registrationNumber"/>
               </td>

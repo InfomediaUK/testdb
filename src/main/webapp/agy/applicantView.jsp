@@ -1190,7 +1190,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					    </td>
 					  </tr>
 					  <tr>
-					    <th width="25%"  align="left" class="label"><bean:message key="label.professionalReference"/></th>
+					    <th width="25%"  align="left" class="label"><bean:message key="label.registrationNumber"/></th>
 					    <td align="left">
 						    <bean:write name="ApplicantFormAgy" property="applicant.registrationNumber"/>
 				      </td>

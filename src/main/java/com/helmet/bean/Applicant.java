@@ -1674,14 +1674,28 @@ public class Applicant extends Base
       // Must register with REGISTRATION, IE. NOT HCA...
       return getHasCurrentProfessionalRegistration();
     }
-    // HCA, no need to validate registration file or expiry date...
-    return null;
+    // HCA, no need to validate Professional Registration at all...
+    return true;
  }
   
   public Boolean getHasCurrentProfessionalRegistration()
   {
-    // True: Must have registrationExpiryDate set AND registrationExpiryDate must not be before today AND registrationFilename entered.
-    return registrationExpiryDate == null ? false : dateInFuture(registrationExpiryDate) && (StringUtils.isNotEmpty(registrationFilename));
+    // True: Must have registrationExpiryDate set AND registrationExpiryDate must not be before today 
+    // AND registrationFilename entered AND registrationNumber entered.
+    if (registrationExpiryDate != null)
+    {
+      if (dateInFuture(registrationExpiryDate))
+      {
+        if (StringUtils.isNotEmpty(registrationFilename))
+        {
+          if (StringUtils.isNotEmpty(registrationNumber))
+          {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
   
   public Boolean getHasCurrentDBS()

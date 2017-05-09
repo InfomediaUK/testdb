@@ -40,11 +40,8 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
       disciplineCategory = agyService.getDisciplineCategoryUser(applicant.getDisciplineCategoryId());
     }
     prepareApplicant(applicant, disciplineCategory, agyService);
+    loadApplicant(applicant, dynaForm, errors, messageResources);
     validateApplicant(applicant, disciplineCategory, dynaForm, errors, messageResources);
-    if (errors.isEmpty()) 
-    {
-      loadApplicant(applicant, dynaForm, errors, messageResources);
-    }
     if (!errors.isEmpty())
     {
       saveErrors(request, errors);
@@ -53,22 +50,6 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     applicant.setAgencyId(getConsultantLoggedIn().getAgencyId());
     // Get the set of new Unavailable dates from the form.
     String unavailableDates = (String)dynaForm.get("unavailableDates");
-//    FormFile photoFile = (FormFile) dynaForm.get("photoFormFile");
-//    String contentType = photoFile.getContentType();
-//    String photoFilename = photoFile.getFileName();
-//    int fileSize = photoFile.getFileSize();
-//    if (StringUtils.isNotEmpty(photoFilename))
-//    {
-//      applicant.setPhotoFilename(photoFilename);
-//    }
-//    // CVFILE -->
-//    FormFile cvFile = (FormFile) dynaForm.get("cvFormFile");
-//    String cvFilename = cvFile.getFileName();
-//    if (StringUtils.isNotEmpty(cvFilename))
-//    {
-//      applicant.setCvFilename(cvFilename);
-//    }
-//    // <-- CVFILE
     // Remove all \r characters but leave the \n characters.
     String notes = ((String)dynaForm.get("notes")).replaceAll("\r", "");
     StringBuffer notesStringBuffer = new StringBuffer(notes);

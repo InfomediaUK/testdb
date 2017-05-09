@@ -74,8 +74,8 @@
     <td align="left"><bean:write name="ApplicantResetPasswordFormAgy" property="applicant.reference"/></td>
   </tr>
   <tr>
-    <th align="left" class="label"><bean:message key="label.professionalReference"/></th>
-    <td align="left"><bean:write name="ApplicantResetPasswordFormAgy" property="applicant.professionalReference"/></td>
+    <th align="left" class="label"><bean:message key="label.registrationNumber"/></th>
+    <td align="left"><bean:write name="ApplicantResetPasswordFormAgy" property="applicant.registrationNumber"/></td>
   </tr>
   <tr>
     <th align="left" class="label"><bean:message key="label.limitedCompany"/></th>

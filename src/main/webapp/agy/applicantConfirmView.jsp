@@ -50,7 +50,7 @@
 			    <td align="left"><bean:write name="ApplicantFormAgy" property="applicant.reference"/></td>
 			  </tr>
 			  <tr>
-			    <th align="left" class="label"><bean:message key="label.professionalReference"/></th>
+			    <th align="left" class="label"><bean:message key="label.registrationNumber"/></th>
 			    <td align="left">
   		      <bean:write name="ApplicantFormAgy" property="applicant.registrationNumber"/>
 			    </td>

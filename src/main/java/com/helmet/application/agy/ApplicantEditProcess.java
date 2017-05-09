@@ -43,11 +43,8 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
       disciplineCategory = agyService.getDisciplineCategoryUser(applicant.getDisciplineCategoryId());
     }
     prepareApplicant(applicant, disciplineCategory, agyService);
+    loadApplicant(applicant, dynaForm, errors, messageResources);
     validateApplicant(applicant, disciplineCategory, dynaForm, errors, messageResources);
-    if (errors.isEmpty()) 
-    {
-      loadApplicant(applicant, dynaForm, errors, messageResources);
-    }
     if (!errors.isEmpty()) 
     {
       saveErrors(request, errors);

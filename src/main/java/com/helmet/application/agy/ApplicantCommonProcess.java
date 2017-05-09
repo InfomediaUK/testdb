@@ -83,10 +83,26 @@ public abstract class ApplicantCommonProcess extends AgyAction
     {
       if (disciplineCategory.getRegulatorId() == null)
       {
+        // The Discipline Category does NOT have a Regulator.
         if (!applicant.getAhpRegistrationType().equals(0))
         {
-          // The Discipline Category does NOT have a Regulator that the Applicant must register with...
+          // Registration with a Regulator NOT required.
           errors.add("applicant", new ActionMessage("error.ahpRegistrationType.notRequired", disciplineCategory.getName()));
+        }
+        if (applicant.getRegistrationExpiryDate() != null)
+        {
+          // Registration Expiry Date must NOT be entered.
+          errors.add("applicant", new ActionMessage("error.registrationExpiryDate.mustBeBlank", disciplineCategory.getName()));
+        }
+        if (StringUtils.isNotEmpty(applicant.getRegistrationNumber()))
+        {
+          // Registration Number must NOT be entered.
+          errors.add("applicant", new ActionMessage("error.registrationNumber.mustBeBlank", disciplineCategory.getName()));
+        }
+        if (applicant.getRegistrationLastCheckedDate() != null)
+        {
+          // Registration Last Checked Date must NOT be entered.
+          errors.add("applicant", new ActionMessage("error.registrationLastCheckedDate.mustBeBlank", disciplineCategory.getName()));
         }
       }
       else

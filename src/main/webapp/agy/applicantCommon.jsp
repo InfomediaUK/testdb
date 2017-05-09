@@ -553,7 +553,7 @@
 			    <td align="left"><html:text property="registrationExpiryDateStr" tabindex="68"/>&nbsp;<bean:message key="text.dateFormat"/></td>
 			  </tr>
 			  <tr>
-			    <th width="25%"  align="left" class="label"><bean:message key="label.professionalReference"/></th>
+			    <th width="25%"  align="left" class="label"><bean:message key="label.registrationNumber"/></th>
 			    <td align="left"><html:text property="applicant.registrationNumber" size="30" maxlength="50" tabindex="69" /></td>
 			  </tr>
 			  <tr>
