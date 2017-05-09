@@ -1,6 +1,7 @@
 package com.helmet.bean;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -87,5 +88,38 @@ public class ApplicantEntity extends Applicant
     }
     return hasRequiredTraining;
   }
-  
+ 
+  public String getTrainingAboutToExpire()
+  {
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+    if (getHasApplicantTrainingCourses())
+    {
+      // This Applicant HAS ApplicantTrainingCourse records. Return any that expire within one month.
+      StringBuffer trainingAboutToExpire = new StringBuffer();
+      Calendar calendar = Calendar.getInstance();
+      calendar.add(Calendar.MONTH, 1);
+      Date dateOneMonthAhead = new Date(calendar.getTimeInMillis());
+      for (ApplicantTrainingCourseUser applicantTrainingCourseUser : applicantTrainingCourseUsers)
+      {
+        if (applicantTrainingCourseUser.getEndDate().before(dateOneMonthAhead))
+        {
+          // ApplicantTrainingCourse expires in less than one month. Add it to the comma delimited string.
+          if (trainingAboutToExpire.length() > 0)
+          {
+            trainingAboutToExpire.append(", ");
+          }
+          trainingAboutToExpire.append(applicantTrainingCourseUser.getTrainingCompanyCourseName());
+          trainingAboutToExpire.append(" - ");
+          trainingAboutToExpire.append(simpleDateFormat.format(applicantTrainingCourseUser.getEndDate()));
+        }
+      }
+      trainingAboutToExpire.append(".");
+      return trainingAboutToExpire.toString();      
+    }
+    else
+    {
+      // This Applicant does NOT have ApplicantTrainingCourse records. Just return the TrainingExpiryDate.
+      return simpleDateFormat.format(getTrainingExpiryDate());
+    }
+  }
 }

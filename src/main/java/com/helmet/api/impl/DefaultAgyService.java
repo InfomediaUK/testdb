@@ -228,8 +228,8 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
       if (applicantEntity.getDisciplineCategoryId() != null)
       {
         applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
-        applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId()));
       }
+      applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId()));
     }
     return applicantEntities;
   }
@@ -302,6 +302,20 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     List<Applicant> applicants = null;
     applicants = getApplicantDAO().getApplicantsForAgencyTrainingAboutToExpire(agencyId, dateToCheck);
     return applicants;
+  }
+  public List<ApplicantEntity> getApplicantEntitiesForAgencyTrainingAboutToExpire(Integer agencyId, Date dateToCheck)
+  {
+    List<ApplicantEntity> applicantEntities = null;
+    applicantEntities = getApplicantDAO().getApplicantEntitiesForAgencyTrainingAboutToExpire(agencyId, dateToCheck);
+    for (ApplicantEntity applicantEntity : applicantEntities)
+    {
+      if (applicantEntity.getDisciplineCategoryId() != null)
+      {
+        applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+      }
+      applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicantTrainingAboutToExpire(applicantEntity.getApplicantId(), dateToCheck));
+    }
+    return applicantEntities;
   }
   public List<Applicant> getApplicantsForAgencyVisaAboutToExpire(Integer agencyId, Date dateToCheck)
   {
@@ -391,7 +405,10 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
   {
     ApplicantEntity applicantEntity = null;
     applicantEntity = getApplicantDAO().getApplicantEntity(applicantId);
-    applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+    if (applicantEntity.getDisciplineCategoryId() != null)
+    {
+      applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+    }
     applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantId));
     return applicantEntity;
   }

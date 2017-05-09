@@ -789,9 +789,29 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectActiveApplicantsForAgencyIdDocumentAboutToExpireSQL.append("ORDER BY A.IDDOCUMENTEXPIRYDATE DESC ");
     // Get select Active Applicants for Agency with Training about to expire.
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND EXISTS ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("( ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    SELECT NULL ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    FROM APPLICANTTRAININGCOURSE ATC ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    WHERE ATC.APPLICANTID = A.APPLICANTID ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE < ^ ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE > NOW() ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ACTIVE = TRUE ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append(") ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("UNION ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append(selectActiveApplicantsForAgencySQL);
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE IS NOT NULL ");
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE < ^ ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("ORDER BY A.TRAININGEXPIRYDATE DESC ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND NOT EXISTS ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("( ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    SELECT NULL ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    FROM APPLICANTTRAININGCOURSE ATC ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    WHERE ATC.APPLICANTID = A.APPLICANTID ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE < ^ ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE > NOW() ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ACTIVE = TRUE ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append(") ");
+    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("ORDER BY TRAININGEXPIRYDATE DESC ");
     // Get select Active Applicants for Agency with Visa about to expire.
     selectActiveApplicantsForAgencyVisaAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
     selectActiveApplicantsForAgencyVisaAboutToExpireSQL.append("AND A.VISAEXPIRYDATE IS NOT NULL ");
@@ -1422,7 +1442,22 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     // Replace the parameters with supplied values.
     Utilities.replace(sql, agencyId);
     Utilities.replaceAndQuote(sql, dateToCheck);
+    Utilities.replace(sql, agencyId);
+    Utilities.replaceAndQuote(sql, dateToCheck);
+    Utilities.replaceAndQuote(sql, dateToCheck);
     return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Applicant.class.getName());
+  }
+
+  public List<ApplicantEntity> getApplicantEntitiesForAgencyTrainingAboutToExpire(Integer agencyId, Date dateToCheck)
+  {
+    StringBuffer sql = new StringBuffer(selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, agencyId);
+    Utilities.replaceAndQuote(sql, dateToCheck);
+    Utilities.replace(sql, agencyId);
+    Utilities.replaceAndQuote(sql, dateToCheck);
+    Utilities.replaceAndQuote(sql, dateToCheck);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantEntity.class.getName());
   }
 
   public List<Applicant> getApplicantsForAgencyVisaAboutToExpire(Integer agencyId, Date dateToCheck)

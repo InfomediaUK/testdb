@@ -1,5 +1,6 @@
 package com.helmet.persistence.impl;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 	private static StringBuffer selectApplicantTrainingCourseUsersForApplicantSQL;
 
 	private static StringBuffer selectActiveApplicantTrainingCourseUsersForApplicantSQL;
+	
+	private static StringBuffer selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL;
 
 	private static StringBuffer selectActiveApplicantTrainingCourseCountForTrainingCourseSQL;
 	
@@ -150,7 +153,10 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		// Active ONLY
 		selectActiveApplicantTrainingCourseUsersForApplicantSQL = new StringBuffer(selectApplicantTrainingCourseUsersForApplicantSQL);
 		selectActiveApplicantTrainingCourseUsersForApplicantSQL.append("AND ATC.ACTIVE = TRUE ");
-    // Get select Active ApplicantTrainingCourse Count for TrainingCourse SQL
+    // Get select ApplicantTrainingCourseUsers for Applicant with TrainingCourse about to Expire SQL.
+    selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL = new StringBuffer(selectActiveApplicantTrainingCourseUsersForApplicantSQL);
+    selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL.append("AND ATC.ENDDATE < ^ ");
+		// Get select Active ApplicantTrainingCourse Count for TrainingCourse SQL
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL = new StringBuffer();
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.append("SELECT COUNT(*) ");
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.append("FROM APPLICANTTRAININGCOURSE ATC ");
@@ -244,6 +250,16 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		Utilities.replace(sql, applicantId);
 		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantTrainingCourseUser.class.getName());
 	}
+
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicantTrainingAboutToExpire(Integer applicantId, Date dateToCheck) 
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, applicantId);
+    Utilities.replaceAndQuote(sql, dateToCheck);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantTrainingCourseUser.class.getName());
+  }
 
 	public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId) 
 	{

@@ -106,6 +106,7 @@ public interface AgyService extends CommonService {
   public List<Applicant> getApplicantsForAgencyRegistrationAboutToExpire(Integer agencyId, Date dateToCheck);
   public List<Applicant> getApplicantsForAgencyIdDocumentAboutToExpire(Integer agencyId, Date dateToCheck);
   public List<Applicant> getApplicantsForAgencyTrainingAboutToExpire(Integer agencyId, Date dateToCheck);
+  public List<ApplicantEntity> getApplicantEntitiesForAgencyTrainingAboutToExpire(Integer agencyId, Date dateToCheck);
   public List<Applicant> getApplicantsForAgencyVisaAboutToExpire(Integer agencyId, Date dateToCheck);
 
   public List<Applicant> getApplicantsForAgencyReference1NotSatisfied(Integer agencyId, Date dateToday);

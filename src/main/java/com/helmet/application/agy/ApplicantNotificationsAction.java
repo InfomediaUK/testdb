@@ -18,6 +18,7 @@ import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
 
 
 public class ApplicantNotificationsAction extends AgyAction 
@@ -34,15 +35,7 @@ public class ApplicantNotificationsAction extends AgyAction
   	logger.entry("In coming !!!");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     Calendar calendar = Calendar.getInstance();
-//    calendar.set(Calendar.HOUR, 00);
-//    calendar.set(Calendar.MINUTE, 00);
-//    calendar.set(Calendar.SECOND, 00);
-//    calendar.set(Calendar.MILLISECOND, 00);
     Date dateToday = new Date(calendar.getTimeInMillis());
-//    calendar.set(Calendar.HOUR, 23);
-//    calendar.set(Calendar.MINUTE, 59);
-//    calendar.set(Calendar.SECOND, 59);
-//    calendar.set(Calendar.MILLISECOND, 999);
     calendar.add(Calendar.MONTH, 1);
     Date dateOneMonthAhead = new Date(calendar.getTimeInMillis());
     List<Applicant> newList = agyService.getApplicantsForAgencyNew(getConsultantLoggedIn().getAgencyId(), dateToday);
@@ -51,7 +44,7 @@ public class ApplicantNotificationsAction extends AgyAction
     List<Applicant> fitToWorkList = agyService.getApplicantsForAgencyFitToWorkAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> registrationList = agyService.getApplicantsForAgencyRegistrationAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> idDocumentList = agyService.getApplicantsForAgencyIdDocumentAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
-    List<Applicant> trainingList = agyService.getApplicantsForAgencyTrainingAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
+    List<ApplicantEntity> trainingList = agyService.getApplicantEntitiesForAgencyTrainingAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> visaList = agyService.getApplicantsForAgencyVisaAboutToExpire(getConsultantLoggedIn().getAgencyId(), dateOneMonthAhead);
     List<Applicant> reference1List = agyService.getApplicantsForAgencyReference1NotSatisfied(getConsultantLoggedIn().getAgencyId(), dateToday);
     List<Applicant> reference2List = agyService.getApplicantsForAgencyReference2NotSatisfied(getConsultantLoggedIn().getAgencyId(), dateToday);

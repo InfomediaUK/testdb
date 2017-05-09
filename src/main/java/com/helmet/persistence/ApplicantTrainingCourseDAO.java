@@ -1,5 +1,6 @@
 package com.helmet.persistence;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.helmet.bean.ApplicantTrainingCourse;
@@ -11,7 +12,8 @@ public interface ApplicantTrainingCourseDAO
   // NON-STANDARD INSERT METHOD. ApplicantTrainingCourseId supplied in object.
   public Integer getApplicantTrainingCourseId(); 
   public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive);
-	public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId);
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId);
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicantTrainingAboutToExpire(Integer applicantId, Date dateToCheck);
   public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId);
   public ApplicantTrainingCourseUser getApplicantTrainingCourseUser(Integer applicantTrainingCourseId);
 	public int insertApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId);

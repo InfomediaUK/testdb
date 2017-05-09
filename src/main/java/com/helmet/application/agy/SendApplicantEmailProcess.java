@@ -338,6 +338,11 @@ public class SendApplicantEmailProcess extends SendEmailProcess
       {
         content.replace(index, index + matcher.group().length(), requestDocumentsText(applicant, html));
       }
+//      else if (tag.equals("applicant.trainingExpiryDate") && applicant.getHasApplicantTrainingCourses())
+//      {
+//        // SPECIAL PROCESSING FOR ApplicantTrainingCourses...
+//        content.replace(index, index + matcher.group().length(), applicantTrainingCourseText(applicant, html));
+//      }
       else
       {
         // Class Name will be agency or applicant.
@@ -628,5 +633,55 @@ public class SendApplicantEmailProcess extends SendEmailProcess
       } 
     }
   }
+
+//  private String applicantTrainingCourseText(ApplicantEntity applicant, Boolean html)
+//  {
+//    StringBuffer text = new StringBuffer();
+//    writeApplicantTrainingCourseLines(text, applicant, html);
+//    return text.toString();
+//  }
+//  
+//  public void writeApplicantTrainingCourseLines(StringBuffer text, ApplicantEntity applicant, Boolean html)
+//  {
+//    Calendar calendar = Calendar.getInstance();
+//    Date todaysDate = new Date(calendar.getTimeInMillis());
+//    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+//    if (applicant.getHasDisciplineCategoryTrainings())
+//    {
+//      for (DisciplineCategoryTrainingUser disciplineCategoryTrainingUser : applicant.getDisciplineCategoryTrainingUsers())
+//      {
+//        // For each mandatory Training for the Applicant's Discipline Category...
+//        for (ApplicantTrainingCourseUser applicantTrainingCourseUser : applicant.getApplicantTrainingCourseUsers())
+//        {
+//          // For each Training Course that the Applicant has taken...
+//          if (disciplineCategoryTrainingUser.getTrainingCourseId().equals(applicantTrainingCourseUser.getTrainingCourseId()))
+//          {
+//            if (todaysDate.after(applicantTrainingCourseUser.getStartDate()) && todaysDate.before(applicantTrainingCourseUser.getEndDate()))
+//            {
+//              // Applicant has this Training Course current.
+//              if (html)
+//              {
+//                text.append("<p>");
+//              }
+//              else
+//              {
+//                // NOT html...
+//                if (text.length() > 0)
+//                {
+//                  // NOT first line. Add a new line.
+//                  text.append("\n");
+//                }
+//              }
+//              text.append(disciplineCategoryTrainingUser.getTrainingName() + " - " + simpleDateFormat.format(applicantTrainingCourseUser.getEndDate()));
+//              if (html)
+//              {
+//                text.append("</p>");
+//              }
+//            }
+//          }
+//        }
+//      } 
+//    }
+//  }
 
 }
