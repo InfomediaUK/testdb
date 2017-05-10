@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ApplicantEntity extends Applicant
 {
   private List<DisciplineCategoryTrainingUser> disciplineCategoryTrainingUsers;
@@ -48,7 +50,20 @@ public class ApplicantEntity extends Applicant
     return applicantTrainingCourseUsers.size() > 0;
   }
  
-  public Boolean hasRequiredTraining(StringBuffer reason)
+  @Override
+  public Boolean getHasCurrentTraining()
+  {
+    if (getHasDisciplineCategoryTrainings() && getHasApplicantTrainingCourses())
+    {
+      return hasRequiredTraining();
+    }
+    else
+    {
+      return super.getHasCurrentTraining();
+    }
+  }
+
+  public Boolean hasRequiredTraining()
   {
     Calendar calendar = Calendar.getInstance();
     Date todaysDate = new Date(calendar.getTimeInMillis());
@@ -76,19 +91,59 @@ public class ApplicantEntity extends Applicant
         if (!trainingCourseFound)
         {
           // Applicant has NOT done this mandatory training.
-          reason.append("Current " + disciplineCategoryTrainingUser.getTrainingName() + "\n");
           hasRequiredTraining = false;
         }
       } 
     }
     else
     {
-      reason.append("Discipline Category MISSING Training NOT Checked \n");
       hasRequiredTraining = false;
     }
     return hasRequiredTraining;
   }
   
+
+//  public Boolean hasRequiredTraining(StringBuffer reason)
+//  {
+//    Calendar calendar = Calendar.getInstance();
+//    Date todaysDate = new Date(calendar.getTimeInMillis());
+//    Boolean hasRequiredTraining = true;
+//    Boolean trainingCourseFound = false;
+//    if (getHasDisciplineCategoryTrainings())
+//    {
+//      for (DisciplineCategoryTrainingUser disciplineCategoryTrainingUser : disciplineCategoryTrainingUsers)
+//      {
+//        // For each mandatory Training for the Applicant's Discipline Category...
+//        trainingCourseFound = false;
+//        for (ApplicantTrainingCourseUser applicantTrainingCourseUser : applicantTrainingCourseUsers)
+//        {
+//          // For each Training Course that the Applicant has taken...
+//          if (disciplineCategoryTrainingUser.getTrainingCourseId().equals(applicantTrainingCourseUser.getTrainingCourseId()))
+//          {
+//            if (todaysDate.after(applicantTrainingCourseUser.getStartDate()) && todaysDate.before(applicantTrainingCourseUser.getEndDate()))
+//            {
+//              // Applicant has this Training Course current.
+//              trainingCourseFound = true;
+//              break;
+//            }
+//          }
+//        }
+//        if (!trainingCourseFound)
+//        {
+//          // Applicant has NOT done this mandatory training.
+//          reason.append("Current " + disciplineCategoryTrainingUser.getTrainingName() + "\n");
+//          hasRequiredTraining = false;
+//        }
+//      } 
+//    }
+//    else
+//    {
+//      reason.append("Discipline Category MISSING Training NOT Checked \n");
+//      hasRequiredTraining = false;
+//    }
+//    return hasRequiredTraining;
+//  }
+//  
   public String getTrainingAboutToExpire()
   {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMMM yyyy");

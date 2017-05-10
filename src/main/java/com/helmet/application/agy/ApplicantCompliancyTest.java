@@ -154,7 +154,7 @@ public class ApplicantCompliancyTest
       }
     }
     // Check that Applicant has done mandatory training.
-    applicant.hasRequiredTraining(reason);
+//    applicant.hasRequiredTraining(reason);
     return applicant.getCompliant();
   }
   
