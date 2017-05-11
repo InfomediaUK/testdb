@@ -34,33 +34,26 @@ public class ApplicantView extends ApplicantCommon
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
-
-    AgyService agyService = ServiceFactory.getInstance().getAgyService();
-
-    applicant = agyService.getApplicantEntity(applicant.getApplicantId());
-
-    if (applicant == null) { return mapping.findForward("illegalaccess"); }
-
     Boolean showWeekly = (Boolean) dynaForm.get("showWeekly");
-
     Date startOfWeekDate = null;
     Date endOfWeekDate = null;
     Integer weekToShow = new Integer(0);
-    
     if (showWeekly)
     {
       // showing weekly so determine which week to show 0=current, -1=last week, 1=next week
       weekToShow = (Integer) dynaForm.get("weekToShow");
       // find out this weeks monday
-
       startOfWeekDate = Utilities.getStartOfWeek(weekToShow);
       endOfWeekDate = Utilities.getEndOfWeek(weekToShow);
-
       dynaForm.set("startDate", startOfWeekDate);
       dynaForm.set("endDate", endOfWeekDate);
-
     }
-
+    AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    applicant = agyService.getApplicantEntity(applicant.getApplicantId(), startOfWeekDate, endOfWeekDate);
+    if (applicant == null) 
+    { 
+      return mapping.findForward("illegalaccess"); 
+    }
     List<BookingDateUserApplicant> list = agyService.getBookingDateUserApplicantsForApplicantForAgencyAndDateRange(applicant.getApplicantId(), getConsultantLoggedIn().getAgencyId(), startOfWeekDate, endOfWeekDate);
     // Get ONLY the ACTIVE Unavailables from one year ago to one year in the future.
     String unavailableDates = getUnavailablesForApplicant(agyService, applicant);

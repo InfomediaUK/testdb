@@ -413,6 +413,25 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return applicantEntity;
   }
 
+  public ApplicantEntity getApplicantEntity(Integer applicantId, Date startDate, Date endDate)
+  {
+    ApplicantEntity applicantEntity = null;
+    applicantEntity = getApplicantDAO().getApplicantEntity(applicantId);
+    if (applicantEntity.getDisciplineCategoryId() != null)
+    {
+      applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+    }
+    if (startDate == null && endDate == null)
+    {
+      applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantId));
+    }
+    else
+    {
+      applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicantAndDateRange(applicantId, startDate, endDate));
+    }
+    return applicantEntity;
+  }
+
   public List<ApplicantClientBooking> getApplicantClientBookings(Integer applicantId, Integer clientId, Integer agencyId, Date searchDate) 
   {
     List<ApplicantClientBooking> applicantClientBookings = null;

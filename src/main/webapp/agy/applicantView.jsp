@@ -1315,98 +1315,6 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 	  </td>
   </tr>
 </table>
-<table cellpadding="0" cellspacing="0" width="100%" border="0">
-  <tr>
-    <td>
-	  <div class="tabber">
-		<div class="tabbertab">
-		  <h2>Training</h2>
-		  <table class="simple" width="100%">
-<mmj-agy:hasAccess forward="applicantTrainingCourseNew">
-		    <tr>
-		      <td colspan="7">
-				<html:link forward="applicantTrainingCourseNew" paramId="applicant.applicantId" paramName="ApplicantFormAgy" paramProperty="applicant.applicantId"><bean:message key="link.new"/></html:link>
-		      </td>
-		    </tr>
-</mmj-agy:hasAccess>
-		    <tr>
-		      <th>
-		        Course
-		      </th>
-		      <th>
-		        Company
-		      </th>
-		      <th>
-		        Start
-		      </th>
-          <th>
-            End
-          </th>
-          <th>
-            Documentation
-          </th>
-          <th>
-            Comment
-          </th>
-          <th>
-            *
-          </th>
-		    </tr>
-    <logic:iterate id="applicantTrainingCourse" name="ApplicantFormAgy" property="applicant.applicantTrainingCourseUsers" type="com.helmet.bean.ApplicantTrainingCourseUser">
-		    <tr>
-		      <td>
-<mmj-agy:hasAccess forward="applicantTrainingCourseNew">
-          <html:link forward="applicantTrainingCourseEdit" paramId="applicantTrainingCourse.applicantTrainingCourseId" paramName="applicantTrainingCourse" paramProperty="applicantTrainingCourseId"><bean:write name="applicantTrainingCourse" property="trainingCompanyCourseName" filter="false"/></html:link>
-</mmj-agy:hasAccess>
-<mmj-agy:hasNoAccess forward="applicantTrainingCourseNew">
-		        <bean:write name="applicantTrainingCourse" property="trainingCompanyCourseName" filter="false"/>
-</mmj-agy:hasNoAccess>
-		      </td>
-		      <td>
-            <bean:write name="applicantTrainingCourse" property="trainingCompanyName" filter="false"/>
-		      </td>
-		      <td>
-            <bean:write name="applicantTrainingCourse" property="startDate" formatKey="format.mediumDateFormat"/>
-		      </td>
-          <td>
-            <bean:write name="applicantTrainingCourse" property="endDate" formatKey="format.mediumDateFormat"/>
-          </td>
-          <td>
-            <bean:define id="documentationFileUrl" name="applicantTrainingCourse" property="documentationFileUrl" type="java.lang.String" />
-                <% 
-                fileUrl = request.getContextPath() + documentationFileUrl;
-                %>
-<logic:equal name="consultant" property="canViewDocuments" value="true">
-                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="applicantTrainingCourse" property="documentationFileName"/></html:link>
-</logic:equal>
-<logic:notEqual name="consultant" property="canViewDocuments" value="true">
-                <bean:write name="applicantTrainingCourse" property="documentationFileName"/>
-</logic:notEqual>
-          </td>
-          <td>
-            <bean:write name="applicantTrainingCourse" property="comment" filter="false"/>
-          </td>
-          <td>
-        <mmj-agy:hasAccess forward="applicantTrainingCourseDelete">
-          <logic:equal name="applicantTrainingCourse" property="active" value="true">
-              <html:link forward="applicantTrainingCourseDelete" paramId="applicantTrainingCourseUser.applicantTrainingCourseId" paramName="applicantTrainingCourse" paramProperty="applicantTrainingCourseId" titleKey="title.applicantTrainingCourseDelete">x</html:link>
-          </logic:equal>
-          <logic:equal name="applicantTrainingCourse" property="active" value="false">
-              &nbsp;
-          </logic:equal>
-        </mmj-agy:hasAccess>
-        <mmj-agy:hasNoAccess forward="applicantTrainingCourseDelete">
-              &nbsp;
-        </mmj-agy:hasNoAccess>
-          </td>
-		    </tr>
-		 </logic:iterate>
-		  </table>
-		</div>
-	  </div>
-    </td>
-  </tr>
-</table>
 <br/>
 <bean:define id="tab" value="weekly"/>
 
@@ -1451,10 +1359,105 @@ String theAction = "/applicantView.do?applicant.applicantId=" + applicantId;
   </tr>
 </table>
 
+<table cellpadding="0" cellspacing="0" width="100%" border="0">
+  <tr>
+    <td>
+    <div class="tabber">
+    <div class="tabbertab">
+      <h2>Shifts</h2>
 <jsp:include page="shiftsIncludeApplicant.jsp" flush="true">
   <jsp:param name="theFormAgy" value="ApplicantFormAgy"/>
   <jsp:param name="showButtons" value="true"/>
 </jsp:include>
+    </div>
+    <div class="tabbertab">
+      <h2>Training</h2>
+      <table class="simple" width="100%">
+<mmj-agy:hasAccess forward="applicantTrainingCourseNew">
+        <tr>
+          <td colspan="7">
+        <html:link forward="applicantTrainingCourseNew" paramId="applicant.applicantId" paramName="ApplicantFormAgy" paramProperty="applicant.applicantId"><bean:message key="link.new"/></html:link>
+          </td>
+        </tr>
+</mmj-agy:hasAccess>
+        <tr>
+          <th>
+            Course
+          </th>
+          <th>
+            Company
+          </th>
+          <th>
+            Start
+          </th>
+          <th>
+            End
+          </th>
+          <th>
+            Documentation
+          </th>
+          <th>
+            Comment
+          </th>
+          <th>
+            *
+          </th>
+        </tr>
+    <logic:iterate id="applicantTrainingCourse" name="ApplicantFormAgy" property="applicant.applicantTrainingCourseUsers" type="com.helmet.bean.ApplicantTrainingCourseUser">
+        <tr>
+          <td>
+<mmj-agy:hasAccess forward="applicantTrainingCourseNew">
+          <html:link forward="applicantTrainingCourseEdit" paramId="applicantTrainingCourse.applicantTrainingCourseId" paramName="applicantTrainingCourse" paramProperty="applicantTrainingCourseId"><bean:write name="applicantTrainingCourse" property="trainingCompanyCourseName" filter="false"/></html:link>
+</mmj-agy:hasAccess>
+<mmj-agy:hasNoAccess forward="applicantTrainingCourseNew">
+            <bean:write name="applicantTrainingCourse" property="trainingCompanyCourseName" filter="false"/>
+</mmj-agy:hasNoAccess>
+          </td>
+          <td>
+            <bean:write name="applicantTrainingCourse" property="trainingCompanyName" filter="false"/>
+          </td>
+          <td>
+            <bean:write name="applicantTrainingCourse" property="startDate" formatKey="format.mediumDateFormat"/>
+          </td>
+          <td>
+            <bean:write name="applicantTrainingCourse" property="endDate" formatKey="format.mediumDateFormat"/>
+          </td>
+          <td>
+            <bean:define id="documentationFileUrl" name="applicantTrainingCourse" property="documentationFileUrl" type="java.lang.String" />
+                <% 
+                fileUrl = request.getContextPath() + documentationFileUrl;
+                %>
+<logic:equal name="consultant" property="canViewDocuments" value="true">
+                <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="applicantTrainingCourse" property="documentationFileName"/></html:link>
+</logic:equal>
+<logic:notEqual name="consultant" property="canViewDocuments" value="true">
+                <bean:write name="applicantTrainingCourse" property="documentationFileName"/>
+</logic:notEqual>
+          </td>
+          <td>
+            <bean:write name="applicantTrainingCourse" property="comment" filter="false"/>
+          </td>
+          <td>
+        <mmj-agy:hasAccess forward="applicantTrainingCourseDelete">
+          <logic:equal name="applicantTrainingCourse" property="active" value="true">
+              <html:link forward="applicantTrainingCourseDelete" paramId="applicantTrainingCourseUser.applicantTrainingCourseId" paramName="applicantTrainingCourse" paramProperty="applicantTrainingCourseId" titleKey="title.applicantTrainingCourseDelete">x</html:link>
+          </logic:equal>
+          <logic:equal name="applicantTrainingCourse" property="active" value="false">
+              &nbsp;
+          </logic:equal>
+        </mmj-agy:hasAccess>
+        <mmj-agy:hasNoAccess forward="applicantTrainingCourseDelete">
+              &nbsp;
+        </mmj-agy:hasNoAccess>
+          </td>
+        </tr>
+     </logic:iterate>
+      </table>
+    </div>
+    </div>
+    </td>
+  </tr>
+</table>
 <script type="text/javascript">//<![CDATA[
 <!--  to hide script contents from old browsers
 

@@ -13,6 +13,7 @@ public interface ApplicantTrainingCourseDAO
   public Integer getApplicantTrainingCourseId(); 
   public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive);
   public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId);
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicantAndDateRange(Integer applicantId, Date startDate, Date endDate);
   public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicantTrainingAboutToExpire(Integer applicantId, Date dateToCheck);
   public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId);
   public ApplicantTrainingCourseUser getApplicantTrainingCourseUser(Integer applicantTrainingCourseId);

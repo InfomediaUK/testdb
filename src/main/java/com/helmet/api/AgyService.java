@@ -120,6 +120,7 @@ public interface AgyService extends CommonService {
   public List<Applicant> getApplicantsForAgencyAndNotForBookingGradeInLastNameGroup(Integer agencyId, Integer bookingGradeId, String indexLetter);
 	public Applicant getApplicant(Integer applicantId);
   public ApplicantEntity getApplicantEntity(Integer applicantId);
+  public ApplicantEntity getApplicantEntity(Integer applicantId, Date startDate, Date endDate);
   public List<ApplicantClientBooking> getApplicantClientBookings(Integer applicantId, Integer clientId, Integer agencyId, Date searchDate); 
   
 	public int insertApplicant(Applicant applicant, Integer auditorId);

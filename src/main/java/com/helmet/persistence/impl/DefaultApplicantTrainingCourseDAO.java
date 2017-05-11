@@ -35,8 +35,10 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 
 	private static StringBuffer selectApplicantTrainingCourseUsersForApplicantSQL;
 
-	private static StringBuffer selectActiveApplicantTrainingCourseUsersForApplicantSQL;
-	
+  private static StringBuffer selectActiveApplicantTrainingCourseUsersForApplicantSQL;
+  
+  private static StringBuffer selectActiveApplicantTrainingCourseUsersForApplicantAndDateRangeSQL;
+  
 	private static StringBuffer selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL;
 
 	private static StringBuffer selectActiveApplicantTrainingCourseCountForTrainingCourseSQL;
@@ -153,7 +155,11 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		// Active ONLY
 		selectActiveApplicantTrainingCourseUsersForApplicantSQL = new StringBuffer(selectApplicantTrainingCourseUsersForApplicantSQL);
 		selectActiveApplicantTrainingCourseUsersForApplicantSQL.append("AND ATC.ACTIVE = TRUE ");
-    // Get select ApplicantTrainingCourseUsers for Applicant with TrainingCourse about to Expire SQL.
+    // Get select ApplicantTrainingCourseUsers for Applicant and Date Range SQL.
+		selectActiveApplicantTrainingCourseUsersForApplicantAndDateRangeSQL = new StringBuffer(selectActiveApplicantTrainingCourseUsersForApplicantSQL);
+    selectActiveApplicantTrainingCourseUsersForApplicantAndDateRangeSQL.append("AND ^ <= ATC.ENDDATE ");
+    selectActiveApplicantTrainingCourseUsersForApplicantAndDateRangeSQL.append("AND ^ >= ATC.STARTDATE ");
+		// Get select ApplicantTrainingCourseUsers for Applicant with TrainingCourse about to Expire SQL.
     selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL = new StringBuffer(selectActiveApplicantTrainingCourseUsersForApplicantSQL);
     selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL.append("AND ATC.ENDDATE < ^ ");
 		// Get select Active ApplicantTrainingCourse Count for TrainingCourse SQL
@@ -170,8 +176,9 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.append("AND A.ACTIVE = TRUE ");
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.append("AND ATC.ACTIVE = TRUE ");
 		// ORDER BY clauses
-		selectApplicantTrainingCourseUsersForApplicantSQL.append("ORDER BY TCC.NAME, ATC.STARTDATE DESC ");
-		selectActiveApplicantTrainingCourseUsersForApplicantSQL.append("ORDER BY TCC.NAME, ATC.STARTDATE DESC ");
+		selectApplicantTrainingCourseUsersForApplicantSQL.append("ORDER BY ATC.STARTDATE DESC, TCC.NAME ");
+    selectActiveApplicantTrainingCourseUsersForApplicantSQL.append("ORDER BY ATC.STARTDATE DESC, TCC.NAME ");
+    selectActiveApplicantTrainingCourseUsersForApplicantAndDateRangeSQL.append("ORDER BY ATC.STARTDATE DESC, TCC.NAME ");
 
 	}
 
@@ -234,22 +241,33 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		return getApplicantTrainingCourseUsersForApplicant(applicantId, true);
 	}
 
-	public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive) 
-	{
-		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = null;
-		if (showOnlyActive) 
-		{
-			sql = new StringBuffer(selectActiveApplicantTrainingCourseUsersForApplicantSQL.toString());
-		}
-		else 
-		{
-			sql = new StringBuffer(selectApplicantTrainingCourseUsersForApplicantSQL.toString()); 
-		}
-		// Replace the parameters with supplied values.
-		Utilities.replace(sql, applicantId);
-		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantTrainingCourseUser.class.getName());
-	}
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive) 
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = null;
+    if (showOnlyActive) 
+    {
+      sql = new StringBuffer(selectActiveApplicantTrainingCourseUsersForApplicantSQL.toString());
+    }
+    else 
+    {
+      sql = new StringBuffer(selectApplicantTrainingCourseUsersForApplicantSQL.toString()); 
+    }
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, applicantId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantTrainingCourseUser.class.getName());
+  }
+
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicantAndDateRange(Integer applicantId, Date startDate, Date endDate) 
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectActiveApplicantTrainingCourseUsersForApplicantAndDateRangeSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, applicantId);
+    Utilities.replaceAndQuote(sql, startDate);
+    Utilities.replaceAndQuote(sql, endDate);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantTrainingCourseUser.class.getName());
+  }
 
   public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicantTrainingAboutToExpire(Integer applicantId, Date dateToCheck) 
   {
