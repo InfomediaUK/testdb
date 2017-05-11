@@ -315,6 +315,10 @@
       <form-property name="lastName" type="java.lang.String" initial="Smith" />
       <form-property name="cvFormFile" type="org.apache.struts.upload.FormFile"/>
     </form-bean>
+    <form-bean name="ApplicantTabControlFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="index" type="java.lang.Integer" />
+      <form-property name="tab" type="java.lang.String" />
+    </form-bean>
     <form-bean name="ApplicantFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="applicant" type="com.helmet.bean.ApplicantEntity" />
       <form-property name="notes" type="java.lang.String" />
@@ -363,8 +367,10 @@
       <form-property name="confirmPwd" type="java.lang.String" />
       <form-property name="list" type="java.util.List" />
       <form-property name="agencyWorkerChecklists" type="java.util.List" />
+      <form-property name="applicantTab" type="java.lang.Integer" />
+      <form-property name="weekTab" type="java.lang.Integer" />
       <form-property name="showWeekly" type="java.lang.Boolean" initial="true" />
-      <form-property name="weekToShow" type="java.lang.Integer" initial="0" />
+      <form-property name="weekToShow" type="java.lang.Integer" />
       <form-property name="startDate" type="java.sql.Date" />
       <form-property name="endDate" type="java.sql.Date" />
       <form-property name="unavailableDates" type="java.lang.String" />
@@ -1313,6 +1319,7 @@
     <forward name="applicantList" path="/applicantList.do" />
     <forward name="applicantSearch" path="/applicantSearch.do" />
     <forward name="applicantView" path="/applicantView.do" />
+    <forward name="applicantTabControl" path="/applicantTabControl.do" />
     <forward name="applicantNew" path="/applicantNew.do" />
     <forward name="applicantNewMock" path="/applicantNewMock.do" />
     <forward name="applicantEdit" path="/applicantEdit.do" />
@@ -1629,6 +1636,15 @@
             validate="false">
         <forward name="success" path="applicantView.page" />
     </action>
+
+    <action path="/applicantTabControl"
+            type="com.helmet.application.agy.ApplicantTabControl"
+            name="ApplicantTabControlFormAgy"
+            scope="request"
+            input="/applicantView.page"
+            validate="false">
+        <forward name="failure" path="/home.do" />
+   </action>
 
     <action path="/applicantChecklist"
             type="com.helmet.application.agy.ApplicantChecklist"
