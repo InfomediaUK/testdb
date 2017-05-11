@@ -10,6 +10,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
 <bean:define id="applicantId" name="ApplicantFormAgy" property="applicant.applicantId"/>
+<bean:define id="applicantTab" name="ApplicantFormAgy" property="applicantTab"/>
+<bean:define id="weekTab" name="ApplicantFormAgy" property="weekTab"/>
 <bean:define id="weekToShow" name="ApplicantFormAgy" property="weekToShow"/>
 <bean:define id="registrationAlertNotification" name="ApplicantFormAgy" property="applicant.registrationAlertNotification"/>
 <bean:define id="fitToWorkIssuedBy" name="ApplicantFormAgy" property="applicant.fitToWorkIssuedBy"/>
@@ -22,8 +24,11 @@ String createAgencyWorkerChecklistFileUrl = request.getContextPath() + "/agy/app
 String deleteAgencyWorkerChecklistFileUrl = request.getContextPath() + "/agy/applicantDeleteAgencyWorkerChecklistFile.do?applicantId=" + applicantId;
 String registrationAlertNotificationMessageKey = "label.registrationAlertNotification" + registrationAlertNotification;
 String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssuedBy;
+Integer aTab = 0;
+Integer wTab = 0;
 %>
 <mmj-agy:consultant var="consultant"/>
+
 <table cellpadding="0" cellspacing="0" width="100%" height="30" border="0">
   <tr>
 		<td align="left" valign="middle" class="title">
@@ -39,7 +44,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 <logic:equal name="ApplicantFormAgy" property="applicant.active" value="true">
 	<mmj-agy:hasAccess forward="applicantEdit">
 	    <html:form action="/applicantEdit.do" onsubmit="return singleSubmit();">
-	      <input type="hidden" name="applicant.applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
+        <input type="hidden" name="applicant.applicantId" value="<bean:write name="ApplicantFormAgy" property="applicant.applicantId"/>"/>
 	      <td align="right" valign="middle" width="80"><html:submit styleClass="titleButton"><bean:message key="button.edit"/></html:submit></td>
 	    </html:form>
 	</mmj-agy:hasAccess>
@@ -87,8 +92,8 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
   <tr>
     <td align="left" valign="top" width="75%">
-			<div class="tabber">
-			  <div class="tabbertab">
+			<div class="tabber" id="applicantTab">
+			  <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Registration</h2>
 					<table class="simple" width="100%">
 						<tr>
@@ -354,7 +359,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					  </tr>
 					</table>  
 			  </div>
-			  <div class="tabbertab">
+			  <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Current Docs</h2>
 					<table class="simple" width="100%">
 					  <tr>
@@ -585,7 +590,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					  <%/* <-- NEW */%>
 					</table>
 			  </div>
-			  <div class="tabbertab">
+			  <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>ID Docs</h2>
 					<table class="simple" width="100%">
 					  <tr>
@@ -783,7 +788,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					  </tr>
 					</table>
 				  </div>
-				  <div class="tabbertab">
+				  <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 					  <h2>Health Docs</h2>
 						<table class="simple" width="100%">
 					  <tr>
@@ -969,7 +974,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
             </tr>
 					</table>
 			  </div>
-		    <div class="tabbertab">
+		    <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Certificates</h2>
 					<table class="simple" width="100%">
             <tr>
@@ -1209,7 +1214,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					  </tr>
 			  	</table>
 			  </div>
-		    <div class="tabbertab">
+		    <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Notes</h2>
 					<table width="100%">
 					  <tr>
@@ -1219,7 +1224,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
 					  </tr>
 					</table>
 			  </div>		
-		    <div class="tabbertab">
+		    <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Checklist</h2>
 					<table>
 					  <tr>
@@ -1292,7 +1297,7 @@ String fitToWorkIssuedByMessageKey = "label.fitToWorkIssuedBy" + fitToWorkIssued
   </logic:notEmpty>
 </logic:present>
 			  </div>		
-		      <div class="tabbertab">
+		      <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Unavailable</h2>
 					<table width="100%">
 					  <tr>
@@ -1362,15 +1367,15 @@ String theAction = "/applicantView.do?applicant.applicantId=" + applicantId;
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
   <tr>
     <td>
-    <div class="tabber">
-    <div class="tabbertab">
+    <div class="tabber" id="weekTab">
+    <div class="<%= weekTab.equals(wTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
       <h2>Shifts</h2>
 <jsp:include page="shiftsIncludeApplicant.jsp" flush="true">
   <jsp:param name="theFormAgy" value="ApplicantFormAgy"/>
   <jsp:param name="showButtons" value="true"/>
 </jsp:include>
     </div>
-    <div class="tabbertab">
+    <div class="<%= weekTab.equals(wTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
       <h2>Training</h2>
       <table class="simple" width="100%">
 <mmj-agy:hasAccess forward="applicantTrainingCourseNew">

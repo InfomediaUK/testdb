@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -20,7 +22,6 @@ import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.application.comparator.AgencyWorkerChecklistFileComparator;
 import com.helmet.bean.ApplicantEntity;
-import com.helmet.bean.ApplicantTrainingCourseUser;
 import com.helmet.bean.BookingDateUserApplicant;
 
 
@@ -33,16 +34,36 @@ public class ApplicantView extends ApplicantCommon
   {
     logger.entry("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm) form;
+    HttpSession session = request.getSession();
+    Integer applicantTab = (Integer)dynaForm.get("applicantTab");
+    if (applicantTab == null)
+    {
+      applicantTab = (Integer)session.getAttribute("applicantTab");
+      applicantTab = applicantTab == null ? 0 : applicantTab;
+    }
+    session.setAttribute("applicantTab", applicantTab);
+    Integer weekTab = (Integer)dynaForm.get("weekTab");
+    if (weekTab == null)
+    {
+      weekTab = (Integer)session.getAttribute("weekTab");
+      weekTab = weekTab == null ? 0 : weekTab;
+    }
+    session.setAttribute("weekTab", weekTab);
+    Integer weekToShow = (Integer)dynaForm.get("weekToShow");
+    if (weekToShow == null)
+    {
+      // WeekToShow not a request parameter, get it from session.
+      weekToShow = (Integer)session.getAttribute("weekToShow");
+      weekToShow = weekToShow == null ? new Integer(0) : weekToShow;
+    }
+    session.setAttribute("weekToShow", weekToShow);
     ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
-    Boolean showWeekly = (Boolean) dynaForm.get("showWeekly");
+    Boolean showWeekly = (Boolean)dynaForm.get("showWeekly");
     Date startOfWeekDate = null;
     Date endOfWeekDate = null;
-    Integer weekToShow = new Integer(0);
     if (showWeekly)
     {
-      // showing weekly so determine which week to show 0=current, -1=last week, 1=next week
-      weekToShow = (Integer) dynaForm.get("weekToShow");
-      // find out this weeks monday
+      // Showing weekly so determine which week to show 0=current, -1=last week, 1=next week
       startOfWeekDate = Utilities.getStartOfWeek(weekToShow);
       endOfWeekDate = Utilities.getEndOfWeek(weekToShow);
       dynaForm.set("startDate", startOfWeekDate);
@@ -73,7 +94,9 @@ public class ApplicantView extends ApplicantCommon
     dynaForm.set("list", listBookingBookingDateUserApplicant);
     dynaForm.set("agencyWorkerChecklists", agencyWorkerChecklists);
     dynaForm.set("unavailableDates", unavailableDates);
-
+    dynaForm.set("applicantTab", applicantTab);
+    dynaForm.set("weekTab", weekTab);
+    dynaForm.set("weekToShow", weekToShow);
     logger.exit("Out going !!!");
 
     return mapping.findForward("success");

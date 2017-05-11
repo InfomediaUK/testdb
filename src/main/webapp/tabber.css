@@ -74,7 +74,9 @@ ul.tabbernav li.tabberactive a
 
 ul.tabbernav li.tabberactive a:hover
 {
-  border-bottom: 1px solid #fff;
+ color: #000;
+ background: white;
+ border-bottom: 1px solid white;
 }
 
 /*--------------------------------------------------

@@ -9,8 +9,12 @@
 <%@ taglib uri="/mmj" prefix="mmj" %>
 <%@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
 <bean:parameter id="applicantAction" name="applicantAction" value="new"/>
+<bean:define id="applicantTab" name="ApplicantFormAgy" property="applicantTab"/>
 <bean:define id="unavailableDates" name="ApplicantFormAgy" property="unavailableDates" type="java.lang.String" />
 <bean:define id="checklistFileUrl" name="ApplicantFormAgy" property="applicant.checklistFileUrl"/>
+<%
+Integer aTab = 0;
+%>
 <html:hidden property="unavailableDates" styleId="datesId" />
 <mmj:countryList var="countryList" />
 <mmj:geographicalRegionList var="geographicalRegionList" />
@@ -22,8 +26,8 @@
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
   <tr>
     <td align="left" valign="top" width="75%">
-			<div class="tabber">
-			  <div class="tabbertab">
+      <div class="tabber" id="applicantTab">
+        <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Registration</h2>
 					<table class="simple" width="100%">
 						<tr>
@@ -220,7 +224,7 @@
 					  </tr>
 					</table>
 			  </div>
-			  <div class="tabbertab">
+        <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Current Documents</h2>
 					<table class="simple" width="100%">
 					  <tr>
@@ -320,7 +324,7 @@
 					  </tr>
 					</table>
 			  </div>
-			  <div class="tabbertab">
+        <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>ID Documents</h2>
 					<table class="simple" width="100%">
 					  <tr>
@@ -408,7 +412,7 @@
 					  </tr>
 					</table>
 				</div>
-				<div class="tabbertab">
+        <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 					<h2>Health Documents</h2>
 					<table class="simple" width="100%">
 					  <tr>
@@ -466,7 +470,7 @@
             </tr>
 					</table>
 			  </div>
-		    <div class="tabbertab">
+        <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Certificates</h2>
 					<table class="simple" width="100%">
             <tr>
@@ -578,7 +582,7 @@
 					  </tr>
 			  	</table>
 			  </div>
-		    <div class="tabbertab">
+        <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Notes</h2>
 					<table class="simple" width="100%">
 					  <tr>
@@ -588,7 +592,7 @@
 					  </tr>
 					</table>
 			  </div>		
-		    <div class="tabbertab">
+        <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Checklist</h2>
 					<table>
 					  <tr>
@@ -661,7 +665,7 @@
   </logic:notEmpty>
 </logic:present>
 			  </div>		
-		    <div class="tabbertab">
+        <div class="<%= applicantTab.equals(aTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2>Unavailable</h2>
 					<table width="100%">
 					  <tr>

@@ -8,6 +8,10 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
 <%  org.apache.struts.util.ModuleUtils.getInstance().selectModule(request, pageContext.getServletContext()); %>
+<%
+String urlApplicantTabControl = request.getContextPath() + "/agy/applicantTabControl.do?tab=";
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +43,41 @@
 <script type="text/javascript" src="<%= request.getContextPath() %>/zapatec/src/calendar-setup.js"></script>
 </logic:equal>
 <script language="javascript" type="text/javascript" src="site.js"></script>
+<script type="text/javascript">
+
+var tabberOptions = {
+
+  /* Optional: code to run when the user clicks a tab. If this
+     function returns boolean false then the tab will not be changed
+     (the click is canceled). If you do not return a value or return
+     something that is not boolean false, */
+
+  'onClick': function(argsObj) {
+	  var theRequest1;
+    var t = argsObj.tabber; /* Tabber object */
+    var id = t.id; /* ID of the main tabber DIV */
+    var i = argsObj.index; /* Which tab was clicked (0 is the first tab) */
+    var e = argsObj.event; /* Event object */
+    var urlTabControl = "<%= urlApplicantTabControl %>" + id + "&index=" + i;
+    theRequest1 = getRequest();
+    theRequest1.open("POST", urlTabControl, true);
+    theRequest1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    theRequest1.onreadystatechange = null;
+    theRequest1.send(null);
+    return true;
+    
+  },
+
+  /* Optional: set an ID for each tab navigation link */
+  'addLinkId': true
+
+};
+
+function callbackMethod() {
+}
+</script>
+
+<!-- Load the tabber code -->
 <script language="javascript" type="text/javascript" src="<%= request.getContextPath() %>/tabber.js"></script>
 </head>
 <body>

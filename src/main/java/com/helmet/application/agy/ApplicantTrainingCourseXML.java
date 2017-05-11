@@ -16,7 +16,6 @@ import org.apache.struts.action.ActionMapping;
 
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
-import com.helmet.bean.TrainingCourse;
 import com.helmet.bean.TrainingCourseUser;
 import com.helmet.bean.TrainingCompany;
 

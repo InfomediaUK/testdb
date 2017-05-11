@@ -2,6 +2,7 @@ package com.helmet.application.agy;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
@@ -21,14 +22,14 @@ public class ApplicantNew extends AgyAction
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-
-    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
     logger.entry("In coming !!!");
-
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
+    HttpSession session = request.getSession();
+    Integer applicantTab = (Integer)session.getAttribute("applicantTab");
+    applicantTab = applicantTab == null ? 0 : applicantTab;
+    Integer weekToShow = (Integer)session.getAttribute("weekToShow");
+    weekToShow = weekToShow == null ? new Integer(0) : weekToShow;
     ApplicantEntity applicant = (ApplicantEntity)dynaForm.get("applicant");
-
-    // set defaults
     applicant.setHideMoney(false);
     applicant.setCanToggleHideMoney(true);
     applicant.setApplicantId(0);
@@ -52,10 +53,9 @@ public class ApplicantNew extends AgyAction
     dynaForm.set("arrivalInCountryDateStr", "");
     dynaForm.set("visaExpiryDateStr", "");
     dynaForm.set("drivingLicenseExpiryDateStr", "");
-    // <-- NEW
-
+    dynaForm.set("weekToShow", weekToShow);
+    dynaForm.set("applicantTab", applicantTab);
     logger.exit("Out going !!!");
-
     return mapping.findForward("success");
   }
 

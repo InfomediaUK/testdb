@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
@@ -27,15 +28,15 @@ public class ApplicantEdit extends ApplicantCommon
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
-
     logger.entry("In coming !!!");
-
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
+    HttpSession session = request.getSession();
+    Integer applicantTab = (Integer)session.getAttribute("applicantTab");
+    applicantTab = applicantTab == null ? 0 : applicantTab;
+    Integer weekToShow = (Integer)session.getAttribute("weekToShow");
+    weekToShow = weekToShow == null ? new Integer(0) : weekToShow;
     ApplicantEntity applicant = (ApplicantEntity) dynaForm.get("applicant");
-
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-
     applicant = agyService.getApplicantEntity(applicant.getApplicantId());
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -88,9 +89,9 @@ public class ApplicantEdit extends ApplicantCommon
     dynaForm.set("agencyWorkerChecklists", agencyWorkerChecklists);
     dynaForm.set("unavailableDates", unavailableDates);
     dynaForm.set("confirmPwd", applicant.getUser().getPwd());
-
+    dynaForm.set("weekToShow", weekToShow);
+    dynaForm.set("applicantTab", applicantTab);
     logger.exit("Out going !!!");
-
     return mapping.findForward("success");
   }
 
