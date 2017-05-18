@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -116,7 +117,7 @@ public class AgencyApplicantTrainingProcess extends AdminAction
       }
       else if (textFromPage.contains("Health & Safety Group Ltd"))
       {
-//        text.append("HSG");
+        hsgTraining(applicant, consultant, textFromPage);
       }
       else
       {
@@ -187,6 +188,70 @@ public class AgencyApplicantTrainingProcess extends AdminAction
               writeApplicantTrainingCourse(applicant, consultant, trainingCourse, trainingCompanyCourse.getTrainingCompanyCourseId(), startDate, endDate, location);
             }
           }
+        }
+      }
+    }
+  }
+
+  private void hsgTraining(ApplicantEntity applicant, Consultant consultant, String pdfText)
+  {
+    AdminService adminService = ServiceFactory.getInstance().getAdminService();
+    TrainingCompany trainingCompany = adminService.getTrainingCompanyForNameStartsWith("The Health & Safety Group");
+    TrainingCourse trainingCourse = null;
+    TrainingCompanyCourse trainingCompanyCourse = null;
+    String lines[] = pdfText.split("\\r?\\n");
+    String line = null;
+    List<String> listTrainingCourseName = new ArrayList<String>();
+    String dateStr = null;
+    String location = null;
+    Date startDate = null;
+    Date endDate = null;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+    for (int i = 0; i < lines.length; i++)
+    {
+      line = lines[i];
+      if (line.contains("Date (Valid for one year):"))
+      {
+        dateStr = lines[i+1].replaceAll("(?<=[0-9])(?:st|nd|rd|th)", "");
+      }
+      else if (line.contains("Date:"))
+      {
+        dateStr = lines[i-1].replaceAll("(?<=[0-9])(?:st|nd|rd|th)", "");
+      }
+      else if (line.contains("Basic Life Support"))
+      {
+        listTrainingCourseName.add("Basic Life Support");
+      }
+      else if (line.contains("Moving & Handling"))
+      {
+        listTrainingCourseName.add("Manual Handling");
+      }
+    }
+    try
+    {
+      startDate = new Date(sdf.parse(dateStr).getTime());
+    }
+    catch (ParseException e)
+    {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(startDate);
+    cal.add(Calendar.YEAR, 1);
+    cal.add(Calendar.DATE, -1);
+    endDate = new Date(cal.getTimeInMillis());
+    System.out.println(startDate);
+    System.out.println(endDate);
+    for (String trainingCourseName : listTrainingCourseName)
+    {
+      trainingCourse = adminService.getTrainingCourseForName(trainingCourseName);
+      if (trainingCourse != null)
+      {
+        trainingCompanyCourse = adminService.getTrainingCompanyCourseForTrainingCompanyAndTrainingCourse(trainingCompany.getTrainingCompanyId(), trainingCourse.getTrainingCourseId());
+        if (trainingCompanyCourse != null)
+        {
+          writeApplicantTrainingCourse(applicant, consultant, trainingCourse, trainingCompanyCourse.getTrainingCompanyCourseId(), startDate, endDate, location);
         }
       }
     }
