@@ -93,7 +93,6 @@ public interface AgyService extends CommonService {
 	public Agency getAgencyForCode(String agencyCode);
 
   public List<Applicant> getApplicantsForAgency(Integer agencyId);
-  public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId);
   public List<Applicant> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive);
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId);
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId, String indexLetter);
@@ -119,7 +118,6 @@ public interface AgyService extends CommonService {
   public List<Applicant> getApplicantsForAgencyAndNotForBookingGrade(Integer agencyId, Integer bookingGradeId);
   public List<Applicant> getApplicantsForAgencyAndNotForBookingGradeInLastNameGroup(Integer agencyId, Integer bookingGradeId, String indexLetter);
 	public Applicant getApplicant(Integer applicantId);
-  public ApplicantEntity getApplicantEntity(Integer applicantId);
   public ApplicantEntity getApplicantEntity(Integer applicantId, Date startDate, Date endDate);
   public List<ApplicantClientBooking> getApplicantClientBookings(Integer applicantId, Integer clientId, Integer agencyId, Date searchDate); 
   
@@ -358,14 +356,12 @@ public interface AgyService extends CommonService {
 
   public EmailAction getEmailAction(Integer emailActionId);
 
-  public Integer getApplicantTrainingCourseId(); 
   public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId);
   public ApplicantTrainingCourseUser getApplicantTrainingCourseUser(Integer applicantTrainingCourseId);
   public int deleteApplicantTrainingCourse(Integer applicantTrainingCourseId, Integer noOfChanges, Integer auditorId);
   public List<TrainingCourseUser> getTrainingCourseUsersForDisciplineCategory(Integer disciplineCategoryId); 
   public List<TrainingCourseUser> getTrainingCoursesForApplicantSelect(Integer disciplineCategoryId); 
   public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive);
-  public int insertApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId);
   public int updateApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId);
   public List<TrainingCompany> getTrainingCompaniesForTrainingCourse(Integer trainingCourseId);
 

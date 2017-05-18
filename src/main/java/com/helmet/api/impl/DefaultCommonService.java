@@ -15,6 +15,8 @@ import com.helmet.bean.Agency;
 import com.helmet.bean.AgencyInvoice;
 import com.helmet.bean.AgencyUser;
 import com.helmet.bean.Applicant;
+import com.helmet.bean.ApplicantEntity;
+import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.AreaOfSpeciality;
 import com.helmet.bean.Booking;
 import com.helmet.bean.BookingDate;
@@ -3427,5 +3429,57 @@ public abstract class DefaultCommonService implements CommonService {
     return rc;
   }
   
+  public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId) 
+  {
+    List<ApplicantEntity> applicantEntities = null;
+    applicantEntities = getApplicantDAO().getApplicantEntitiesForAgency(agencyId, true);
+    for (ApplicantEntity applicantEntity : applicantEntities)
+    {
+      if (applicantEntity.getDisciplineCategoryId() != null)
+      {
+        applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+      }
+      applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId()));
+    }
+    return applicantEntities;
+  }
+
+  public List<ApplicantEntity> getApplicantEntitiesForAgencyWithBLSAndMHTraining(Integer agencyId) 
+  {
+    List<ApplicantEntity> applicantEntities = null;
+    applicantEntities = getApplicantDAO().getApplicantEntitiesForAgencyWithBLSAndMHTraining(agencyId, true);
+    for (ApplicantEntity applicantEntity : applicantEntities)
+    {
+      if (applicantEntity.getDisciplineCategoryId() != null)
+      {
+        applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+      }
+      applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId()));
+    }
+    return applicantEntities;
+  }
+
+  public ApplicantEntity getApplicantEntity(Integer applicantId)
+  {
+    ApplicantEntity applicantEntity = null;
+    applicantEntity = getApplicantDAO().getApplicantEntity(applicantId);
+    if (applicantEntity.getDisciplineCategoryId() != null)
+    {
+      applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+    }
+    applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantId));
+    return applicantEntity;
+  }
   
+  public Integer getApplicantTrainingCourseId()
+  {
+    return getApplicantTrainingCourseDAO().getApplicantTrainingCourseId();
+  }
+
+  public int insertApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId)
+  {
+    int rc = getApplicantTrainingCourseDAO().insertApplicantTrainingCourse(applicantTrainingCourse, auditorId);
+    return rc;
+  }
+
 }

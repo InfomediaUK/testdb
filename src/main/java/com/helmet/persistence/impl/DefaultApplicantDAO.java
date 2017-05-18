@@ -50,7 +50,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
   
   private static StringBuffer selectApplicantsForIdDocumentSQL;
 
-	private static StringBuffer selectActiveApplicantsForAgencySQL;
+  private static StringBuffer selectActiveApplicantsForAgencySQL;
+
+  private static StringBuffer selectActiveApplicantsForAgencyWithBLSAndMHTrainingSQL;
 
   private static StringBuffer selectApplicantsForNhsStaffNameSQL;
 
@@ -721,9 +723,12 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		selectApplicantsForAgencySQL = new StringBuffer(selectApplicantsSQL);
     selectApplicantsForAgencySQL.append("WHERE A.AGENCYID = ^ ");
     selectApplicantsForAgencySQL.append("AND A.ARCHIVED = FALSE ");
-		// Get select Active Applicants for Agency SQL.
-		selectActiveApplicantsForAgencySQL = new StringBuffer(selectApplicantsForAgencySQL);
-		selectActiveApplicantsForAgencySQL.append("AND A.ACTIVE = TRUE ");
+    // Get select Active Applicants for Agency SQL.
+    selectActiveApplicantsForAgencySQL = new StringBuffer(selectApplicantsForAgencySQL);
+    selectActiveApplicantsForAgencySQL.append("AND A.ACTIVE = TRUE ");
+    // Get select Active Applicants for Agency with Basic Life Support and Manual Handling Training SQL.
+    selectActiveApplicantsForAgencyWithBLSAndMHTrainingSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
+    selectActiveApplicantsForAgencyWithBLSAndMHTrainingSQL.append("AND A.TRAININGFILENAME IS NOT NULL ");
     // Get select Applicants (for Agency) To Copy SQL.
     selectApplicantsToCopySQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
     selectApplicantsToCopySQL.append("AND NOT EXISTS ");
@@ -864,6 +869,7 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectActiveApplicantsForAgencyAndNotForBookingGradeInLastNameGroupSQL.append("ORDER BY A.LASTNAME, A.FIRSTNAME ");
     selectApplicantsForAgencyInLastNameGroupSQL.append("ORDER BY A.LASTNAME, A.FIRSTNAME ");
     selectActiveApplicantsForAgencyInLastNameGroupSQL.append("ORDER BY A.LASTNAME, A.FIRSTNAME ");
+    selectActiveApplicantsForAgencyWithBLSAndMHTrainingSQL.append("ORDER BY A.LASTNAME, A.FIRSTNAME ");
     // Applicant Client Bookings: 
     // A list of Booking date ranges for the Applicant/Client with  the most recent date range first.
     // To get a list of date ranges when the Applicant had worked at the Client before today.
@@ -941,6 +947,21 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     StringBuffer sql = null;
     if (showOnlyActive) {
       sql = new StringBuffer(selectActiveApplicantsForAgencySQL.toString());
+    }
+    else 
+    {
+      sql = new StringBuffer(selectApplicantsForAgencySQL.toString());
+    }
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, agencyId);
+    return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantEntity.class.getName());
+    
+  }
+
+  public List<ApplicantEntity> getApplicantEntitiesForAgencyWithBLSAndMHTraining(Integer agencyId, boolean showOnlyActive) {
+    StringBuffer sql = null;
+    if (showOnlyActive) {
+      sql = new StringBuffer(selectActiveApplicantsForAgencyWithBLSAndMHTrainingSQL.toString());
     }
     else 
     {

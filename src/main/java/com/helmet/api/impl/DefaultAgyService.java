@@ -219,21 +219,6 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return applicants;
   }
 
-  public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId) 
-  {
-    List<ApplicantEntity> applicantEntities = null;
-    applicantEntities = getApplicantDAO().getApplicantEntitiesForAgency(agencyId, true);
-    for (ApplicantEntity applicantEntity : applicantEntities)
-    {
-      if (applicantEntity.getDisciplineCategoryId() != null)
-      {
-        applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
-      }
-      applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId()));
-    }
-    return applicantEntities;
-  }
-
   public List<Applicant> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive) 
   {
     List<Applicant> applicants = null;
@@ -400,18 +385,6 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     	applicant = getApplicantDAO().getApplicant(applicantId);
 		return applicant;
 	}
-
-  public ApplicantEntity getApplicantEntity(Integer applicantId)
-  {
-    ApplicantEntity applicantEntity = null;
-    applicantEntity = getApplicantDAO().getApplicantEntity(applicantId);
-    if (applicantEntity.getDisciplineCategoryId() != null)
-    {
-      applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
-    }
-    applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantId));
-    return applicantEntity;
-  }
 
   public ApplicantEntity getApplicantEntity(Integer applicantId, Date startDate, Date endDate)
   {
@@ -2115,11 +2088,6 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return trainingCourses;
   }
   
-  public Integer getApplicantTrainingCourseId()
-  {
-    return getApplicantTrainingCourseDAO().getApplicantTrainingCourseId();
-  }
-
   public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId)
   {
     ApplicantTrainingCourse applicantTrainingCourse = null;
@@ -2145,12 +2113,6 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     List<ApplicantTrainingCourseUser> listApplicantTrainingCourseUser = null;
     listApplicantTrainingCourseUser = getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantId, showOnlyActive);
     return listApplicantTrainingCourseUser;
-  }
-
-  public int insertApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId)
-  {
-    int rc = getApplicantTrainingCourseDAO().insertApplicantTrainingCourse(applicantTrainingCourse, auditorId);
-    return rc;
   }
 
   public int updateApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId)

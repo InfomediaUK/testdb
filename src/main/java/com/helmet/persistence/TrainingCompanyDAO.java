@@ -13,7 +13,8 @@ public interface TrainingCompanyDAO
   public List<TrainingCompanyUserEntity> getTrainingCompanyUserEntities(boolean showOnlyActive);
   public List<TrainingCompany> getTrainingCompaniesForTrainingCourse(Integer trainingCourseId);
 	public TrainingCompany getTrainingCompany(Integer trainingCompanyId);
-	public TrainingCompany getTrainingCompanyForName(String name);
+  public TrainingCompany getTrainingCompanyForName(String name);
+  public TrainingCompany getTrainingCompanyForNameStartsWith(String name);
 	public TrainingCompany getTrainingCompanyForCode(String code);
 	public TrainingCompanyUser getTrainingCompanyUser(Integer trainingCompanyId);
   public TrainingCompanyUserEntity getTrainingCompanyUserEntity(Integer agencyId);

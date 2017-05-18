@@ -2122,6 +2122,13 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     return trainingCompany;
   }
 
+  public TrainingCompany getTrainingCompanyForNameStartsWith(String name) 
+  {
+    TrainingCompany trainingCompany = null;
+    trainingCompany = getTrainingCompanyDAO().getTrainingCompanyForNameStartsWith(name);
+    return trainingCompany;
+  }
+
   public int insertTrainingCompany(TrainingCompany trainingCompany, Integer auditorId) {
 
     TrainingCompany duplicateTrainingCompany = getTrainingCompanyDAO().getTrainingCompanyForName(trainingCompany.getName());
@@ -2218,7 +2225,7 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
   {
     
     TrainingCourse trainingCourse = null;
-    trainingCourse = getTrainingCourseDAO().getTrainingCourseForCode(name);
+    trainingCourse = getTrainingCourseDAO().getTrainingCourseForName(name);
     return trainingCourse;
     
   }

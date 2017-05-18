@@ -12,6 +12,7 @@ public interface ApplicantDAO
 {
   public List<Applicant> getApplicantsForAgency(Integer agencyId, boolean showOnlyActive);
   public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId, boolean showOnlyActive);
+  public List<ApplicantEntity> getApplicantEntitiesForAgencyWithBLSAndMHTraining(Integer agencyId, boolean showOnlyActive);
   public List<Applicant> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive);
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId, String lastNameGroup, boolean showOnlyActive);
   public List<Applicant> getApplicantsForNhsStaffName(Integer agencyId, String nhsStaffName);

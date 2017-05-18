@@ -909,5 +909,13 @@
         <put name="titleKey" value="title.agencyApplicantCopySelect" type="string"/>
         <put name="body"   value="/admin/agencyApplicantCopySelect.jsp"/>
   </definition>
+  <definition name="agencyApplicantTraining.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyApplicantTraining" type="string"/>
+        <put name="body"   value="/admin/agencyApplicantTraining.jsp"/>
+  </definition>
+  <definition name="agencyApplicantTrainingSelect.page" extends="layoutAdmin.main">
+        <put name="titleKey" value="title.agencyApplicantTrainingSelect" type="string"/>
+        <put name="body"   value="/admin/agencyApplicantTrainingSelect.jsp"/>
+  </definition>
 
 </tiles-definitions>

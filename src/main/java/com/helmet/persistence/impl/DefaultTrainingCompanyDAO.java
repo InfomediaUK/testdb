@@ -27,7 +27,9 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 
 	private static StringBuffer selectTrainingCompanySQL;
 
-	private static StringBuffer selectTrainingCompanyForNameSQL;
+  private static StringBuffer selectTrainingCompanyForNameSQL;
+
+  private static StringBuffer selectTrainingCompanyForNameStartsWithSQL;
 
 	private static StringBuffer selectTrainingCompanyForCodeSQL;
 
@@ -188,10 +190,14 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 		// Get select TrainingCompany SQL.
 		selectTrainingCompanySQL = new StringBuffer(selectTrainingCompaniesSQL);
 		selectTrainingCompanySQL.append("WHERE TC.TRAININGCOMPANYID = ^ ");
-		// Get select TrainingCompany for Name SQL.
-		selectTrainingCompanyForNameSQL = new StringBuffer(selectTrainingCompaniesSQL);
-		selectTrainingCompanyForNameSQL.append("WHERE TC.NAME = ^ ");
-		selectTrainingCompanyForNameSQL.append("AND TC.ACTIVE = TRUE ");
+    // Get select TrainingCompany for Name SQL.
+    selectTrainingCompanyForNameSQL = new StringBuffer(selectTrainingCompaniesSQL);
+    selectTrainingCompanyForNameSQL.append("WHERE TC.NAME = ^ ");
+    selectTrainingCompanyForNameSQL.append("AND TC.ACTIVE = TRUE ");
+    // Get select TrainingCompany for Name Starts With SQL.
+    selectTrainingCompanyForNameStartsWithSQL = new StringBuffer(selectTrainingCompaniesSQL);
+    selectTrainingCompanyForNameStartsWithSQL.append("WHERE UPPER(TC.NAME) LIKE UPPER(^) ");
+    selectTrainingCompanyForNameStartsWithSQL.append("AND TC.ACTIVE = TRUE ");
 		// Get select TrainingCompany for Code SQL.
 		selectTrainingCompanyForCodeSQL = new StringBuffer(selectTrainingCompaniesSQL);
 		selectTrainingCompanyForCodeSQL.append("WHERE TC.CODE = ^ ");
@@ -327,15 +333,23 @@ public class DefaultTrainingCompanyDAO extends JdbcDaoSupport implements Trainin
 				sql.toString(), TrainingCompany.class.getName());
 	}
 
-	public TrainingCompany getTrainingCompanyForName(String name) 
-	{
-		// Create a new local StringBuffer containing the parameterised SQL.
-		StringBuffer sql = new StringBuffer(selectTrainingCompanyForNameSQL.toString());
-		// Replace the parameters with supplied values.
-		Utilities.replaceAndQuote(sql, name);
-		return (TrainingCompany) RecordFactory.getInstance().get(getJdbcTemplate(),
-				sql.toString(), TrainingCompany.class.getName());
-	}
+  public TrainingCompany getTrainingCompanyForName(String name) 
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectTrainingCompanyForNameSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replaceAndQuote(sql, name);
+    return (TrainingCompany) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCompany.class.getName());
+  }
+
+  public TrainingCompany getTrainingCompanyForNameStartsWith(String name) 
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectTrainingCompanyForNameStartsWithSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replaceAndQuote(sql, name + "%");
+    return (TrainingCompany) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCompany.class.getName());
+  }
 
 	public TrainingCompany getTrainingCompanyForCode(String code) 
 	{

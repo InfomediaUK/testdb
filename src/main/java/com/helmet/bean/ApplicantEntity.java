@@ -5,12 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class ApplicantEntity extends Applicant
 {
   private List<DisciplineCategoryTrainingUser> disciplineCategoryTrainingUsers;
   private List<ApplicantTrainingCourseUser> applicantTrainingCourseUsers;
+  private String trainingDocumentInfo;
   
   public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsers()
   {
@@ -49,18 +48,15 @@ public class ApplicantEntity extends Applicant
     }
     return applicantTrainingCourseUsers.size() > 0;
   }
- 
-  @Override
-  public Boolean getHasCurrentTraining()
+
+  public String getTrainingDocumentInfo()
   {
-    if (getHasDisciplineCategoryTrainings() && getHasApplicantTrainingCourses())
-    {
-      return hasRequiredTraining();
-    }
-    else
-    {
-      return super.getHasCurrentTraining();
-    }
+    return trainingDocumentInfo;
+  }
+
+  public void setTrainingDocumentInfo(String trainingDocumentInfo)
+  {
+    this.trainingDocumentInfo = trainingDocumentInfo;
   }
 
   public Boolean hasRequiredTraining()

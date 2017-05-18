@@ -172,7 +172,7 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
 		selectTrainingCourseSQL.append("WHERE TRAININGCOURSEID = ^ ");
     // Get select TrainingCourse for Name SQL.
     selectTrainingCourseForNameSQL = new StringBuffer(selectTrainingCoursesSQL);
-    selectTrainingCourseForNameSQL.append("WHERE NAME = ^ ");
+    selectTrainingCourseForNameSQL.append("WHERE UPPER(NAME) = UPPER(^) ");
     // Get select TrainingCourse for Iso Code SQL.
     selectTrainingCourseForCodeSQL = new StringBuffer(selectTrainingCoursesSQL);
     selectTrainingCourseForCodeSQL.append("WHERE CODE = ^ ");
@@ -263,8 +263,7 @@ public class DefaultTrainingCourseDAO extends JdbcDaoSupport implements Training
 		StringBuffer sql = new StringBuffer(selectTrainingCourseForNameSQL.toString());
 		// Replace the parameters with supplied values.
 		Utilities.replaceAndQuote(sql, name);
-		return (TrainingCourse) RecordFactory.getInstance().get(getJdbcTemplate(),
-				sql.toString(), TrainingCourse.class.getName());
+		return (TrainingCourse) RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), TrainingCourse.class.getName());
 	}
 
 	public TrainingCourse getTrainingCourseForCode(String code) 

@@ -22,6 +22,12 @@
       <form-property name="list" type="java.util.List" />
     </form-bean>
 
+    <form-bean name="AgencyApplicantTrainingFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="agency" type="com.helmet.bean.AgencyUserEntity" />
+      <form-property name="consultantId" type="java.lang.Integer" />
+      <form-property name="list" type="java.util.List" />
+    </form-bean>
+
     <form-bean name="TrainingCompanyListFormAdmin" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="trainingCompany" type="com.helmet.bean.TrainingCompany" />
       <form-property name="list" type="java.util.List" />
@@ -637,6 +643,9 @@
     <forward name="agencyApplicantCopy" path="/agencyApplicantCopy.do" />
     <forward name="agencyApplicantCopySelect" path="/agencyApplicantCopySelect.do" />
     <forward name="agencyApplicantCopyProcess" path="/agencyApplicantCopyProcess.do" />
+    <forward name="agencyApplicantTraining" path="/agencyApplicantTraining.do" />
+    <forward name="agencyApplicantTrainingSelect" path="/agencyApplicantTrainingSelect.do" />
+    <forward name="agencyApplicantTrainingProcess" path="/agencyApplicantTrainingProcess.do" />
     <forward name="agencyList" path="/agencyList.do" />
     <forward name="agencyView" path="/agencyView.do" />
     <forward name="agencyNew" path="/agencyNew.do" />
@@ -2722,6 +2731,33 @@
             input="/agencyApplicantCopySelect.do"
             validate="false">
         <forward name="success" path="/agencyApplicantCopySelect.do" />
+    </action>
+
+    <action path="/agencyApplicantTraining"
+            type="com.helmet.application.admin.AgencyApplicantTraining"
+            name="AgencyApplicantTrainingFormAdmin"
+            scope="request"
+            input="agencyView.do"
+            validate="false">
+        <forward name="success" path="agencyApplicantTraining.page" />
+    </action>
+
+    <action path="/agencyApplicantTrainingSelect"
+            type="com.helmet.application.admin.AgencyApplicantTrainingSelect"
+            name="AgencyApplicantTrainingFormAdmin"
+            scope="request"
+            input="/agencyApplicantTraining.do"
+            validate="false">
+        <forward name="success" path="agencyApplicantTrainingSelect.page" />
+    </action>
+
+    <action path="/agencyApplicantTrainingProcess"
+            type="com.helmet.application.admin.AgencyApplicantTrainingProcess"
+            name="AgencyApplicantTrainingFormAdmin"
+            scope="request"
+            input="/agencyApplicantTrainingSelect.do"
+            validate="false">
+        <forward name="success" path="/agencyApplicantTrainingSelect.do" />
     </action>
 
     <action path="/agencyList"

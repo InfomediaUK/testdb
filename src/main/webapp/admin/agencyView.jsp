@@ -52,6 +52,9 @@
 <mmj-admin:hasAccess forward="agencyApplicantCopy">
   <html:link forward="agencyApplicantCopy" paramId="targetAgencyId" paramName="AgencyViewFormAdmin" paramProperty="agency.agencyId"><bean:message key="link.agencyApplicantCopy"/></html:link>&nbsp;
 </mmj-admin:hasAccess>
+<mmj-admin:hasAccess forward="agencyApplicantTraining">
+  <html:link forward="agencyApplicantTraining" paramId="agency.agencyId" paramName="AgencyViewFormAdmin" paramProperty="agency.agencyId"><bean:message key="link.agencyApplicantTraining"/></html:link>&nbsp;
+</mmj-admin:hasAccess>
 </logic:equal>
 
 <br/>

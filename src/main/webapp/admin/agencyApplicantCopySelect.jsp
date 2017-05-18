@@ -48,8 +48,8 @@ function checkedAll(frmname)
     <th align="left"><bean:message key="label.disciplineCategory" /></th>
     <th align="left"><bean:message key="label.clientGroup" /></th>
     <th align="left"><bean:message key="label.registrationNumber" /></th>
-    <th align="left"><bean:message key="label.dateOfBirth" /></th>
     <th align="left"><bean:message key="label.niNumber" /></th>
+    <th align="left"><bean:message key="label.dateOfBirth" /></th>
     <th align="left"><bean:message key="label.gender" /></th>
     <th align="left"><bean:message key="label.compliant" /></th>
   </tr>

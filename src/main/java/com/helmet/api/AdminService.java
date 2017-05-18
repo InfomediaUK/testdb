@@ -290,6 +290,7 @@ public interface AdminService extends CommonService {
   public int deleteCompliancyTest(Integer regulatorId, Integer noOfChanges, Integer auditorId);
   
   public TrainingCompany getTrainingCompany(Integer trainingCompanyId);
+  public TrainingCompany getTrainingCompanyForNameStartsWith(String name);
   public TrainingCompanyUserEntity getTrainingCompanyUserEntity(Integer agencyId, boolean showOnlyActive);
   public int insertTrainingCompany(TrainingCompany trainingCompany, Integer auditorId);
   public int updateTrainingCompany(TrainingCompany trainingCompany, Integer auditorId);

@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.helmet.bean.Agency;
 import com.helmet.bean.AgencyUser;
+import com.helmet.bean.ApplicantEntity;
+import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.AreaOfSpeciality;
 import com.helmet.bean.Booking;
 import com.helmet.bean.BookingDate;
@@ -357,5 +359,11 @@ public interface CommonService {
   public int insertTrainingCompanyCourse(TrainingCompanyCourse disciplineCategoryTraining, Integer auditorId);
   public int deleteTrainingCompanyCourse(Integer disciplineCategoryTrainingId, Integer noOfChanges, Integer auditorId);
   public int updateTrainingCompanyCourse(TrainingCompanyCourse disciplineCategoryTraining, Integer auditorId);
+
+  public List<ApplicantEntity> getApplicantEntitiesForAgency(Integer agencyId);
+  public List<ApplicantEntity> getApplicantEntitiesForAgencyWithBLSAndMHTraining(Integer agencyId);
+  public ApplicantEntity getApplicantEntity(Integer applicantId);
+  public Integer getApplicantTrainingCourseId(); 
+  public int insertApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId);
 
 }
