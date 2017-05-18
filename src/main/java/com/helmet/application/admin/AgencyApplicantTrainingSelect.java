@@ -93,11 +93,7 @@ public class AgencyApplicantTrainingSelect extends AdminAction
     String lines[] = pdfText.split("\\r?\\n");
     for (int i = 5; i < (lines.length - 1); i++)
     {
-      if (text.length() > 0)
-      {
-        text.append(" | ");
-      }
-      text.append(lines[i]);
+      appendLine(text, lines[i]);
     }
     return text.toString();
   }
@@ -106,18 +102,37 @@ public class AgencyApplicantTrainingSelect extends AdminAction
   {
     StringBuffer text = new StringBuffer();
     String lines[] = pdfText.split("\\r?\\n");
+    String line = null;
     for (int i = 0; i < lines.length; i++)
     {
-      if (lines[i].contains("Date (Valid for one year):"))
+      line = lines[i];
+      if (line.contains("Date (Valid for one year):"))
       {
-        text.append(lines[i+1].replaceAll("(?<=[0-9])(?:st|nd|rd|th)", ""));
+        appendLine(text, lines[i+1].replaceAll("(?<=[0-9])(?:st|nd|rd|th)", ""));
       }
-      else if (lines[i].contains("Date:"))
+      else if (line.contains("Date:"))
       {
-        text.append(lines[i - 1].replaceAll("(?<=[0-9])(?:st|nd|rd|th)", ""));
+        appendLine(text, lines[i - 1].replaceAll("(?<=[0-9])(?:st|nd|rd|th)", ""));
+      }
+      else if (line.contains("Basic Life Support"))
+      {
+        appendLine(text, "Basic Life Support");
+      }
+      else if (line.contains("Moving & Handling"))
+      {
+        appendLine(text, "Moving & Handling");
       }
     }
     return text.toString();
+  }
+
+  private void appendLine(StringBuffer text, String line)
+  {
+    if (text.length() > 0)
+    {
+      text.append(" | ");
+    }
+    text.append(line);
   }
 
   private void removeApplicantWithTrainingCoursesFromList(List<ApplicantEntity> list)
