@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
@@ -29,8 +30,13 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
+    HttpSession session = request.getSession();
+    Integer applicantTab = (Integer)session.getAttribute("applicantTab");
+    applicantTab = applicantTab == null ? 0 : applicantTab;
+    Integer weekToShow = (Integer)session.getAttribute("weekToShow");
+    weekToShow = weekToShow == null ? new Integer(0) : weekToShow;
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
@@ -47,6 +53,8 @@ public class ApplicantEditProcess extends ApplicantCommonProcess
     validateApplicant(applicant, disciplineCategory, dynaForm, errors, messageResources);
     if (!errors.isEmpty()) 
     {
+      dynaForm.set("weekToShow", weekToShow);
+      dynaForm.set("applicantTab", applicantTab);
       saveErrors(request, errors);
       return mapping.getInputForward();
     }
