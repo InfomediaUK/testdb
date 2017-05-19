@@ -27,7 +27,10 @@ function checkedAll(frmname)
   }
 }
 </script>
-<% String applicantCheckBox = "applicantId"; %>
+<% 
+String fileUrl = null;
+String applicantCheckBox = "applicantId"; 
+%>
 
 <bean:message key="title.agencyApplicantTrainingSelect"/>&nbsp;<bean:write name="AgencyApplicantTrainingFormAdmin" property="agency.code" />
 
@@ -46,12 +49,12 @@ function checkedAll(frmname)
     <th align="left"><bean:message key="label.firstName" /></th>
     <th align="left"><bean:message key="label.disciplineCategory" /></th>
     <th align="left"><bean:message key="label.trainingFile" /></th>
+    <th align="left">Expiry</th>
     <th align="left">BLS</th>
     <th align="left">MH</th>
     <th align="left">EL</th>
     <th align="left">POVA</th>
     <th align="left">NLS</th>
-    <th align="left">Has Courses</th>
     <th align="left"><bean:message key="label.compliant" /></th>
   </tr>
   </thead>
@@ -70,7 +73,14 @@ function checkedAll(frmname)
       <bean:write name="applicant" property="disciplineCategoryName" />
     </td>
     <td>
-      <bean:write name="applicant" property="trainingFilename" />
+       <bean:define id="trainingFileUrl" name="applicant" property="trainingFileUrl" type="java.lang.String" />
+       <% 
+         fileUrl = request.getContextPath() + trainingFileUrl;
+       %>
+       <html:link href="<%= fileUrl %>" target="_blank"><bean:write name="applicant" property="trainingFilename" /></html:link>      
+    </td>
+    <td>
+      <bean:write name="applicant" property="trainingExpiryDate" formatKey="format.mediumDateFormat" />
     </td>
     <td>
       <logic:equal name="applicant" property="basicLifeSupportTraining" value="true">
@@ -109,14 +119,6 @@ function checkedAll(frmname)
         <bean:message key="label.yes"/>
       </logic:equal>
       <logic:equal name="applicant" property="neonatalLifeSupportTraining" value="false">
-        <bean:message key="label.no"/>
-      </logic:equal>
-    </td>
-    <td>
-      <logic:equal name="applicant" property="hasApplicantTrainingCourses" value="true">
-        <bean:message key="label.yes"/>
-      </logic:equal>
-      <logic:equal name="applicant" property="hasApplicantTrainingCourses" value="false">
         <bean:message key="label.no"/>
       </logic:equal>
     </td>

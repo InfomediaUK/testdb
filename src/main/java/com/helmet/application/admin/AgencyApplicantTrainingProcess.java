@@ -121,7 +121,8 @@ public class AgencyApplicantTrainingProcess extends AdminAction
       }
       else
       {
-//        text.append("UNKNOWN");
+        // Assume it's OSMOSIS photocopy...
+        unknownTraining(applicant, consultant, textFromPage);
       }
     }
     catch (IOException e)
@@ -253,6 +254,51 @@ public class AgencyApplicantTrainingProcess extends AdminAction
         {
           writeApplicantTrainingCourse(applicant, consultant, trainingCourse, trainingCompanyCourse.getTrainingCompanyCourseId(), startDate, endDate, location);
         }
+      }
+    }
+  }
+
+  private void unknownTraining(ApplicantEntity applicant, Consultant consultant, String pdfText)
+  {
+    AdminService adminService = ServiceFactory.getInstance().getAdminService();
+    TrainingCompany trainingCompany = adminService.getTrainingCompanyForNameStartsWith("OSMOSIS");
+    TrainingCourse trainingCourse = null;
+    TrainingCompanyCourse trainingCompanyCourse = null;
+    String location = null;
+    Date startDate = null;
+    Date endDate = applicant.getTrainingExpiryDate();
+    if (endDate != null)
+    {
+      Calendar cal = Calendar.getInstance();
+      cal.setTime(endDate);
+      cal.add(Calendar.YEAR, -1);
+      cal.add(Calendar.DATE, +1);
+      startDate = new Date(cal.getTimeInMillis());
+      System.out.println(startDate);
+      System.out.println(endDate);
+      if (applicant.getBasicLifeSupportTraining())
+      {
+        trainingCourse = adminService.getTrainingCourseForName("BASIC LIFE SUPPORT");
+        if (trainingCourse != null)
+        {
+          trainingCompanyCourse = adminService.getTrainingCompanyCourseForTrainingCompanyAndTrainingCourse(trainingCompany.getTrainingCompanyId(), trainingCourse.getTrainingCourseId());
+          if (trainingCompanyCourse != null)
+          {
+            writeApplicantTrainingCourse(applicant, consultant, trainingCourse, trainingCompanyCourse.getTrainingCompanyCourseId(), startDate, endDate, location);
+          }
+        } 
+      }
+      if (applicant.getManualHandlingTraining())
+      {
+        trainingCourse = adminService.getTrainingCourseForName("MANUAL HANDLING");
+        if (trainingCourse != null)
+        {
+          trainingCompanyCourse = adminService.getTrainingCompanyCourseForTrainingCompanyAndTrainingCourse(trainingCompany.getTrainingCompanyId(), trainingCourse.getTrainingCourseId());
+          if (trainingCompanyCourse != null)
+          {
+            writeApplicantTrainingCourse(applicant, consultant, trainingCourse, trainingCompanyCourse.getTrainingCompanyCourseId(), startDate, endDate, location);
+          }
+        } 
       }
     }
   }

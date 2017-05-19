@@ -59,6 +59,7 @@ public class AgencyApplicantTrainingSelect extends AdminAction
     try
     {
       reader = new PdfReader(filePath);
+      int pages = reader.getNumberOfPages();
       String textFromPage = PdfTextExtractor.getTextFromPage(reader, 1);
       if (textFromPage.contains("OSMOSIS"))
       {
@@ -76,7 +77,7 @@ public class AgencyApplicantTrainingSelect extends AdminAction
       }
       else
       {
-        text.append("UNKNOWN");
+        text.append("UNKNOWN " + pages + " page(s).");
       }
     }
     catch (IOException e)
