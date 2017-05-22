@@ -90,12 +90,9 @@ public class ApplicantView extends ApplicantCommon
     Collections.sort(agencyWorkerChecklists, new AgencyWorkerChecklistFileComparator());
     
     ApplicantTrainingCoursesInfo applicantTrainingCoursesInfo = null;
-    
-    if (applicant.getHasApplicantTrainingCourses())
-    {
-      applicantTrainingCoursesInfo = agyService.getApplicantTrainingCoursesInfoForApplicant(applicant.getApplicantId());
-      dynaForm.set("applicantTrainingCoursesInfo", applicantTrainingCoursesInfo);
-    }
+    // Get ApplicantTrainingCoursesInfo for ALL TIME not just this week.
+    applicantTrainingCoursesInfo = agyService.getApplicantTrainingCoursesInfoForApplicant(applicant.getApplicantId());
+    dynaForm.set("applicantTrainingCoursesInfo", applicantTrainingCoursesInfo);
     
     dynaForm.set("applicant", applicant);
     String notes = getApplicantNotes(applicant).toString();

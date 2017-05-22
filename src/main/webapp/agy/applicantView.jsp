@@ -1383,12 +1383,14 @@ String theAction = "/applicantView.do?applicant.applicantId=" + applicantId;
 <mmj-agy:hasAccess forward="applicantTrainingCourseNew">
             <html:link forward="applicantTrainingCourseNew" paramId="applicant.applicantId" paramName="ApplicantFormAgy" paramProperty="applicant.applicantId"><bean:message key="link.new"/></html:link>&nbsp;
 </mmj-agy:hasAccess>
-<logic:equal name="ApplicantFormAgy" property="applicant.hasApplicantTrainingCourses" value="true">
+<logic:present name="ApplicantFormAgy" property="applicantTrainingCoursesInfo">
+  <logic:greaterThan name="ApplicantFormAgy" property="applicantTrainingCoursesInfo.count" value="0">
             <bean:write name="ApplicantFormAgy" property="applicantTrainingCoursesInfo.earliestStartDate" formatKey="format.mediumDateFormat" />
             -
             <bean:write name="ApplicantFormAgy" property="applicantTrainingCoursesInfo.latestEndDate" formatKey="format.mediumDateFormat" />
-            &nbsp;(<bean:write name="ApplicantFormAgy" property="applicantTrainingCoursesInfo.count" />)            
-</logic:equal>
+            &nbsp;(<bean:write name="ApplicantFormAgy" property="applicantTrainingCoursesInfo.count" />)
+  </logic:greaterThan>            
+</logic:present>
           </td>
         </tr>
         <tr>
