@@ -336,7 +336,7 @@ function checkedAll(frmname)
                 <td align="left" valign="top">
                   <input type="checkbox" name="<%= applicantTrainingExpiryCheckBox %>" value="<%= applicant.getApplicantId() %>">    
                 </td>
-                <td align="left"><bean:write name="applicant" property="trainingExpiryDate" formatKey="format.mediumDateFormat" /></td>
+                <td align="left"><bean:write name="applicant" property="latestApplicantTrainingCourseEndDate" formatKey="format.mediumDateFormat" /></td>
                 <td align="left">    
                 <mmj-agy:hasAccess forward="applicantView">
                   <html:link forward="applicantView" paramId="applicant.applicantId" paramName="applicant" paramProperty="applicantId" >
