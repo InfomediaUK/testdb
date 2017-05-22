@@ -25,6 +25,7 @@ import com.helmet.bean.ApplicantClientBooking;
 import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.ApplicantTrainingCourseUser;
+import com.helmet.bean.ApplicantTrainingCoursesInfo;
 import com.helmet.bean.Booking;
 import com.helmet.bean.BookingDate;
 import com.helmet.bean.BookingDateUser;
@@ -2100,6 +2101,13 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     ApplicantTrainingCourseUser applicantTrainingCourseUser = null;
     applicantTrainingCourseUser = getApplicantTrainingCourseDAO().getApplicantTrainingCourseUser(applicantTrainingCourseId);
     return applicantTrainingCourseUser;
+  }
+  
+  public ApplicantTrainingCoursesInfo getApplicantTrainingCoursesInfoForApplicant(Integer applicantId)
+  {
+    ApplicantTrainingCoursesInfo applicantTrainingCoursesInfo = null;
+    applicantTrainingCoursesInfo = getApplicantTrainingCourseDAO().getApplicantTrainingCoursesInfoForApplicant(applicantId);
+    return applicantTrainingCoursesInfo;
   }
   
   public int deleteApplicantTrainingCourse(Integer applicantTrainingCourseId, Integer noOfChanges, Integer auditorId)

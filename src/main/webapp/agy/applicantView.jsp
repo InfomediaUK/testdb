@@ -1378,13 +1378,19 @@ String theAction = "/applicantView.do?applicant.applicantId=" + applicantId;
     <div class="<%= weekTab.equals(wTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
       <h2>Training</h2>
       <table class="simple" width="100%">
-<mmj-agy:hasAccess forward="applicantTrainingCourseNew">
         <tr>
-          <td colspan="7">
-        <html:link forward="applicantTrainingCourseNew" paramId="applicant.applicantId" paramName="ApplicantFormAgy" paramProperty="applicant.applicantId"><bean:message key="link.new"/></html:link>
+          <td colspan="7" class="greyedText">
+<mmj-agy:hasAccess forward="applicantTrainingCourseNew">
+            <html:link forward="applicantTrainingCourseNew" paramId="applicant.applicantId" paramName="ApplicantFormAgy" paramProperty="applicant.applicantId"><bean:message key="link.new"/></html:link>&nbsp;
+</mmj-agy:hasAccess>
+<logic:equal name="ApplicantFormAgy" property="applicant.hasApplicantTrainingCourses" value="true">
+            <bean:write name="ApplicantFormAgy" property="applicantTrainingCoursesInfo.earliestStartDate" formatKey="format.mediumDateFormat" />
+            -
+            <bean:write name="ApplicantFormAgy" property="applicantTrainingCoursesInfo.latestEndDate" formatKey="format.mediumDateFormat" />
+            &nbsp;(<bean:write name="ApplicantFormAgy" property="applicantTrainingCoursesInfo.count" />)            
+</logic:equal>
           </td>
         </tr>
-</mmj-agy:hasAccess>
         <tr>
           <th>
             Course

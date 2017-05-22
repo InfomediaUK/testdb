@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.ApplicantTrainingCourseUser;
+import com.helmet.bean.ApplicantTrainingCoursesInfo;
 import com.helmet.bean.RecordCount;
 
 public interface ApplicantTrainingCourseDAO 
@@ -21,4 +22,5 @@ public interface ApplicantTrainingCourseDAO
 	public int deleteApplicantTrainingCourse(Integer applicantTrainingCourseId, Integer noOfChanges, Integer auditorId);
 	public int updateApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId);
   public RecordCount getActiveApplicantTrainingCourseCountForTrainingCourse(Integer trainingCourseId); 
+  public ApplicantTrainingCoursesInfo getApplicantTrainingCoursesInfoForApplicant(Integer applicantId);
 }

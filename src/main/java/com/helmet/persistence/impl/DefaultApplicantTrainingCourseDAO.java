@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.ApplicantTrainingCourseUser;
+import com.helmet.bean.ApplicantTrainingCoursesInfo;
 import com.helmet.bean.RecordCount;
 import com.helmet.persistence.ApplicantTrainingCourseDAO;
 import com.helmet.persistence.RecordFactory;
@@ -41,8 +42,10 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
   
 	private static StringBuffer selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL;
 
-	private static StringBuffer selectActiveApplicantTrainingCourseCountForTrainingCourseSQL;
-	
+  private static StringBuffer selectActiveApplicantTrainingCourseCountForTrainingCourseSQL;
+  
+  private static StringBuffer selectApplicantTrainingCoursesInfoForApplicantSQL;
+  
 	public static void init() {
 		// Get insert ApplicantTrainingCourse SQL.
 		insertApplicantTrainingCourseSQL = new StringBuffer();
@@ -175,6 +178,14 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.append("WHERE TC.TRAININGCOURSEID = ^ ");
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.append("AND A.ACTIVE = TRUE ");
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.append("AND ATC.ACTIVE = TRUE ");
+		// Get select ApplicantTrainingCoursesInfo for Applicant SQL
+		selectApplicantTrainingCoursesInfoForApplicantSQL = new StringBuffer();
+    selectApplicantTrainingCoursesInfoForApplicantSQL.append("SELECT COUNT(APPLICANTTRAININGCOURSEID) AS COUNT, ");
+    selectApplicantTrainingCoursesInfoForApplicantSQL.append("       MIN(STARTDATE) AS EARLIESTSTARTDATE, ");
+    selectApplicantTrainingCoursesInfoForApplicantSQL.append("       MAX(ENDDATE) AS LATESTENDDATE ");
+    selectApplicantTrainingCoursesInfoForApplicantSQL.append("FROM APPLICANTTRAININGCOURSE ");
+    selectApplicantTrainingCoursesInfoForApplicantSQL.append("WHERE APPLICANTID = ^ ");
+    selectApplicantTrainingCoursesInfoForApplicantSQL.append("AND ACTIVE = TRUE ");
 		// ORDER BY clauses
 		selectApplicantTrainingCourseUsersForApplicantSQL.append("ORDER BY ATC.STARTDATE DESC, TCC.NAME ");
     selectActiveApplicantTrainingCourseUsersForApplicantSQL.append("ORDER BY ATC.STARTDATE DESC, TCC.NAME ");
@@ -304,6 +315,16 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
     StringBuffer sql = new StringBuffer(selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.toString());
     Utilities.replace(sql, trainingCourseId);
     return (RecordCount)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), RecordCount.class.getName());
+  }
+
+  public ApplicantTrainingCoursesInfo getApplicantTrainingCoursesInfoForApplicant(Integer applicantId) 
+  {
+    // Create a new local StringBuffer containing the parameterised SQL.
+    StringBuffer sql = new StringBuffer(selectApplicantTrainingCoursesInfoForApplicantSQL.toString());
+    // Replace the parameters with supplied values.
+    Utilities.replace(sql, applicantId);
+    ApplicantTrainingCoursesInfo applicantTrainingCoursesInfo = (ApplicantTrainingCoursesInfo)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantTrainingCoursesInfo.class.getName());
+    return applicantTrainingCoursesInfo;
   }
 
 }

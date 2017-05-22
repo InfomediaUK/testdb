@@ -321,6 +321,7 @@
     </form-bean>
     <form-bean name="ApplicantFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="applicant" type="com.helmet.bean.ApplicantEntity" />
+      <form-property name="applicantTrainingCoursesInfo" type="com.helmet.bean.ApplicantTrainingCoursesInfo" />
       <form-property name="notes" type="java.lang.String" />
       <!-- Note. Any Date Strings here have to be initialised in Applicant New -->
       <form-property name="dateOfBirthStr" type="java.lang.String" />

@@ -22,6 +22,7 @@ import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
 import com.helmet.application.comparator.AgencyWorkerChecklistFileComparator;
 import com.helmet.bean.ApplicantEntity;
+import com.helmet.bean.ApplicantTrainingCoursesInfo;
 import com.helmet.bean.BookingDateUserApplicant;
 
 
@@ -87,6 +88,14 @@ public class ApplicantView extends ApplicantCommon
     List<AgencyWorkerChecklistFile> agencyWorkerChecklists = loadAgencyWorkerChecklists(FileHandler.getInstance().getApplicantFileLocation() + FileHandler.getInstance().getApplicantFileFolder() + "/" + applicant.getApplicantId(), applicant.getApplicantId());
     
     Collections.sort(agencyWorkerChecklists, new AgencyWorkerChecklistFileComparator());
+    
+    ApplicantTrainingCoursesInfo applicantTrainingCoursesInfo = null;
+    
+    if (applicant.getHasApplicantTrainingCourses())
+    {
+      applicantTrainingCoursesInfo = agyService.getApplicantTrainingCoursesInfoForApplicant(applicant.getApplicantId());
+      dynaForm.set("applicantTrainingCoursesInfo", applicantTrainingCoursesInfo);
+    }
     
     dynaForm.set("applicant", applicant);
     String notes = getApplicantNotes(applicant).toString();

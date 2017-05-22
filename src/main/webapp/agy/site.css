@@ -76,7 +76,11 @@ td.nhsUploadError {
 }
 
 td.nhsBookingDeleted {
-	color:#808080;
+  color:#808080;
+}
+
+td.greyedText {
+  color:#808080;
 }
 
 .title {font-weight: bold}

@@ -16,6 +16,7 @@ import com.helmet.bean.ApplicantClientBooking;
 import com.helmet.bean.ApplicantEntity;
 import com.helmet.bean.ApplicantTrainingCourse;
 import com.helmet.bean.ApplicantTrainingCourseUser;
+import com.helmet.bean.ApplicantTrainingCoursesInfo;
 import com.helmet.bean.BookingDate;
 import com.helmet.bean.BookingDateUser;
 import com.helmet.bean.BookingDateUserApplicant;
@@ -358,10 +359,11 @@ public interface AgyService extends CommonService {
 
   public ApplicantTrainingCourse getApplicantTrainingCourse(Integer applicantTrainingCourseId);
   public ApplicantTrainingCourseUser getApplicantTrainingCourseUser(Integer applicantTrainingCourseId);
+  public ApplicantTrainingCoursesInfo getApplicantTrainingCoursesInfoForApplicant(Integer applicantId);
+  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive);
   public int deleteApplicantTrainingCourse(Integer applicantTrainingCourseId, Integer noOfChanges, Integer auditorId);
   public List<TrainingCourseUser> getTrainingCourseUsersForDisciplineCategory(Integer disciplineCategoryId); 
   public List<TrainingCourseUser> getTrainingCoursesForApplicantSelect(Integer disciplineCategoryId); 
-  public List<ApplicantTrainingCourseUser> getApplicantTrainingCourseUsersForApplicant(Integer applicantId, boolean showOnlyActive);
   public int updateApplicantTrainingCourse(ApplicantTrainingCourse applicantTrainingCourse, Integer auditorId);
   public List<TrainingCompany> getTrainingCompaniesForTrainingCourse(Integer trainingCourseId);
 
