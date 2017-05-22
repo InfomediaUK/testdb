@@ -803,20 +803,22 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE > NOW() ");
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ACTIVE = TRUE ");
     selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append(") ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("UNION ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append(selectActiveApplicantsForAgencySQL);
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE IS NOT NULL ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE < ^ ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND NOT EXISTS ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("( ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    SELECT NULL ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    FROM APPLICANTTRAININGCOURSE ATC ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    WHERE ATC.APPLICANTID = A.APPLICANTID ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE < ^ ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE > NOW() ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ACTIVE = TRUE ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append(") ");
-    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("ORDER BY TRAININGEXPIRYDATE DESC ");
+//
+// NO LONGER USED. 
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("UNION ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append(selectActiveApplicantsForAgencySQL);
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE IS NOT NULL ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND A.TRAININGEXPIRYDATE < ^ ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("AND NOT EXISTS ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("( ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    SELECT NULL ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    FROM APPLICANTTRAININGCOURSE ATC ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    WHERE ATC.APPLICANTID = A.APPLICANTID ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE < ^ ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ENDDATE > NOW() ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("    AND   ATC.ACTIVE = TRUE ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append(") ");
+//    selectActiveApplicantsForAgencyTrainingAboutToExpireSQL.append("ORDER BY TRAININGEXPIRYDATE DESC ");
     // Get select Active Applicants for Agency with Visa about to expire.
     selectActiveApplicantsForAgencyVisaAboutToExpireSQL = new StringBuffer(selectActiveApplicantsForAgencySQL);
     selectActiveApplicantsForAgencyVisaAboutToExpireSQL.append("AND A.VISAEXPIRYDATE IS NOT NULL ");
@@ -1463,9 +1465,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     // Replace the parameters with supplied values.
     Utilities.replace(sql, agencyId);
     Utilities.replaceAndQuote(sql, dateToCheck);
-    Utilities.replace(sql, agencyId);
-    Utilities.replaceAndQuote(sql, dateToCheck);
-    Utilities.replaceAndQuote(sql, dateToCheck);
+//    Utilities.replace(sql, agencyId);
+//    Utilities.replaceAndQuote(sql, dateToCheck);
+//    Utilities.replaceAndQuote(sql, dateToCheck);
     return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), Applicant.class.getName());
   }
 
@@ -1475,9 +1477,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
     // Replace the parameters with supplied values.
     Utilities.replace(sql, agencyId);
     Utilities.replaceAndQuote(sql, dateToCheck);
-    Utilities.replace(sql, agencyId);
-    Utilities.replaceAndQuote(sql, dateToCheck);
-    Utilities.replaceAndQuote(sql, dateToCheck);
+//    Utilities.replace(sql, agencyId);
+//    Utilities.replaceAndQuote(sql, dateToCheck);
+//    Utilities.replaceAndQuote(sql, dateToCheck);
     return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantEntity.class.getName());
   }
 

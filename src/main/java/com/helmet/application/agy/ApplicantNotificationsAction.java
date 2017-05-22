@@ -2,6 +2,7 @@ package com.helmet.application.agy;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.agy.abztract.AgyAction;
+import com.helmet.application.comparator.ApplicantTrainingComparator;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.ApplicantEntity;
 
@@ -56,6 +58,9 @@ public class ApplicantNotificationsAction extends AgyAction
     // Applicants that are newly compliant are of special interest. Show list.
     List<Applicant> recentlyCompliantList = agyService.getApplicantsForAgencyRecentlyCompliant(getConsultantLoggedIn().getAgencyId());
     List<Applicant> recentProspectList = agyService.getApplicantsForAgencyRecentProspect(getConsultantLoggedIn().getAgencyId());
+    // Sort on Latest ApplicantTrainingCourse EndDate...
+    Collections.sort(trainingList, new ApplicantTrainingComparator());
+
     dynaForm.set("newList", newList);
     dynaForm.set("crbList", crbList);
     dynaForm.set("dbsList", dbsList);

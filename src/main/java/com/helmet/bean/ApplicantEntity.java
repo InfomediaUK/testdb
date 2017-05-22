@@ -9,6 +9,7 @@ public class ApplicantEntity extends Applicant
 {
   private List<DisciplineCategoryTrainingUser> disciplineCategoryTrainingUsers;
   private List<ApplicantTrainingCourseUser> applicantTrainingCourseUsers;
+  // This is a temporary field to hold data for the ApplicantTrainingCourse data take-on...
   private String trainingDocumentInfo;
   
   public List<DisciplineCategoryTrainingUser> getDisciplineCategoryTrainingUsers()
@@ -148,13 +149,17 @@ public class ApplicantEntity extends Applicant
       // This Applicant HAS ApplicantTrainingCourse records. Return any that expire within one month.
       StringBuffer trainingAboutToExpire = new StringBuffer();
       Calendar calendar = Calendar.getInstance();
+      calendar.add(Calendar.DATE, -1);
+      Date dateYesterday = new Date(calendar.getTimeInMillis());
+      calendar.add(Calendar.DATE, 1);
       calendar.add(Calendar.MONTH, 1);
       Date dateOneMonthAhead = new Date(calendar.getTimeInMillis());
       for (ApplicantTrainingCourseUser applicantTrainingCourseUser : applicantTrainingCourseUsers)
       {
-        if (applicantTrainingCourseUser.getEndDate().before(dateOneMonthAhead))
+        if (applicantTrainingCourseUser.getEndDate().before(dateOneMonthAhead) && applicantTrainingCourseUser.getEndDate().after(dateYesterday))
         {
-          // ApplicantTrainingCourse expires in less than one month. Add it to the comma delimited string.
+          // ApplicantTrainingCourse is today or later and expires in less than one month. 
+          // Add it to the comma delimited string.
           if (trainingAboutToExpire.length() > 0)
           {
             trainingAboutToExpire.append(", ");
@@ -173,4 +178,31 @@ public class ApplicantEntity extends Applicant
       return simpleDateFormat.format(getTrainingExpiryDate());
     }
   }
+  
+  public Date getLatestApplicantTrainingCourseEndDate()
+  {
+    Date latestDate = new Date(0);
+    for (ApplicantTrainingCourseUser applicantTrainingCourseUser : applicantTrainingCourseUsers)
+    {
+      if (applicantTrainingCourseUser.getEndDate().after(latestDate))
+      {
+        latestDate = applicantTrainingCourseUser.getEndDate();
+      }
+    }
+    return latestDate;
+  }
+
+  public Date getEarliestApplicantTrainingCourseStartDate()
+  {
+    Date earliestDate = new Date(Long.MAX_VALUE);
+    for (ApplicantTrainingCourseUser applicantTrainingCourseUser : applicantTrainingCourseUsers)
+    {
+      if (applicantTrainingCourseUser.getStartDate().before(earliestDate))
+      {
+        earliestDate = applicantTrainingCourseUser.getStartDate();
+      }
+    }
+    return earliestDate;
+  }
+  
 }
