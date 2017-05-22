@@ -6,6 +6,12 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
+<bean:define id="applicantNotificationsTab" name="ApplicantNotificationsFormAgy" property="applicantNotificationsTab"/>
+<bean:define id="applicantStateTab" name="ApplicantNotificationsFormAgy" property="applicantStateTab"/>
+<%
+Integer anTab = 0;
+Integer asTab = 0;
+%>
 <script type="text/javascript">
 var checked=false;
 var frmname='';
@@ -37,8 +43,8 @@ function checkedAll(frmname)
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
   <tr>
     <td align="left" valign="top" width="100%">
-			<div class="tabber">
-        <div class="tabbertab">
+			<div class="tabber" id="applicantNotificationsTab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.new"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantNew" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -86,7 +92,7 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="16">
           </html:form>
         </div>
-			  <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2><bean:message key="label.crb"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantCrbExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -131,7 +137,7 @@ function checkedAll(frmname)
 						<input type="hidden" name="emailActionId" value="1">
 					</html:form>
 			  </div>
-        <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.dbs"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantDbsExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -176,7 +182,7 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="17">
           </html:form>
         </div>
-        <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.fitToWork"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantFitToWorkExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -221,7 +227,7 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="2">
           </html:form>
         </div>
-        <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.professionalRegistration"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantRegistrationExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -266,7 +272,7 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="3">
           </html:form>
         </div>
-			  <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2><bean:message key="label.idDocument"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantIdDocumentExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -311,7 +317,7 @@ function checkedAll(frmname)
 						<input type="hidden" name="emailActionId" value="4">
           </html:form>
 				</div>
-        <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.training"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantTrainingExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -356,7 +362,7 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="5">
           </html:form>
         </div>
-			  <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
 				  <h2><bean:message key="label.visa"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantVisaExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -401,7 +407,7 @@ function checkedAll(frmname)
 						<input type="hidden" name="emailActionId" value="6">
           </html:form>
 				</div>
-        <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.drivingLicense"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantDrivingLicenseExpiry" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -446,7 +452,7 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="11">
           </html:form>
         </div>
-        <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.reference1"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantReference1" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -491,7 +497,7 @@ function checkedAll(frmname)
             <input type="hidden" name="emailActionId" value="9">
           </html:form>
         </div>
-        <div class="tabbertab">
+        <div class="<%= applicantNotificationsTab.equals(anTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.reference2"/></h2>
           <html:form action="/applicantEmailProcess.do" styleId="ApplicantReference2" onsubmit="return singleSubmit();">
 <mmj-agy:hasAccess forward="applicantEdit">
@@ -546,8 +552,8 @@ function checkedAll(frmname)
   </tr>
   <tr>
     <td>
-      <div class="tabber">
-        <div class="tabbertab">
+      <div class="tabber" id="applicantStateTab">
+        <div class="<%= applicantStateTab.equals(asTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.recentlyCompliant"/></h2>
           <table class="simple" width="100%">
             <thead>
@@ -626,7 +632,7 @@ function checkedAll(frmname)
             </logic:iterate>
           </table>
         </div>
-        <div class="tabbertab">
+        <div class="<%= applicantStateTab.equals(asTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.recentProspects"/></h2>
           <table class="simple" width="100%">
             <thead>
@@ -669,7 +675,7 @@ function checkedAll(frmname)
 </logic:empty>
           </table>
         </div>
-        <div class="tabbertab">
+        <div class="<%= applicantStateTab.equals(asTab++) ? "tabbertab tabbertabdefault" : "tabbertab" %>">
           <h2><bean:message key="label.unarchived"/></h2>
           <table class="simple" width="100%">
             <thead>

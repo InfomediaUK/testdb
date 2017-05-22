@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
@@ -32,9 +33,23 @@ public class ApplicantNotificationsAction extends AgyAction
                                HttpServletRequest request,
                                HttpServletResponse response) 
   {
-  	
+    logger.entry("In coming !!!");
    	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-  	logger.entry("In coming !!!");
+    HttpSession session = request.getSession();
+    Integer applicantNotificationsTab = (Integer)dynaForm.get("applicantNotificationsTab");
+    if (applicantNotificationsTab == null)
+    {
+      applicantNotificationsTab = (Integer)session.getAttribute("applicantNotificationsTab");
+      applicantNotificationsTab = applicantNotificationsTab == null ? 0 : applicantNotificationsTab;
+    }
+    session.setAttribute("applicantNotificationsTab", applicantNotificationsTab);
+    Integer applicantStateTab = (Integer)dynaForm.get("applicantStateTab");
+    if (applicantStateTab == null)
+    {
+      applicantStateTab = (Integer)session.getAttribute("applicantStateTab");
+      applicantStateTab = applicantStateTab == null ? 0 : applicantStateTab;
+    }
+    session.setAttribute("applicantStateTab", applicantStateTab);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     Calendar calendar = Calendar.getInstance();
     Date dateToday = new Date(calendar.getTimeInMillis());
@@ -61,6 +76,8 @@ public class ApplicantNotificationsAction extends AgyAction
     // Sort on Latest ApplicantTrainingCourse EndDate...
     Collections.sort(trainingList, new ApplicantTrainingComparator());
 
+    dynaForm.set("applicantNotificationsTab", applicantNotificationsTab);
+    dynaForm.set("applicantStateTab", applicantStateTab);
     dynaForm.set("newList", newList);
     dynaForm.set("crbList", crbList);
     dynaForm.set("dbsList", dbsList);

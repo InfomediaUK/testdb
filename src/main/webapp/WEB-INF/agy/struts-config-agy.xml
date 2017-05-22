@@ -436,6 +436,8 @@
       <form-property name="agencyWorkerChecklistFile" type="com.helmet.application.agy.AgencyWorkerChecklistFile" />
     </form-bean> 
     <form-bean name="ApplicantNotificationsFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="applicantNotificationsTab" type="java.lang.Integer" />
+      <form-property name="applicantStateTab" type="java.lang.Integer" />
       <form-property name="newList" type="java.util.List" />
       <form-property name="crbList" type="java.util.List" />
       <form-property name="dbsList" type="java.util.List" />
@@ -450,11 +452,6 @@
       <form-property name="unarchivedList" type="java.util.List" />
       <form-property name="recentlyCompliantList" type="java.util.List" />
       <form-property name="recentProspectList" type="java.util.List" />
-<!-- 
-      <form-property name="unfilledBookings" type="java.util.List" />
-      <form-property name="unfilledShifts" type="java.util.List" />
-      <form-property name="filledShifts" type="java.util.List" />
--->
     </form-bean>
     <form-bean name="ApplicantSearchFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="lastName" type="java.lang.String" />

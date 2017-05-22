@@ -24,7 +24,7 @@ public class ApplicantTabControl extends Action
     String tab = (String)dynaForm.get("tab");
     Integer index = (Integer)dynaForm.get("index");
     HttpSession session = request.getSession();
-    if (tab != null)
+    if (!tab.equals("undefined"))
     {
       session.setAttribute(tab, index);      
     }
