@@ -226,6 +226,21 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     applicants = getApplicantDAO().getApplicantsForAgencySearch(agencyId, applicantSearchParameters, showOnlyActive);
     return applicants;
   }
+//public List<ApplicantEntity> getApplicantsForAgencySearch(Integer agencyId, ApplicantSearchParameters applicantSearchParameters, boolean showOnlyActive) 
+//{
+//  List<ApplicantEntity> applicantEntities = null;
+//  applicantEntities = getApplicantDAO().getApplicantsForAgencySearch(agencyId, applicantSearchParameters, showOnlyActive);
+//  for (ApplicantEntity applicantEntity : applicantEntities)
+//  {
+//    if (applicantEntity.getDisciplineCategoryId() != null)
+//    {
+//      applicantEntity.setDisciplineCategoryTrainingUsers(getDisciplineCategoryTrainingDAO().getDisciplineCategoryTrainingUsersForDisciplineCategory(applicantEntity.getDisciplineCategoryId()));
+//    }
+//    // Get ALL ApplicantTrainingCourseUsers for Applicant.
+//    applicantEntity.setApplicantTrainingCourseUsers(getApplicantTrainingCourseDAO().getApplicantTrainingCourseUsersForApplicant(applicantEntity.getApplicantId()));
+//  }
+//  return applicantEntities;
+//}
   public List<Applicant> getApplicantsForAgencyInLastNameGroup(Integer agencyId) {
 
     List<Applicant> applicants = null;

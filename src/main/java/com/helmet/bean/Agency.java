@@ -35,6 +35,10 @@ public class Agency extends BaseOwner
 
   public String agencyAdminEmailAddress;
 
+  public String paymentTermsText;
+
+  public String bankDetailsText;
+
   // Tradshift Agency specific values.
   private String tradeshiftConsumerKey;
   private String tradeshiftConsumerSecret;
@@ -194,6 +198,26 @@ public class Agency extends BaseOwner
     this.agencyAdminEmailAddress = agencyAdminEmailAddress;
   }
 
+  public String getPaymentTermsText()
+  {
+    return paymentTermsText;
+  }
+
+  public void setPaymentTermsText(String paymentTermsText)
+  {
+    this.paymentTermsText = paymentTermsText;
+  }
+
+  public String getBankDetailsText()
+  {
+    return bankDetailsText;
+  }
+
+  public void setBankDetailsText(String bankDetailsText)
+  {
+    this.bankDetailsText = bankDetailsText;
+  }
+
   public String getTradeshiftConsumerKey()
   {
     return tradeshiftConsumerKey;
@@ -271,6 +295,8 @@ public class Agency extends BaseOwner
     setClientConfirmationEmailFreeText(rs.getString("CLIENTCONFIRMATIONEMAILFREETEXT"));
     setApplicantConfirmationEmailFreeText(rs.getString("APPLICANTCONFIRMATIONEMAILFREETEXT"));
     setAgencyAdminEmailAddress(rs.getString("AGENCYADMINEMAILADDRESS"));
+    setPaymentTermsText(rs.getString("PAYMENTTERMSTEXT"));
+    setBankDetailsText(rs.getString("BANKDETAILSTEXT"));
     setTradeshiftConsumerKey(rs.getString("TRADESHIFTCONSUMERKEY"));
     setTradeshiftConsumerSecret(rs.getString("TRADESHIFTCONSUMERSECRET"));
     setTradeshiftTokenKey(rs.getString("TRADESHIFTTOKENKEY"));

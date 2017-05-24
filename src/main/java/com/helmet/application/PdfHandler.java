@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ext.XLogger;
@@ -491,9 +493,15 @@ public class PdfHandler
 
     doc.add(summaryTable);
 
-    doc.add(buildPaymentTermsTable(messageResources));
-    doc.add(buildPaymentInstructionsTable(messageResources));
-    doc.add(buildBankDetailsTable(messageResources));
+    if (StringUtils.isNotEmpty(agency.getPaymentTermsText()))
+    {
+      doc.add(buildPaymentTermsTable(agency));
+    }
+    if (StringUtils.isNotEmpty(agency.getBankDetailsText()))
+    {
+      doc.add(buildPaymentInstructionsTable(agency, messageResources));
+      doc.add(buildBankDetailsTable(agency));
+    }
     doc.add(buildInitiativeTable(messageResources));
     doc.add(buildFooterTable(messageResources, serverName));
 
@@ -919,9 +927,15 @@ public class PdfHandler
     if (subcontractInvoiceUser.getValue().compareTo(new BigDecimal(0)) > 0)
     {
       // Positive: Invoice.
-      doc.add(buildPaymentTermsTable(messageResources));
-      doc.add(buildPaymentInstructionsTable(messageResources));
-      doc.add(buildBankDetailsTable(messageResources));
+      if (StringUtils.isNotEmpty(toAgency.getPaymentTermsText()))
+      {
+        doc.add(buildPaymentTermsTable(toAgency));
+      }
+      if (StringUtils.isNotEmpty(toAgency.getBankDetailsText()))
+      {
+        doc.add(buildPaymentInstructionsTable(toAgency, messageResources));
+        doc.add(buildBankDetailsTable(toAgency));
+      }
     }    
     doc.add(buildInitiativeTable(messageResources));
     doc.add(buildFooterTable(messageResources, serverName));
@@ -976,41 +990,65 @@ public class PdfHandler
     return agencyAddressTable;
   }
 
-  private PdfPTable buildPaymentTermsTable(MessageResources messageResources)
+  private PdfPTable buildPaymentTermsTable(Agency agency)
   {
     float[] paymentTermsColumnWidths = { 100 }; // percentage
     PdfPTable paymentTermsTable = new PdfPTable(paymentTermsColumnWidths);
     paymentTermsTable.setWidthPercentage(100);
     paymentTermsTable.setSpacingAfter(10);
-    paymentTermsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("text.subcontractInvoice.paymentTerms")));
+    paymentTermsTable.addCell(getAdditionalInfoCell(agency.getPaymentTermsText()));
     return paymentTermsTable;
   }
 
-  private PdfPTable buildPaymentInstructionsTable(MessageResources messageResources)
+  private PdfPTable buildPaymentInstructionsTable(Agency agency, MessageResources messageResources)
   {
     float[] paymentInstructionsColumnWidths = { 100 }; // percentage
     PdfPTable paymentInstructionsTable = new PdfPTable(paymentInstructionsColumnWidths);
     paymentInstructionsTable.setWidthPercentage(100);
     paymentInstructionsTable.setSpacingAfter(10);
-    paymentInstructionsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("text.subcontractInvoice.remitFundsTo")));
+    if (StringUtils.isEmpty(agency.getBankDetailsText()))
+    {
+      paymentInstructionsTable.addCell(getAdditionalInfoCell(""));
+    }
+    else
+    {
+      paymentInstructionsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("text.subcontractInvoice.remitFundsTo")));
+    }
     return paymentInstructionsTable;
   }
   
-  private PdfPTable buildBankDetailsTable(MessageResources messageResources)
+  private PdfPTable buildBankDetailsTable(Agency agency)
   {
-    float[] bankDetailsColumnWidths = { 50, 50 }; // percentage
+    float[] bankDetailsColumnWidths = null;
+    if (agency.getBankDetailsText().contains(":"))
+    {
+      bankDetailsColumnWidths = new float[] { 50, 50 }; // percentage
+    }
+    else
+    {
+      bankDetailsColumnWidths = new float[] { 100 }; // percentage
+    }
     PdfPTable bankDetailsTable = new PdfPTable(bankDetailsColumnWidths);
     bankDetailsTable.setWidthPercentage(30);
     bankDetailsTable.setHorizontalAlignment(Element.ALIGN_LEFT);
     bankDetailsTable.setSpacingAfter(10);
-    bankDetailsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("text.subcontractInvoice.bankName")));
-    bankDetailsTable.addCell(getAdditionalInfoCell(""));
-    bankDetailsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("text.subcontractInvoice.accountName")));
-    bankDetailsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("label.accountName")));
-    bankDetailsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("text.subcontractInvoice.sortCode")));
-    bankDetailsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("label.sortCode")));
-    bankDetailsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("text.subcontractInvoice.accountNumber")));
-    bankDetailsTable.addCell(getAdditionalInfoCell(messageResources.getMessage("label.accountNumber")));
+    String text = null;
+    List<String> listBankDetailsText = Arrays.asList(agency.getBankDetailsText().split("\\r?\\n"));
+    for (String bankDetailsText : listBankDetailsText)
+    {
+      if (bankDetailsText.contains(":"))
+      {
+        text = bankDetailsText.substring(0, bankDetailsText.indexOf(":"));
+        bankDetailsTable.addCell(getAdditionalInfoCell(text));
+        text = bankDetailsText.substring(bankDetailsText.indexOf(":") + 1);
+        bankDetailsTable.addCell(getAdditionalInfoCell(text.trim()));
+      }
+      else
+      {
+        bankDetailsTable.addCell(getAdditionalInfoCell(bankDetailsText));
+        bankDetailsTable.addCell(getAdditionalInfoCell(""));
+      }
+    }
     return bankDetailsTable;
   }
 
