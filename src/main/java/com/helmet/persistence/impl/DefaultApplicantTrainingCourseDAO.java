@@ -165,6 +165,7 @@ public class DefaultApplicantTrainingCourseDAO extends JdbcDaoSupport implements
 		// Get select ApplicantTrainingCourseUsers for Applicant with TrainingCourse about to Expire SQL.
     selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL = new StringBuffer(selectActiveApplicantTrainingCourseUsersForApplicantSQL);
     selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL.append("AND ATC.ENDDATE < ^ ");
+    selectActiveApplicantTrainingCourseUsersForApplicantTrainingAboutToExpireSQL.append("AND ATC.ENDDATE > NOW() ");
 		// Get select Active ApplicantTrainingCourse Count for TrainingCourse SQL
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL = new StringBuffer();
 		selectActiveApplicantTrainingCourseCountForTrainingCourseSQL.append("SELECT COUNT(*) ");

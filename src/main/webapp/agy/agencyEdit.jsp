@@ -175,6 +175,14 @@
     <td align="left"><html:textarea property="agency.invoiceCreditFooterFreeText" cols="75" rows="5"/></td>
   </tr>
   <tr>
+    <th align="left"><bean:message key="label.paymentTermsText"/></th>
+    <td align="left"><html:text property="agency.paymentTermsText" size="75"/></td>
+  </tr>
+  <tr>
+    <th align="left"><bean:message key="label.bankDetailsText"/></th>
+    <td align="left"><html:textarea property="agency.bankDetailsText" cols="75" rows="5"/></td>
+  </tr>
+  <tr>
     <th align="left"><bean:message key="label.clientConfirmationEmailFreeText"/></th>
     <td align="left"><html:textarea property="agency.clientConfirmationEmailFreeText" cols="75" rows="5"/></td>
   </tr>

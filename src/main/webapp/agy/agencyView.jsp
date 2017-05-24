@@ -146,6 +146,19 @@
     <bean:write name="AgencyFormAgy" property="agency.invoiceCreditFooterFreeText"/>
     </td>
   </tr>
+  
+  <tr>
+    <th align="left"><bean:message key="label.paymentTermsText"/></th>
+    <td align="left">
+    <bean:write name="AgencyFormAgy" property="agency.paymentTermsText"/>
+    </td>
+  </tr>
+  <tr>
+    <th align="left"><bean:message key="label.bankDetailsText"/></th>
+    <td align="left">
+    <bean:write name="AgencyFormAgy" property="agency.bankDetailsText"/>
+    </td>
+  </tr>
   <tr>
     <th align="left"><bean:message key="label.clientConfirmationEmailFreeText"/></th>
     <td align="left">

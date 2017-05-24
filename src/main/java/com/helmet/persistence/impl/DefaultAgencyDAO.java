@@ -79,6 +79,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		insertAgencySQL.append("  CLIENTCONFIRMATIONEMAILFREETEXT, ");
     insertAgencySQL.append("  APPLICANTCONFIRMATIONEMAILFREETEXT, ");
     insertAgencySQL.append("  AGENCYADMINEMAILADDRESS, ");
+    insertAgencySQL.append("  PAYMENTTERMSTEXT, ");
+    insertAgencySQL.append("  BANKDETAILSTEXT, ");
     insertAgencySQL.append("  TRADESHIFTCONSUMERKEY, ");
     insertAgencySQL.append("  TRADESHIFTCONSUMERSECRET, ");
     insertAgencySQL.append("  TRADESHIFTTOKENKEY, ");
@@ -105,6 +107,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
+    insertAgencySQL.append("  ^, ");
+    insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
 		insertAgencySQL.append("  ^, ");
@@ -166,6 +170,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		updateAgencySQL.append("     CLIENTCONFIRMATIONEMAILFREETEXT = ^, ");
     updateAgencySQL.append("     APPLICANTCONFIRMATIONEMAILFREETEXT = ^, ");
     updateAgencySQL.append("     AGENCYADMINEMAILADDRESS = ^, ");
+    updateAgencySQL.append("     PAYMENTTERMSTEXT = ^, ");
+    updateAgencySQL.append("     BANKDETAILSTEXT = ^, ");
     updateAgencySQL.append("     TRADESHIFTCONSUMERKEY = ^, ");
     updateAgencySQL.append("     TRADESHIFTCONSUMERSECRET = ^, ");
     updateAgencySQL.append("     TRADESHIFTTOKENKEY = ^, ");
@@ -228,6 +234,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		selectAgenciesSQL.append("       CLIENTCONFIRMATIONEMAILFREETEXT, ");
     selectAgenciesSQL.append("       APPLICANTCONFIRMATIONEMAILFREETEXT, ");
     selectAgenciesSQL.append("       AGENCYADMINEMAILADDRESS, ");
+    selectAgenciesSQL.append("       PAYMENTTERMSTEXT, ");
+    selectAgenciesSQL.append("       BANKDETAILSTEXT, ");
     selectAgenciesSQL.append("       TRADESHIFTCONSUMERKEY, ");
     selectAgenciesSQL.append("       TRADESHIFTCONSUMERSECRET, ");
     selectAgenciesSQL.append("       TRADESHIFTTOKENKEY, ");
@@ -286,6 +294,8 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		selectAgencyUsersSQL.append("    A.CLIENTCONFIRMATIONEMAILFREETEXT, ");
     selectAgencyUsersSQL.append("    A.APPLICANTCONFIRMATIONEMAILFREETEXT, ");
     selectAgencyUsersSQL.append("    A.AGENCYADMINEMAILADDRESS, ");
+    selectAgencyUsersSQL.append("    A.PAYMENTTERMSTEXT, ");
+    selectAgencyUsersSQL.append("    A.BANKDETAILSTEXT, ");
     selectAgencyUsersSQL.append("    A.TRADESHIFTCONSUMERKEY, ");
     selectAgencyUsersSQL.append("    A.TRADESHIFTCONSUMERSECRET, ");
     selectAgencyUsersSQL.append("    A.TRADESHIFTTOKENKEY, ");
@@ -368,18 +378,16 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		Utilities.replaceAndQuoteNullable(sql, agency.getClientConfirmationEmailFreeText());
     Utilities.replaceAndQuoteNullable(sql, agency.getApplicantConfirmationEmailFreeText());
     Utilities.replaceAndQuoteNullable(sql, agency.getAgencyAdminEmailAddress());
-
+    Utilities.replaceAndQuoteNullable(sql, agency.getPaymentTermsText());
+    Utilities.replaceAndQuoteNullable(sql, agency.getBankDetailsText());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftConsumerKey());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftConsumerSecret());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftTokenKey());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftTokenSecret());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftTenantId());
-
-		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date()
-				.getTime()).toString());
+		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
 		Utilities.replace(sql, auditorId);
-		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date()
-				.getTime()).toString());
+		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
 		return UpdateHandler.getInstance().update(getJdbcTemplate(), sql.toString());
 	}
 
@@ -419,16 +427,15 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		Utilities.replaceAndQuoteNullable(sql, agency.getClientConfirmationEmailFreeText());
 		Utilities.replaceAndQuoteNullable(sql, agency.getApplicantConfirmationEmailFreeText());
     Utilities.replaceAndQuoteNullable(sql, agency.getAgencyAdminEmailAddress());
-    
+    Utilities.replaceAndQuoteNullable(sql, agency.getPaymentTermsText());
+    Utilities.replaceAndQuoteNullable(sql, agency.getBankDetailsText());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftConsumerKey());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftConsumerSecret());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftTokenKey());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftTokenSecret());
     Utilities.replaceAndQuoteNullable(sql, agency.getTradeshiftTenantId());
-
 		Utilities.replace(sql, auditorId);
-		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date()
-				.getTime()).toString());
+		Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
 		Utilities.replace(sql, agency.getAgencyId());
 		Utilities.replace(sql, agency.getNoOfChanges());
 		return UpdateHandler.getInstance().update(getJdbcTemplate(), sql.toString());
@@ -514,8 +521,7 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		else {
 			sql = new StringBuffer(selectAgencyUsersSQL.toString());	
 		}
-		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(),
-				AgencyUser.class.getName());
+		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), AgencyUser.class.getName());
 	}
 
 	public List<AgencyUser> getAgencyUsersNotForClient(Integer clientId) {
@@ -524,8 +530,7 @@ public class DefaultAgencyDAO extends JdbcDaoSupport implements AgencyDAO {
 		StringBuffer sql = new StringBuffer(selectAgencyUsersNotForClientSQL.toString());
 		// Replace the parameters with supplied values.
 		Utilities.replace(sql, clientId);
-		return RecordListFactory.getInstance().get(getJdbcTemplate(),
-				sql.toString(), AgencyUser.class.getName());
+		return RecordListFactory.getInstance().get(getJdbcTemplate(), sql.toString(), AgencyUser.class.getName());
 
 	}
 
