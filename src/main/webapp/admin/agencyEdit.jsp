@@ -106,6 +106,14 @@
     <td align="left"><html:textarea property="agency.invoiceCreditFooterFreeText" cols="75" rows="10"/></td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.paymentTermsText"/></td>
+    <td align="left"><html:text property="agency.paymentTermsText" size="75"/></td>
+  </tr>
+  <tr>
+    <td align="left"><bean:message key="label.bankDetailsText"/></td>
+    <td align="left"><html:textarea property="agency.bankDetailsText" cols="75" rows="5"/></td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.invoiceLogoFilename"/></td>
     <td align="left">
       <html:file property="invoiceLogoFile" size="30" />

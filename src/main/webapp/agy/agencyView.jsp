@@ -146,7 +146,6 @@
     <bean:write name="AgencyFormAgy" property="agency.invoiceCreditFooterFreeText"/>
     </td>
   </tr>
-
   <tr>
     <th align="left"><bean:message key="label.paymentTermsText"/></th>
     <td align="left">
