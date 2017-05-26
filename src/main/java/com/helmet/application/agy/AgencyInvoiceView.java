@@ -30,7 +30,7 @@ public class AgencyInvoiceView extends AgyAction
     AgencyInvoiceUserEntity agencyInvoice = (AgencyInvoiceUserEntity)dynaForm.get("agencyInvoice");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     logger.debug("***** About to getAgencyInvoiceUserEntity() *****");
-    agencyInvoice = agyService.getAgencyInvoiceUserEntity(agencyInvoice.getAgencyInvoiceId());
+//    agencyInvoice = agyService.getAgencyInvoiceUserEntity(agencyInvoice.getAgencyInvoiceId());
     logger.debug("***** Back from getAgencyInvoiceUserEntity() *****");
     // could check agency is the same agency as the consultant logged in
     if (agencyInvoice == null || !agencyInvoice.getAgencyId().equals(getConsultantLoggedIn().getAgencyId()))
