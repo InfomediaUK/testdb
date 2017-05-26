@@ -1474,7 +1474,7 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 		if (agencyInvoice != null) 
 		{
 	    logger.debug("***** Start getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice *****");
-			List <BookingDateUserApplicantEntity> bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice(agencyInvoice.getAgencyId(), agencyInvoiceId); 
+//			List <BookingDateUserApplicantEntity> bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice(agencyInvoice.getAgencyId(), agencyInvoiceId); 
       logger.debug("***** End getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice *****");
 			// TODO - soooo rubbishly slow!
 //      logger.debug("***** Start for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) *****");
