@@ -18,45 +18,42 @@ import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.AgencyInvoiceUserEntity;
 
 
-public class AgencyInvoiceView extends AgyAction {
+public class AgencyInvoiceView extends AgyAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
-
-    	logger.entry("In coming !!!");
-
-     	AgencyInvoiceUserEntity agencyInvoice = (AgencyInvoiceUserEntity)dynaForm.get("agencyInvoice");
-     	
-		AgyService agyService = ServiceFactory.getInstance().getAgyService();
-
-		agencyInvoice = agyService.getAgencyInvoiceUserEntity(agencyInvoice.getAgencyInvoiceId());
-		
-		// could check agency is the same agency as the consultant logged in
-
-		if (agencyInvoice == null || !agencyInvoice.getAgencyId().equals(getConsultantLoggedIn().getAgencyId())) {
-	     	// either agencyInvoice doesn't exist OR it is for another agency!
-			return mapping.findForward("illegalaccess");
-		}
-		
-		MessageResources messageResources = getResources(request);
-		try {
-			Utilities.generateInvoicePDF(request, messageResources, agencyInvoice);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		dynaForm.set("agencyInvoice", agencyInvoice); 
-		
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    AgencyInvoiceUserEntity agencyInvoice = (AgencyInvoiceUserEntity)dynaForm.get("agencyInvoice");
+    AgyService agyService = ServiceFactory.getInstance().getAgyService();
+    logger.info("***** About to getAgencyInvoiceUserEntity() *****");
+    agencyInvoice = agyService.getAgencyInvoiceUserEntity(agencyInvoice.getAgencyInvoiceId());
+    logger.info("***** Back from getAgencyInvoiceUserEntity() *****");
+    // could check agency is the same agency as the consultant logged in
+    if (agencyInvoice == null || !agencyInvoice.getAgencyId().equals(getConsultantLoggedIn().getAgencyId()))
+    {
+      // either agencyInvoice doesn't exist OR it is for another agency!
+      logger.info("***** Illegal Access *****");
+      return mapping.findForward("illegalaccess");
     }
+    MessageResources messageResources = getResources(request);
+    try
+    {
+      logger.info("***** About to Utilities.generateInvoicePDF() *****");
+      Utilities.generateInvoicePDF(request, messageResources, agencyInvoice);
+      logger.info("***** Back from Utilities.generateInvoicePDF() *****");
+    }
+    catch (Exception e)
+    {
+      logger.info("***** Exception *****");
+      e.printStackTrace();
+    }
+    dynaForm.set("agencyInvoice", agencyInvoice);
+    logger.exit("Out going !!!");
+    return mapping.findForward("success");
+  }
 
 }
