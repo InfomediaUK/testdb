@@ -7,6 +7,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
+
 import com.helmet.api.AgyService;
 import com.helmet.api.exceptions.DataNotFoundException;
 import com.helmet.api.exceptions.DuplicateDataException;
@@ -81,7 +84,9 @@ import com.helmet.persistence.SubcontractInvoiceItemDAO;
 import com.helmet.persistence.UnavailableDAO;
 import com.helmet.persistence.Utilities;
 
-public class DefaultAgyService extends DefaultCommonService implements AgyService {
+public class DefaultAgyService extends DefaultCommonService implements AgyService 
+{
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
   private ConsultantDAO consultantDAO;
 
@@ -1459,29 +1464,34 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 
 	}
 	
-	public AgencyInvoiceUserEntity getAgencyInvoiceUserEntity(Integer agencyInvoiceId) {
-		
+	public AgencyInvoiceUserEntity getAgencyInvoiceUserEntity(Integer agencyInvoiceId) 
+	{
 		AgencyInvoiceUserEntity agencyInvoice = null;
+    logger.debug("***** Start getAgencyInvoiceDAO().getAgencyInvoiceUserEntity() *****");
 		agencyInvoice = getAgencyInvoiceDAO().getAgencyInvoiceUserEntity(agencyInvoiceId);
+    logger.debug("***** End getAgencyInvoiceDAO().getAgencyInvoiceUserEntity() *****");
 		
-		if (agencyInvoice != null) {
-			
-			//
-
+		if (agencyInvoice != null) 
+		{
+	    logger.debug("***** Start getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice *****");
 			List <BookingDateUserApplicantEntity> bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice(agencyInvoice.getAgencyId(), agencyInvoiceId); 
-
+      logger.debug("***** End getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice *****");
 			// TODO - soooo rubbishly slow!
-			
-			for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) {
-				if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
+      logger.debug("***** Start for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) *****");
+			for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) 
+			{
+	      logger.debug("***** bookingDate {} *****", bookingDate.getBookingDate());
+				if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) 
+				{
 					bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
 				}
-				if (bookingDate.getWorkedNoOfHours().compareTo(new BigDecimal(0)) > 0) {
+				if (bookingDate.getWorkedNoOfHours().compareTo(new BigDecimal(0)) > 0) 
+				{
 					// only get workedNoOfHours > 0
 					bookingDate.setBookingDateHours(bookingDateHourDAO.getBookingDateHoursForBookingDate(bookingDate.getBookingDateId(), true));
 				}
 			}
-			
+      logger.debug("***** End for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) *****");
 //			if (agencyInvoice.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
 //			
 //				// expenses
@@ -1491,14 +1501,9 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 //					}
 //				}
 //			}
-			
 			agencyInvoice.setBookingDateUserApplicants(bookingDateUserApplicants);
-
-		
 		}
-		
 		return agencyInvoice;
-
 	}
 	
 	public List<BookingDateUserApplicant> getBookingDateUserApplicantsForAgencyAndBookingDates(Integer agencyId, String bookingDateIdStrs) {

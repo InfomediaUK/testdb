@@ -29,26 +29,26 @@ public class AgencyInvoiceView extends AgyAction
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
     AgencyInvoiceUserEntity agencyInvoice = (AgencyInvoiceUserEntity)dynaForm.get("agencyInvoice");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-    logger.info("***** About to getAgencyInvoiceUserEntity() *****");
+    logger.debug("***** About to getAgencyInvoiceUserEntity() *****");
     agencyInvoice = agyService.getAgencyInvoiceUserEntity(agencyInvoice.getAgencyInvoiceId());
-    logger.info("***** Back from getAgencyInvoiceUserEntity() *****");
+    logger.debug("***** Back from getAgencyInvoiceUserEntity() *****");
     // could check agency is the same agency as the consultant logged in
     if (agencyInvoice == null || !agencyInvoice.getAgencyId().equals(getConsultantLoggedIn().getAgencyId()))
     {
       // either agencyInvoice doesn't exist OR it is for another agency!
-      logger.info("***** Illegal Access *****");
+      logger.debug("***** Illegal Access *****");
       return mapping.findForward("illegalaccess");
     }
     MessageResources messageResources = getResources(request);
     try
     {
-      logger.info("***** About to Utilities.generateInvoicePDF() *****");
+      logger.debug("***** About to Utilities.generateInvoicePDF() *****");
       Utilities.generateInvoicePDF(request, messageResources, agencyInvoice);
-      logger.info("***** Back from Utilities.generateInvoicePDF() *****");
+      logger.debug("***** Back from Utilities.generateInvoicePDF() *****");
     }
     catch (Exception e)
     {
-      logger.info("***** Exception *****");
+      logger.debug("***** Exception *****");
       e.printStackTrace();
     }
     dynaForm.set("agencyInvoice", agencyInvoice);
