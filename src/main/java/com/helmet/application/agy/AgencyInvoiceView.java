@@ -25,7 +25,7 @@ public class AgencyInvoiceView extends AgyAction
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-    logger.entry("In coming !!!");
+    logger.debug("In coming !!!");
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
     AgencyInvoiceUserEntity agencyInvoice = (AgencyInvoiceUserEntity)dynaForm.get("agencyInvoice");
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
@@ -39,6 +39,9 @@ public class AgencyInvoiceView extends AgyAction
       logger.debug("***** Illegal Access *****");
       return mapping.findForward("illegalaccess");
     }
+    String fileName = "ai" + agencyInvoice.getAgencyInvoiceId();
+    String tempFilePath = request.getContextPath() + com.helmet.application.FileHandler.getInstance().getTempFileFolder() + "/" + fileName + ".pdf";
+    logger.debug("***** tempFilePath {} *****", tempFilePath);
     MessageResources messageResources = getResources(request);
     try
     {
@@ -52,7 +55,9 @@ public class AgencyInvoiceView extends AgyAction
       e.printStackTrace();
     }
     dynaForm.set("agencyInvoice", agencyInvoice);
-    logger.exit("Out going !!!");
+    ActionForward actionForward = mapping.findForward("success");
+    logger.debug("***** actionForward: {} - {} *****", actionForward.getName(), actionForward.getPath());
+    logger.debug("Out going !!!");
     return mapping.findForward("success");
   }
 
