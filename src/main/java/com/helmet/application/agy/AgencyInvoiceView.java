@@ -33,12 +33,12 @@ public class AgencyInvoiceView extends AgyAction
 //    agencyInvoice = agyService.getAgencyInvoiceUserEntity(agencyInvoice.getAgencyInvoiceId());
     logger.debug("***** Back from getAgencyInvoiceUserEntity() *****");
     // could check agency is the same agency as the consultant logged in
-    if (agencyInvoice == null || !agencyInvoice.getAgencyId().equals(getConsultantLoggedIn().getAgencyId()))
-    {
-      // either agencyInvoice doesn't exist OR it is for another agency!
-      logger.debug("***** Illegal Access *****");
-      return mapping.findForward("illegalaccess");
-    }
+//    if (agencyInvoice == null || !agencyInvoice.getAgencyId().equals(getConsultantLoggedIn().getAgencyId()))
+//    {
+//      // either agencyInvoice doesn't exist OR it is for another agency!
+//      logger.debug("***** Illegal Access *****");
+//      return mapping.findForward("illegalaccess");
+//    }
     String fileName = "ai" + agencyInvoice.getAgencyInvoiceId();
     String tempFilePath = request.getContextPath() + com.helmet.application.FileHandler.getInstance().getTempFileFolder() + "/" + fileName + ".pdf";
     logger.debug("***** tempFilePath {} *****", tempFilePath);
@@ -46,7 +46,7 @@ public class AgencyInvoiceView extends AgyAction
     try
     {
       logger.debug("***** About to Utilities.generateInvoicePDF() *****");
-      Utilities.generateInvoicePDF(request, messageResources, agencyInvoice);
+//      Utilities.generateInvoicePDF(request, messageResources, agencyInvoice);
       logger.debug("***** Back from Utilities.generateInvoicePDF() *****");
     }
     catch (Exception e)
