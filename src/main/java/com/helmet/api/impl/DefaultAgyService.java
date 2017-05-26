@@ -1477,31 +1477,31 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
 			List <BookingDateUserApplicantEntity> bookingDateUserApplicants = getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice(agencyInvoice.getAgencyId(), agencyInvoiceId); 
       logger.debug("***** End getBookingDateDAO().getBookingDateUserApplicantEntitiesForAgencyAndAgencyInvoice *****");
 			// TODO - soooo rubbishly slow!
-      logger.debug("***** Start for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) *****");
-			for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) 
-			{
-	      logger.debug("***** bookingDate {} *****", bookingDate.getBookingDate());
-				if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) 
-				{
-					bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
-				}
-				if (bookingDate.getWorkedNoOfHours().compareTo(new BigDecimal(0)) > 0) 
-				{
-					// only get workedNoOfHours > 0
-					bookingDate.setBookingDateHours(bookingDateHourDAO.getBookingDateHoursForBookingDate(bookingDate.getBookingDateId(), true));
-				}
-			}
-      logger.debug("***** End for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) *****");
-//			if (agencyInvoice.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
-//			
-//				// expenses
-//				for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) {
-//					if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
-//						bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
-//					}
+//      logger.debug("***** Start for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) *****");
+//			for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) 
+//			{
+//	      logger.debug("***** bookingDate {} *****", bookingDate.getBookingDate());
+//				if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) 
+//				{
+//					bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
+//				}
+//				if (bookingDate.getWorkedNoOfHours().compareTo(new BigDecimal(0)) > 0) 
+//				{
+//					// only get workedNoOfHours > 0
+//					bookingDate.setBookingDateHours(bookingDateHourDAO.getBookingDateHoursForBookingDate(bookingDate.getBookingDateId(), true));
 //				}
 //			}
-			agencyInvoice.setBookingDateUserApplicants(bookingDateUserApplicants);
+//      logger.debug("***** End for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) *****");
+////			if (agencyInvoice.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
+////			
+////				// expenses
+////				for (BookingDateUserApplicantEntity bookingDate: bookingDateUserApplicants) {
+////					if (bookingDate.getExpenseValue().compareTo(new BigDecimal(0)) > 0) {
+////						bookingDate.setBookingDateExpenses(bookingDateExpenseDAO.getBookingDateExpenseUsersForBookingDate(bookingDate.getBookingDateId()));
+////					}
+////				}
+////			}
+//			agencyInvoice.setBookingDateUserApplicants(bookingDateUserApplicants);
 		}
 		return agencyInvoice;
 	}
