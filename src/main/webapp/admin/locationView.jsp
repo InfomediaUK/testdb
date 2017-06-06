@@ -81,6 +81,10 @@
     <td align="left"><bean:write name="LocationViewFormAdmin" property="location.name"/></td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.nhsWard"/></td>
+    <td align="left"><bean:write name="LocationViewFormAdmin" property="location.nhsWard"/></td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.description"/></td>
     <td align="left"><bean:write name="LocationViewFormAdmin" property="location.description"/></td>
   </tr>

@@ -34,11 +34,15 @@
   </tr>
   <tr>
     <td align="left"><bean:message key="label.name"/></td>
-    <td align="left"><html:text property="location.name"/></td>
+    <td align="left"><html:text property="location.name" maxlength="50" size="50"/></td>
+  </tr>
+  <tr>
+    <th align="left"><bean:message key="label.nhsWard"/></th>
+    <td align="left" colspan="3"><html:text property="location.nhsWard" maxlength="50" size="50"/></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.description"/></td>
-    <td align="left"><html:text property="location.description"/></td>
+    <td align="left"><html:text property="location.description" maxlength="50" size="50"/></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.code"/></td>

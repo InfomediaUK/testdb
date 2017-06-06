@@ -27,7 +27,11 @@
   </tr>
   <tr>
     <td align="left"><bean:message key="label.name"/></td>
-    <td align="left"><html:text property="site.name"/></td>
+    <td align="left"><html:text property="site.name" maxlength="50" size="50"/></td>
+  </tr>
+  <tr>
+    <td align="left"><bean:message key="label.nhsLocation"/></td>
+    <td align="left"><html:text property="site.nhsLocation" maxlength="50" size="50"/></td>
   </tr>
   <tr>
     <td align="left"><bean:message key="label.address"/></td>
