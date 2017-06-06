@@ -51,6 +51,10 @@
     <td align="left"><bean:write name="SiteViewFormAdmin" property="site.name"/></td>
   </tr>
   <tr>
+    <td align="left"><bean:message key="label.nhsLocation"/></td>
+    <td align="left"><bean:write name="SiteViewFormAdmin" property="site.nhsLocation"/></td>
+  </tr>
+  <tr>
     <td align="left"><bean:message key="label.address"/></td>
     <td align="left"><bean:write name="SiteViewFormAdmin" property="site.address.fullAddress"/></td>
   </tr>

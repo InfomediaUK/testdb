@@ -17,35 +17,30 @@ import com.helmet.bean.ClientUser;
 import com.helmet.bean.Site;
 
 
-public class SiteEdit extends AdminAction {
+public class SiteEdit extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    Site site = (Site)dynaForm.get("site");
+    AdminService adminService = ServiceFactory.getInstance().getAdminService();
 
-    	logger.entry("In coming !!!");
+    site = adminService.getSite(site.getSiteId());
 
-     	Site site = (Site)dynaForm.get("site");
+    // TODO check not null, maybe service should throw a known exception
 
-		AdminService adminService = ServiceFactory.getInstance().getAdminService();
+    ClientUser client = adminService.getClientUser(site.getClientId());
 
-		site = adminService.getSite(site.getSiteId());
-		
-		// TODO check not null, maybe service should throw a known exception
-        
-		ClientUser client = adminService.getClientUser(site.getClientId());
-    	
-		dynaForm.set("client", client); 
-		dynaForm.set("site", site); 
-		
-    	logger.exit("Out going !!!");
-    	
-     	return mapping.findForward("success");
-    }
+    dynaForm.set("client", client);
+    dynaForm.set("site", site);
+
+    logger.exit("Out going !!!");
+
+    return mapping.findForward("success");
+  }
 
 }

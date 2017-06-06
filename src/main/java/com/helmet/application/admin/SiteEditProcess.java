@@ -20,44 +20,37 @@ import com.helmet.application.admin.abztract.AdminAction;
 import com.helmet.bean.Site;
 
 
-public class SiteEditProcess extends AdminAction {
+public class SiteEditProcess extends AdminAction
+{
 
-    protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
-    public ActionForward doExecute(ActionMapping mapping,
-                                 ActionForm form,
-                                 HttpServletRequest request,
-                                 HttpServletResponse response) {
-    	
-     	DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+  public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+  {
+    logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm)form;
+    Site site = (Site)dynaForm.get("site");
+    ActionMessages errors = new ActionMessages();
+    MessageResources messageResources = getResources(request);
+    AdminService adminService = ServiceFactory.getInstance().getAdminService();
 
-    	logger.entry("In coming !!!");
-
-     	Site site = (Site)dynaForm.get("site");
-
-		ActionMessages errors = new ActionMessages();
-
-		MessageResources messageResources = getResources(request);
-		
-     	AdminService adminService = ServiceFactory.getInstance().getAdminService();
-		
-		try {
-		  int rowCount = adminService.updateSite(site, getAdministratorLoggedIn().getAdministratorId());
-		}  
-        catch (DuplicateDataException e) {
-            errors.add("site", new ActionMessage("errors.duplicate", messageResources.getMessage("label." + e.getField())));
-            saveErrors(request, errors);
-    		return mapping.getInputForward();
-        }
-
-    	logger.exit("Out going !!!");
-    	
-    	ActionForward actionForward = mapping.findForward("success");
-    	
-    	return new ActionForward(actionForward.getName(),
-    							 actionForward.getPath() + "?site.siteId=" + site.getSiteId(),
-    	                         actionForward.getRedirect());
-
+    try
+    {
+      int rowCount = adminService.updateSite(site, getAdministratorLoggedIn().getAdministratorId());
     }
+    catch (DuplicateDataException e)
+    {
+      errors.add("site", new ActionMessage("errors.duplicate", messageResources.getMessage("label." + e.getField())));
+      saveErrors(request, errors);
+      return mapping.getInputForward();
+    }
+
+    logger.exit("Out going !!!");
+
+    ActionForward actionForward = mapping.findForward("success");
+
+    return new ActionForward(actionForward.getName(), actionForward.getPath() + "?site.siteId=" + site.getSiteId(), actionForward.getRedirect());
+
+  }
 
 }
