@@ -279,8 +279,16 @@ public class LocationActionDispatcher extends AgyAction
     }
     else
     {
-      MessageResources messageResources = getResources(request);
-      errors.add("location", new ActionMessage("error.location.cannotBeDeleted.hasBookings", bookings.size()));
+      for (Booking booking : bookings)
+      {
+        if (booking.getStatus() != booking.BOOKING_STATUS_CANCELLED)
+        {
+          // A non-cancelled booking exists...
+          MessageResources messageResources = getResources(request);
+          errors.add("location", new ActionMessage("error.location.cannotBeDeleted.hasBookings", bookings.size()));
+          break;
+        }
+      }
     }
 
     List<NhsBooking> nhsBookings = agyService.getNhsBookingsForLocation(getConsultantLoggedIn().getAgencyId(), location.getLocationId());
