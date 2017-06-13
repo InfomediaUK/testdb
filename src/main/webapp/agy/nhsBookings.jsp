@@ -159,18 +159,23 @@ String nhsBookingApplicantNotifyAction = request.getContextPath() + "/agy/nhsBoo
 				<logic:equal name="nhsBooking" property="bookingId" value="0">
 				        &nbsp;
 				</logic:equal>
-				<logic:greaterThan name="nhsBooking" property="bookingId" value="0">
-				  <logic:equal name="nhsBooking" property="active" value="true">
- 	          <mmj-agy:hasAccess forward="nhsBookingApplicantNotify">
-	                <html:link href="<%= nhsBookingApplicantNotifyAction %>" titleKey="title.nhsBookingResendApplicantNotify">
-					          <logic:empty name="nhsBooking" property="applicantNotificationSent">Notify</logic:empty>
-					          <logic:notEmpty name="nhsBooking" property="applicantNotificationSent"><bean:write name="nhsBooking" property="applicantNotificationSent" format="EEE dd-MMM-yyyy HH:mm"/></logic:notEmpty>
-	                </html:link>
-	          </mmj-agy:hasAccess>
-          </logic:equal>
- 				  <logic:equal name="nhsBooking" property="active" value="false">
-                &nbsp;
-          </logic:equal>
+        <logic:greaterThan name="nhsBooking" property="bookingId" value="0">
+          <logic:present name="nhsBooking" property="applicantPaidDate" >
+            Paid: <bean:write name="nhsBooking" property="applicantPaidDate"  format="EEE dd-MMM-yyyy"/>
+          </logic:present>
+          <logic:notPresent name="nhsBooking" property="applicantPaidDate" >
+					  <logic:equal name="nhsBooking" property="active" value="true">
+	 	          <mmj-agy:hasAccess forward="nhsBookingApplicantNotify">
+		                <html:link href="<%= nhsBookingApplicantNotifyAction %>" titleKey="title.nhsBookingResendApplicantNotify">
+						          <logic:empty name="nhsBooking" property="applicantNotificationSent">Notify</logic:empty>
+						          <logic:notEmpty name="nhsBooking" property="applicantNotificationSent"><bean:write name="nhsBooking" property="applicantNotificationSent" format="EEE dd-MMM-yyyy HH:mm"/></logic:notEmpty>
+		                </html:link>
+		          </mmj-agy:hasAccess>
+	          </logic:equal>
+	 				  <logic:equal name="nhsBooking" property="active" value="false">
+	                &nbsp;
+	          </logic:equal>
+	        </logic:notPresent>
         </logic:greaterThan>
           <mmj-agy:hasNoAccess forward="nhsBookingApplicantNotify">
                 <bean:write name="nhsBooking" property="applicantNotificationSent" format="EEE dd-MMM-yyyy HH:mm"/>
@@ -206,9 +211,9 @@ String nhsBookingApplicantNotifyAction = request.getContextPath() + "/agy/nhsBoo
 				        <bean:write name="nhsBooking" property="status"/>
 				      </td>
 				      <td align="right" <logic:equal name="nhsBooking" property="active" value="false">class="nhsBookingDeleted"</logic:equal>><%-- Value --%>
-				      <logic:notEqual name="nhsBooking" property="value" value="0">
+				      <logic:greaterThan name="nhsBooking" property="value" value="0">
 				        <bean:message key="label.currencySymbol"/><bean:write name="nhsBooking" property="value" format="#,##0.00"/>
-				      </logic:notEqual>
+				      </logic:greaterThan>
 				      <logic:equal name="nhsBooking" property="value" value="0">
 				        &nbsp;
 				      </logic:equal>
