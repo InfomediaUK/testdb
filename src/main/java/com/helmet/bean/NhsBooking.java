@@ -37,6 +37,7 @@ public class NhsBooking extends Base
   private Timestamp bookingTime;
   private Timestamp applicantNotificationSent;
   private String comment;
+  private Date applicantPaidDate;
   
   public Integer getApplicantId()
   {
@@ -125,18 +126,15 @@ public class NhsBooking extends Base
     return bankReqNum;
   }
 
-
   public void setBankReqNum(String bankReqNum)
   {
     this.bankReqNum = bankReqNum;
   }
 
-
   public Integer getBookingId()
   {
     return bookingId;
   }
-
 
   public void setBookingId(Integer bookingId)
   {
@@ -168,84 +166,70 @@ public class NhsBooking extends Base
     return date;
   }
 
-
   public void setDate(Date date)
   {
     this.date = date;
   }
-
 
   public Time getEndTime()
   {
     return endTime;
   }
 
-
   public void setEndTime(Time endTime)
   {
     this.endTime = endTime;
   }
-
 
   public Integer getJobProfileId()
   {
     return jobProfileId;
   }
 
-
   public void setJobProfileId(Integer gradeId)
   {
     this.jobProfileId = gradeId;
   }
-
 
   public String getLocation()
   {
     return location;
   }
 
-
   public void setLocation(String location)
   {
     this.location = location;
   }
-
 
   public Integer getLocationId()
   {
     return locationId;
   }
 
-
   public void setLocationId(Integer locationId)
   {
     this.locationId = locationId;
   }
-
 
   public Integer getBookingGroupId()
   {
     return bookingGroupId;
   }
 
-
   public void setBookingGroupId(Integer bookingGroupId)
   {
     this.bookingGroupId = bookingGroupId;
   }
-
 
   public Integer getNhsBookingId()
   {
     return nhsBookingId;
   }
 
-
   public void setNhsBookingId(Integer nhsBookingId)
   {
     this.nhsBookingId = nhsBookingId;
   }
-
 
   public Integer getShiftId()
   {
@@ -277,48 +261,40 @@ public class NhsBooking extends Base
     this.shiftId = shiftId;
   }
 
-
   public Integer getSiteId()
   {
     return siteId;
   }
-
 
   public void setSiteId(Integer siteId)
   {
     this.siteId = siteId;
   }
 
-
   public String getStaffName()
   {
     return staffName;
   }
-
 
   public void setStaffName(String staffName)
   {
     this.staffName = staffName;
   }
 
-
   public Time getStartTime()
   {
     return startTime;
   }
-
 
   public void setStartTime(Time startTime)
   {
     this.startTime = startTime;
   }
 
-
   public String getWard()
   {
     return ward;
   }
-
 
   public void setWard(String ward)
   {
@@ -350,7 +326,6 @@ public class NhsBooking extends Base
            locationId        != null &&
            jobProfileId      != null &&
            bookingGroupId    != null;
-           
   }
 
   public boolean isReadyToBook()
@@ -386,6 +361,7 @@ public class NhsBooking extends Base
     setBookingTime(rs.getTimestamp("BOOKINGTIME"));
     setApplicantNotificationSent(rs.getTimestamp("APPLICANTNOTIFICATIONSENT"));
     setComment(rs.getString("COMMENT"));
+    setApplicantPaidDate(rs.getDate("APPLICANTPAIDDATE"));
   }
 
   public String toString()
@@ -502,6 +478,12 @@ public class NhsBooking extends Base
       text.append("applicantNotificationSent=");
       text.append(applicantNotificationSent);
     }    
+    if (applicantPaidDate != null)
+    {
+      text.append(",");
+      text.append("applicantPaidDate=");
+      text.append(applicantPaidDate);
+    }    
     return text.toString();
   }
 
@@ -513,6 +495,16 @@ public class NhsBooking extends Base
   public void setComment(String comment)
   {
     this.comment = comment;
+  }
+
+  public Date getApplicantPaidDate()
+  {
+    return applicantPaidDate;
+  }
+
+  public void setApplicantPaidDate(Date applicantPaidDate)
+  {
+    this.applicantPaidDate = applicantPaidDate;
   }
 
   public String getReportGroupKey()

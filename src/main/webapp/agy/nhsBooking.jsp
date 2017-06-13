@@ -96,10 +96,21 @@
 	    <th align="left" valign="top"><bean:message key="label.comment"/></th>
 	    <td align="left"><html:textarea name="NhsBookingFormAgy" property="nhsBookingUser.comment" cols="50" rows="4"/></td>
 	  </tr>
-	  <tr>
-	    <th align="left" valign="top"><bean:message key="label.value"/></th>
-	    <td align="left"><html:text name="NhsBookingFormAgy" property="nhsBookingUser.value" /></td>
-	  </tr>
+    <tr>
+      <th align="left" valign="top"><bean:message key="label.value"/></th>
+      <td align="left"><html:text name="NhsBookingFormAgy" property="nhsBookingUser.value" /></td>
+    </tr>
+    <tr>
+      <th align="left" valign="top"><bean:message key="label.applicantPaidDate"/></th>
+      <td align="left">
+<logic:greaterThan name="NhsBookingFormAgy" property="nhsBookingUser.workedNoOfHours" value="0">
+        <html:text name="NhsBookingFormAgy" property="applicantPaidDateStr" />&nbsp;<bean:message key="text.dateFormat"/>
+</logic:greaterThan>
+<logic:equal name="NhsBookingFormAgy" property="nhsBookingUser.workedNoOfHours" value="0">
+        &nbsp;
+</logic:equal>
+      </td>
+    </tr>
 	</table>
 <logic:present name="NhsBookingFormAgy" property="listSubcontractInvoiceItemHistory">
 	<table class="simple" width="100%">

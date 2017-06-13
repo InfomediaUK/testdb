@@ -1,5 +1,6 @@
 package com.helmet.application.agy;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ public class NhsBookingEdit extends AgyAction
   {
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
     logger.entry("In coming !!!");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     MessageResources messageResources = getResources(request);
     NhsBookingUser nhsBookingUser = (NhsBookingUser)dynaForm.get("nhsBookingUser");
     Integer weekToShow = (Integer)dynaForm.get("weekToShow");
@@ -46,6 +48,10 @@ public class NhsBookingEdit extends AgyAction
       // NHS Booking has been Booked.
       BookingGrade bookingGrade = agyService.getBookingGrade(nhsBookingUser.getBookingGradeId());
       dynaForm.set("bookingGradeStatus", messageResources.getMessage(bookingGrade.getStatusDescriptionKey()));
+    }
+    if (nhsBookingUser.getApplicantPaidDate() != null)
+    {
+      dynaForm.set("applicantPaidDateStr", sdf.format(nhsBookingUser.getApplicantPaidDate()));
     }
     List<SubcontractInvoiceItemHistory> listSubcontractInvoiceItemHistory = agyService.getSubcontractInvoiceItemHistoryForBankReqNum(nhsBookingUser.getBankReqNum());
     dynaForm.set("nhsBookingUser", nhsBookingUser);

@@ -192,6 +192,7 @@
     </form-bean>
     <form-bean name="NhsBookingFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="nhsBookingUser" type="com.helmet.bean.NhsBookingUser" />
+      <form-property name="applicantPaidDateStr" type="java.lang.String" />
       <form-property name="bookingStatus" type="java.lang.String" />
       <form-property name="bookingGradeStatus" type="java.lang.String" />
       <form-property name="weekToShow" type="java.lang.Integer" initial="0" />

@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import com.helmet.application.NhsBookingReportGroup;
 import com.helmet.application.agy.AgyConstants;
-import com.helmet.bean.Booking;
 import com.helmet.bean.NhsBooking;
 import com.helmet.bean.NhsBookingGroup;
 import com.helmet.bean.NhsBookingUser;
@@ -26,7 +25,7 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
 
   private static StringBuffer updateNhsBookingSQL;
 
-  private static StringBuffer updateNhsBookingCommentAndValueSQL;
+  private static StringBuffer updateNhsBookingCommentValueApplicantPaidDateSQL;
 
   private static StringBuffer updateNhsBookingApplicantNotificationSentSQL;
   
@@ -159,15 +158,16 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
     updateNhsBookingApplicantNotificationSentSQL.append("WHERE NHSBOOKINGID = ^ ");
     updateNhsBookingApplicantNotificationSentSQL.append("AND   NOOFCHANGES = ^ ");
     // Get update NhsBooking Comment and Value Id SQL.
-    updateNhsBookingCommentAndValueSQL = new StringBuffer();
-    updateNhsBookingCommentAndValueSQL.append("UPDATE NHSBOOKING ");
-    updateNhsBookingCommentAndValueSQL.append("SET  NOOFCHANGES = NOOFCHANGES + 1, ");
-    updateNhsBookingCommentAndValueSQL.append("     COMMENT = ^, ");
-    updateNhsBookingCommentAndValueSQL.append("     VALUE = ^, ");
-    updateNhsBookingCommentAndValueSQL.append("     AUDITORID = ^, ");
-    updateNhsBookingCommentAndValueSQL.append("     AUDITTIMESTAMP = ^ ");
-    updateNhsBookingCommentAndValueSQL.append("WHERE NHSBOOKINGID = ^ ");
-    updateNhsBookingCommentAndValueSQL.append("AND   NOOFCHANGES = ^ ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL = new StringBuffer();
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("UPDATE NHSBOOKING ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("SET  NOOFCHANGES = NOOFCHANGES + 1, ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("     COMMENT = ^, ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("     VALUE = ^, ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("     APPLICANTPAIDDATE = ^, ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("     AUDITORID = ^, ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("     AUDITTIMESTAMP = ^ ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("WHERE NHSBOOKINGID = ^ ");
+    updateNhsBookingCommentValueApplicantPaidDateSQL.append("AND   NOOFCHANGES = ^ ");
     // Get update NhsBooking Subcontract Invoice Id SQL.
     updateNhsBookingSubcontractInvoiceIdSQL = new StringBuffer();
     updateNhsBookingSubcontractInvoiceIdSQL.append("UPDATE NHSBOOKING ");
@@ -213,6 +213,7 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
     selectNhsBookingsSQL.append("       NB.BOOKINGDATEID, ");
     selectNhsBookingsSQL.append("       NB.BOOKINGGRADEID, ");
     selectNhsBookingsSQL.append("       NB.COMMENT, ");
+    selectNhsBookingsSQL.append("       NB.APPLICANTPAIDDATE, ");
     selectNhsBookingsSQL.append("       NB.APPLICANTNOTIFICATIONSENT, ");
     selectNhsBookingsSQL.append("       NB.CREATIONTIMESTAMP, ");
 		selectNhsBookingsSQL.append("       NB.AUDITORID, ");
@@ -493,13 +494,14 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
     return UpdateHandler.getInstance().update(getJdbcTemplate(), sql.toString());
   }
 
-  public int updateNhsBookingCommentAndValue(NhsBooking nhsBooking, Integer auditorId) 
+  public int updateNhsBookingCommentValueApplicantPaidDate(NhsBooking nhsBooking, Integer auditorId) 
   {
     // Create a new local StringBuffer containing the parameterised SQL.
-    StringBuffer sql = new StringBuffer(updateNhsBookingCommentAndValueSQL.toString());
+    StringBuffer sql = new StringBuffer(updateNhsBookingCommentValueApplicantPaidDateSQL.toString());
     // Replace the parameters with supplied values.
     Utilities.replaceAndQuoteNullable(sql, nhsBooking.getComment());
     Utilities.replace(sql, nhsBooking.getValue() == null ? new BigDecimal(0) : nhsBooking.getValue());
+    Utilities.replaceAndQuoteNullable(sql, nhsBooking.getApplicantPaidDate());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
     Utilities.replace(sql, nhsBooking.getNhsBookingId());

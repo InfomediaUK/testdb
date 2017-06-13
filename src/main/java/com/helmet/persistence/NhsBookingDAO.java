@@ -27,7 +27,7 @@ public interface NhsBookingDAO
 	public int insertNhsBooking(NhsBooking nhsBooking, Integer auditorId);
   public int updateNhsBooking(NhsBooking nhsBooking, Integer auditorId);
   public int updateNhsBookingApplicantNotificationSent(NhsBooking nhsBooking, Integer auditorId);
-  public int updateNhsBookingCommentAndValue(NhsBooking nhsBooking, Integer auditorId);
+  public int updateNhsBookingCommentValueApplicantPaidDate(NhsBooking nhsBooking, Integer auditorId);
   public int updateNhsBookingSubcontractInvoiceId(NhsBooking nhsBooking, Integer auditorId);
 	public int deleteNhsBooking(NhsBooking nhsBooking, Integer auditorId);
 

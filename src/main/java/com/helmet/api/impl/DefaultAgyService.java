@@ -1869,9 +1869,9 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return rc;
   }
 
-  public int updateNhsBookingCommentAndValue(NhsBooking nhsBooking, Integer auditorId)
+  public int updateNhsBookingCommentValueApplicantPaidDate(NhsBooking nhsBooking, Integer auditorId)
   {
-    int rc = getNhsBookingDAO().updateNhsBookingCommentAndValue(nhsBooking, auditorId);
+    int rc = getNhsBookingDAO().updateNhsBookingCommentValueApplicantPaidDate(nhsBooking, auditorId);
     return rc;
   }
 

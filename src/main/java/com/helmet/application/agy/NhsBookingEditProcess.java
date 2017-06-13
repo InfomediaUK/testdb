@@ -1,5 +1,7 @@
 package com.helmet.application.agy;
 
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +10,8 @@ import org.slf4j.ext.XLoggerFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessages;
+import org.apache.struts.util.MessageResources;
 import org.apache.struts.validator.DynaValidatorForm;
 
 import com.helmet.api.AgyService;
@@ -24,7 +28,17 @@ public class NhsBookingEditProcess extends AgyAction
   {
     DynaValidatorForm dynaForm = (DynaValidatorForm)form;
     logger.entry("In coming !!!");
+    ActionMessages errors = new ActionMessages();
+    MessageResources messageResources = getResources(request);
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     NhsBookingUser nhsBookingUser = (NhsBookingUser)dynaForm.get("nhsBookingUser");
+    String applicantPaidDateStr = (String)dynaForm.get("applicantPaidDateStr");
+    nhsBookingUser.setApplicantPaidDate(convertDate(applicantPaidDateStr, sdf, errors, messageResources, "label.applicantPaidDate"));
+    if (!errors.isEmpty()) 
+    {
+      saveErrors(request, errors);
+      return mapping.getInputForward();
+    }
     Integer weekToShow = (Integer)dynaForm.get("weekToShow");
     if (isCancelled(request))
     {
@@ -32,7 +46,7 @@ public class NhsBookingEditProcess extends AgyAction
       return new ActionForward(actionForward.getName(), actionForward.getPath() + "?weekToShow=" + weekToShow, actionForward.getRedirect());
     }   
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
-    int rowCount = agyService.updateNhsBookingCommentAndValue(nhsBookingUser, getConsultantLoggedIn().getConsultantId());
+    int rowCount = agyService.updateNhsBookingCommentValueApplicantPaidDate(nhsBookingUser, getConsultantLoggedIn().getConsultantId());
     logger.exit("Out going !!!");
     ActionForward actionForward = mapping.findForward("success");
     return new ActionForward(actionForward.getName(), actionForward.getPath() + "?weekToShow=" + weekToShow, actionForward.getRedirect());
