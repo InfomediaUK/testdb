@@ -123,13 +123,13 @@
     <td align="left"><bean:write name="AgencyFormAgy" property="agency.payrollContactFaxNumber"/></td>
   </tr>
   <tr>
-    <th align="left"><bean:message key="label.freeText"/></th>
+    <th align="left"><bean:message key="label.freeText"/></th><%-- Invoice Text --%>
     <td align="left">
     <bean:write name="AgencyFormAgy" property="agency.freeText"/>
     </td>
   </tr>
   <tr>
-    <th align="left"><bean:message key="label.freeText2"/></th>
+    <th align="left"><bean:message key="label.freeText2"/></th><%-- Invoice Footer Text --%>
     <td align="left">
     <bean:write name="AgencyFormAgy" property="agency.freeText2"/>
     </td>
