@@ -190,6 +190,14 @@
       <form-property name="countExistingNhsBooking" type="java.lang.Integer" />
       <form-property name="countInvalidNhsBooking" type="java.lang.Integer" />
     </form-bean>
+    <form-bean name="NhsBookingPaymentFileUploadFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
+      <form-property name="paymentDateStr" type="java.lang.String" />
+      <form-property name="nhsBookingPaymentExampleText" type="java.lang.String"/>
+      <form-property name="nhsBookingPaymentFormFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="list" type="java.util.List" />
+      <form-property name="countValidNhsBooking" type="java.lang.Integer" />
+      <form-property name="countInvalidNhsBooking" type="java.lang.Integer" />
+    </form-bean>
     <form-bean name="NhsBookingFormAgy" type="org.apache.struts.validator.DynaValidatorForm">
       <form-property name="nhsBookingUser" type="com.helmet.bean.NhsBookingUser" />
       <form-property name="applicantPaidDateStr" type="java.lang.String" />
@@ -1558,6 +1566,7 @@
     <forward name="nhsBackingReportDocumentationSend" path="/nhsBackingReportDocumentationSend.do" />
 
     <forward name="nhsBookingFileUpload" path="/nhsBookingFileUpload.do" />
+    <forward name="nhsBookingPaymentFileUpload" path="/nhsBookingPaymentFileUpload.do" />
     <forward name="nhsBookings" path="/nhsBookings.do" />
     <forward name="nhsBookingEdit" path="/nhsBookingEdit.do" />
     <forward name="nhsBookingDelete" path="/nhsBookingDelete.do" />
@@ -4299,8 +4308,6 @@
         <forward name="success" path="/nhsBackingReportShiftList.do" redirect="true" />
     </action>
 
-
-
     <action path="/nhsBookingFileUpload"
             type="com.helmet.application.agy.NhsBookingFileUpload"
             name="NhsBookingFileUploadFormAgy"
@@ -4318,6 +4325,25 @@
             validate="true">
         <forward name="success" path="nhsBookingFileUploadResults.page" redirect="true" />
         <forward name="error" path="/nhsBookingFileUpload.do" />
+    </action>
+
+    <action path="/nhsBookingPaymentFileUpload"
+            type="com.helmet.application.agy.NhsBookingPaymentFileUpload"
+            name="NhsBookingPaymentFileUploadFormAgy"
+            scope="request"
+            input="homeAgy.page"
+            validate="false">
+        <forward name="success" path="nhsBookingPaymentFileUpload.page" />
+    </action>
+
+    <action path="/nhsBookingPaymentFileUploadProcess"
+            type="com.helmet.application.agy.NhsBookingPaymentFileUploadProcess"
+            name="NhsBookingPaymentFileUploadFormAgy"
+            scope="request"
+            input="nhsBookingPaymentFileUpload.page"
+            validate="true">
+        <forward name="success" path="nhsBookingPaymentFileUploadResults.page" redirect="true" />
+        <forward name="error" path="/nhsBookingPaymentFileUpload.do" />
     </action>
 
     <action path="/nhsBookingsReady"

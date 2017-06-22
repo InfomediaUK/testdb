@@ -139,6 +139,9 @@
 <mmj-agy:hasAccess forward="nhsBookingFileUpload">
 <br/><html:link forward="nhsBookingFileUpload" styleClass="leftColumn"><bean:message key="link.nhsBookingFileUpload"/></html:link>
 </mmj-agy:hasAccess>
+<mmj-agy:hasAccess forward="nhsBookingPaymentFileUpload">
+<br/><html:link forward="nhsBookingPaymentFileUpload" styleClass="leftColumn"><bean:message key="link.nhsBookingPaymentFileUpload"/></html:link>
+</mmj-agy:hasAccess>
 <mmj-agy:hasAccess forward="nhsBookingsReady">
 <br/><html:link forward="nhsBookingsReady" styleClass="leftColumn"><bean:message key="link.nhsBookingsReady"/></html:link>
 </mmj-agy:hasAccess>

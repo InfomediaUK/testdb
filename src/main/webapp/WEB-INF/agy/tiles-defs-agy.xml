@@ -826,6 +826,18 @@
         <put name="pageHelpKey" value="pageHelp.nhsBookingFileUploadResults" type="string"/>
         <put name="body"   value="/agy/nhsBookingFileUploadResults.jsp"/>
   </definition>
+
+  <definition name="nhsBookingPaymentFileUpload.page" extends="layoutAgy.main">
+        <put name="titleKey" value="title.nhsBookingPaymentFileUpload" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.nhsBookingPaymentFileUpload" type="string"/>
+        <put name="body"   value="/agy/nhsBookingPaymentFileUpload.jsp"/>
+  </definition>
+  <definition name="nhsBookingPaymentFileUploadResults.page" extends="layoutAgy.main">
+        <put name="titleKey" value="title.nhsBookingPaymentFileUploadResults" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.nhsBookingPaymentFileUploadResults" type="string"/>
+        <put name="body"   value="/agy/nhsBookingPaymentFileUploadResults.jsp"/>
+  </definition>
+
   <definition name="nhsBookings.page" extends="layoutAgy.main">
         <put name="titleKey" value="title.nhsBookings" type="string"/>
         <put name="pageHelpKey" value="pageHelp.nhsBookings" type="string"/>

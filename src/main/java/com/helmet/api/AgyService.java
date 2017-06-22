@@ -47,6 +47,7 @@ import com.helmet.bean.Location;
 import com.helmet.bean.LocationUser;
 import com.helmet.bean.NhsBooking;
 import com.helmet.bean.NhsBookingGroup;
+import com.helmet.bean.NhsBookingPaymentUpload;
 import com.helmet.bean.NhsBookingUser;
 import com.helmet.bean.RecordCount;
 import com.helmet.bean.Site;
@@ -310,6 +311,8 @@ public interface AgyService extends CommonService {
   public int updateNhsBookingCommentValueApplicantPaidDate(NhsBooking nhsBooking, Integer auditorId);
   public int updateNhsBookingSubcontractInvoiceId(NhsBooking nhsBooking, Integer auditorId);
   public int deleteNhsBooking(NhsBooking nhsBooking, Integer auditorId);
+  public NhsBooking getNhsBookingForBankReqNum(Integer agencyId, String bankReqNum); 
+  public NhsBookingPaymentUpload getNhsBookingPaymentUploadForBankReqNum(Integer agencyId, String bankReqNum); 
   public NhsBooking getActiveNhsBookingForBankReqNum(Integer agencyId, String bankReqNum); 
   public NhsBooking getNhsBooking(Integer nhsBookingId); 
   public NhsBookingUser getNhsBookingUser(Integer nhsBookingId); 

@@ -68,7 +68,15 @@ td.unavailable {
 }
 
 td.nhsMatched {
-	color:#808080;
+  color:#808080;
+}
+
+td.unmatched {
+  color:#808080;
+}
+
+td.matched {
+  color:#000000;
 }
 
 td.nhsUploadError {
