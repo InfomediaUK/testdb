@@ -6,7 +6,7 @@ import java.util.List;
 import com.helmet.application.NhsBookingReportGroup;
 import com.helmet.bean.NhsBooking;
 import com.helmet.bean.NhsBookingGroup;
-import com.helmet.bean.NhsBookingPaymentUpload;
+import com.helmet.bean.ApplicantPaymentUpload;
 import com.helmet.bean.NhsBookingUser;
 
 public interface NhsBookingDAO 
@@ -25,7 +25,7 @@ public interface NhsBookingDAO
   public NhsBookingUser getNhsBookingUser(Integer nhsBookingId);
   public NhsBooking getActiveNhsBookingForBankReqNum(Integer agencyId, String bankReqNum); 
   public NhsBooking getNhsBookingForBankReqNum(Integer agencyId, String bankReqNum); 
-  public NhsBookingPaymentUpload getNhsBookingPaymentUploadForBankReqNum(Integer agencyId, String bankReqNum); 
+  public ApplicantPaymentUpload getApplicantPaymentUploadForBankReqNum(Integer agencyId, String bankReqNum); 
 	public int insertNhsBooking(NhsBooking nhsBooking, Integer auditorId);
   public int updateNhsBooking(NhsBooking nhsBooking, Integer auditorId);
   public int updateNhsBookingApplicantNotificationSent(NhsBooking nhsBooking, Integer auditorId);

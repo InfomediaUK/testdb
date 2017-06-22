@@ -122,6 +122,9 @@
 <mmj-agy:hasAccess forward="applicantWorkingList">
 <br/><html:link forward="applicantWorkingList" styleClass="leftColumn"><bean:message key="link.working"/></html:link>
 </mmj-agy:hasAccess>
+<mmj-agy:hasAccess forward="applicantPaymentFileUpload">
+<br/><html:link forward="applicantPaymentFileUpload" styleClass="leftColumn"><bean:message key="link.applicantPaymentFileUpload"/></html:link>
+</mmj-agy:hasAccess>
 
 <bean:define id="showNhsp" value="false"/>
 <mmj-agy:hasAccess forward="nhsBookingFileUpload"><bean:define id="showNhsp" value="true"/></mmj-agy:hasAccess>
@@ -138,9 +141,6 @@
 </logic:equal>
 <mmj-agy:hasAccess forward="nhsBookingFileUpload">
 <br/><html:link forward="nhsBookingFileUpload" styleClass="leftColumn"><bean:message key="link.nhsBookingFileUpload"/></html:link>
-</mmj-agy:hasAccess>
-<mmj-agy:hasAccess forward="nhsBookingPaymentFileUpload">
-<br/><html:link forward="nhsBookingPaymentFileUpload" styleClass="leftColumn"><bean:message key="link.nhsBookingPaymentFileUpload"/></html:link>
 </mmj-agy:hasAccess>
 <mmj-agy:hasAccess forward="nhsBookingsReady">
 <br/><html:link forward="nhsBookingsReady" styleClass="leftColumn"><bean:message key="link.nhsBookingsReady"/></html:link>

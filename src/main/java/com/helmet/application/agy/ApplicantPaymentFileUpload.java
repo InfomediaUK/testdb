@@ -25,7 +25,7 @@ import com.helmet.application.Utilities;
 import com.helmet.application.agy.abztract.AgyAction;
 import com.helmet.bean.ClientUser;
 
-public class NhsBookingPaymentFileUpload extends AgyAction
+public class ApplicantPaymentFileUpload extends AgyAction
 {
 
   protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
@@ -41,16 +41,16 @@ public class NhsBookingPaymentFileUpload extends AgyAction
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     List<ClientUser> list = agyService.getNhsClientUsersForAgency(getConsultantLoggedIn().getAgencyId());
     StringBuffer nhsBookingsPaymentExampleText = new StringBuffer();
-    String nhsBookingPaymentExampleFileName = FileHandler.getInstance().getNhsBookingFileLocation() + FileHandler.getInstance().getNhsBookingFileFolder() + "/nhsbookingpaymentexample.txt";
-    File nhsBookingExampleFile = new File(nhsBookingPaymentExampleFileName);
+    String applicantPaymentExampleFileName = FileHandler.getInstance().getNhsBookingFileLocation() + FileHandler.getInstance().getNhsBookingFileFolder() + "/applicantpaymentexample.txt";
+    File nhsBookingExampleFile = new File(applicantPaymentExampleFileName);
     if (nhsBookingExampleFile.exists())
     {
-      Utilities.suckInFile(nhsBookingPaymentExampleFileName, nhsBookingsPaymentExampleText);
-      dynaForm.set("nhsBookingPaymentExampleText", nhsBookingsPaymentExampleText.toString());
+      Utilities.suckInFile(applicantPaymentExampleFileName, nhsBookingsPaymentExampleText);
+      dynaForm.set("applicantPaymentExampleText", nhsBookingsPaymentExampleText.toString());
     }
     else
     {
-      errors.add("nhsBookingsPaymentFileUpload", new ActionMessage("error.nhsBookingPaymentFile.exampleNotFound", nhsBookingPaymentExampleFileName));
+      errors.add("nhsBookingsPaymentFileUpload", new ActionMessage("error.applicantPaymentFile.exampleNotFound", applicantPaymentExampleFileName));
       saveErrors(request, errors);
     }
     dynaForm.set("list", list);

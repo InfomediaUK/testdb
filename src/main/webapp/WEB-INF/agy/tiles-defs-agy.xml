@@ -827,15 +827,15 @@
         <put name="body"   value="/agy/nhsBookingFileUploadResults.jsp"/>
   </definition>
 
-  <definition name="nhsBookingPaymentFileUpload.page" extends="layoutAgy.main">
-        <put name="titleKey" value="title.nhsBookingPaymentFileUpload" type="string"/>
-        <put name="pageHelpKey" value="pageHelp.nhsBookingPaymentFileUpload" type="string"/>
-        <put name="body"   value="/agy/nhsBookingPaymentFileUpload.jsp"/>
+  <definition name="applicantPaymentFileUpload.page" extends="layoutAgy.main">
+        <put name="titleKey" value="title.applicantPaymentFileUpload" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.applicantPaymentFileUpload" type="string"/>
+        <put name="body"   value="/agy/applicantPaymentFileUpload.jsp"/>
   </definition>
-  <definition name="nhsBookingPaymentFileUploadResults.page" extends="layoutAgy.main">
-        <put name="titleKey" value="title.nhsBookingPaymentFileUploadResults" type="string"/>
-        <put name="pageHelpKey" value="pageHelp.nhsBookingPaymentFileUploadResults" type="string"/>
-        <put name="body"   value="/agy/nhsBookingPaymentFileUploadResults.jsp"/>
+  <definition name="applicantPaymentFileUploadResults.page" extends="layoutAgy.main">
+        <put name="titleKey" value="title.applicantPaymentFileUploadResults" type="string"/>
+        <put name="pageHelpKey" value="pageHelp.applicantPaymentFileUploadResults" type="string"/>
+        <put name="body"   value="/agy/applicantPaymentFileUploadResults.jsp"/>
   </definition>
 
   <definition name="nhsBookings.page" extends="layoutAgy.main">

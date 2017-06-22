@@ -1,6 +1,6 @@
 package com.helmet.bean;
 
-public class NhsBookingPaymentUpload extends NhsBooking
+public class ApplicantPaymentUpload extends NhsBooking
 {
   private String uploadStaffName;
   private boolean validStaffName;

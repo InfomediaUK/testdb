@@ -29,11 +29,11 @@ function checkedAll(frmname)
 }
 </script>
 <% String nhsBookingCheckBox = "nhsBookingId"; %>
-<html:form action="/nhsBackingReportFileAccept.do" styleId="NhsBookingPaymentResults" onsubmit="return singleSubmit();">
+<html:form action="/nhsBackingReportFileAccept.do" styleId="ApplicantPaymentResults" onsubmit="return singleSubmit();">
 <table cellpadding="0" cellspacing="0" width="100%" height="30">
   <tr>
     <td align="left" valign="middle" class="title">
-      <bean:message key="title.nhsBookingPaymentFileUploadResults"/>
+      <bean:message key="title.applicantPaymentFileUploadResults"/>
     </td>
   <mmj-agy:hasAccess forward="nhsBackingReportFileAccept">
     <td align="right" valign="middle" width="75">
@@ -42,24 +42,24 @@ function checkedAll(frmname)
   </mmj-agy:hasAccess>
   </tr>
 </table>
-<logic:notPresent name="NhsBookingPaymentFileUploadFormAgy" property="list">
+<logic:notPresent name="ApplicantPaymentFileUploadFormAgy" property="list">
   <bean:message key="text.noDetails"/>
 </logic:notPresent>
-<logic:present name="NhsBookingPaymentFileUploadFormAgy" property="list">
-	<logic:empty name="NhsBookingPaymentFileUploadFormAgy" property="list">
+<logic:present name="ApplicantPaymentFileUploadFormAgy" property="list">
+	<logic:empty name="ApplicantPaymentFileUploadFormAgy" property="list">
 	  <bean:message key="text.noDetails"/>
 	</logic:empty>
-<logic:notEmpty name="NhsBookingPaymentFileUploadFormAgy" property="list">
+<logic:notEmpty name="ApplicantPaymentFileUploadFormAgy" property="list">
 	<table cellpadding="0" cellspacing="0" width="100%" height="30">
 	  <tr>
       <td align="left">
-        <b>Payment Date:</b> <bean:write name="NhsBookingPaymentFileUploadFormAgy" property="paymentDateStr"/>
+        <b>Payment Date:</b> <bean:write name="ApplicantPaymentFileUploadFormAgy" property="paymentDateStr"/>
       </td>
       <td align="left">
-        <b>Invalid:</b> <bean:write name="NhsBookingPaymentFileUploadFormAgy" property="countInvalidNhsBooking"/>
+        <b>Invalid:</b> <bean:write name="ApplicantPaymentFileUploadFormAgy" property="countInvalidNhsBooking"/>
       </td>
       <td align="left">
-        <b>Valid:</b> <bean:write name="NhsBookingPaymentFileUploadFormAgy" property="countValidNhsBooking"/>
+        <b>Valid:</b> <bean:write name="ApplicantPaymentFileUploadFormAgy" property="countValidNhsBooking"/>
       </td>
 	  </tr>
 	</table>
@@ -67,7 +67,7 @@ function checkedAll(frmname)
     <thead>
     <tr>
       <th align="left" width="2%">
-        <input type="checkbox" name="checkall" onclick="checkedAll('NhsBookingPaymentResults');"/>
+        <input type="checkbox" name="checkall" onclick="checkedAll('ApplicantPaymentResults');"/>
       </th>
       <th align="left">BankReqNum</th>
       <th align="left">Booking</th>
@@ -80,7 +80,7 @@ function checkedAll(frmname)
       <th align="left">Assignment</th>
     </tr>
     </thead>
-<logic:iterate id="nhsBooking" name="NhsBookingPaymentFileUploadFormAgy" property="list" indexId="nhsBookingIndex" type="com.helmet.bean.NhsBookingPaymentUpload">
+<logic:iterate id="nhsBooking" name="ApplicantPaymentFileUploadFormAgy" property="list" indexId="nhsBookingIndex" type="com.helmet.bean.ApplicantPaymentUpload">
     <logic:notPresent name="nhsBooking" property="nhsBookingId"><%-- NHS Booking NOT found --%>
       <td align="left" valign="top" class="unmatched"><%-- Blank --%>
         &nbsp;
@@ -118,7 +118,7 @@ function checkedAll(frmname)
     <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
       <td align="left" valign="top" class="matched"><%-- CheckBox --%>
       <logic:equal name="nhsBooking" property="valid" value="true">
-        <input type="checkbox" name="<%= nhsBookingCheckBox %>" value="<%= nhsBooking.getNhsBookingId() %>">    
+        <input type="checkbox" name="<%= nhsBookingCheckBox %>" value="xxxx">    
       </logic:equal>
       <logic:notEqual name="nhsBooking" property="valid" value="true">
         &nbsp;

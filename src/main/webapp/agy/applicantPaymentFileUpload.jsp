@@ -8,12 +8,12 @@
 <%@ taglib uri="/mmj" prefix="mmj" %>
 <%@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
 <table cellpadding="0" cellspacing="0" width="100%" height="30">
-<html:form action="/nhsBookingPaymentFileUploadProcess.do" focus="nhsBookingPaymentFormFile" enctype="multipart/form-data" onsubmit="return singleSubmit();">
+<html:form action="/applicantPaymentFileUploadProcess.do" focus="applicantPaymentFormFile" enctype="multipart/form-data" onsubmit="return singleSubmit();">
   <tr>
 		<td align="left" valign="middle" class="title">
-      <bean:message key="title.nhsBookingPaymentFileUpload"/>
+      <bean:message key="title.applicantPaymentFileUpload"/>
 		</td>
-    <mmj-agy:hasAccess forward="nhsBookingPaymentFileUpload">
+    <mmj-agy:hasAccess forward="applicantPaymentFileUpload">
     <td align="right" valign="middle" width="75"><html:submit styleClass="titleButton"><bean:message key="button.upload"/></html:submit></td>
 		</mmj-agy:hasAccess>
   </tr>
@@ -25,12 +25,12 @@
       <bean:message key="label.paymentDate"/>
     </th>
     <td>
-      <html:text name="NhsBookingPaymentFileUploadFormAgy" property="paymentDateStr" />&nbsp;<bean:message key="text.dateFormat"/>
+      <html:text name="ApplicantPaymentFileUploadFormAgy" property="paymentDateStr" />&nbsp;<bean:message key="text.dateFormat"/>
     </td>
   </tr>
   <tr>
-    <th width="25%" align="left" class="label"><bean:message key="label.nhsBookingPaymentFile"/></th>
-    <td align="left"><html:file property="nhsBookingPaymentFormFile" size="50" tabindex="1" /></td>
+    <th width="25%" align="left" class="label"><bean:message key="label.applicantPaymentFile"/></th>
+    <td align="left"><html:file property="applicantPaymentFormFile" size="50" tabindex="1" /></td>
   </tr>
   <tr>
     <td align="left" colspan="2">
@@ -40,7 +40,7 @@
   <tr>
     <td align="left" colspan="2">
       Example:-<br />
-      <html:textarea name="NhsBookingPaymentFileUploadFormAgy" property="nhsBookingPaymentExampleText" style="width:100%" styleId="message" cols="100" rows="12" disabled="true" />      
+      <html:textarea name="ApplicantPaymentFileUploadFormAgy" property="applicantPaymentExampleText" style="width:100%" styleId="message" cols="100" rows="12" disabled="true" />      
     </td>
   </tr>
 </table>

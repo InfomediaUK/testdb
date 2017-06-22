@@ -62,7 +62,7 @@ import com.helmet.bean.Location;
 import com.helmet.bean.LocationUser;
 import com.helmet.bean.NhsBooking;
 import com.helmet.bean.NhsBookingGroup;
-import com.helmet.bean.NhsBookingPaymentUpload;
+import com.helmet.bean.ApplicantPaymentUpload;
 import com.helmet.bean.NhsBookingUser;
 import com.helmet.bean.RecordCount;
 import com.helmet.bean.Site;
@@ -1894,9 +1894,9 @@ public class DefaultAgyService extends DefaultCommonService implements AgyServic
     return nhsBooking;
   }
 
-  public NhsBookingPaymentUpload getNhsBookingPaymentUploadForBankReqNum(Integer agencyId, String bankReqNum)
+  public ApplicantPaymentUpload getApplicantPaymentUploadForBankReqNum(Integer agencyId, String bankReqNum)
   {
-    NhsBookingPaymentUpload nhsBooking = getNhsBookingDAO().getNhsBookingPaymentUploadForBankReqNum(agencyId, bankReqNum);
+    ApplicantPaymentUpload nhsBooking = getNhsBookingDAO().getApplicantPaymentUploadForBankReqNum(agencyId, bankReqNum);
     return nhsBooking;
   }
 

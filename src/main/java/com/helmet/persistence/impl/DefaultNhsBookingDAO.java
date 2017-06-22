@@ -11,7 +11,7 @@ import com.helmet.application.NhsBookingReportGroup;
 import com.helmet.application.agy.AgyConstants;
 import com.helmet.bean.NhsBooking;
 import com.helmet.bean.NhsBookingGroup;
-import com.helmet.bean.NhsBookingPaymentUpload;
+import com.helmet.bean.ApplicantPaymentUpload;
 import com.helmet.bean.NhsBookingUser;
 import com.helmet.persistence.RecordFactory;
 import com.helmet.persistence.RecordListFactory;
@@ -574,14 +574,14 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
     return (NhsBooking)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), NhsBooking.class.getName());
   }
 
-  public NhsBookingPaymentUpload getNhsBookingPaymentUploadForBankReqNum(Integer agencyId, String bankReqNum) 
+  public ApplicantPaymentUpload getApplicantPaymentUploadForBankReqNum(Integer agencyId, String bankReqNum) 
   {
     // Create a new local StringBuffer containing the parameterised SQL.
     StringBuffer sql = new StringBuffer(selectNhsBookingForBankReqNumSQL.toString());
     // Replace the parameters with supplied values.
     Utilities.replaceAndQuote(sql, bankReqNum);
     Utilities.replace(sql, agencyId);
-    return (NhsBookingPaymentUpload)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), NhsBookingPaymentUpload.class.getName());
+    return (ApplicantPaymentUpload)RecordFactory.getInstance().get(getJdbcTemplate(), sql.toString(), ApplicantPaymentUpload.class.getName());
   }
 
   public List<NhsBookingUser> getNhsBookingUsersReadyToBook(Integer agencyId) 

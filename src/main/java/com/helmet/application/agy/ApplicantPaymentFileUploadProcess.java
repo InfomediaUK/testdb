@@ -29,9 +29,9 @@ import org.apache.struts.validator.DynaValidatorForm;
 import com.helmet.api.AgyService;
 import com.helmet.api.ServiceFactory;
 import com.helmet.application.FileHandler;
-import com.helmet.bean.NhsBookingPaymentUpload;
+import com.helmet.bean.ApplicantPaymentUpload;
 
-public class NhsBookingPaymentFileUploadProcess extends NhsFileUploadCommon
+public class ApplicantPaymentFileUploadProcess extends NhsFileUploadCommon
 {
   protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
 
@@ -45,12 +45,12 @@ public class NhsBookingPaymentFileUploadProcess extends NhsFileUploadCommon
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     String paymentDateStr = (String)dynaForm.get("paymentDateStr");
-    FormFile nhsBookingPaymentFile = (FormFile)dynaForm.get("nhsBookingPaymentFormFile");
-    String nhsBookingPaymentFilename = nhsBookingPaymentFile.getFileName();
-    List<NhsBookingPaymentUpload> listNhsBookingPaymentUpload = new ArrayList<NhsBookingPaymentUpload>();
-    if (StringUtils.isEmpty(nhsBookingPaymentFilename))
+    FormFile applicantPaymentFile = (FormFile)dynaForm.get("applicantPaymentFormFile");
+    String applicantPaymentFilename = applicantPaymentFile.getFileName();
+    List<ApplicantPaymentUpload> listApplicantPaymentUpload = new ArrayList<ApplicantPaymentUpload>();
+    if (StringUtils.isEmpty(applicantPaymentFilename))
     {
-      errors.add("nhsBookingPaymentUpload", new ActionMessage("error.nhsBookingPaymentFile.notSupplied"));
+      errors.add("applicantPaymentUpload", new ActionMessage("error.applicantPaymentFile.notSupplied"));
     }
     else
     {
@@ -62,17 +62,17 @@ public class NhsBookingPaymentFileUploadProcess extends NhsFileUploadCommon
       {
         folder.mkdir();
       }
-      String filePath = folderPath + "/" + nhsBookingPaymentFilename;
-      uploadFile(nhsBookingPaymentFile, filePath);
+      String filePath = folderPath + "/" + applicantPaymentFilename;
+      uploadFile(applicantPaymentFile, filePath);
       HashMap<String, Integer> columnMap = new HashMap<String, Integer>();
       String columnNumbersFilePath = FileHandler.getInstance().getNhsBookingFileLocation() + FileHandler.getInstance().getNhsBookingFileFolder();
-      columnNumbers(columnMap, columnNumbersFilePath, errors, "nhsBookingPaymentUpload", "error.nhsBookingColumnNumbersFile");
+      columnNumbers(columnMap, columnNumbersFilePath, errors, "applicantPaymentUpload", "error.nhsBookingColumnNumbersFile");
       if (errors.isEmpty())
       {
-        validate(agyService, columnMap, listNhsBookingPaymentUpload, filePath, dynaForm, errors, messageResources);
+        validate(agyService, columnMap, listApplicantPaymentUpload, filePath, dynaForm, errors, messageResources);
       }
     }
-    dynaForm.set("list", listNhsBookingPaymentUpload);
+    dynaForm.set("list", listApplicantPaymentUpload);
     long endTime = System.nanoTime();
     long duration = endTime - startTime;
     logger.debug("Out going !!! - Duration: " + duration + "ms.");
@@ -88,7 +88,7 @@ public class NhsBookingPaymentFileUploadProcess extends NhsFileUploadCommon
     return actionForward;
   }
    
-  private void validate(AgyService agyService, HashMap<String, Integer> columnMap, List<NhsBookingPaymentUpload> listNhsBookingPaymentUpload, String csvFile, DynaValidatorForm dynaForm, ActionMessages errors, MessageResources messageResources)
+  private void validate(AgyService agyService, HashMap<String, Integer> columnMap, List<ApplicantPaymentUpload> listApplicantPaymentUpload, String csvFile, DynaValidatorForm dynaForm, ActionMessages errors, MessageResources messageResources)
   {
     long startTime = System.currentTimeMillis();
     long endTime = 999;
@@ -102,13 +102,13 @@ public class NhsBookingPaymentFileUploadProcess extends NhsFileUploadCommon
     String line = "";
     Integer countValidNhsBooking = new Integer(0);
     Integer countInvalidNhsBooking = new Integer(0);
-    NhsBookingPaymentUpload nhsBookingPaymentUpload = null;
+    ApplicantPaymentUpload applicantPaymentUpload = null;
     try
     {
       br = new BufferedReader(new FileReader(csvFile));
       if ((line = br.readLine()) == null)
       {
-        errors.add("nhsBookingPaymentUpload", new ActionMessage("error.nhsBookingPaymentFile.empty", csvFile));
+        errors.add("applicantPaymentUpload", new ActionMessage("error.applicantPaymentFile.empty", csvFile));
       }
       else
       {
@@ -151,123 +151,123 @@ public class NhsBookingPaymentFileUploadProcess extends NhsFileUploadCommon
             String location = nhsBookingArray[columnMap.get("Location").intValue()].trim();
             String ward = nhsBookingArray[columnMap.get("Ward").intValue()].trim();
             String assignment = nhsBookingArray[columnMap.get("Assignment").intValue()].trim();
-            nhsBookingPaymentUpload = agyService.getNhsBookingPaymentUploadForBankReqNum(getConsultantLoggedIn().getAgencyId(), bankReqNum);
-            if (nhsBookingPaymentUpload == null)
+            applicantPaymentUpload = agyService.getApplicantPaymentUploadForBankReqNum(getConsultantLoggedIn().getAgencyId(), bankReqNum);
+            if (applicantPaymentUpload == null)
             {
               // This NHS Booking does NOT exist in the NHS Booking table.
               ++countInvalidNhsBooking;
-              nhsBookingPaymentUpload = new NhsBookingPaymentUpload();
-              nhsBookingPaymentUpload.setBankReqNum(bankReqNum);
-              nhsBookingPaymentUpload.setUploadStaffName(staffName);
-              nhsBookingPaymentUpload.setUploadDate(uploadDate);
-              nhsBookingPaymentUpload.setUploadStart(uploadStart);
-              nhsBookingPaymentUpload.setUploadEnd(uploadEnd);
-              nhsBookingPaymentUpload.setUploadLocation(location);
-              nhsBookingPaymentUpload.setUploadWard(ward);
-              nhsBookingPaymentUpload.setUploadAssignment(assignment);
+              applicantPaymentUpload = new ApplicantPaymentUpload();
+              applicantPaymentUpload.setBankReqNum(bankReqNum);
+              applicantPaymentUpload.setUploadStaffName(staffName);
+              applicantPaymentUpload.setUploadDate(uploadDate);
+              applicantPaymentUpload.setUploadStart(uploadStart);
+              applicantPaymentUpload.setUploadEnd(uploadEnd);
+              applicantPaymentUpload.setUploadLocation(location);
+              applicantPaymentUpload.setUploadWard(ward);
+              applicantPaymentUpload.setUploadAssignment(assignment);
             }
             else
             {
               // This NHS Booking EXISTS in the NHS Booking table.
-              logger.debug("Booking EXISTS: " + nhsBookingPaymentUpload.getBankReqNum());
+              logger.debug("Booking EXISTS: " + applicantPaymentUpload.getBankReqNum());
               ++countValidNhsBooking;
-              nhsBookingPaymentUpload.setUploadStaffName(staffName);
-              if (staffName.equals(nhsBookingPaymentUpload.getStaffName()))
+              applicantPaymentUpload.setUploadStaffName(staffName);
+              if (staffName.equals(applicantPaymentUpload.getStaffName()))
               {
-                nhsBookingPaymentUpload.setValidStaffName(true);
+                applicantPaymentUpload.setValidStaffName(true);
               }
               else
               {
-                nhsBookingPaymentUpload.setValidStaffName(false);
+                applicantPaymentUpload.setValidStaffName(false);
               }
-              nhsBookingPaymentUpload.setUploadDate(uploadDate);
+              applicantPaymentUpload.setUploadDate(uploadDate);
               if (isValidDate(uploadDate))
               {
                 // Date appears valid. Get as Date.
                 date = getDate(formatDate, uploadDate);
-                if (date.equals(nhsBookingPaymentUpload.getDate()))
+                if (date.equals(applicantPaymentUpload.getDate()))
                 {
                   // Date same as on NHS Booking. Valid.
-                  nhsBookingPaymentUpload.setValidDate(true);
+                  applicantPaymentUpload.setValidDate(true);
                 }
                 else
                 {
                   // Date differs from that on NHS Booking. Invalid.
-                  nhsBookingPaymentUpload.setValidDate(false);
+                  applicantPaymentUpload.setValidDate(false);
                 }
               }
               else
               {
                 // Invalid Date.
-                nhsBookingPaymentUpload.setValidDate(false);
+                applicantPaymentUpload.setValidDate(false);
               }
-              nhsBookingPaymentUpload.setUploadStart(uploadStart);
+              applicantPaymentUpload.setUploadStart(uploadStart);
               if (isValidTime(uploadStart))
               {
                 // Time appears valid. Get as Time.
                 timeStart = getTime(formatTime, uploadStart);
-                if (timeStart.equals(nhsBookingPaymentUpload.getStartTime()))
+                if (timeStart.equals(applicantPaymentUpload.getStartTime()))
                 {
-                  nhsBookingPaymentUpload.setValidStart(true);
+                  applicantPaymentUpload.setValidStart(true);
                 }
                 else
                 {
-                  nhsBookingPaymentUpload.setValidStart(false);
+                  applicantPaymentUpload.setValidStart(false);
                 }
               }
               else
               {
                 // Invalid Time.
-                nhsBookingPaymentUpload.setValidStart(false);
+                applicantPaymentUpload.setValidStart(false);
               }
-              nhsBookingPaymentUpload.setUploadEnd(uploadEnd);
+              applicantPaymentUpload.setUploadEnd(uploadEnd);
               if (isValidTime(uploadEnd))
               {
                 // Time appears valid. Get as Time.
                 timeEnd = getTime(formatTime, uploadEnd);
-                if (timeEnd.equals(nhsBookingPaymentUpload.getEndTime()))
+                if (timeEnd.equals(applicantPaymentUpload.getEndTime()))
                 {
-                  nhsBookingPaymentUpload.setValidEnd(true);
+                  applicantPaymentUpload.setValidEnd(true);
                 }
                 else
                 {
-                  nhsBookingPaymentUpload.setValidEnd(false);
+                  applicantPaymentUpload.setValidEnd(false);
                 }
               }
               else
               {
                 // Invalid Time.
-                nhsBookingPaymentUpload.setValidEnd(false);
+                applicantPaymentUpload.setValidEnd(false);
               }
-              nhsBookingPaymentUpload.setUploadLocation(location);
-              if (location.equals(nhsBookingPaymentUpload.getLocation()))
+              applicantPaymentUpload.setUploadLocation(location);
+              if (location.equals(applicantPaymentUpload.getLocation()))
               {
-                nhsBookingPaymentUpload.setValidLocation(true);
-              }
-              else
-              {
-                nhsBookingPaymentUpload.setValidLocation(false);
-              }
-              nhsBookingPaymentUpload.setUploadWard(ward);
-              if (ward.equals(nhsBookingPaymentUpload.getWard()))
-              {
-                nhsBookingPaymentUpload.setValidWard(true);
+                applicantPaymentUpload.setValidLocation(true);
               }
               else
               {
-                nhsBookingPaymentUpload.setValidWard(false);
+                applicantPaymentUpload.setValidLocation(false);
               }
-              nhsBookingPaymentUpload.setUploadAssignment(assignment);
-              if (assignment.equals(nhsBookingPaymentUpload.getAssignment()))
+              applicantPaymentUpload.setUploadWard(ward);
+              if (ward.equals(applicantPaymentUpload.getWard()))
               {
-                nhsBookingPaymentUpload.setValidAssignment(true);
+                applicantPaymentUpload.setValidWard(true);
               }
               else
               {
-                nhsBookingPaymentUpload.setValidAssignment(false);
+                applicantPaymentUpload.setValidWard(false);
+              }
+              applicantPaymentUpload.setUploadAssignment(assignment);
+              if (assignment.equals(applicantPaymentUpload.getAssignment()))
+              {
+                applicantPaymentUpload.setValidAssignment(true);
+              }
+              else
+              {
+                applicantPaymentUpload.setValidAssignment(false);
               }
             }
-            listNhsBookingPaymentUpload.add(nhsBookingPaymentUpload);
+            listApplicantPaymentUpload.add(applicantPaymentUpload);
             endTime = System.currentTimeMillis();
             duration = endTime - startTime;
             System.out.println("Duration so far: " + duration);
@@ -281,7 +281,7 @@ public class NhsBookingPaymentFileUploadProcess extends NhsFileUploadCommon
     }
     catch (Exception e)
     {
-      errors.add("nhsBookingPaymentUpload", new ActionMessage("error.nhsBookingPaymentFile.exception", e.getMessage()));
+      errors.add("applicantPaymentUpload", new ActionMessage("error.applicantPaymentFile.exception", e.getMessage()));
       e.printStackTrace();
     }
     finally
@@ -295,7 +295,7 @@ public class NhsBookingPaymentFileUploadProcess extends NhsFileUploadCommon
         }
         catch (IOException e)
         {
-          errors.add("nhsBookingPaymentUpload", new ActionMessage("error.nhsBookingPaymentFile.ioException", e.getMessage()));
+          errors.add("applicantPaymentUpload", new ActionMessage("error.applicantPaymentFile.ioException", e.getMessage()));
           e.printStackTrace();
         }
       }
