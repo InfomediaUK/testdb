@@ -44,6 +44,8 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
 
   private static StringBuffer selectNhsBookingForBankReqNumSQL;
 
+  private static StringBuffer selectApplicantPaymentUploadForBankReqNumSQL;
+
   private static StringBuffer selectNhsBookingUsersReadyToBookSQL;
 
   private static StringBuffer selectNhsBookingUsersReadyToBookForBookingGroupSQL;
@@ -249,7 +251,7 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
     selectNhsBookingUsersSQL.append("       SI.PAIDDATE AS SUBCONTRACTINVOICEPAIDDATE, ");
 // WAS    selectNhsBookingUsersSQL.append("       BG.RATE ");
     selectNhsBookingUsersSQL.append("       B.RATE ");
-      selectNhsBookingUsersSQL.append("FROM NHSBOOKING NB ");
+    selectNhsBookingUsersSQL.append("FROM NHSBOOKING NB ");
     selectNhsBookingUsersSQL.append("JOIN APPLICANT A ");
     selectNhsBookingUsersSQL.append("ON  A.APPLICANTID = NB.APPLICANTID ");
     selectNhsBookingUsersSQL.append("JOIN CLIENT C ");
@@ -274,13 +276,30 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
     selectNhsBookingUsersSQL.append("ON  B.BOOKINGID = NB.BOOKINGID ");
     selectNhsBookingUsersSQL.append("LEFT OUTER JOIN SUBCONTRACTINVOICE SI ");
     selectNhsBookingUsersSQL.append("ON  SI.SUBCONTRACTINVOICEID = NB.SUBCONTRACTINVOICEID ");
+
+    // Get select ApplicantPaymentUpload for Bank Request Number SQL.
+    selectApplicantPaymentUploadForBankReqNumSQL = new StringBuffer(selectNhsBookingsSQL);
+    selectApplicantPaymentUploadForBankReqNumSQL.append(", ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("       BD.WORKEDSTARTTIME, ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("       BD.WORKEDENDTIME, ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("       BD.WORKEDBREAKSTARTTIME, ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("       BD.WORKEDBREAKENDTIME, ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("       BD.WORKEDNOOFHOURS, ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("       BD.WORKEDBREAKNOOFHOURS, ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("       BD.BACKINGREPORT ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("FROM NHSBOOKING NB ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("LEFT OUTER JOIN BOOKINGDATE BD ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("ON  BD.BOOKINGDATEID = NB.BOOKINGDATEID ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("WHERE NB.BANKREQNUM = ^ ");
+    selectApplicantPaymentUploadForBankReqNumSQL.append("AND NB.AGENCYID = ^ ");
+
     // Add FROM to Get NhsBookings SQL.
     selectNhsBookingsSQL.append("FROM NHSBOOKING NB ");
     // Get select NhsBooking for Bank Request Number SQL.
     selectNhsBookingForBankReqNumSQL = new StringBuffer(selectNhsBookingsSQL);
     selectNhsBookingForBankReqNumSQL.append("WHERE NB.BANKREQNUM = ^ ");
     selectNhsBookingForBankReqNumSQL.append("AND NB.AGENCYID = ^ ");
-		// Get select Active NhsBookings SQL.
+    // Get select Active NhsBookings SQL.
 		selectActiveNhsBookingsSQL = new StringBuffer(selectNhsBookingsSQL);
     selectActiveNhsBookingsSQL.append("WHERE NB.AGENCYID = ^ ");
     selectActiveNhsBookingsSQL.append("AND NB.ACTIVE = TRUE ");
@@ -577,7 +596,7 @@ public class DefaultNhsBookingDAO extends JdbcDaoSupport implements NhsBookingDA
   public ApplicantPaymentUpload getApplicantPaymentUploadForBankReqNum(Integer agencyId, String bankReqNum) 
   {
     // Create a new local StringBuffer containing the parameterised SQL.
-    StringBuffer sql = new StringBuffer(selectNhsBookingForBankReqNumSQL.toString());
+    StringBuffer sql = new StringBuffer(selectApplicantPaymentUploadForBankReqNumSQL.toString());
     // Replace the parameters with supplied values.
     Utilities.replaceAndQuote(sql, bankReqNum);
     Utilities.replace(sql, agencyId);

@@ -170,7 +170,6 @@ public class ApplicantPaymentFileUploadProcess extends NhsFileUploadCommon
             {
               // This NHS Booking EXISTS in the NHS Booking table.
               logger.debug("Booking EXISTS: " + applicantPaymentUpload.getBankReqNum());
-              ++countValidNhsBooking;
               applicantPaymentUpload.setUploadStaffName(staffName);
               if (staffName.equals(applicantPaymentUpload.getStaffName()))
               {
@@ -265,6 +264,14 @@ public class ApplicantPaymentFileUploadProcess extends NhsFileUploadCommon
               else
               {
                 applicantPaymentUpload.setValidAssignment(false);
+              }
+              if (applicantPaymentUpload.isValid())
+              {
+                ++countValidNhsBooking;
+              }
+              else
+              {
+                ++countInvalidNhsBooking;
               }
             }
             listApplicantPaymentUpload.add(applicantPaymentUpload);

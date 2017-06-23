@@ -78,6 +78,7 @@ function checkedAll(frmname)
       <th align="left">Location</th>
       <th align="left">Ward</th>
       <th align="left">Assignment</th>
+      <th align="left">Paid</th>
     </tr>
     </thead>
 <logic:iterate id="nhsBooking" name="ApplicantPaymentFileUploadFormAgy" property="list" indexId="nhsBookingIndex" type="com.helmet.bean.ApplicantPaymentUpload">
@@ -112,13 +113,16 @@ function checkedAll(frmname)
       <td align="left" valign="top" class="unmatched"><%-- Assignment --%>
         <bean:write name="nhsBooking" property="uploadAssignment"/>
       </td>
+      <td align="left" valign="top" class="unmatched"><%-- Applicant Paid Date --%>
+        &nbsp;
+      </td>
     </tr>
     </logic:notPresent>
     <logic:present name="nhsBooking" property="nhsBookingId"><%-- NHS Booking found --%>
     <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
       <td align="left" valign="top" class="matched"><%-- CheckBox --%>
       <logic:equal name="nhsBooking" property="valid" value="true">
-        <input type="checkbox" name="<%= nhsBookingCheckBox %>" value="xxxx">    
+        <input type="checkbox" name="<%= nhsBookingCheckBox %>" value="<%= nhsBooking.getNhsBookingId() %>">    
       </logic:equal>
       <logic:notEqual name="nhsBooking" property="valid" value="true">
         &nbsp;
@@ -128,7 +132,12 @@ function checkedAll(frmname)
         <bean:write name="nhsBooking" property="bankReqNum"/>
       </td>
       <td align="left" valign="top" class="matched"><%-- Booking --%>
+      <logic:greaterThan name="nhsBooking" property="bookingId" value="0">
         <bean:write name="nhsBooking" property="bookingId"/>
+      </logic:greaterThan>
+      <logic:equal name="nhsBooking" property="bookingId" value="0">
+        &nbsp;
+      </logic:equal>
       </td>
       <td align="left" valign="top" class="matched"><%-- Staff Name --%>
         <bean:write name="nhsBooking" property="uploadStaffName"/>
@@ -151,7 +160,27 @@ function checkedAll(frmname)
       <td align="left" valign="top" class="matched"><%-- Assignment --%>
         <bean:write name="nhsBooking" property="uploadAssignment"/>
       </td>
+      <td align="left" valign="top" class="matched"><%-- Applicant Paid Date --%>
+        <bean:write name="nhsBooking" property="applicantPaidDate" format="dd-MMM-yyyy"/>
+      </td>
     </tr>
+      <logic:equal name="nhsBooking" property="valid" value="true">
+    <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
+      <td align="left" valign="top" class="matched"><%-- CheckBox --%>
+        &nbsp;
+      </td>
+      <td colspan="10" align="left" valign="top" class="matched"><%-- Comment/BackingReport --%>
+    <logic:present name="nhsBooking" property="comment"><%-- Comment --%>
+        Comment
+        &nbsp;<bean:write name="nhsBooking" property="comment"/>
+    </logic:present>
+    <logic:present name="nhsBooking" property="backingReport"><%-- BackingReport --%>
+        Backing Report
+        &nbsp;<bean:write name="nhsBooking" property="backingReport"/>
+    </logic:present>
+      </td>
+    </tr>
+      </logic:equal>
       <logic:notEqual name="nhsBooking" property="valid" value="true">
     <tr class="highlightoff" onmouseover="this.className='highlighton';" onmouseout="this.className='highlightoff';">
       <td align="left" valign="top" class="unmatched"><%-- CheckBox --%>
@@ -161,7 +190,7 @@ function checkedAll(frmname)
         &nbsp;
       </td>
       <td align="left" valign="top" class="unmatched"><%-- Booking --%>
-        <bean:write name="nhsBooking" property="bookingId"/>
+        &nbsp;
       </td>
       <td align="left" valign="top" class="unmatched"><%-- Staff Name --%>
         <bean:write name="nhsBooking" property="staffName"/>
@@ -183,6 +212,9 @@ function checkedAll(frmname)
       </td>
       <td align="left" valign="top" class="unmatched"><%-- Assignment --%>
         <bean:write name="nhsBooking" property="assignment"/>
+      </td>
+      <td align="left" valign="top" class="unmatched"><%-- Assignment --%>
+        <bean:write name="nhsBooking" property="applicantPaidDate" format="dd-MMM-yyyy"/>
       </td>
     </tr>
       </logic:notEqual>

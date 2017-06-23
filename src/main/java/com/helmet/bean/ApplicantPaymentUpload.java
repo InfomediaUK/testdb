@@ -1,5 +1,10 @@
 package com.helmet.bean;
 
+import java.math.BigDecimal;
+import java.sql.Time;
+
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+
 public class ApplicantPaymentUpload extends NhsBooking
 {
   private String uploadStaffName;
@@ -16,6 +21,13 @@ public class ApplicantPaymentUpload extends NhsBooking
   private boolean validWard;
   private String uploadAssignment;
   private boolean validAssignment;
+  private Time workedStartTime;
+  private Time workedEndTime;
+  private Time workedBreakStartTime;
+  private Time workedBreakEndTime;
+  private BigDecimal workedNoOfHours;
+  private BigDecimal workedBreakNoOfHours;
+  private String backingReport;
   
   public String getUploadStaffName()
   {
@@ -162,8 +174,93 @@ public class ApplicantPaymentUpload extends NhsBooking
     this.validAssignment = validAssignment;
   }
 
-  public Boolean getValid()
+  @Override
+  public boolean isValid()
   {
-    return validStaffName && validDate && validStart && validEnd && validLocation & validWard && validAssignment;
+    return getBookingId() > 0 && validStaffName && validDate && validStart && validEnd && validLocation & validWard && validAssignment;
   }
+  
+  public Time getWorkedStartTime()
+  {
+    return workedStartTime;
+  }
+
+  public void setWorkedStartTime(Time workedStartTime)
+  {
+    this.workedStartTime = workedStartTime;
+  }
+
+  public Time getWorkedEndTime()
+  {
+    return workedEndTime;
+  }
+
+  public void setWorkedEndTime(Time workedEndTime)
+  {
+    this.workedEndTime = workedEndTime;
+  }
+
+  public BigDecimal getWorkedNoOfHours()
+  {
+    return workedNoOfHours;
+  }
+
+  public void setWorkedNoOfHours(BigDecimal workedNoOfHours)
+  {
+    this.workedNoOfHours = workedNoOfHours;
+  }
+
+  public Time getWorkedBreakStartTime()
+  {
+    return workedBreakStartTime;
+  }
+
+  public void setWorkedBreakStartTime(Time workedBreakStartTime)
+  {
+    this.workedBreakStartTime = workedBreakStartTime;
+  }
+
+  public Time getWorkedBreakEndTime()
+  {
+    return workedBreakEndTime;
+  }
+
+  public void setWorkedBreakEndTime(Time workedBreakEndTime)
+  {
+    this.workedBreakEndTime = workedBreakEndTime;
+  }
+
+  public BigDecimal getWorkedBreakNoOfHours()
+  {
+    return workedBreakNoOfHours;
+  }
+
+  public void setWorkedBreakNoOfHours(BigDecimal workedBreakNoOfHours)
+  {
+    this.workedBreakNoOfHours = workedBreakNoOfHours;
+  }
+
+  public String getBackingReport()
+  {
+    return backingReport;
+  }
+
+  public void setBackingReport(String backingReport)
+  {
+    this.backingReport = backingReport;
+  }
+
+  public void load(SqlRowSet rs)
+  {
+    super.load(rs);
+    setWorkedStartTime(rs.getTime("WORKEDSTARTTIME"));
+    setWorkedEndTime(rs.getTime("WORKEDENDTIME"));
+    setWorkedBreakStartTime(rs.getTime("WORKEDBREAKSTARTTIME"));
+    setWorkedBreakEndTime(rs.getTime("WORKEDBREAKENDTIME"));
+    setWorkedNoOfHours(rs.getBigDecimal("WORKEDNOOFHOURS"));
+    setWorkedBreakNoOfHours(rs.getBigDecimal("WORKEDBREAKNOOFHOURS"));
+    setBackingReport(rs.getString("BACKINGREPORT"));
+  }
+
+  
 }
