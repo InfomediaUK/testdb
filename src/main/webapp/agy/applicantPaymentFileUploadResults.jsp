@@ -29,7 +29,8 @@ function checkedAll(frmname)
 }
 </script>
 <% String nhsBookingCheckBox = "nhsBookingId"; %>
-<html:form action="/nhsBackingReportFileAccept.do" styleId="ApplicantPaymentResults" onsubmit="return singleSubmit();">
+<html:form action="/nhsBookingApplicantPaidDateUpdate.do" styleId="ApplicantPaymentResults" onsubmit="return singleSubmit();">
+  <html:hidden name="ApplicantPaymentFileUploadFormAgy" property="paymentDateStr" />
 <table cellpadding="0" cellspacing="0" width="100%" height="30">
   <tr>
     <td align="left" valign="middle" class="title">
@@ -82,6 +83,9 @@ function checkedAll(frmname)
     </tr>
     </thead>
 <logic:iterate id="nhsBooking" name="ApplicantPaymentFileUploadFormAgy" property="list" indexId="nhsBookingIndex" type="com.helmet.bean.ApplicantPaymentUpload">
+<% 
+    String nhsBookingEditAction = request.getContextPath() + "/agy/nhsBookingEdit.do?nhsBookingUser.nhsBookingId=" + nhsBooking.getNhsBookingId();
+%>
     <logic:notPresent name="nhsBooking" property="nhsBookingId"><%-- NHS Booking NOT found --%>
       <td align="left" valign="top" class="unmatched"><%-- Blank --%>
         &nbsp;
@@ -129,11 +133,21 @@ function checkedAll(frmname)
       </logic:notEqual>
       </td>
       <td align="left" valign="top" class="matched"><%-- BankReqNum --%>
-        <bean:write name="nhsBooking" property="bankReqNum"/>
+        <mmj-agy:hasAccess forward="nhsBookingEdit">
+          <html:link href="<%= nhsBookingEditAction %>" titleKey="title.nhsBookingEdit"><bean:write name="nhsBooking" property="bankReqNum"/></html:link>
+        </mmj-agy:hasAccess>
+        <mmj-agy:hasNoAccess forward="nhsBookingEdit">
+          <bean:write name="nhsBooking" property="bankReqNum"/>
+        </mmj-agy:hasNoAccess>
       </td>
       <td align="left" valign="top" class="matched"><%-- Booking --%>
       <logic:greaterThan name="nhsBooking" property="bookingId" value="0">
-        <bean:write name="nhsBooking" property="bookingId"/>
+	      <mmj-agy:hasAccess forward="bookingGradeViewSummary">
+	        <html:link forward="bookingGradeViewSummary" paramId="bookingGrade.bookingGradeId" paramName="nhsBooking" paramProperty="bookingGradeId" titleKey="title.bookingGradeViewSummary"><bean:write name="nhsBooking" property="bookingId" format="#000"/></html:link>
+	      </mmj-agy:hasAccess>
+	      <mmj-agy:hasNoAccess forward="bookingGradeViewSummary">
+	        <bean:write name="nhsBooking" property="bookingId" format="#000"/>
+	      </mmj-agy:hasNoAccess>
       </logic:greaterThan>
       <logic:equal name="nhsBooking" property="bookingId" value="0">
         &nbsp;

@@ -1567,6 +1567,7 @@
 
     <forward name="nhsBookingFileUpload" path="/nhsBookingFileUpload.do" />
     <forward name="applicantPaymentFileUpload" path="/applicantPaymentFileUpload.do" />
+    <forward name="nhsBookingApplicantPaidDateUpdate" path="/nhsBookingApplicantPaidDateUpdate.do" />
     <forward name="nhsBookings" path="/nhsBookings.do" />
     <forward name="nhsBookingEdit" path="/nhsBookingEdit.do" />
     <forward name="nhsBookingDelete" path="/nhsBookingDelete.do" />
@@ -4344,6 +4345,15 @@
             validate="true">
         <forward name="success" path="applicantPaymentFileUploadResults.page" redirect="true" />
         <forward name="error" path="/applicantPaymentFileUpload.do" />
+    </action>
+
+    <action path="/nhsBookingApplicantPaidDateUpdate"
+            type="com.helmet.application.agy.NhsBookingApplicantPaidDateUpdate"
+            name="ApplicantPaymentFileUploadFormAgy"
+            scope="request"
+            input="applicantPaymentFileUploadResults.page"
+            validate="false">
+        <forward name="success" path="/applicantPaymentFileUpload.do" />
     </action>
 
     <action path="/nhsBookingsReady"
