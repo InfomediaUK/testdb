@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.ext.XLogger;
 import org.slf4j.ext.XLoggerFactory;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -35,6 +36,7 @@ public class NhsBookingApplicantPaidDateUpdate extends AgyAction
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     String paymentDateStr = (String)dynaForm.get("paymentDateStr");
+    String applicantPaymentFilename = (String)dynaForm.get("applicantPaymentFilename");
     Date paymentDate = convertDate(paymentDateStr, sdf, errors, messageResources, "label.applicantPaidDate");
     int rowCount = 0;
     if (!errors.isEmpty()) 
@@ -64,6 +66,14 @@ public class NhsBookingApplicantPaidDateUpdate extends AgyAction
           {
             // Applicant found, so now validate them.
             nhsBooking.setApplicantPaidDate(paymentDate);
+            if (StringUtils.isEmpty(nhsBooking.getComment()))
+            {
+              nhsBooking.setComment("Paid Date from: " + applicantPaymentFilename);
+            }
+            else
+            {
+              nhsBooking.setComment(nhsBooking.getComment() + "\n\n Paid Date from: " + applicantPaymentFilename);
+            }
             rowCount += agyService.updateNhsBookingCommentValueApplicantPaidDate(nhsBooking, getConsultantLoggedIn().getConsultantId());
           }
         }

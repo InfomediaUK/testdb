@@ -31,6 +31,7 @@ function checkedAll(frmname)
 <% String nhsBookingCheckBox = "nhsBookingId"; %>
 <html:form action="/nhsBookingApplicantPaidDateUpdate.do" styleId="ApplicantPaymentResults" onsubmit="return singleSubmit();">
   <html:hidden name="ApplicantPaymentFileUploadFormAgy" property="paymentDateStr" />
+  <html:hidden name="ApplicantPaymentFileUploadFormAgy" property="applicantPaymentFilename" />
 <table cellpadding="0" cellspacing="0" width="100%" height="30">
   <tr>
     <td align="left" valign="middle" class="title">
@@ -53,6 +54,9 @@ function checkedAll(frmname)
 <logic:notEmpty name="ApplicantPaymentFileUploadFormAgy" property="list">
 	<table cellpadding="0" cellspacing="0" width="100%" height="30">
 	  <tr>
+      <td align="left">
+        <b>Payment File:</b> <bean:write name="ApplicantPaymentFileUploadFormAgy" property="applicantPaymentFilename"/>
+      </td>
       <td align="left">
         <b>Payment Date:</b> <bean:write name="ApplicantPaymentFileUploadFormAgy" property="paymentDateStr"/>
       </td>
@@ -185,11 +189,11 @@ function checkedAll(frmname)
       </td>
       <td colspan="10" align="left" valign="top" class="matched"><%-- Comment/BackingReport --%>
     <logic:present name="nhsBooking" property="comment"><%-- Comment --%>
-        Comment
+        Comment:
         &nbsp;<bean:write name="nhsBooking" property="comment"/>
     </logic:present>
     <logic:present name="nhsBooking" property="backingReport"><%-- BackingReport --%>
-        Backing Report
+        Backing Report:
         &nbsp;<bean:write name="nhsBooking" property="backingReport"/>
     </logic:present>
       </td>

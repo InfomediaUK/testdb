@@ -194,6 +194,7 @@
       <form-property name="paymentDateStr" type="java.lang.String" />
       <form-property name="applicantPaymentExampleText" type="java.lang.String"/>
       <form-property name="applicantPaymentFormFile" type="org.apache.struts.upload.FormFile"/>
+      <form-property name="applicantPaymentFilename" type="java.lang.String"/>
       <form-property name="list" type="java.util.List" />
       <form-property name="countValidNhsBooking" type="java.lang.Integer" />
       <form-property name="countInvalidNhsBooking" type="java.lang.Integer" />

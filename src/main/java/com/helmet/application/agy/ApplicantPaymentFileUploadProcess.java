@@ -73,6 +73,7 @@ public class ApplicantPaymentFileUploadProcess extends NhsFileUploadCommon
       }
     }
     dynaForm.set("list", listApplicantPaymentUpload);
+    dynaForm.set("applicantPaymentFilename", applicantPaymentFilename);
     long endTime = System.nanoTime();
     long duration = endTime - startTime;
     logger.debug("Out going !!! - Duration: " + duration + "ms.");
