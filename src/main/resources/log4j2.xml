@@ -56,11 +56,14 @@
             <AppenderRef ref="Console" />
             <AppenderRef ref="RollingFile"/>
         </Root>
-        <Logger name="org.apache.commons" level="OFF" additivity="false">
-            <AppenderRef ref="Console" level="DEBUG" />
+        <Logger name="org.apache.commons" level="DEBUG" additivity="false">
+            <AppenderRef ref="Console" level="OFF" />
         </Logger>
-        <Logger name="org.apache.struts.action" level="DEBUG" additivity="false">
-            <AppenderRef ref="RollingFileStruts" level="DEBUG" />
+        <Logger name="org.apache.struts" level="DEBUG" additivity="false">
+            <AppenderRef ref="RollingFileStruts" level="OFF" />
+        </Logger>
+        <Logger name="org.displaytag" level="DEBUG" additivity="false">
+            <AppenderRef ref="RollingFile" level="OFF" />
         </Logger>
         <Logger name="org.springframework" level="DEBUG" additivity="false">
             <AppenderRef ref="RollingFileSpring" level="DEBUG" />

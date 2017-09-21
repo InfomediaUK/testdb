@@ -44,7 +44,7 @@
               />
                
     <Resource name="jdbc/PostgreSQLDS"
-              url="jdbc:postgresql://${OPENSHIFT_POSTGRESQL_DB_HOST}:${OPENSHIFT_POSTGRESQL_DB_PORT}/${OPENSHIFT_APP_NAME}"
+              url="jdbc:postgresql://${OPENSHIFT_POSTGRESQL_DB_HOST}:${OPENSHIFT_POSTGRESQL_DB_PORT}/${POSTGRESQL_DATABASE}"
               driverClassName="org.postgresql.Driver"
               username="${OPENSHIFT_POSTGRESQL_DB_USERNAME}"
               password="${OPENSHIFT_POSTGRESQL_DB_PASSWORD}"

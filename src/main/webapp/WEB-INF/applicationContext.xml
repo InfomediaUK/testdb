@@ -125,9 +125,9 @@
   <!--  dataSource - connection to Tomcat database connection pool -->
   <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close" >
     <property name="driverClassName" value="org.postgresql.Driver" />
-    <property name="url" value="jdbc:postgresql://#{systemEnvironment['OPENSHIFT_POSTGRESQL_DB_HOST']}:#{systemEnvironment['OPENSHIFT_POSTGRESQL_DB_PORT']}/#{systemEnvironment['OPENSHIFT_APP_NAME']}" />
-    <property name="username" value="#{systemEnvironment['OPENSHIFT_POSTGRESQL_DB_USERNAME']}" />
-    <property name="password" value="#{systemEnvironment['OPENSHIFT_POSTGRESQL_DB_PASSWORD']}" />
+    <property name="url" value="jdbc:postgresql://#{systemEnvironment['POSTGRESQL_SERVICE_HOST']}:#{systemEnvironment['POSTGRESQL_SERVICE_PORT']}/#{systemEnvironment['POSTGRESQL_DATABASE']}" />
+    <property name="username" value="#{systemEnvironment['POSTGRESQL_USER']}" />
+    <property name="password" value="#{systemEnvironment['POSTGRESQL_PASSWORD']}" />
     <property name="testOnBorrow" value="true" />
     <property name="initialSize" value="10" />
     <property name="maxActive" value="50" />
