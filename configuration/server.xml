@@ -138,7 +138,7 @@
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
-        <Context docBase="${OPENSHIFT_DATA_DIR}/documents" path="/documents" />
+<!--         <Context docBase="${OPENSHIFT_DATA_DIR}/documents" path="/documents" /> -->
 <!--         <Context docBase="${OPENSHIFT_DATA_DIR}/temp" path="/temp" /> -->
       </Host>
     </Engine>
