@@ -2290,10 +2290,8 @@ public class Utilities
       footerTable.setExtendLastRow(true);
 
       Image mmjLogo = null;
-
-      String serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
-      serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
-      String mmjLogoFilename = "/images/" + serverNamePrefix + "master-logo.jpg";
+      String imagePrefix = System.getenv("IMAGE_PREFIX");
+      String mmjLogoFilename = "/images/" + imagePrefix + "master-logo.jpg";
 
       try
       {

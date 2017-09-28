@@ -187,17 +187,8 @@ public class MultipartEmailer
 
       // add a part for the image
       messageBodyPart = new MimeBodyPart();
-      String serverNamePrefix = null;
-      if (serverName.indexOf(".") == -1)
-      {
-        serverNamePrefix = "local";
-      }
-      else
-      {
-        serverNamePrefix = serverName.substring(0, serverName.indexOf("."));
-      }
-      serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
-      String mmjLogo = FileHandler.getInstance().getFileLocation() + "/images/" + serverNamePrefix + "master-logo.jpg";
+      String imagePrefix = System.getenv("IMAGE_PREFIX");
+      String mmjLogo = FileHandler.getInstance().getFileLocation() + "/images/" + imagePrefix + "master-logo.jpg";
       DataSource fds = new FileDataSource(mmjLogo);
       messageBodyPart.setDataHandler(new DataHandler(fds));
       messageBodyPart.setHeader("Content-ID", "<mmjLogo>");
