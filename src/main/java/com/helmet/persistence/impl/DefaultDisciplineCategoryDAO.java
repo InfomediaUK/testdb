@@ -188,7 +188,7 @@ public class DefaultDisciplineCategoryDAO extends JdbcDaoSupport implements Disc
 		Utilities.replaceAndQuote(sql, disciplineCategory.getCode());
     Utilities.replaceAndQuote(sql, disciplineCategory.getName());
     Utilities.replaceZeroWithNull(sql, disciplineCategory.getRegulatorId());
-    Utilities.replace(sql, disciplineCategory.getUndertakesEPP());
+    Utilities.replace(sql, disciplineCategory.getUndertakesEPP() == null ? false : disciplineCategory.getUndertakesEPP());
     Utilities.replace(sql, disciplineCategory.getDisplayOrder());
     Utilities.replace(sql, auditorId);
     Utilities.replaceAndQuote(sql, new Timestamp(new java.util.Date().getTime()).toString());
