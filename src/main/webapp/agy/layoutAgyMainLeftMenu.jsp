@@ -116,24 +116,8 @@ function callbackMethod() {
 <bean:define id="agencyLogoHeight" name="agency" property="logoHeight" type="java.lang.Integer"/>
 
 <%
-String serverNamePrefix = null;
-String mmjLogo = null;
-if (request.getServerName().contains("matchmyjob.co.uk"))
-{
-  // Could be www or test or local.
-  serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
-  serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
-  mmjLogo = request.getContextPath() + "/images/" + serverNamePrefix + "master-logo.jpg";
-}
-else
-{
-  // Could be localhost or www.befriened.co.uk.
-  serverNamePrefix = request.getServerName();
-  mmjLogo = request.getContextPath() + "/images/localmaster-logo.jpg";
-}
-// String serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
-// serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
-// String mmjLogo = request.getContextPath() + "/images/" + serverNamePrefix + "master-logo.jpg";
+String imagePrefix = System.getenv("IMAGE_PREFIX");
+String mmjLogo = request.getContextPath() + "/images/" + imagePrefix + "master-logo.jpg";
 %>
 
 <table width="<bean:write name="pageWidth"/>" height="76" cellpadding="0" cellspacing="0" border="0">

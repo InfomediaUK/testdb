@@ -58,9 +58,8 @@
 ><div align="left">
 <%/* TEMPORARY */%>
 <%
-String serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
-serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
-String mmjLogo = request.getContextPath() + "/images/" + serverNamePrefix + "master-logo.jpg";
+String imagePrefix = System.getenv("IMAGE_PREFIX");
+String mmjLogo = request.getContextPath() + "/images/" + imagePrefix + "master-logo.jpg";
 %>
 
 <mmj-mgr:client var="client"/>

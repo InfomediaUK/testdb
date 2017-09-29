@@ -78,9 +78,8 @@
 <bean:define id="agencyLogoHeight" name="agency" property="logoHeight" type="java.lang.Integer"/>
 
 <%
-String serverNamePrefix = request.getServerName().substring(0, request.getServerName().indexOf("."));
-serverNamePrefix = "www".equals(serverNamePrefix) ? "" : serverNamePrefix;
-String mmjLogo = request.getContextPath() + "/images/" + serverNamePrefix + "master-logo.jpg";
+String imagePrefix = System.getenv("IMAGE_PREFIX");
+String mmjLogo = request.getContextPath() + "/images/" + imagePrefix + "master-logo.jpg";
 %>
 
 <table width="<bean:write name="pageWidth"/>" height="76" cellpadding="0" cellspacing="0" border="0">
