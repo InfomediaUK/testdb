@@ -58,7 +58,7 @@ public class ProspectResource
     System.out.println("Found prospect: " + prospect.toString());
     User user = createUser(prospect);
     System.out.println("Created User...");
-    Applicant applicant = creatApplicant(user, prospect);
+    Applicant applicant = createApplicant(user, prospect);
     System.out.println("Created Applicant...");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
     Consultant consultant = adminService.getProspectConsultant(prospect.getAgencyId());
@@ -127,7 +127,7 @@ public class ProspectResource
     return user;
   }
 
-  private Applicant creatApplicant(User user, Prospect prospect)
+  private Applicant createApplicant(User user, Prospect prospect)
   {
     System.out.println("Start creatApplicant()");
     Applicant applicant = new Applicant();
@@ -142,10 +142,10 @@ public class ProspectResource
     applicant.setRegistrationNumber("");
     applicant.setAhpRegistrationType(0);
     applicant.setRegistrationAlertNotification(0);
+    applicant.setVisaType(prospect.getVisaId() == null ? 0 : prospect.getVisaId());
     // <<<<< Can NOT be null.
     applicant.setDisciplineCategoryId(prospect.getDisciplineId());
     applicant.setIdDocumentId(prospect.getIdDocumentId());
-    applicant.setVisaType(prospect.getVisaId());
     applicant.setMobileNumber(prospect.getMobileTelephone());
     applicant.setTelephoneNumber(prospect.getMobileTelephone());
     applicant.setCvFilename(prospect.getDocumentFileName());
