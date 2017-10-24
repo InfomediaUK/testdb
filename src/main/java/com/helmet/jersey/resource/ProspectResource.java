@@ -69,7 +69,7 @@ public class ProspectResource
     }
     else
     {
-      System.out.println("Prospect Consultant found...");
+      System.out.println("Prospect Consultant found, Hurrah!...");
       AgyService agyService = ServiceFactory.getInstance().getAgyService();
       int rowCount = 0;
       try
