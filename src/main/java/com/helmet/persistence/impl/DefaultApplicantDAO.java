@@ -1617,8 +1617,9 @@ public class DefaultApplicantDAO extends JdbcDaoSupport implements ApplicantDAO 
 		Utilities.replaceAndQuote(sql, applicant.getUser().getLogin());
 		Utilities.replaceAndQuote(sql, applicant.getUser().getPwd());
 		Utilities.replaceAndQuote(sql, applicant.getUser().getPwdHint());
-		// on insert set secretword as login - then force to change on first login
-		Utilities.replaceAndQuote(sql, applicant.getUser().getLogin());
+		// On insert set secretword as login (up to 20 chars) - then force to change on first login.
+		Integer lengthLogin = applicant.getUser().getLogin().length();
+		Utilities.replaceAndQuote(sql, lengthLogin > 20 ? applicant.getUser().getLogin().substring(0, 20) : applicant.getUser().getLogin());
 		Utilities.replaceAndQuoteNullable(sql, applicant.getReference());
 		Utilities.replaceAndQuoteNullable(sql, applicant.getProfessionalReference());
 		Utilities.replaceAndQuoteNullable(sql, applicant.getDateOfBirth());

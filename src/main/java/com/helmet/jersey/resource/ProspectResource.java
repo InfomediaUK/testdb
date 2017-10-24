@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.ext.XLogger;
+import org.slf4j.ext.XLoggerFactory;
 
 import com.helmet.api.AdminService;
 import com.helmet.api.AgyService;
@@ -25,6 +27,7 @@ import com.helmet.api.ServiceFactory;
 import com.helmet.api.exceptions.DuplicateDataException;
 import com.helmet.application.FileHandler;
 import com.helmet.application.Utilities;
+import com.helmet.bean.Agency;
 import com.helmet.bean.Applicant;
 import com.helmet.bean.Consultant;
 import com.helmet.bean.User;
@@ -40,6 +43,7 @@ import com.sun.jersey.multipart.MultiPart;
 @Path("/prospect")
 public class ProspectResource
 {
+  protected transient XLogger logger = XLoggerFactory.getXLogger(getClass());
   // Allows to insert contextual objects into the class,
   // e.g. ServletContext, Request, Response, UriInfo
   @Context
@@ -51,40 +55,50 @@ public class ProspectResource
   @Consumes("multipart/mixed")
   public Response post(MultiPart multiPart)
   {
-    System.out.println("In Post Method...");
+    logProgress("In ProspectResource Post Method...");
     boolean isProcessed = false;
     String message = null;
     Prospect prospect = multiPart.getBodyParts().get(0).getEntityAs(Prospect.class);
-    System.out.println("Found prospect: " + prospect.toString());
+    logProgress("Found prospect: " + prospect.toString());
     User user = createUser(prospect);
-    System.out.println("Created User...");
+    logProgress("Created User...");
     Applicant applicant = createApplicant(user, prospect);
-    System.out.println("Created Applicant...");
+    logProgress("Created Applicant...");
     AdminService adminService = ServiceFactory.getInstance().getAdminService();
+    Agency agency = adminService.getAgency(prospect.getAgencyId());
+    if (agency == null)
+    {
+      logProgress("Agency NOT found...");
+      return Response.status(Response.Status.NOT_FOUND).entity("Agency NOT Found for Agency Id: " + prospect.getAgencyId()).build();
+    }
     Consultant consultant = adminService.getProspectConsultant(prospect.getAgencyId());
     if (consultant == null)
     {
-      System.out.println("Prospect Consultant NOT found...");
-      return Response.status(Response.Status.BAD_REQUEST).entity("Prospect Consultant NOT Found.").type(MediaType.TEXT_PLAIN).build();
+      logProgress("Prospect Consultant NOT found...");
+      return Response.status(Response.Status.NOT_FOUND).entity("Prospect Consultant NOT Found for Agency: " + agency.getName()).build();
     }
     else
     {
-      System.out.println("Prospect Consultant found, Hurrah!...");
+      logProgress("Prospect Consultant found...");
       AgyService agyService = ServiceFactory.getInstance().getAgyService();
       int rowCount = 0;
       try
       {
-        System.out.println("About to Insert Applicant...");
+        logProgress("About to Insert Applicant...");
         rowCount = agyService.insertApplicant(applicant, consultant.getConsultantId());
-        System.out.println("Inserted Applicant...");
+        logProgress("Inserted Applicant...");
         if (multiPart.getBodyParts().size() == 2)
         {
-          System.out.println("Multipart contains file...");
+          logProgress("Multipart contains file...");
           BodyPartEntity bpe = (BodyPartEntity)multiPart.getBodyParts().get(1).getEntity();
           try
           {
             InputStream inputStream = bpe.getInputStream();
             isProcessed = saveCvFile(applicant, inputStream);
+            if (isProcessed)
+            {
+              message = "Applicant loaded and attachement processed successfully.";
+            }
           }
           catch (Exception e)
           {
@@ -93,7 +107,8 @@ public class ProspectResource
         }
         else
         {
-          System.out.println("Does NOT contain file...");
+          logProgress("Does NOT contain file...");
+          message = "Applicant loaded successfully.";
           isProcessed = true;
         }
         String notes = applicant.getReference() + "\nProfession: " + prospect.getProfession() + "\nLength of Stay: " + prospect.getLengthOfStay();
@@ -101,35 +116,42 @@ public class ProspectResource
       }
       catch (DuplicateDataException e)
       {
-        System.out.println("Applicant Insert Failed...");
+        message = "Applicant Insert Failed (Duplicate)...";
+        logProgress(message);
       }
+      catch (Exception e)
+      {
+        message = "Applicant Insert Failed: " + e.getMessage();
+        logProgress(message);
+      }
+      logProgress("Processed: " + isProcessed);
       if (isProcessed)
       {
-        return Response.status(Response.Status.ACCEPTED).entity("Attachement processed successfully.").type(MediaType.TEXT_PLAIN).build();
+        return Response.status(Response.Status.ACCEPTED).entity(message).type(MediaType.TEXT_PLAIN).build();
       }
-      return Response.status(Response.Status.BAD_REQUEST).entity("Failed to process attachment. Reason : " + message).type(MediaType.TEXT_PLAIN).build();
+      return Response.status(Response.Status.BAD_REQUEST).entity("Failed. Reason : " + message).type(MediaType.TEXT_PLAIN).build();
     }
   }
 
   private User createUser(Prospect prospect)
   {
-    System.out.println("Start createUser()");
+    logProgress("Start createUser()");
     User user = new User();
     user.setFirstName(prospect.getFirstName());
     user.setLastName(prospect.getLastName());
     user.setEmailAddress(prospect.getEmail());
     // From ApplicantNewProcess
     String temp = Long.toString(new java.util.Date().getTime());
-    user.setLogin(temp);
-    user.setPwd(temp);
-    user.setPwdHint(temp);
-    System.out.println("End createUser()");
+    user.setLogin(prospect.getEmail());
+    user.setPwd(prospect.getEmail());
+    user.setPwdHint("Please call us and we'll tell you.");
+    logProgress("End createUser()");
     return user;
   }
 
   private Applicant createApplicant(User user, Prospect prospect)
   {
-    System.out.println("Start creatApplicant()");
+    logProgress("Start creatApplicant()");
     Applicant applicant = new Applicant();
     // Put User into Applicant.
     applicant.setUser(user);
@@ -157,13 +179,13 @@ public class ProspectResource
       Date availableForWorkDate = convertDate(availableForWork, sdf);
       applicant.setAvailabilityDate(availableForWorkDate);
     }
-    System.out.println("End creatApplicant()");
+    logProgress("End creatApplicant()");
     return applicant;
   }
   
   protected Date convertDate(String dateStr, SimpleDateFormat simpleDateFormat)
   {
-    System.out.println("Start convertDate()");
+    logProgress("Start convertDate()");
     Date date = null;
     if (StringUtils.isNotEmpty(dateStr))
     {
@@ -177,7 +199,7 @@ public class ProspectResource
         return new Date(0);
       }
     }
-    System.out.println("End convertDate()");
+    logProgress("End convertDate()");
     return date;
   }
 
@@ -206,7 +228,7 @@ public class ProspectResource
     catch (IOException e)
     {
       // TODO
-      System.out.println("IOException - uploading " + applicant.getCvFilename());
+      logProgress("IOException - uploading " + applicant.getCvFilename());
       e.printStackTrace();
     }
     finally
@@ -228,7 +250,7 @@ public class ProspectResource
         {
           fileOutputStream.close();
           isProcessed = true;
-          System.out.println("CV File: " + applicant.getCvFilename() + " saved ok.");
+          logProgress("CV File: " + applicant.getCvFilename() + " saved ok.");
         }
         catch (IOException e)
         {
@@ -241,7 +263,7 @@ public class ProspectResource
   
   private void saveApplicantNotes(Applicant applicant, String notes)
   {
-    System.out.println("Start saveApplicantNotes()");
+    logProgress("Start saveApplicantNotes()");
     String notesFileName = FileHandler.getInstance().getApplicantFileLocation() +
                            FileHandler.getInstance().getApplicantFileFolder() + 
                            "/" + applicant.getApplicantId() + "/notes.txt";
@@ -254,15 +276,20 @@ public class ProspectResource
     try
     {
       Utilities.saveFile(notesFileName, notes);
-      System.out.println("Notes File: " + notesFileName + " saved ok.");
+      logProgress("Notes File: " + notesFileName + " saved ok.");
     }
     catch (IOException e)
     {
       // TODO 
-      System.out.println("IOException - saving " + notesFileName);
+      logProgress("IOException - saving " + notesFileName);
       e.printStackTrace();
     }
-    System.out.println("End saveApplicantNotes()");
+    logProgress("End saveApplicantNotes()");
   }
   
+  private void logProgress(String message)
+  {
+    logger.info(message);
+    System.out.println(message);    
+  }
 }
