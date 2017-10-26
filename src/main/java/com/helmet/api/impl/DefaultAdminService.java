@@ -865,6 +865,8 @@ public class DefaultAdminService extends DefaultCommonService implements AdminSe
     jerseyIdDocument.setId(idDocument.getIdDocumentId());
     jerseyIdDocument.setCode(idDocument.getCode());
     jerseyIdDocument.setName(idDocument.getName());
+    jerseyIdDocument.setIdDocumentType(idDocument.getIdDocumentType());
+    jerseyIdDocument.setRequiresVisa(idDocument.getRequiresVisa());
     jerseyIdDocument.setDisplayOrder(idDocument.getDisplayOrder());
     return jerseyIdDocument;
   }

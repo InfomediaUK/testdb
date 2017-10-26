@@ -4,12 +4,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement
-@XmlType(propOrder = { "id", "code", "name", "displayOrder" })
+@XmlType(propOrder = { "id", "code", "name", "idDocumentType", "requiresVisa", "displayOrder" })
 public class IdDocument
 {
   private Integer id;
   private String code;
   private String name;
+  private Integer idDocumentType;
+  private Boolean requiresVisa;
   private Integer displayOrder;
 
   public Integer getId()
@@ -40,6 +42,26 @@ public class IdDocument
   public void setName(String name)
   {
     this.name = name;
+  }
+
+  public Integer getIdDocumentType()
+  {
+    return idDocumentType;
+  }
+
+  public void setIdDocumentType(Integer idDocumentType)
+  {
+    this.idDocumentType = idDocumentType;
+  }
+
+  public Boolean getRequiresVisa()
+  {
+    return requiresVisa;
+  }
+
+  public void setRequiresVisa(Boolean requiresVisa)
+  {
+    this.requiresVisa = requiresVisa;
   }
 
   public Integer getDisplayOrder()
