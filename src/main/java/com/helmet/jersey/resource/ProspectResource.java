@@ -57,7 +57,7 @@ public class ProspectResource
   @Consumes("multipart/mixed")
   public Response post(MultiPart multiPart)
   {
-    logProgress("In ProspectResource Post Method...");
+    logProgress("In ProspectResource Post Method......");
     boolean isProcessed = false;
     String message = null;
     Prospect prospect = multiPart.getBodyParts().get(0).getEntityAs(Prospect.class);
