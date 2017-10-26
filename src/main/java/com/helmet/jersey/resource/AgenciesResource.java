@@ -49,7 +49,7 @@ public class AgenciesResource
     return adminService.getJerseyAgencies(true);
   }
 
-  // retuns the number of agencies
+  // Returns the number of agencies
   // Use http://localhost:8080/jersey/rest/agencies/count
   // to get the total number of records
   @GET

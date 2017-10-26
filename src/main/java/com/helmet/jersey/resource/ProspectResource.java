@@ -9,8 +9,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
@@ -287,6 +289,17 @@ public class ProspectResource
     logProgress("End saveApplicantNotes()");
   }
   
+  // Returns the string "Found"
+  // Use http://localhost:8080/jersey/rest/prospect/test
+  //
+  @GET
+  @Path("/test")
+  @Produces(MediaType.TEXT_PLAIN)
+  public String getTest()
+  {
+    return String.valueOf("Found");
+  }
+
   private void logProgress(String message)
   {
     logger.info(message);
