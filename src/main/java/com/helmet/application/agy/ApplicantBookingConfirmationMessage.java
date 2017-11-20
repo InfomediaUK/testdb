@@ -186,7 +186,7 @@ public class ApplicantBookingConfirmationMessage
 
     messageBuffer.append("\n");
 
-    messageBuffer.append("<LINK>http://" + serverName + "/timesheet</LINK>");
+    messageBuffer.append("<LINK>http://" + serverName + "/appLogin.do</LINK>");
     messageBuffer.append("\n");
     messageBuffer.append("\n");
     messageBuffer.append(messageResources.getMessage("label.login") + " : " + bookingGradeApplicant.getLogin());
