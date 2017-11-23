@@ -9,13 +9,18 @@
 <%@ taglib uri="/mmj" prefix="mmj" %>
 <%@ taglib uri="/mmj-agy" prefix="mmj-agy" %>
 <bean:parameter id="applicantAction" name="applicantAction" value="new"/>
-<bean:define id="applicantTab" name="ApplicantFormAgy" property="applicantTab"/>
+<bean:define id="applicantTab" name="ApplicantFormAgy" property="applicantTab" type="java.lang.Integer"/>
 <bean:define id="unavailableDates" name="ApplicantFormAgy" property="unavailableDates" type="java.lang.String" />
 <bean:define id="checklistFileUrl" name="ApplicantFormAgy" property="applicant.checklistFileUrl"/>
 <%
+if (applicantTab == null)
+{
+  applicantTab = 0;
+}
 Integer aTab = 0;
 %>
 <html:hidden property="unavailableDates" styleId="datesId" />
+<html:hidden property="applicantTab" />
 <mmj:countryList var="countryList" />
 <mmj:geographicalRegionList var="geographicalRegionList" />
 <mmj:disciplineCategoryList var="disciplineCategoryList" />

@@ -2,6 +2,7 @@ package com.helmet.application.agy;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ext.XLogger;
@@ -27,8 +28,11 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
 
   public ActionForward doExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
   {
-    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
     logger.entry("In coming !!!");
+    DynaValidatorForm dynaForm = (DynaValidatorForm) form;
+    HttpSession session = request.getSession();
+    Integer applicantTab = (Integer)session.getAttribute("applicantTab");
+    applicantTab = applicantTab == null ? 0 : applicantTab;
     ActionMessages errors = new ActionMessages();
     MessageResources messageResources = getResources(request);
     AgyService agyService = ServiceFactory.getInstance().getAgyService();
@@ -44,6 +48,7 @@ public class ApplicantNewProcess extends ApplicantCommonProcess
     validateApplicant(applicant, disciplineCategory, dynaForm, errors, messageResources);
     if (!errors.isEmpty())
     {
+      dynaForm.set("applicantTab", applicantTab);
       saveErrors(request, errors);
       return mapping.getInputForward();
     }
