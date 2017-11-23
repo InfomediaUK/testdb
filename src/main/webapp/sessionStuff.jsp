@@ -13,8 +13,8 @@
 <%
 String major = "1";
 String minor = "7";
-String revision = "10";
-String build = "528"; // DO NOT EDIT BUILD. IT'S CHANGED BY ANT.
+String revision = "11";
+String build = "529"; // DO NOT EDIT BUILD. IT'S CHANGED BY ANT.
 String time = "17 11 2016 19:19:22"; // DO NOT EDIT TIME. IT'S CHANGED BY ANT.
 String user = "infomedia"; // DO NOT EDIT USER. IT'S CHANGED BY ANT.
 %>    
